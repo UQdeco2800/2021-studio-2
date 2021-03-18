@@ -2,6 +2,10 @@ package com.deco2800.game.ecs;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
+/**
+ * Internal type system for components. Used to generate unique IDs for each component type at
+ * runtime, allowing entities to get components by type.
+ */
 public class ComponentType {
   private static final ObjectMap<Class<? extends Component>, ComponentType> componentTypes =
       new ObjectMap<>();

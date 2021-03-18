@@ -1,35 +1,57 @@
 package com.deco2800.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.ecs.Entity;
+import com.deco2800.game.ecs.EntityService;
+import com.deco2800.game.rendering.RenderService;
+import com.deco2800.game.rendering.Renderer;
+import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
+/**
+ * Runs the main game.
+ *
+ * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
+ */
 public class MainGameScreen extends ScreenAdapter {
   private final GdxGame game;
-  SpriteBatch batch;
-  Texture img;
+  private final Renderer renderer;
 
   public MainGameScreen(GdxGame game) {
     this.game = game;
-    batch = new SpriteBatch();
-    img = new Texture("badlogic.jpg");
+    ServiceLocator.registerEntityService(new EntityService());
+    ServiceLocator.registerRenderService(new RenderService());
+    renderer = Renderer.createRenderer();
+
+    Entity defaultSprite =
+        new Entity().addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")));
+    ServiceLocator.getEntityService().register(defaultSprite);
   }
 
   @Override
   public void render(float delta) {
-    Gdx.gl.glClearColor(1, 0, 0, 1);
-    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    batch.begin();
-    batch.draw(img, 0, 0);
-    batch.end();
+    ServiceLocator.getEntityService().update();
+    renderer.render();
   }
 
   @Override
+  public void resize(int width, int height) {
+    renderer.resize(width, height);
+  }
+
+  @Override
+  public void pause() {}
+
+  @Override
+  public void resume() {}
+
+  @Override
   public void dispose() {
-    batch.dispose();
-    img.dispose();
+    renderer.dispose();
+
+    ServiceLocator.getEntityService().dispose();
+    ServiceLocator.getRenderService().dispose();
   }
 }
