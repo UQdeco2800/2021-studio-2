@@ -25,8 +25,8 @@ public class GameExtension implements AfterEachCallback, BeforeAllCallback {
     game = new HeadlessApplication(new ApplicationAdapter() {});
 
     // Mock any calls to OpenGL
-    Gdx.gl30 = Mockito.mock(GL30.class);
     Gdx.gl20 = Mockito.mock(GL20.class);
+    Gdx.gl = Gdx.gl20;
   }
 
   @Override

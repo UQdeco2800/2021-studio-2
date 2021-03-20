@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.physics.PhysicsEngine;
+import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -30,7 +31,14 @@ public class Renderer implements Disposable {
    * @return A new renderer.
    */
   public static Renderer createRenderer() {
-    return new Renderer(new OrthographicCamera(), GAME_SCREEN_WIDTH, new SpriteBatch());
+    return new Renderer(
+      new OrthographicCamera(),
+      GAME_SCREEN_WIDTH,
+      new SpriteBatch(),
+      ServiceLocator.getRenderService(),
+      ServiceLocator.getPhysicsService(),
+      new Box2DDebugRenderer()
+    );
   }
 
   /**
@@ -41,16 +49,23 @@ public class Renderer implements Disposable {
    *     the aspect ratio.
    * @param batch Batch to render to.
    */
-  public Renderer(Camera camera, float gameWidth, SpriteBatch batch) {
+  public Renderer(
+    Camera camera,
+    float gameWidth,
+    SpriteBatch batch,
+    RenderService renderService,
+    PhysicsService physicsService,
+    Box2DDebugRenderer debugRenderer
+  ) {
     this.camera = camera;
     this.gameWidth = gameWidth;
     this.batch = batch;
-    this.renderService = ServiceLocator.getRenderService();
-    debugRenderer = new Box2DDebugRenderer();
+    this.renderService = renderService;
+    this.debugRenderer = debugRenderer;
 
     camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    physicsEngine = ServiceLocator.getPhysicsService().getPhysics();
+    physicsEngine = physicsService.getPhysics();
   }
 
   /**
