@@ -15,6 +15,7 @@ public class ServiceLocator {
   private static EntityService entityService;
   private static RenderService renderService;
   private static PhysicsService physicsService;
+  private static GameTime timeSource;
 
   public static EntityService getEntityService() {
     return entityService;
@@ -28,6 +29,10 @@ public class ServiceLocator {
     return physicsService;
   }
 
+  public static GameTime getTimeSource() {
+    return timeSource;
+  }
+
   public static void registerEntityService(EntityService service) {
     entityService = service;
   }
@@ -38,5 +43,16 @@ public class ServiceLocator {
 
   public static void registerPhysicsService(PhysicsService service) {
     physicsService = service;
+  }
+
+  public static void registerTimeSource(GameTime source) {
+    timeSource = source;
+  }
+
+  public static void clear() {
+    entityService = null;
+    renderService = null;
+    physicsService = null;
+    timeSource = null;
   }
 }
