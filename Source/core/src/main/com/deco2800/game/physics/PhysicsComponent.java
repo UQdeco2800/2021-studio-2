@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.ecs.Component;
 import com.deco2800.game.services.ServiceLocator;
-import net.dermetfan.gdx.physics.box2d.RotationController.P;
 
 /**
  * Lets an entity be controlled by physics. Do not directly modify the position of a physics-enabled

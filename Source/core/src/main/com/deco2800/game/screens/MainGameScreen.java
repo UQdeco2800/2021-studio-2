@@ -17,6 +17,7 @@ import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -31,6 +32,7 @@ public class MainGameScreen extends ScreenAdapter {
 
   public MainGameScreen(GdxGame game) {
     this.game = game;
+    ServiceLocator.registerTimeSource(new GameTime());
     physicsEngine = PhysicsEngine.createPhysicsEngine();
     ServiceLocator.registerPhysicsService(new PhysicsService(physicsEngine));
     ServiceLocator.registerEntityService(new EntityService());
