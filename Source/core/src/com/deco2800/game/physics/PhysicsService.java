@@ -1,13 +1,17 @@
 package com.deco2800.game.physics;
 
+/**
+ * Provides a global access point to the physics engine. This is necessary for physics-based
+ * entities to add or remove themselves from the world, as well as update their position each frame.
+ */
 public class PhysicsService {
-  private final com.deco2800.game.physics.PhysicsEngine engine;
+  private final PhysicsEngine engine;
 
-  public PhysicsService(com.deco2800.game.physics.PhysicsEngine engine) {
+  public PhysicsService(PhysicsEngine engine) {
     this.engine = engine;
   }
 
-  public com.deco2800.game.physics.PhysicsEngine getPhysics() {
+  public PhysicsEngine getPhysics() {
     return engine;
   }
 }

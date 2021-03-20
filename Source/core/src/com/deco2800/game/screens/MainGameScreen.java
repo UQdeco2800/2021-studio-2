@@ -4,7 +4,9 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.ecs.Entity;
@@ -35,16 +37,10 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
     renderer = Renderer.createRenderer();
 
-    PhysicsComponent physicsComponent =
-        new PhysicsComponent(BodyType.DynamicBody, new Vector2(1f, 1f));
-    Shape shape = new CircleShape();
-    shape.setRadius(5f);
-    physicsComponent.setShape(shape);
-
     Entity defaultSprite =
-        new Entity()
-            .addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")))
-            .addComponent(physicsComponent);
+      new Entity()
+        .addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")))
+        .addComponent(new PhysicsComponent());
     ServiceLocator.getEntityService().register(defaultSprite);
   }
 

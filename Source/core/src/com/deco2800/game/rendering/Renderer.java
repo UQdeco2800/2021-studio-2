@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
+import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -19,6 +21,9 @@ public class Renderer implements Disposable {
   private final float gameWidth;
   private final SpriteBatch batch;
   private final RenderService renderService;
+  private final Box2DDebugRenderer debugRenderer;
+  // TODO: extract physics rendering somewhere else
+  private final PhysicsEngine physicsEngine;
 
   /**
    * Create a new renderer with default settings
@@ -41,9 +46,11 @@ public class Renderer implements Disposable {
     this.gameWidth = gameWidth;
     this.batch = batch;
     this.renderService = ServiceLocator.getRenderService();
+    debugRenderer = new Box2DDebugRenderer();
 
     camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    physicsEngine = ServiceLocator.getPhysicsService().getPhysics();
   }
 
   /**
@@ -57,6 +64,7 @@ public class Renderer implements Disposable {
     batch.begin();
     renderService.render(batch);
     batch.end();
+    debugRenderer.render(physicsEngine.getWorld(), camera.combined);
   }
 
   /**

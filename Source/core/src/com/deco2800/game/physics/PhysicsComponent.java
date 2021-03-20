@@ -3,98 +3,189 @@ package com.deco2800.game.physics;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.ecs.Component;
 import com.deco2800.game.services.ServiceLocator;
+import net.dermetfan.gdx.physics.box2d.RotationController.P;
 
 /**
- * Lets an entity be controlled by physics.
- * Do not directly modify the position of a physics-enabled entity. Instead,
- * use forces to move it.
+ * Lets an entity be controlled by physics. Do not directly modify the position of a physics-enabled
+ * entity. Instead, use forces to move it.
  */
 public class PhysicsComponent extends Component {
-    private final PhysicsEngine physics;
-    private final BodyDef.BodyType bodyType;
-    private final FixtureDef fixtureDef;
-    private Body body;
+  private final PhysicsEngine physics;
+  private final FixtureDef fixtureDef = new FixtureDef();
+  private BodyDef.BodyType bodyType = BodyType.DynamicBody;
+  private float angle = 0f;
+  private Body body;
+  private Shape shape;
 
-    public PhysicsComponent(
-        BodyDef.BodyType bodyType,
-        Vector2 size
-    ) {
-        this.physics = ServiceLocator.getPhysicsService().getPhysics();
-        this.bodyType = bodyType;
-        fixtureDef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(size.x, size.y);
-        fixtureDef.shape = shape;
-        shape.dispose();
-    }
+  /** Create a physics component with default settings. */
+  public PhysicsComponent() {
+    this.physics = ServiceLocator.getPhysicsService().getPhysics();
+  }
 
-    public PhysicsComponent(
-        BodyDef.BodyType bodyType,
-        Shape shape
-    ) {
-        this.physics = ServiceLocator.getPhysicsService().getPhysics();
-        this.bodyType = bodyType;
-        fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-    }
+  /**
+   * Set friction. This affects the object when touching other objects, but does not affect friction
+   * with the ground.
+   *
+   * @param friction friction, default = 0
+   * @return self
+   */
+  public PhysicsComponent setFriction(float friction) {
+    fixtureDef.friction = friction;
+    return this;
+  }
 
-    public Body getBody() {
-        return body;
-    }
+  /**
+   * Set whether this physics component is a sensor. Sensors don't collide with other objects but
+   * still trigger collision events. See: https://www.iforce2d.net/b2dtut/sensors
+   *
+   * @param isSensor true if sensor, false if not. default = false.
+   * @return self
+   */
+  public PhysicsComponent setSensor(boolean isSensor) {
+    fixtureDef.isSensor = isSensor;
+    return this;
+  }
 
-    public void setFriction(float friction) {
-        fixtureDef.friction = friction;
-    }
+  /**
+   * Set density
+   *
+   * @param density Density and size of the physics component determine the object's mass. default =
+   *     0
+   * @return self
+   */
+  public PhysicsComponent setDensity(float density) {
+    fixtureDef.density = density;
+    return this;
+  }
 
-    public void setSensor(boolean isSensor) {
-        fixtureDef.isSensor = isSensor;
-    }
+  /**
+   * Set restitution
+   *
+   * @param restitution restitution is the 'bounciness' of an object, default = 0
+   * @return self
+   */
+  public PhysicsComponent setRestitution(float restitution) {
+    fixtureDef.restitution = restitution;
+    return this;
+  }
 
-    public void setDensity(float density) {
-        fixtureDef.density = density;
-    }
+  /**
+   * Set shape
+   *
+   * @param shape shape, default = bounding box the same size as the entity
+   * @return self
+   */
+  public PhysicsComponent setShape(Shape shape) {
+    this.shape = shape;
+    return this;
+  }
 
-    public void setRestitution(float restitution) {
-        fixtureDef.restitution = restitution;
-    }
+  /**
+   * Set body type
+   *
+   * @param bodyType body type, default = dynamic
+   * @return self
+   */
+  public PhysicsComponent setBodyType(BodyType bodyType) {
+    this.bodyType = bodyType;
+    return this;
+  }
 
-    public void setShape(Shape shape) {
-        fixtureDef.shape = shape;
-    }
+  /**
+   * Set angle
+   *
+   * @param angle new angle in degrees, default = 0
+   * @return self
+   */
+  public PhysicsComponent setAngle(float angle) {
+    this.angle = angle;
+    return this;
+  }
 
-    @Override
-    public void create() {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = bodyType;
-        bodyDef.fixedRotation = true;
-        bodyDef.position.set(entity.getPosition());
-        body = physics.createBody(bodyDef);
-        body.createFixture(fixtureDef);
-    }
+  /**
+   * Set physics as a box with a given size and local position. Box is centered around the position.
+   *
+   * @param size size of the box
+   * @param position position of the box center relative to the entity.
+   * @return self
+   */
+  public PhysicsComponent setAsBox(Vector2 size, Vector2 position) {
+    PolygonShape bbox = new PolygonShape();
+    bbox.setAsBox(size.x / 2, size.y / 2, position, 0f);
+    shape = bbox;
+    return this;
+  }
 
-    /**
-     * Entity position needs to be updated to match the new physics position.
-     * This should happen before other updates, which may use the new position.
-     */
-    @Override
-    public void earlyUpdate() {
-        Vector2 bodyPos = body.getPosition();
-        entity.setPosition(bodyPos);
-    }
+  /**
+   * Get the physics body.
+   *
+   * @return physics body if entity has been created, null otherwise.
+   */
+  public Body getBody() {
+    return body;
+  }
 
-    @Override
-    public void dispose() {
-        physics.destroyBody(body);
-    }
+  /**
+   * Get the fixture definition. Avoid changing this manually.
+   *
+   * @return fixture definition.
+   */
+  public FixtureDef getFixtureDef() {
+    return fixtureDef;
+  }
 
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        body.setActive(enabled);
+  @Override
+  public void create() {
+    // Create physics body
+    BodyDef bodyDef = new BodyDef();
+    bodyDef.type = bodyType;
+    bodyDef.fixedRotation = true;
+    bodyDef.angle = angle;
+    bodyDef.position.set(entity.getPosition());
+    body = physics.createBody(bodyDef);
+
+    // Create fixture
+    if (shape == null) {
+      shape = makeBoundingBox();
     }
+    fixtureDef.shape = shape;
+    body.createFixture(fixtureDef);
+  }
+
+  private Shape makeBoundingBox() {
+    PolygonShape bbox = new PolygonShape();
+    Vector2 center = entity.getScale().cpy().scl(0.5f);
+    bbox.setAsBox(center.x, center.y, center, 0f);
+    return bbox;
+  }
+
+  /**
+   * Entity position needs to be updated to match the new physics position. This should happen
+   * before other updates, which may use the new position.
+   */
+  @Override
+  public void earlyUpdate() {
+    Vector2 bodyPos = body.getPosition();
+    entity.setPosition(bodyPos);
+  }
+
+  @Override
+  public void dispose() {
+    physics.destroyBody(body);
+    if (shape != null) {
+      shape.dispose();
+    }
+  }
+
+  @Override
+  public void setEnabled(boolean enabled) {
+    super.setEnabled(enabled);
+    body.setActive(enabled);
+  }
 }
