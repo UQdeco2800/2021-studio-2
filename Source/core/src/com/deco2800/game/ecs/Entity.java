@@ -98,6 +98,14 @@ public class Entity {
   }
 
   /**
+   * Get the entity's center position
+   * @return center position
+   */
+  public Vector2 getCenterPosition() {
+    return getPosition().mulAdd(getScale(), 0.5f);
+  }
+
+  /**
    * Get a component of type T on the entity.
    * @param type The component class, e.g. RenderComponent.class
    * @param <T> The component type, e.g. RenderComponent

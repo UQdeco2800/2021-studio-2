@@ -2,9 +2,18 @@ package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.ecs.Entity;
 import com.deco2800.game.ecs.EntityService;
+import com.deco2800.game.physics.PhysicsComponent;
+import com.deco2800.game.physics.PhysicsEngine;
+import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -18,20 +27,26 @@ import com.deco2800.game.services.ServiceLocator;
 public class MainGameScreen extends ScreenAdapter {
   private final GdxGame game;
   private final Renderer renderer;
+  private final PhysicsEngine physicsEngine;
 
   public MainGameScreen(GdxGame game) {
     this.game = game;
+    physicsEngine = PhysicsEngine.createPhysicsEngine();
+    ServiceLocator.registerPhysicsService(new PhysicsService(physicsEngine));
     ServiceLocator.registerEntityService(new EntityService());
     ServiceLocator.registerRenderService(new RenderService());
     renderer = Renderer.createRenderer();
 
     Entity defaultSprite =
-        new Entity().addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")));
+      new Entity()
+        .addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")))
+        .addComponent(new PhysicsComponent());
     ServiceLocator.getEntityService().register(defaultSprite);
   }
 
   @Override
   public void render(float delta) {
+    physicsEngine.update();
     ServiceLocator.getEntityService().update();
     renderer.render();
   }
