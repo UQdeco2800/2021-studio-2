@@ -39,4 +39,10 @@ public class ServiceLocator {
   public static void registerPhysicsService(PhysicsService service) {
     physicsService = service;
   }
+
+  public static void clear() {
+    entityService = null;
+    renderService = null;
+    physicsService = null;
+  }
 }

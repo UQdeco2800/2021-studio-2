@@ -187,6 +187,14 @@ public class Entity {
     }
   }
 
+  /**
+   * This entity's unique ID. Used for equality checks
+   * @return unique ID
+   */
+  public int getId() {
+    return id;
+  }
+
   @Override
   public boolean equals(Object obj) {
     return (obj instanceof Entity && ((Entity) obj).id == this.id);
