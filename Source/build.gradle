@@ -23,6 +23,8 @@ allprojects {
         gdxControllersVersion = '2.1.0'
         junitVersion = '5.7.1'
         mockitoVersion = '3.8.0'
+        gdxUtilsVersion = '0.13.4'
+        slf4jVersion = '1.7.30'
     }
 
     repositories {
@@ -55,8 +57,12 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
-        api "net.dermetfan.libgdx-utils:libgdx-utils:0.13.4"
-        api "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.4"
+        api "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        api "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion"
+
+        // Logging
+        api  "org.slf4j:slf4j-api:$slf4jVersion"
+        api  "org.slf4j:slf4j-jdk14:$slf4jVersion"
 
         // Unit testing
         testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"

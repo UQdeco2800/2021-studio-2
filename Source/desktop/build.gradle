@@ -10,6 +10,7 @@ task run(dependsOn: classes, type: JavaExec) {
     standardInput = System.in
     workingDir = project.assetsDir
     ignoreExitValue = true
+    jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]
 }
 
 task debug(dependsOn: classes, type: JavaExec) {
