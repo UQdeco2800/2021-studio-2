@@ -19,6 +19,8 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Runs the main game.
@@ -26,12 +28,15 @@ import com.deco2800.game.services.ServiceLocator;
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
+  private final static Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
 
   public MainGameScreen(GdxGame game) {
     this.game = game;
+
+    logger.debug("Initialising main game screen services");
     ServiceLocator.registerTimeSource(new GameTime());
     physicsEngine = PhysicsEngine.createPhysicsEngine();
     ServiceLocator.registerPhysicsService(new PhysicsService(physicsEngine));
@@ -39,6 +44,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
     renderer = Renderer.createRenderer();
 
+    logger.debug("Initialising main game screen entities");
     Entity defaultSprite =
       new Entity()
         .addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")))
@@ -56,19 +62,27 @@ public class MainGameScreen extends ScreenAdapter {
   @Override
   public void resize(int width, int height) {
     renderer.resize(width, height);
+    logger.debug("Resized renderer: ({} x {})", width, height);
   }
 
   @Override
-  public void pause() {}
+  public void pause() {
+    logger.info("Game paused");
+  }
 
   @Override
-  public void resume() {}
+  public void resume() {
+    logger.info("Game resumed");
+  }
 
   @Override
   public void dispose() {
+    logger.debug("Disposing main game screen");
     renderer.dispose();
 
     ServiceLocator.getEntityService().dispose();
     ServiceLocator.getRenderService().dispose();
+
+    logger.info("Main game screen disposed");
   }
 }
