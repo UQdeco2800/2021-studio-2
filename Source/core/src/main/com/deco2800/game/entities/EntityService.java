@@ -1,4 +1,4 @@
-package com.deco2800.game.ecs;
+package com.deco2800.game.entities;
 
 import com.badlogic.gdx.utils.Array;
 

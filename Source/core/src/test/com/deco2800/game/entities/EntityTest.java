@@ -1,4 +1,4 @@
-package com.deco2800.game.ecs;
+package com.deco2800.game.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -9,6 +9,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.Component;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.Test;
@@ -78,8 +79,8 @@ class EntityTest {
 
     verify(component1).create();
     verify(component2).create();
-    assertEquals(entity, component1.entity);
-    assertEquals(entity, component2.entity);
+    assertEquals(entity, component1.getEntity());
+    assertEquals(entity, component2.getEntity());
   }
 
   @Test

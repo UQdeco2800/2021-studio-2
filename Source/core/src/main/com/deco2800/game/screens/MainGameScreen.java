@@ -2,15 +2,10 @@ package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.ecs.Entity;
-import com.deco2800.game.ecs.EntityService;
+import com.deco2800.game.components.TestComponent;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.physics.PhysicsComponent;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
@@ -34,6 +29,7 @@ public class MainGameScreen extends ScreenAdapter {
   private final PhysicsEngine physicsEngine;
 
   public MainGameScreen(GdxGame game) {
+    logger.error("THIS IS AN ERROR");
     this.game = game;
 
     logger.debug("Initialising main game screen services");
@@ -48,7 +44,12 @@ public class MainGameScreen extends ScreenAdapter {
     Entity defaultSprite =
       new Entity()
         .addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")))
-        .addComponent(new PhysicsComponent());
+        .addComponent(new PhysicsComponent())
+        .addComponent(new TestComponent());
+
+    defaultSprite.getEvents().addListener("created", () -> System.out.println("Created!"));
+    defaultSprite.getEvents().addListener("something", (String arg) -> System.out.println(arg));
+
     ServiceLocator.getEntityService().register(defaultSprite);
   }
 

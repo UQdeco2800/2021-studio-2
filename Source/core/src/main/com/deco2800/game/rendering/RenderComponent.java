@@ -1,7 +1,7 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.deco2800.game.ecs.Component;
+import com.deco2800.game.components.Component;
 import com.deco2800.game.services.ServiceLocator;
 
 /**

@@ -1,6 +1,6 @@
 package com.deco2800.game.services;
 
-import com.deco2800.game.ecs.EntityService;
+import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 

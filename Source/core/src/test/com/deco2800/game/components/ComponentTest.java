@@ -1,9 +1,10 @@
-package com.deco2800.game.ecs;
+package com.deco2800.game.components;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import com.deco2800.game.components.Component;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

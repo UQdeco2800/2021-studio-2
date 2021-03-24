@@ -1,4 +1,6 @@
-package com.deco2800.game.ecs;
+package com.deco2800.game.components;
+
+import com.deco2800.game.entities.Entity;
 
 /**
  * Core component class from which all components inherit. Contains logic for creating, updating,
@@ -38,6 +40,14 @@ public class Component {
    */
   public void setEntity(Entity entity) {
     this.entity = entity;
+  }
+
+  /**
+   * Get the entity to which this component belongs.
+   * @return entity
+   */
+  public Entity getEntity() {
+    return entity;
   }
 
   /**

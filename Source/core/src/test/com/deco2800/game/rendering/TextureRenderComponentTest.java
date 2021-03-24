@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ecs.Entity;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

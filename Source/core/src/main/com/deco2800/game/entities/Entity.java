@@ -1,8 +1,11 @@
-package com.deco2800.game.ecs;
+package com.deco2800.game.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
+import com.deco2800.game.components.Component;
+import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -10,7 +13,8 @@ import com.deco2800.game.services.ServiceLocator;
  * position and scale, but have no default behaviour. Components should be added to an entity to
  * give it specific behaviour. This class should not be inherited or modified directly.
  *
- * Example use:
+ * <p>Example use:
+ *
  * <pre>
  * Entity player = new Entity()
  *   .addComponent(new RenderComponent())
@@ -23,7 +27,7 @@ public class Entity {
 
   private final int id;
   private final IntMap<Component> components;
-
+  private final EventHandler eventHandler;
   private boolean enabled = true;
   private boolean created = false;
   private Vector2 position = Vector2.Zero;
@@ -32,6 +36,7 @@ public class Entity {
 
   public Entity() {
     components = new IntMap<>(4);
+    eventHandler = new EventHandler();
     id = nextId;
     nextId++;
   }
@@ -39,6 +44,7 @@ public class Entity {
   /**
    * Enable or disable an entity. Disabled entities do not run update() or earlyUpdate() on their
    * components, but can still be disposed.
+   *
    * @param enabled true for enable, false for disable.
    */
   public void setEnabled(boolean enabled) {
@@ -47,6 +53,7 @@ public class Entity {
 
   /**
    * Get the entity's game position.
+   *
    * @return position
    */
   public Vector2 getPosition() {
@@ -55,6 +62,7 @@ public class Entity {
 
   /**
    * Set the entity's game position. Avoid calling this when using physics.
+   *
    * @param position new position.
    */
   public void setPosition(Vector2 position) {
@@ -63,6 +71,7 @@ public class Entity {
 
   /**
    * Set the entity's game position. Avoid calling this when using physics.
+   *
    * @param x new x position
    * @param y new y position
    */
@@ -73,6 +82,7 @@ public class Entity {
 
   /**
    * Get the entity's scale. Used for rendering and physics bounding box calculations.
+   *
    * @return Scale in x and y directions. 1 = 1 metre.
    */
   public Vector2 getScale() {
@@ -81,6 +91,7 @@ public class Entity {
 
   /**
    * Set the entity's scale.
+   *
    * @param scale new scale in metres
    */
   public void setScale(Vector2 scale) {
@@ -89,6 +100,7 @@ public class Entity {
 
   /**
    * Set the entity's scale.
+   *
    * @param x width in metres
    * @param y height in metres
    */
@@ -99,6 +111,7 @@ public class Entity {
 
   /**
    * Get the entity's center position
+   *
    * @return center position
    */
   public Vector2 getCenterPosition() {
@@ -107,6 +120,7 @@ public class Entity {
 
   /**
    * Get a component of type T on the entity.
+   *
    * @param type The component class, e.g. RenderComponent.class
    * @param <T> The component type, e.g. RenderComponent
    * @return The entity component, or null if nonexistent.
@@ -119,6 +133,7 @@ public class Entity {
 
   /**
    * Add a component to the entity. Can only be called before the entity is registered in the world.
+   *
    * @param component The component to add. Only one component of a type can be added to an entity.
    * @return Itself
    */
@@ -135,9 +150,7 @@ public class Entity {
     return this;
   }
 
-  /**
-   * Dispose of the entity. This will dispose of all components on this entity.
-   */
+  /** Dispose of the entity. This will dispose of all components on this entity. */
   public void dispose() {
     for (Component component : createdComponents) {
       component.dispose();
@@ -175,8 +188,8 @@ public class Entity {
   }
 
   /**
-   * Perform an update on all components. This is called by the entity service and should not
-   * be called manually.
+   * Perform an update on all components. This is called by the entity service and should not be
+   * called manually.
    */
   public void update() {
     if (!enabled) {
@@ -189,10 +202,21 @@ public class Entity {
 
   /**
    * This entity's unique ID. Used for equality checks
+   *
    * @return unique ID
    */
   public int getId() {
     return id;
+  }
+
+  /**
+   * Get the event handler attached to this entity. Can be used to trigger events from an attached
+   * component, or listen to events from a component.
+   *
+   * @return entity's event handler
+   */
+  public EventHandler getEvents() {
+    return eventHandler;
   }
 
   @Override
