@@ -7,6 +7,10 @@ package com.deco2800.game.physics;
 public class PhysicsService {
   private final PhysicsEngine engine;
 
+  public PhysicsService() {
+    this(new PhysicsEngine());
+  }
+
   public PhysicsService(PhysicsEngine engine) {
     this.engine = engine;
   }

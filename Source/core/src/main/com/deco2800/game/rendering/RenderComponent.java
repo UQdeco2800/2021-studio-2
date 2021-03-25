@@ -9,7 +9,6 @@ import com.deco2800.game.services.ServiceLocator;
  * be rendered each frame. Child classes can implement different kinds of rendering behaviour.
  */
 public abstract class RenderComponent extends Component implements Renderable {
-
   @Override
   public void create() {
     ServiceLocator.getRenderService().register(this);

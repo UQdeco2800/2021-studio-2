@@ -1,6 +1,8 @@
 package com.deco2800.game.entities;
 
 import com.badlogic.gdx.utils.Array;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides a global access point for entities to register themselves. This allows for iterating
@@ -10,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
  * sharing data.
  */
 public class EntityService {
+  private static final Logger logger = LoggerFactory.getLogger(EntityService.class);
   private static final int INITIAL_CAPACITY = 16;
 
   private final Array<Entity> entities = new Array<>(false, INITIAL_CAPACITY);
@@ -19,6 +22,7 @@ public class EntityService {
    * @param entity new entity.
    */
   public void register(Entity entity) {
+    logger.debug("Registering {} in entity service", entity);
     entities.add(entity);
     entity.create();
   }
@@ -28,6 +32,7 @@ public class EntityService {
    * @param entity entity to be removed.
    */
   public void unregister(Entity entity) {
+    logger.debug("Unregistering {} in entity service", entity);
     entities.removeValue(entity, true);
   }
 

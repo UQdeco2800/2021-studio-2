@@ -7,6 +7,8 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Core entity class. Entities exist in the game and are updated each frame. All entities have a
@@ -23,6 +25,7 @@ import com.deco2800.game.services.ServiceLocator;
  * </pre>
  */
 public class Entity {
+  private static final Logger logger = LoggerFactory.getLogger(Entity.class);
   private static int nextId = 0;
 
   private final int id;
@@ -48,6 +51,7 @@ public class Entity {
    * @param enabled true for enable, false for disable.
    */
   public void setEnabled(boolean enabled) {
+    logger.debug("Setting enabled={} on entity {}", enabled, this);
     this.enabled = enabled;
   }
 
@@ -139,11 +143,19 @@ public class Entity {
    */
   public Entity addComponent(Component component) {
     if (created) {
-      throw new RuntimeException("Attempted to add component after entity creation");
+      logger.error(
+        "Adding {} to {} after creation is not supported and will be ignored", component, this
+      );
+      return this;
     }
     ComponentType componentType = ComponentType.getFrom(component.getClass());
     if (components.containsKey(componentType.getId())) {
-      throw new RuntimeException("Attempted to add two components of the same type to entity");
+      logger.error(
+        "Attempted to add multiple components of class {} to {}. Only one component of a class "
+          + "can be added to an entity, this will be ignored.",
+        component, this
+      );
+      return this;
     }
     components.put(componentType.getId(), component);
 
@@ -164,7 +176,11 @@ public class Entity {
    */
   public void create() {
     if (created) {
-      throw new RuntimeException("Entity was created twice");
+      logger.error(
+        "{} was created twice. Entity should only be registered with the entity service once.",
+        this
+      );
+      return;
     }
     createdComponents = components.values().toArray();
     for (Component component : createdComponents) {
@@ -222,5 +238,10 @@ public class Entity {
   @Override
   public boolean equals(Object obj) {
     return (obj instanceof Entity && ((Entity) obj).id == this.id);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Entity{id=%d}", id);
   }
 }

@@ -5,6 +5,8 @@ import com.deco2800.game.events.listeners.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Send and receive events between objects. EventHandler provides an implementation of the Observer
@@ -18,6 +20,7 @@ import java.util.function.Consumer;
  * arguments than the listeners expect.
  */
 public class EventHandler {
+  private static final Logger logger = LoggerFactory.getLogger(EventHandler.class);
   Map<String, Array<EventListener>> listeners;
 
   public EventHandler() {
@@ -71,6 +74,7 @@ public class EventHandler {
    * @param eventName name of the event
    */
   public void trigger(String eventName) {
+    logger.debug("Triggering event {}", eventName);
     forEachListener(eventName, (EventListener listener) -> ((EventListener0) listener).handle());
   }
 
@@ -81,8 +85,10 @@ public class EventHandler {
    */
   @SuppressWarnings("unchecked")
   public <T> void trigger(String eventName, T arg0) {
+    logger.debug("Triggering event {}", eventName);
     forEachListener(
-        eventName, (EventListener listener) -> ((EventListener1<T>) listener).handle(arg0));
+      eventName, (EventListener listener) -> ((EventListener1<T>) listener).handle(arg0)
+    );
   }
 
   /**
@@ -92,9 +98,11 @@ public class EventHandler {
    */
   @SuppressWarnings("unchecked")
   public <T0, T1> void trigger(String eventName, T0 arg0, T1 arg1) {
+    logger.debug("Triggering event {}", eventName);
     forEachListener(
-        eventName,
-        (EventListener listener) -> ((EventListener2<T0, T1>) listener).handle(arg0, arg1));
+      eventName,
+      (EventListener listener) -> ((EventListener2<T0, T1>) listener).handle(arg0, arg1)
+    );
   }
 
   /**
@@ -104,13 +112,15 @@ public class EventHandler {
    */
   @SuppressWarnings("unchecked")
   public <T0, T1, T2> void trigger(String eventName, T0 arg0, T1 arg1, T2 arg2) {
+    logger.debug("Triggering event {}", eventName);
     forEachListener(
-        eventName,
-        (EventListener listener) ->
-            ((EventListener3<T0, T1, T2>) listener).handle(arg0, arg1, arg2));
+      eventName,
+      (EventListener listener) -> ((EventListener3<T0, T1, T2>) listener).handle(arg0, arg1, arg2)
+    );
   }
 
   private void registerListener(String eventName, EventListener listener) {
+    logger.debug("Adding listener {} to event {}", listener, eventName);
     Array<EventListener> eventListeners = listeners.getOrDefault(eventName, null);
     if (eventListeners == null) {
       eventListeners = new Array<>(1);

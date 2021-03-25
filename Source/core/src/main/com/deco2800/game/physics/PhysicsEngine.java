@@ -7,15 +7,17 @@ import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.JointDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Process game physics using the Box2D library. See the Box2D documentation for examples or use
  * cases.
  */
 public class PhysicsEngine implements Disposable {
+  private static final Logger logger = LoggerFactory.getLogger(PhysicsEngine.class);
   private static final float MAX_UPDATE_TIME = 0.25f;
   private static final float PHYSICS_TIMESTEP = 0.016f;
   private static final Vector2 GRAVITY = new Vector2(0, -9.8f);
@@ -26,8 +28,11 @@ public class PhysicsEngine implements Disposable {
   private final GameTime timeSource;
   private float accumulator;
 
-  public static PhysicsEngine createPhysicsEngine() {
-    return new PhysicsEngine(new World(GRAVITY, true), ServiceLocator.getTimeSource());
+  public PhysicsEngine() {
+    this(
+      new World(GRAVITY, true),
+      ServiceLocator.getTimeSource()
+    );
   }
 
   public PhysicsEngine(World world, GameTime timeSource) {
@@ -52,18 +57,22 @@ public class PhysicsEngine implements Disposable {
   }
 
   public Body createBody(BodyDef bodyDef) {
+    logger.debug("Creating physics body {}", bodyDef);
     return world.createBody(bodyDef);
   }
 
   public void destroyBody(Body body) {
+    logger.debug("Destroying physics body {}", body);
     world.destroyBody(body);
   }
 
   public Joint createJoint(JointDef jointDef) {
+    logger.debug("Creating physics joint {}", jointDef);
     return world.createJoint(jointDef);
   }
 
   public void destroyJoint(Joint joint) {
+    logger.debug("Destroying physics joint {}", joint);
     world.destroyJoint(joint);
   }
 

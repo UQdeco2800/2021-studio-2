@@ -30,8 +30,8 @@ public class Renderer implements Disposable {
    * Create a new renderer with default settings
    * @return A new renderer.
    */
-  public static Renderer createRenderer() {
-    return new Renderer(
+  public Renderer() {
+    this(
       new OrthographicCamera(),
       GAME_SCREEN_WIDTH,
       new SpriteBatch(),

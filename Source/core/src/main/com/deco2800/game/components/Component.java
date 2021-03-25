@@ -1,6 +1,8 @@
 package com.deco2800.game.components;
 
 import com.deco2800.game.entities.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Core component class from which all components inherit. Contains logic for creating, updating,
@@ -8,6 +10,7 @@ import com.deco2800.game.entities.Entity;
  * unlikely that changes will need to be made here.
  */
 public class Component {
+  private static final Logger logger = LoggerFactory.getLogger(Component.class);
   protected Entity entity;
   protected boolean enabled = true;
 
@@ -39,6 +42,7 @@ public class Component {
    * @param entity The entity to which the component is attached.
    */
   public void setEntity(Entity entity) {
+    logger.debug("Attaching {} to {}", this, entity);
     this.entity = entity;
   }
 
@@ -58,6 +62,7 @@ public class Component {
    * @param enabled Should component be enabled
    */
   public void setEnabled(boolean enabled) {
+    logger.debug("Setting enabled={} on {}", enabled, this);
     this.enabled = enabled;
   }
 
@@ -76,5 +81,14 @@ public class Component {
     if (enabled) {
       earlyUpdate();
     }
+  }
+
+  @Override
+  public String toString() {
+    String className = this.getClass().getSimpleName();
+    if (entity == null) {
+      return className;
+    }
+    return entity + "." + className;
   }
 }

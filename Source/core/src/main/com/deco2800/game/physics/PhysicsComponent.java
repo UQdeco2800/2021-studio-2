@@ -24,7 +24,15 @@ public class PhysicsComponent extends Component {
 
   /** Create a physics component with default settings. */
   public PhysicsComponent() {
-    this.physics = ServiceLocator.getPhysicsService().getPhysics();
+    this(ServiceLocator.getPhysicsService().getPhysics());
+  }
+
+  /**
+   * Create a physics component
+   * @param engine The physics engine to attach the component to
+   */
+  public PhysicsComponent(PhysicsEngine engine) {
+    this.physics = engine;
   }
 
   /**

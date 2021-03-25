@@ -3,7 +3,6 @@ package com.deco2800.game.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -89,7 +88,8 @@ class EntityTest {
     Component component1 = new TestComponent1();
     Component component2 = new TestComponent1();
     entity.addComponent(component1);
-    assertThrows(RuntimeException.class, () -> entity.addComponent(component2));
+    entity.addComponent(component2);
+    assertEquals(component1, entity.getComponent(TestComponent1.class));
   }
 
   @Test

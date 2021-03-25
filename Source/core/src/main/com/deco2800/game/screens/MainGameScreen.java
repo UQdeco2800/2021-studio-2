@@ -29,16 +29,18 @@ public class MainGameScreen extends ScreenAdapter {
   private final PhysicsEngine physicsEngine;
 
   public MainGameScreen(GdxGame game) {
-    logger.error("THIS IS AN ERROR");
     this.game = game;
 
     logger.debug("Initialising main game screen services");
     ServiceLocator.registerTimeSource(new GameTime());
-    physicsEngine = PhysicsEngine.createPhysicsEngine();
-    ServiceLocator.registerPhysicsService(new PhysicsService(physicsEngine));
+
+    PhysicsService physicsService = new PhysicsService();
+    ServiceLocator.registerPhysicsService(physicsService);
+    physicsEngine = physicsService.getPhysics();
+
     ServiceLocator.registerEntityService(new EntityService());
     ServiceLocator.registerRenderService(new RenderService());
-    renderer = Renderer.createRenderer();
+    renderer = new Renderer();
 
     logger.debug("Initialising main game screen entities");
     Entity defaultSprite =
@@ -63,7 +65,7 @@ public class MainGameScreen extends ScreenAdapter {
   @Override
   public void resize(int width, int height) {
     renderer.resize(width, height);
-    logger.debug("Resized renderer: ({} x {})", width, height);
+    logger.trace("Resized renderer: ({} x {})", width, height);
   }
 
   @Override
@@ -83,7 +85,5 @@ public class MainGameScreen extends ScreenAdapter {
 
     ServiceLocator.getEntityService().dispose();
     ServiceLocator.getRenderService().dispose();
-
-    logger.info("Main game screen disposed");
   }
 }
