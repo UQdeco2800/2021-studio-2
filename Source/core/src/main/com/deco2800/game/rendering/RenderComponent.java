@@ -1,6 +1,7 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -8,7 +9,7 @@ import com.deco2800.game.services.ServiceLocator;
  * A generic component for rendering an entity. Registers itself with the render service in order to
  * be rendered each frame. Child classes can implement different kinds of rendering behaviour.
  */
-public abstract class RenderComponent extends Component implements Renderable {
+public abstract class RenderComponent extends Component implements Renderable, Disposable {
   @Override
   public void create() {
     ServiceLocator.getRenderService().register(this);

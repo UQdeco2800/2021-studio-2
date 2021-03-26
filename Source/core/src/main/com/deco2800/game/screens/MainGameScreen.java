@@ -2,6 +2,9 @@ package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.TestComponent;
 import com.deco2800.game.entities.Entity;
@@ -9,6 +12,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.physics.PhysicsComponent;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -45,13 +49,14 @@ public class MainGameScreen extends ScreenAdapter {
     logger.debug("Initialising main game screen entities");
     Entity defaultSprite =
       new Entity()
-        .addComponent(new TextureRenderComponent(new Texture("badlogic.jpg")))
-        .addComponent(new PhysicsComponent())
-        .addComponent(new TestComponent());
+        .addComponent(new AnimationRenderComponent(new TextureAtlas("test.atlas")));
+    AnimationRenderComponent animator = defaultSprite.getComponent(AnimationRenderComponent.class);
+    animator.addAnimation("attack", 0.1f, PlayMode.LOOP);
+    animator.addAnimation("chase_down", 0.1f, PlayMode.LOOP);
+    animator.startAnimation("chase_down");
 
     defaultSprite.getEvents().addListener("created", () -> System.out.println("Created!"));
     defaultSprite.getEvents().addListener("something", (String arg) -> System.out.println(arg));
-
     ServiceLocator.getEntityService().register(defaultSprite);
   }
 

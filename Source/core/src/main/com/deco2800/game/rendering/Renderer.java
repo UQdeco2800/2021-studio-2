@@ -28,7 +28,6 @@ public class Renderer implements Disposable {
 
   /**
    * Create a new renderer with default settings
-   * @return A new renderer.
    */
   public Renderer() {
     this(
