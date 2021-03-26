@@ -56,9 +56,10 @@ public class AnimationRenderComponent extends RenderComponent {
    * @param name Name of the animation. Must match the name of this animation inside the texture
    *             atlas.
    * @param frameDuration How long, in seconds, to show each frame of the animation for when playing
+   * @return true if added successfully, false otherwise
    */
-  public void addAnimation(String name, float frameDuration) {
-    addAnimation(name, frameDuration, PlayMode.NORMAL);
+  public boolean addAnimation(String name, float frameDuration) {
+    return addAnimation(name, frameDuration, PlayMode.NORMAL);
   }
 
   /**
@@ -67,21 +68,24 @@ public class AnimationRenderComponent extends RenderComponent {
    *             atlas.
    * @param frameDuration How long, in seconds, to show each frame of the animation for when playing
    * @param playMode How the animation should be played (e.g. looping, backwards)
+   * @return true if added successfully, false otherwise
    */
-  public void addAnimation(String name, float frameDuration, PlayMode playMode) {
+  public boolean addAnimation(String name, float frameDuration, PlayMode playMode) {
     Array<AtlasRegion> regions = atlas.findRegions(name);
     if (regions == null || regions.size == 0) {
       logger.warn("Animation {} not found in texture atlas", name);
-      return;
+      return false;
     } else if (animations.containsKey(name)) {
       logger.warn(
           "Animation {} already added in texture atlas. Animations should only be added once.",
           name);
+      return false;
     }
 
     Animation<TextureRegion> animation = new Animation<>(frameDuration, regions, playMode);
     animations.put(name, animation);
     logger.debug("Adding animation {}", name);
+    return true;
   }
 
   /**
@@ -159,11 +163,11 @@ public class AnimationRenderComponent extends RenderComponent {
     if (currentAnimation == null) {
       return;
     }
-    animationPlayTime += timeSource.getDeltaTime();
     TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
     Vector2 pos = entity.getPosition();
     Vector2 scale = entity.getScale();
     batch.draw(region, pos.x, pos.y, scale.x, scale.y);
+    animationPlayTime += timeSource.getDeltaTime();
   }
 
   @Override
