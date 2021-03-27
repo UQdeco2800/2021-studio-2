@@ -3,7 +3,7 @@ name: Java Unit Tests
 on: [push] # Will trigger whenever a push is made to the branch
 
 jobs:
-  build:
+  run_unit_tests:
     runs-on: ubuntu-latest # Running on this OS, if we need it changed lmk
 
     steps:
@@ -13,4 +13,4 @@ jobs:
         with:
           java-version: '13'
       - name: Build with Gradle
-        run: ./gradlew test
+        run: ./Source/gradlew test
