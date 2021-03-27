@@ -20,6 +20,6 @@ jobs:
       - name: Post to Slack # Notify the students
         uses: rtCamp/action-slack-notify@v2.1.3
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }}
           SLACK_CHANNEL: 'banter'
           SLACK_MESSAGE: 'Unit tests workflow finished!'
