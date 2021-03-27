@@ -17,9 +17,9 @@ jobs:
         run: |
           $GRADLE_DIR/gradlew test
         env:
-          GRADLE_DIR: './Source/'
+          GRADLE_DIR: './Source'
       - name: Post to Slack # Notify the channel specified in the env variables
-        if: github.ref == 'refs/heads/feat/github_workflow' # always run this step
+        if: always() && github.ref == 'refs/heads/feat/github_workflow' # always run this step
         uses: rtCamp/action-slack-notify@v2.1.3
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }}
