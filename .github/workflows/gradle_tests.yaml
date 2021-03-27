@@ -26,7 +26,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }} # Same bot used for all, don't change
           SLACK_CHANNEL: 'bot-testing' # Where are we posting to?
-          SLACK_MESSAGE: 'Unit tests workflow reported *${{steps.tests.conclusion}}*!\n `${{ github.event.head_commit.message }}`'
+          SLACK_MESSAGE: 'Unit tests workflow reported *${{steps.tests.conclusion}}*! Commit message: `${{ github.event.head_commit.message }}`'
           SLACK_COLOR: ${{job.status}} # Automatically changes color of the message
           SLACK_USERNAME: DECO2800 Overwatch
           SLACK_ICON: https://static.wikia.nocookie.net/1547a0b1-0227-43c5-ac81-9f1d0895824b
