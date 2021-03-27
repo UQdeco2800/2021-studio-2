@@ -18,8 +18,9 @@ jobs:
           $GRADLE_DIR/gradlew test
         env:
           GRADLE_DIR: './Source/'
+      - uses: nelonoel/branch-name@v1.0.1 # Here for simplicities sake for DECO people
       - name: Post to Slack # Notify the channel specified in the env variables
-        if: always() # always run this step
+        if: BRANCH_NAME == 'feat/github_workflow' # always run this step
         uses: rtCamp/action-slack-notify@v2.1.3
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }}
