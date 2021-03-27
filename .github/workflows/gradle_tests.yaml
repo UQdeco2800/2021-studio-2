@@ -21,7 +21,7 @@ jobs:
           GRADLE_DIR: './Source' # Modify this to whereever './gradlew' is 
 
       - name: Post to Slack # Notify the channel specified in the env variables
-        if: always() && github.ref == 'refs/heads/feat/github_workflow' # Always run when on main
+        if: always() && github.ref == 'refs/heads/main' # Always run when on main
         uses: rtCamp/action-slack-notify@v2.1.3
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }} # Same bot used for all, don't change
