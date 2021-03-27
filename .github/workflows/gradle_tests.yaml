@@ -22,5 +22,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.1.3
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }}
-          SLACK_CHANNEL: 'banter'
+          SLACK_CHANNEL: 'bot-testing'
           SLACK_MESSAGE: 'Unit tests workflow finished!'
+          SLACK_USERNAME: DECO2800 Overwatch
+          SLACK_ICON: http://pm1.narvii.com/6586/6a7d40535b71849c75f0b2ec4ff9d6978c6f6122_00.jpg
