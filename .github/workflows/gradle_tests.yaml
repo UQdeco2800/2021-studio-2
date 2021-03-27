@@ -1,6 +1,6 @@
 name: Game Unit Tests
 
-on: [push] # Will trigger whenever a push is made to the branch
+on: [push, pull_request] # Will trigger whenever a push is made to the branch, regardless of which branch
 
 jobs:
   run_unit_tests:
@@ -12,19 +12,22 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '13'
-      - name: Build with Gradle
-        id: test
+
+      - name: Run Unit Tests
+        id: tests # Unique ID to reference later to color our message
         run: |
           $GRADLE_DIR/gradlew test
         env:
-          GRADLE_DIR: './Source'
+          GRADLE_DIR: './Source' # Modify this to whereever './gradlew' is 
+
       - name: Post to Slack # Notify the channel specified in the env variables
-        if: always() && github.ref == 'refs/heads/main' # Always run when on main
+        if: always() && github.ref == 'refs/heads/feat/github_workflow' # Always run when on main
         uses: rtCamp/action-slack-notify@v2.1.3
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }}
-          SLACK_CHANNEL: 'bot-testing'
-          SLACK_MESSAGE: 'Unit tests workflow reported *${{steps.test.conclusion}}*!'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }} # Same bot used for all, don't change
+          SLACK_CHANNEL: 'bot-testing' # Where are we posting to?
+          SLACK_MESSAGE: 'Unit tests workflow reported *${{steps.tests.conclusion}}*!'
           SLACK_COLOR: ${{job.status}} # Automatically changes color of the message
           SLACK_USERNAME: DECO2800 Overwatch
           SLACK_ICON: https://static.wikia.nocookie.net/1547a0b1-0227-43c5-ac81-9f1d0895824b
+          SLACK_FOOTER: ''
