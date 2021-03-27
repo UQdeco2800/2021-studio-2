@@ -31,4 +31,4 @@ jobs:
           SLACK_USERNAME: DECO2800 Overwatch
           SLACK_ICON: https://static.wikia.nocookie.net/1547a0b1-0227-43c5-ac81-9f1d0895824b
           SLACK_FOOTER: ''
-          MSG_MINIMAL: true
+          MSG_MINIMAL: actions url, commit
