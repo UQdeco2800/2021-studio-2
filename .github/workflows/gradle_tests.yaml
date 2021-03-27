@@ -1,4 +1,4 @@
-name: Java Unit Tests
+name: Game Unit Tests
 
 on: [push] # Will trigger whenever a push is made to the branch
 
@@ -24,7 +24,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_TEST }}
           SLACK_CHANNEL: 'bot-testing'
-          SLACK_MESSAGE: 'Unit tests workflow reported ${{steps.test.conclusion}}!'
+          SLACK_MESSAGE: 'Unit tests workflow reported *${{steps.test.conclusion}}*!'
           SLACK_COLOR: ${{job.status}} # Automatically changes color of the message
           SLACK_USERNAME: DECO2800 Overwatch
           SLACK_ICON: https://static.wikia.nocookie.net/1547a0b1-0227-43c5-ac81-9f1d0895824b
