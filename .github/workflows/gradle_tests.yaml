@@ -14,5 +14,12 @@ jobs:
           java-version: '13'
       - name: Build with Gradle
         run: |
-          chmod +x ./Source/gradlew test
-          ./Source/gradlew test
+          $GRADLE_DIR/gradlew test
+        env:
+          GRADLE_DIR: './Source/'
+      - name: Post to Slack # Notify the students
+        uses: rtCamp/action-slack-notify@v2.1.3
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: 'banter'
+          SLACK_MESSAGE: 'Unit tests workflow finished!'
