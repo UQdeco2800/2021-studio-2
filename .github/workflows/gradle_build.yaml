@@ -29,7 +29,6 @@ jobs:
           prerelease: false
           title: "Latest Build of Game"
           files: |
-            README.md
-            desktop/build/libs/*.jar
+            ./desktop/build/libs/*.jar
   
           
