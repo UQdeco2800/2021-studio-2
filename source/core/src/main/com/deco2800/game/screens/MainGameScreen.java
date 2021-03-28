@@ -1,21 +1,16 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.TestComponent;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
-import com.deco2800.game.physics.PhysicsComponent;
+import com.deco2800.game.areas.ForestGameArea;
+import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
+import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
-import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -27,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
-  private final static Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
+  private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -45,19 +40,13 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerEntityService(new EntityService());
     ServiceLocator.registerRenderService(new RenderService());
     renderer = new Renderer();
+    renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
 
     logger.debug("Initialising main game screen entities");
-    Entity defaultSprite =
-      new Entity()
-        .addComponent(new AnimationRenderComponent(new TextureAtlas("test.atlas")));
-    AnimationRenderComponent animator = defaultSprite.getComponent(AnimationRenderComponent.class);
-    animator.addAnimation("attack", 0.1f, PlayMode.LOOP);
-    animator.addAnimation("chase_down", 0.1f, PlayMode.LOOP);
-    animator.startAnimation("chase_down");
-
-    defaultSprite.getEvents().addListener("created", () -> System.out.println("Created!"));
-    defaultSprite.getEvents().addListener("something", (String arg) -> System.out.println(arg));
-    ServiceLocator.getEntityService().register(defaultSprite);
+    TerrainFactory terrainFactory =
+        new TerrainFactory(renderer.getCamera());
+    ForestGameArea forestGameArea = new ForestGameArea(terrainFactory);
+    forestGameArea.create();
   }
 
   @Override

@@ -18,7 +18,7 @@ import com.deco2800.game.services.ServiceLocator;
 public class Renderer implements Disposable {
   private static final float GAME_SCREEN_WIDTH = 10f;
 
-  private final Camera camera;
+  private final OrthographicCamera camera;
   private final float gameWidth;
   private final SpriteBatch batch;
   private final RenderService renderService;
@@ -49,7 +49,7 @@ public class Renderer implements Disposable {
    * @param batch Batch to render to.
    */
   public Renderer(
-    Camera camera,
+    OrthographicCamera camera,
     float gameWidth,
     SpriteBatch batch,
     RenderService renderService,
@@ -65,6 +65,10 @@ public class Renderer implements Disposable {
     camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     physicsEngine = physicsService.getPhysics();
+  }
+
+  public OrthographicCamera getCamera() {
+    return camera;
   }
 
   /**
