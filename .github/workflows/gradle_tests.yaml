@@ -13,6 +13,16 @@ jobs:
         with:
           java-version: '13'
 
+      - name: Cache Gradle packages # Allows us to reuse packages between runs
+        uses: actions/cache@v2 # If the files specified in key change we dump old cache else re-use
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper 
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }} 
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Run Unit Tests
         id: tests # Unique ID to reference later to color our message
         run: |
@@ -35,3 +45,11 @@ jobs:
           SLACK_ICON: https://static.wikia.nocookie.net/1547a0b1-0227-43c5-ac81-9f1d0895824b
           SLACK_FOOTER: ''
           MSG_MINIMAL: commit,actions url # We only want the commit link and actions url
+
+      - name: Cleanup Gradle Cache
+        if: always()
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
