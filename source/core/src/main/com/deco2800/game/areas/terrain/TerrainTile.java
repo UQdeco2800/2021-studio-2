@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 
 /**
  * Custom terrain tile implementation for tiled map terrain that stores additional properties we
- * want to have in the game, such as audio, walking speed, traversability by AI, etc.
+ * may want to have in the game, such as audio, walking speed, traversability by AI, etc.
  */
 public class TerrainTile implements TiledMapTile {
   private int id;

@@ -20,16 +20,31 @@ public class TerrainFactory {
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
 
+  /**
+   * Create a terrain factory with Orthogonal orientation
+   * @param camera Camera to render terrains to
+   */
   public TerrainFactory(OrthographicCamera camera) {
     this.camera = camera;
     this.orientation = TerrainOrientation.Orthogonal;
   }
 
+  /**
+   * Create a terrain factory
+   * @param camera Camera to render terrains to
+   * @param orientation orientation to render terrain at
+   */
   public TerrainFactory(OrthographicCamera camera, TerrainOrientation orientation) {
     this.camera = camera;
     this.orientation = orientation;
   }
 
+  /**
+   * Create a terrain of the given type, using the orientation of the factory.
+   * This can be extended to add additional game terrains.
+   * @param terrainType Terrain to create
+   * @return Terrain component which renders the terrain
+   */
   public TerrainComponent createTerrain(TerrainType terrainType) {
     switch (terrainType) {
       case FOREST_DEMO:
