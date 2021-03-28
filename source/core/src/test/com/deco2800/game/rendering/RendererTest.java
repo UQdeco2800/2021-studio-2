@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -24,7 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
 class RendererTest {
-  @Spy Camera camera;
+  @Spy OrthographicCamera camera;
   @Mock SpriteBatch spriteBatch;
   @Mock Graphics graphics;
   @Mock RenderService renderService;
