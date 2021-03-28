@@ -13,13 +13,14 @@ jobs:
           java-version: '13'
 
       - name: Build Game
-        steps: |
+        run: |
           cd $GRADLE_DIR
           chmod +x ./gradlew
           ./gradlew --stacktrace build
         env:
           GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
-      - name: Release
+
+      - name: Release Game
         uses: softprops/action-gh-release@v1
         with:
           files: desktop/build/libs/*.jar
