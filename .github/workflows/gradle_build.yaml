@@ -36,5 +36,3 @@ jobs:
           files: |
             ./source/desktop/build/libs/*.jar 
         
-  
-          
