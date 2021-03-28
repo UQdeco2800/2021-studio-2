@@ -1,0 +1,11 @@
+name: Build JAR artifacts
+
+on: [push]
+
+jobs:
+  build_game:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo
+        run: echo "One eye"
