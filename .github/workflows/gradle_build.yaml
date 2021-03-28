@@ -17,6 +17,7 @@ jobs:
           cd $GRADLE_DIR
           chmod +x ./gradlew
           ./gradlew --stacktrace build
+          ls -al
         env:
           GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
 
@@ -28,6 +29,7 @@ jobs:
           prerelease: false
           title: "Latest Build of Game"
           files: |
+            README.md
             desktop/build/libs/*.jar
   
           
