@@ -29,6 +29,6 @@ jobs:
           prerelease: false
           title: "Latest Build of Game"
           files: |
-            ./desktop/build/libs/*.jar
+            ./source/desktop/build/libs/*.jar
   
           
