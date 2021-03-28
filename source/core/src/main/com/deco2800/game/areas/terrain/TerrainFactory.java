@@ -11,17 +11,18 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 
-/**
- * Factory for creating game terrains.
- */
+/** Factory for creating game terrains. */
 public class TerrainFactory {
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
 
   /**
    * Create a terrain factory with Orthogonal orientation
+   *
    * @param camera Camera to render terrains to
    */
   public TerrainFactory(OrthographicCamera camera) {
@@ -31,6 +32,7 @@ public class TerrainFactory {
 
   /**
    * Create a terrain factory
+   *
    * @param camera Camera to render terrains to
    * @param orientation orientation to render terrain at
    */
@@ -40,34 +42,34 @@ public class TerrainFactory {
   }
 
   /**
-   * Create a terrain of the given type, using the orientation of the factory.
-   * This can be extended to add additional game terrains.
+   * Create a terrain of the given type, using the orientation of the factory. This can be extended
+   * to add additional game terrains.
+   *
    * @param terrainType Terrain to create
    * @return Terrain component which renders the terrain
    */
   public TerrainComponent createTerrain(TerrainType terrainType) {
     switch (terrainType) {
       case FOREST_DEMO:
-        float tileWorldSize = 1f;
-        int tilePixelSize = 16;
-        Texture texture = new Texture("Overworld.png");
-        TextureRegion grass = new TextureRegion(texture, 0, 0, tilePixelSize, tilePixelSize);
-        TiledMap tiledMap = makeForestDemoTiledMap(tilePixelSize, grass);
-        TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize);
-        return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+        Texture orthoTexture = new Texture("terrain_ortho.png");
+        TextureRegion orthoGrass = new TextureRegion(orthoTexture, 0, 0, 16, 16);
+        return createForestDemoTerrain(1f, new GridPoint2(16, 16), orthoGrass);
       case FOREST_DEMO_ISO:
-        return createTerrainForestDemoIso();
+        TextureRegion isoGrass = new TextureAtlas("terrain_iso_grass.atlas").findRegion("grass");
+        return createForestDemoTerrain(1f, new GridPoint2(132, 132), isoGrass);
+      case FOREST_DEMO_HEX:
+        Texture hexGrassTex = new Texture("terrain_hex.png");
+        TextureRegion hexGrass = new TextureRegion(hexGrassTex, 224, 66, 32, 32);
+        return createForestDemoTerrain(1f, new GridPoint2(32, 32), hexGrass);
       default:
         return null;
     }
   }
 
-  private TerrainComponent createTerrainForestDemoIso() {
-    float tileWorldSize = 1f;
-    int tilePixelSize = 132;
-    TextureRegion grass = new TextureAtlas("terrain_iso.atlas").findRegion("landscapeTiles");
-    TiledMap tiledMap = makeForestDemoTiledMap(tilePixelSize, grass);
-    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize);
+  private TerrainComponent createForestDemoTerrain(
+      float tileWorldSize, GridPoint2 tilePixelSize, TextureRegion tex) {
+    TiledMap tiledMap = createForestDemoTiles(tilePixelSize, tex);
+    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
     return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
 
@@ -84,11 +86,11 @@ public class TerrainFactory {
     }
   }
 
-  private TiledMap makeForestDemoTiledMap(int tilePixelSize, TextureRegion textureRegion) {
+  private TiledMap createForestDemoTiles(GridPoint2 tileSize, TextureRegion textureRegion) {
     TiledMap tiledMap = new TiledMap();
     TerrainTile mapTile = new TerrainTile(textureRegion);
 
-    TiledMapTileLayer layer = new TiledMapTileLayer(100, 100, tilePixelSize, tilePixelSize);
+    TiledMapTileLayer layer = new TiledMapTileLayer(20, 20, tileSize.x, tileSize.y);
     for (int x = 0; x < 100; x++) {
       for (int y = 0; y < 100; y++) {
         Cell cell = new Cell();
@@ -102,6 +104,8 @@ public class TerrainFactory {
   }
 
   public enum TerrainType {
-    FOREST_DEMO, FOREST_DEMO_ISO
+    FOREST_DEMO,
+    FOREST_DEMO_ISO,
+    FOREST_DEMO_HEX
   }
 }

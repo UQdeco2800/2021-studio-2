@@ -1,10 +1,10 @@
 
-terrain_iso.png
+terrain_iso_grass.png
 size: 256, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-landscapeTiles
+grass
   rotate: false
   xy: 2, 2
   size: 132, 99
