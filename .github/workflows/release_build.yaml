@@ -2,7 +2,7 @@ name: Release App
 
 on: 
   workflow_run:
-    workflows: ["Build"]
+    workflows: ["build_game"]
     types: [completed]
 
 jobs:
