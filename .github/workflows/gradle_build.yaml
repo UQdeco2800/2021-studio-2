@@ -1,6 +1,11 @@
 name: Build and Release
 
-on: [push]
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      # Push events on main branch
+      - main
 
 jobs:
   build_game:
@@ -21,7 +26,7 @@ jobs:
         env:
           GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
 
-      - name: Automatic Release
+      - name: Automatic Release # note the path for the files on this one
         uses: marvinpinto/action-automatic-releases@v1.1.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -29,6 +34,7 @@ jobs:
           prerelease: false
           title: "Latest Build of Game"
           files: |
-            ./source/desktop/build/libs/*.jar
+            ./source/desktop/build/libs/*.jar 
+        
   
           
