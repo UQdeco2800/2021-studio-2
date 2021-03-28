@@ -7,6 +7,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
@@ -36,6 +37,8 @@ public class MainGameScreen extends ScreenAdapter {
     PhysicsService physicsService = new PhysicsService();
     ServiceLocator.registerPhysicsService(physicsService);
     physicsEngine = physicsService.getPhysics();
+
+    ServiceLocator.registerInputService(new InputService());
 
     ServiceLocator.registerEntityService(new EntityService());
     ServiceLocator.registerRenderService(new RenderService());

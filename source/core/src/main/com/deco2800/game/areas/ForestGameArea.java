@@ -3,10 +3,12 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.GridPoint2;
+import com.deco2800.game.components.player.PlayerActionComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.services.ServiceLocator;
 
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class ForestGameArea extends GameArea {
@@ -28,7 +30,11 @@ public class ForestGameArea extends GameArea {
 
     // Spawn entities
     Entity defaultSprite =
-        new Entity().addComponent(new AnimationRenderComponent(new TextureAtlas("test.atlas")));
+        new Entity()
+            .addComponent(new AnimationRenderComponent(new TextureAtlas("test.atlas")))
+            .addComponent(new PlayerActionComponent())
+            .addComponent(ServiceLocator.getInputService().getInputFactory().createForPlayer());
+    ;
     spawnEntityAt(defaultSprite, new GridPoint2(1, 1), true);
 
     AnimationRenderComponent animator = defaultSprite.getComponent(AnimationRenderComponent.class);

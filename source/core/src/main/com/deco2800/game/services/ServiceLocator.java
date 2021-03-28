@@ -1,6 +1,7 @@
 package com.deco2800.game.services;
 
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ public class ServiceLocator {
   private static RenderService renderService;
   private static PhysicsService physicsService;
   private static GameTime timeSource;
+  private static InputService inputService;
+
 
   public static EntityService getEntityService() {
     return entityService;
@@ -34,6 +37,10 @@ public class ServiceLocator {
 
   public static GameTime getTimeSource() {
     return timeSource;
+  }
+
+  public static InputService getInputService() {
+    return inputService;
   }
 
   public static void registerEntityService(EntityService service) {
@@ -54,6 +61,10 @@ public class ServiceLocator {
   public static void registerTimeSource(GameTime source) {
     logger.debug("Registering time source {}", source);
     timeSource = source;
+  }
+
+  public static void registerInputService(InputService source) {
+    inputService = source;
   }
 
   public static void clear() {
