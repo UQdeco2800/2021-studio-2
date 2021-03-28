@@ -35,4 +35,3 @@ jobs:
           title: "Latest Build of Game"
           files: |
             ./source/desktop/build/libs/*.jar 
-        
