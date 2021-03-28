@@ -19,8 +19,7 @@ jobs:
           ./gradlew --stacktrace build
         env:
           GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
-      
-     - name: Release
+      - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: desktop/build/libs/*.jar
