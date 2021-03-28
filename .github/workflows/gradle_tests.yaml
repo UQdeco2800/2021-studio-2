@@ -16,9 +16,10 @@ jobs:
       - name: Run Unit Tests
         id: tests # Unique ID to reference later to color our message
         run: |
+          chmod +x $GRADLE_DIR/gradlew
           $GRADLE_DIR/gradlew test
         env:
-          GRADLE_DIR: './Source' # Modify this to whereever './gradlew' is 
+          GRADLE_DIR: './source' # Modify this to whereever './gradlew' is 
 
       - name: Post to Slack # Notify the channel specified in the env variables
         if: always() && github.ref == 'refs/heads/main' # Always run when on main
