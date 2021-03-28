@@ -17,7 +17,8 @@ jobs:
         id: tests # Unique ID to reference later to color our message
         run: |
           chmod +x $GRADLE_DIR/gradlew
-          $GRADLE_DIR/gradlew test
+          $GRADLEW_DIR/gradlew tasks
+          $GRADLE_DIR/gradlew --stacktrace test
         env:
           GRADLE_DIR: './source' # Modify this to whereever './gradlew' is 
 
