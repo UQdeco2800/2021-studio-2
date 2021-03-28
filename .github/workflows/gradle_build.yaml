@@ -1,4 +1,4 @@
-name: Build
+name: Build and Release
 
 on: [push]
 
@@ -6,5 +6,27 @@ jobs:
   build_game:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo
-        run: echo "One eye"
+      - uses: actions/checkout@v2 # Checkout repo to remote machine
+      - name: Set up OpenJDK13 
+        uses: actions/setup-java@v1
+        with:
+          java-version: '13'
+
+      - name: Build Game
+        steps: |
+          cd $GRADLE_DIR
+          chmod +x ./gradlew
+          ./gradlew --stacktrace build
+        env:
+          GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
+      
+     - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: desktop/build/libs/*.jar
+          name: latest-release
+          body: 'latest build'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          
