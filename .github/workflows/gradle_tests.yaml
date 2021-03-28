@@ -11,11 +11,12 @@ jobs:
       - name: Set up OpenJDK13 
         uses: actions/setup-java@v1
         with:
-          java-version: '13'
+          java-version: '15'
 
       - name: Run Unit Tests
         id: tests # Unique ID to reference later to color our message
         run: |
+          ls -al
           chmod +x $GRADLE_DIR/gradlew
           $GRADLEW_DIR/gradlew tasks
           $GRADLE_DIR/gradlew --stacktrace test
