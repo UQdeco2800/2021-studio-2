@@ -1,4 +1,4 @@
-name: Build JAR artifacts
+name: Build
 
 on: [push]
 
