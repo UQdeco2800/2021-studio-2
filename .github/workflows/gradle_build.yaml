@@ -32,6 +32,7 @@ jobs:
           files: desktop/build/libs/*.jar
           name: latest-release
           body: 'latest build'
+          tag_name: 'latest'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
