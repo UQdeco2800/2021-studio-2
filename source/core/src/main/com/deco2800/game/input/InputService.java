@@ -7,8 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Provides a global access point for handling user input and creating input handlers. All active
@@ -20,7 +19,7 @@ import java.util.Map;
 public class InputService implements InputProcessor, GestureDetector.GestureListener {
   private static final Logger logger = LoggerFactory.getLogger(InputService.class);
   private static final InputFactory.InputType inputType = InputFactory.InputType.KEYBOARD;
-  private final LinkedHashMap<Integer, InputComponent> inputHandlers = new LinkedHashMap<>();
+  private final ArrayList<InputComponent> inputHandlers = new ArrayList<>();
   private InputFactory inputFactory;
 
   public InputService() {
@@ -38,17 +37,18 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Register an input handler with a given priority
+   * Register an input handler based on its priority and reorder inputHandlers.
    *
    * @param inputHandler input handler
-   * @param priority priority level
    */
-  public void register(InputComponent inputHandler, int priority) {
-    if (inputHandlers.containsKey(priority)) {
-      logger.error("Duplicate priorities are not allowed");
+  public void register(InputComponent inputHandler) {
+    if (inputHandler.getPriority() == null) {
+      logger.error("Priority had not been set");
       return;
     }
-    inputHandlers.put(priority, inputHandler);
+    inputHandlers.add(inputHandler);
+    Collections.sort(inputHandlers);
+    logger.info("New input handler registered");
   }
 
   /**
@@ -56,24 +56,19 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @param inputHandler
    */
   public void unregister(InputComponent inputHandler) {
-    for (Map.Entry<Integer, InputComponent> entry : inputHandlers.entrySet()) {
-      if (entry.getValue().equals(inputHandler)) {
-        inputHandlers.remove(entry.getKey());
-        return;
-      }
-    }
+    inputHandlers.remove(inputHandler);
   }
 
   /**
    * Iterates over registered input handlers in ascending priority and stops as soon as the input is
-   * processed
+   * processed.
    *
    * @return whether the input was processed
    * @see InputProcessor#keyDown(int)
    */
   @Override
   public boolean keyDown(int keycode) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.keyDown(keycode)) {
         return true;
       }
@@ -90,7 +85,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean keyTyped(char character) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.keyTyped(character)) {
         return true;
       }
@@ -107,7 +102,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean keyUp(int keycode) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.keyUp(keycode)) {
         return true;
       }
@@ -124,7 +119,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean mouseMoved(int screenX, int screenY) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.mouseMoved(screenX, screenY)) {
         return true;
       }
@@ -141,7 +136,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean scrolled(float amountX, float amountY) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.scrolled(amountX, amountY)) {
         return true;
       }
@@ -158,7 +153,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean touchDown(float screenX, float screenY, int pointer, int button) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDown(screenX, screenY, pointer, button)) {
         return true;
       }
@@ -175,7 +170,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean touchDragged(int screenX, int screenY, int pointer) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDragged(screenX, screenY, pointer)) {
         return true;
       }
@@ -192,7 +187,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchUp(screenX, screenY, pointer, button)) {
         return true;
       }
@@ -209,7 +204,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean fling(float velocityX, float velocityY, int button) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.fling(velocityX, velocityY, button)) {
         return true;
       }
@@ -226,7 +221,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean longPress(float x, float y) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.longPress(x, y)) {
         return true;
       }
@@ -243,7 +238,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean pan(float x, float y, float deltaX, float deltaY) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.pan(x, y, deltaX, deltaY)) {
         return true;
       }
@@ -260,7 +255,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean panStop(float x, float y, int pointer, int button) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.panStop(x, y, pointer, button)) {
         return true;
       }
@@ -278,7 +273,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   @Override
   public boolean pinch(
       Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.pinch(initialPointer1, initialPointer2, pointer1, pointer2)) {
         return true;
       }
@@ -295,7 +290,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public void pinchStop() {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.pinchStopHandled()) {
         return;
       }
@@ -311,7 +306,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean tap(float x, float y, int count, int button) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.tap(x, y, count, button)) {
         return true;
       }
@@ -328,7 +323,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean touchDown(int x, int y, int pointer, int button) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDown(x, y, pointer, button)) {
         return true;
       }
@@ -345,7 +340,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   @Override
   public boolean zoom(float initialDistance, float distance) {
-    for (InputComponent inputHandler : inputHandlers.values()) {
+    for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.zoom(initialDistance, distance)) {
         return true;
       }

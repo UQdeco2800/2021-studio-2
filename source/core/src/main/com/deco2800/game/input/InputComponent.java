@@ -4,14 +4,32 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * An InputComponent that supports keyboard and touch input and touch gestures. By default an
- * InputComponent does not handle any input events. Components that extend InputComponent are expected to
- * override relevant methods to handle input.
+ * InputComponent does not handle any input events.
+ *
+ * <p>Subclasses of InputComponent should override relevant methods to handle input. Ensure the
+ * priority is set in the subclass' constructor.
  */
 public abstract class InputComponent extends Component
-    implements InputProcessor, GestureDetector.GestureListener {
+    implements InputProcessor, GestureDetector.GestureListener, Comparable<InputComponent> {
+  /** The priority that the input handler is visited in by InputService. */
+  protected Integer priority;
+
+  @Override
+  public void create() {
+    ServiceLocator.getInputService().register(this);
+  }
+
+  public void setPriority(int priority) {
+    this.priority = priority;
+  }
+
+  public Integer getPriority() {
+    return priority;
+  }
 
   /** @see InputProcessor#keyDown(int) */
   @Override
@@ -122,5 +140,10 @@ public abstract class InputComponent extends Component
   @Override
   public boolean zoom(float initialDistance, float distance) {
     return false;
+  }
+
+  @Override
+  public int compareTo(InputComponent inputHandler) {
+    return Integer.compare(this.getPriority(), inputHandler.getPriority());
   }
 }

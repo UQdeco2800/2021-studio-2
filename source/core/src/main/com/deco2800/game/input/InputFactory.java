@@ -1,7 +1,5 @@
 package com.deco2800.game.input;
 
-import com.deco2800.game.components.player.PlayerInputComponent;
-
 /**
  * InputFactory creates inputType-specific inputFactories which can handle various types of input.
  * Currently only keyboard input and touch is implemented, but InputFactory can be expanded to
@@ -36,5 +34,5 @@ public abstract class InputFactory {
    *
    * @return Player input handler
    */
-  public abstract PlayerInputComponent createForPlayer();
+  public abstract InputComponent createForPlayer();
 }
