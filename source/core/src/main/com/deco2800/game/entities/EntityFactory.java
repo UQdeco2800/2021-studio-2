@@ -29,7 +29,9 @@ public class EntityFactory {
     TextureRenderComponent renderComponent = new TextureRenderComponent(treeTex);
     PhysicsComponent physicsComponent = new PhysicsComponent();
 
-    Entity tree = new Entity().addComponent(renderComponent).addComponent(physicsComponent);
+    Entity tree = new Entity()
+        .addComponent(renderComponent)
+        .addComponent(physicsComponent);
     renderComponent.scaleEntity();
     tree.scaleHeight(2.5f);
 

@@ -13,6 +13,8 @@ import com.deco2800.game.rendering.RenderComponent;
  * shows the 'ground' in the game. Enabling/disabling this component will show/hide the terrain.
  */
 public class TerrainComponent extends RenderComponent {
+  private static final int TERRAIN_LAYER = 0;
+
   private final TiledMap tiledMap;
   private final TiledMapRenderer tiledMapRenderer;
   private final OrthographicCamera camera;
@@ -41,10 +43,7 @@ public class TerrainComponent extends RenderComponent {
       case Hexagonal:
         float hexLength = tileSize / 2;
         float yOffset = (x % 2 == 0) ? 0.5f * tileSize : 0f;
-        return new Vector2(
-            x * (tileSize + hexLength) / 2,
-            y + yOffset
-        );
+        return new Vector2(x * (tileSize + hexLength) / 2, y + yOffset);
       case Isometric:
         return new Vector2((x + y) * tileSize / 2, (y - x) * tileSize / 2);
       case Orthogonal:
@@ -72,6 +71,16 @@ public class TerrainComponent extends RenderComponent {
   public void dispose() {
     tiledMap.dispose();
     super.dispose();
+  }
+
+  @Override
+  public float getZIndex() {
+    return 0f;
+  }
+
+  @Override
+  public int getLayer() {
+    return TERRAIN_LAYER;
   }
 
   public enum TerrainOrientation {
