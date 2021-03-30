@@ -1,5 +1,8 @@
 package com.deco2800.game.input;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * InputFactory creates inputType-specific inputFactories which can handle various types of input.
  * Currently only keyboard input and touch is implemented, but InputFactory can be expanded to
@@ -8,6 +11,8 @@ package com.deco2800.game.input;
  * <p>Methods to get new input handlers should be defined here.
  */
 public abstract class InputFactory {
+  private static final Logger logger = LoggerFactory.getLogger(InputFactory.class);
+
   /** Input device types */
   public enum InputType {
     KEYBOARD, // keyboard and touch
@@ -19,13 +24,17 @@ public abstract class InputFactory {
    * @return an InputFactory for the specified input type
    */
   public static InputFactory createFromInputType(InputType inputType) {
+    if (inputType == null) {
+      logger.error("Null is not a valid input type");
+      return null;
+    }
+
     switch (inputType) {
       case KEYBOARD:
         return new KeyboardInputFactory();
-      case TOUCH:
-        throw new RuntimeException("Touch with gesture input has not been implemented.");
       default:
-        throw new RuntimeException(String.format("Unrecognised input type: %s ", inputType));
+        logger.error("Unrecognised input type: {} ", inputType);
+        return null;
     }
   }
 

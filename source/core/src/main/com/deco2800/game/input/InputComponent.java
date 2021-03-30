@@ -19,6 +19,17 @@ public abstract class InputComponent extends Component
   protected Integer priority;
 
   @Override
+  public int compareTo(InputComponent inputHandler) {
+    if (this.getPriority() == null) {
+      return 1;
+    }
+    if (inputHandler.getPriority() == null) {
+      return -1;
+    }
+    return this.getPriority().compareTo(inputHandler.getPriority());
+  }
+
+  @Override
   public void create() {
     ServiceLocator.getInputService().register(this);
   }
@@ -30,6 +41,10 @@ public abstract class InputComponent extends Component
   public Integer getPriority() {
     return priority;
   }
+
+  /**
+   * Below methods are for supporting keyboard and touch.
+   */
 
   /** @see InputProcessor#keyDown(int) */
   @Override
@@ -78,6 +93,10 @@ public abstract class InputComponent extends Component
   public boolean touchUp(int screenX, int screenY, int pointer, int button) {
     return false;
   }
+
+  /**
+   * Below methods are for supporting touch gestures.
+   */
 
   /** @see GestureDetector.GestureListener#fling(float, float, int) */
   @Override
@@ -142,8 +161,4 @@ public abstract class InputComponent extends Component
     return false;
   }
 
-  @Override
-  public int compareTo(InputComponent inputHandler) {
-    return Integer.compare(this.getPriority(), inputHandler.getPriority());
-  }
 }

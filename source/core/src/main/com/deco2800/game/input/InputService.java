@@ -18,13 +18,20 @@ import java.util.*;
  */
 public class InputService implements InputProcessor, GestureDetector.GestureListener {
   private static final Logger logger = LoggerFactory.getLogger(InputService.class);
+
   private static final InputFactory.InputType inputType = InputFactory.InputType.KEYBOARD;
-  private final ArrayList<InputComponent> inputHandlers = new ArrayList<>();
+
+  private List<InputComponent> inputHandlers;
   private InputFactory inputFactory;
 
   public InputService() {
+    this(InputFactory.createFromInputType(inputType));
+  }
+
+  public InputService(InputFactory inputFactory) {
+    this.inputFactory = inputFactory;
+    inputHandlers = new ArrayList<>();
     Gdx.input.setInputProcessor(this);
-    inputFactory = InputFactory.createFromInputType(inputType);
   }
 
   /**
@@ -47,6 +54,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
       return;
     }
     inputHandlers.add(inputHandler);
+
     Collections.sort(inputHandlers);
     logger.info("New input handler registered");
   }
