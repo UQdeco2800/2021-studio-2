@@ -16,7 +16,7 @@ import com.deco2800.game.services.ServiceLocator;
  * renderables each frame.
  */
 public class Renderer implements Disposable {
-  private static final float GAME_SCREEN_WIDTH = 10f;
+  private static final float GAME_SCREEN_WIDTH = 20f;
 
   private final OrthographicCamera camera;
   private final float gameWidth;

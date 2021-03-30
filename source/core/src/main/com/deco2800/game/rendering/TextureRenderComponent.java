@@ -17,6 +17,13 @@ public class TextureRenderComponent extends RenderComponent {
     this.texture = texture;
   }
 
+  /**
+   * Scale the entity to a width of 1 and a height matching the texture's ratio
+   */
+  public void scaleEntity() {
+    entity.setScale(1f, (float)texture.getHeight() / texture.getWidth());
+  }
+
   @Override
   public void draw(SpriteBatch batch) {
     Vector2 position = entity.getPosition();

@@ -29,6 +29,7 @@ public class PhysicsComponent extends Component {
 
   /**
    * Create a physics component
+   *
    * @param engine The physics engine to attach the component to
    */
   public PhysicsComponent(PhysicsEngine engine) {
@@ -116,6 +117,51 @@ public class PhysicsComponent extends Component {
   }
 
   /**
+   * Set physics as a box with a given size. Box is centered around the entity.
+   *
+   * @param size size of the box
+   * @return self
+   */
+  public PhysicsComponent setAsBox(Vector2 size) {
+    return setAsBox(size, entity.getCenterPosition());
+  }
+
+  /**
+   * Set physics as a box with a given size. Box is aligned based on alignment.
+   *
+   * @param size size of the box
+   * @param alignX how to align x relative to entity
+   * @param alignY how to align y relative to entity
+   * @return self
+   */
+  public PhysicsComponent setAsBoxAligned(Vector2 size, AlignX alignX, AlignY alignY) {
+    Vector2 position = new Vector2();
+    switch (alignX) {
+      case Left:
+        position.x = size.x / 2;
+        break;
+      case Center:
+        position.x = entity.getCenterPosition().x;
+        break;
+      case Right:
+        position.x = entity.getScale().x - (size.x / 2);
+        break;
+    }
+
+    switch (alignY) {
+      case Bottom:
+        position.y = size.y / 2;
+        break;
+      case Center:
+        position.y = entity.getCenterPosition().y;
+      case Top:
+        position.y = entity.getScale().y - (size.y / 2);
+    }
+
+    return setAsBox(size, position);
+  }
+
+  /**
    * Set physics as a box with a given size and local position. Box is centered around the position.
    *
    * @param size size of the box
@@ -163,7 +209,14 @@ public class PhysicsComponent extends Component {
     }
     fixtureDef.shape = shape;
     body.createFixture(fixtureDef);
+
+//    // Start listening to entity position changes
+//    entity.getEvents().addListener("setPosition", this::onSetPosition);
   }
+
+//  private void onSetPosition(Vector2 newPosition) {
+//    body.setTransform(newPosition, body.getAngle());
+//  }
 
   private Shape makeBoundingBox() {
     PolygonShape bbox = new PolygonShape();
@@ -194,5 +247,17 @@ public class PhysicsComponent extends Component {
   public void setEnabled(boolean enabled) {
     super.setEnabled(enabled);
     body.setActive(enabled);
+  }
+
+  public enum AlignX {
+    Left,
+    Center,
+    Right
+  }
+
+  public enum AlignY {
+    Bottom,
+    Center,
+    Top
   }
 }

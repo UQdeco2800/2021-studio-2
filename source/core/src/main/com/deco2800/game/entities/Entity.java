@@ -33,15 +33,16 @@ public class Entity {
   private final EventHandler eventHandler;
   private boolean enabled = true;
   private boolean created = false;
-  private Vector2 position = Vector2.Zero;
+  private Vector2 position = Vector2.Zero.cpy();
   private Vector2 scale = new Vector2(1, 1);
   private Array<Component> createdComponents;
 
   public Entity() {
-    components = new IntMap<>(4);
-    eventHandler = new EventHandler();
     id = nextId;
     nextId++;
+
+    components = new IntMap<>(4);
+    eventHandler = new EventHandler();
   }
 
   /**
@@ -82,6 +83,7 @@ public class Entity {
   public void setPosition(float x, float y) {
     this.position.x = x;
     this.position.y = y;
+    getEvents().trigger("setPosition", position);
   }
 
   /**
@@ -112,6 +114,25 @@ public class Entity {
     this.scale.x = x;
     this.scale.y = y;
   }
+
+  /**
+   * Set the entity's width and scale the height to maintain aspect ratio.
+   * @param x width in metres
+   */
+  public void scaleWidth(float x) {
+    this.scale.y = this.scale.y / this.scale.x * x;
+    this.scale.x = x;
+  }
+
+  /**
+   * Set the entity's height and scale the width to maintain aspect ratio.
+   * @param y height in metres
+   */
+  public void scaleHeight(float y) {
+    this.scale.x = this.scale.x / this.scale.y * y;
+    this.scale.y = y;
+  }
+
 
   /**
    * Get the entity's center position
@@ -158,6 +179,7 @@ public class Entity {
       return this;
     }
     components.put(componentType.getId(), component);
+    component.setEntity(this);
 
     return this;
   }
@@ -184,7 +206,6 @@ public class Entity {
     }
     createdComponents = components.values().toArray();
     for (Component component : createdComponents) {
-      component.setEntity(this);
       component.create();
     }
     created = true;

@@ -58,6 +58,10 @@ public class TerrainComponent extends RenderComponent {
     return tileSize;
   }
 
+  public TiledMap getMap() {
+    return tiledMap;
+  }
+
   @Override
   public void draw(SpriteBatch batch) {
     tiledMapRenderer.setView(camera);
