@@ -3,10 +3,12 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.deco2800.game.components.player.PlayerActionComponent;
 import com.deco2800.game.physics.PhysicsComponent;
 import com.deco2800.game.physics.PhysicsComponent.AlignX;
 import com.deco2800.game.physics.PhysicsComponent.AlignY;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
 public class EntityFactory {
   public static Entity createPlayer() {
@@ -15,7 +17,9 @@ public class EntityFactory {
     Entity player =
         new Entity()
             .addComponent(renderComponent)
-            .addComponent(new PhysicsComponent());
+            .addComponent(new PhysicsComponent())
+            .addComponent(new PlayerActionComponent())
+            .addComponent(ServiceLocator.getInputService().getInputFactory().createForPlayer());
     renderComponent.scaleEntity();
     return player;
   }
