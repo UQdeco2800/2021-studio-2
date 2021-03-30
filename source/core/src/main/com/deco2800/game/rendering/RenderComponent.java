@@ -1,6 +1,7 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.services.ServiceLocator;
@@ -10,6 +11,8 @@ import com.deco2800.game.services.ServiceLocator;
  * be rendered each frame. Child classes can implement different kinds of rendering behaviour.
  */
 public abstract class RenderComponent extends Component implements Renderable, Disposable {
+  private static final int DEFAULT_LAYER = 1;
+
   @Override
   public void create() {
     ServiceLocator.getRenderService().register(this);
@@ -25,8 +28,24 @@ public abstract class RenderComponent extends Component implements Renderable, D
     draw(batch);
   }
 
+  @Override
+  public int compareTo(Renderable o) {
+    return Float.compare(getZIndex(), o.getZIndex());
+  }
+
+  @Override
+  public int getLayer() {
+    return DEFAULT_LAYER;
+  }
+
+  @Override
+  public float getZIndex() {
+    return 1 / entity.getPosition().y;
+  }
+
   /**
    * Draw the renderable. Should be called only by the renderer, not manually.
+   *
    * @param batch Batch to render to.
    */
   protected abstract void draw(SpriteBatch batch);

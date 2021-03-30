@@ -12,10 +12,9 @@ public class EntityFactory {
   public static Entity createPlayer() {
     Texture playerTex = new Texture("box_boy_leaf.png");
     TextureRenderComponent renderComponent = new TextureRenderComponent(playerTex);
-    Entity player =
-        new Entity()
-            .addComponent(renderComponent)
-            .addComponent(new PhysicsComponent());
+    Entity player = new Entity()
+        .addComponent(renderComponent)
+        .addComponent(new PhysicsComponent());
     renderComponent.scaleEntity();
     return player;
   }
@@ -25,7 +24,9 @@ public class EntityFactory {
     TextureRenderComponent renderComponent = new TextureRenderComponent(treeTex);
     PhysicsComponent physicsComponent = new PhysicsComponent();
 
-    Entity tree = new Entity().addComponent(renderComponent).addComponent(physicsComponent);
+    Entity tree = new Entity()
+        .addComponent(renderComponent)
+        .addComponent(physicsComponent);
     renderComponent.scaleEntity();
     tree.scaleHeight(2.5f);
 
