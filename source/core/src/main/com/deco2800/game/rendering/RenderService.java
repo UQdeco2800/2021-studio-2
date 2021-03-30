@@ -26,8 +26,7 @@ public class RenderService implements Disposable {
    */
   public void register(Renderable renderable) {
     int layerIndex = renderable.getLayer();
-    System.out.println(layerIndex);
-    if (!renderables.contains(layerIndex)) {
+    if (!renderables.containsKey(layerIndex)) {
       renderables.put(layerIndex, new Array<>(INITIAL_CAPACITY));
     }
     Array<Renderable> layer = renderables.get(layerIndex);

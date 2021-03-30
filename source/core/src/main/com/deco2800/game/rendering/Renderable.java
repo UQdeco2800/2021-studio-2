@@ -12,7 +12,15 @@ public interface Renderable extends Comparable<Renderable> {
    */
   void render(SpriteBatch batch);
 
+  /**
+   * Z index controls rendering order within a layer. Higher Z index is drawn on top.
+   * @return Z index
+   */
   float getZIndex();
 
+  /**
+   * Layer to be rendered in. Higher layers will be rendered on top of lower layers.
+   * @return layer
+   */
   int getLayer();
 }
