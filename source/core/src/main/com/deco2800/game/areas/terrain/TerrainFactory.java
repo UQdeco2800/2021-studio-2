@@ -58,11 +58,11 @@ public class TerrainFactory {
         return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
       case FOREST_DEMO_ISO:
         TextureRegion isoGrass = new TextureAtlas("terrain_iso_grass.atlas").findRegion("grass");
-        return createForestDemoTerrain(0.5f, isoGrass, isoGrass, isoGrass);
+        return createForestDemoTerrain(1f, isoGrass, isoGrass, isoGrass);
       case FOREST_DEMO_HEX:
         Texture hexGrassTex = new Texture("terrain_hex.png");
         TextureRegion hexGrass = new TextureRegion(hexGrassTex, 224, 66, 32, 32);
-        return createForestDemoTerrain(0.5f, hexGrass, hexGrass, hexGrass);
+        return createForestDemoTerrain(1f, hexGrass, hexGrass, hexGrass);
       default:
         return null;
     }

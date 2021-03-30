@@ -47,14 +47,20 @@ public abstract class GameArea implements Disposable {
    * Spawn entity on a given tile. Requires the terrain to be set first.
    * @param entity Entity (not yet registered)
    * @param tilePos tile position to spawn at
-   * @param center true to center entity on the tile, false to align the bottom left corner
+   * @param centerX true to center entity X on the tile, false to align the bottom left corner
+   * @param centerY true to center entity Y on the tile, false to align the bottom left corner
    */
-  protected void spawnEntityAt(Entity entity, GridPoint2 tilePos, boolean center) {
+  protected void spawnEntityAt(Entity entity, GridPoint2 tilePos, boolean centerX, boolean centerY) {
     Vector2 worldPos = terrain.tileToWorldPosition(tilePos);
-    if (center) {
-      float tileSize = terrain.getTileSize();
-      worldPos.add(tileSize / 2, tileSize / 2).sub(entity.getCenterPosition());
+    float tileSize = terrain.getTileSize();
+
+    if (centerX) {
+      worldPos.x += (tileSize / 2) - entity.getCenterPosition().x;
     }
+    if (centerY) {
+      worldPos.y += (tileSize / 2) - entity.getCenterPosition().y;
+    }
+
     entity.setPosition(worldPos);
     spawnEntity(entity);
   }
