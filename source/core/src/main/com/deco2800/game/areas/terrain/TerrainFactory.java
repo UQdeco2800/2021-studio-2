@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
+import com.deco2800.game.math.RandomUtils;
 
 /** Factory for creating game terrains. */
 public class TerrainFactory {
@@ -51,24 +52,26 @@ public class TerrainFactory {
   public TerrainComponent createTerrain(TerrainType terrainType) {
     switch (terrainType) {
       case FOREST_DEMO:
-        Texture orthoTexture = new Texture("terrain_ortho.png");
-        TextureRegion orthoGrass = new TextureRegion(orthoTexture, 0, 0, 16, 16);
-        return createForestDemoTerrain(1f, new GridPoint2(16, 16), orthoGrass);
+        TextureRegion orthoGrass = new TextureRegion(new Texture("grass_1.png"));
+        TextureRegion orthoTuft = new TextureRegion(new Texture("grass_2.png"));
+        TextureRegion orthoRocks = new TextureRegion(new Texture("grass_3.png"));
+        return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
       case FOREST_DEMO_ISO:
         TextureRegion isoGrass = new TextureAtlas("terrain_iso_grass.atlas").findRegion("grass");
-        return createForestDemoTerrain(1f, new GridPoint2(132, 132), isoGrass);
+        return createForestDemoTerrain(0.5f, isoGrass, isoGrass, isoGrass);
       case FOREST_DEMO_HEX:
         Texture hexGrassTex = new Texture("terrain_hex.png");
         TextureRegion hexGrass = new TextureRegion(hexGrassTex, 224, 66, 32, 32);
-        return createForestDemoTerrain(1f, new GridPoint2(32, 32), hexGrass);
+        return createForestDemoTerrain(0.5f, hexGrass, hexGrass, hexGrass);
       default:
         return null;
     }
   }
 
   private TerrainComponent createForestDemoTerrain(
-      float tileWorldSize, GridPoint2 tilePixelSize, TextureRegion tex) {
-    TiledMap tiledMap = createForestDemoTiles(tilePixelSize, tex);
+      float tileWorldSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
+    GridPoint2 tilePixelSize = new GridPoint2(grass.getRegionWidth(), grass.getRegionHeight());
+    TiledMap tiledMap = createForestDemoTiles(tilePixelSize, grass, grassTuft, rocks);
     TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
     return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
@@ -86,18 +89,37 @@ public class TerrainFactory {
     }
   }
 
-  private TiledMap createForestDemoTiles(GridPoint2 tileSize, TextureRegion textureRegion) {
+  private TiledMap createForestDemoTiles(
+      GridPoint2 tileSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
     TiledMap tiledMap = new TiledMap();
-    TerrainTile mapTile = new TerrainTile(textureRegion);
+    GridPoint2 mapSize = new GridPoint2(20, 20);
+    TerrainTile grassTile = new TerrainTile(grass);
+    TerrainTile grassTuftTile = new TerrainTile(grassTuft);
+    TerrainTile rockTile = new TerrainTile(rocks);
+    TiledMapTileLayer layer = new TiledMapTileLayer(mapSize.x, mapSize.y, tileSize.x, tileSize.y);
 
-    TiledMapTileLayer layer = new TiledMapTileLayer(20, 20, tileSize.x, tileSize.y);
-    for (int x = 0; x < 100; x++) {
-      for (int y = 0; y < 100; y++) {
+    // Create base grass
+    for (int x = 0; x < 20; x++) {
+      for (int y = 0; y < 20; y++) {
         Cell cell = new Cell();
-        cell.setTile(mapTile);
+        cell.setTile(grassTile);
         layer.setCell(x, y, cell);
       }
     }
+
+    // Add some tufts
+    for (int i = 0; i < 20; i++) {
+      GridPoint2 tilePos = RandomUtils.random(new GridPoint2(0, 0), new GridPoint2(19, 19));
+      Cell cell = layer.getCell(tilePos.x, tilePos.y);
+      cell.setTile(grassTuftTile);
+    }
+    // Add some rocks
+    for (int i = 0; i < 20; i++) {
+      GridPoint2 tilePos = RandomUtils.random(new GridPoint2(0, 0), new GridPoint2(19, 19));
+      Cell cell = layer.getCell(tilePos.x, tilePos.y);
+      cell.setTile(rockTile);
+    }
+
     tiledMap.getLayers().add(layer);
 
     return tiledMap;
