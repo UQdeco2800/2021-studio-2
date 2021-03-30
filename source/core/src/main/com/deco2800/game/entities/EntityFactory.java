@@ -12,7 +12,7 @@ import com.deco2800.game.services.ServiceLocator;
 
 public class EntityFactory {
   public static Entity createPlayer() {
-    Texture playerTex = new Texture("box_boy_leaf.png");
+    Texture playerTex = ServiceLocator.getResourceService().getResource("box_boy_leaf.png", Texture.class);
     TextureRenderComponent renderComponent = new TextureRenderComponent(playerTex);
     Entity player =
         new Entity()

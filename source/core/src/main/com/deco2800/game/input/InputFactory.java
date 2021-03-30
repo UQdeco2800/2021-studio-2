@@ -16,7 +16,7 @@ public abstract class InputFactory {
   /** Input device types */
   public enum InputType {
     KEYBOARD, // keyboard and touch
-    TOUCH
+    TOUCH // intended for adding touch gestures
   }
 
   /**

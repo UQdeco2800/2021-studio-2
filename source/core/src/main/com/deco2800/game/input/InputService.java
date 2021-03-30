@@ -21,7 +21,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
 
   private static final InputFactory.InputType inputType = InputFactory.InputType.KEYBOARD;
 
-  private List<InputComponent> inputHandlers;
+  private List<InputComponent> inputHandlers = new ArrayList<>();
   private InputFactory inputFactory;
 
   public InputService() {
@@ -30,7 +30,6 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
 
   public InputService(InputFactory inputFactory) {
     this.inputFactory = inputFactory;
-    inputHandlers = new ArrayList<>();
     Gdx.input.setInputProcessor(this);
   }
 
