@@ -63,12 +63,12 @@ public class ForestGameArea extends GameArea {
     for (int i = 0; i < NUM_TREES; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
       Entity tree = EntityFactory.createTree();
-      spawnEntityAt(tree, randomPos, false);
+      spawnEntityAt(tree, randomPos, true, false);
     }
 
     // Spawn entities
     Entity player = EntityFactory.createPlayer();
-    spawnEntityAt(player, PLAYER_SPAWN, true);
+    spawnEntityAt(player, PLAYER_SPAWN, true, true);
   }
 
   public void dispose() {

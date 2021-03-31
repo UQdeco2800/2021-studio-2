@@ -67,11 +67,11 @@ public class TerrainFactory {
             resourceService
                 .getAsset("terrain_iso_grass.atlas", TextureAtlas.class)
                 .findRegion("grass");
-        return createForestDemoTerrain(0.5f, isoGrass, isoGrass, isoGrass);
+        return createForestDemoTerrain(1f, isoGrass, isoGrass, isoGrass);
       case FOREST_DEMO_HEX:
         Texture hexGrassTex = resourceService.getAsset("terrain_hex.png", Texture.class);
         TextureRegion hexGrass = new TextureRegion(hexGrassTex, 224, 66, 32, 32);
-        return createForestDemoTerrain(0.5f, hexGrass, hexGrass, hexGrass);
+        return createForestDemoTerrain(1f, hexGrass, hexGrass, hexGrass);
       default:
         return null;
     }
