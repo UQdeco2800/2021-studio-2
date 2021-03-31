@@ -22,7 +22,12 @@ public class ForestGameArea extends GameArea {
     "tree.png",
     "grass_1.png",
     "grass_2.png",
-    "grass_3.png"
+    "grass_3.png",
+    "terrain_hex.png"
+  };
+
+  private static final String[] forestTextureAtlases = {
+    "terrain_iso_grass.atlas"
   };
 
   private static final int NUM_TREES = 5;
@@ -41,6 +46,7 @@ public class ForestGameArea extends GameArea {
 
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(forestTextures);
+    resourceService.loadTextureAtlases(forestTextureAtlases);
     while (!resourceService.loadForMillis(10)) {
       logger.info("Loading... {}%", resourceService.getProgress());
     }

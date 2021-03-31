@@ -8,41 +8,65 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Service for loading resources, e.g. textures, texture atlases, sounds, music, etc. Add new load
+ * methods when new types of resources are added to the game.
+ */
 public class ResourceService {
   private static final Logger logger = LoggerFactory.getLogger(ResourceService.class);
-  private static final int loadingUpdateInterval = 10; // adjust for desired loading interval
-
   private final AssetManager assetManager = new AssetManager();
 
+  /** @see AssetManager#get(String, Class<T>) */
   public <T> T getAsset(String filename, Class<T> type) {
     return assetManager.get(filename, type);
   }
 
+  /** @see AssetManager#contains(String) */
   public boolean containsAsset(String resourceName) {
     return assetManager.contains(resourceName);
   }
 
+  /**
+   * Returns the loading completion progress as a percentage.
+   *
+   * @return progress
+   */
   public int getProgress() {
     return (int) (assetManager.getProgress() * 100);
   }
 
-  public boolean loadAll() {
-    return assetManager.update();
-  } // blocking load
+  /**
+   * Blocking call to load all assets.
+   * @see AssetManager#finishLoading()
+   * */
+  public void loadAll() {
+    assetManager.finishLoading();
+  }
 
+  /**
+   * Loads assets for the specified duration in milliseconds.
+   * @see AssetManager#update(int)
+   *
+   * @param duration duration to load for
+   * @return finished loading
+   */
   public boolean loadForMillis(int duration) {
     return assetManager.update(duration);
   }
 
+  /**
+   * Clears all loaded assets and assets in the preloading queue.
+   * @see AssetManager#clear()
+   * */
   public void clearAllAssets() {
     assetManager.clear();
   }
 
-  private <T> void loadAsset(String textureName, Class<T> type) {
+  private <T> void loadAsset(String assetName, Class<T> type) {
     try {
-      assetManager.load(textureName, type);
+      assetManager.load(assetName, type);
     } catch (Exception e) {
-      logger.error("Could not load {}: {}", type.getSimpleName(), textureName);
+      logger.error("Could not load {}: {}", type.getSimpleName(), assetName);
     }
   }
 
@@ -52,18 +76,38 @@ public class ResourceService {
     }
   }
 
+  /**
+   * Loads a list of texture assets into the asset manager.
+   *
+   * @param textureNames texture filenames
+   */
   public void loadTextures(String[] textureNames) {
     loadAssets(textureNames, Texture.class);
   }
 
-  public void loadTextureAtlases(String[] textureAtlases) {
-    loadAssets(textureAtlases, TextureAtlas.class);
+  /**
+   * Loads a list of texture atlas assets into the asset manager.
+   *
+   * @param textureAtlasNames texture atlas filenames
+   */
+  public void loadTextureAtlases(String[] textureAtlasNames) {
+    loadAssets(textureAtlasNames, TextureAtlas.class);
   }
 
+  /**
+   * Loads a list of sounds into the asset manager.
+   *
+   * @param soundNames sound filenames
+   */
   public void loadSounds(String[] soundNames) {
     loadAssets(soundNames, Sound.class);
   }
 
+  /**
+   * Loads a list of music assets into the asset manager.
+   *
+   * @param musicNames music filenames
+   */
   public void loadMusic(String[] musicNames) {
     loadAssets(musicNames, Music.class);
   }
