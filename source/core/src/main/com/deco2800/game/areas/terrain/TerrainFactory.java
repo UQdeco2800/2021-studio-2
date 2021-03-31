@@ -15,6 +15,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.math.RandomUtils;
+import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.services.ServiceLocator;
 
 /** Factory for creating game terrains. */
 public class TerrainFactory {
@@ -50,11 +52,12 @@ public class TerrainFactory {
    * @return Terrain component which renders the terrain
    */
   public TerrainComponent createTerrain(TerrainType terrainType) {
+    ResourceService resourceService = ServiceLocator.getResourceService();
     switch (terrainType) {
       case FOREST_DEMO:
-        TextureRegion orthoGrass = new TextureRegion(new Texture("grass_1.png"));
-        TextureRegion orthoTuft = new TextureRegion(new Texture("grass_2.png"));
-        TextureRegion orthoRocks = new TextureRegion(new Texture("grass_3.png"));
+        TextureRegion orthoGrass = new TextureRegion(resourceService.getAsset("grass_1.png", Texture.class));
+        TextureRegion orthoTuft = new TextureRegion(resourceService.getAsset("grass_2.png", Texture.class));
+        TextureRegion orthoRocks = new TextureRegion(resourceService.getAsset("grass_3.png", Texture.class));
         return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
       case FOREST_DEMO_ISO:
         TextureRegion isoGrass = new TextureAtlas("terrain_iso_grass.atlas").findRegion("grass");
