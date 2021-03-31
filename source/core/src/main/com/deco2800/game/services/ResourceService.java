@@ -14,7 +14,15 @@ import org.slf4j.LoggerFactory;
  */
 public class ResourceService {
   private static final Logger logger = LoggerFactory.getLogger(ResourceService.class);
-  private final AssetManager assetManager = new AssetManager();
+  private final AssetManager assetManager;
+
+  public ResourceService() {
+    this.assetManager = new AssetManager();
+  }
+
+  public ResourceService(AssetManager assetManager) {
+    this.assetManager = assetManager;
+  }
 
   /** @see AssetManager#get(String, Class<T>) */
   public <T> T getAsset(String filename, Class<T> type) {
@@ -22,8 +30,8 @@ public class ResourceService {
   }
 
   /** @see AssetManager#contains(String) */
-  public boolean containsAsset(String resourceName) {
-    return assetManager.contains(resourceName);
+  public <T> boolean containsAsset(String resourceName, Class<T> type) {
+    return assetManager.contains(resourceName, type);
   }
 
   /**
@@ -40,7 +48,11 @@ public class ResourceService {
    * @see AssetManager#finishLoading()
    * */
   public void loadAll() {
-    assetManager.finishLoading();
+    try {
+      assetManager.finishLoading();
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
   }
 
   /**
@@ -51,7 +63,12 @@ public class ResourceService {
    * @return finished loading
    */
   public boolean loadForMillis(int duration) {
-    return assetManager.update(duration);
+    try {
+      return assetManager.update(duration);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+    }
+    return assetManager.isFinished();
   }
 
   /**

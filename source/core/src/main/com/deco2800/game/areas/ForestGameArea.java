@@ -18,6 +18,7 @@ public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
 
   private static final String[] forestTextures = {
+    "missing.png",
     "box_boy_leaf.png",
     "tree.png",
     "grass_1.png",
