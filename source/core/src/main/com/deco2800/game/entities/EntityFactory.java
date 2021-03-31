@@ -13,7 +13,7 @@ import com.deco2800.game.services.ServiceLocator;
 
 public class EntityFactory {
   public static Entity createPlayer() {
-    Texture playerTex = ServiceLocator.getResourceService().getAsset("box_boy_leaf.png", Texture.class);
+    Texture playerTex = ServiceLocator.getResourceService().getAsset("images/box_boy_leaf.png", Texture.class);
     TextureRenderComponent renderComponent = new TextureRenderComponent(playerTex);
     PhysicsComponent physicsComponent = new PhysicsComponent();
     InputComponent inputComponent =
@@ -33,7 +33,7 @@ public class EntityFactory {
   }
 
   public static Entity createTree() {
-    Texture treeTex = ServiceLocator.getResourceService().getAsset("tree.png", Texture.class);
+    Texture treeTex = ServiceLocator.getResourceService().getAsset("images/tree.png", Texture.class);
     TextureRenderComponent renderComponent = new TextureRenderComponent(treeTex);
     PhysicsComponent physicsComponent = new PhysicsComponent();
 

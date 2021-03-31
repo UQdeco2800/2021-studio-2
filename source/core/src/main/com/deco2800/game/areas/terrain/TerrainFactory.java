@@ -56,20 +56,20 @@ public class TerrainFactory {
     switch (terrainType) {
       case FOREST_DEMO:
         TextureRegion orthoGrass =
-            new TextureRegion(resourceService.getAsset("grass_1.png", Texture.class));
+            new TextureRegion(resourceService.getAsset("images/grass_1.png", Texture.class));
         TextureRegion orthoTuft =
-            new TextureRegion(resourceService.getAsset("grass_2.png", Texture.class));
+            new TextureRegion(resourceService.getAsset("images/grass_2.png", Texture.class));
         TextureRegion orthoRocks =
-            new TextureRegion(resourceService.getAsset("grass_3.png", Texture.class));
+            new TextureRegion(resourceService.getAsset("images/grass_3.png", Texture.class));
         return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
       case FOREST_DEMO_ISO:
         TextureRegion isoGrass =
             resourceService
-                .getAsset("terrain_iso_grass.atlas", TextureAtlas.class)
-                .findRegion("grass");
+                .getAsset("images/terrain_iso_grass.atlas", TextureAtlas.class)
+                .findRegion("images/grass");
         return createForestDemoTerrain(1f, isoGrass, isoGrass, isoGrass);
       case FOREST_DEMO_HEX:
-        Texture hexGrassTex = resourceService.getAsset("terrain_hex.png", Texture.class);
+        Texture hexGrassTex = resourceService.getAsset("images/terrain_hex.png", Texture.class);
         TextureRegion hexGrass = new TextureRegion(hexGrassTex, 224, 66, 32, 32);
         return createForestDemoTerrain(1f, hexGrass, hexGrass, hexGrass);
       default:
