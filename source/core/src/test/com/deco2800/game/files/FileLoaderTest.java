@@ -17,7 +17,6 @@ public class FileLoaderTest {
     @Test
     void loadFromValidFile() {
         FileHandle file = Gdx.files.internal("test/files/valid.json");
-        logger.info(file.readString());
         TestStats test = FileLoader.loadClassFromJson(TestStats.class, file);
         assertNotNull(test);
         assertEquals(test.stat1, 3);

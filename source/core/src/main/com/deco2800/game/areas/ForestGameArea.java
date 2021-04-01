@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
+import com.deco2800.game.UI.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityFactory;
 import com.deco2800.game.math.RandomUtils;
@@ -46,7 +47,9 @@ public class ForestGameArea extends GameArea {
   }
 
   /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
+  @Override
   public void create() {
+    //Load assets
     loadAssets();
 
     // Make terrain
@@ -76,7 +79,6 @@ public class ForestGameArea extends GameArea {
 
   private void loadAssets() {
     ResourceService resourceService = ServiceLocator.getResourceService();
-
     resourceService.loadTextures(forestTextures);
     resourceService.loadTextureAtlases(forestTextureAtlases);
     resourceService.loadSounds(forestSounds);

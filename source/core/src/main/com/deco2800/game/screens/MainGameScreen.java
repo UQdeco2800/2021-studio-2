@@ -3,6 +3,8 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.UI.PlayerStatsDisplay;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
@@ -25,6 +27,9 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
+  private static final String[] mainGameTextures = {
+    "images/heart.png"
+  };
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -46,6 +51,13 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
     renderer = new Renderer();
     renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
+
+    loadAssets();
+
+    // UI display
+    Entity UI = new Entity();
+    UI.addComponent(new PlayerStatsDisplay());
+    ServiceLocator.getEntityService().register(UI);
 
     logger.debug("Initialising main game screen entities");
     TerrainFactory terrainFactory =
@@ -84,5 +96,11 @@ public class MainGameScreen extends ScreenAdapter {
 
     ServiceLocator.getEntityService().dispose();
     ServiceLocator.getRenderService().dispose();
+  }
+
+  private void loadAssets() {
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    resourceService.loadTextures(mainGameTextures);
+    ServiceLocator.getResourceService().loadAll();
   }
 }
