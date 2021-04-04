@@ -4,9 +4,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.movement.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.Task;
 import com.deco2800.game.entities.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MovementTask implements Task {
-  private final Vector2 target;
+  private static final Logger logger = LoggerFactory.getLogger(MovementTask.class);
+  private Vector2 target;
   private float stopDistance = 0.01f;
   private Entity entity;
   private Status status = Status.Inactive;
@@ -26,7 +29,9 @@ public class MovementTask implements Task {
     this.entity = entity;
     this.movementComponent = entity.getComponent(PhysicsMovementComponent.class);
     movementComponent.setTarget(target);
+    movementComponent.setMoving(true);
     status = Status.Active;
+    logger.debug("Starting movement towards {}", target);
   }
 
   @Override
@@ -38,13 +43,20 @@ public class MovementTask implements Task {
     if (entity.getPosition().dst(target) <= stopDistance) {
       movementComponent.setMoving(false);
       status = Status.Finished;
+      logger.debug("Finished moving to {}", target);
     }
+  }
+
+  public void setTarget(Vector2 target) {
+    this.target = target;
+    movementComponent.setTarget(target);
   }
 
   @Override
   public void stop() {
     movementComponent.setMoving(false);
     status = Status.Inactive;
+    logger.debug("Stopping movement");
   }
 
   @Override
