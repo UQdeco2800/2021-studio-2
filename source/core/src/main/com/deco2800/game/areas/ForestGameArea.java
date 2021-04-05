@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
   private static final int NUM_TREES = 5;
-  private static final int NUM_GHOSTS = 10;
+  private static final int NUM_GHOSTS = 2;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",

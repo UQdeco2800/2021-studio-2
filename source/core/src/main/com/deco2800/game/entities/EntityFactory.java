@@ -3,7 +3,7 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.ai.movement.PhysicsMovementComponent;
+import com.deco2800.game.physics.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.player.PlayerActionComponent;
 import com.deco2800.game.components.tasks.WanderTask;

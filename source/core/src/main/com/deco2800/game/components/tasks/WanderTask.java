@@ -2,6 +2,7 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.ai.tasks.Task;
 import com.deco2800.game.entities.Entity;
@@ -10,17 +11,25 @@ import com.deco2800.game.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WanderTask implements PriorityTask {
+/**
+ * Wander around by moving a random position within a range of the starting position. Wait a little
+ * bit between movements. Requires an entity with a PhysicsMovementComponent.
+ */
+public class WanderTask extends DefaultTask implements PriorityTask {
   private static final Logger logger = LoggerFactory.getLogger(WanderTask.class);
 
   private final Vector2 wanderRange;
   private final float waitTime;
   private Vector2 startPos;
-  private Entity entity;
   private MovementTask movementTask;
   private WaitTask waitTask;
   private Task currentTask;
 
+  /**
+   * @param wanderRange Distance in X and Y the entity can move from its position when start() is
+   *     called.
+   * @param waitTime How long in seconds to wait between wandering.
+   */
   public WanderTask(Vector2 wanderRange, float waitTime) {
     this.wanderRange = wanderRange;
     this.waitTime = waitTime;
@@ -28,12 +37,12 @@ public class WanderTask implements PriorityTask {
 
   @Override
   public int getPriority() {
-    return 1;
+    return 1; // Low priority task
   }
 
   @Override
   public void start(Entity entity) {
-    this.entity = entity;
+    super.start(entity);
     startPos = entity.getPosition().cpy();
     waitTask = new WaitTask(waitTime);
     movementTask = new MovementTask(getRandomPosInRange());
@@ -51,15 +60,6 @@ public class WanderTask implements PriorityTask {
       }
     }
     currentTask.update();
-  }
-
-  @Override
-  public void stop() {}
-
-  @Override
-  public Status getStatus() {
-    // Wandering never finishes
-    return Status.Active;
   }
 
   private void startWaiting() {

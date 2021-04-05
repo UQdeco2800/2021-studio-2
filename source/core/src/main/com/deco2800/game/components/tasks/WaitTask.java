@@ -1,40 +1,41 @@
 package com.deco2800.game.components.tasks;
 
-import com.deco2800.game.ai.tasks.Task;
+import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
-public class WaitTask implements Task {
+/**
+ * Task that does nothing other than waiting for a given time. Status is Finished
+ * after the time has passed.
+ */
+public class WaitTask extends DefaultTask {
   private final GameTime timeSource;
   private final float duration;
   private long endTime;
 
+  /**
+   * @param duration How long to wait for, in seconds.
+   */
   public WaitTask(float duration) {
     timeSource = ServiceLocator.getTimeSource();
     this.duration = duration;
   }
 
+  /**
+   * Start waiting from now until duration has passed.
+   * @param entity unused
+   */
   @Override
-  public void start(Entity owner) {
+  public void start(Entity entity) {
+    super.start(entity);
     endTime = timeSource.getTime() + (int)(duration * 1000);
   }
 
   @Override
   public void update() {
-
-  }
-
-  @Override
-  public void stop() {
-
-  }
-
-  @Override
-  public Status getStatus() {
     if (timeSource.getTime() >= endTime) {
-      return Status.Finished;
+      status = Status.Finished;
     }
-    return Status.Active;
   }
 }

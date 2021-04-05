@@ -1,14 +1,15 @@
-package com.deco2800.game.ai.movement;
+package com.deco2800.game.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.math.Vector2Utils;
-import com.deco2800.game.physics.PhysicsComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PhysicsMovementComponent extends Component {
+/** Movement controller for a physics-based entity. */
+public class PhysicsMovementComponent extends Component implements MovementController {
   private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
 
   private PhysicsComponent physicsComponent;
@@ -30,6 +31,12 @@ public class PhysicsMovementComponent extends Component {
     }
   }
 
+  /**
+   * Enable/disable movement for the controller. Disabling will immediately set velocity to 0.
+   *
+   * @param movementEnabled true to enable movement, false otherwise
+   */
+  @Override
   public void setMoving(boolean movementEnabled) {
     this.movementEnabled = movementEnabled;
     if (!movementEnabled) {
@@ -38,10 +45,19 @@ public class PhysicsMovementComponent extends Component {
     }
   }
 
+  /** @return Target position in the world */
+  @Override
   public Vector2 getTarget() {
     return targetPosition;
   }
 
+  /**
+   * Set a target to move towards. The entity will be steered towards it in a straight line, not
+   * using pathfinding or avoiding other entities.
+   *
+   * @param target target position
+   */
+  @Override
   public void setTarget(Vector2 target) {
     logger.info("Setting target to " + target);
     this.targetPosition = target;
