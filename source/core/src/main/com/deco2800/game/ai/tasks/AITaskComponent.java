@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Task-based AI component. Given a list of tasks with priorities, the AI component will run the
@@ -52,7 +53,11 @@ public class AITaskComponent extends Component {
   }
 
   private PriorityTask getHighestPriorityTask() {
-    return Collections.max(priorityTasks, Comparator.comparingInt(PriorityTask::getPriority));
+    try {
+      return Collections.max(priorityTasks, Comparator.comparingInt(PriorityTask::getPriority));
+    } catch (NoSuchElementException e) {
+      return null;
+    }
   }
 
   private void changeTask(PriorityTask desiredTask) {
@@ -60,6 +65,8 @@ public class AITaskComponent extends Component {
       currentTask.stop();
     }
     currentTask = desiredTask;
-    desiredTask.start(entity);
+    if (desiredTask != null) {
+      desiredTask.start(entity);
+    }
   }
 }

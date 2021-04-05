@@ -45,6 +45,11 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
   }
 
+  @Override
+  public boolean getMoving() {
+    return movementEnabled;
+  }
+
   /** @return Target position in the world */
   @Override
   public Vector2 getTarget() {

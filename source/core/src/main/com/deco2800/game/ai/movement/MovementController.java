@@ -7,6 +7,9 @@ public interface MovementController {
   /** @param movementEnabled true to enable controller movement, false to disable. */
   void setMoving(boolean movementEnabled);
 
+  /** @return True when movement enabled, false when disabled */
+  boolean getMoving();
+
   /** @return Target position in the world */
   Vector2 getTarget();
 
