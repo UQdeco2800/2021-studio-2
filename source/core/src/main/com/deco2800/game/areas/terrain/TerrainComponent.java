@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.rendering.RenderComponent;
@@ -55,6 +56,11 @@ public class TerrainComponent extends RenderComponent {
 
   public float getTileSize() {
     return tileSize;
+  }
+
+  public GridPoint2 getMapBounds(int layer) {
+    TiledMapTileLayer terrainLayer = (TiledMapTileLayer)tiledMap.getLayers().get(layer);
+    return new GridPoint2(terrainLayer.getWidth(), terrainLayer.getHeight());
   }
 
   public TiledMap getMap() {

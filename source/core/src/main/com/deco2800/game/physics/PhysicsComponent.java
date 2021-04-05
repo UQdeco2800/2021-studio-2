@@ -15,6 +15,7 @@ import com.deco2800.game.services.ServiceLocator;
  * entity. Instead, use forces to move it.
  */
 public class PhysicsComponent extends Component {
+  private static final float GROUND_FRICTION = 5f;
   private final PhysicsEngine physics;
   private final FixtureDef fixtureDef = new FixtureDef();
   private BodyDef.BodyType bodyType = BodyType.DynamicBody;
@@ -199,6 +200,7 @@ public class PhysicsComponent extends Component {
     BodyDef bodyDef = new BodyDef();
     bodyDef.type = bodyType;
     bodyDef.fixedRotation = true;
+    bodyDef.linearDamping = GROUND_FRICTION;
     bodyDef.angle = angle;
     bodyDef.position.set(entity.getPosition());
     body = physics.createBody(bodyDef);
