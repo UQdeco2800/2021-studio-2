@@ -62,6 +62,11 @@ public class PhysicsComponent extends Component {
   public void create() {
     body.setTransform(entity.getPosition(), 0f);
     body.setActive(true);
+
+    BodyUserData userData = new BodyUserData();
+    userData.entity = entity;
+    body.setUserData(userData);
+
 //    // Start listening to entity position changes
 //    entity.getEvents().addListener("setPosition", this::onSetPosition);
   }
