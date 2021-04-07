@@ -9,14 +9,19 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.physics.PhysicsComponent.AlignX;
 import com.deco2800.game.physics.PhysicsComponent.AlignY;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ColliderComponent extends Component {
+  private static final Logger logger = LoggerFactory.getLogger(ColliderComponent.class);
+
   private final FixtureDef fixtureDef = new FixtureDef();
   private Fixture fixture;
 
   @Override
   public void create() {
     if (fixtureDef.shape == null) {
+      logger.trace("{} Setting default bounding box", this);
       fixtureDef.shape = makeBoundingBox();
     }
 
@@ -156,7 +161,7 @@ public class ColliderComponent extends Component {
     if (fixture == null) {
       fixtureDef.shape = shape;
     } else {
-      // TODO: warning
+      logger.error("{} Cannot set Collider shape after create(), ignoring.", this);
     }
     return this;
   }
