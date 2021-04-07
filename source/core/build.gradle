@@ -1,6 +1,5 @@
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-//sourceSets.main.java.srcDirs = [ "src/" ]
 sourceSets.main.java.srcDirs = [ "src/main/" ]
 sourceSets.test.java.srcDirs = [ "src/test/" ]
 
@@ -9,4 +8,10 @@ eclipse.project.name = appName + "-core"
 test {
     useJUnitPlatform()
     workingDir = new File("../core/assets")
+}
+
+javadoc {
+    options {
+        links 'https://libgdx.badlogicgames.com/ci/nightlies/docs/api/'
+    }
 }

@@ -292,7 +292,6 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * Iterates over registered input handlers in ascending priority and stops as soon as the input is
    * processed
    *
-   * @return whether the input was processed
    * @see GestureDetector.GestureListener#pinchStop()
    */
   @Override

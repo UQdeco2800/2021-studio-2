@@ -3,6 +3,7 @@ package com.deco2800.game.physics;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.JointDef;
 import com.badlogic.gdx.physics.box2d.World;
@@ -29,14 +30,12 @@ public class PhysicsEngine implements Disposable {
   private float accumulator;
 
   public PhysicsEngine() {
-    this(
-      new World(GRAVITY, true),
-      ServiceLocator.getTimeSource()
-    );
+    this(new World(GRAVITY, true), ServiceLocator.getTimeSource());
   }
 
   public PhysicsEngine(World world, GameTime timeSource) {
     this.world = world;
+    world.setContactListener(new PhysicsContactListener());
     this.timeSource = timeSource;
   }
 
