@@ -161,6 +161,11 @@ public class ColliderComponent extends Component {
     return this;
   }
 
+  /** @return Physics fixture of this collider. Null before created() */
+  public Fixture getFixture() {
+    return fixture;
+  }
+
   @Override
   public void dispose() {
     super.dispose();

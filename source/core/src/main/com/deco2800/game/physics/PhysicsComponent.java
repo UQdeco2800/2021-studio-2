@@ -10,6 +10,9 @@ import com.deco2800.game.services.ServiceLocator;
 /**
  * Lets an entity be controlled by physics. Do not directly modify the position of a physics-enabled
  * entity. Instead, use forces to move it.
+ *
+ * <p>Entities with a PhysicsComponent will fire "collisionStart" and "collisionEnd" events. See
+ * {@link PhysicsContactListener }
  */
 public class PhysicsComponent extends Component {
   private static final float GROUND_FRICTION = 5f;
@@ -67,8 +70,7 @@ public class PhysicsComponent extends Component {
     userData.entity = entity;
     body.setUserData(userData);
 
-//    // Start listening to entity position changes
-//    entity.getEvents().addListener("setPosition", this::onSetPosition);
+    entity.getEvents().addListener("setPosition", (Vector2 pos) -> body.setTransform(pos, 0f));
   }
 
   /**
@@ -78,7 +80,8 @@ public class PhysicsComponent extends Component {
   @Override
   public void earlyUpdate() {
     Vector2 bodyPos = body.getPosition();
-    entity.setPosition(bodyPos);
+    // Don't notify position changes due to physics
+    entity.setPosition(bodyPos, false);
   }
 
   @Override

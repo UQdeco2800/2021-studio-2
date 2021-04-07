@@ -5,14 +5,27 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.deco2800.game.components.Component;
 import com.deco2800.game.events.EventHandler;
 
-public class PhysicsContactListener extends Component implements ContactListener {
+/**
+ * Box2D collision events fire globally on the physics world, not per-object. The contact listener
+ * receives these events, finds the entities involved in the collision, and triggers events on them.
+ *
+ * <p>On contact start: evt = "collisionStart", params = ({@link Fixture} thisFixture, {@link
+ * Fixture} otherFixture)
+ *
+ * <p>On contact end: evt = "collisionEnd", params = ({@link Fixture} thisFixture, {@link Fixture}
+ * otherFixture)
+ */
+public class PhysicsContactListener implements ContactListener {
   private final EventHandler eventHandler;
 
   public PhysicsContactListener() {
-    eventHandler = new EventHandler();
+    this(new EventHandler());
+  }
+
+  public PhysicsContactListener(EventHandler eventHandler) {
+    this.eventHandler = eventHandler;
   }
 
   public EventHandler getEvents() {
@@ -21,14 +34,14 @@ public class PhysicsContactListener extends Component implements ContactListener
 
   @Override
   public void beginContact(Contact contact) {
-    triggerEventOn(contact.getFixtureA(), "beginContact", contact);
-    triggerEventOn(contact.getFixtureB(), "beginContact", contact);
+    triggerEventOn(contact.getFixtureA(), "collisionStart", contact.getFixtureB());
+    triggerEventOn(contact.getFixtureB(), "collisionStart", contact.getFixtureA());
   }
 
   @Override
   public void endContact(Contact contact) {
-    triggerEventOn(contact.getFixtureA(), "endContact", contact);
-    triggerEventOn(contact.getFixtureB(), "endContact", contact);
+    triggerEventOn(contact.getFixtureA(), "collisionEnd", contact.getFixtureB());
+    triggerEventOn(contact.getFixtureB(), "collisionEnd", contact.getFixtureA());
   }
 
   @Override
@@ -37,10 +50,10 @@ public class PhysicsContactListener extends Component implements ContactListener
   @Override
   public void postSolve(Contact contact, ContactImpulse impulse) {}
 
-  private void triggerEventOn(Fixture fixture, String evt, Contact contact) {
+  private void triggerEventOn(Fixture fixture, String evt, Fixture otherFixture) {
     BodyUserData userData = (BodyUserData) fixture.getBody().getUserData();
     if (userData != null && userData.entity != null) {
-      userData.entity.getEvents().trigger(evt, contact);
+      userData.entity.getEvents().trigger(evt, fixture, otherFixture);
     }
   }
 }

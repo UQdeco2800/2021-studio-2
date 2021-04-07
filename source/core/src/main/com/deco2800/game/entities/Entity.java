@@ -66,16 +66,17 @@ public class Entity {
   }
 
   /**
-   * Set the entity's game position. Avoid calling this when using physics.
+   * Set the entity's game position.
    *
    * @param position new position.
    */
   public void setPosition(Vector2 position) {
     this.position = position;
+    getEvents().trigger("setPosition", position);
   }
 
   /**
-   * Set the entity's game position. Avoid calling this when using physics.
+   * Set the entity's game position.
    *
    * @param x new x position
    * @param y new y position
@@ -84,6 +85,19 @@ public class Entity {
     this.position.x = x;
     this.position.y = y;
     getEvents().trigger("setPosition", position);
+  }
+
+  /**
+   * Set the entity's game position and optionally notifies listeners.
+   *
+   * @param position new position.
+   * @param notify true to notify (default), false otherwise
+   */
+  public void setPosition(Vector2 position, boolean notify) {
+    this.position = position;
+    if (notify) {
+      getEvents().trigger("setPosition", position);
+    }
   }
 
   /**
@@ -117,6 +131,7 @@ public class Entity {
 
   /**
    * Set the entity's width and scale the height to maintain aspect ratio.
+   *
    * @param x width in metres
    */
   public void scaleWidth(float x) {
@@ -126,13 +141,13 @@ public class Entity {
 
   /**
    * Set the entity's height and scale the width to maintain aspect ratio.
+   *
    * @param y height in metres
    */
   public void scaleHeight(float y) {
     this.scale.x = this.scale.x / this.scale.y * y;
     this.scale.y = y;
   }
-
 
   /**
    * Get the entity's center position
@@ -165,17 +180,16 @@ public class Entity {
   public Entity addComponent(Component component) {
     if (created) {
       logger.error(
-        "Adding {} to {} after creation is not supported and will be ignored", component, this
-      );
+          "Adding {} to {} after creation is not supported and will be ignored", component, this);
       return this;
     }
     ComponentType componentType = ComponentType.getFrom(component.getClass());
     if (components.containsKey(componentType.getId())) {
       logger.error(
-        "Attempted to add multiple components of class {} to {}. Only one component of a class "
-          + "can be added to an entity, this will be ignored.",
-        component, this
-      );
+          "Attempted to add multiple components of class {} to {}. Only one component of a class "
+              + "can be added to an entity, this will be ignored.",
+          component,
+          this);
       return this;
     }
     components.put(componentType.getId(), component);
@@ -199,9 +213,8 @@ public class Entity {
   public void create() {
     if (created) {
       logger.error(
-        "{} was created twice. Entity should only be registered with the entity service once.",
-        this
-      );
+          "{} was created twice. Entity should only be registered with the entity service once.",
+          this);
       return;
     }
     createdComponents = components.values().toArray();
