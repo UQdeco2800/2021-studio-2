@@ -24,27 +24,26 @@ public class Renderer implements Disposable {
   private static final Logger logger = LoggerFactory.getLogger(Renderer.class);
   private static final float GAME_SCREEN_WIDTH = 20f;
 
-  private final OrthographicCamera camera;
-  private final float gameWidth;
-  private final SpriteBatch batch;
-  private final Stage stage;
-  private final RenderService renderService;
-  private final Box2DDebugRenderer debugRenderer;
+  private OrthographicCamera camera;
+  private float gameWidth;
+  private SpriteBatch batch;
+  private Stage stage;
+  private RenderService renderService;
+  private Box2DDebugRenderer debugRenderer;
   // TODO: extract physics rendering somewhere else
-  private final PhysicsEngine physicsEngine;
+  private PhysicsEngine physicsEngine;
 
-  /**
-   * Create a new renderer with default settings
-   */
+  /** Create a new renderer with default settings */
   public Renderer() {
-    this(
-      new OrthographicCamera(),
-      GAME_SCREEN_WIDTH,
-      new SpriteBatch(),
-      ServiceLocator.getRenderService(),
-      ServiceLocator.getPhysicsService(),
-      new Box2DDebugRenderer()
-    );
+    SpriteBatch spriteBatch = new SpriteBatch();
+      init(
+        new OrthographicCamera(),
+        GAME_SCREEN_WIDTH,
+        spriteBatch,
+        new Stage(new ScreenViewport(), spriteBatch),
+        ServiceLocator.getRenderService(),
+        ServiceLocator.getPhysicsService(),
+        new Box2DDebugRenderer());
   }
 
   /**
@@ -56,20 +55,32 @@ public class Renderer implements Disposable {
    * @param batch Batch to render to.
    */
   public Renderer(
-    OrthographicCamera camera,
-    float gameWidth,
-    SpriteBatch batch,
-    RenderService renderService,
-    PhysicsService physicsService,
-    Box2DDebugRenderer debugRenderer
-  ) {
+      OrthographicCamera camera,
+      float gameWidth,
+      SpriteBatch batch,
+      Stage stage,
+      RenderService renderService,
+      PhysicsService physicsService,
+      Box2DDebugRenderer debugRenderer) {
+    init(camera, gameWidth, batch, stage, renderService, physicsService, debugRenderer);
+  }
+
+  private void init(
+      OrthographicCamera camera,
+      float gameWidth,
+      SpriteBatch batch,
+      Stage stage,
+      RenderService renderService,
+      PhysicsService physicsService,
+      Box2DDebugRenderer debugRenderer) {
+
     this.camera = camera;
     this.gameWidth = gameWidth;
     this.batch = batch;
+    this.stage = stage;
     this.renderService = renderService;
     this.debugRenderer = debugRenderer;
 
-    stage = new Stage(new ScreenViewport(), batch);
     renderService.setStage(stage);
     camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -80,9 +91,7 @@ public class Renderer implements Disposable {
     return camera;
   }
 
-  /**
-   * Render everything to the render service.
-   */
+  /** Render everything to the render service. */
   public void render() {
     camera.update();
     batch.setProjectionMatrix(camera.combined);
@@ -99,6 +108,7 @@ public class Renderer implements Disposable {
 
   /**
    * Resize the renderer to a new screen size.
+   *
    * @param width new screen width
    * @param height new screen height
    */

@@ -23,11 +23,6 @@ public abstract class UIComponent extends RenderComponent implements Renderable 
   }
 
   @Override
-  public int compareTo(Renderable o) {
-    return Float.compare(getZIndex(), o.getZIndex());
-  }
-
-  @Override
   public int getLayer() {
     return UI_LAYER;
   }

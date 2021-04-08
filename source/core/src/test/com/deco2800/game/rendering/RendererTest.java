@@ -30,6 +30,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class RendererTest {
   @Spy OrthographicCamera camera;
   @Mock SpriteBatch spriteBatch;
+  @Mock Stage stage;
   @Mock Graphics graphics;
   @Mock RenderService renderService;
   @Mock Box2DDebugRenderer debugRenderer;
@@ -43,10 +44,11 @@ class RendererTest {
 
   @Test
   void shouldResizeCamera() {
+    when(stage.getViewport()).thenReturn(mock(Viewport.class));
     when(graphics.getWidth()).thenReturn(100);
     when(graphics.getHeight()).thenReturn(200);
     Renderer renderer =
-        new Renderer(camera, 10, spriteBatch, renderService, physicsService, debugRenderer);
+        new Renderer(camera, 10, spriteBatch, stage, renderService, physicsService, debugRenderer);
 
     assertEquals(camera.position, Vector3.Zero);
     assertEquals(10, camera.viewportWidth);
@@ -60,7 +62,7 @@ class RendererTest {
   @Test
   void shouldRender() {
     Renderer renderer =
-        new Renderer(camera, 10, spriteBatch, renderService, physicsService, debugRenderer);
+        new Renderer(camera, 10, spriteBatch, stage, renderService, physicsService, debugRenderer);
     renderer.render();
     verify(renderService).render(spriteBatch);
   }
