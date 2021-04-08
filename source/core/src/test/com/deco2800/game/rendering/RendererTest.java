@@ -1,9 +1,7 @@
 package com.deco2800.game.rendering;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -57,6 +55,23 @@ class RendererTest {
     renderer.resize(200, 100);
     assertEquals(10, camera.viewportWidth);
     assertEquals(5, camera.viewportHeight);
+  }
+
+  @Test
+  void shouldResizeViewPort() {
+    ScreenViewport screenViewport = spy(ScreenViewport.class);
+    Stage stage = new Stage(screenViewport, spriteBatch);
+
+    Renderer renderer =
+      new Renderer(camera, 10, spriteBatch, stage, renderService, physicsService, debugRenderer);
+
+    assertEquals(0, stage.getViewport().getScreenWidth());
+    assertEquals(0, stage.getViewport().getScreenHeight());
+
+    renderer.resize(200, 100);
+    verify(screenViewport).update(200, 100, true);
+    assertEquals(200, stage.getViewport().getScreenWidth());
+    assertEquals(100, stage.getViewport().getScreenHeight());
   }
 
   @Test
