@@ -24,7 +24,7 @@ public class ResourceService {
     this.assetManager = assetManager;
   }
 
-  /** @see AssetManager#get(String, Class<T>) */
+  /** @see AssetManager#get(String, Class)  */
   public <T> T getAsset(String filename, Class<T> type) {
     return assetManager.get(filename, type);
   }
