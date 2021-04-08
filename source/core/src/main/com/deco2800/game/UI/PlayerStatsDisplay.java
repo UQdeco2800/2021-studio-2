@@ -1,11 +1,9 @@
 package com.deco2800.game.UI;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -16,16 +14,19 @@ public class PlayerStatsDisplay extends UIComponent {
   private static final float zIndex = 5f;
   private final BitmapFont font = new BitmapFont();
   Table table;
-  private Image heart;
-  private Label health;
+  private Image heartImage;
+  private Label healthLabel;
   private Label.LabelStyle defaultWhiteText;
 
   @Override
   public void create() {
     super.create();
-    createStyles();
 
+    createStyles();
     addActors();
+
+    // TODO when player health is implemented
+    // player.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
   }
 
   private void createStyles() {
@@ -41,15 +42,15 @@ public class PlayerStatsDisplay extends UIComponent {
 
     // Heart image
     Float heartSideLength = 30f;
-    heart = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
+    heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
 
     // Health text
-    CharSequence healthText = String.format("Health: %d", getPlayerHealth());
-    health = new Label(healthText, defaultWhiteText);
-    health.setFontScale(1.5f);
+    CharSequence healthText = String.format("Health: %d", 0);
+    healthLabel = new Label(healthText, defaultWhiteText);
+    healthLabel.setFontScale(1.5f);
 
-    table.add(heart).size(heartSideLength).pad(5);
-    table.add(health);
+    table.add(heartImage).size(heartSideLength).pad(5);
+    table.add(healthLabel);
     stage.addActor(table);
   }
 
@@ -66,7 +67,8 @@ public class PlayerStatsDisplay extends UIComponent {
     return zIndex;
   }
 
-  private int getPlayerHealth() {
-    return 50;
+  public void updatePlayerHealthUI(int health) {
+    CharSequence text = String.format("Health: %d", health);
+    healthLabel.setText(text);
   }
 }
