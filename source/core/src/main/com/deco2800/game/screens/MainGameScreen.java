@@ -54,11 +54,7 @@ public class MainGameScreen extends ScreenAdapter {
     renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
 
     loadAssets();
-
-    // UI display
-    Entity UI = new Entity();
-    UI.addComponent(new PlayerStatsDisplay());
-    ServiceLocator.getEntityService().register(UI);
+    displayUI();
 
     logger.debug("Initialising main game screen entities");
     TerrainFactory terrainFactory =
@@ -103,5 +99,11 @@ public class MainGameScreen extends ScreenAdapter {
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainGameTextures);
     ServiceLocator.getResourceService().loadAll();
+  }
+
+  private void displayUI() {
+    Entity UI = new Entity();
+    UI.addComponent(new PlayerStatsDisplay());
+    ServiceLocator.getEntityService().register(UI);
   }
 }

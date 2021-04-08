@@ -1,5 +1,6 @@
 package com.deco2800.game.UI;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,14 +11,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.services.ServiceLocator;
 
+/**
+ * A UI component for displaying player stats, e.g. health.
+ */
 public class PlayerStatsDisplay extends UIComponent {
   private static final float zIndex = 5f;
   private final BitmapFont font = new BitmapFont();
+  private Label.LabelStyle defaultWhiteText;
   Table table;
   private Image heartImage;
   private Label healthLabel;
-  private Label.LabelStyle defaultWhiteText;
 
+  /**
+   * Creates reusable UI styles and adds actors to the stage.
+   */
   @Override
   public void create() {
     super.create();
@@ -35,6 +42,10 @@ public class PlayerStatsDisplay extends UIComponent {
     defaultWhiteText.fontColor = Color.WHITE;
   }
 
+  /**
+   * Creates actors and positions them on the stage using a table.
+   * @see Table for positioning options
+   */
   private void addActors() {
     table = new Table();
     table.align(Align.topLeft);
@@ -67,6 +78,10 @@ public class PlayerStatsDisplay extends UIComponent {
     return zIndex;
   }
 
+  /**
+   * Updates the player's health on the UI.
+   * @param health player health
+   */
   public void updatePlayerHealthUI(int health) {
     CharSequence text = String.format("Health: %d", health);
     healthLabel.setText(text);
