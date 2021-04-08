@@ -3,6 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.UI.GameAreaDisplay;
 import com.deco2800.game.UI.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;

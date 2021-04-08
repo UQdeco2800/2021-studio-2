@@ -23,16 +23,6 @@ public abstract class UIComponent extends RenderComponent implements Renderable 
   }
 
   @Override
-  public void render(SpriteBatch batch) {
-    super.render(batch);
-    batch.end();
-    stage.act();
-    stage.draw();
-    batch.begin();
-  }
-
-
-  @Override
   public int compareTo(Renderable o) {
     return Float.compare(getZIndex(), o.getZIndex());
   }

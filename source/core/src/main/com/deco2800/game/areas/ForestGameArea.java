@@ -1,10 +1,9 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
-import com.deco2800.game.UI.PlayerStatsDisplay;
+import com.deco2800.game.UI.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityFactory;
 import com.deco2800.game.math.RandomUtils;
@@ -52,6 +51,11 @@ public class ForestGameArea extends GameArea {
     //Load assets
     loadAssets();
 
+    // UI display
+    Entity UI = new Entity();
+    UI.addComponent(new GameAreaDisplay("Box Forest"));
+    spawnEntity(UI);
+
     // Make terrain
     terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
     spawnEntity(new Entity().addComponent(terrain));
@@ -89,7 +93,9 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  @Override
   public void dispose() {
+    super.dispose();
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.getAsset("sounds/BGM_03_mp3.mp3", Music.class).stop();
     resourceService.clearAllAssets();

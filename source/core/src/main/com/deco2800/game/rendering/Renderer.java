@@ -92,6 +92,9 @@ public class Renderer implements Disposable {
     renderService.render(batch);
     batch.end();
     debugRenderer.render(physicsEngine.getWorld(), camera.combined);
+
+    stage.act();
+    stage.draw();
   }
 
   /**
@@ -113,11 +116,11 @@ public class Renderer implements Disposable {
 
   private void resizeStage(int screenWidth, int screenHeight) {
     stage.getViewport().update(screenWidth, screenHeight, true);
-    logger.info("stage {} gdx {}", stage.getViewport().getScreenHeight(), Gdx.graphics.getHeight());
   }
 
   @Override
   public void dispose() {
+    stage.dispose();
     batch.dispose();
   }
 }
