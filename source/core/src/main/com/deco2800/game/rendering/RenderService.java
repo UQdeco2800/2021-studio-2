@@ -1,6 +1,7 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.utils.SortedIntMap;
@@ -12,6 +13,7 @@ import com.deco2800.game.utils.SortedIntMap;
 public class RenderService implements Disposable {
   private static final int INITIAL_LAYER_CAPACITY = 4;
   private static final int INITIAL_CAPACITY = 4;
+  private Stage stage;
 
   /**
    * Map from layer to list of renderables, allows us to render each layer in the correct order
@@ -57,6 +59,14 @@ public class RenderService implements Disposable {
         renderable.render(batch);
       }
     }
+  }
+
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
+
+  public Stage getStage() {
+    return stage;
   }
 
   @Override
