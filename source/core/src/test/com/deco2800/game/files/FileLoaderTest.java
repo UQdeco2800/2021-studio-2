@@ -16,8 +16,7 @@ public class FileLoaderTest {
 
     @Test
     void loadFromValidFile() {
-        FileHandle file = Gdx.files.internal("test/files/valid.json");
-        TestStats test = FileLoader.loadClassFromJson(TestStats.class, file);
+        TestStats test = FileLoader.loadClass(TestStats.class, "test/files/valid.json");
         assertNotNull(test);
         assertEquals(test.stat1, 3);
         assertEquals(test.stat2, 4);
@@ -26,8 +25,8 @@ public class FileLoaderTest {
     @Test
     void loadFromEmptyFile() {
         TestStats test =
-                FileLoader.loadClassFromJson(
-                  TestStats.class, Gdx.files.internal("test/files/empty.json"));
+                FileLoader.loadClass(
+                  TestStats.class, "test/files/empty.json");
         assertNotNull(test);
         assertEquals(test.stat1, 1);
         assertEquals(test.stat2, 2);
@@ -36,16 +35,16 @@ public class FileLoaderTest {
     @Test
     void loadFromMissingFile() {
         TestStats test =
-                FileLoader.loadClassFromJson(
-                  TestStats.class, Gdx.files.internal("test/files/missing.json"));
+                FileLoader.loadClass(
+                  TestStats.class, "test/files/missing.json");
         assertNull(test);
     }
 
     @Test
     void loadFromInvalidFile() {
         TestStats test =
-                FileLoader.loadClassFromJson(
-                  TestStats.class, Gdx.files.internal("test/files/invalid.json"));
+                FileLoader.loadClass(
+                  TestStats.class, "test/files/invalid.json");
         assertNull(test);
     }
 }

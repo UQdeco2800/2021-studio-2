@@ -1,5 +1,6 @@
 package com.deco2800.game.files;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import org.slf4j.Logger;
@@ -23,7 +24,8 @@ public class FileLoader {
    * @param file Json file to read from
    * @return instance of class, may be null
    */
-  public static <T> T loadClassFromJson(Class<T> type, FileHandle file) {
+  public static <T> T loadClass(Class<T> type, String filename) {
+    FileHandle file = Gdx.files.internal(filename);
     T object = null;
     try {
       object = json.fromJson(type, file);

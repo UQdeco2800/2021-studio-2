@@ -6,50 +6,18 @@ import com.deco2800.game.physics.ColliderComponent;
 import com.deco2800.game.physics.HitboxComponent;
 import com.deco2800.game.physics.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.AITaskComponent;
-import com.deco2800.game.components.player.PlayerActionComponent;
 import com.deco2800.game.components.tasks.WanderTask;
-import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.physics.PhysicsComponent;
 import com.deco2800.game.physics.PhysicsComponent.AlignX;
 import com.deco2800.game.physics.PhysicsComponent.AlignY;
 import com.deco2800.game.rendering.TextureRenderComponent;
-import com.deco2800.game.services.ServiceLocator;
 
 public class EntityFactory {
+  private static final PlayerFactory playerFactory = new PlayerFactory();
+  private static final EnemyFactory enemyFactory = new EnemyFactory();
+
   public static Entity createPlayer() {
-    InputComponent inputComponent =
-        ServiceLocator.getInputService().getInputFactory().createForPlayer();
-
-    Entity player =
-        new Entity()
-            .addComponent(new TextureRenderComponent("images/box_boy_leaf.png"))
-            .addComponent(new PhysicsComponent())
-            .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
-            .addComponent(new PlayerActionComponent())
-            .addComponent(inputComponent);
-
-    setScaledCollider(player, 0.6f, 0.3f);
-    player.getComponent(ColliderComponent.class).setDensity(0.3f);
-    player.getComponent(TextureRenderComponent.class).scaleEntity();
-    return player;
-  }
-
-  public static Entity createGhost() {
-    AITaskComponent aiComponent =
-        new AITaskComponent().addTask(new WanderTask(new Vector2(2f, 2f), 2f));
-    Entity ghost =
-        new Entity()
-            .addComponent(new TextureRenderComponent("images/ghost_1.png"))
-            .addComponent(new PhysicsComponent())
-            .addComponent(new PhysicsMovementComponent())
-            .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
-            .addComponent(aiComponent);
-
-    setScaledCollider(ghost, 0.9f, 0.4f);
-    ghost.getComponent(TextureRenderComponent.class).scaleEntity();
-    return ghost;
+    return playerFactory.createPlayer();
   }
 
   public static Entity createTree() {
@@ -66,11 +34,19 @@ public class EntityFactory {
     return tree;
   }
 
+  public static Entity createGhost() {
+    return enemyFactory.createGhost();
+  }
+
+  public static Entity createGhostKing() {
+    return enemyFactory.createGhostKing();
+  }
+
   // Set the collider to the base of the entity, scaled relative to the entity size.
-  private static void setScaledCollider(Entity entity, float scaleX, float scaleY) {
+  public static void setScaledCollider(Entity entity, float scaleX, float scaleY) {
     Vector2 boundingBox = entity.getScale().cpy().scl(scaleX, scaleY);
     entity
-        .getComponent(ColliderComponent.class)
-        .setAsBoxAligned(boundingBox, AlignX.Center, AlignY.Bottom);
+      .getComponent(ColliderComponent.class)
+      .setAsBoxAligned(boundingBox, AlignX.Center, AlignY.Bottom);
   }
 }

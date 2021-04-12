@@ -1,10 +1,9 @@
 package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.UI.GameAreaDisplay;
-import com.badlogic.gdx.utils.async.AsyncExecutor;
+import com.deco2800.game.components.player.PlayerStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityFactory;
 import com.deco2800.game.math.RandomUtils;
@@ -12,7 +11,6 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import java.util.concurrent.CompletableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +19,12 @@ public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
   private static final int NUM_TREES = 5;
   private static final int NUM_GHOSTS = 2;
+  private static final int NUM_GHOSTS_KINGS = 1;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
     "images/tree.png",
+    "images/ghost_king.png",
     "images/ghost_1.png",
     "images/grass_1.png",
     "images/grass_2.png",
@@ -54,6 +54,7 @@ public class ForestGameArea extends GameArea {
     spawnTrees();
     spawnPlayer();
     spawnGhosts();
+    spawnGhostKing();
 
     playMusic();
   }
@@ -92,6 +93,17 @@ public class ForestGameArea extends GameArea {
     for (int i = 0; i < NUM_GHOSTS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
       Entity ghost = EntityFactory.createGhost();
+      spawnEntityAt(ghost, randomPos, true, true);
+    }
+  }
+
+  private void spawnGhostKing() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_GHOSTS_KINGS; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity ghost = EntityFactory.createGhostKing();
       spawnEntityAt(ghost, randomPos, true, true);
     }
   }
