@@ -6,6 +6,8 @@ import com.deco2800.game.UI.GameAreaDisplay;
 import com.deco2800.game.components.player.PlayerStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityFactory;
+import com.deco2800.game.entities.NPCFactory;
+import com.deco2800.game.entities.PlayerFactory;
 import com.deco2800.game.math.RandomUtils;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
@@ -82,7 +84,7 @@ public class ForestGameArea extends GameArea {
   }
 
   private void spawnPlayer() {
-    Entity player = EntityFactory.createPlayer();
+    Entity player = PlayerFactory.createPlayer();
     spawnEntityAt(player, PLAYER_SPAWN, true, true);
   }
 
@@ -92,7 +94,7 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = EntityFactory.createGhost();
+      Entity ghost = NPCFactory.createGhost();
       spawnEntityAt(ghost, randomPos, true, true);
     }
   }
@@ -103,7 +105,7 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS_KINGS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = EntityFactory.createGhostKing();
+      Entity ghost = NPCFactory.createGhostKing();
       spawnEntityAt(ghost, randomPos, true, true);
     }
   }

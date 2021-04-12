@@ -10,13 +10,11 @@ import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.physics.ColliderComponent;
 import com.deco2800.game.physics.HitboxComponent;
 import com.deco2800.game.physics.PhysicsComponent;
+import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PlayerFactory {
-  private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
   private static final PlayerStats playerStats = FileLoader.loadClass(PlayerStats.class, "entityStats/player.json");
 
   public static Entity createPlayer() {
@@ -33,7 +31,7 @@ public class PlayerFactory {
         .addComponent(new PlayerStatsComponent(playerStats))
         .addComponent(inputComponent);
 
-    EntityFactory.setScaledCollider(player, 0.6f, 0.3f);
+    PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
     player.getComponent(ColliderComponent.class).setDensity(0.3f);
     player.getComponent(TextureRenderComponent.class).scaleEntity();
     return player;

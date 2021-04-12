@@ -21,7 +21,7 @@ public class FileLoader {
    * defaults.
    *
    * @param type class type
-   * @param file Json file to read from
+   * @param filename file to read from
    * @return instance of class, may be null
    */
   public static <T> T loadClass(Class<T> type, String filename) {
