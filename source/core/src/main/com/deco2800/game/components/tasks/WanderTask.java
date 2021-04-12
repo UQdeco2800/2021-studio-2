@@ -1,13 +1,11 @@
 package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.ai.tasks.Task;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.math.RandomUtils;
-import com.deco2800.game.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +41,8 @@ public class WanderTask extends DefaultTask implements PriorityTask {
   @Override
   public void start(Entity entity) {
     super.start(entity);
-    startPos = entity.getPosition().cpy();
+    startPos = entity.getPosition();
+
     waitTask = new WaitTask(waitTime);
     movementTask = new MovementTask(getRandomPosInRange());
     movementTask.start(entity);

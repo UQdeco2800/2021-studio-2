@@ -16,7 +16,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
   private Vector2 targetPosition;
   private Vector2 maxSpeed = Vector2Utils.One;
   private boolean movementEnabled = true;
-  private boolean isAtTarget = false;
 
   @Override
   public void create() {
@@ -27,7 +26,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
   public void update() {
     if (movementEnabled && targetPosition != null) {
       Body body = physicsComponent.getBody();
-      updatePosition(body);
+      updateDirection(body);
     }
   }
 
@@ -68,10 +67,8 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     this.targetPosition = target;
   }
 
-  private void updatePosition(Body body) {
-    // Move towards targetPosition based on our current position
-    Vector2 direction = targetPosition.cpy().sub(entity.getPosition());
-    Vector2 desiredVelocity = direction.setLength(1f).scl(maxSpeed);
+  private void updateDirection(Body body) {
+    Vector2 desiredVelocity = getDirection(body).scl(maxSpeed);
     setToVelocity(body, desiredVelocity);
   }
 
@@ -80,5 +77,10 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     Vector2 velocity = body.getLinearVelocity();
     Vector2 impulse = desiredVelocity.cpy().sub(velocity).scl(body.getMass());
     body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
+  }
+
+  private Vector2 getDirection(Body body) {
+    // Move towards targetPosition based on our current position
+    return targetPosition.cpy().sub(entity.getPosition()).nor();
   }
 }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.physics.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +15,17 @@ import org.slf4j.LoggerFactory;
  */
 public class MovementTask extends DefaultTask {
   private static final Logger logger = LoggerFactory.getLogger(MovementTask.class);
+
+  private final GameTime gameTime;
   private Vector2 target;
   private float stopDistance = 0.01f;
+  private long lastTimeMoved;
+  private Vector2 lastPos;
   private PhysicsMovementComponent movementComponent;
 
   public MovementTask(Vector2 target) {
     this.target = target;
+    this.gameTime = ServiceLocator.getTimeSource();
   }
 
   public MovementTask(Vector2 target, float stopDistance) {
@@ -33,14 +40,18 @@ public class MovementTask extends DefaultTask {
     movementComponent.setTarget(target);
     movementComponent.setMoving(true);
     logger.debug("Starting movement towards {}", target);
+    lastTimeMoved = gameTime.getTime();
+    lastPos = entity.getPosition();
   }
 
   @Override
   public void update() {
-    if (entity.getPosition().dst(target) <= stopDistance) {
+    if (isAtTarget()) {
       movementComponent.setMoving(false);
       status = Status.Finished;
       logger.debug("Finished moving to {}", target);
+    } else {
+      checkIfStuck();
     }
   }
 
@@ -54,5 +65,24 @@ public class MovementTask extends DefaultTask {
     super.stop();
     movementComponent.setMoving(false);
     logger.debug("Stopping movement");
+  }
+
+  private boolean isAtTarget() {
+    return entity.getPosition().dst(target) <= stopDistance;
+  }
+
+  private void checkIfStuck() {
+    if (didMove()) {
+      lastTimeMoved = gameTime.getTime();
+      lastPos = entity.getPosition();
+    } else if (gameTime.getTimeSince(lastTimeMoved) > 500L) {
+      movementComponent.setMoving(false);
+      status = Status.Failed;
+      logger.debug("Got stuck! Failing movement task");
+    }
+  }
+
+  private boolean didMove() {
+    return entity.getPosition().dst2(lastPos) > 0.001f;
   }
 }
