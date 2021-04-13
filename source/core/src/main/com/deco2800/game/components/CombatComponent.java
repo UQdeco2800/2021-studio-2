@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
  */
 public class CombatComponent extends Component {
   private static final Logger logger = LoggerFactory.getLogger(CombatComponent.class);
-  public int health;
-  public int baseAttack;
+  private int health;
+  private int baseAttack;
 
   public CombatComponent(int health, int baseAttack) {
     setHealth(health);
