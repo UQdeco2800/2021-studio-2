@@ -3,9 +3,10 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.UI.GameAreaDisplay;
-import com.deco2800.game.components.player.PlayerStatsComponent;
+import com.deco2800.game.components.CombatComponent;
+import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.EntityFactory;
+import com.deco2800.game.entities.ObstacleFactory;
 import com.deco2800.game.entities.NPCFactory;
 import com.deco2800.game.entities.PlayerFactory;
 import com.deco2800.game.math.RandomUtils;
@@ -78,7 +79,7 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_TREES; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity tree = EntityFactory.createTree();
+      Entity tree = ObstacleFactory.createTree();
       spawnEntityAt(tree, randomPos, true, false);
     }
   }
@@ -86,6 +87,9 @@ public class ForestGameArea extends GameArea {
   private void spawnPlayer() {
     Entity player = PlayerFactory.createPlayer();
     spawnEntityAt(player, PLAYER_SPAWN, true, true);
+    CombatComponent stats = player.getComponent(CombatComponent.class);
+    InventoryComponent inventory = player.getComponent(InventoryComponent.class);
+    logger.info("Stats {} {} {} {}", stats.getHealth(), stats.getBaseAttack(), stats.getSpecialAttack(), inventory.getGold());
   }
 
   private void spawnGhosts() {
@@ -105,8 +109,8 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS_KINGS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = NPCFactory.createGhostKing();
-      spawnEntityAt(ghost, randomPos, true, true);
+      Entity ghostKing = NPCFactory.createGhostKing();
+      spawnEntityAt(ghostKing, randomPos, true, true);
     }
   }
 

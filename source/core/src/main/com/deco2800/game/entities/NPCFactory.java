@@ -2,27 +2,30 @@ package com.deco2800.game.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
-import com.deco2800.game.components.enemies.EnemyStats;
-import com.deco2800.game.components.enemies.EnemyStatsComponent;
+import com.deco2800.game.components.CombatComponent;
 import com.deco2800.game.components.tasks.WanderTask;
+import com.deco2800.game.entities.configs.BaseEntityConfig;
+import com.deco2800.game.entities.configs.GhostKingConfig;
+import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.*;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
-public class NPCFactory {
-  private static final EnemyStats ghostStats = FileLoader.loadClass(EnemyStats.class, "entityStats/ghost.json");
-  private static final EnemyStats ghostKingStats = FileLoader.loadClass(EnemyStats.class, "entityStats/ghostKing.json");
-
-  public static Entity createGhostKing() {
-    Entity ghostKing = createBaseNPC("images/ghost_king.png");
-    ghostKing.addComponent(new EnemyStatsComponent(ghostKingStats));
-    return ghostKing;
-  }
+public class  NPCFactory {
+  private static final NPCConfigs configs = FileLoader.loadClass(NPCConfigs.class, "configs/NPCs.json");
 
   public static Entity createGhost() {
     Entity ghost = createBaseNPC("images/ghost_1.png");
-    ghost.addComponent(new EnemyStatsComponent(ghostStats));
+    BaseEntityConfig config = configs.ghost;
+    ghost.addComponent(new CombatComponent(config.health, config.baseAttack, config.specialAttack));
     return ghost;
+  }
+
+  public static Entity createGhostKing() {
+    Entity ghostKing = createBaseNPC("images/ghost_king.png");
+    GhostKingConfig config = configs.ghostKing;
+    ghostKing.addComponent(new CombatComponent(config.health, config.baseAttack, config.specialAttack));
+    return ghostKing;
   }
 
   private static Entity createBaseNPC(String textureName) {

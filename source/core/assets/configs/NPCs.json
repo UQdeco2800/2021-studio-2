@@ -1,0 +1,14 @@
+{
+  "ghost": {
+    "health": 40,
+    "baseAttack": 10,
+    "specialAttack": 20
+  },
+  "ghostKing": {
+    "health": 100,
+    "baseAttack": 25,
+    "specialAttack": 50,
+    "spookyFactor": 7
+  }
+}
+

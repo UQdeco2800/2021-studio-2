@@ -9,7 +9,7 @@ import com.deco2800.game.physics.PhysicsComponent.AlignX;
 import com.deco2800.game.physics.PhysicsComponent.AlignY;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
-public class EntityFactory {
+public class ObstacleFactory {
   public static Entity createTree() {
     Entity tree =
         new Entity()
