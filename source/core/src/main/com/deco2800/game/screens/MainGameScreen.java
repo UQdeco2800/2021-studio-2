@@ -4,6 +4,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.UI.GameAreaDisplay;
+import com.deco2800.game.UI.PerformanceDisplay;
 import com.deco2800.game.UI.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -28,9 +29,8 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-  private static final String[] mainGameTextures = {
-    "images/heart.png"
-  };
+  private static final String[] mainGameTextures = {"images/heart.png"};
+  private static final Boolean debugMode = true;
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -57,8 +57,7 @@ public class MainGameScreen extends ScreenAdapter {
     displayUI();
 
     logger.debug("Initialising main game screen entities");
-    TerrainFactory terrainFactory =
-        new TerrainFactory(renderer.getCamera());
+    TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
     ForestGameArea forestGameArea = new ForestGameArea(terrainFactory);
     forestGameArea.create();
   }
@@ -104,6 +103,9 @@ public class MainGameScreen extends ScreenAdapter {
   private void displayUI() {
     Entity UI = new Entity();
     UI.addComponent(new PlayerStatsDisplay());
+    if (debugMode) {
+      UI.addComponent(new PerformanceDisplay());
+    }
     ServiceLocator.getEntityService().register(UI);
   }
 }

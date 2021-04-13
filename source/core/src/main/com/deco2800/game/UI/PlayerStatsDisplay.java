@@ -1,9 +1,6 @@
 package com.deco2800.game.UI;
 
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,8 +13,6 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class PlayerStatsDisplay extends UIComponent {
   private static final float zIndex = 5f;
-  private final BitmapFont font = new BitmapFont();
-  private Label.LabelStyle defaultWhiteText;
   Table table;
   private Image heartImage;
   private Label healthLabel;
@@ -28,18 +23,10 @@ public class PlayerStatsDisplay extends UIComponent {
   @Override
   public void create() {
     super.create();
-
-    createStyles();
     addActors();
 
     // TODO when player health is implemented
     // player.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
-  }
-
-  private void createStyles() {
-    defaultWhiteText = new Label.LabelStyle();
-    defaultWhiteText.font = font;
-    defaultWhiteText.fontColor = Color.WHITE;
   }
 
   /**
