@@ -2,6 +2,7 @@ package com.deco2800.game.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -15,8 +16,12 @@ import org.slf4j.LoggerFactory;
 public class ColliderComponent extends Component {
   private static final Logger logger = LoggerFactory.getLogger(ColliderComponent.class);
 
-  private final FixtureDef fixtureDef = new FixtureDef();
+  private final FixtureDef fixtureDef;
   private Fixture fixture;
+
+  public ColliderComponent() {
+    fixtureDef = new FixtureDef();
+  }
 
   @Override
   public void create() {
@@ -169,6 +174,24 @@ public class ColliderComponent extends Component {
   /** @return Physics fixture of this collider. Null before created() */
   public Fixture getFixture() {
     return fixture;
+  }
+
+  public ColliderComponent setLayer(short layerMask) {
+    if (fixture == null) {
+      fixtureDef.filter.categoryBits = layerMask;
+    } else {
+      Filter filter = fixture.getFilterData();
+      filter.categoryBits = layerMask;
+      fixture.setFilterData(filter);
+    }
+    return this;
+  }
+
+  public short getLayer() {
+    if (fixture == null) {
+      return fixtureDef.filter.categoryBits;
+    }
+    return fixture.getFilterData().categoryBits;
   }
 
   @Override

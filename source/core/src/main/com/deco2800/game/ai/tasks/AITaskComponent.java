@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Task-based AI component. Given a list of tasks with priorities, the AI component will run the
@@ -13,7 +15,9 @@ import java.util.NoSuchElementException;
  * implementation of Goal-Oriented Action Planning (GOAP), a common AI decision algorithm in games
  * that's more powerful than Finite State Machines (FSMs) (State pattern).
  */
-public class AITaskComponent extends Component {
+public class AITaskComponent extends Component implements TaskRunner {
+  private static final Logger logger = LoggerFactory.getLogger(AITaskComponent.class);
+
   private final List<PriorityTask> priorityTasks = new ArrayList<>(2);
   private PriorityTask currentTask;
 
@@ -25,7 +29,10 @@ public class AITaskComponent extends Component {
    * @return self
    */
   public AITaskComponent addTask(PriorityTask task) {
+    logger.debug("{} Adding task {}", this, task);
     priorityTasks.add(task);
+    task.create(this);
+
     return this;
   }
 
@@ -61,12 +68,13 @@ public class AITaskComponent extends Component {
   }
 
   private void changeTask(PriorityTask desiredTask) {
+    logger.debug("{} Changing to task {}", this, desiredTask);
     if (currentTask != null) {
       currentTask.stop();
     }
     currentTask = desiredTask;
     if (desiredTask != null) {
-      desiredTask.start(entity);
+      desiredTask.start();
     }
   }
 }

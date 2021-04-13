@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-  private static final int NUM_TREES = 5;
-  private static final int NUM_GHOSTS = 2;
+  private static final int NUM_TREES = 7;
+  private static final int NUM_GHOSTS = 20;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
@@ -37,6 +37,8 @@ public class ForestGameArea extends GameArea {
 
   private final TerrainFactory terrainFactory;
 
+  private Entity player;
+
   public ForestGameArea(TerrainFactory terrainFactory) {
     super();
     this.terrainFactory = terrainFactory;
@@ -52,7 +54,7 @@ public class ForestGameArea extends GameArea {
 
     spawnTerrain();
     spawnTrees();
-    spawnPlayer();
+    player = spawnPlayer();
     spawnGhosts();
 
     playMusic();
@@ -80,9 +82,10 @@ public class ForestGameArea extends GameArea {
     }
   }
 
-  private void spawnPlayer() {
+  private Entity spawnPlayer() {
     Entity player = EntityFactory.createPlayer();
     spawnEntityAt(player, PLAYER_SPAWN, true, true);
+    return player;
   }
 
   private void spawnGhosts() {
@@ -91,7 +94,7 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = EntityFactory.createGhost();
+      Entity ghost = EntityFactory.createGhost(player);
       spawnEntityAt(ghost, randomPos, true, true);
     }
   }

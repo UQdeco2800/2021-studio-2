@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.JointDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
+import com.deco2800.game.physics.raycast.RaycastHit;
+import com.deco2800.game.physics.raycast.SingleHitCallback;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -27,6 +29,7 @@ public class PhysicsEngine implements Disposable {
 
   private final World world;
   private final GameTime timeSource;
+  private final SingleHitCallback singleHitCallback = new SingleHitCallback();
   private float accumulator;
 
   public PhysicsEngine() {
@@ -78,6 +81,22 @@ public class PhysicsEngine implements Disposable {
   public World getWorld() {
     return world;
   }
+
+  public boolean raycast(Vector2 from, Vector2 to, RaycastHit hit) {
+    return raycast(from, to, PhysicsLayer.All, hit);
+  }
+
+  public boolean raycast(Vector2 from, Vector2 to, short layerMask, RaycastHit hit) {
+    singleHitCallback.didHit = false;
+    singleHitCallback.layerMask = layerMask;
+    singleHitCallback.hit = hit;
+    world.rayCast(singleHitCallback, from, to);
+    return singleHitCallback.didHit;
+  }
+
+//  public RaycastHit[] raycastAll(Vector2 from, Vector2 to, short layerMask, RaycastHit hit) {
+//
+//  }
 
   @Override
   public void dispose() {

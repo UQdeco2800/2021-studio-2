@@ -3,15 +3,14 @@ package com.deco2800.game.components.tasks;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.physics.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.DefaultTask;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Move to a given position, finishing when you get close enough. Requires an
- * entity with a PhysicsMovementComponent.
+ * Move to a given position, finishing when you get close enough. Requires an entity with a
+ * PhysicsMovementComponent.
  */
 public class MovementTask extends DefaultTask {
   private static final Logger logger = LoggerFactory.getLogger(MovementTask.class);
@@ -34,14 +33,14 @@ public class MovementTask extends DefaultTask {
   }
 
   @Override
-  public void start(Entity entity) {
-    super.start(entity);
-    this.movementComponent = entity.getComponent(PhysicsMovementComponent.class);
+  public void start() {
+    super.start();
+    this.movementComponent = owner.getEntity().getComponent(PhysicsMovementComponent.class);
     movementComponent.setTarget(target);
     movementComponent.setMoving(true);
     logger.debug("Starting movement towards {}", target);
     lastTimeMoved = gameTime.getTime();
-    lastPos = entity.getPosition();
+    lastPos = owner.getEntity().getPosition();
   }
 
   @Override
@@ -68,13 +67,13 @@ public class MovementTask extends DefaultTask {
   }
 
   private boolean isAtTarget() {
-    return entity.getPosition().dst(target) <= stopDistance;
+    return owner.getEntity().getPosition().dst(target) <= stopDistance;
   }
 
   private void checkIfStuck() {
     if (didMove()) {
       lastTimeMoved = gameTime.getTime();
-      lastPos = entity.getPosition();
+      lastPos = owner.getEntity().getPosition();
     } else if (gameTime.getTimeSince(lastTimeMoved) > 500L) {
       movementComponent.setMoving(false);
       status = Status.Failed;
@@ -83,6 +82,6 @@ public class MovementTask extends DefaultTask {
   }
 
   private boolean didMove() {
-    return entity.getPosition().dst2(lastPos) > 0.001f;
+    return owner.getEntity().getPosition().dst2(lastPos) > 0.001f;
   }
 }

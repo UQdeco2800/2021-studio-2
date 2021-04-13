@@ -4,8 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.deco2800.game.components.tasks.ChaseTask;
 import com.deco2800.game.physics.ColliderComponent;
 import com.deco2800.game.physics.HitboxComponent;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.player.PlayerActionComponent;
@@ -26,7 +28,7 @@ public class EntityFactory {
             .addComponent(new TextureRenderComponent("images/box_boy_leaf.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.Player))
             .addComponent(new PlayerActionComponent())
             .addComponent(inputComponent);
 
@@ -36,9 +38,11 @@ public class EntityFactory {
     return player;
   }
 
-  public static Entity createGhost() {
+  public static Entity createGhost(Entity target) {
     AITaskComponent aiComponent =
-        new AITaskComponent().addTask(new WanderTask(new Vector2(2f, 2f), 2f));
+        new AITaskComponent()
+            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+            .addTask(new ChaseTask(target, 10, 3f, 4f));
 
     Entity ghost =
         new Entity()
@@ -46,7 +50,7 @@ public class EntityFactory {
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
+            .addComponent(new HitboxComponent().setLayer((PhysicsLayer.NPC)))
             .addComponent(aiComponent);
 
     setScaledCollider(ghost, 0.9f, 0.4f);
@@ -59,7 +63,7 @@ public class EntityFactory {
         new Entity()
             .addComponent(new TextureRenderComponent("images/tree.png"))
             .addComponent(new PhysicsComponent())
-            .addComponent(new ColliderComponent());
+            .addComponent(new ColliderComponent().setLayer(PhysicsLayer.Obstacle));
 
     tree.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     tree.getComponent(TextureRenderComponent.class).scaleEntity();

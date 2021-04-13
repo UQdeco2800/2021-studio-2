@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.ai.tasks.Task;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,13 +38,16 @@ public class WanderTask extends DefaultTask implements PriorityTask {
   }
 
   @Override
-  public void start(Entity entity) {
-    super.start(entity);
-    startPos = entity.getPosition();
+  public void start() {
+    super.start();
+    startPos = owner.getEntity().getPosition();
 
     waitTask = new WaitTask(waitTime);
+    waitTask.create(owner);
     movementTask = new MovementTask(getRandomPosInRange());
-    movementTask.start(entity);
+    movementTask.create(owner);
+
+    movementTask.start();
     currentTask = movementTask;
   }
 
@@ -63,15 +65,21 @@ public class WanderTask extends DefaultTask implements PriorityTask {
 
   private void startWaiting() {
     logger.debug("Starting waiting");
-    waitTask.start(entity);
-    currentTask = waitTask;
+    swapTask(waitTask);
   }
 
   private void startMoving() {
     logger.debug("Starting moving");
     movementTask.setTarget(getRandomPosInRange());
-    movementTask.start(entity);
-    currentTask = movementTask;
+    swapTask(movementTask);
+  }
+
+  private void swapTask(Task newTask) {
+    if (currentTask != null) {
+      currentTask.stop();
+    }
+    currentTask = newTask;
+    currentTask.start();
   }
 
   private Vector2 getRandomPosInRange() {

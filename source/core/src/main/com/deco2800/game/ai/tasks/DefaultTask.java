@@ -1,18 +1,20 @@
 package com.deco2800.game.ai.tasks;
 
-import com.deco2800.game.entities.Entity;
-
 /**
  * A default task implementation that stores the associated entity and updates status when
  * starting/stopping a task. Removes some boilerplate code from each task.
  */
 public abstract class DefaultTask implements Task {
-  protected Entity entity;
+  protected TaskRunner owner;
   protected Status status = Status.Inactive;
 
   @Override
-  public void start(Entity entity) {
-    this.entity = entity;
+  public void create(TaskRunner taskRunner) {
+    this.owner = taskRunner;
+  }
+
+  @Override
+  public void start() {
     status = Status.Active;
   }
 
