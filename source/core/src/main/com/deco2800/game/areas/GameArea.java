@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.areas.terrain.TerrainFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +35,7 @@ public abstract class GameArea implements Disposable {
 
   /**
    * Spawn entity at its current position
+   *
    * @param entity Entity (not yet registered)
    */
   protected void spawnEntity(Entity entity) {
@@ -45,12 +45,14 @@ public abstract class GameArea implements Disposable {
 
   /**
    * Spawn entity on a given tile. Requires the terrain to be set first.
+   *
    * @param entity Entity (not yet registered)
    * @param tilePos tile position to spawn at
    * @param centerX true to center entity X on the tile, false to align the bottom left corner
    * @param centerY true to center entity Y on the tile, false to align the bottom left corner
    */
-  protected void spawnEntityAt(Entity entity, GridPoint2 tilePos, boolean centerX, boolean centerY) {
+  protected void spawnEntityAt(
+      Entity entity, GridPoint2 tilePos, boolean centerX, boolean centerY) {
     Vector2 worldPos = terrain.tileToWorldPosition(tilePos);
     float tileSize = terrain.getTileSize();
 

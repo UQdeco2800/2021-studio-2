@@ -3,8 +3,6 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.UI.GameAreaDisplay;
-import com.deco2800.game.components.CombatComponent;
-import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.ObstacleFactory;
 import com.deco2800.game.entities.NPCFactory;
@@ -22,7 +20,6 @@ public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
   private static final int NUM_TREES = 5;
   private static final int NUM_GHOSTS = 2;
-  private static final int NUM_GHOSTS_KINGS = 1;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
@@ -87,9 +84,6 @@ public class ForestGameArea extends GameArea {
   private void spawnPlayer() {
     Entity player = PlayerFactory.createPlayer();
     spawnEntityAt(player, PLAYER_SPAWN, true, true);
-    CombatComponent stats = player.getComponent(CombatComponent.class);
-    InventoryComponent inventory = player.getComponent(InventoryComponent.class);
-    logger.info("Stats {} {} {} {}", stats.getHealth(), stats.getBaseAttack(), stats.getSpecialAttack(), inventory.getGold());
   }
 
   private void spawnGhosts() {
@@ -107,11 +101,9 @@ public class ForestGameArea extends GameArea {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-    for (int i = 0; i < NUM_GHOSTS_KINGS; i++) {
-      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghostKing = NPCFactory.createGhostKing();
-      spawnEntityAt(ghostKing, randomPos, true, true);
-    }
+    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+    Entity ghostKing = NPCFactory.createGhostKing();
+    spawnEntityAt(ghostKing, randomPos, true, true);
   }
 
   private void playMusic() {

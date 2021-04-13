@@ -15,13 +15,20 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Factory to create a player entity.
+ *
+ * <p>Predefined player properties are loaded from a config stored as a json file and should have
+ * the properties stores in 'PlayerConfig'.
+ */
 public class PlayerFactory {
   private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
-  private static final PlayerConfig stats = FileLoader.loadClass(PlayerConfig.class, "configs/player.json");
+  private static final PlayerConfig stats =
+      FileLoader.loadClass(PlayerConfig.class, "configs/player.json");
 
   public static Entity createPlayer() {
     InputComponent inputComponent =
-      ServiceLocator.getInputService().getInputFactory().createForPlayer();
+        ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
     Entity player =
         new Entity()
@@ -30,7 +37,7 @@ public class PlayerFactory {
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent())
             .addComponent(new PlayerActionComponent())
-            .addComponent(new CombatComponent(stats.health, stats.baseAttack, stats.specialAttack))
+            .addComponent(new CombatComponent(stats.health, stats.baseAttack))
             .addComponent(new InventoryComponent(stats.gold))
             .addComponent(inputComponent);
 
