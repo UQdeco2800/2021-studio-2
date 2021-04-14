@@ -10,6 +10,7 @@ import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 
+/** Chases a target entity until they get too far away or line of sight is lost */
 public class ChaseTask extends DefaultTask implements PriorityTask {
   private final Entity target;
   private final int priority;
@@ -20,6 +21,12 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
   private final RaycastHit hit = new RaycastHit();
   private MovementTask movementTask;
 
+  /**
+   * @param target The entity to chase.
+   * @param priority Task priority when chasing (0 when not chasing).
+   * @param viewDistance Maximum distance from the entity at which chasing can start.
+   * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
+   */
   public ChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
     this.target = target;
     this.priority = priority;

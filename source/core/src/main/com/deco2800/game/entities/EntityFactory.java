@@ -2,20 +2,18 @@ package com.deco2800.game.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.components.tasks.ChaseTask;
-import com.deco2800.game.physics.ColliderComponent;
-import com.deco2800.game.physics.HitboxComponent;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.PhysicsMovementComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.player.PlayerActionComponent;
 import com.deco2800.game.components.tasks.WanderTask;
 import com.deco2800.game.input.InputComponent;
-import com.deco2800.game.physics.PhysicsComponent;
-import com.deco2800.game.physics.PhysicsComponent.AlignX;
-import com.deco2800.game.physics.PhysicsComponent.AlignY;
+import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsComponent.AlignX;
+import com.deco2800.game.physics.components.PhysicsComponent.AlignY;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 

@@ -1,4 +1,4 @@
-package com.deco2800.game.physics;
+package com.deco2800.game.physics.components;
 
 /**
  * Physics comp
