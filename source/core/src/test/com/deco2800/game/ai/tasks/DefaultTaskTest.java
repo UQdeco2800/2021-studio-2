@@ -18,7 +18,7 @@ class DefaultTaskTest {
     Entity entity = new Entity();
     assertEquals(Status.Inactive, task.getStatus());
 
-    task.start(entity);
+    task.start();
     assertEquals(Status.Active, task.getStatus());
 
     task.stop();

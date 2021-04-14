@@ -11,9 +11,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Task-based AI component. Given a list of tasks with priorities, the AI component will run the
- * highest priority task each frame. Tasks can be made up of smaller sub-tasks. This is a simple
- * implementation of Goal-Oriented Action Planning (GOAP), a common AI decision algorithm in games
- * that's more powerful than Finite State Machines (FSMs) (State pattern).
+ * highest priority task each frame. Tasks can be made up of smaller sub-tasks. A negative priority
+ * indicates that the task should not be run.
+ *
+ * <p>This is a simple implementation of Goal-Oriented Action Planning (GOAP), a common AI decision
+ * algorithm in games that's more powerful than Finite State Machines (FSMs) (State pattern).
  */
 public class AITaskComponent extends Component implements TaskRunner {
   private static final Logger logger = LoggerFactory.getLogger(AITaskComponent.class);
@@ -38,18 +40,19 @@ public class AITaskComponent extends Component implements TaskRunner {
 
   /**
    * On update, run the current highest priority task. If it's a different one, stop the old one and
-   * start the new one.
+   * start the new one. If the highest priority task has negative priority, no task will be run.
    */
   @Override
   public void update() {
     PriorityTask desiredtask = getHighestPriorityTask();
+    if (desiredtask == null || desiredtask.getPriority() < 0) {
+      return;
+    }
+
     if (desiredtask != currentTask) {
       changeTask(desiredtask);
     }
-
-    if (currentTask != null) {
-      currentTask.update();
-    }
+    currentTask.update();
   }
 
   @Override
