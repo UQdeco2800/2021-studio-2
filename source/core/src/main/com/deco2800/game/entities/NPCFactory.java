@@ -9,6 +9,7 @@ import com.deco2800.game.entities.configs.BaseEntityConfig;
 import com.deco2800.game.entities.configs.GhostKingConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
@@ -60,7 +61,7 @@ public class NPCFactory {
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
             .addComponent(aiComponent);
 
     npc.getComponent(TextureRenderComponent.class).scaleEntity();
