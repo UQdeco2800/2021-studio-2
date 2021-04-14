@@ -1,18 +1,17 @@
 package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.UI.GameAreaDisplay;
-import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.EntityFactory;
+import com.deco2800.game.entities.ObstacleFactory;
+import com.deco2800.game.entities.NPCFactory;
+import com.deco2800.game.entities.PlayerFactory;
 import com.deco2800.game.math.RandomUtils;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import java.util.concurrent.CompletableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +24,7 @@ public class ForestGameArea extends GameArea {
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
     "images/tree.png",
+    "images/ghost_king.png",
     "images/ghost_1.png",
     "images/grass_1.png",
     "images/grass_2.png",
@@ -56,6 +56,7 @@ public class ForestGameArea extends GameArea {
     spawnTrees();
     player = spawnPlayer();
     spawnGhosts();
+    spawnGhostKing();
 
     playMusic();
   }
@@ -77,13 +78,13 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_TREES; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity tree = EntityFactory.createTree();
+      Entity tree = ObstacleFactory.createTree();
       spawnEntityAt(tree, randomPos, true, false);
     }
   }
 
   private Entity spawnPlayer() {
-    Entity player = EntityFactory.createPlayer();
+    Entity player = PlayerFactory.createPlayer();
     spawnEntityAt(player, PLAYER_SPAWN, true, true);
     return player;
   }
@@ -94,9 +95,18 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = EntityFactory.createGhost(player);
+      Entity ghost = NPCFactory.createGhost(player);
       spawnEntityAt(ghost, randomPos, true, true);
     }
+  }
+
+  private void spawnGhostKing() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+    Entity ghostKing = NPCFactory.createGhostKing(player);
+    spawnEntityAt(ghostKing, randomPos, true, true);
   }
 
   private void playMusic() {
