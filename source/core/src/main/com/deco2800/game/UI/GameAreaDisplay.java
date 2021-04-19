@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class GameAreaDisplay extends UIComponent {
-  private static final float zIndex = 4f;
   private String gameAreaName = "";
   private Label title;
 
@@ -32,10 +31,5 @@ public class GameAreaDisplay extends UIComponent {
     float offsetY = 30f;
 
     title.setPosition(offsetX, screenHeight - offsetY);
-  }
-
-  @Override
-  public float getZIndex() {
-    return zIndex;
   }
 }

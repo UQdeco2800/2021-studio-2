@@ -3,13 +3,14 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.UI.GameAreaDisplay;
 import com.deco2800.game.UI.PerformanceDisplay;
-import com.deco2800.game.UI.PlayerStatsDisplay;
+import com.deco2800.game.components.player.PlayerStatsDisplay;
+import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
+import com.deco2800.game.terminal.Terminal;
+import com.deco2800.game.terminal.TerminalDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.areas.ForestGameArea;
-import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsEngine;
@@ -54,7 +55,7 @@ public class MainGameScreen extends ScreenAdapter {
     renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
 
     loadAssets();
-    displayUI();
+    renderUI();
 
     logger.debug("Initialising main game screen entities");
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
@@ -100,12 +101,13 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.getResourceService().loadAll();
   }
 
-  private void displayUI() {
+  private void renderUI() {
     Entity UI = new Entity();
-    UI.addComponent(new PlayerStatsDisplay());
-    if (debugMode) {
-      UI.addComponent(new PerformanceDisplay());
-    }
+    UI.addComponent(new PlayerStatsDisplay())
+        .addComponent(new PerformanceDisplay())
+        .addComponent(new Terminal())
+        .addComponent(new KeyboardTerminalInputComponent())
+        .addComponent(new TerminalDisplay());
     ServiceLocator.getEntityService().register(UI);
   }
 }

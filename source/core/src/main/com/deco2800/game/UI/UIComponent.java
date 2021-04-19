@@ -38,4 +38,9 @@ public abstract class UIComponent extends RenderComponent implements Renderable 
   public int getLayer() {
     return UI_LAYER;
   }
+
+  @Override
+  public float getZIndex() {
+    return 1f;
+  }
 }

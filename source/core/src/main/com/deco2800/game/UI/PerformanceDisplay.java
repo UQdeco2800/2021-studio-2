@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
 public class PerformanceDisplay extends UIComponent {
-  private static final float zIndex = 10f;
+  private static final float zIndex = 5f;
   private Label profileLabel;
   Table table;
 

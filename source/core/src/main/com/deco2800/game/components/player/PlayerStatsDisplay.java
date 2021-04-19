@@ -1,4 +1,4 @@
-package com.deco2800.game.UI;
+package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -6,13 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.deco2800.game.UI.UIComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
  * A UI component for displaying player stats, e.g. health.
  */
 public class PlayerStatsDisplay extends UIComponent {
-  private static final float zIndex = 5f;
   Table table;
   private Image heartImage;
   private Label healthLabel;
@@ -58,11 +58,6 @@ public class PlayerStatsDisplay extends UIComponent {
     float offsetY = 40f;
 
     table.setPosition(0,screenHeight - offsetY);
-  }
-
-  @Override
-  public float getZIndex() {
-    return zIndex;
   }
 
   /**
