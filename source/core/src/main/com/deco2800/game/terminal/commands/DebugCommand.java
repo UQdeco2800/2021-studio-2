@@ -7,21 +7,20 @@ import org.slf4j.LoggerFactory;
 public class DebugCommand implements Command {
   private static final Logger logger = LoggerFactory.getLogger(DebugCommand.class);
 
-  public boolean action(String[] args) {
+  public void action(String[] args) {
     if (!isValid(args)) {
-      return false;
+      return;
     }
 
     String arg = args[0];
-    if ("on".equals(arg)) {
-      ServiceLocator.getRenderService().getDebug().setActive(true);
-      return true;
-    } else if ("off".equals(arg)) {
-      ServiceLocator.getRenderService().getDebug().setActive(false);
-      return true;
+    switch (arg) {
+      case "on":
+        ServiceLocator.getRenderService().getDebug().setActive(true);
+        break;
+      case "off":
+        ServiceLocator.getRenderService().getDebug().setActive(false);
+        break;
     }
-
-    return false;
   }
 
   boolean isValid(String[] args) {

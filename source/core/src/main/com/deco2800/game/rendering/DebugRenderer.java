@@ -9,9 +9,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Provides functionality to draw lines/shapes to the screen for debug purposes. */
 public class DebugRenderer {
+  private static final Logger logger = LoggerFactory.getLogger(DebugRenderer.class);
   private final World physicsWorld;
   private boolean active = true;
   private final Box2DDebugRenderer physicsRenderer;
@@ -89,6 +92,7 @@ public class DebugRenderer {
 
   /** @param active true to enable debug drawing, false to disable */
   public void setActive(boolean active) {
+    logger.info("Set debug to: {}", active);
     this.active = active;
   }
 

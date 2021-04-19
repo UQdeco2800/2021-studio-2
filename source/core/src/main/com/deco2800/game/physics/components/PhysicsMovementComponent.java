@@ -63,7 +63,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
    */
   @Override
   public void setTarget(Vector2 target) {
-    logger.info("Setting target to " + target);
+    logger.trace("Setting target to " + target);
     this.targetPosition = target;
   }
 
