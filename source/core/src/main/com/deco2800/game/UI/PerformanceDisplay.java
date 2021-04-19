@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.deco2800.game.services.ServiceLocator;
 
 public class PerformanceDisplay extends UIComponent {
   private static final float zIndex = 5f;
@@ -30,10 +31,15 @@ public class PerformanceDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch) {
-    profileLabel.setText(getStats());
-    int screenHeight = stage.getViewport().getScreenHeight();
-    float offsetY = 80f;
-    table.setPosition(0, screenHeight - offsetY);
+    if (ServiceLocator.getRenderService().getDebug().getActive()) {
+      table.setVisible(true);
+      profileLabel.setText(getStats());
+      int screenHeight = stage.getViewport().getScreenHeight();
+      float offsetY = 80f;
+      table.setPosition(0, screenHeight - offsetY);
+    } else {
+      table.setVisible(false);
+    }
   }
 
   private String getStats() {

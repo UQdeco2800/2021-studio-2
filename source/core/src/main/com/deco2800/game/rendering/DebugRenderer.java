@@ -92,6 +92,10 @@ public class DebugRenderer {
     this.active = active;
   }
 
+  public boolean getActive() {
+    return active;
+  }
+
   public void render(Matrix4 projMatrix) {
     if (!active) {
       return;
