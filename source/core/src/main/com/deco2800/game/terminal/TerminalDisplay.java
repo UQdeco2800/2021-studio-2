@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.UI.UIComponent;
 
+/** A UI component for displaying the debug terminal. */
 public class TerminalDisplay extends UIComponent {
   private static final float zIndex = 10f;
   private Terminal terminal;
@@ -19,7 +20,7 @@ public class TerminalDisplay extends UIComponent {
   private void addActors() {
     // label at bottom of screen with background
     String message = "";
-    label = new Label("> "+ message, defaultWhiteText);
+    label = new Label("> " + message, defaultWhiteText);
     label.setPosition(5f, 0);
     stage.addActor(label);
   }
@@ -28,8 +29,8 @@ public class TerminalDisplay extends UIComponent {
   public void draw(SpriteBatch batch) {
     if (terminal.isOpen()) {
       label.setVisible(true);
-      String message = terminal.getIncompleteMessage();
-      label.setText("> "+ message);
+      String message = terminal.getEnteredMessage();
+      label.setText("> " + message);
     } else {
       label.setVisible(false);
     }

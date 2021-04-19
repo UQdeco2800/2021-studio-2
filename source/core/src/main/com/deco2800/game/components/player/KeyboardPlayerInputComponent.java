@@ -6,20 +6,20 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.math.Vector2Utils;
 
-/**
- * Input handler for the player for keyboard and touch (mouse) input.
- */
+/** Input handler for the player for keyboard and touch (mouse) input. */
 public class KeyboardPlayerInputComponent extends InputComponent {
   private final Vector2 walkDirection = Vector2.Zero.cpy();
 
-  public KeyboardPlayerInputComponent () {
+  public KeyboardPlayerInputComponent() {
     this.setPriority(5);
   }
 
-   /** Called when a key is pressed and triggers player events on specific keycodes.
+  /**
+   * Triggers player events on specific keycodes.
    *
    * @param keycode one of the constants in {@link Input.Keys}
-   * @return whether the input was processed */
+   * @return whether the input was processed
+   */
   @Override
   public boolean keyDown(int keycode) {
     switch (keycode) {
@@ -46,6 +46,12 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     return false;
   }
 
+  /**
+   * Triggers player events on specific keycodes.
+   *
+   * @param keycode one of the constants in {@link Input.Keys}
+   * @return whether the input was processed
+   */
   @Override
   public boolean keyUp(int keycode) {
     switch (keycode) {
@@ -66,7 +72,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         triggerWalkEvent();
         return true;
     }
-      return false;
+    return false;
   }
 
   private void triggerWalkEvent() {
