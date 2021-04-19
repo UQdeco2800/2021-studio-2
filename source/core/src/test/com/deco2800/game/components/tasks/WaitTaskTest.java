@@ -20,7 +20,7 @@ class WaitTaskTest {
     ServiceLocator.registerTimeSource(time);
 
     WaitTask task = new WaitTask(5f);
-    task.start(null);
+    task.start();
     assertEquals(Status.Active, task.getStatus());
 
     when(time.getTime()).thenReturn(5000L);

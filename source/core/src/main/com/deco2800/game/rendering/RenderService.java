@@ -14,6 +14,7 @@ public class RenderService implements Disposable {
   private static final int INITIAL_LAYER_CAPACITY = 4;
   private static final int INITIAL_CAPACITY = 4;
   private Stage stage;
+  private DebugRenderer debugRenderer;
 
   /**
    * Map from layer to list of renderables, allows us to render each layer in the correct order
@@ -67,6 +68,14 @@ public class RenderService implements Disposable {
 
   public Stage getStage() {
     return stage;
+  }
+
+  public void setDebug(DebugRenderer debugRenderer) {
+    this.debugRenderer = debugRenderer;
+  }
+
+  public DebugRenderer getDebug() {
+    return debugRenderer;
   }
 
   @Override

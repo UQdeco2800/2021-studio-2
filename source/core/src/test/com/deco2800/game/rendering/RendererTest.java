@@ -31,7 +31,7 @@ class RendererTest {
   @Mock Stage stage;
   @Mock Graphics graphics;
   @Mock RenderService renderService;
-  @Mock Box2DDebugRenderer debugRenderer;
+  @Mock DebugRenderer debugRenderer;
   PhysicsService physicsService;
 
   @BeforeEach

@@ -53,6 +53,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
     renderer = new Renderer();
     renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
+    ServiceLocator.getRenderService().getDebug().setActive(true);
 
     loadAssets();
     renderUI();

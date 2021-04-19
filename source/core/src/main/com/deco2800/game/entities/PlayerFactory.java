@@ -6,10 +6,11 @@ import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.input.InputComponent;
-import com.deco2800.game.physics.ColliderComponent;
-import com.deco2800.game.physics.HitboxComponent;
-import com.deco2800.game.physics.PhysicsComponent;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class PlayerFactory {
             .addComponent(new TextureRenderComponent("images/box_boy_leaf.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.Player))
             .addComponent(new PlayerActionComponent())
             .addComponent(new CombatComponent(stats.health, stats.baseAttack))
             .addComponent(new InventoryComponent(stats.gold))

@@ -1,22 +1,33 @@
-package com.deco2800.game.physics;
+package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.physics.PhysicsComponent.AlignX;
-import com.deco2800.game.physics.PhysicsComponent.AlignY;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.PhysicsComponent.AlignX;
+import com.deco2800.game.physics.components.PhysicsComponent.AlignY;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Attaches a physics collider to an entity. By default, this is a rectangle the same size as the
+ * entity's scale. This allows an entity to collide with other physics objects, or detect collisions
+ * without interaction (if sensor = true)
+ */
 public class ColliderComponent extends Component {
   private static final Logger logger = LoggerFactory.getLogger(ColliderComponent.class);
 
-  private final FixtureDef fixtureDef = new FixtureDef();
+  private final FixtureDef fixtureDef;
   private Fixture fixture;
+
+  public ColliderComponent() {
+    fixtureDef = new FixtureDef();
+  }
 
   @Override
   public void create() {
@@ -171,6 +182,32 @@ public class ColliderComponent extends Component {
     return fixture;
   }
 
+  /**
+   * Set the collider layer, used in collision logic
+   * @param layerMask Bitmask of {@link PhysicsLayer} this collider belongs to
+   * @return self
+   */
+  public ColliderComponent setLayer(short layerMask) {
+    if (fixture == null) {
+      fixtureDef.filter.categoryBits = layerMask;
+    } else {
+      Filter filter = fixture.getFilterData();
+      filter.categoryBits = layerMask;
+      fixture.setFilterData(filter);
+    }
+    return this;
+  }
+
+  /**
+   * @return The {@link PhysicsLayer} this collider belongs to
+   */
+  public short getLayer() {
+    if (fixture == null) {
+      return fixtureDef.filter.categoryBits;
+    }
+    return fixture.getFilterData().categoryBits;
+  }
+
   @Override
   public void dispose() {
     super.dispose();
@@ -182,7 +219,7 @@ public class ColliderComponent extends Component {
 
   private Shape makeBoundingBox() {
     PolygonShape bbox = new PolygonShape();
-    Vector2 center = entity.getScale().cpy().scl(0.5f);
+    Vector2 center = entity.getScale().scl(0.5f);
     bbox.setAsBox(center.x, center.y, center, 0f);
     return bbox;
   }

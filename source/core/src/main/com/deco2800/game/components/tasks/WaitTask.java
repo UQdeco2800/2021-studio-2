@@ -1,7 +1,6 @@
 package com.deco2800.game.components.tasks;
 
 import com.deco2800.game.ai.tasks.DefaultTask;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -24,11 +23,10 @@ public class WaitTask extends DefaultTask {
 
   /**
    * Start waiting from now until duration has passed.
-   * @param entity unused
    */
   @Override
-  public void start(Entity entity) {
-    super.start(entity);
+  public void start() {
+    super.start();
     endTime = timeSource.getTime() + (int)(duration * 1000);
   }
 

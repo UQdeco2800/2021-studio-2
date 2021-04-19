@@ -3,14 +3,17 @@ package com.deco2800.game.components.tasks;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.Task.Status;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.physics.PhysicsComponent;
-import com.deco2800.game.physics.PhysicsMovementComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.PhysicsService;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +24,9 @@ class MovementTaskTest {
   @BeforeEach
   void beforeEach() {
     ServiceLocator.registerPhysicsService(new PhysicsService());
+    GameTime gameTime = mock(GameTime.class);
+    when(gameTime.getTime()).thenReturn(0L);
+    ServiceLocator.registerTimeSource(gameTime);
   }
 
   @Test
@@ -32,7 +38,8 @@ class MovementTaskTest {
     entity.addComponent(movementComponent);
     entity.create();
 
-    task.start(entity);
+    task.create(() -> entity);
+    task.start();
     assertTrue(movementComponent.getMoving());
     assertEquals(target, movementComponent.getTarget());
     assertEquals(Status.Active, task.getStatus());
@@ -47,7 +54,8 @@ class MovementTaskTest {
     entity.setPosition(5f, 5f);
     entity.create();
 
-    task.start(entity);
+    task.create(() -> entity);
+    task.start();
     task.update();
     assertTrue(movementComponent.getMoving());
     assertEquals(Status.Active, task.getStatus());

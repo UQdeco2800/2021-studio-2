@@ -1,10 +1,13 @@
-package com.deco2800.game.physics;
+package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.physics.BodyUserData;
+import com.deco2800.game.physics.PhysicsContactListener;
+import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.services.ServiceLocator;
 
 /**

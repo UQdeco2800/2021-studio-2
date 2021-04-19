@@ -62,7 +62,7 @@ public class Entity {
    * @return position
    */
   public Vector2 getPosition() {
-    return position;
+    return position.cpy(); // Cpy gives us pass-by-value to prevent bugs
   }
 
   /**
@@ -71,8 +71,8 @@ public class Entity {
    * @param position new position.
    */
   public void setPosition(Vector2 position) {
-    this.position = position;
-    getEvents().trigger("setPosition", position);
+    this.position = position.cpy();
+    getEvents().trigger("setPosition", position.cpy());
   }
 
   /**
@@ -84,7 +84,7 @@ public class Entity {
   public void setPosition(float x, float y) {
     this.position.x = x;
     this.position.y = y;
-    getEvents().trigger("setPosition", position);
+    getEvents().trigger("setPosition", position.cpy());
   }
 
   /**
@@ -106,7 +106,7 @@ public class Entity {
    * @return Scale in x and y directions. 1 = 1 metre.
    */
   public Vector2 getScale() {
-    return scale;
+    return scale.cpy(); // Cpy gives us pass-by-value to prevent bugs
   }
 
   /**
@@ -115,7 +115,7 @@ public class Entity {
    * @param scale new scale in metres
    */
   public void setScale(Vector2 scale) {
-    this.scale = scale;
+    this.scale = scale.cpy();
   }
 
   /**

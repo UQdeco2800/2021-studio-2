@@ -3,12 +3,18 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatComponent;
+import com.deco2800.game.components.tasks.ChaseTask;
 import com.deco2800.game.components.tasks.WanderTask;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
 import com.deco2800.game.entities.configs.GhostKingConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.files.FileLoader;
-import com.deco2800.game.physics.*;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.PhysicsUtils;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
 /**
@@ -25,15 +31,15 @@ public class NPCFactory {
   private static final NPCConfigs configs =
       FileLoader.loadClass(NPCConfigs.class, "configs/NPCs.json");
 
-  public static Entity createGhost() {
-    Entity ghost = createBaseNPC("images/ghost_1.png");
+  public static Entity createGhost(Entity target) {
+    Entity ghost = createBaseNPC("images/ghost_1.png", target);
     BaseEntityConfig config = configs.ghost;
     ghost.addComponent(new CombatComponent(config.health, config.baseAttack));
     return ghost;
   }
 
-  public static Entity createGhostKing() {
-    Entity ghostKing = createBaseNPC("images/ghost_king.png");
+  public static Entity createGhostKing(Entity target) {
+    Entity ghostKing = createBaseNPC("images/ghost_king.png", target);
     GhostKingConfig config = configs.ghostKing;
     ghostKing.addComponent(new CombatComponent(config.health, config.baseAttack));
     return ghostKing;
@@ -45,16 +51,17 @@ public class NPCFactory {
    * @param textureName texture name
    * @return entity
    */
-  private static Entity createBaseNPC(String textureName) {
+  private static Entity createBaseNPC(String textureName, Entity target) {
     AITaskComponent aiComponent =
-        new AITaskComponent().addTask(new WanderTask(new Vector2(2f, 2f), 2f));
-    Entity npc =
+        new AITaskComponent()
+            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+            .addTask(new ChaseTask(target, 10, 3f, 4f));    Entity npc =
         new Entity()
             .addComponent(new TextureRenderComponent(textureName))
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
             .addComponent(aiComponent);
 
     npc.getComponent(TextureRenderComponent.class).scaleEntity();

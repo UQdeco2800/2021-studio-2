@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
@@ -29,21 +30,21 @@ public class Renderer implements Disposable {
   private SpriteBatch batch;
   private Stage stage;
   private RenderService renderService;
-  private Box2DDebugRenderer debugRenderer;
+  private DebugRenderer debugRenderer;
   // TODO: extract physics rendering somewhere else
   private PhysicsEngine physicsEngine;
 
   /** Create a new renderer with default settings */
   public Renderer() {
     SpriteBatch spriteBatch = new SpriteBatch();
-      init(
+    init(
         new OrthographicCamera(),
         GAME_SCREEN_WIDTH,
         spriteBatch,
         new Stage(new ScreenViewport(), spriteBatch),
         ServiceLocator.getRenderService(),
         ServiceLocator.getPhysicsService(),
-        new Box2DDebugRenderer());
+        new DebugRenderer());
   }
 
   /**
@@ -61,7 +62,7 @@ public class Renderer implements Disposable {
       Stage stage,
       RenderService renderService,
       PhysicsService physicsService,
-      Box2DDebugRenderer debugRenderer) {
+      DebugRenderer debugRenderer) {
     init(camera, gameWidth, batch, stage, renderService, physicsService, debugRenderer);
   }
 
@@ -72,7 +73,7 @@ public class Renderer implements Disposable {
       Stage stage,
       RenderService renderService,
       PhysicsService physicsService,
-      Box2DDebugRenderer debugRenderer) {
+      DebugRenderer debugRenderer) {
 
     this.camera = camera;
     this.gameWidth = gameWidth;
@@ -82,6 +83,7 @@ public class Renderer implements Disposable {
     this.debugRenderer = debugRenderer;
 
     renderService.setStage(stage);
+    renderService.setDebug(debugRenderer);
     camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     physicsEngine = physicsService.getPhysics();
@@ -100,7 +102,7 @@ public class Renderer implements Disposable {
     batch.begin();
     renderService.render(batch);
     batch.end();
-    debugRenderer.render(physicsEngine.getWorld(), camera.combined);
+    debugRenderer.render(camera.combined);
 
     stage.act();
     stage.draw();

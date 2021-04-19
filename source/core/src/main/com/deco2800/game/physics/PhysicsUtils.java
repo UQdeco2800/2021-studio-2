@@ -2,6 +2,8 @@ package com.deco2800.game.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
 
 public class PhysicsUtils {
 
@@ -9,7 +11,8 @@ public class PhysicsUtils {
   public static void setScaledCollider(Entity entity, float scaleX, float scaleY) {
     Vector2 boundingBox = entity.getScale().cpy().scl(scaleX, scaleY);
     entity
-      .getComponent(ColliderComponent.class)
-      .setAsBoxAligned(boundingBox, PhysicsComponent.AlignX.Center, PhysicsComponent.AlignY.Bottom);
+        .getComponent(ColliderComponent.class)
+        .setAsBoxAligned(
+            boundingBox, PhysicsComponent.AlignX.Center, PhysicsComponent.AlignY.Bottom);
   }
 }
