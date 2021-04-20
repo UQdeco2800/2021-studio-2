@@ -1,0 +1,97 @@
+package com.deco2800.game.terminal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.terminal.commands.Command;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+@ExtendWith(GameExtension.class)
+public class TerminalTest {
+  Command command = mock(Command.class);
+
+  @Test
+  void shouldToggleIsOpen() {
+    Terminal terminal = spy(Terminal.class);
+    boolean startingIsOpen = terminal.isOpen();
+
+    terminal.toggleIsOpen();
+    assertNotEquals(terminal.isOpen(), startingIsOpen);
+    terminal.toggleIsOpen();
+    assertEquals(terminal.isOpen(), startingIsOpen);
+  }
+
+  @Test
+  void shouldAddCommand() {
+    HashMap<String, Command> commands = new HashMap<>();
+    Terminal terminal = new Terminal(commands);
+
+    int startingSize = commands.size();
+
+    terminal.addCommand("test1", command);
+    assertEquals(startingSize + 1, commands.size());
+
+    terminal.addCommand("test2", command);
+    assertEquals(startingSize + 2, commands.size());
+
+    // command for duplicate key should not be added
+    terminal.addCommand("test2", command);
+    assertEquals(startingSize + 2, commands.size());
+  }
+
+  @Test
+  void shouldProcessMessageNoArgs() {
+    Terminal terminal = new Terminal();
+
+    Class<ArrayList<String>> captorClass = (Class<ArrayList<String>>) (Class)ArrayList.class;
+    ArgumentCaptor<ArrayList<String>> captor = ArgumentCaptor.forClass(captorClass);
+
+    terminal.addCommand("test1", command);
+
+    terminal.setEnteredMessage("test1");
+    terminal.processMessage();
+    verify(command).action(captor.capture());
+
+    assertEquals(0, captor.getValue().size());
+  }
+
+  @Test
+  void shouldProcessMessageMultipleArgs() {
+    Terminal terminal = new Terminal();
+
+    Class<ArrayList<String>> captorClass = (Class<ArrayList<String>>) (Class)ArrayList.class;
+    ArgumentCaptor<ArrayList<String>> captor = ArgumentCaptor.forClass(captorClass);
+
+    terminal.addCommand("test1", command);
+
+    terminal.setEnteredMessage("test1 1 2 3");
+    terminal.processMessage();
+    verify(command).action(captor.capture());
+
+    ArrayList<String> capturedArg = captor.getValue();
+    assertEquals(3, capturedArg.size());
+    assertEquals("1", capturedArg.get(0));
+    assertEquals("2", capturedArg.get(1));
+    assertEquals("3", capturedArg.get(2));
+  }
+
+  @Test
+  void shouldModifyEnteredMessage() {
+    Terminal terminal = new Terminal();
+
+    terminal.appendToMessage('a');
+    terminal.appendToMessage('b');
+    assertEquals("ab", terminal.getEnteredMessage());
+
+    terminal.handleBackspace();
+    assertEquals("a", terminal.getEnteredMessage());
+  }
+}

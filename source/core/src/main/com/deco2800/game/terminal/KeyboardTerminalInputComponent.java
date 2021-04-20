@@ -14,12 +14,18 @@ import org.slf4j.LoggerFactory;
 public class KeyboardTerminalInputComponent extends InputComponent {
   private static final Logger logger =
       LoggerFactory.getLogger(KeyboardTerminalInputComponent.class);
-  private Terminal terminal;
   private static final int toggleOpenKey = Input.Keys.F1;
+  private Terminal terminal;
 
   public KeyboardTerminalInputComponent() {
+    this(new Terminal());
+  }
+
+  public KeyboardTerminalInputComponent(Terminal terminal) {
+    this.terminal = terminal;
     this.setPriority(3);
   }
+
 
   @Override
   public void create() {

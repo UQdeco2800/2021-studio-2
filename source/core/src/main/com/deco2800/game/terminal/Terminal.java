@@ -6,6 +6,7 @@ import com.deco2800.game.terminal.commands.DebugCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -15,11 +16,17 @@ import java.util.HashMap;
  */
 public class Terminal extends Component {
   private static final Logger logger = LoggerFactory.getLogger(Terminal.class);
-  private HashMap<String, Command> commands = new HashMap<>();
+  private HashMap<String, Command> commands;
   private String enteredMessage = "";
   private Boolean isOpen = false;
 
   public Terminal() {
+    this(new HashMap<>());
+  }
+
+  public Terminal(HashMap<String, Command> commands) {
+    this.commands = commands;
+
     addCommand("debug", new DebugCommand());
   }
 
@@ -45,7 +52,7 @@ public class Terminal extends Component {
   public void toggleIsOpen() {
     isOpen = !isOpen;
     if (!isOpen) {
-      resetEnteredMessage();
+      setEnteredMessage("");
     }
   }
 
@@ -73,13 +80,17 @@ public class Terminal extends Component {
     // separate command from args
     String[] sections = message.split(" ");
     String command = sections[0];
-    String[] args = Arrays.copyOfRange(sections, 1, sections.length);
+
+    ArrayList<String> args = new ArrayList<>();
+    for (int i = 1; i < sections.length; i++) {
+      args.add(sections[i]);
+    }
 
     if (commands.containsKey(command)) {
       commands.get(command).action(args);
     }
 
-    resetEnteredMessage();
+    setEnteredMessage("");
   }
 
   /**
@@ -100,7 +111,7 @@ public class Terminal extends Component {
   }
 
   /** Sets the entered message to the empty string. */
-  private void resetEnteredMessage() {
-    enteredMessage = "";
+  public void setEnteredMessage(String text) {
+    enteredMessage = text;
   }
 }
