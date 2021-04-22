@@ -40,4 +40,10 @@ public class TerminalDisplay extends UIComponent {
   public float getZIndex() {
     return zIndex;
   }
+
+  @Override
+  public void dispose() {
+    super.dispose();
+    label.remove();
+  }
 }

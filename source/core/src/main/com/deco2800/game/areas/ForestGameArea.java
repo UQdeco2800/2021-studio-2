@@ -129,11 +129,18 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  private void unloadAssets() {
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    resourceService.unloadAssets(forestTextures);
+    resourceService.unloadAssets(forestTextureAtlases);
+    resourceService.unloadAssets(forestSounds);
+    resourceService.unloadAssets(forestMusic);
+  }
+
   @Override
   public void dispose() {
     super.dispose();
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.getAsset("sounds/BGM_03_mp3.mp3", Music.class).stop();
-    resourceService.clearAllAssets();
+    ServiceLocator.getResourceService().getAsset("sounds/BGM_03_mp3.mp3", Music.class).stop();
+    this.unloadAssets();
   }
 }

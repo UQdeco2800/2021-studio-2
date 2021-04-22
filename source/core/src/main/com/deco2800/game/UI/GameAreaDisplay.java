@@ -32,4 +32,10 @@ public class GameAreaDisplay extends UIComponent {
 
     title.setPosition(offsetX, screenHeight - offsetY);
   }
+
+  @Override
+  public void dispose() {
+    super.dispose();
+    title.remove();
+  }
 }

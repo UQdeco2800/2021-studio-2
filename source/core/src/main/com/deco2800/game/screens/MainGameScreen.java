@@ -62,6 +62,11 @@ public class MainGameScreen extends ScreenAdapter {
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
     ForestGameArea forestGameArea = new ForestGameArea(terrainFactory);
     forestGameArea.create();
+    forestGameArea.dispose();
+
+    TerrainFactory terrainFactory2 = new TerrainFactory(renderer.getCamera());
+    ForestGameArea forestGameArea2 = new ForestGameArea(terrainFactory2);
+    forestGameArea2.create();
   }
 
   @Override
@@ -90,8 +95,9 @@ public class MainGameScreen extends ScreenAdapter {
   @Override
   public void dispose() {
     logger.debug("Disposing main game screen");
-    renderer.dispose();
 
+    renderer.dispose();
+    unloadAssets();
     ServiceLocator.getEntityService().dispose();
     ServiceLocator.getRenderService().dispose();
   }
@@ -100,6 +106,11 @@ public class MainGameScreen extends ScreenAdapter {
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainGameTextures);
     ServiceLocator.getResourceService().loadAll();
+  }
+
+  private void unloadAssets() {
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    resourceService.unloadAssets(mainGameTextures);
   }
 
   private void createUI() {
