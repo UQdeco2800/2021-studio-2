@@ -42,6 +42,12 @@ public abstract class InputComponent extends Component
     return priority;
   }
 
+  @Override
+  public void dispose() {
+    super.dispose();
+    ServiceLocator.getInputService().unregister(this);
+  }
+
   /**
    * Below methods are for supporting keyboard and touch.
    */

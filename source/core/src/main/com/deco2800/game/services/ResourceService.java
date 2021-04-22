@@ -128,4 +128,14 @@ public class ResourceService {
   public void loadMusic(String[] musicNames) {
     loadAssets(musicNames, Music.class);
   }
+
+  public void unloadAssets(String[] assetNames) {
+    for (String assetName : assetNames) {
+      try {
+        assetManager.unload(assetName);
+      } catch(Exception e) {
+        logger.error("Could not unload {}", assetName);
+      }
+    }
+  }
 }

@@ -68,4 +68,11 @@ public class PlayerStatsDisplay extends UIComponent {
     CharSequence text = String.format("Health: %d", health);
     healthLabel.setText(text);
   }
+
+  @Override
+  public void dispose() {
+    super.dispose();
+    heartImage.remove();
+    healthLabel.remove();
+  }
 }

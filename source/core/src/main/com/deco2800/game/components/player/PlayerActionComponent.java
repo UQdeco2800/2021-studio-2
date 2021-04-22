@@ -60,8 +60,7 @@ public class PlayerActionComponent extends Component {
 
   /** Placeholder method to make the player attack. */
   void attack() {
-    System.out.println("Player attacks");
-    Sound attackSound2 = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
-    attackSound2.play();
+    Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
+    attackSound.play();
   }
 }
