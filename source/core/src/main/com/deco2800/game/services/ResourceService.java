@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Disposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * Service for loading resources, e.g. textures, texture atlases, sounds, music, etc. Add new load
  * methods when new types of resources are added to the game.
  */
-public class ResourceService {
+public class ResourceService implements Disposable {
   private static final Logger logger = LoggerFactory.getLogger(ResourceService.class);
   private final AssetManager assetManager;
 
@@ -137,5 +138,10 @@ public class ResourceService {
         logger.error("Could not unload {}", assetName);
       }
     }
+  }
+
+  @Override
+  public void dispose() {
+    assetManager.clear();
   }
 }

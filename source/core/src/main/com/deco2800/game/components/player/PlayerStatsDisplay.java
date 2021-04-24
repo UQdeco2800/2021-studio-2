@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.UI.UIComponent;
+import com.deco2800.game.components.CombatComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -25,8 +26,7 @@ public class PlayerStatsDisplay extends UIComponent {
     super.create();
     addActors();
 
-    // TODO when player health is implemented
-    // player.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
+    entity.getEvents().addListener("updateHealth", this::updatePlayerHealthUI);
   }
 
   /**
@@ -43,7 +43,8 @@ public class PlayerStatsDisplay extends UIComponent {
     heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
 
     // Health text
-    CharSequence healthText = String.format("Health: %d", 0);
+    int health = entity.getComponent(CombatComponent.class).getHealth();
+    CharSequence healthText = String.format("Health: %d", health);
     healthLabel = new Label(healthText, defaultWhiteText);
     healthLabel.setFontScale(1.5f);
 

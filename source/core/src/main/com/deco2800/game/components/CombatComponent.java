@@ -47,6 +47,9 @@ public class CombatComponent extends Component {
     } else {
       this.health = 0;
     }
+    if (entity != null) {
+      entity.getEvents().trigger("updateHealth", this.health);
+    }
   }
 
   /**

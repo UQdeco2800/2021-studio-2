@@ -43,7 +43,9 @@ public class RenderService implements Disposable {
    */
   public void unregister(Renderable renderable) {
     Array<Renderable> layer = renderables.get(renderable.getLayer());
-    layer.removeValue(renderable, true);
+    if (layer != null) {
+      layer.removeValue(renderable, true);
+    }
   }
 
   /**

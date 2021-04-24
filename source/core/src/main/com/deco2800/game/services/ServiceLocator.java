@@ -83,5 +83,7 @@ public class ServiceLocator {
     renderService = null;
     physicsService = null;
     timeSource = null;
+    inputService = null;
+    resourceService = null;
   }
 }

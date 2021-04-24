@@ -11,7 +11,7 @@ import com.deco2800.game.services.ServiceLocator;
  * Action component for interacting with the player. Player events should be initialised in create()
  * and when triggered should call methods within this class.
  */
-public class PlayerActionComponent extends Component {
+public class PlayerActions extends Component {
   private static final Vector2 MAX_SPEED = new Vector2(3f, 3f); // Metres per second
 
   private PhysicsComponent physicsComponent;
