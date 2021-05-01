@@ -8,12 +8,12 @@ import org.slf4j.LoggerFactory;
  * which engage it combat should have an instance of this class registered. This class can be
  * extended for more specific combat needs.
  */
-public class CombatComponent extends Component {
-  private static final Logger logger = LoggerFactory.getLogger(CombatComponent.class);
+public class CombatStatsComponent extends Component {
+  private static final Logger logger = LoggerFactory.getLogger(CombatStatsComponent.class);
   private int health;
   private int baseAttack;
 
-  public CombatComponent(int health, int baseAttack) {
+  public CombatStatsComponent(int health, int baseAttack) {
     setHealth(health);
     setBaseAttack(baseAttack);
   }
@@ -78,5 +78,10 @@ public class CombatComponent extends Component {
     } else {
       logger.error("Can not set base attack to a negative attack value");
     }
+  }
+
+  public void hit(CombatStatsComponent attacker) {
+    int newHealth = getHealth() - attacker.getBaseAttack();
+    setHealth(newHealth);
   }
 }
