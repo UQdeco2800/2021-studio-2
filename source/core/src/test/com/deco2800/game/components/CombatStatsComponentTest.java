@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(GameExtension.class)
-public class CombatComponentTest {
+public class CombatStatsComponentTest {
 
   @Test
   void shouldSetGetHealth() {
-    CombatComponent combat = new CombatComponent(100, 20);
+    CombatStatsComponent combat = new CombatStatsComponent(100, 20);
     assertEquals(combat.getHealth(), 100);
 
     combat.setHealth(150);
@@ -24,7 +24,7 @@ public class CombatComponentTest {
 
   @Test
   void shouldCheckIsDead() {
-    CombatComponent combat = new CombatComponent(100, 20);
+    CombatStatsComponent combat = new CombatStatsComponent(100, 20);
     assertFalse(combat.isDead());
 
     combat.setHealth(0);
@@ -33,7 +33,7 @@ public class CombatComponentTest {
 
   @Test
   void shouldAddHealth() {
-    CombatComponent combat = new CombatComponent(100, 20);
+    CombatStatsComponent combat = new CombatStatsComponent(100, 20);
     combat.addHealth(-500);
     assertEquals(combat.getHealth(), 0);
 
@@ -44,7 +44,7 @@ public class CombatComponentTest {
 
   @Test
   void shouldSetGetBaseAttack() {
-    CombatComponent combat = new CombatComponent(100, 20);
+    CombatStatsComponent combat = new CombatStatsComponent(100, 20);
     assertEquals(combat.getBaseAttack(), 20);
 
     combat.setBaseAttack(150);

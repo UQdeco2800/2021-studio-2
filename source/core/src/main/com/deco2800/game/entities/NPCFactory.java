@@ -2,7 +2,8 @@ package com.deco2800.game.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
-import com.deco2800.game.components.CombatComponent;
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
 import com.deco2800.game.components.tasks.WanderTask;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
@@ -34,14 +35,14 @@ public class NPCFactory {
   public static Entity createGhost(Entity target) {
     Entity ghost = createBaseNPC("images/ghost_1.png", target);
     BaseEntityConfig config = configs.ghost;
-    ghost.addComponent(new CombatComponent(config.health, config.baseAttack));
+    ghost.addComponent(new CombatStatsComponent(config.health, config.baseAttack));
     return ghost;
   }
 
   public static Entity createGhostKing(Entity target) {
     Entity ghostKing = createBaseNPC("images/ghost_king.png", target);
     GhostKingConfig config = configs.ghostKing;
-    ghostKing.addComponent(new CombatComponent(config.health, config.baseAttack));
+    ghostKing.addComponent(new CombatStatsComponent(config.health, config.baseAttack));
     return ghostKing;
   }
 
@@ -55,13 +56,15 @@ public class NPCFactory {
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new ChaseTask(target, 10, 3f, 4f));    Entity npc =
+            .addTask(new ChaseTask(target, 10, 3f, 4f));
+    Entity npc =
         new Entity()
             .addComponent(new TextureRenderComponent(textureName))
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+            .addComponent(new TouchAttackComponent(PhysicsLayer.Player, 1.5f))
             .addComponent(aiComponent);
 
     npc.getComponent(TextureRenderComponent.class).scaleEntity();
