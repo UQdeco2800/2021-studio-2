@@ -30,7 +30,7 @@ public class MainMenuScreen extends ScreenAdapter {
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());
 
-    //for debug renderer
+    // for debug renderer
     PhysicsService physicsService = new PhysicsService();
     ServiceLocator.registerPhysicsService(physicsService);
 
@@ -88,7 +88,9 @@ public class MainMenuScreen extends ScreenAdapter {
 
   private void createUI() {
     Entity UI = new Entity();
-    UI.addComponent(new KeyboardMainMenuInput()).addComponent(new MainMenuDisplay()).addComponent(new MainMenuActions(game));
+    UI.addComponent(new KeyboardMainMenuInput())
+        .addComponent(new MainMenuDisplay())
+        .addComponent(new MainMenuActions(game));
     ServiceLocator.getEntityService().register(UI);
   }
 }

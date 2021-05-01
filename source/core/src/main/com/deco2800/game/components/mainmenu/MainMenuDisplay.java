@@ -1,12 +1,14 @@
 package com.deco2800.game.components.mainmenu;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.UI.UIComponent;
 
 public class MainMenuDisplay extends UIComponent {
-  private static final float zIndex = 2f;
-  private Label profileLabel;
+  private static final float Z_INDEX = 2f;
+  private Label gameTitle;
   private Label instructions;
 
   @Override
@@ -16,29 +18,45 @@ public class MainMenuDisplay extends UIComponent {
   }
 
   private void addActors() {
-    profileLabel = new Label("Box Boy and the Ghosts", skin);
-    instructions = new Label("'Space' to start\n'l' to load\n'e' to exit", defaultWhiteText);
-    stage.addActor(profileLabel);
+    gameTitle = new Label("Box Boy and the Ghosts", skin);
+    instructions = new Label(
+      "'Space' to play\n" +
+          "'l' to load\n" +
+          "'s' for settings\n" +
+          "'e' to exit",
+        defaultWhiteText
+    );
+    stage.addActor(gameTitle);
     stage.addActor(instructions);
   }
 
   @Override
   public void draw(SpriteBatch batch) {
-    int screenHeight = stage.getViewport().getScreenHeight();
-    int screenWidth = stage.getViewport().getScreenWidth();
-    profileLabel.setPosition(screenWidth / 2 - profileLabel.getWidth() / 2, screenHeight / 2 + profileLabel.getHeight());
-    instructions.setPosition(screenWidth / 2 - instructions.getWidth() / 2, screenHeight / 2 - instructions.getHeight());
+    Vector2 titlePos = getCenteredPosition(gameTitle).add(0f, 50f);
+    gameTitle.setPosition(titlePos.x, titlePos.y);
+
+    Vector2 instructionsPos = getCenteredPosition(instructions).add(0f, -10f);
+    instructions.setPosition(instructionsPos.x, instructionsPos.y);
   }
 
   @Override
   public float getZIndex() {
-    return zIndex;
+    return Z_INDEX;
   }
 
   @Override
   public void dispose() {
     super.dispose();
-    profileLabel.remove();
+    gameTitle.remove();
     instructions.remove();
+  }
+
+  private Vector2 getCenteredPosition(Actor actor) {
+    int screenWidth = stage.getViewport().getScreenWidth();
+    int screenHeight = stage.getViewport().getScreenHeight();
+    return new Vector2(
+        (screenWidth - actor.getWidth()) / 2,
+        (screenHeight - actor.getHeight()) / 2
+    );
   }
 }
