@@ -20,7 +20,7 @@ public class TerminalDisplay extends UIComponent {
   private void addActors() {
     // label at bottom of screen with background
     String message = "";
-    label = new Label("> " + message, defaultWhiteText);
+    label = new Label("> " + message, skin);
     label.setPosition(5f, 0);
     stage.addActor(label);
   }

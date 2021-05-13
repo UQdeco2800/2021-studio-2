@@ -38,7 +38,7 @@ public class SettingsMenuDisplay extends UIComponent {
   }
 
   private void addActors() {
-    Label title = new Label("Settings", skin);
+    Label title = new Label("Settings", skin, "title");
     Table settingsTable = makeSettingsTable();
     Table menuBtns = makeMenuBtns();
 

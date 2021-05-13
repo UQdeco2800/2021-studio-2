@@ -18,13 +18,13 @@ public class MainMenuDisplay extends UIComponent {
   }
 
   private void addActors() {
-    gameTitle = new Label("Box Boy and the Ghosts", skin);
+    gameTitle = new Label("Box Boy and the Ghosts", skin, "title");
     instructions = new Label(
       "'Space' to play\n" +
           "'l' to load\n" +
           "'s' for settings\n" +
           "'e' to exit",
-        defaultWhiteText
+      skin
     );
     stage.addActor(gameTitle);
     stage.addActor(instructions);
@@ -35,7 +35,7 @@ public class MainMenuDisplay extends UIComponent {
     Vector2 titlePos = getCenteredPosition(gameTitle).add(0f, 50f);
     gameTitle.setPosition(titlePos.x, titlePos.y);
 
-    Vector2 instructionsPos = getCenteredPosition(instructions).add(0f, -10f);
+    Vector2 instructionsPos = getCenteredPosition(instructions).add(0f, -40f);
     instructions.setPosition(instructionsPos.x, instructionsPos.y);
   }
 

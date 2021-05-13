@@ -1,13 +1,19 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	button: {
-		file: font-button-export.fnt
+		file: fonts/pixel_18.fnt
 	}
 	font: {
-		file: font-export.fnt
+		file: fonts/pixel_18.fnt
 	}
 	title: {
-		file: font-title-export.fnt
+		file: fonts/pixel_32.fnt
+	}
+	font_small: {
+		file: fonts/pixel_16.fnt
+	}
+	font_large: {
+		file: fonts/pixel_26.fnt
 	}
 }
 com.badlogic.gdx.graphics.Color: {
@@ -317,7 +323,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
 		font: font
-		fontColor: color
+		fontColor: white
 	}
 	button: {
 		font: button
@@ -326,6 +332,14 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	title: {
 		font: title
 		fontColor: color
+	}
+	small: {
+		font: font_small
+		fontColor: white
+	}
+	large: {
+		font: font_large
+		fontColor: white
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

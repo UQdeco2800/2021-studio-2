@@ -20,20 +20,20 @@ public abstract class UIComponent extends RenderComponent implements Renderable 
       new Skin(Gdx.files.internal("flat-earth/skin/flat-earth-ui.json"));
   protected Stage stage;
   private final BitmapFont font = new BitmapFont();
-  protected Label.LabelStyle defaultWhiteText;
+//  protected Label.LabelStyle defaultWhiteText;
 
   @Override
   public void create() {
     super.create();
-    createStyles();
+//    createStyles();
     stage = ServiceLocator.getRenderService().getStage();
   }
 
-  protected void createStyles() {
-    defaultWhiteText = new Label.LabelStyle();
-    defaultWhiteText.font = font;
-    defaultWhiteText.fontColor = Color.WHITE;
-  }
+//  protected void createStyles() {
+//    defaultWhiteText = new Label.LabelStyle();
+//    defaultWhiteText.font = font;
+//    defaultWhiteText.fontColor = Color.WHITE;
+//  }
 
   @Override
   public int getLayer() {
