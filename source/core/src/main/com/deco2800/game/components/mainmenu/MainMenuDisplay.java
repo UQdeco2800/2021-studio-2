@@ -50,13 +50,4 @@ public class MainMenuDisplay extends UIComponent {
     gameTitle.remove();
     instructions.remove();
   }
-
-  private Vector2 getCenteredPosition(Actor actor) {
-    int screenWidth = stage.getViewport().getScreenWidth();
-    int screenHeight = stage.getViewport().getScreenHeight();
-    return new Vector2(
-        (screenWidth - actor.getWidth()) / 2,
-        (screenHeight - actor.getHeight()) / 2
-    );
-  }
 }
