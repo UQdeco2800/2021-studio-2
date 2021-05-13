@@ -1,5 +1,6 @@
 package com.deco2800.game.components.settingsmenu;
 
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -14,10 +15,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.UI.UIComponent;
+import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.services.ServiceLocator;
 
 public class SettingsMenuDisplay extends UIComponent {
   private final GdxGame game;
+
+  private TextField fpsText;
+  private CheckBox fullScreenCheck;
+  private Slider uiScaleSlider;
 
   public SettingsMenuDisplay(GdxGame game) {
     super();
@@ -51,16 +57,24 @@ public class SettingsMenuDisplay extends UIComponent {
   }
 
   private Table makeSettingsTable() {
+    // Get current values
+    Preferences settings = UserSettings.get();
+    int fps = settings.getInteger("fps");
+    boolean isFullscreen = settings.getBoolean("fullscreen");
+    float uiScale = settings.getFloat("uiScale");
+
     // Create components
     Label fpsLabel = new Label("FPS:", skin);
-    TextField fpsText = new TextField("", skin);
+    fpsText = new TextField(Integer.toString(fps), skin);
 
     Label fullScreenLabel = new Label("Fullscreen:", skin);
-    CheckBox fullScreenCheck = new CheckBox("", skin);
+    fullScreenCheck = new CheckBox("", skin);
+    fullScreenCheck.setChecked(isFullscreen);
 
     Label uiScaleLabel = new Label("UI Scale:", skin);
-    Slider uiScaleSlider = new Slider(0.2f, 2f, 0.1f, false, skin);
-    Label uiScaleValue = new Label("1x", skin);
+    uiScaleSlider = new Slider(0.2f, 2f, 0.1f, false, skin);
+    uiScaleSlider.setValue(uiScale);
+    Label uiScaleValue = new Label(String.format("%.2fx", uiScale), skin);
 
     // Position Components on table
     Table table = new Table();
@@ -112,11 +126,26 @@ public class SettingsMenuDisplay extends UIComponent {
   }
 
   private void applyChanges() {
-    // TODO: Save settings
+    Preferences settings = UserSettings.get();
+    Integer fpsVal = parseOrNull(fpsText.getText());
+    if (fpsVal != null) {
+      settings.putInteger("fps", fpsVal);
+    }
+    settings.putBoolean("fullscreen", fullScreenCheck.isChecked());
+    settings.putFloat("uiScale", uiScaleSlider.getValue());
+    settings.flush();
   }
 
   private void exitMenu() {
     game.setScreen(ScreenType.MainMenu);
+  }
+
+  private Integer parseOrNull(String num) {
+    try {
+      return Integer.parseInt(num, 10);
+    } catch (NumberFormatException e) {
+      return null;
+    }
   }
 
   @Override
