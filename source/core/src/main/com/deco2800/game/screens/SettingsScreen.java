@@ -4,7 +4,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.settingsmenu.SettingsMenuActions;
 import com.deco2800.game.components.settingsmenu.SettingsMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -16,6 +15,9 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 
+/**
+ * The game screen containing the settings.
+ */
 public class SettingsScreen extends ScreenAdapter {
   private final GdxGame game;
   private final Renderer renderer;
@@ -23,6 +25,7 @@ public class SettingsScreen extends ScreenAdapter {
   public SettingsScreen(GdxGame game) {
     this.game = game;
 
+    // TODO: Not all of these should be required
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());

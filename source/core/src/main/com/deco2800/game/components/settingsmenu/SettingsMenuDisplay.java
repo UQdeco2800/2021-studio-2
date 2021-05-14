@@ -22,9 +22,6 @@ import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.files.UserSettings.DisplaySettings;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.StringDecorator;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Settings menu display and logic. If you bork the settings, they can be changed manually in

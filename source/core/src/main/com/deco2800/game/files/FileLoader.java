@@ -28,6 +28,16 @@ public class FileLoader {
     return readClass(type, filename, Location.Internal);
   }
 
+  /**
+   * Read generic Java classes from a JSON file. Properties in the JSON file will override class
+   * defaults.
+   *
+   * @param type class type
+   * @param filename file to read from
+   * @param location File storage type. See
+   *     https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
+   * @return instance of class, may be null
+   */
   public static <T> T readClass(Class<T> type, String filename, Location location) {
     FileHandle file = getFileHandle(filename, location);
     T object;
@@ -38,16 +48,29 @@ public class FileLoader {
       return null;
     }
     if (object == null) {
-      logger.error(
-          "Error creating {} class instance from {}", type.getSimpleName(), file.path());
+      logger.error("Error creating {} class instance from {}", type.getSimpleName(), file.path());
     }
     return object;
   }
 
+  /**
+   * Write generic Java classes to a JSON file.
+   *
+   * @param object Java object to write.
+   * @param filename File to write to.
+   */
   public static void writeClass(Object object, String filename) {
     writeClass(object, filename, Location.External);
   }
 
+  /**
+   * Write generic Java classes to a JSON file.
+   *
+   * @param object Java object to write.
+   * @param filename File to write to.
+   * @param location File storage type. See
+   *     https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
+   */
   public static void writeClass(Object object, String filename, Location location) {
     FileHandle file = getFileHandle(filename, location);
     assert file != null;
@@ -72,6 +95,10 @@ public class FileLoader {
   }
 
   public enum Location {
-    Classpath, Internal, Local, External, Absolute
+    Classpath,
+    Internal,
+    Local,
+    External,
+    Absolute
   }
 }

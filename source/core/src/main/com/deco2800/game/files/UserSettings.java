@@ -1,13 +1,13 @@
 package com.deco2800.game.files;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Graphics.DisplayMode;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
 import com.deco2800.game.files.FileLoader.Location;
 import java.io.File;
 
+/**
+ * Reading, Writing, and applying user settings in the game.
+ */
 public class UserSettings {
   private static final String ROOT_DIR = "DECO2800Game";
   private static final String SETTINGS_FILE = "settings.json";
@@ -15,6 +15,10 @@ public class UserSettings {
   private static final int WINDOW_WIDTH = 1280;
   private static final int WINDOW_HEIGHT = 800;
 
+  /**
+   * Get the stored user settings
+   * @return Copy of the current settings
+   */
   public static Settings get() {
     String path = ROOT_DIR + File.separator + SETTINGS_FILE;
     Settings fileSettings = FileLoader.readClass(Settings.class, path, Location.External);
@@ -22,6 +26,11 @@ public class UserSettings {
     return fileSettings != null ? fileSettings : new Settings();
   }
 
+  /**
+   * Set the stored user settings
+   * @param settings New settings to store
+   * @param applyImmediate true to immediately apply new settings.
+   */
   public static void set(Settings settings, boolean applyImmediate) {
     String path = ROOT_DIR + File.separator + SETTINGS_FILE;
     FileLoader.writeClass(settings, path, Location.External);
@@ -31,6 +40,10 @@ public class UserSettings {
     }
   }
 
+  /**
+   * Apply the given settings without storing them.
+   * @param settings Settings to apply
+   */
   public static void applySettings(Settings settings) {
     Gdx.graphics.setForegroundFPS(settings.fps);
     Gdx.graphics.setVSync(settings.vsync);
@@ -61,14 +74,26 @@ public class UserSettings {
     return null;
   }
 
+  /**
+   * Stores game settings, can be serialised/deserialised.
+   */
   public static class Settings {
+    /**
+     * FPS cap of the game. Independant of screen FPS.
+     */
     public int fps = 60;
     public boolean fullscreen = true;
     public boolean vsync = true;
+    /**
+     * UI Scale. Currently unused, but can be implemented.
+     */
     public float uiScale = 1f;
     public DisplaySettings displayMode = null;
   }
 
+  /**
+   * Stores chosen display settings. Can be serialised/deserialised.
+   */
   public static class DisplaySettings {
     public int width;
     public int height;
@@ -82,24 +107,4 @@ public class UserSettings {
       this.refreshRate = displayMode.refreshRate;
     }
   }
-
-  //  public class SerializedDisplayMode implements Json.Serializable {
-  //    public DisplayMode displayMode;
-  //
-  //    @Override
-  //    public void write(Json json) {
-  //      json.writeValue("width", displayMode.width);
-  //      json.writeValue("height", displayMode.height);
-  //      json.writeValue("refreshRate", displayMode.refreshRate);
-  //    }
-  //
-  //    @Override
-  //    public void read(Json json, JsonValue jsonData) {
-  //      int width = jsonData.getInt("width");
-  //      int height = jsonData.getInt("height");
-  //      int refreshRate = jsonData.getInt("refreshRate");
-  //
-  //      // Find the matching displayMode
-  //    }
-  //  }
 }
