@@ -30,7 +30,7 @@ import com.deco2800.game.rendering.TextureRenderComponent;
  */
 public class NPCFactory {
   private static final NPCConfigs configs =
-      FileLoader.loadClass(NPCConfigs.class, "configs/NPCs.json");
+      FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
 
   public static Entity createGhost(Entity target) {
     Entity ghost = createBaseNPC("images/ghost_1.png", target);

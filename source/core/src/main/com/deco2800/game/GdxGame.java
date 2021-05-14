@@ -1,7 +1,9 @@
 package com.deco2800.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.screens.MainMenuScreen;
 import com.deco2800.game.screens.SettingsScreen;
@@ -17,7 +19,13 @@ public class GdxGame extends Game {
 
   @Override
   public void create() {
+    loadSettings();
     setScreen(ScreenType.MainMenu);
+  }
+
+  private void loadSettings() {
+    UserSettings.Settings settings = UserSettings.get();
+    UserSettings.applySettings(settings);
   }
 
   public void setScreen(ScreenType screenType) {

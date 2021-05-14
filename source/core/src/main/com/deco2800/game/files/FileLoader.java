@@ -24,9 +24,13 @@ public class FileLoader {
    * @param filename file to read from
    * @return instance of class, may be null
    */
-  public static <T> T loadClass(Class<T> type, String filename) {
-    FileHandle file = Gdx.files.internal(filename);
-    T object = null;
+  public static <T> T readClass(Class<T> type, String filename) {
+    return readClass(type, filename, Location.Internal);
+  }
+
+  public static <T> T readClass(Class<T> type, String filename, Location location) {
+    FileHandle file = getFileHandle(filename, location);
+    T object;
     try {
       object = json.fromJson(type, file);
     } catch (Exception e) {
@@ -35,8 +39,39 @@ public class FileLoader {
     }
     if (object == null) {
       logger.error(
-        "Error creating {} class instance from {}", type.getSimpleName(), file.path());
+          "Error creating {} class instance from {}", type.getSimpleName(), file.path());
     }
     return object;
+  }
+
+  public static void writeClass(Object object, String filename) {
+    writeClass(object, filename, Location.External);
+  }
+
+  public static void writeClass(Object object, String filename, Location location) {
+    FileHandle file = getFileHandle(filename, location);
+    assert file != null;
+    file.writeString(json.prettyPrint(object), false);
+  }
+
+  private static FileHandle getFileHandle(String filename, Location location) {
+    switch (location) {
+      case Classpath:
+        return Gdx.files.classpath(filename);
+      case Internal:
+        return Gdx.files.internal(filename);
+      case Local:
+        return Gdx.files.local(filename);
+      case External:
+        return Gdx.files.external(filename);
+      case Absolute:
+        return Gdx.files.absolute(filename);
+      default:
+        return null;
+    }
+  }
+
+  public enum Location {
+    Classpath, Internal, Local, External, Absolute
   }
 }
