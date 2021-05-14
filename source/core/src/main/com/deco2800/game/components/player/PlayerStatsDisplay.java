@@ -45,8 +45,7 @@ public class PlayerStatsDisplay extends UIComponent {
     // Health text
     int health = entity.getComponent(CombatStatsComponent.class).getHealth();
     CharSequence healthText = String.format("Health: %d", health);
-    healthLabel = new Label(healthText, defaultWhiteText);
-    healthLabel.setFontScale(1.5f);
+    healthLabel = new Label(healthText, skin, "large");
 
     table.add(heartImage).size(heartSideLength).pad(5);
     table.add(healthLabel);

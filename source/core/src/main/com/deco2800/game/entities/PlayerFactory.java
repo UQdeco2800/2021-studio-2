@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 public class PlayerFactory {
   private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
   private static final PlayerConfig stats =
-      FileLoader.loadClass(PlayerConfig.class, "configs/player.json");
+      FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
   public static Entity createPlayer() {
     InputComponent inputComponent =

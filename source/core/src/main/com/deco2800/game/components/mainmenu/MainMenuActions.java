@@ -15,22 +15,28 @@ public class MainMenuActions extends Component {
 
   @Override
   public void create() {
-    entity.getEvents().addListener("start", this::start);
-    entity.getEvents().addListener("load", this::load);
-    entity.getEvents().addListener("exit", this::exit);
+    entity.getEvents().addListener("onStartInput", this::onStart);
+    entity.getEvents().addListener("load", this::onLoad);
+    entity.getEvents().addListener("exit", this::onExit);
+    entity.getEvents().addListener("settings", this::onSettings);
   }
 
-  void start() {
+  private void onStart() {
     logger.info("Start game");
     game.setScreen(GdxGame.ScreenType.MainGame);
   }
 
-  void load() {
+  private void onLoad() {
     logger.info("Load game");
   }
 
-  void exit() {
+  private void onExit() {
     logger.info("Exit game");
     game.exit();
+  }
+
+  private void onSettings() {
+    logger.info("Launching settings screen");
+    game.setScreen(GdxGame.ScreenType.Settings);
   }
 }

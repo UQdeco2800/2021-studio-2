@@ -13,13 +13,16 @@ public class KeyboardMainMenuInput extends InputComponent {
   public boolean keyDown(int keycode) {
     switch (keycode) {
       case Input.Keys.SPACE:
-        entity.getEvents().trigger("start");
+        entity.getEvents().trigger("onStartInput");
         return true;
       case Input.Keys.L:
         entity.getEvents().trigger("load");
         return true;
       case Input.Keys.E:
         entity.getEvents().trigger("exit");
+        return true;
+      case Input.Keys.S:
+        entity.getEvents().trigger("settings");
         return true;
     }
     return false;

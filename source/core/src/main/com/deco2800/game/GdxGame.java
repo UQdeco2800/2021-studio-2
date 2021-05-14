@@ -1,10 +1,12 @@
 package com.deco2800.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
+import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.screens.MainMenuScreen;
+import com.deco2800.game.screens.SettingsScreen;
 
 import static com.badlogic.gdx.Gdx.app;
 
@@ -17,11 +19,20 @@ public class GdxGame extends Game {
 
   @Override
   public void create() {
-    setScreen(new MainMenuScreen(this));
+    loadSettings();
+    setScreen(ScreenType.MainMenu);
+  }
+
+  private void loadSettings() {
+    UserSettings.Settings settings = UserSettings.get();
+    UserSettings.applySettings(settings);
   }
 
   public void setScreen(ScreenType screenType) {
-    getScreen().dispose();
+    Screen currentScreen = getScreen();
+    if (currentScreen != null) {
+      currentScreen.dispose();
+    }
     setScreen(newScreen(screenType));
   }
 
@@ -36,13 +47,15 @@ public class GdxGame extends Game {
         return new MainMenuScreen(this);
       case MainGame:
         return new MainGameScreen(this);
+      case Settings:
+        return new SettingsScreen(this);
       default:
         return null;
     }
   }
 
   public enum ScreenType {
-    MainMenu, MainGame
+    MainMenu, MainGame, Settings
   }
 
   public void exit() {

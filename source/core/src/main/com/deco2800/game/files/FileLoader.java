@@ -24,9 +24,23 @@ public class FileLoader {
    * @param filename file to read from
    * @return instance of class, may be null
    */
-  public static <T> T loadClass(Class<T> type, String filename) {
-    FileHandle file = Gdx.files.internal(filename);
-    T object = null;
+  public static <T> T readClass(Class<T> type, String filename) {
+    return readClass(type, filename, Location.Internal);
+  }
+
+  /**
+   * Read generic Java classes from a JSON file. Properties in the JSON file will override class
+   * defaults.
+   *
+   * @param type class type
+   * @param filename file to read from
+   * @param location File storage type. See
+   *     https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
+   * @return instance of class, may be null
+   */
+  public static <T> T readClass(Class<T> type, String filename, Location location) {
+    FileHandle file = getFileHandle(filename, location);
+    T object;
     try {
       object = json.fromJson(type, file);
     } catch (Exception e) {
@@ -34,9 +48,57 @@ public class FileLoader {
       return null;
     }
     if (object == null) {
-      logger.error(
-        "Error creating {} class instance from {}", type.getSimpleName(), file.path());
+      logger.error("Error creating {} class instance from {}", type.getSimpleName(), file.path());
     }
     return object;
+  }
+
+  /**
+   * Write generic Java classes to a JSON file.
+   *
+   * @param object Java object to write.
+   * @param filename File to write to.
+   */
+  public static void writeClass(Object object, String filename) {
+    writeClass(object, filename, Location.External);
+  }
+
+  /**
+   * Write generic Java classes to a JSON file.
+   *
+   * @param object Java object to write.
+   * @param filename File to write to.
+   * @param location File storage type. See
+   *     https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
+   */
+  public static void writeClass(Object object, String filename, Location location) {
+    FileHandle file = getFileHandle(filename, location);
+    assert file != null;
+    file.writeString(json.prettyPrint(object), false);
+  }
+
+  private static FileHandle getFileHandle(String filename, Location location) {
+    switch (location) {
+      case Classpath:
+        return Gdx.files.classpath(filename);
+      case Internal:
+        return Gdx.files.internal(filename);
+      case Local:
+        return Gdx.files.local(filename);
+      case External:
+        return Gdx.files.external(filename);
+      case Absolute:
+        return Gdx.files.absolute(filename);
+      default:
+        return null;
+    }
+  }
+
+  public enum Location {
+    Classpath,
+    Internal,
+    Local,
+    External,
+    Absolute
   }
 }
