@@ -1,4 +1,4 @@
-package com.deco2800.game.UI;
+package com.deco2800.game.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.services.ServiceLocator;
 
 public class PerformanceDisplay extends UIComponent {
-  private static final float zIndex = 5f;
+  private static final float Z_INDEX = 5f;
   private Label profileLabel;
 
   @Override
@@ -39,14 +39,14 @@ public class PerformanceDisplay extends UIComponent {
     String message = "Debug\n";
     message =
         message
-            .concat(String.format("FPS: %d fps\n", Gdx.graphics.getFramesPerSecond()))
-            .concat(String.format("RAM: %d MB\n", Gdx.app.getJavaHeap() / 1000000));
+            .concat(String.format("FPS: %d fps%n", Gdx.graphics.getFramesPerSecond()))
+            .concat(String.format("RAM: %d MB%n", Gdx.app.getJavaHeap() / 1000000));
     return message;
   }
 
   @Override
   public float getZIndex() {
-    return zIndex;
+    return Z_INDEX;
   }
 
   @Override

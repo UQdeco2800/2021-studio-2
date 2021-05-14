@@ -18,22 +18,30 @@ public class Component {
    * Called when the entity is created and registered. Initial logic such as calls to GetComponent
    * should be made here, not in the constructor which is called before an entity is finished.
    */
-  public void create() {}
+  public void create() {
+    // No action by default.
+  }
 
   /**
    * Early update called once per frame of the game, before update(). Use this only for logic that
    * must run before other updates, such as physics. Not called if component is disabled.
    */
-  public void earlyUpdate() {}
+  public void earlyUpdate() {
+    // No action by default.
+  }
 
   /**
    * Called once per frame of the game, and should be used for most component logic. Not called if
    * component is disabled.
    */
-  public void update() {}
+  public void update() {
+    // No action by default.
+  }
 
   /** Called when the component is disposed. Dispose of any internal resources here. */
-  public void dispose() {}
+  public void dispose() {
+    // No action by default.
+  }
 
   /**
    * Set the entity to which this component belongs. This is called by the Entity, and should not be

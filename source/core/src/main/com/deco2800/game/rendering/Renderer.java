@@ -1,16 +1,12 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.services.ServiceLocator;
@@ -31,8 +27,6 @@ public class Renderer implements Disposable {
   private Stage stage;
   private RenderService renderService;
   private DebugRenderer debugRenderer;
-  // TODO: extract physics rendering somewhere else
-  private PhysicsEngine physicsEngine;
 
   /** Create a new renderer with default settings */
   public Renderer() {
@@ -43,7 +37,6 @@ public class Renderer implements Disposable {
         spriteBatch,
         new Stage(new ScreenViewport(), spriteBatch),
         ServiceLocator.getRenderService(),
-        ServiceLocator.getPhysicsService(),
         new DebugRenderer());
   }
 
@@ -61,9 +54,8 @@ public class Renderer implements Disposable {
       SpriteBatch batch,
       Stage stage,
       RenderService renderService,
-      PhysicsService physicsService,
       DebugRenderer debugRenderer) {
-    init(camera, gameWidth, batch, stage, renderService, physicsService, debugRenderer);
+    init(camera, gameWidth, batch, stage, renderService, debugRenderer);
   }
 
   private void init(
@@ -72,7 +64,6 @@ public class Renderer implements Disposable {
       SpriteBatch batch,
       Stage stage,
       RenderService renderService,
-      PhysicsService physicsService,
       DebugRenderer debugRenderer) {
 
     this.camera = camera;
@@ -86,7 +77,6 @@ public class Renderer implements Disposable {
     renderService.setDebug(debugRenderer);
     camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    physicsEngine = physicsService.getPhysics();
   }
 
   public OrthographicCamera getCamera() {

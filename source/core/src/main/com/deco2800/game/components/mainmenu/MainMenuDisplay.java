@@ -2,9 +2,8 @@ package com.deco2800.game.components.mainmenu;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.deco2800.game.UI.UIComponent;
+import com.deco2800.game.ui.UIComponent;
 
 public class MainMenuDisplay extends UIComponent {
   private static final float Z_INDEX = 2f;

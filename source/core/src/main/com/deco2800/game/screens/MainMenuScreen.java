@@ -87,10 +87,10 @@ public class MainMenuScreen extends ScreenAdapter {
   }
 
   private void createUI() {
-    Entity UI = new Entity();
-    UI.addComponent(new KeyboardMainMenuInput())
+    Entity ui = new Entity();
+    ui.addComponent(new KeyboardMainMenuInput())
         .addComponent(new MainMenuDisplay())
         .addComponent(new MainMenuActions(game));
-    ServiceLocator.getEntityService().register(UI);
+    ServiceLocator.getEntityService().register(ui);
   }
 }

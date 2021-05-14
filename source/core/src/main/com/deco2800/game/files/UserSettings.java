@@ -107,4 +107,8 @@ public class UserSettings {
       this.refreshRate = displayMode.refreshRate;
     }
   }
+
+  private UserSettings() {
+    throw new IllegalStateException("Instantiating static util class");
+  }
 }

@@ -3,8 +3,7 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.UI.PerformanceDisplay;
-import com.deco2800.game.components.player.PlayerStatsDisplay;
+import com.deco2800.game.ui.PerformanceDisplay;
 import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
 import com.deco2800.game.terminal.Terminal;
 import com.deco2800.game.terminal.TerminalDisplay;
@@ -31,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private static final String[] mainGameTextures = {"images/heart.png"};
-  private static final Boolean debugMode = true;
+  private static final Boolean DEBUG_MODE = true;
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -53,7 +52,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
     renderer = new Renderer();
     renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
-    ServiceLocator.getRenderService().getDebug().setActive(debugMode);
+    ServiceLocator.getRenderService().getDebug().setActive(DEBUG_MODE);
 
     loadAssets();
     createUI();
@@ -113,14 +112,14 @@ public class MainGameScreen extends ScreenAdapter {
   }
 
   private void createUI() {
-    Entity UI = new Entity();
-    UI.addComponent(new PerformanceDisplay());
+    Entity ui = new Entity();
+    ui.addComponent(new PerformanceDisplay());
 
     // Add terminal
-    UI.addComponent(new Terminal())
+    ui.addComponent(new Terminal())
         .addComponent(new KeyboardTerminalInputComponent())
         .addComponent(new TerminalDisplay());
 
-    ServiceLocator.getEntityService().register(UI);
+    ServiceLocator.getEntityService().register(ui);
   }
 }
