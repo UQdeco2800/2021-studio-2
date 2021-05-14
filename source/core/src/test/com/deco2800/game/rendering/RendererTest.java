@@ -46,7 +46,7 @@ class RendererTest {
     when(graphics.getWidth()).thenReturn(100);
     when(graphics.getHeight()).thenReturn(200);
     Renderer renderer =
-        new Renderer(camera, 10, spriteBatch, stage, renderService, physicsService, debugRenderer);
+        new Renderer(camera, 10, spriteBatch, stage, renderService, debugRenderer);
 
     assertEquals(camera.position, Vector3.Zero);
     assertEquals(10, camera.viewportWidth);
@@ -63,7 +63,7 @@ class RendererTest {
     Stage stage = new Stage(screenViewport, spriteBatch);
 
     Renderer renderer =
-      new Renderer(camera, 10, spriteBatch, stage, renderService, physicsService, debugRenderer);
+      new Renderer(camera, 10, spriteBatch, stage, renderService, debugRenderer);
 
     assertEquals(0, stage.getViewport().getScreenWidth());
     assertEquals(0, stage.getViewport().getScreenHeight());
@@ -77,7 +77,7 @@ class RendererTest {
   @Test
   void shouldRender() {
     Renderer renderer =
-        new Renderer(camera, 10, spriteBatch, stage, renderService, physicsService, debugRenderer);
+        new Renderer(camera, 10, spriteBatch, stage, renderService, debugRenderer);
     renderer.render();
     verify(renderService).render(spriteBatch);
   }

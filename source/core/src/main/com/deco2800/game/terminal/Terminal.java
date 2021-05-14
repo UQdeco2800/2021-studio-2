@@ -3,11 +3,11 @@ package com.deco2800.game.terminal;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.terminal.commands.Command;
 import com.deco2800.game.terminal.commands.DebugCommand;
+import java.util.Arrays;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -16,23 +16,18 @@ import java.util.HashMap;
  */
 public class Terminal extends Component {
   private static final Logger logger = LoggerFactory.getLogger(Terminal.class);
-  private HashMap<String, Command> commands;
+  private final Map<String, Command> commands;
   private String enteredMessage = "";
-  private Boolean isOpen = false;
+  private boolean isOpen = false;
 
   public Terminal() {
     this(new HashMap<>());
   }
 
-  public Terminal(HashMap<String, Command> commands) {
+  public Terminal(Map<String, Command> commands) {
     this.commands = commands;
 
     addCommand("debug", new DebugCommand());
-  }
-
-  @Override
-  public void create() {
-    super.create();
   }
 
   /** @return message entered by user */
@@ -81,10 +76,7 @@ public class Terminal extends Component {
     String[] sections = message.split(" ");
     String command = sections[0];
 
-    ArrayList<String> args = new ArrayList<>();
-    for (int i = 1; i < sections.length; i++) {
-      args.add(sections[i]);
-    }
+    ArrayList<String> args = new ArrayList<>(Arrays.asList(sections).subList(1, sections.length));
 
     if (commands.containsKey(command)) {
       commands.get(command).action(args);

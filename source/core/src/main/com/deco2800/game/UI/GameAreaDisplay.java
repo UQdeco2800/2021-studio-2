@@ -1,4 +1,4 @@
-package com.deco2800.game.UI;
+package com.deco2800.game.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

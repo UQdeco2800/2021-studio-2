@@ -40,6 +40,11 @@ public class FileLoader {
    */
   public static <T> T readClass(Class<T> type, String filename, Location location) {
     FileHandle file = getFileHandle(filename, location);
+    if (file == null) {
+      logger.error("Failed to create file handle for {}", filename);
+      return null;
+    }
+
     T object;
     try {
       object = json.fromJson(type, file);

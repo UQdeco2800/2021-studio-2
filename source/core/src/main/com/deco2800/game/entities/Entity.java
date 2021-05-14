@@ -275,6 +275,11 @@ public class Entity {
   }
 
   @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
+  @Override
   public String toString() {
     return String.format("Entity{id=%d}", id);
   }

@@ -38,7 +38,6 @@ public class SettingsScreen extends ScreenAdapter {
     renderer = new Renderer();
     renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
 
-    loadAssets();
     createUI();
   }
 
@@ -55,23 +54,18 @@ public class SettingsScreen extends ScreenAdapter {
   @Override
   public void dispose() {
     renderer.dispose();
-    unloadAssets();
     ServiceLocator.getRenderService().dispose();
     ServiceLocator.getEntityService().dispose();
 
     ServiceLocator.clear();
   }
 
-  private void loadAssets() {}
-
-  private void unloadAssets() {}
-
   private void createUI() {
     Stage stage = ServiceLocator.getRenderService().getStage();
-    Entity UI = new Entity();
-    UI.addComponent(new SettingsMenuDisplay(game))
+    Entity ui = new Entity();
+    ui.addComponent(new SettingsMenuDisplay(game))
         .addComponent(new InputDecorator(stage));
-    UI.getComponent(InputDecorator.class).setPriority(10);
-    ServiceLocator.getEntityService().register(UI);
+    ui.getComponent(InputDecorator.class).setPriority(10);
+    ServiceLocator.getEntityService().register(ui);
   }
 }
