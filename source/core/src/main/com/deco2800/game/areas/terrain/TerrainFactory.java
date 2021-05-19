@@ -30,7 +30,7 @@ public class TerrainFactory {
    */
   public TerrainFactory(OrthographicCamera camera) {
     this.camera = camera;
-    this.orientation = TerrainOrientation.Orthogonal;
+    this.orientation = TerrainOrientation.Isometric;
   }
 
   /**
@@ -64,14 +64,20 @@ public class TerrainFactory {
         return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
       case FOREST_DEMO_ISO:
         TextureRegion isoGrass =
-            resourceService
-                .getAsset("images/terrain_iso_grass.atlas", TextureAtlas.class)
-                .findRegion("images/grass");
-        return createForestDemoTerrain(1f, isoGrass, isoGrass, isoGrass);
+          new TextureRegion(resourceService.getAsset("images/iso_grass_1.png", Texture.class));
+        TextureRegion isoTuft =
+          new TextureRegion(resourceService.getAsset("images/iso_grass_2.png", Texture.class));
+        TextureRegion isoRocks =
+          new TextureRegion(resourceService.getAsset("images/iso_grass_3.png", Texture.class));
+        return createForestDemoTerrain(1f, isoGrass, isoTuft, isoRocks);
       case FOREST_DEMO_HEX:
-        Texture hexGrassTex = resourceService.getAsset("images/terrain_hex.png", Texture.class);
-        TextureRegion hexGrass = new TextureRegion(hexGrassTex, 224, 66, 32, 32);
-        return createForestDemoTerrain(1f, hexGrass, hexGrass, hexGrass);
+        TextureRegion hexGrass =
+            new TextureRegion(resourceService.getAsset("images/hex_grass_1.png", Texture.class));
+        TextureRegion hexTuft =
+            new TextureRegion(resourceService.getAsset("images/hex_grass_2.png", Texture.class));
+        TextureRegion hexRocks =
+            new TextureRegion(resourceService.getAsset("images/hex_grass_3.png", Texture.class));
+        return createForestDemoTerrain(1f, hexGrass, hexTuft, hexRocks);
       default:
         return null;
     }

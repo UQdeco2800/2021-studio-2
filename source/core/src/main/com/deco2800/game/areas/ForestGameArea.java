@@ -29,7 +29,12 @@ public class ForestGameArea extends GameArea {
     "images/grass_1.png",
     "images/grass_2.png",
     "images/grass_3.png",
-    "images/terrain_hex.png"
+    "images/hex_grass_1.png",
+    "images/hex_grass_2.png",
+    "images/hex_grass_3.png",
+    "images/iso_grass_1.png",
+    "images/iso_grass_2.png",
+    "images/iso_grass_3.png"
   };
   private static final String[] forestTextureAtlases = {"images/terrain_iso_grass.atlas", "images/ghost.atlas"};
   private static final String[] forestSounds = {"sounds/Impact4.ogg"};
@@ -67,7 +72,7 @@ public class ForestGameArea extends GameArea {
   }
 
   private void spawnTerrain() {
-    terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
+    terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO_ISO);
     spawnEntity(new Entity().addComponent(terrain));
   }
 
