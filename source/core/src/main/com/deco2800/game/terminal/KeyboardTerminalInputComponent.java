@@ -68,8 +68,10 @@ public class KeyboardTerminalInputComponent extends InputComponent {
     }
 
     if (character == '\r' || character == '\n') {
-      terminal.processMessage();
-      terminal.toggleIsOpen();
+      if (terminal.processMessage()) {
+        terminal.toggleIsOpen();
+      }
+      terminal.setEnteredMessage("");
       return true;
     } else if (character == '\b') {
       terminal.handleBackspace();
