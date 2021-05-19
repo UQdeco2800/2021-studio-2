@@ -72,7 +72,7 @@ public class ForestGameArea extends GameArea {
   }
 
   private void spawnTerrain() {
-    terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO_ISO);
+    terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
     spawnEntity(new Entity().addComponent(terrain));
   }
 

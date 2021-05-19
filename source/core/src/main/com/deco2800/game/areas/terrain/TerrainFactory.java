@@ -30,7 +30,7 @@ public class TerrainFactory {
    */
   public TerrainFactory(OrthographicCamera camera) {
     this.camera = camera;
-    this.orientation = TerrainOrientation.Isometric;
+    this.orientation = TerrainOrientation.Orthogonal;
   }
 
   /**
