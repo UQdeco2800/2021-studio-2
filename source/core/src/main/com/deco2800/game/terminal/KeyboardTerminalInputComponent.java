@@ -22,8 +22,8 @@ public class KeyboardTerminalInputComponent extends InputComponent {
   }
 
   public KeyboardTerminalInputComponent(Terminal terminal) {
+    super(10);
     this.terminal = terminal;
-    this.setPriority(3);
   }
 
 
@@ -69,13 +69,17 @@ public class KeyboardTerminalInputComponent extends InputComponent {
 
     if (character == '\r' || character == '\n') {
       terminal.processMessage();
+      terminal.toggleIsOpen();
+      return true;
     } else if (character == '\b') {
       terminal.handleBackspace();
-    } else {
+      return true;
+    } else if(Character.isLetterOrDigit(character) || character == ' ') {
       // append character to message
       terminal.appendToMessage(character);
+      return true;
     }
-    return true;
+    return false;
   }
 
   /**

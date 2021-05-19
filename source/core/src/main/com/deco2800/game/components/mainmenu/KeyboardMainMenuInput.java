@@ -6,7 +6,7 @@ import com.deco2800.game.input.InputComponent;
 public class KeyboardMainMenuInput extends InputComponent {
 
   public KeyboardMainMenuInput() {
-    this.setPriority(1);
+    super(10);
   }
 
   @Override

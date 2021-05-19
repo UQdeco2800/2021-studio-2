@@ -5,7 +5,8 @@ import com.badlogic.gdx.InputProcessor;
 public class InputDecorator extends InputComponent {
   private final InputProcessor inputProcessor;
 
-  public InputDecorator(InputProcessor inputProcessor) {
+  public InputDecorator(InputProcessor inputProcessor, int priority) {
+    super(priority);
     this.inputProcessor = inputProcessor;
   }
 

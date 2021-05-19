@@ -48,12 +48,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @param inputHandler input handler
    */
   public void register(InputComponent inputHandler) {
-    if (inputHandler.getPriority() == null) {
-      logger.error("Priority had not been set");
-      return;
-    }
     inputHandlers.add(inputHandler);
-
     Collections.sort(inputHandlers);
     logger.info("New input handler registered");
   }

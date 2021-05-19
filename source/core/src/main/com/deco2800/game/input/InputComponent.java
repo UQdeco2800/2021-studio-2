@@ -16,17 +16,23 @@ import com.deco2800.game.services.ServiceLocator;
 public abstract class InputComponent extends Component
     implements InputProcessor, GestureDetector.GestureListener, Comparable<InputComponent> {
   /** The priority that the input handler is visited in by InputService. */
-  protected Integer priority;
+  protected int priority;
 
+  /**
+   * Sets priority to default value;
+   */
+  public InputComponent() {
+    this(0);
+  }
+
+  public InputComponent(int priority) {
+    this.priority = priority;
+  }
+
+  // will sort in descending order
   @Override
   public int compareTo(InputComponent inputHandler) {
-    if (this.getPriority() == null) {
-      return 1;
-    }
-    if (inputHandler.getPriority() == null) {
-      return -1;
-    }
-    return this.getPriority().compareTo(inputHandler.getPriority());
+    return Integer.compare(inputHandler.getPriority(), this.getPriority());
   }
 
   @Override
@@ -38,7 +44,7 @@ public abstract class InputComponent extends Component
     this.priority = priority;
   }
 
-  public Integer getPriority() {
+  public int getPriority() {
     return priority;
   }
 

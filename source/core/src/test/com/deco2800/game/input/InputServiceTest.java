@@ -44,8 +44,8 @@ public class InputServiceTest {
     InputComponent inputComponent1 = spy(InputComponent.class);
     InputComponent inputComponent2 = spy(InputComponent.class);
 
-    when(inputComponent1.getPriority()).thenReturn(10);
-    when(inputComponent2.getPriority()).thenReturn(1);
+    when(inputComponent1.getPriority()).thenReturn(1);
+    when(inputComponent2.getPriority()).thenReturn(10);
 
     when(inputComponent1.keyDown(keycode)).thenReturn(true);
     when(inputComponent2.keyDown(keycode)).thenReturn(true);
@@ -67,9 +67,9 @@ public class InputServiceTest {
     InputComponent inputComponent2 = spy(InputComponent.class);
     InputComponent inputComponent3 = spy(InputComponent.class);
 
-    when(inputComponent1.getPriority()).thenReturn(1);
+    when(inputComponent1.getPriority()).thenReturn(100);
     when(inputComponent2.getPriority()).thenReturn(10);
-    when(inputComponent3.getPriority()).thenReturn(100);
+    when(inputComponent3.getPriority()).thenReturn(1);
 
     when(inputComponent1.keyDown(keycode)).thenReturn(false);
     when(inputComponent2.keyDown(keycode)).thenReturn(true);
