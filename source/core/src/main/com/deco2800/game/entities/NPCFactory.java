@@ -60,11 +60,19 @@ public class NPCFactory {
   public static Entity createGhostKing(Entity target) {
     Entity ghostKing = createBaseNPC(target);
     GhostKingConfig config = configs.ghostKing;
+
+    AnimationRenderComponent animator =
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghostKing.atlas", TextureAtlas.class));
+    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+
     ghostKing
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(new TextureRenderComponent("images/ghost_king.png"));
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
 
-    ghostKing.getComponent(TextureRenderComponent.class).scaleEntity();
+    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
     return ghostKing;
   }
 
