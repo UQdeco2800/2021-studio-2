@@ -43,7 +43,7 @@ public class PlayerActions extends Component {
   }
 
   /**
-   * Placeholder method to move the player in a given direction.
+   * Method to move the player in a given direction.
    *
    * @param direction direction to move in
    */
