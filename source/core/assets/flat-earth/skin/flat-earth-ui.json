@@ -323,7 +323,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
 		font: font
-		fontColor: white
+		fontColor: black
 	}
 	button: {
 		font: button
@@ -334,12 +334,12 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		fontColor: color
 	}
 	small: {
-		font: font_small
-		fontColor: white
+		font: font_small,
+		fontColor: black
 	}
 	large: {
-		font: font_large
-		fontColor: white
+		font: font_large,
+		fontColor: black
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

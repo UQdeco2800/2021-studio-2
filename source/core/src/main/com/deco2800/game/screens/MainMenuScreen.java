@@ -1,5 +1,6 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -22,10 +23,13 @@ public class MainMenuScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
   private final GdxGame game;
   private final Renderer renderer;
-  private static final String[] mainMenuTextures = {"images/box_boy.png"};
+  private static final String[] mainMenuTextures = {"images/box_boy_title.png"};
 
   public MainMenuScreen(GdxGame game) {
     this.game = game;
+
+    // set background to light yellow
+    Gdx.gl.glClearColor(248f/255f, 249/255f, 178/255f, 1);
 
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
