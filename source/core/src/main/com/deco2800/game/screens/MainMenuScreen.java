@@ -2,12 +2,13 @@ package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.mainmenu.KeyboardMainMenuInput;
 import com.deco2800.game.components.mainmenu.MainMenuActions;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
@@ -87,9 +88,10 @@ public class MainMenuScreen extends ScreenAdapter {
   }
 
   private void createUI() {
+    Stage stage = ServiceLocator.getRenderService().getStage();
     Entity UI = new Entity();
-    UI.addComponent(new KeyboardMainMenuInput())
-        .addComponent(new MainMenuDisplay())
+    UI.addComponent(new MainMenuDisplay())
+        .addComponent(new InputDecorator(stage, 10))
         .addComponent(new MainMenuActions(game));
     ServiceLocator.getEntityService().register(UI);
   }
