@@ -29,9 +29,14 @@ public class ForestGameArea extends GameArea {
     "images/grass_1.png",
     "images/grass_2.png",
     "images/grass_3.png",
-    "images/terrain_hex.png"
+    "images/hex_grass_1.png",
+    "images/hex_grass_2.png",
+    "images/hex_grass_3.png",
+    "images/iso_grass_1.png",
+    "images/iso_grass_2.png",
+    "images/iso_grass_3.png"
   };
-  private static final String[] forestTextureAtlases = {"images/terrain_iso_grass.atlas"};
+  private static final String[] forestTextureAtlases = {"images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas"};
   private static final String[] forestSounds = {"sounds/Impact4.ogg"};
   private static final String[] forestMusic = {"sounds/BGM_03_mp3.mp3"};
 
@@ -47,7 +52,6 @@ public class ForestGameArea extends GameArea {
   /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
   @Override
   public void create() {
-    //Load assets
     loadAssets();
 
     displayUI();

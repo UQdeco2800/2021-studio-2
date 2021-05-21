@@ -1,8 +1,11 @@
 package com.deco2800.game.entities;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.NPC.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.ChaseTask;
 import com.deco2800.game.components.tasks.WanderTask;
@@ -16,7 +19,9 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Factory to create non-playable character (NPC) entities with predefined components.
@@ -33,33 +38,56 @@ public class NPCFactory {
       FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
 
   public static Entity createGhost(Entity target) {
-    Entity ghost = createBaseNPC("images/ghost_1.png", target);
+    Entity ghost = createBaseNPC(target);
     BaseEntityConfig config = configs.ghost;
-    ghost.addComponent(new CombatStatsComponent(config.health, config.baseAttack));
+
+    AnimationRenderComponent animator =
+        new AnimationRenderComponent(
+            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+
+    ghost
+        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+        .addComponent(animator)
+        .addComponent(new GhostAnimationController());
+
+    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+
     return ghost;
   }
 
   public static Entity createGhostKing(Entity target) {
-    Entity ghostKing = createBaseNPC("images/ghost_king.png", target);
+    Entity ghostKing = createBaseNPC(target);
     GhostKingConfig config = configs.ghostKing;
-    ghostKing.addComponent(new CombatStatsComponent(config.health, config.baseAttack));
+
+    AnimationRenderComponent animator =
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghostKing.atlas", TextureAtlas.class));
+    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+
+    ghostKing
+        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
+
+    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
     return ghostKing;
   }
 
   /**
    * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
    *
-   * @param textureName texture name
    * @return entity
    */
-  private static Entity createBaseNPC(String textureName, Entity target) {
+  private static Entity createBaseNPC(Entity target) {
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
             .addTask(new ChaseTask(target, 10, 3f, 4f));
     Entity npc =
         new Entity()
-            .addComponent(new TextureRenderComponent(textureName))
             .addComponent(new PhysicsComponent())
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
@@ -67,7 +95,6 @@ public class NPCFactory {
             .addComponent(new TouchAttackComponent(PhysicsLayer.Player, 1.5f))
             .addComponent(aiComponent);
 
-    npc.getComponent(TextureRenderComponent.class).scaleEntity();
     PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
     return npc;
   }

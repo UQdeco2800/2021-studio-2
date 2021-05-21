@@ -1,5 +1,6 @@
 package com.deco2800.game.rendering;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -86,6 +87,12 @@ public class AnimationRenderComponent extends RenderComponent {
     animations.put(name, animation);
     logger.debug("Adding animation {}", name);
     return true;
+  }
+
+  /** Scale the entity to a width of 1 and a height matching the texture's ratio */
+  public void scaleEntity() {
+    TextureRegion defaultTexture = this.atlas.findRegion("default");
+    entity.setScale(1f, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
   }
 
   /**
