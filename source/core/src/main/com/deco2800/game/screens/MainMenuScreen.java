@@ -1,13 +1,15 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.mainmenu.KeyboardMainMenuInput;
 import com.deco2800.game.components.mainmenu.MainMenuActions;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
@@ -21,10 +23,13 @@ public class MainMenuScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
   private final GdxGame game;
   private final Renderer renderer;
-  private static final String[] mainMenuTextures = {"images/box_boy.png"};
+  private static final String[] mainMenuTextures = {"images/box_boy_title.png"};
 
   public MainMenuScreen(GdxGame game) {
     this.game = game;
+
+    // set background to light yellow
+    Gdx.gl.glClearColor(248f/255f, 249/255f, 178/255f, 1);
 
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
@@ -87,9 +92,10 @@ public class MainMenuScreen extends ScreenAdapter {
   }
 
   private void createUI() {
-    Entity ui = new Entity();
-    ui.addComponent(new KeyboardMainMenuInput())
-        .addComponent(new MainMenuDisplay())
+    Stage stage = ServiceLocator.getRenderService().getStage();
+    Entity UI = new Entity();
+    UI.addComponent(new MainMenuDisplay())
+        .addComponent(new InputDecorator(stage, 10))
         .addComponent(new MainMenuActions(game));
     ServiceLocator.getEntityService().register(ui);
   }

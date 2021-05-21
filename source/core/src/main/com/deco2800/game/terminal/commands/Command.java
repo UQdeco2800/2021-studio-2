@@ -6,5 +6,10 @@ import java.util.ArrayList;
  * A generic command class.
  */
 public interface Command {
-  void action(ArrayList<String> args);
+  /**
+   * Action command.
+   * @param args command args
+   * @return command was successful
+   */
+  boolean action(ArrayList<String> args);
 }

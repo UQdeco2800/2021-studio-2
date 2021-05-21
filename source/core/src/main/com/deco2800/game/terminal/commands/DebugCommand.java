@@ -16,20 +16,22 @@ public class DebugCommand implements Command {
    * Toggles debug mode on or off if the corresponding argument is received.
    * @param args command arguments
    */
-  public void action(ArrayList<String> args) {
+  public boolean action(ArrayList<String> args) {
     if (!isValid(args)) {
-      return;
+      return false;
     }
 
     String arg = args.get(0);
     switch (arg) {
       case "on":
         ServiceLocator.getRenderService().getDebug().setActive(true);
-        break;
+        return true;
       case "off":
         ServiceLocator.getRenderService().getDebug().setActive(false);
-        break;
+        return true;
     }
+
+    return false;
   }
 
   /**

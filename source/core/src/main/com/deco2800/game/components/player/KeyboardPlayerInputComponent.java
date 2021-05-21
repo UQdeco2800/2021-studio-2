@@ -11,7 +11,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   private final Vector2 walkDirection = Vector2.Zero.cpy();
 
   public KeyboardPlayerInputComponent() {
-    this.setPriority(5);
+    super(5);
   }
 
   /**

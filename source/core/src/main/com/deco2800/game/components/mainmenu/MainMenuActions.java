@@ -15,7 +15,7 @@ public class MainMenuActions extends Component {
 
   @Override
   public void create() {
-    entity.getEvents().addListener("onStartInput", this::onStart);
+    entity.getEvents().addListener("start", this::onStart);
     entity.getEvents().addListener("load", this::onLoad);
     entity.getEvents().addListener("exit", this::onExit);
     entity.getEvents().addListener("settings", this::onSettings);

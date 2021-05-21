@@ -68,7 +68,7 @@ public class Terminal extends Component {
    * Processes the completed message entered by the user. If the message corresponds to a valid
    * command, the command will be actioned.
    */
-  public void processMessage() {
+  public boolean processMessage() {
     // strip leading and trailing whitespace
     String message = enteredMessage.trim();
 
@@ -79,10 +79,10 @@ public class Terminal extends Component {
     ArrayList<String> args = new ArrayList<>(Arrays.asList(sections).subList(1, sections.length));
 
     if (commands.containsKey(command)) {
-      commands.get(command).action(args);
+      setEnteredMessage("");
+      return commands.get(command).action(args);
     }
-
-    setEnteredMessage("");
+    return false;
   }
 
   /**
