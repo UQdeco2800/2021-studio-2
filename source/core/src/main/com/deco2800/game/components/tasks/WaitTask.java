@@ -33,7 +33,7 @@ public class WaitTask extends DefaultTask {
   @Override
   public void update() {
     if (timeSource.getTime() >= endTime) {
-      status = Status.Finished;
+      status = Status.FINISHED;
     }
   }
 }

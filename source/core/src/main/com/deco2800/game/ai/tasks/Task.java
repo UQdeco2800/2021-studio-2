@@ -24,9 +24,9 @@ public interface Task {
   Status getStatus();
 
   enum Status {
-    Finished, // The task has completed succesfully
-    Failed, // The task has failed
-    Active, // The task is currently running
-    Inactive // The task is currently not running
+    FINISHED, // The task has completed succesfully
+    FAILED, // The task has failed
+    ACTIVE, // The task is currently running
+    INACTIVE // The task is currently not running
   }
 }

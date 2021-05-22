@@ -1,10 +1,6 @@
 package com.deco2800.game.physics;
 
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,10 +30,14 @@ public class PhysicsContactListener implements ContactListener {
   }
 
   @Override
-  public void preSolve(Contact contact, Manifold oldManifold) {}
+  public void preSolve(Contact contact, Manifold oldManifold) {
+    // Nothing to do before resolving contact
+  }
 
   @Override
-  public void postSolve(Contact contact, ContactImpulse impulse) {}
+  public void postSolve(Contact contact, ContactImpulse impulse) {
+    // Nothing to do after resolving contact
+  }
 
   private void triggerEventOn(Fixture fixture, String evt, Fixture otherFixture) {
     BodyUserData userData = (BodyUserData) fixture.getBody().getUserData();

@@ -42,7 +42,7 @@ class MovementTaskTest {
     task.start();
     assertTrue(movementComponent.getMoving());
     assertEquals(target, movementComponent.getTarget());
-    assertEquals(Status.Active, task.getStatus());
+    assertEquals(Status.ACTIVE, task.getStatus());
   }
 
   @Test
@@ -58,11 +58,11 @@ class MovementTaskTest {
     task.start();
     task.update();
     assertTrue(movementComponent.getMoving());
-    assertEquals(Status.Active, task.getStatus());
+    assertEquals(Status.ACTIVE, task.getStatus());
 
     entity.setPosition(10f, 9f);
     task.update();
     assertFalse(movementComponent.getMoving());
-    assertEquals(Status.Finished, task.getStatus());
+    assertEquals(Status.FINISHED, task.getStatus());
   }
 }

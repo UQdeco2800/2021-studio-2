@@ -6,21 +6,15 @@ import com.badlogic.gdx.Graphics.Monitor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
-import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.files.UserSettings.DisplaySettings;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.StringDecorator;
 
 /**
@@ -30,7 +24,7 @@ import com.deco2800.game.utils.StringDecorator;
 public class SettingsMenuDisplay extends UIComponent {
   private final GdxGame game;
 
-  private Table table;
+  private Table rootTable;
   private TextField fpsText;
   private CheckBox fullScreenCheck;
   private CheckBox vsyncCheck;
@@ -53,18 +47,18 @@ public class SettingsMenuDisplay extends UIComponent {
     Table settingsTable = makeSettingsTable();
     Table menuBtns = makeMenuBtns();
 
-    table = new Table();
-    table.setFillParent(true);
+    rootTable = new Table();
+    rootTable.setFillParent(true);
 
-    table.add(title).expandX().top().padTop(20f);
+    rootTable.add(title).expandX().top().padTop(20f);
 
-    table.row().padTop(30f);
-    table.add(settingsTable).expandX().expandY();
+    rootTable.row().padTop(30f);
+    rootTable.add(settingsTable).expandX().expandY();
 
-    table.row();
-    table.add(menuBtns).fillX();
+    rootTable.row();
+    rootTable.add(menuBtns).fillX();
 
-    stage.addActor(table);
+    stage.addActor(rootTable);
   }
 
   private Table makeSettingsTable() {
@@ -145,18 +139,6 @@ public class SettingsMenuDisplay extends UIComponent {
     return null;
   }
 
-  private Array<StringDecorator<Monitor>> getMonitors() {
-    Monitor[] monitors = Gdx.graphics.getMonitors();
-    Array<StringDecorator<Monitor>> arr = new Array<>();
-
-    for (int i = 0; i < monitors.length; i++) {
-      int finalI = i;
-      arr.add(new StringDecorator<>(monitors[i], (Monitor m) -> "Monitor " + finalI));
-    }
-
-    return arr;
-  }
-
   private Array<StringDecorator<DisplayMode>> getDisplayModes(Monitor monitor) {
     DisplayMode[] displayModes = Gdx.graphics.getDisplayModes(monitor);
     Array<StringDecorator<DisplayMode>> arr = new Array<>();
@@ -214,7 +196,7 @@ public class SettingsMenuDisplay extends UIComponent {
   }
 
   private void exitMenu() {
-    game.setScreen(ScreenType.MainMenu);
+    game.setScreen(ScreenType.MAIN_MENU);
   }
 
   private Integer parseOrNull(String num) {
@@ -237,7 +219,7 @@ public class SettingsMenuDisplay extends UIComponent {
 
   @Override
   public void dispose() {
-    table.clear();
+    rootTable.clear();
     super.dispose();
   }
 }

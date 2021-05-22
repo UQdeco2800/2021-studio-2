@@ -24,10 +24,12 @@ public class MainMenuDisplay extends UIComponent {
   private void addActors() {
     table = new Table();
     table.setFillParent(true);
-    Label gameTitle = new Label("Box Boy and the Ghosts", skin, "title");
+    new Label("Box Boy and the Ghosts", skin, "title");
 
-
-    Image title = new Image(ServiceLocator.getResourceService().getAsset("images/box_boy_title.png", Texture.class));
+    Image title =
+        new Image(
+            ServiceLocator.getResourceService()
+                .getAsset("images/box_boy_title.png", Texture.class));
 
     TextButton startBtn = new TextButton("Start", skin);
     TextButton loadBtn = new TextButton("Load", skin);

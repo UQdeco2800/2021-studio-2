@@ -13,6 +13,10 @@ public class PhysicsUtils {
     entity
         .getComponent(ColliderComponent.class)
         .setAsBoxAligned(
-            boundingBox, PhysicsComponent.AlignX.Center, PhysicsComponent.AlignY.Bottom);
+            boundingBox, PhysicsComponent.AlignX.CENTER, PhysicsComponent.AlignY.BOTTOM);
+  }
+
+  private PhysicsUtils() {
+    throw new IllegalStateException("Instantiating static util class");
   }
 }

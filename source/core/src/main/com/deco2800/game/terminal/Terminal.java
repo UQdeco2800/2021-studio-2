@@ -3,12 +3,13 @@ package com.deco2800.game.terminal;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.terminal.commands.Command;
 import com.deco2800.game.terminal.commands.DebugCommand;
-import java.util.Arrays;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * State tracker for a debug terminal. Any commands to be actioned through the terminal input should

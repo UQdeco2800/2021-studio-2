@@ -25,7 +25,7 @@ public class FileLoader {
    * @return instance of class, may be null
    */
   public static <T> T readClass(Class<T> type, String filename) {
-    return readClass(type, filename, Location.Internal);
+    return readClass(type, filename, Location.INTERNAL);
   }
 
   /**
@@ -65,7 +65,7 @@ public class FileLoader {
    * @param filename File to write to.
    */
   public static void writeClass(Object object, String filename) {
-    writeClass(object, filename, Location.External);
+    writeClass(object, filename, Location.EXTERNAL);
   }
 
   /**
@@ -84,15 +84,15 @@ public class FileLoader {
 
   private static FileHandle getFileHandle(String filename, Location location) {
     switch (location) {
-      case Classpath:
+      case CLASSPATH:
         return Gdx.files.classpath(filename);
-      case Internal:
+      case INTERNAL:
         return Gdx.files.internal(filename);
-      case Local:
+      case LOCAL:
         return Gdx.files.local(filename);
-      case External:
+      case EXTERNAL:
         return Gdx.files.external(filename);
-      case Absolute:
+      case ABSOLUTE:
         return Gdx.files.absolute(filename);
       default:
         return null;
@@ -100,10 +100,10 @@ public class FileLoader {
   }
 
   public enum Location {
-    Classpath,
-    Internal,
-    Local,
-    External,
-    Absolute
+    CLASSPATH,
+    INTERNAL,
+    LOCAL,
+    EXTERNAL,
+    ABSOLUTE
   }
 }

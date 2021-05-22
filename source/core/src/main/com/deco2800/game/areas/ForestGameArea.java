@@ -2,16 +2,16 @@ package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
-import com.deco2800.game.ui.GameAreaDisplay;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.ObstacleFactory;
-import com.deco2800.game.entities.factories.NPCFactory;
-import com.deco2800.game.entities.factories.PlayerFactory;
-import com.deco2800.game.math.RandomUtils;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.NPCFactory;
+import com.deco2800.game.entities.factories.ObstacleFactory;
+import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.GameAreaDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,9 @@ public class ForestGameArea extends GameArea {
     "images/iso_grass_2.png",
     "images/iso_grass_3.png"
   };
-  private static final String[] forestTextureAtlases = {"images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas"};
+  private static final String[] forestTextureAtlases = {
+    "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas"
+  };
   private static final String[] forestSounds = {"sounds/Impact4.ogg"};
   private static final String[] forestMusic = {"sounds/BGM_03_mp3.mp3"};
 
@@ -66,9 +68,9 @@ public class ForestGameArea extends GameArea {
   }
 
   private void displayUI() {
-    Entity UI = new Entity();
-    UI.addComponent(new GameAreaDisplay("Box Forest"));
-    spawnEntity(UI);
+    Entity ui = new Entity();
+    ui.addComponent(new GameAreaDisplay("Box Forest"));
+    spawnEntity(ui);
   }
 
   private void spawnTerrain() {
@@ -88,9 +90,9 @@ public class ForestGameArea extends GameArea {
   }
 
   private Entity spawnPlayer() {
-    Entity player = PlayerFactory.createPlayer();
-    spawnEntityAt(player, PLAYER_SPAWN, true, true);
-    return player;
+    Entity newPlayer = PlayerFactory.createPlayer();
+    spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
+    return newPlayer;
   }
 
   private void spawnGhosts() {
@@ -114,8 +116,7 @@ public class ForestGameArea extends GameArea {
   }
 
   private void playMusic() {
-    Music music =
-        ServiceLocator.getResourceService().getAsset("sounds/BGM_03_mp3.mp3", Music.class);
+    Music music = ServiceLocator.getResourceService().getAsset(forestMusic[0], Music.class);
     music.setLooping(true);
     music.setVolume(0.3f);
     music.play();
@@ -144,7 +145,7 @@ public class ForestGameArea extends GameArea {
   @Override
   public void dispose() {
     super.dispose();
-    ServiceLocator.getResourceService().getAsset("sounds/BGM_03_mp3.mp3", Music.class).stop();
+    ServiceLocator.getResourceService().getAsset(forestMusic[0], Music.class).stop();
     this.unloadAssets();
   }
 }

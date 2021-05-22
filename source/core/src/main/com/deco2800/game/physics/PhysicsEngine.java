@@ -1,11 +1,7 @@
 package com.deco2800.game.physics;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Joint;
-import com.badlogic.gdx.physics.box2d.JointDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.physics.raycast.AllHitCallback;
 import com.deco2800.game.physics.raycast.RaycastHit;
@@ -93,7 +89,7 @@ public class PhysicsEngine implements Disposable {
    * @return true if a collider was hit, false otherwise.
    */
   public boolean raycast(Vector2 from, Vector2 to, RaycastHit hit) {
-    return raycast(from, to, PhysicsLayer.All, hit);
+    return raycast(from, to, PhysicsLayer.ALL, hit);
   }
 
   /**
@@ -124,7 +120,7 @@ public class PhysicsEngine implements Disposable {
    * @return All hits made by the ray, unordered. Empty if no hits were made.
    */
   public RaycastHit[] raycastAll(Vector2 from, Vector2 to) {
-    return raycastAll(from, to, PhysicsLayer.All);
+    return raycastAll(from, to, PhysicsLayer.ALL);
   }
 
   /**

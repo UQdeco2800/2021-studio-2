@@ -6,7 +6,7 @@ package com.deco2800.game.ai.tasks;
  */
 public abstract class DefaultTask implements Task {
   protected TaskRunner owner;
-  protected Status status = Status.Inactive;
+  protected Status status = Status.INACTIVE;
 
   @Override
   public void create(TaskRunner taskRunner) {
@@ -15,7 +15,7 @@ public abstract class DefaultTask implements Task {
 
   @Override
   public void start() {
-    status = Status.Active;
+    status = Status.ACTIVE;
   }
 
   @Override
@@ -23,7 +23,7 @@ public abstract class DefaultTask implements Task {
 
   @Override
   public void stop() {
-    status = Status.Inactive;
+    status = Status.INACTIVE;
   }
 
   @Override

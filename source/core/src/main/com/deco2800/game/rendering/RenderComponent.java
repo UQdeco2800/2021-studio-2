@@ -1,7 +1,6 @@
 package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.services.ServiceLocator;

@@ -56,9 +56,9 @@ public class SettingsScreen extends ScreenAdapter {
 
   private void createUI() {
     Stage stage = ServiceLocator.getRenderService().getStage();
-    Entity UI = new Entity();
-    UI.addComponent(new SettingsMenuDisplay(game))
+    Entity ui = new Entity();
+    ui.addComponent(new SettingsMenuDisplay(game))
         .addComponent(new InputDecorator(stage, 10));
-    ServiceLocator.getEntityService().register(UI);
+    ServiceLocator.getEntityService().register(ui);
   }
 }

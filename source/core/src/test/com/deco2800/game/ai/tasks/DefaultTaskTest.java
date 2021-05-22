@@ -16,12 +16,12 @@ class DefaultTaskTest {
   void shouldHaveCorrectStatus() {
     DefaultTask task = spy(DefaultTask.class);
     Entity entity = new Entity();
-    assertEquals(Status.Inactive, task.getStatus());
+    assertEquals(Status.INACTIVE, task.getStatus());
 
     task.start();
-    assertEquals(Status.Active, task.getStatus());
+    assertEquals(Status.ACTIVE, task.getStatus());
 
     task.stop();
-    assertEquals(Status.Inactive, task.getStatus());
+    assertEquals(Status.INACTIVE, task.getStatus());
   }
 }

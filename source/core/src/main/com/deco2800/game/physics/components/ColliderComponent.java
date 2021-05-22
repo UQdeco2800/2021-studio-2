@@ -1,12 +1,7 @@
 package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Filter;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent.AlignX;
@@ -61,25 +56,27 @@ public class ColliderComponent extends Component {
   public ColliderComponent setAsBoxAligned(Vector2 size, AlignX alignX, AlignY alignY) {
     Vector2 position = new Vector2();
     switch (alignX) {
-      case Left:
+      case LEFT:
         position.x = size.x / 2;
         break;
-      case Center:
+      case CENTER:
         position.x = entity.getCenterPosition().x;
         break;
-      case Right:
+      case RIGHT:
         position.x = entity.getScale().x - (size.x / 2);
         break;
     }
 
     switch (alignY) {
-      case Bottom:
+      case BOTTOM:
         position.y = size.y / 2;
         break;
-      case Center:
+      case CENTER:
         position.y = entity.getCenterPosition().y;
-      case Top:
+        break;
+      case TOP:
         position.y = entity.getScale().y - (size.y / 2);
+        break;
     }
 
     return setAsBox(size, position);

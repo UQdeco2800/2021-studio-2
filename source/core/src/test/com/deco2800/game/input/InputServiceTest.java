@@ -1,15 +1,13 @@
 package com.deco2800.game.input;
 
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.spy;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.mockito.Mockito.*;
+
 @ExtendWith(GameExtension.class)
-public class InputServiceTest {
+class InputServiceTest {
 
   @Test
   void shouldRegisterInputHandler() {

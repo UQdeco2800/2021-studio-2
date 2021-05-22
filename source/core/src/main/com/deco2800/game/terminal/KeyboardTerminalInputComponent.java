@@ -2,8 +2,6 @@ package com.deco2800.game.terminal;
 
 import com.badlogic.gdx.Input;
 import com.deco2800.game.input.InputComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Input handler for the debug terminal for keyboard and touch (mouse) input.
@@ -12,9 +10,7 @@ import org.slf4j.LoggerFactory;
  * the keyboard.
  */
 public class KeyboardTerminalInputComponent extends InputComponent {
-  private static final Logger logger =
-      LoggerFactory.getLogger(KeyboardTerminalInputComponent.class);
-  private static final int toggleOpenKey = Input.Keys.F1;
+  private static final int TOGGLE_OPEN_KEY = Input.Keys.F1;
   private Terminal terminal;
 
   public KeyboardTerminalInputComponent() {
@@ -46,7 +42,7 @@ public class KeyboardTerminalInputComponent extends InputComponent {
   @Override
   public boolean keyDown(int keycode) {
     // handle open and close terminal
-    if (keycode == toggleOpenKey) {
+    if (keycode == TOGGLE_OPEN_KEY) {
       terminal.toggleIsOpen();
       return true;
     }

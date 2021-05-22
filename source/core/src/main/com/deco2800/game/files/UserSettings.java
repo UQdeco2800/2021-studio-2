@@ -3,6 +3,7 @@ package com.deco2800.game.files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.deco2800.game.files.FileLoader.Location;
+
 import java.io.File;
 
 /**
@@ -21,7 +22,7 @@ public class UserSettings {
    */
   public static Settings get() {
     String path = ROOT_DIR + File.separator + SETTINGS_FILE;
-    Settings fileSettings = FileLoader.readClass(Settings.class, path, Location.External);
+    Settings fileSettings = FileLoader.readClass(Settings.class, path, Location.EXTERNAL);
     // Use default values if file doesn't exist
     return fileSettings != null ? fileSettings : new Settings();
   }
@@ -33,7 +34,7 @@ public class UserSettings {
    */
   public static void set(Settings settings, boolean applyImmediate) {
     String path = ROOT_DIR + File.separator + SETTINGS_FILE;
-    FileLoader.writeClass(settings, path, Location.External);
+    FileLoader.writeClass(settings, path, Location.EXTERNAL);
 
     if (applyImmediate) {
       applySettings(settings);

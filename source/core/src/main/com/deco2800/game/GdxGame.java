@@ -1,7 +1,6 @@
 package com.deco2800.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.MainGameScreen;
@@ -20,7 +19,7 @@ public class GdxGame extends Game {
   @Override
   public void create() {
     loadSettings();
-    setScreen(ScreenType.MainMenu);
+    setScreen(ScreenType.MAIN_MENU);
   }
 
   private void loadSettings() {
@@ -43,11 +42,11 @@ public class GdxGame extends Game {
 
   private Screen newScreen(ScreenType screenType) {
     switch (screenType) {
-      case MainMenu:
+      case MAIN_MENU:
         return new MainMenuScreen(this);
-      case MainGame:
+      case MAIN_GAME:
         return new MainGameScreen(this);
-      case Settings:
+      case SETTINGS:
         return new SettingsScreen(this);
       default:
         return null;
@@ -55,7 +54,7 @@ public class GdxGame extends Game {
   }
 
   public enum ScreenType {
-    MainMenu, MainGame, Settings
+    MAIN_MENU, MAIN_GAME, SETTINGS
   }
 
   public void exit() {

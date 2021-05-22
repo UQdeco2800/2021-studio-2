@@ -1,11 +1,11 @@
 package com.deco2800.game.entities.factories;
 
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -15,8 +15,6 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Factory to create a player entity.
@@ -25,7 +23,6 @@ import org.slf4j.LoggerFactory;
  * the properties stores in 'PlayerConfig'.
  */
 public class PlayerFactory {
-  private static final Logger logger = LoggerFactory.getLogger(PlayerFactory.class);
   private static final PlayerConfig stats =
       FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
@@ -38,7 +35,7 @@ public class PlayerFactory {
             .addComponent(new TextureRenderComponent("images/box_boy_leaf.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new ColliderComponent())
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.Player))
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
             .addComponent(new PlayerActions())
             .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
             .addComponent(new InventoryComponent(stats.gold))
@@ -49,5 +46,9 @@ public class PlayerFactory {
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
     player.getComponent(TextureRenderComponent.class).scaleEntity();
     return player;
+  }
+
+  private PlayerFactory() {
+    throw new IllegalStateException("Instantiating static util class");
   }
 }

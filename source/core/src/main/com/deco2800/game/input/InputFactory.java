@@ -29,13 +29,13 @@ public abstract class InputFactory {
       return null;
     }
 
-    switch (inputType) {
-      case KEYBOARD:
-        return new KeyboardInputFactory();
-      default:
-        logger.error("Unrecognised input type: {} ", inputType);
-        return null;
+    if (inputType == InputType.KEYBOARD) {
+      return new KeyboardInputFactory();
     }
+    // Add other input forms here
+
+    logger.error("Unrecognised input type: {} ", inputType);
+    return null;
   }
 
   /**

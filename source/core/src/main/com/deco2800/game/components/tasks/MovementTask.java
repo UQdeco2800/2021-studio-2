@@ -1,8 +1,8 @@
 package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.ai.tasks.DefaultTask;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -47,7 +47,7 @@ public class MovementTask extends DefaultTask {
   public void update() {
     if (isAtTarget()) {
       movementComponent.setMoving(false);
-      status = Status.Finished;
+      status = Status.FINISHED;
       logger.debug("Finished moving to {}", target);
     } else {
       checkIfStuck();
@@ -76,7 +76,7 @@ public class MovementTask extends DefaultTask {
       lastPos = owner.getEntity().getPosition();
     } else if (gameTime.getTimeSince(lastTimeMoved) > 500L) {
       movementComponent.setMoving(false);
-      status = Status.Failed;
+      status = Status.FAILED;
       logger.debug("Got stuck! Failing movement task");
     }
   }

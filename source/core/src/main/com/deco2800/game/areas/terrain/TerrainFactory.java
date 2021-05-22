@@ -2,7 +2,6 @@ package com.deco2800.game.areas.terrain;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.math.RandomUtils;
@@ -31,7 +29,7 @@ public class TerrainFactory {
    */
   public TerrainFactory(CameraComponent cameraComponent) {
     this.camera = (OrthographicCamera)cameraComponent.getCamera();
-    this.orientation = TerrainOrientation.Orthogonal;
+    this.orientation = TerrainOrientation.ORTHOGONAL;
   }
 
   /**
@@ -94,11 +92,11 @@ public class TerrainFactory {
 
   private TiledMapRenderer createRenderer(TiledMap tiledMap, float tileScale) {
     switch (orientation) {
-      case Orthogonal:
+      case ORTHOGONAL:
         return new OrthogonalTiledMapRenderer(tiledMap, tileScale);
-      case Isometric:
+      case ISOMETRIC:
         return new IsometricTiledMapRenderer(tiledMap, tileScale);
-      case Hexagonal:
+      case HEXAGONAL:
         return new HexagonalTiledMapRenderer(tiledMap, tileScale);
       default:
         return null;
