@@ -109,7 +109,7 @@ public class Renderer implements Disposable {
   }
 
   private void resizeCamera(int screenWidth, int screenHeight) {
-    camera.resize(screenWidth, screenHeight);
+    camera.resize(screenWidth, screenHeight, gameWidth);
   }
 
   private void resizeStage(int screenWidth, int screenHeight) {
@@ -120,5 +120,9 @@ public class Renderer implements Disposable {
   public void dispose() {
     stage.dispose();
     batch.dispose();
+  }
+
+  public Stage getStage() {
+    return stage;
   }
 }

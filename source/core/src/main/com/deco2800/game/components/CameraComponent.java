@@ -19,18 +19,13 @@ public class CameraComponent extends Component {
   }
 
   @Override
-  public void create() {
-    // When the entity moves, update the camera to move too
-//    entity.getEvents().addListener("setPosition", this::onPositionChanged);
-  }
-
-  @Override
   public void update() {
     Vector2 position = entity.getPosition();
     if (!lastPosition.epsilonEquals(entity.getPosition())) {
-      camera.position.set(position, 0f);
+      camera.position.set(position.x, position.y, 0f);
+      lastPosition = position;
+      camera.update();
     }
-    camera.update();
   }
 
   public Matrix4 getProjectionMatrix() {
@@ -41,14 +36,10 @@ public class CameraComponent extends Component {
     return camera;
   }
 
-  public void resize(int width, int height) {
-    float ratio = (float) height / width;
-    camera.viewportWidth = width;
-    camera.viewportHeight = width * ratio;
+  public void resize(int screenWidth, int screenHeight, float gameWidth) {
+    float ratio = (float) screenHeight / screenWidth;
+    camera.viewportWidth = gameWidth;
+    camera.viewportHeight = gameWidth * ratio;
     camera.update();
-  }
-
-  private void onPositionChanged(Vector2 position) {
-    camera.position.set(position, 0f);
   }
 }

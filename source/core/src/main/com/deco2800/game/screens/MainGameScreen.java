@@ -32,7 +32,6 @@ import org.slf4j.LoggerFactory;
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private static final String[] mainGameTextures = {"images/heart.png"};
-  private static final Boolean DEBUG_MODE = true;
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -55,8 +54,6 @@ public class MainGameScreen extends ScreenAdapter {
 
     renderer = RenderFactory.createRenderer();
     renderer.getCamera().getEntity().setPosition(5f, 5f);
-
-    ServiceLocator.getRenderService().getDebug().setActive(DEBUG_MODE);
 
     loadAssets();
     createUI();

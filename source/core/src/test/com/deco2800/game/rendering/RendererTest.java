@@ -13,6 +13,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.deco2800.game.components.CameraComponent;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
@@ -42,11 +45,13 @@ class RendererTest {
 
   @Test
   void shouldResizeCamera() {
+    CameraComponent cameraComponent = makeCameraEntity(camera);
+
     when(stage.getViewport()).thenReturn(mock(Viewport.class));
     when(graphics.getWidth()).thenReturn(100);
     when(graphics.getHeight()).thenReturn(200);
     Renderer renderer =
-        new Renderer(camera, 10, spriteBatch, stage, renderService, debugRenderer);
+        new Renderer(cameraComponent, 10, spriteBatch, stage, renderService, debugRenderer);
 
     assertEquals(camera.position, Vector3.Zero);
     assertEquals(10, camera.viewportWidth);
@@ -59,11 +64,12 @@ class RendererTest {
 
   @Test
   void shouldResizeViewPort() {
+    CameraComponent cameraComponent = makeCameraEntity(camera);
     ScreenViewport screenViewport = spy(ScreenViewport.class);
     Stage stage = new Stage(screenViewport, spriteBatch);
 
     Renderer renderer =
-      new Renderer(camera, 10, spriteBatch, stage, renderService, debugRenderer);
+        new Renderer(cameraComponent, 10, spriteBatch, stage, renderService, debugRenderer);
 
     assertEquals(0, stage.getViewport().getScreenWidth());
     assertEquals(0, stage.getViewport().getScreenHeight());
@@ -76,9 +82,15 @@ class RendererTest {
 
   @Test
   void shouldRender() {
+    CameraComponent cameraComponent = makeCameraEntity(camera);
     Renderer renderer =
-        new Renderer(camera, 10, spriteBatch, stage, renderService, debugRenderer);
+        new Renderer(cameraComponent, 10, spriteBatch, stage, renderService, debugRenderer);
     renderer.render();
     verify(renderService).render(spriteBatch);
+  }
+
+  private static CameraComponent makeCameraEntity(Camera camera) {
+    Entity camEntity = new Entity().addComponent(new CameraComponent(camera));
+    return camEntity.getComponent(CameraComponent.class);
   }
 }
