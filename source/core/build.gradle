@@ -8,17 +8,16 @@ eclipse.project.name = appName + "-core"
 test {
     useJUnitPlatform()
     workingDir = new File("../core/assets")
+    finalizedBy jacocoTestReport
 
     jacoco {
         destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
     }
 }
 
-jacoco {
-    toolVersion = "0.8.6"
-}
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.enabled true
     }
