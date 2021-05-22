@@ -1,18 +1,15 @@
 package com.deco2800.game.terminal;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.*;
-
 import com.badlogic.gdx.Input;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(GameExtension.class)
-public class KeyboardTerminalInputComponentTest {
+class KeyboardTerminalInputComponentTest {
   @Test
   void shouldToggleTerminalOpenClose() {
     Terminal terminal = spy(Terminal.class);

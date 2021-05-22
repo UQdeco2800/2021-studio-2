@@ -1,10 +1,5 @@
 package com.deco2800.game.terminal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.terminal.commands.Command;
 import org.junit.jupiter.api.Test;
@@ -14,8 +9,12 @@ import org.mockito.ArgumentCaptor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(GameExtension.class)
-public class TerminalTest {
+class TerminalTest {
   Command command = mock(Command.class);
 
   @Test

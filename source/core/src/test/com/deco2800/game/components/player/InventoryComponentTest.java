@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(GameExtension.class)
-public class InventoryComponentTest {
+class InventoryComponentTest {
   @Test
   void shouldSetGetGold() {
     InventoryComponent inventory = new InventoryComponent(100);
