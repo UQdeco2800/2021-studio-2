@@ -11,7 +11,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
- * A UI component for displaying player stats, e.g. health.
+ * A ui component for displaying player stats, e.g. health.
  */
 public class PlayerStatsDisplay extends UIComponent {
   Table table;
@@ -19,7 +19,7 @@ public class PlayerStatsDisplay extends UIComponent {
   private Label healthLabel;
 
   /**
-   * Creates reusable UI styles and adds actors to the stage.
+   * Creates reusable ui styles and adds actors to the stage.
    */
   @Override
   public void create() {
@@ -61,7 +61,7 @@ public class PlayerStatsDisplay extends UIComponent {
   }
 
   /**
-   * Updates the player's health on the UI.
+   * Updates the player's health on the ui.
    * @param health player health
    */
   public void updatePlayerHealthUI(int health) {

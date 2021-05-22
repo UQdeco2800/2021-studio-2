@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
+import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
@@ -26,10 +27,10 @@ public class TerrainFactory {
   /**
    * Create a terrain factory with Orthogonal orientation
    *
-   * @param camera Camera to render terrains to
+   * @param cameraComponent Camera to render terrains to. Must be ortographic.
    */
-  public TerrainFactory(OrthographicCamera camera) {
-    this.camera = camera;
+  public TerrainFactory(CameraComponent cameraComponent) {
+    this.camera = (OrthographicCamera)cameraComponent.getCamera();
     this.orientation = TerrainOrientation.Orthogonal;
   }
 

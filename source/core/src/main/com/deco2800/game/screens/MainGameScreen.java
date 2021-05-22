@@ -1,8 +1,10 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.ui.PerformanceDisplay;
 import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
 import com.deco2800.game.terminal.Terminal;
@@ -50,8 +52,10 @@ public class MainGameScreen extends ScreenAdapter {
 
     ServiceLocator.registerEntityService(new EntityService());
     ServiceLocator.registerRenderService(new RenderService());
-    renderer = new Renderer();
-    renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
+
+    renderer = RenderFactory.createRenderer();
+    renderer.getCamera().getEntity().setPosition(5f, 5f);
+
     ServiceLocator.getRenderService().getDebug().setActive(DEBUG_MODE);
 
     loadAssets();

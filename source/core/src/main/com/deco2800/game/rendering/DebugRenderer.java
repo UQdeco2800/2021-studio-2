@@ -15,21 +15,25 @@ import org.slf4j.LoggerFactory;
 /** Provides functionality to draw lines/shapes to the screen for debug purposes. */
 public class DebugRenderer {
   private static final Logger logger = LoggerFactory.getLogger(DebugRenderer.class);
-  private final World physicsWorld;
-  private boolean active = true;
   private final Box2DDebugRenderer physicsRenderer;
   private final ShapeRenderer shapeRenderer;
+
+  private World physicsWorld;
+  private boolean active = true;
   private DrawRequest[] drawRequests = new DrawRequest[10];
   private int requestCount = 0;
 
   public DebugRenderer() {
-    physicsWorld = ServiceLocator.getPhysicsService().getPhysics().getWorld();
     physicsRenderer = new Box2DDebugRenderer();
     shapeRenderer = new ShapeRenderer();
 
     for (int i = 0; i < drawRequests.length; i++) {
       drawRequests[i] = new DrawRequest();
     }
+  }
+
+  public void renderPhysicsWorld(World physicsWorld) {
+    this.physicsWorld = physicsWorld;
   }
 
   /**
@@ -104,7 +108,10 @@ public class DebugRenderer {
     if (!active) {
       return;
     }
-    physicsRenderer.render(physicsWorld, projMatrix);
+
+    if (physicsWorld != null) {
+      physicsRenderer.render(physicsWorld, projMatrix);
+    }
 
     shapeRenderer.setProjectionMatrix(projMatrix);
     shapeRenderer.begin(ShapeType.Line);

@@ -2,13 +2,12 @@ package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsService;
+import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +17,10 @@ import org.slf4j.LoggerFactory;
  * renderables each frame.
  */
 public class Renderer implements Disposable {
-  private static final Logger logger = LoggerFactory.getLogger(Renderer.class);
   private static final float GAME_SCREEN_WIDTH = 20f;
+  private static final Logger logger = LoggerFactory.getLogger(Renderer.class);
 
-  private OrthographicCamera camera;
+  private CameraComponent camera;
   private float gameWidth;
   private SpriteBatch batch;
   private Stage stage;
@@ -29,10 +28,11 @@ public class Renderer implements Disposable {
   private DebugRenderer debugRenderer;
 
   /** Create a new renderer with default settings */
-  public Renderer() {
+  public Renderer(CameraComponent camera) {
     SpriteBatch spriteBatch = new SpriteBatch();
+
     init(
-        new OrthographicCamera(),
+        camera,
         GAME_SCREEN_WIDTH,
         spriteBatch,
         new Stage(new ScreenViewport(), spriteBatch),
@@ -49,7 +49,7 @@ public class Renderer implements Disposable {
    * @param batch Batch to render to.
    */
   public Renderer(
-      OrthographicCamera camera,
+      CameraComponent camera,
       float gameWidth,
       SpriteBatch batch,
       Stage stage,
@@ -59,7 +59,7 @@ public class Renderer implements Disposable {
   }
 
   private void init(
-      OrthographicCamera camera,
+      CameraComponent camera,
       float gameWidth,
       SpriteBatch batch,
       Stage stage,
@@ -75,24 +75,23 @@ public class Renderer implements Disposable {
 
     renderService.setStage(stage);
     renderService.setDebug(debugRenderer);
-    camera.position.set(0f, 0f, 0f);
     resizeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
   }
 
-  public OrthographicCamera getCamera() {
+  public CameraComponent getCamera() {
     return camera;
   }
 
   /** Render everything to the render service. */
   public void render() {
-    camera.update();
-    batch.setProjectionMatrix(camera.combined);
+    Matrix4 projMatrix = camera.getProjectionMatrix();
+    batch.setProjectionMatrix(projMatrix);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
     batch.begin();
     renderService.render(batch);
     batch.end();
-    debugRenderer.render(camera.combined);
+    debugRenderer.render(projMatrix);
 
     stage.act();
     stage.draw();
@@ -110,10 +109,7 @@ public class Renderer implements Disposable {
   }
 
   private void resizeCamera(int screenWidth, int screenHeight) {
-    float ratio = (float) screenHeight / screenWidth;
-    camera.viewportWidth = gameWidth;
-    camera.viewportHeight = gameWidth * ratio;
-    camera.update();
+    camera.resize(screenWidth, screenHeight);
   }
 
   private void resizeStage(int screenWidth, int screenHeight) {

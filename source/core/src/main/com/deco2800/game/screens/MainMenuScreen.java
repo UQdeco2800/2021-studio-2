@@ -9,6 +9,7 @@ import com.deco2800.game.components.mainmenu.MainMenuActions;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
@@ -34,14 +35,10 @@ public class MainMenuScreen extends ScreenAdapter {
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());
-
-    // for debug renderer
-    PhysicsService physicsService = new PhysicsService();
-    ServiceLocator.registerPhysicsService(physicsService);
-
     ServiceLocator.registerRenderService(new RenderService());
-    renderer = new Renderer();
-    renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
+
+    renderer = RenderFactory.createRenderer();
+    renderer.getCamera().getEntity().setPosition(5f, 5f);
 
     loadAssets();
     createUI();
@@ -97,6 +94,6 @@ public class MainMenuScreen extends ScreenAdapter {
     UI.addComponent(new MainMenuDisplay())
         .addComponent(new InputDecorator(stage, 10))
         .addComponent(new MainMenuActions(game));
-    ServiceLocator.getEntityService().register(ui);
+    ServiceLocator.getEntityService().register(UI);
   }
 }

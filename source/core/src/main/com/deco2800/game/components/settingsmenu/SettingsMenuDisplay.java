@@ -83,7 +83,7 @@ public class SettingsMenuDisplay extends UIComponent {
     vsyncCheck = new CheckBox("", skin);
     vsyncCheck.setChecked(settings.vsync);
 
-    Label uiScaleLabel = new Label("UI Scale (Unused):", skin);
+    Label uiScaleLabel = new Label("ui Scale (Unused):", skin);
     uiScaleSlider = new Slider(0.2f, 2f, 0.1f, false, skin);
     uiScaleSlider.setValue(settings.uiScale);
     Label uiScaleValue = new Label(String.format("%.2fx", settings.uiScale), skin);
@@ -147,7 +147,7 @@ public class SettingsMenuDisplay extends UIComponent {
 
   private Array<StringDecorator<Monitor>> getMonitors() {
     Monitor[] monitors = Gdx.graphics.getMonitors();
-    var arr = new Array<StringDecorator<Monitor>>();
+    Array<StringDecorator<Monitor>> arr = new Array<>();
 
     for (int i = 0; i < monitors.length; i++) {
       int finalI = i;
@@ -159,7 +159,7 @@ public class SettingsMenuDisplay extends UIComponent {
 
   private Array<StringDecorator<DisplayMode>> getDisplayModes(Monitor monitor) {
     DisplayMode[] displayModes = Gdx.graphics.getDisplayModes(monitor);
-    var arr = new Array<StringDecorator<DisplayMode>>();
+    Array<StringDecorator<DisplayMode>> arr = new Array<>();
 
     for (DisplayMode displayMode : displayModes) {
       arr.add(new StringDecorator<>(displayMode, this::prettyPrint));
