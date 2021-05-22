@@ -23,6 +23,7 @@ sonarqube {
 
 allprojects {
     apply plugin: "eclipse"
+    apply plugin: 'jacoco'
 
     version = '1.0'
     ext {

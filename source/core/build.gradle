@@ -8,6 +8,10 @@ eclipse.project.name = appName + "-core"
 test {
     useJUnitPlatform()
     workingDir = new File("../core/assets")
+
+    jacoco {
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+    }
 }
 
 javadoc {
