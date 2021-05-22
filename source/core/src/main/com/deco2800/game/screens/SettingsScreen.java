@@ -1,15 +1,14 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.settingsmenu.SettingsMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
+import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
-import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.ResourceService;
@@ -25,24 +24,19 @@ public class SettingsScreen extends ScreenAdapter {
   public SettingsScreen(GdxGame game) {
     this.game = game;
 
-    // TODO: Not all of these should be required
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());
-
-    // for debug renderer
-    PhysicsService physicsService = new PhysicsService();
-    ServiceLocator.registerPhysicsService(physicsService);
-
     ServiceLocator.registerRenderService(new RenderService());
-    renderer = new Renderer();
-    renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
+    renderer = RenderFactory.createRenderer();
+    renderer.getCamera().getEntity().setPosition(5f, 5f);
 
     createUI();
   }
 
   @Override
   public void render(float delta) {
+    ServiceLocator.getEntityService().update();
     renderer.render();
   }
 

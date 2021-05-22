@@ -1,8 +1,10 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.ui.PerformanceDisplay;
 import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
 import com.deco2800.game.terminal.Terminal;
@@ -30,7 +32,6 @@ import org.slf4j.LoggerFactory;
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private static final String[] mainGameTextures = {"images/heart.png"};
-  private static final Boolean DEBUG_MODE = true;
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -50,9 +51,9 @@ public class MainGameScreen extends ScreenAdapter {
 
     ServiceLocator.registerEntityService(new EntityService());
     ServiceLocator.registerRenderService(new RenderService());
-    renderer = new Renderer();
-    renderer.getCamera().position.set(new Vector3(5f, 5f, 0f));
-    ServiceLocator.getRenderService().getDebug().setActive(DEBUG_MODE);
+
+    renderer = RenderFactory.createRenderer();
+    renderer.getCamera().getEntity().setPosition(5f, 5f);
 
     loadAssets();
     createUI();

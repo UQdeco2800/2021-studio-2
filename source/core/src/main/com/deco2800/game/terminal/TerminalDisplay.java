@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.ui.UIComponent;
 
-/** A UI component for displaying the debug terminal. */
+/** A ui component for displaying the debug terminal. */
 public class TerminalDisplay extends UIComponent {
   private static final float zIndex = 10f;
   private Terminal terminal;

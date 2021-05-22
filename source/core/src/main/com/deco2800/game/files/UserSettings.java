@@ -85,7 +85,7 @@ public class UserSettings {
     public boolean fullscreen = true;
     public boolean vsync = true;
     /**
-     * UI Scale. Currently unused, but can be implemented.
+     * ui Scale. Currently unused, but can be implemented.
      */
     public float uiScale = 1f;
     public DisplaySettings displayMode = null;
