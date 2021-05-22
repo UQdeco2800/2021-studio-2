@@ -89,7 +89,7 @@ public class PhysicsEngine implements Disposable {
    * @return true if a collider was hit, false otherwise.
    */
   public boolean raycast(Vector2 from, Vector2 to, RaycastHit hit) {
-    return raycast(from, to, PhysicsLayer.All, hit);
+    return raycast(from, to, PhysicsLayer.ALL, hit);
   }
 
   /**
@@ -120,7 +120,7 @@ public class PhysicsEngine implements Disposable {
    * @return All hits made by the ray, unordered. Empty if no hits were made.
    */
   public RaycastHit[] raycastAll(Vector2 from, Vector2 to) {
-    return raycastAll(from, to, PhysicsLayer.All);
+    return raycastAll(from, to, PhysicsLayer.ALL);
   }
 
   /**

@@ -29,7 +29,7 @@ public class TerrainFactory {
    */
   public TerrainFactory(CameraComponent cameraComponent) {
     this.camera = (OrthographicCamera)cameraComponent.getCamera();
-    this.orientation = TerrainOrientation.Orthogonal;
+    this.orientation = TerrainOrientation.ORTHOGONAL;
   }
 
   /**
@@ -92,11 +92,11 @@ public class TerrainFactory {
 
   private TiledMapRenderer createRenderer(TiledMap tiledMap, float tileScale) {
     switch (orientation) {
-      case Orthogonal:
+      case ORTHOGONAL:
         return new OrthogonalTiledMapRenderer(tiledMap, tileScale);
-      case Isometric:
+      case ISOMETRIC:
         return new IsometricTiledMapRenderer(tiledMap, tileScale);
-      case Hexagonal:
+      case HEXAGONAL:
         return new HexagonalTiledMapRenderer(tiledMap, tileScale);
       default:
         return null;

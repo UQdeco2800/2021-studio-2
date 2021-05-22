@@ -9,19 +9,22 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Provides a global access point for handling user input and creating input handlers. All active
  * input handlers should be registered here.
  *
- * <p>When an input is received, it is passed to registered input handlers in ascending priority level
- * order and stops as soon as the input is handled.
+ * <p>When an input is received, it is passed to registered input handlers in ascending priority
+ * level order and stops as soon as the input is handled.
  */
 public class InputService implements InputProcessor, GestureDetector.GestureListener {
   private static final Logger logger = LoggerFactory.getLogger(InputService.class);
-
   private static final InputFactory.InputType inputType = InputFactory.InputType.KEYBOARD;
+
+  private static final Comparator<InputComponent> comparator =
+      Collections.reverseOrder(Comparator.comparingInt(InputComponent::getPriority));
 
   private List<InputComponent> inputHandlers = new ArrayList<>();
   private InputFactory inputFactory;
@@ -51,12 +54,13 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    */
   public void register(InputComponent inputHandler) {
     inputHandlers.add(inputHandler);
-    Collections.sort(inputHandlers);
+    inputHandlers.sort(comparator);
     logger.info("New input handler registered");
   }
 
   /**
    * Unregister an input handler
+   *
    * @param inputHandler
    */
   public void unregister(InputComponent inputHandler) {

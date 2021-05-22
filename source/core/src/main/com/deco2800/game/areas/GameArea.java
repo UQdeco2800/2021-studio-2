@@ -20,7 +20,7 @@ public abstract class GameArea implements Disposable {
   protected TerrainComponent terrain;
   protected List<Entity> areaEntities;
 
-  public GameArea() {
+  protected GameArea() {
     areaEntities = new ArrayList<>();
   }
 

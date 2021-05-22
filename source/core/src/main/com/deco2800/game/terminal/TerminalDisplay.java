@@ -6,7 +6,7 @@ import com.deco2800.game.ui.UIComponent;
 
 /** A ui component for displaying the debug terminal. */
 public class TerminalDisplay extends UIComponent {
-  private static final float zIndex = 10f;
+  private static final float Z_INDEX = 10f;
   private Terminal terminal;
   private Label label;
 
@@ -38,7 +38,7 @@ public class TerminalDisplay extends UIComponent {
 
   @Override
   public float getZIndex() {
-    return zIndex;
+    return Z_INDEX;
   }
 
   @Override

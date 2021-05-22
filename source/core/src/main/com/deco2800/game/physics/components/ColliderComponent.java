@@ -56,25 +56,27 @@ public class ColliderComponent extends Component {
   public ColliderComponent setAsBoxAligned(Vector2 size, AlignX alignX, AlignY alignY) {
     Vector2 position = new Vector2();
     switch (alignX) {
-      case Left:
+      case LEFT:
         position.x = size.x / 2;
         break;
-      case Center:
+      case CENTER:
         position.x = entity.getCenterPosition().x;
         break;
-      case Right:
+      case RIGHT:
         position.x = entity.getScale().x - (size.x / 2);
         break;
     }
 
     switch (alignY) {
-      case Bottom:
+      case BOTTOM:
         position.y = size.y / 2;
         break;
-      case Center:
+      case CENTER:
         position.y = entity.getCenterPosition().y;
-      case Top:
+        break;
+      case TOP:
         position.y = entity.getScale().y - (size.y / 2);
+        break;
     }
 
     return setAsBox(size, position);

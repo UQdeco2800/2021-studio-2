@@ -16,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 class TerrainComponentTest {
   @Test
   void shouldConvertPositionOrthogonal() {
-    TerrainComponent component = makeComponent(TerrainOrientation.Orthogonal, 3f);
+    TerrainComponent component = makeComponent(TerrainOrientation.ORTHOGONAL, 3f);
     assertEquals(new Vector2(0f, 0f), component.tileToWorldPosition(0, 0));
     assertEquals(new Vector2(6f, 12f), component.tileToWorldPosition(2, 4));
     assertEquals(new Vector2(-15f, -9f), component.tileToWorldPosition(-5, -3));
@@ -24,7 +24,7 @@ class TerrainComponentTest {
 
   @Test
   void shouldConvertPositionIsometric() {
-    TerrainComponent component = makeComponent(TerrainOrientation.Isometric, 3f);
+    TerrainComponent component = makeComponent(TerrainOrientation.ISOMETRIC, 3f);
     assertEquals(new Vector2(0f, 0f), component.tileToWorldPosition(0, 0));
     assertEquals(new Vector2(9f, 3f), component.tileToWorldPosition(2, 4));
     assertEquals(new Vector2(-12f, 3f), component.tileToWorldPosition(-5, -3));
@@ -32,7 +32,7 @@ class TerrainComponentTest {
 
   @Test
   void shouldConvertPositionHexagonal() {
-    TerrainComponent component = makeComponent(TerrainOrientation.Hexagonal, 3f);
+    TerrainComponent component = makeComponent(TerrainOrientation.HEXAGONAL, 3f);
   }
 
   private static TerrainComponent makeComponent(TerrainOrientation orientation, float tileSize) {

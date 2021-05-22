@@ -47,7 +47,7 @@ public class MovementTask extends DefaultTask {
   public void update() {
     if (isAtTarget()) {
       movementComponent.setMoving(false);
-      status = Status.Finished;
+      status = Status.FINISHED;
       logger.debug("Finished moving to {}", target);
     } else {
       checkIfStuck();
@@ -76,7 +76,7 @@ public class MovementTask extends DefaultTask {
       lastPos = owner.getEntity().getPosition();
     } else if (gameTime.getTimeSince(lastTimeMoved) > 500L) {
       movementComponent.setMoving(false);
-      status = Status.Failed;
+      status = Status.FAILED;
       logger.debug("Got stuck! Failing movement task");
     }
   }

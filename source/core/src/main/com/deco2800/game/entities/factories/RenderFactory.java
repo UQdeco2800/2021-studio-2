@@ -18,4 +18,8 @@ public class RenderFactory {
 
     return new Renderer(camComponent);
   }
+
+  private RenderFactory() {
+    throw new IllegalStateException("Instantiating static util class");
+  }
 }

@@ -50,7 +50,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
   public void update() {
     movementTask.setTarget(target.getPosition());
     movementTask.update();
-    if (movementTask.getStatus() != Status.Active) {
+    if (movementTask.getStatus() != Status.ACTIVE) {
       movementTask.start();
     }
   }
@@ -63,7 +63,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
 
   @Override
   public int getPriority() {
-    if (status == Status.Active) {
+    if (status == Status.ACTIVE) {
       return getActivePriority();
     }
 
@@ -95,7 +95,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     Vector2 to = target.getCenterPosition();
 
     // If there is an obstacle in the path to the player, not visible.
-    if (physics.raycast(from, to, PhysicsLayer.Obstacle, hit)) {
+    if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
       debugRenderer.drawLine(from, hit.point);
       return false;
     }

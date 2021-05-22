@@ -106,6 +106,7 @@ public class Renderer implements Disposable {
   public void resize(int width, int height) {
     resizeCamera(width, height);
     resizeStage(width, height);
+    logger.debug("Resizing to ({}x{})", width, height);
   }
 
   private void resizeCamera(int screenWidth, int screenHeight) {

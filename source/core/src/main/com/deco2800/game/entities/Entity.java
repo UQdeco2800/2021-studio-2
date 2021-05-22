@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 public class Entity {
   private static final Logger logger = LoggerFactory.getLogger(Entity.class);
   private static int nextId = 0;
+  private static final String EVT_NAME_POS = "setPosition";
 
   private final int id;
   private final IntMap<Component> components;
@@ -72,7 +73,7 @@ public class Entity {
    */
   public void setPosition(Vector2 position) {
     this.position = position.cpy();
-    getEvents().trigger("setPosition", position.cpy());
+    getEvents().trigger(EVT_NAME_POS, position.cpy());
   }
 
   /**
@@ -84,7 +85,7 @@ public class Entity {
   public void setPosition(float x, float y) {
     this.position.x = x;
     this.position.y = y;
-    getEvents().trigger("setPosition", position.cpy());
+    getEvents().trigger(EVT_NAME_POS, position.cpy());
   }
 
   /**
@@ -96,7 +97,7 @@ public class Entity {
   public void setPosition(Vector2 position, boolean notify) {
     this.position = position;
     if (notify) {
-      getEvents().trigger("setPosition", position);
+      getEvents().trigger(EVT_NAME_POS, position);
     }
   }
 

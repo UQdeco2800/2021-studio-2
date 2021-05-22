@@ -55,7 +55,7 @@ public class WanderTask extends DefaultTask implements PriorityTask {
 
   @Override
   public void update() {
-    if (currentTask.getStatus() != Status.Active) {
+    if (currentTask.getStatus() != Status.ACTIVE) {
       if (currentTask == movementTask) {
         startWaiting();
       } else {

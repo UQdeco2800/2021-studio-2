@@ -56,4 +56,8 @@ public class JobSystem {
   public static <T> CompletableFuture<T> launchBlocking(Supplier<T> supplier) {
     return CompletableFuture.supplyAsync(supplier, blockingExecutor);
   }
+
+  private JobSystem() {
+    throw new IllegalStateException("Instantiating static util class");
+  }
 }

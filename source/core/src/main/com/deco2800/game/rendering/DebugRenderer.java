@@ -56,7 +56,7 @@ public class DebugRenderer {
   public void drawLine(Vector2 from, Vector2 to, Color color, float lineWidth) {
     ensureCapacity();
     DrawRequest request = drawRequests[requestCount];
-    request.drawRequestType = DrawRequestType.Line;
+    request.drawRequestType = DrawRequestType.LINE;
     request.pos = from;
     request.end = to;
     request.color = color;
@@ -85,7 +85,7 @@ public class DebugRenderer {
   public void drawRectangle(Vector2 pos, Vector2 size, Color color, float lineWidth) {
     ensureCapacity();
     DrawRequest request = drawRequests[requestCount];
-    request.drawRequestType = DrawRequestType.Rect;
+    request.drawRequestType = DrawRequestType.RECT;
     request.pos = pos;
     request.end = size;
     request.color = color;
@@ -116,11 +116,14 @@ public class DebugRenderer {
     shapeRenderer.begin(ShapeType.Line);
     for (int i = 0; i < requestCount; i++) {
       switch (drawRequests[i].drawRequestType) {
-        case Line:
+        case LINE:
           renderLine(drawRequests[i]);
           break;
-        case Rect:
+        case RECT:
           renderRect(drawRequests[i]);
+          break;
+        default:
+          logger.error("Attempting to draw unsupported shape!");
           break;
       }
     }
@@ -170,7 +173,7 @@ public class DebugRenderer {
   }
 
   enum DrawRequestType {
-    Line,
-    Rect
+    LINE,
+    RECT
   }
 }

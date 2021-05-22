@@ -23,7 +23,7 @@ public class MainMenuActions extends Component {
 
   private void onStart() {
     logger.info("Start game");
-    game.setScreen(GdxGame.ScreenType.MainGame);
+    game.setScreen(GdxGame.ScreenType.MAIN_GAME);
   }
 
   private void onLoad() {
@@ -37,6 +37,6 @@ public class MainMenuActions extends Component {
 
   private void onSettings() {
     logger.info("Launching settings screen");
-    game.setScreen(GdxGame.ScreenType.Settings);
+    game.setScreen(GdxGame.ScreenType.SETTINGS);
   }
 }

@@ -21,14 +21,14 @@ class WaitTaskTest {
 
     WaitTask task = new WaitTask(5f);
     task.start();
-    assertEquals(Status.Active, task.getStatus());
+    assertEquals(Status.ACTIVE, task.getStatus());
 
     when(time.getTime()).thenReturn(5000L);
     task.update();
-    assertEquals(Status.Active, task.getStatus());
+    assertEquals(Status.ACTIVE, task.getStatus());
 
     when(time.getTime()).thenReturn(6100L);
     task.update();
-    assertEquals(Status.Finished, task.getStatus());
+    assertEquals(Status.FINISHED, task.getStatus());
   }
 }

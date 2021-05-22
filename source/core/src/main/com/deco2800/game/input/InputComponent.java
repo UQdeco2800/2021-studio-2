@@ -14,26 +14,25 @@ import com.deco2800.game.services.ServiceLocator;
  * priority is set in the subclass' constructor.
  */
 public abstract class InputComponent extends Component
-    implements InputProcessor, GestureDetector.GestureListener, Comparable<InputComponent> {
+    implements InputProcessor, GestureDetector.GestureListener {
   /** The priority that the input handler is visited in by InputService. */
   protected int priority;
 
   /**
    * Sets priority to default value;
    */
-  public InputComponent() {
+  protected InputComponent() {
     this(0);
   }
 
-  public InputComponent(int priority) {
+  protected InputComponent(int priority) {
     this.priority = priority;
   }
 
   // will sort in descending order
-  @Override
-  public int compareTo(InputComponent inputHandler) {
-    return Integer.compare(inputHandler.getPriority(), this.getPriority());
-  }
+//  public int compareTo(InputComponent inputHandler) {
+//    return Integer.compare(inputHandler.getPriority(), this.getPriority());
+//  }
 
   @Override
   public void create() {

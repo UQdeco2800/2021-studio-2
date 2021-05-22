@@ -42,8 +42,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.SPACE:
         entity.getEvents().trigger("attack");
         return true;
+      default:
+        return false;
     }
-    return false;
   }
 
   /**
@@ -71,8 +72,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         walkDirection.sub(Vector2Utils.RIGHT);
         triggerWalkEvent();
         return true;
+      default:
+        return false;
     }
-    return false;
   }
 
   private void triggerWalkEvent() {

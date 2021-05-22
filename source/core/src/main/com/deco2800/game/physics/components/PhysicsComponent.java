@@ -99,14 +99,14 @@ public class PhysicsComponent extends Component {
   }
 
   public enum AlignX {
-    Left,
-    Center,
-    Right
+    LEFT,
+    CENTER,
+    RIGHT
   }
 
   public enum AlignY {
-    Bottom,
-    Center,
-    Top
+    BOTTOM,
+    CENTER,
+    TOP
   }
 }

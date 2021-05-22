@@ -30,10 +30,14 @@ public class PhysicsContactListener implements ContactListener {
   }
 
   @Override
-  public void preSolve(Contact contact, Manifold oldManifold) {}
+  public void preSolve(Contact contact, Manifold oldManifold) {
+    // Nothing to do before resolving contact
+  }
 
   @Override
-  public void postSolve(Contact contact, ContactImpulse impulse) {}
+  public void postSolve(Contact contact, ContactImpulse impulse) {
+    // Nothing to do after resolving contact
+  }
 
   private void triggerEventOn(Fixture fixture, String evt, Fixture otherFixture) {
     BodyUserData userData = (BodyUserData) fixture.getBody().getUserData();

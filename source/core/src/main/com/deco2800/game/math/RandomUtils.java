@@ -12,4 +12,8 @@ public class RandomUtils {
   public static GridPoint2 random(GridPoint2 start, GridPoint2 end) {
     return new GridPoint2(MathUtils.random(start.x, end.x), MathUtils.random(start.y, end.y));
   }
+
+  private RandomUtils() {
+    throw new IllegalStateException("Instantiating static util class");
+  }
 }

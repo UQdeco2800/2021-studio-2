@@ -86,4 +86,8 @@ public class ServiceLocator {
     inputService = null;
     resourceService = null;
   }
+
+  private ServiceLocator() {
+    throw new IllegalStateException("Instantiating static util class");
+  }
 }
