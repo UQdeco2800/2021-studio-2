@@ -1,10 +1,5 @@
 package com.deco2800.game.components.tasks;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
@@ -18,6 +13,11 @@ import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class ChaseTaskTest {
@@ -71,12 +71,12 @@ class ChaseTaskTest {
 
     // When in view distance, should give higher priority
     target.setPosition(0f, 4f);
-    assertEquals(chaseTask.getPriority(), 10);
+    assertEquals(10, chaseTask.getPriority());
 
     // When active, should chase if within chase distance
     target.setPosition(0f, 8f);
     chaseTask.start();
-    assertEquals(chaseTask.getPriority(), 10);
+    assertEquals(10, chaseTask.getPriority());
 
     // When active, should not chase outside chase distance
     target.setPosition(0f, 12f);

@@ -29,11 +29,6 @@ public abstract class InputComponent extends Component
     this.priority = priority;
   }
 
-  // will sort in descending order
-//  public int compareTo(InputComponent inputHandler) {
-//    return Integer.compare(inputHandler.getPriority(), this.getPriority());
-//  }
-
   @Override
   public void create() {
     ServiceLocator.getInputService().register(this);

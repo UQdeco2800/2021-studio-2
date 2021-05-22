@@ -1,21 +1,16 @@
 package com.deco2800.game.rendering;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
@@ -25,6 +20,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
@@ -53,7 +51,7 @@ class RendererTest {
     Renderer renderer =
         new Renderer(cameraComponent, 10, spriteBatch, stage, renderService, debugRenderer);
 
-    assertEquals(camera.position, Vector3.Zero);
+    assertEquals(Vector3.Zero, camera.position);
     assertEquals(10, camera.viewportWidth);
     assertEquals(20, camera.viewportHeight);
 
