@@ -3,6 +3,7 @@ package com.deco2800.game.files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.deco2800.game.files.FileLoader.Location;
+
 import java.io.File;
 
 /**

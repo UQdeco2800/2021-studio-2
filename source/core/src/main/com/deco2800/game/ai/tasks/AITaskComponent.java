@@ -1,13 +1,10 @@
 package com.deco2800.game.ai.tasks;
 
 import com.deco2800.game.components.Component;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.NoSuchElementException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.*;
 
 /**
  * Task-based AI component. Given a list of tasks with priorities, the AI component will run the
