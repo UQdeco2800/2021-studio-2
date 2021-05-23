@@ -23,8 +23,12 @@ public class DebugRenderer {
   private int requestCount = 0;
 
   public DebugRenderer() {
-    physicsRenderer = new Box2DDebugRenderer();
-    shapeRenderer = new ShapeRenderer();
+    this(new Box2DDebugRenderer(), new ShapeRenderer());
+  }
+
+  public DebugRenderer(Box2DDebugRenderer physicsRenderer, ShapeRenderer shapeRenderer) {
+    this.physicsRenderer = physicsRenderer;
+    this.shapeRenderer = shapeRenderer;
 
     for (int i = 0; i < drawRequests.length; i++) {
       drawRequests[i] = new DrawRequest();
