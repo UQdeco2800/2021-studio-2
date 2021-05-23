@@ -272,7 +272,7 @@ public class Entity {
 
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof Entity && ((Entity) obj).id == this.id);
+    return (obj instanceof Entity && ((Entity) obj).getId() == this.getId());
   }
 
   @Override
