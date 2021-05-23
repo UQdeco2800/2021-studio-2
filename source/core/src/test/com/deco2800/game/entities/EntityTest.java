@@ -3,9 +3,13 @@ package com.deco2800.game.entities;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.Component;
@@ -93,6 +97,14 @@ class EntityTest {
   }
 
   @Test
+  void shouldRejectAfterCreate() {
+    Entity entity = new Entity();
+    entity.create();
+    entity.addComponent(new TestComponent1());
+    assertNull(entity.getComponent(TestComponent1.class));
+  }
+
+  @Test
   void shouldGetComponent() {
     Entity entity = new Entity();
     Component component1 = new TestComponent1();
@@ -135,6 +147,31 @@ class EntityTest {
     Entity entity2 = new Entity();
 
     assertNotEquals(entity1.getId(), entity2.getId());
+  }
+
+  @Test
+  void shouldEqualWithId() {
+    Entity entity1 = new Entity();
+    Entity entity2 = mock(Entity.class);
+    int id = entity1.getId();
+    when(entity2.getId()).thenReturn(id);
+
+    assertEquals(entity1, entity2);
+  }
+
+  @Test
+  void shouldNotUpdateIfDisabled() {
+    Entity entity = new Entity();
+    TestComponent1 component = spy(TestComponent1.class);
+    entity.addComponent(component);
+    entity.create();
+
+    entity.setEnabled(false);
+    entity.earlyUpdate();
+    entity.update();
+
+    verify(component, times(0)).earlyUpdate();
+    verify(component, times(0)).update();
   }
 
   static class TestComponent1 extends Component {}

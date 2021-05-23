@@ -4,12 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.math.Vector2Utils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsComponent.AlignX;
+import com.deco2800.game.physics.components.PhysicsComponent.AlignY;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,5 +97,44 @@ class ColliderComponentTest {
     component.setShape(shape);
     entity.create();
     assertEquals(shape.getType(), component.getFixture().getShape().getType());
+  }
+
+  @Test
+  void shouldSetBox() {
+    Entity entity = new Entity();
+    entity.addComponent(new PhysicsComponent());
+    ColliderComponent component = new ColliderComponent();
+    entity.addComponent(component);
+
+    entity.setScale(4f, 4f);
+    Vector2 box = new Vector2(2f, 2f);
+    component.setAsBox(box);
+    entity.create();
+
+    PhysicsTestUtils.checkPolygonCollider(component, box);
+    Vector2 pos = PhysicsTestUtils.getRectanglePosition(component);
+    assertEquals(Vector2Utils.ONE, pos);
+  }
+
+  @Test
+  void shouldSetAligned() {
+    testAlignedBox(AlignX.LEFT, AlignY.BOTTOM, Vector2.Zero);
+    testAlignedBox(AlignX.RIGHT, AlignY.TOP, new Vector2(2f, 2f));
+    testAlignedBox(AlignX.CENTER, AlignY.CENTER, new Vector2(1f, 1f));
+  }
+
+  private static void testAlignedBox(AlignX alignX, AlignY alignY, Vector2 position) {
+    Entity entity = new Entity();
+    entity.addComponent(new PhysicsComponent());
+    ColliderComponent component = new ColliderComponent();
+    entity.addComponent(component);
+
+    entity.setScale(4f, 4f);
+    Vector2 box = new Vector2(2f, 2f);
+    component.setAsBoxAligned(box, alignX, alignY);
+    entity.create();
+
+    Vector2 realPos = PhysicsTestUtils.getRectanglePosition(component);
+    assertEquals(position, realPos);
   }
 }
