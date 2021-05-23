@@ -49,32 +49,7 @@ class PhysicsUtilsTest {
     PhysicsUtils.setScaledCollider(entity, colliderScale.x, colliderScale.y);
     ServiceLocator.getEntityService().register(entity);
 
-    checkCollider(entity, entityScale.cpy().scl(colliderScale));
-  }
-
-  private void checkCollider(Entity entity, Vector2 scale) {
-    ColliderComponent collider = entity.getComponent(ColliderComponent.class);
-    Shape shape = collider.getFixture().getShape();
-    assertTrue(shape instanceof PolygonShape);
-
-    Vector2 bounds = getColliderBounds((PolygonShape) shape);
-    assertTrue(bounds.epsilonEquals(scale));
-  }
-
-  private Vector2 getColliderBounds(PolygonShape shape) {
-    Vector2 min = Vector2Utils.MAX.cpy();
-    Vector2 max = Vector2Utils.MIN.cpy();
-    Vector2 vect = new Vector2();
-
-    for (int i = 0; i < shape.getVertexCount(); i++) {
-      shape.getVertex(i, vect);
-      min.x = Math.min(min.x, vect.x);
-      min.y = Math.min(min.y, vect.y);
-
-      max.x = Math.max(max.x, vect.x);
-      max.y = Math.max(max.y, vect.y);
-    }
-
-    return max.sub(min);
+    PhysicsTestUtils.checkPolygonCollider(
+        entity.getComponent(ColliderComponent.class), entityScale.cpy().scl(colliderScale));
   }
 }
