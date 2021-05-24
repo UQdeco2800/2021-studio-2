@@ -19,6 +19,10 @@ import com.deco2800.game.services.ServiceLocator;
 
 /** Factory for creating game terrains. */
 public class TerrainFactory {
+  private static final GridPoint2 MAP_SIZE = new GridPoint2(30, 30);
+  private static final int TUFT_TILE_COUNT = 30;
+  private static final int ROCK_TILE_COUNT = 30;
+
   private final OrthographicCamera camera;
   private final TerrainOrientation orientation;
 
@@ -28,18 +32,17 @@ public class TerrainFactory {
    * @param cameraComponent Camera to render terrains to. Must be ortographic.
    */
   public TerrainFactory(CameraComponent cameraComponent) {
-    this.camera = (OrthographicCamera)cameraComponent.getCamera();
-    this.orientation = TerrainOrientation.ORTHOGONAL;
+    this(cameraComponent, TerrainOrientation.ORTHOGONAL);
   }
 
   /**
    * Create a terrain factory
    *
-   * @param camera Camera to render terrains to
+   * @param cameraComponent Camera to render terrains to. Must be orthographic.
    * @param orientation orientation to render terrain at
    */
-  public TerrainFactory(OrthographicCamera camera, TerrainOrientation orientation) {
-    this.camera = camera;
+  public TerrainFactory(CameraComponent cameraComponent, TerrainOrientation orientation) {
+    this.camera = (OrthographicCamera) cameraComponent.getCamera();
     this.orientation = orientation;
   }
 
@@ -63,11 +66,11 @@ public class TerrainFactory {
         return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
       case FOREST_DEMO_ISO:
         TextureRegion isoGrass =
-          new TextureRegion(resourceService.getAsset("images/iso_grass_1.png", Texture.class));
+            new TextureRegion(resourceService.getAsset("images/iso_grass_1.png", Texture.class));
         TextureRegion isoTuft =
-          new TextureRegion(resourceService.getAsset("images/iso_grass_2.png", Texture.class));
+            new TextureRegion(resourceService.getAsset("images/iso_grass_2.png", Texture.class));
         TextureRegion isoRocks =
-          new TextureRegion(resourceService.getAsset("images/iso_grass_3.png", Texture.class));
+            new TextureRegion(resourceService.getAsset("images/iso_grass_3.png", Texture.class));
         return createForestDemoTerrain(1f, isoGrass, isoTuft, isoRocks);
       case FOREST_DEMO_HEX:
         TextureRegion hexGrass =
@@ -106,39 +109,49 @@ public class TerrainFactory {
   private TiledMap createForestDemoTiles(
       GridPoint2 tileSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
     TiledMap tiledMap = new TiledMap();
-    GridPoint2 mapSize = new GridPoint2(20, 20);
     TerrainTile grassTile = new TerrainTile(grass);
     TerrainTile grassTuftTile = new TerrainTile(grassTuft);
     TerrainTile rockTile = new TerrainTile(rocks);
-    TiledMapTileLayer layer = new TiledMapTileLayer(mapSize.x, mapSize.y, tileSize.x, tileSize.y);
+    TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
 
     // Create base grass
-    for (int x = 0; x < 20; x++) {
-      for (int y = 0; y < 20; y++) {
-        Cell cell = new Cell();
-        cell.setTile(grassTile);
-        layer.setCell(x, y, cell);
-      }
-    }
+    fillTiles(layer, MAP_SIZE, grassTile);
 
-    // Add some tufts
-    for (int i = 0; i < 20; i++) {
-      GridPoint2 tilePos = RandomUtils.random(new GridPoint2(0, 0), new GridPoint2(19, 19));
-      Cell cell = layer.getCell(tilePos.x, tilePos.y);
-      cell.setTile(grassTuftTile);
-    }
-    // Add some rocks
-    for (int i = 0; i < 20; i++) {
-      GridPoint2 tilePos = RandomUtils.random(new GridPoint2(0, 0), new GridPoint2(19, 19));
-      Cell cell = layer.getCell(tilePos.x, tilePos.y);
-      cell.setTile(rockTile);
-    }
+    // Add some grass and rocks
+    fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
+    fillTilesAtRandom(layer, MAP_SIZE, rockTile, ROCK_TILE_COUNT);
 
     tiledMap.getLayers().add(layer);
-
     return tiledMap;
   }
 
+  private static void fillTilesAtRandom(
+      TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int amount) {
+    GridPoint2 min = new GridPoint2(0, 0);
+    GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
+
+    for (int i = 0; i < amount; i++) {
+      GridPoint2 tilePos = RandomUtils.random(min, max);
+      Cell cell = layer.getCell(tilePos.x, tilePos.y);
+      cell.setTile(tile);
+    }
+  }
+
+  private static void fillTiles(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile) {
+    for (int x = 0; x < mapSize.x; x++) {
+      for (int y = 0; y < mapSize.y; y++) {
+        Cell cell = new Cell();
+        cell.setTile(tile);
+        layer.setCell(x, y, cell);
+      }
+    }
+  }
+
+  /**
+   * This enum should contain the different terrains in your game, e.g. forest, cave, home, all with
+   * the same oerientation. But for demonstration purposes, the base code has the same level in 3
+   * different orientations.
+   */
   public enum TerrainType {
     FOREST_DEMO,
     FOREST_DEMO_ISO,
