@@ -35,8 +35,9 @@ public class PlayerStatsDisplay extends UIComponent {
    */
   private void addActors() {
     table = new Table();
-    table.align(Align.topLeft);
-    table.padTop(5f).padLeft(5f);
+    table.top().left();
+    table.setFillParent(true);
+    table.padTop(45f).padLeft(5f);
 
     // Heart image
     Float heartSideLength = 30f;
@@ -54,10 +55,6 @@ public class PlayerStatsDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch)  {
-    int screenHeight = stage.getViewport().getScreenHeight();
-    float offsetY = 40f;
-
-    table.setPosition(0,screenHeight - offsetY);
   }
 
   /**

@@ -209,7 +209,6 @@ public class SettingsMenuDisplay extends UIComponent {
 
   @Override
   protected void draw(SpriteBatch batch) {
-
   }
 
   @Override
