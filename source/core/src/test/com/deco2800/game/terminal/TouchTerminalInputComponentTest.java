@@ -1,6 +1,5 @@
 package com.deco2800.game.terminal;
 
-import com.badlogic.gdx.Input;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -56,5 +55,4 @@ class TouchTerminalInputComponentTest {
     when(terminal.isOpen()).thenReturn(false);
     assertFalse(terminalInput.keyDown('a'));
   }
-
 }
