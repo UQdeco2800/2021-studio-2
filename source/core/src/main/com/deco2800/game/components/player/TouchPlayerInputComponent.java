@@ -4,7 +4,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.math.Vector2Utils;
+import com.badlogic.gdx.InputProcessor;
 
+/**
+ * Input handler for the player for keyboard and touch (mouse) input.
+ * This input handler uses keyboard and touch input.
+ */
 public class TouchPlayerInputComponent extends InputComponent {
   private final Vector2 walkDirection = Vector2.Zero.cpy();
 
@@ -15,8 +20,8 @@ public class TouchPlayerInputComponent extends InputComponent {
   /**
    * Triggers player events on specific keycodes.
    *
-   * @param keycode one of the constants in {@link Input.Keys}
    * @return whether the input was processed
+   * @see InputProcessor#keyDown(int)
    */
   @Override
   public boolean keyDown(int keycode) {
@@ -45,8 +50,8 @@ public class TouchPlayerInputComponent extends InputComponent {
   /**
    * Triggers player events on specific keycodes.
    *
-   * @param keycode one of the constants in {@link Input.Keys}
    * @return whether the input was processed
+   * @see InputProcessor#keyUp(int)
    */
   @Override
   public boolean keyUp(int keycode) {
@@ -72,6 +77,11 @@ public class TouchPlayerInputComponent extends InputComponent {
     }
   }
 
+  /**
+   * Triggers the player attack.
+   * @return whether the input was processed
+   * @see InputProcessor#touchDown(int, int, int, int)
+   */
   @Override
   public boolean touchDown(int screenX, int screenY, int pointer, int button) {
     entity.getEvents().trigger("attack");

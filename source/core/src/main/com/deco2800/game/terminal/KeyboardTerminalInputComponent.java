@@ -1,10 +1,12 @@
 package com.deco2800.game.terminal;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.deco2800.game.input.InputComponent;
 
 /**
  * Input handler for the debug terminal for keyboard and touch (mouse) input.
+ * This input handler only uses keyboard input.
  *
  * <p>The debug terminal can be opened and closed by pressing 'F1' and a message can be entered via
  * the keyboard.
@@ -36,8 +38,8 @@ public class KeyboardTerminalInputComponent extends InputComponent {
    * triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
    * trigger any other input handlers.
    *
-   * @param keycode one of the constants in {@link Input.Keys}
    * @return whether the input was processed
+   * @see InputProcessor#keyDown(int)
    */
   @Override
   public boolean keyDown(int keycode) {
@@ -54,8 +56,8 @@ public class KeyboardTerminalInputComponent extends InputComponent {
    * Handles input if the terminal is open. If 'enter' is typed, the entered message will be
    * processed, otherwise the message will be updated with the new character.
    *
-   * @param character The character
    * @return whether the input was processed
+   * @see InputProcessor#keyTyped(char)
    */
   @Override
   public boolean keyTyped(char character) {
