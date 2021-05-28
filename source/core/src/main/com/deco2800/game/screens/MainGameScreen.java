@@ -2,13 +2,16 @@ package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputComponent;
+import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
@@ -19,6 +22,7 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.terminal.Terminal;
 import com.deco2800.game.terminal.TerminalDisplay;
+import com.deco2800.game.ui.MainGameExitDisplay;
 import com.deco2800.game.ui.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,14 +118,16 @@ public class MainGameScreen extends ScreenAdapter {
   }
 
   private void createUI() {
-    Entity ui = new Entity();
-    ui.addComponent(new PerformanceDisplay());
-
-    // Add terminal
+    Stage stage = ServiceLocator.getRenderService().getStage();
     InputComponent inputComponent =
-      ServiceLocator.getInputService().getInputFactory().createForTerminal();
+        ServiceLocator.getInputService().getInputFactory().createForTerminal();
 
-    ui.addComponent(new Terminal())
+    Entity ui = new Entity();
+      ui.addComponent(new InputDecorator(stage, 10))
+        .addComponent(new PerformanceDisplay())
+        .addComponent(new MainGameActions(this.game))
+        .addComponent(new MainGameExitDisplay())
+        .addComponent(new Terminal())
         .addComponent(inputComponent)
         .addComponent(new TerminalDisplay());
 

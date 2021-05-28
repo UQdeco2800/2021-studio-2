@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -24,8 +23,6 @@ public class MainMenuDisplay extends UIComponent {
   private void addActors() {
     table = new Table();
     table.setFillParent(true);
-    new Label("Box Boy and the Ghosts", skin, "title");
-
     Image title =
         new Image(
             ServiceLocator.getResourceService()
@@ -83,7 +80,6 @@ public class MainMenuDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch) {
-    stage.getRoot().draw(batch, 1f);
   }
 
   @Override
