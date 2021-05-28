@@ -53,8 +53,10 @@ class KeyboardTerminalInputComponentTest {
 
     when(terminal.isOpen()).thenReturn(true);
     assertTrue(terminalInput.keyDown('a'));
+    assertTrue(terminalInput.keyUp('a'));
 
     when(terminal.isOpen()).thenReturn(false);
     assertFalse(terminalInput.keyDown('a'));
+    assertFalse(terminalInput.keyUp('a'));
   }
 }

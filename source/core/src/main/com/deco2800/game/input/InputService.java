@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class InputService implements InputProcessor, GestureDetector.GestureListener {
   private static final Logger logger = LoggerFactory.getLogger(InputService.class);
-  private static final InputFactory.InputType inputType = InputFactory.InputType.TOUCH;
+  private static final InputFactory.InputType inputType = InputFactory.InputType.KEYBOARD;
 
   private static final Comparator<InputComponent> comparator =
       Collections.reverseOrder(Comparator.comparingInt(InputComponent::getPriority));
