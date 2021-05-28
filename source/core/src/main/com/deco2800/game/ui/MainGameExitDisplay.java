@@ -37,6 +37,7 @@ public class MainGameExitDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch) {
+    // draw is handled by stage
   }
 
   @Override
