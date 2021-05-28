@@ -9,21 +9,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
-class KeyboardTerminalInputComponentTest {
+class TouchTerminalInputComponentTest {
   @Test
-  void shouldToggleTerminalOpenClose() {
+  void shouldSetTerminalOpenClose() {
     Terminal terminal = spy(Terminal.class);
-    KeyboardTerminalInputComponent terminalInput = new KeyboardTerminalInputComponent(terminal);
+    TouchTerminalInputComponent terminalInput = new TouchTerminalInputComponent(terminal);
 
     terminal.setClosed();
 
-    terminalInput.keyDown(Input.Keys.F1);
+    terminalInput.scrolled(0, -1);
     assertTrue(terminal.isOpen());
 
-    terminalInput.keyDown(Input.Keys.F1);
+    terminalInput.scrolled(0, 1);
     assertFalse(terminal.isOpen());
 
-    verify(terminal, times(2)).toggleIsOpen();
     verify(terminal).setOpen();
     verify(terminal, times(2)).setClosed();
   }
@@ -57,4 +56,5 @@ class KeyboardTerminalInputComponentTest {
     when(terminal.isOpen()).thenReturn(false);
     assertFalse(terminalInput.keyDown('a'));
   }
+
 }
