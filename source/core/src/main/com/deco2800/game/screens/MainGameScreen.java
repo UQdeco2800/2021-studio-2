@@ -17,7 +17,6 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
 import com.deco2800.game.terminal.Terminal;
 import com.deco2800.game.terminal.TerminalDisplay;
 import com.deco2800.game.ui.PerformanceDisplay;

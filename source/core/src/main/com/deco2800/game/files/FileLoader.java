@@ -53,7 +53,8 @@ public class FileLoader {
       return null;
     }
     if (object == null) {
-      logger.error("Error creating {} class instance from {}", type.getSimpleName(), file.path());
+      String path = file.path();
+      logger.error("Error creating {} class instance from {}", type.getSimpleName(), path);
     }
     return object;
   }

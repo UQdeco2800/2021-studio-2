@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
  */
 public class TouchTerminalInputComponent extends InputComponent {
   Logger logger = LoggerFactory.getLogger(TouchTerminalInputComponent.class);
-  private static final int TOGGLE_OPEN_KEY = Input.Keys.F1;
   private Terminal terminal;
 
   public TouchTerminalInputComponent() {
