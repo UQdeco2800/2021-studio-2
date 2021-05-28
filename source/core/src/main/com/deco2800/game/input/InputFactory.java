@@ -31,8 +31,10 @@ public abstract class InputFactory {
 
     if (inputType == InputType.KEYBOARD) {
       return new KeyboardInputFactory();
+    } else if (inputType == InputType.TOUCH) {
+      return new TouchInputFactory();
     }
-    // Add other input forms here
+    // Add other input types here
 
     logger.error("Unrecognised input type: {} ", inputType);
     return null;

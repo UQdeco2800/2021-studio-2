@@ -46,10 +46,20 @@ public class Terminal extends Component {
    * cleared.
    */
   public void toggleIsOpen() {
-    isOpen = !isOpen;
-    if (!isOpen) {
-      setEnteredMessage("");
+    if (isOpen) {
+      this.setClosed();
+    } else {
+      this.setOpen();
     }
+  }
+
+  public void setOpen() {
+    isOpen = true;
+  }
+
+  public void setClosed() {
+    isOpen = false;
+    setEnteredMessage("");
   }
 
   /**

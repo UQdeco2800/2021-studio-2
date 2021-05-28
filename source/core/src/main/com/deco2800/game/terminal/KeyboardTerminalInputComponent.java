@@ -14,11 +14,11 @@ public class KeyboardTerminalInputComponent extends InputComponent {
   private Terminal terminal;
 
   public KeyboardTerminalInputComponent() {
-    this(new Terminal());
+    super(10);
   }
 
   public KeyboardTerminalInputComponent(Terminal terminal) {
-    super(10);
+    this();
     this.terminal = terminal;
   }
 
@@ -78,18 +78,5 @@ public class KeyboardTerminalInputComponent extends InputComponent {
       return true;
     }
     return false;
-  }
-
-  /**
-   * Handles input if the terminal is open. This is because keyUp events are triggered alongside
-   * keyTyped events. If the user is typing in the terminal, the input shouldn't trigger any other
-   * input handlers.
-   *
-   * @param keycode one of the constants in {@link Input.Keys}
-   * @return whether the input was processed
-   */
-  @Override
-  public boolean keyUp(int keycode) {
-    return terminal.isOpen();
   }
 }

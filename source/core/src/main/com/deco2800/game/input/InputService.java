@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class InputService implements InputProcessor, GestureDetector.GestureListener {
   private static final Logger logger = LoggerFactory.getLogger(InputService.class);
-  private static final InputFactory.InputType inputType = InputFactory.InputType.KEYBOARD;
+  private static final InputFactory.InputType inputType = InputFactory.InputType.TOUCH;
 
   private static final Comparator<InputComponent> comparator =
       Collections.reverseOrder(Comparator.comparingInt(InputComponent::getPriority));
@@ -160,7 +160,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @see InputProcessor#touchDown(int, int, int, int)
    */
   @Override
-  public boolean touchDown(float screenX, float screenY, int pointer, int button) {
+  public boolean touchDown(int screenX, int screenY, int pointer, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDown(screenX, screenY, pointer, button)) {
         return true;
@@ -329,7 +329,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @see GestureDetector.GestureListener#touchDown(float, float, int, int)
    */
   @Override
-  public boolean touchDown(int x, int y, int pointer, int button) {
+  public boolean touchDown(float x, float y, int pointer, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDown(x, y, pointer, button)) {
         return true;

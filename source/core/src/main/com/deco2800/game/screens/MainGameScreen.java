@@ -8,6 +8,7 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
@@ -118,8 +119,11 @@ public class MainGameScreen extends ScreenAdapter {
     ui.addComponent(new PerformanceDisplay());
 
     // Add terminal
+    InputComponent inputComponent =
+      ServiceLocator.getInputService().getInputFactory().createForTerminal();
+
     ui.addComponent(new Terminal())
-        .addComponent(new KeyboardTerminalInputComponent())
+        .addComponent(inputComponent)
         .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);
