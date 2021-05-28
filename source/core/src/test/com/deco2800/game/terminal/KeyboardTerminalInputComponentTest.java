@@ -46,15 +46,12 @@ class KeyboardTerminalInputComponentTest {
   @Test
   void shouldHandleMessageWhenTerminalOpen() {
     Terminal terminal = mock(Terminal.class);
-    when(terminal.isOpen()).thenReturn(true);
     KeyboardTerminalInputComponent terminalInput = new KeyboardTerminalInputComponent(terminal);
 
+    when(terminal.isOpen()).thenReturn(true);
     assertTrue(terminalInput.keyDown('a'));
-    assertTrue(terminalInput.keyUp('a'));
 
     when(terminal.isOpen()).thenReturn(false);
-
     assertFalse(terminalInput.keyDown('a'));
-    assertFalse(terminalInput.keyUp('a'));
   }
 }
