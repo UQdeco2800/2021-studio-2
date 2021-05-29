@@ -56,6 +56,7 @@ public class Terminal extends Component {
    * Opens the terminal.
    */
   public void setOpen() {
+    logger.debug("Opening terminal");
     isOpen = true;
   }
 
@@ -63,6 +64,7 @@ public class Terminal extends Component {
    * Closes the terminal and clears the stored message.
    */
   public void setClosed() {
+    logger.debug("Closing terminal");
     isOpen = false;
     setEnteredMessage("");
   }
@@ -74,6 +76,7 @@ public class Terminal extends Component {
    * @param command command
    */
   public void addCommand(String name, Command command) {
+    logger.debug("Adding command: {}", name);
     if (commands.containsKey(name)) {
       logger.error("Command {} is already registered", name);
     }
@@ -85,6 +88,7 @@ public class Terminal extends Component {
    * command, the command will be actioned.
    */
   public boolean processMessage() {
+    logger.debug("Processing message");
     // strip leading and trailing whitespace
     String message = enteredMessage.trim();
 
@@ -107,11 +111,13 @@ public class Terminal extends Component {
    * @param character character to append
    */
   public void appendToMessage(char character) {
+    logger.debug("Appending '{}' to message", character);
     enteredMessage = enteredMessage + character;
   }
 
   /** Removes the last character of the entered message. */
   public void handleBackspace() {
+    logger.debug("Handling backspace");
     int messageLength = enteredMessage.length();
     if (messageLength != 0) {
       enteredMessage = enteredMessage.substring(0, messageLength - 1);

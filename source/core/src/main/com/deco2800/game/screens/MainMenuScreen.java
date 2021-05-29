@@ -1,6 +1,5 @@
 package com.deco2800.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
@@ -30,6 +29,7 @@ public class MainMenuScreen extends ScreenAdapter {
   public MainMenuScreen(GdxGame game) {
     this.game = game;
 
+    logger.debug("Initialising main menu screen services");
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());
@@ -76,12 +76,14 @@ public class MainMenuScreen extends ScreenAdapter {
   }
 
   private void loadAssets() {
+    logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainMenuTextures);
     ServiceLocator.getResourceService().loadAll();
   }
 
   private void unloadAssets() {
+    logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainMenuTextures);
   }
@@ -91,6 +93,7 @@ public class MainMenuScreen extends ScreenAdapter {
    * capturing and handling ui input.
    */
   private void createUI() {
+    logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
     Entity ui = new Entity();
     ui.addComponent(new MainMenuDisplay())

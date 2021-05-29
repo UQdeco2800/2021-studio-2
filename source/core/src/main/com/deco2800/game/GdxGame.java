@@ -7,6 +7,8 @@ import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.screens.MainMenuScreen;
 import com.deco2800.game.screens.SettingsScreen;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.badlogic.gdx.Gdx.app;
 
@@ -16,9 +18,11 @@ import static com.badlogic.gdx.Gdx.app;
  * machine (See the State Pattern).
  */
 public class GdxGame extends Game {
+  private static final Logger logger = LoggerFactory.getLogger(GdxGame.class);
 
   @Override
   public void create() {
+    logger.info("Creating game");
     loadSettings();
 
     // Sets background to light yellow
@@ -31,6 +35,7 @@ public class GdxGame extends Game {
    * Loads the game's settings.
    */
   private void loadSettings() {
+    logger.debug("Loading game settings");
     UserSettings.Settings settings = UserSettings.get();
     UserSettings.applySettings(settings);
   }
@@ -40,6 +45,7 @@ public class GdxGame extends Game {
    * @param screenType screen type
    */
   public void setScreen(ScreenType screenType) {
+    logger.info("Setting game screen to {}", screenType.toString());
     Screen currentScreen = getScreen();
     if (currentScreen != null) {
       currentScreen.dispose();
@@ -49,6 +55,7 @@ public class GdxGame extends Game {
 
   @Override
   public void dispose() {
+    logger.debug("Disposing of current screen");
     getScreen().dispose();
   }
 

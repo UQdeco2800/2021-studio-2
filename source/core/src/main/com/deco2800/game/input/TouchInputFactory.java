@@ -2,8 +2,12 @@ package com.deco2800.game.input;
 
 import com.deco2800.game.components.player.TouchPlayerInputComponent;
 import com.deco2800.game.terminal.TouchTerminalInputComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TouchInputFactory extends InputFactory{
+  private static final Logger logger = LoggerFactory.getLogger(TouchInputFactory.class);
+
   /**
    * Creates an input handler for the player
    *
@@ -11,6 +15,7 @@ public class TouchInputFactory extends InputFactory{
    */
   @Override
   public InputComponent createForPlayer() {
+    logger.debug("Creating player input handler");
     return new TouchPlayerInputComponent();
   }
 
@@ -20,6 +25,7 @@ public class TouchInputFactory extends InputFactory{
    * @return Terminal input handler
    */
   public InputComponent createForTerminal() {
+    logger.debug("Creating terminal input handler");
     return new TouchTerminalInputComponent();
   }
 }

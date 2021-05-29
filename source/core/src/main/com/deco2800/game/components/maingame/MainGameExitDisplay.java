@@ -6,11 +6,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.ui.UIComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Displays a button to exit the Main Game screen to the Main Menu screen.
  */
 public class MainGameExitDisplay extends UIComponent {
+  private static final Logger logger = LoggerFactory.getLogger(MainGameExitDisplay.class);
   private static final float Z_INDEX = 2f;
   private Table table;
 
@@ -32,6 +35,7 @@ public class MainGameExitDisplay extends UIComponent {
       new ChangeListener() {
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
+          logger.debug("Exit button clicked");
           entity.getEvents().trigger("exit");
         }
       });

@@ -30,8 +30,10 @@ public abstract class InputFactory {
     }
 
     if (inputType == InputType.KEYBOARD) {
+      logger.debug("Creating keyboard input factory");
       return new KeyboardInputFactory();
     } else if (inputType == InputType.TOUCH) {
+      logger.debug("Creating touch input factory");
       return new TouchInputFactory();
     }
     // Add other input types here

@@ -65,14 +65,14 @@ public class KeyboardTerminalInputComponent extends InputComponent {
       return false;
     }
 
-    if (character == '\r' || character == '\n') {
+    if (character == '\b') {
+      terminal.handleBackspace();
+      return true;
+    } else if (character == '\r' || character == '\n') {
       if (terminal.processMessage()) {
         terminal.toggleIsOpen();
       }
       terminal.setEnteredMessage("");
-      return true;
-    } else if (character == '\b') {
-      terminal.handleBackspace();
       return true;
     } else if(Character.isLetterOrDigit(character) || character == ' ') {
       // append character to message

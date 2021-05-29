@@ -9,11 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A ui component for displaying the Main menu.
  */
 public class MainMenuDisplay extends UIComponent {
+  private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
   private static final float Z_INDEX = 2f;
   private Table table;
 
@@ -41,6 +44,7 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Start button clicked");
             entity.getEvents().trigger("start");
           }
         });
@@ -49,6 +53,7 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Load button clicked");
             entity.getEvents().trigger("load");
           }
         });
@@ -57,6 +62,7 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Settings button clicked");
             entity.getEvents().trigger("settings");
           }
         });
@@ -65,6 +71,8 @@ public class MainMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
+
+            logger.debug("Exit button clicked");
             entity.getEvents().trigger("exit");
           }
         });

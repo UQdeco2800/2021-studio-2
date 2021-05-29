@@ -2,6 +2,8 @@ package com.deco2800.game.components.npc;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class listens to events relevant to a ghost entity's state and plays the animation when one

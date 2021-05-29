@@ -107,12 +107,14 @@ public class MainGameScreen extends ScreenAdapter {
   }
 
   private void loadAssets() {
+    logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainGameTextures);
     ServiceLocator.getResourceService().loadAll();
   }
 
   private void unloadAssets() {
+    logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainGameTextures);
   }
@@ -122,6 +124,7 @@ public class MainGameScreen extends ScreenAdapter {
    * capturing and handling ui input.
    */
   private void createUI() {
+    logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
     InputComponent inputComponent =
         ServiceLocator.getInputService().getInputFactory().createForTerminal();

@@ -49,6 +49,7 @@ public class ResourceService implements Disposable {
    * @see AssetManager#finishLoading()
    * */
   public void loadAll() {
+    logger.debug("Loading all assets");
     try {
       assetManager.finishLoading();
     } catch (Exception e) {
@@ -64,6 +65,7 @@ public class ResourceService implements Disposable {
    * @return finished loading
    */
   public boolean loadForMillis(int duration) {
+    logger.debug("Loading assets for {} ms", duration);
     try {
       return assetManager.update(duration);
     } catch (Exception e) {
@@ -77,6 +79,7 @@ public class ResourceService implements Disposable {
    * @see AssetManager#clear()
    * */
   public void clearAllAssets() {
+    logger.debug("Clearing all assets");
     assetManager.clear();
   }
 
@@ -87,6 +90,7 @@ public class ResourceService implements Disposable {
    * @param <T> type
    */
   private <T> void loadAsset(String assetName, Class<T> type) {
+    logger.debug("Loading {}: {}", type.getSimpleName(), assetName);
     try {
       assetManager.load(assetName, type);
     } catch (Exception e) {
@@ -144,6 +148,7 @@ public class ResourceService implements Disposable {
 
   public void unloadAssets(String[] assetNames) {
     for (String assetName : assetNames) {
+      logger.debug("Unloading {}", assetName);
       try {
         assetManager.unload(assetName);
       } catch(Exception e) {

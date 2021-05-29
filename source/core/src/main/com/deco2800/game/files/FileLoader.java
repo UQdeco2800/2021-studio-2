@@ -39,6 +39,7 @@ public class FileLoader {
    * @return instance of class, may be null
    */
   public static <T> T readClass(Class<T> type, String filename, Location location) {
+    logger.debug("Reading class {} from {}", type.getSimpleName(), filename);
     FileHandle file = getFileHandle(filename, location);
     if (file == null) {
       logger.error("Failed to create file handle for {}", filename);
@@ -78,6 +79,7 @@ public class FileLoader {
    *     https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
    */
   public static void writeClass(Object object, String filename, Location location) {
+    logger.debug("Reading class {} from {}", object.getClass().getSimpleName(), filename);
     FileHandle file = getFileHandle(filename, location);
     assert file != null;
     file.writeString(json.prettyPrint(object), false);

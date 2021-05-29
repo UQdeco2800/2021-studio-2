@@ -6,7 +6,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -53,9 +52,9 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @param inputHandler input handler
    */
   public void register(InputComponent inputHandler) {
+    logger.info("Registering input handler {}", inputHandler);
     inputHandlers.add(inputHandler);
     inputHandlers.sort(comparator);
-    logger.info("New input handler registered");
   }
 
   /**
@@ -64,6 +63,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @param inputHandler input handler
    */
   public void unregister(InputComponent inputHandler) {
+    logger.info("Unregistering input handler {}", inputHandler);
     inputHandlers.remove(inputHandler);
   }
 
@@ -78,9 +78,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean keyDown(int keycode) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.keyDown(keycode)) {
+        logger.debug("keyDown input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("keyDown input was not handled");
     return false;
   }
 
@@ -95,9 +97,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean keyTyped(char character) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.keyTyped(character)) {
+        logger.debug("keyTyped input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("keyTyped input was not handled");
     return false;
   }
 
@@ -112,9 +116,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean keyUp(int keycode) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.keyUp(keycode)) {
+        logger.debug("keyUp input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("keyUp input was not handled");
     return false;
   }
 
@@ -129,9 +135,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean mouseMoved(int screenX, int screenY) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.mouseMoved(screenX, screenY)) {
+        logger.debug("mouseMoved input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("mouseMoved input was not handled");
     return false;
   }
 
@@ -146,9 +154,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean scrolled(float amountX, float amountY) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.scrolled(amountX, amountY)) {
+        logger.debug("scrolled input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("scrolled input was not handled");
     return false;
   }
 
@@ -163,9 +173,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean touchDown(int screenX, int screenY, int pointer, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDown(screenX, screenY, pointer, button)) {
+        logger.debug("touchDown input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("touchDown input was not handled");
     return false;
   }
 
@@ -180,9 +192,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean touchDragged(int screenX, int screenY, int pointer) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDragged(screenX, screenY, pointer)) {
+        logger.debug("touchDragged input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("touchDragged input was not handled");
     return false;
   }
 
@@ -197,9 +211,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean touchUp(int screenX, int screenY, int pointer, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchUp(screenX, screenY, pointer, button)) {
+        logger.debug("touchUp input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("touchUp input was not handled");
     return false;
   }
 
@@ -214,9 +230,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean fling(float velocityX, float velocityY, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.fling(velocityX, velocityY, button)) {
+        logger.debug("fling input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("fling input was not handled");
     return false;
   }
 
@@ -231,9 +249,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean longPress(float x, float y) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.longPress(x, y)) {
+        logger.debug("longPress input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("longPress input was not handled");
     return false;
   }
 
@@ -248,9 +268,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean pan(float x, float y, float deltaX, float deltaY) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.pan(x, y, deltaX, deltaY)) {
+        logger.debug("pan input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("pan input was not handled");
     return false;
   }
 
@@ -265,9 +287,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean panStop(float x, float y, int pointer, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.panStop(x, y, pointer, button)) {
+        logger.debug("panStop input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("panStop input was not handled");
     return false;
   }
 
@@ -283,9 +307,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
       Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.pinch(initialPointer1, initialPointer2, pointer1, pointer2)) {
+        logger.debug("pinch input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("pinch input was not handled");
     return false;
   }
 
@@ -299,9 +325,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public void pinchStop() {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.pinchStopHandled()) {
+        logger.debug("pinchStop input handled by {}", inputHandler);
         return;
       }
     }
+    logger.debug("pinchStop input was not handled");
   }
 
   /**
@@ -315,9 +343,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean tap(float x, float y, int count, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.tap(x, y, count, button)) {
+        logger.debug("tap input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("tap input was not handled");
     return false;
   }
 
@@ -332,9 +362,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean touchDown(float x, float y, int pointer, int button) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.touchDown(x, y, pointer, button)) {
+        logger.debug("touchDown (gesture) input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("touchDown input was not handled");
     return false;
   }
 
@@ -349,9 +381,11 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   public boolean zoom(float initialDistance, float distance) {
     for (InputComponent inputHandler : inputHandlers) {
       if (inputHandler.zoom(initialDistance, distance)) {
+        logger.debug("zoom input handled by {}", inputHandler);
         return true;
       }
     }
+    logger.debug("zoom input was not handled");
     return false;
   }
 }
