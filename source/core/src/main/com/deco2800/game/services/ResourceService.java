@@ -18,7 +18,7 @@ public class ResourceService implements Disposable {
   private final AssetManager assetManager;
 
   public ResourceService() {
-    this.assetManager = new AssetManager();
+    this(new AssetManager());
   }
 
   public ResourceService(AssetManager assetManager) {
