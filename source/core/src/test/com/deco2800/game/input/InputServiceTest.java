@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
