@@ -26,8 +26,8 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   private static final Comparator<InputComponent> comparator =
       Collections.reverseOrder(Comparator.comparingInt(InputComponent::getPriority));
 
-  private List<InputComponent> inputHandlers = new ArrayList<>();
-  private InputFactory inputFactory;
+  private final List<InputComponent> inputHandlers = new ArrayList<>();
+  private final InputFactory inputFactory;
 
   public InputService() {
     this(InputFactory.createFromInputType(inputType));
@@ -61,7 +61,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   /**
    * Unregister an input handler
    *
-   * @param inputHandler
+   * @param inputHandler input handler
    */
   public void unregister(InputComponent inputHandler) {
     inputHandlers.remove(inputHandler);
