@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public interface Command {
   /**
-   * Action command.
+   * Action a command.
    * @param args command args
    * @return command was successful
    */

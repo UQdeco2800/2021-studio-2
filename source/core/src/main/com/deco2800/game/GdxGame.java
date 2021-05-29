@@ -1,6 +1,7 @@
 package com.deco2800.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.MainGameScreen;
@@ -19,14 +20,25 @@ public class GdxGame extends Game {
   @Override
   public void create() {
     loadSettings();
+
+    // Sets background to light yellow
+    Gdx.gl.glClearColor(248f/255f, 249/255f, 178/255f, 1);
+
     setScreen(ScreenType.MAIN_MENU);
   }
 
+  /**
+   * Loads the game's settings.
+   */
   private void loadSettings() {
     UserSettings.Settings settings = UserSettings.get();
     UserSettings.applySettings(settings);
   }
 
+  /**
+   * Sets the game's screen to a new screen of the provided type.
+   * @param screenType screen type
+   */
   public void setScreen(ScreenType screenType) {
     Screen currentScreen = getScreen();
     if (currentScreen != null) {
@@ -40,6 +52,11 @@ public class GdxGame extends Game {
     getScreen().dispose();
   }
 
+  /**
+   * Create a new screen of the provided type.
+   * @param screenType screen type
+   * @return new screen
+   */
   private Screen newScreen(ScreenType screenType) {
     switch (screenType) {
       case MAIN_MENU:
@@ -57,6 +74,9 @@ public class GdxGame extends Game {
     MAIN_MENU, MAIN_GAME, SETTINGS
   }
 
+  /**
+   * Exit the game.
+   */
   public void exit() {
     app.exit();
   }

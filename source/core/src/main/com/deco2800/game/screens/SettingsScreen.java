@@ -1,5 +1,6 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
@@ -15,9 +16,7 @@ import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 
-/**
- * The game screen containing the settings.
- */
+/** The game screen containing the settings. */
 public class SettingsScreen extends ScreenAdapter {
   private final GdxGame game;
   private final Renderer renderer;
@@ -57,11 +56,14 @@ public class SettingsScreen extends ScreenAdapter {
     ServiceLocator.clear();
   }
 
+  /**
+   * Creates the setting screen's ui including components for rendering ui elements to the screen
+   * and capturing and handling ui input.
+   */
   private void createUI() {
     Stage stage = ServiceLocator.getRenderService().getStage();
     Entity ui = new Entity();
-    ui.addComponent(new SettingsMenuDisplay(game))
-        .addComponent(new InputDecorator(stage, 10));
+    ui.addComponent(new SettingsMenuDisplay(game)).addComponent(new InputDecorator(stage, 10));
     ServiceLocator.getEntityService().register(ui);
   }
 }

@@ -14,6 +14,11 @@ import com.deco2800.game.rendering.TextureRenderComponent;
  * <p>Each obstacle entity type should have a creation method that returns a corresponding entity.
  */
 public class ObstacleFactory {
+
+  /**
+   * Creates a tree entity.
+   * @return entity
+   */
   public static Entity createTree() {
     Entity tree =
         new Entity()

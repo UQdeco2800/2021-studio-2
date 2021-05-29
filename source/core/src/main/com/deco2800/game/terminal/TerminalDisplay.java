@@ -4,7 +4,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.ui.UIComponent;
 
-/** A ui component for displaying the debug terminal. */
+/**
+ * A ui component for displaying the debug terminal. The terminal is positioned at the bottom of the
+ * screen.
+ */
 public class TerminalDisplay extends UIComponent {
   private static final float Z_INDEX = 10f;
   private Terminal terminal;
@@ -18,7 +21,6 @@ public class TerminalDisplay extends UIComponent {
   }
 
   private void addActors() {
-    // label at bottom of screen with background
     String message = "";
     label = new Label("> " + message, skin);
     label.setPosition(5f, 0);

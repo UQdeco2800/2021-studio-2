@@ -1,11 +1,15 @@
-package com.deco2800.game.ui;
+package com.deco2800.game.components.maingame;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.deco2800.game.ui.UIComponent;
 
+/**
+ * Displays a button to exit the Main Game screen to the Main Menu screen.
+ */
 public class MainGameExitDisplay extends UIComponent {
   private static final float Z_INDEX = 2f;
   private Table table;
@@ -22,6 +26,8 @@ public class MainGameExitDisplay extends UIComponent {
     table.setFillParent(true);
 
     TextButton mainMenuBtn = new TextButton("Exit", skin);
+
+    // Triggers an event when the button is pressed.
     mainMenuBtn.addListener(
       new ChangeListener() {
         @Override
@@ -37,7 +43,7 @@ public class MainGameExitDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch) {
-    // draw is handled by stage
+    // draw is handled by the stage
   }
 
   @Override

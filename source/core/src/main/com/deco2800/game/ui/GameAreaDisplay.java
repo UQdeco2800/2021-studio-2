@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
+/**
+ * Displays the name of the current game area.
+ */
 public class GameAreaDisplay extends UIComponent {
   private String gameAreaName = "";
   private Label title;

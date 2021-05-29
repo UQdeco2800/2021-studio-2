@@ -16,8 +16,8 @@ import java.util.List;
  * Provides a global access point for handling user input and creating input handlers. All active
  * input handlers should be registered here.
  *
- * <p>When an input is received, it is passed to registered input handlers in ascending priority
- * level order and stops as soon as the input is handled.
+ * <p>When an input is received, it is passed to registered input handlers in descending priority
+ * order and stops as soon as the input is handled.
  */
 public class InputService implements InputProcessor, GestureDetector.GestureListener {
   private static final Logger logger = LoggerFactory.getLogger(InputService.class);
@@ -68,7 +68,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed.
    *
    * @return whether the input was processed
@@ -85,7 +85,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -102,7 +102,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -119,7 +119,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -136,7 +136,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -153,7 +153,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -170,7 +170,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -187,7 +187,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -204,7 +204,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -221,7 +221,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -238,7 +238,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -255,7 +255,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -272,7 +272,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -290,7 +290,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @see GestureDetector.GestureListener#pinchStop()
@@ -305,7 +305,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -322,7 +322,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed
@@ -339,7 +339,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
   }
 
   /**
-   * Iterates over registered input handlers in ascending priority and stops as soon as the input is
+   * Iterates over registered input handlers in descending priority and stops as soon as the input is
    * processed
    *
    * @return whether the input was processed

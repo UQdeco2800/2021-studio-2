@@ -7,7 +7,7 @@ import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
  */
 public class KeyboardInputFactory extends InputFactory {
     /**
-     * Creates an input handler for the player
+     * Creates an input handler for the player.
      * @return Player input handler
      */
     @Override
@@ -16,7 +16,7 @@ public class KeyboardInputFactory extends InputFactory {
     }
 
     /**
-     * Creates an input handler for the terminal
+     * Creates an input handler for the terminal.
      *
      * @return Terminal input handler
      */

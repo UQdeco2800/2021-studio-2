@@ -22,13 +22,13 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.terminal.Terminal;
 import com.deco2800.game.terminal.TerminalDisplay;
-import com.deco2800.game.ui.MainGameExitDisplay;
+import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.ui.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Runs the main game.
+ * The game screen containing the main game.
  *
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
@@ -117,13 +117,17 @@ public class MainGameScreen extends ScreenAdapter {
     resourceService.unloadAssets(mainGameTextures);
   }
 
+  /**
+   * Creates the main game's ui including components for rendering ui elements to the screen and
+   * capturing and handling ui input.
+   */
   private void createUI() {
     Stage stage = ServiceLocator.getRenderService().getStage();
     InputComponent inputComponent =
         ServiceLocator.getInputService().getInputFactory().createForTerminal();
 
     Entity ui = new Entity();
-      ui.addComponent(new InputDecorator(stage, 10))
+    ui.addComponent(new InputDecorator(stage, 10))
         .addComponent(new PerformanceDisplay())
         .addComponent(new MainGameActions(this.game))
         .addComponent(new MainGameExitDisplay())

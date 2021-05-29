@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.services.ServiceLocator;
 
+/**
+ * Displays performance stats about the game for debugging purposes.
+ */
 public class PerformanceDisplay extends UIComponent {
   private static final float Z_INDEX = 5f;
   private Label profileLabel;

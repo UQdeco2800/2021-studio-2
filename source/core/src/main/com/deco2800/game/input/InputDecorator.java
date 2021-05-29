@@ -2,6 +2,11 @@ package com.deco2800.game.input;
 
 import com.badlogic.gdx.InputProcessor;
 
+/**
+ * Generic class to wrap an InputProcessor so that it acts like an InputComponent. This was
+ * initially created to wrap the stage in, but can be used for any class that implements
+ * InputProcessor.
+ */
 public class InputDecorator extends InputComponent {
   private final InputProcessor inputProcessor;
 

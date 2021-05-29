@@ -18,6 +18,9 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The game screen containing the main menu.
+ */
 public class MainMenuScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
   private final GdxGame game;
@@ -26,9 +29,6 @@ public class MainMenuScreen extends ScreenAdapter {
 
   public MainMenuScreen(GdxGame game) {
     this.game = game;
-
-    // set background to light yellow
-    Gdx.gl.glClearColor(248f/255f, 249/255f, 178/255f, 1);
 
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
@@ -86,6 +86,10 @@ public class MainMenuScreen extends ScreenAdapter {
     resourceService.unloadAssets(mainMenuTextures);
   }
 
+  /**
+   * Creates the main menu's ui including components for rendering ui elements to the screen and
+   * capturing and handling ui input.
+   */
   private void createUI() {
     Stage stage = ServiceLocator.getRenderService().getStage();
     Entity ui = new Entity();

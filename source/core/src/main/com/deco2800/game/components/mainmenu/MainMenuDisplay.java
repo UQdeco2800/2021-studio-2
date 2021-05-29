@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
+/**
+ * A ui component for displaying the Main menu.
+ */
 public class MainMenuDisplay extends UIComponent {
   private static final float Z_INDEX = 2f;
   private Table table;
@@ -33,6 +36,7 @@ public class MainMenuDisplay extends UIComponent {
     TextButton settingsBtn = new TextButton("Settings", skin);
     TextButton exitBtn = new TextButton("Exit", skin);
 
+    // Triggers an event when the button is pressed
     startBtn.addListener(
         new ChangeListener() {
           @Override
@@ -80,7 +84,7 @@ public class MainMenuDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch) {
-    // draw is handled by stage
+    // draw is handled by the stage
   }
 
   @Override

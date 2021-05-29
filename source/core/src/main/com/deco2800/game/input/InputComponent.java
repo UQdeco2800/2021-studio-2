@@ -19,12 +19,16 @@ public abstract class InputComponent extends Component
   protected int priority;
 
   /**
-   * Sets priority to default value;
+   * Sets priority to the default value;
    */
   protected InputComponent() {
     this(0);
   }
 
+  /**
+   * Sets input handler priority to a given value.
+   * @param priority input handler's priority
+   */
   protected InputComponent(int priority) {
     this.priority = priority;
   }
@@ -140,7 +144,8 @@ public abstract class InputComponent extends Component
   public void pinchStop() {}
 
   /**
-   * Wrapper for pinch stop that returns true if the input was process.
+   * Wrapper for pinch stop that can be overridden.
+   * This was created because the pinchStop() doesn't have a return value.
    *
    * @return whether the input was processed
    */

@@ -54,7 +54,7 @@ public class PlayerStatsDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch)  {
-    // draw is handled by stage
+    // draw is handled by the stage
   }
 
   /**

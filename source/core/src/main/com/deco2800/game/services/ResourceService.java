@@ -80,6 +80,12 @@ public class ResourceService implements Disposable {
     assetManager.clear();
   }
 
+  /**
+   * Loads a single asset into the asset manager.
+   * @param assetName asset name
+   * @param type asset type
+   * @param <T> type
+   */
   private <T> void loadAsset(String assetName, Class<T> type) {
     try {
       assetManager.load(assetName, type);
@@ -88,6 +94,12 @@ public class ResourceService implements Disposable {
     }
   }
 
+  /**
+   * Loads multiple assets into the asset manager.
+   * @param assetNames list of asset names
+   * @param type asset type
+   * @param <T> type
+   */
   private <T> void loadAssets(String[] assetNames, Class<T> type) {
     for (String resource : assetNames) {
       loadAsset(resource, type);

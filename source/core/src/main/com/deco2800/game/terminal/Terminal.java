@@ -42,8 +42,7 @@ public class Terminal extends Component {
   }
 
   /**
-   * Toggles between the terminal being open and closed. When closed, the terminal message will be
-   * cleared.
+   * Toggles between the terminal being open and closed.
    */
   public void toggleIsOpen() {
     if (isOpen) {
@@ -53,10 +52,16 @@ public class Terminal extends Component {
     }
   }
 
+  /**
+   * Opens the terminal.
+   */
   public void setOpen() {
     isOpen = true;
   }
 
+  /**
+   * Closes the terminal and clears the stored message.
+   */
   public void setClosed() {
     isOpen = false;
     setEnteredMessage("");

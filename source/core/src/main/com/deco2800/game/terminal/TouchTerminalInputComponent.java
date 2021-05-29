@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
  * the keyboard.
  */
 public class TouchTerminalInputComponent extends InputComponent {
-  Logger logger = LoggerFactory.getLogger(TouchTerminalInputComponent.class);
   private Terminal terminal;
 
   public TouchTerminalInputComponent() {
