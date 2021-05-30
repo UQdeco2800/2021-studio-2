@@ -1,4 +1,4 @@
-package com.deco2800.game.terminal.commands;
+package com.deco2800.game.ui.terminal.commands;
 
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;

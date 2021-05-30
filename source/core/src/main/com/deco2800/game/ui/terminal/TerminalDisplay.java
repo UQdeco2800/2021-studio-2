@@ -1,4 +1,4 @@
-package com.deco2800.game.terminal;
+package com.deco2800.game.ui.terminal;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.deco2800.game.math.Vector2Utils;
+import com.deco2800.game.utils.math.Vector2Utils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import net.dermetfan.utils.Pair;
 

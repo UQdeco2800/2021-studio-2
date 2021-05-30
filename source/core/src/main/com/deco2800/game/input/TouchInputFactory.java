@@ -1,7 +1,7 @@
 package com.deco2800.game.input;
 
 import com.deco2800.game.components.player.TouchPlayerInputComponent;
-import com.deco2800.game.terminal.TouchTerminalInputComponent;
+import com.deco2800.game.ui.terminal.TouchTerminalInputComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

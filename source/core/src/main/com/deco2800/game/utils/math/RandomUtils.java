@@ -1,4 +1,4 @@
-package com.deco2800.game.math;
+package com.deco2800.game.utils.math;
 
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.MathUtils;

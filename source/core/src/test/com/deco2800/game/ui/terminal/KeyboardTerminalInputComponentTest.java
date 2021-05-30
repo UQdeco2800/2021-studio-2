@@ -1,4 +1,4 @@
-package com.deco2800.game.terminal;
+package com.deco2800.game.ui.terminal;
 
 import com.badlogic.gdx.Input;
 import com.deco2800.game.extensions.GameExtension;

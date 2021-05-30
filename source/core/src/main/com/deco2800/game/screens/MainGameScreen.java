@@ -20,10 +20,10 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.terminal.Terminal;
-import com.deco2800.game.terminal.TerminalDisplay;
+import com.deco2800.game.ui.terminal.Terminal;
+import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
-import com.deco2800.game.ui.PerformanceDisplay;
+import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,10 +1,7 @@
-package com.deco2800.game.terminal;
+package com.deco2800.game.ui.terminal;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.deco2800.game.input.InputComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Input handler for the debug terminal for keyboard and touch (mouse) input.

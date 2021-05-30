@@ -1,7 +1,7 @@
-package com.deco2800.game.terminal;
+package com.deco2800.game.ui.terminal;
 
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.terminal.commands.Command;
+import com.deco2800.game.ui.terminal.commands.Command;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
