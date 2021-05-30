@@ -52,7 +52,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @param inputHandler input handler
    */
   public void register(InputComponent inputHandler) {
-    logger.info("Registering input handler {}", inputHandler);
+    logger.debug("Registering input handler {}", inputHandler);
     inputHandlers.add(inputHandler);
     inputHandlers.sort(comparator);
   }
@@ -63,7 +63,7 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
    * @param inputHandler input handler
    */
   public void unregister(InputComponent inputHandler) {
-    logger.info("Unregistering input handler {}", inputHandler);
+    logger.debug("Unregistering input handler {}", inputHandler);
     inputHandlers.remove(inputHandler);
   }
 

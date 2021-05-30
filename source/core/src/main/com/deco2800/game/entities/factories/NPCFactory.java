@@ -22,8 +22,6 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Factory to create non-playable character (NPC) entities with predefined components.

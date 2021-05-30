@@ -45,7 +45,7 @@ public class GdxGame extends Game {
    * @param screenType screen type
    */
   public void setScreen(ScreenType screenType) {
-    logger.info("Setting game screen to {}", screenType.toString());
+    logger.info("Setting game screen to {}", screenType);
     Screen currentScreen = getScreen();
     if (currentScreen != null) {
       currentScreen.dispose();
