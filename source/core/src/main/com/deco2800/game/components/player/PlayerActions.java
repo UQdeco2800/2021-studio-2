@@ -43,7 +43,7 @@ public class PlayerActions extends Component {
   }
 
   /**
-   * Method to move the player in a given direction.
+   * Moves the player towards a given direction.
    *
    * @param direction direction to move in
    */
@@ -52,13 +52,18 @@ public class PlayerActions extends Component {
     moving = true;
   }
 
+  /**
+   * Stops the player from walking.
+   */
   void stopWalking() {
     this.walkDirection = Vector2.Zero.cpy();
     updateSpeed();
     moving = false;
   }
 
-  /** Placeholder method to make the player attack. */
+  /**
+   * Makes the player attack.
+   */
   void attack() {
     Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
     attackSound.play();

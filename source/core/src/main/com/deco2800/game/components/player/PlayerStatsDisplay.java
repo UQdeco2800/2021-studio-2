@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -35,11 +34,12 @@ public class PlayerStatsDisplay extends UIComponent {
    */
   private void addActors() {
     table = new Table();
-    table.align(Align.topLeft);
-    table.padTop(5f).padLeft(5f);
+    table.top().left();
+    table.setFillParent(true);
+    table.padTop(45f).padLeft(5f);
 
     // Heart image
-    Float heartSideLength = 30f;
+    float heartSideLength = 30f;
     heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
 
     // Health text
@@ -54,10 +54,7 @@ public class PlayerStatsDisplay extends UIComponent {
 
   @Override
   public void draw(SpriteBatch batch)  {
-    int screenHeight = stage.getViewport().getScreenHeight();
-    float offsetY = 40f;
-
-    table.setPosition(0,screenHeight - offsetY);
+    // draw is handled by the stage
   }
 
   /**

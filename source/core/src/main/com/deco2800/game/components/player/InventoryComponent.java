@@ -47,7 +47,7 @@ public class InventoryComponent extends Component {
     } else {
       this.gold = 0;
     }
-    logger.info("Setting gold to {}", this.gold);
+    logger.debug("Setting gold to {}", this.gold);
   }
 
   /**

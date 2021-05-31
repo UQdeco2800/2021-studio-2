@@ -1,7 +1,7 @@
-package com.deco2800.game.terminal;
+package com.deco2800.game.ui.terminal;
 
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.terminal.commands.Command;
+import com.deco2800.game.ui.terminal.commands.Command;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -9,8 +9,7 @@ import org.mockito.ArgumentCaptor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
@@ -18,14 +17,29 @@ class TerminalTest {
   Command command = mock(Command.class);
 
   @Test
+  void shouldSetOpenClosed() {
+    Terminal terminal = spy(Terminal.class);
+
+    terminal.setClosed();
+    assertFalse(terminal.isOpen());
+
+    terminal.setOpen();
+    assertTrue(terminal.isOpen());
+
+    terminal.setClosed();
+    assertFalse(terminal.isOpen());
+  }
+
+  @Test
   void shouldToggleIsOpen() {
     Terminal terminal = spy(Terminal.class);
-    boolean startingIsOpen = terminal.isOpen();
+
+    terminal.setClosed();
 
     terminal.toggleIsOpen();
-    assertNotEquals(terminal.isOpen(), startingIsOpen);
+    assertTrue(terminal.isOpen());
     terminal.toggleIsOpen();
-    assertEquals(terminal.isOpen(), startingIsOpen);
+    assertFalse(terminal.isOpen());
   }
 
   @Test

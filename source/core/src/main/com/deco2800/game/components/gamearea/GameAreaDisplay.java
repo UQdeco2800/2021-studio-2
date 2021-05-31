@@ -1,9 +1,13 @@
-package com.deco2800.game.ui;
+package com.deco2800.game.components.gamearea;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.deco2800.game.ui.UIComponent;
 
+/**
+ * Displays the name of the current game area.
+ */
 public class GameAreaDisplay extends UIComponent {
   private String gameAreaName = "";
   private Label title;

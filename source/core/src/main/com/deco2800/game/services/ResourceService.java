@@ -18,7 +18,7 @@ public class ResourceService implements Disposable {
   private final AssetManager assetManager;
 
   public ResourceService() {
-    this.assetManager = new AssetManager();
+    this(new AssetManager());
   }
 
   public ResourceService(AssetManager assetManager) {
@@ -49,6 +49,7 @@ public class ResourceService implements Disposable {
    * @see AssetManager#finishLoading()
    * */
   public void loadAll() {
+    logger.debug("Loading all assets");
     try {
       assetManager.finishLoading();
     } catch (Exception e) {
@@ -64,6 +65,7 @@ public class ResourceService implements Disposable {
    * @return finished loading
    */
   public boolean loadForMillis(int duration) {
+    logger.debug("Loading assets for {} ms", duration);
     try {
       return assetManager.update(duration);
     } catch (Exception e) {
@@ -77,10 +79,18 @@ public class ResourceService implements Disposable {
    * @see AssetManager#clear()
    * */
   public void clearAllAssets() {
+    logger.debug("Clearing all assets");
     assetManager.clear();
   }
 
+  /**
+   * Loads a single asset into the asset manager.
+   * @param assetName asset name
+   * @param type asset type
+   * @param <T> type
+   */
   private <T> void loadAsset(String assetName, Class<T> type) {
+    logger.debug("Loading {}: {}", type.getSimpleName(), assetName);
     try {
       assetManager.load(assetName, type);
     } catch (Exception e) {
@@ -88,6 +98,12 @@ public class ResourceService implements Disposable {
     }
   }
 
+  /**
+   * Loads multiple assets into the asset manager.
+   * @param assetNames list of asset names
+   * @param type asset type
+   * @param <T> type
+   */
   private <T> void loadAssets(String[] assetNames, Class<T> type) {
     for (String resource : assetNames) {
       loadAsset(resource, type);
@@ -132,6 +148,7 @@ public class ResourceService implements Disposable {
 
   public void unloadAssets(String[] assetNames) {
     for (String assetName : assetNames) {
+      logger.debug("Unloading {}", assetName);
       try {
         assetManager.unload(assetName);
       } catch(Exception e) {

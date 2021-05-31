@@ -1,12 +1,17 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.input.InputComponent;
+import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsService;
@@ -15,21 +20,23 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.terminal.KeyboardTerminalInputComponent;
-import com.deco2800.game.terminal.Terminal;
-import com.deco2800.game.terminal.TerminalDisplay;
-import com.deco2800.game.ui.PerformanceDisplay;
+import com.deco2800.game.ui.terminal.Terminal;
+import com.deco2800.game.ui.terminal.TerminalDisplay;
+import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Runs the main game.
+ * The game screen containing the main game.
  *
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private static final String[] mainGameTextures = {"images/heart.png"};
+  private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
+
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -51,7 +58,8 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
 
     renderer = RenderFactory.createRenderer();
-    renderer.getCamera().getEntity().setPosition(5f, 5f);
+    renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
+    renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
     loadAssets();
     createUI();
@@ -100,23 +108,35 @@ public class MainGameScreen extends ScreenAdapter {
   }
 
   private void loadAssets() {
+    logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainGameTextures);
     ServiceLocator.getResourceService().loadAll();
   }
 
   private void unloadAssets() {
+    logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainGameTextures);
   }
 
+  /**
+   * Creates the main game's ui including components for rendering ui elements to the screen and
+   * capturing and handling ui input.
+   */
   private void createUI() {
-    Entity ui = new Entity();
-    ui.addComponent(new PerformanceDisplay());
+    logger.debug("Creating ui");
+    Stage stage = ServiceLocator.getRenderService().getStage();
+    InputComponent inputComponent =
+        ServiceLocator.getInputService().getInputFactory().createForTerminal();
 
-    // Add terminal
-    ui.addComponent(new Terminal())
-        .addComponent(new KeyboardTerminalInputComponent())
+    Entity ui = new Entity();
+    ui.addComponent(new InputDecorator(stage, 10))
+        .addComponent(new PerformanceDisplay())
+        .addComponent(new MainGameActions(this.game))
+        .addComponent(new MainGameExitDisplay())
+        .addComponent(new Terminal())
+        .addComponent(inputComponent)
         .addComponent(new TerminalDisplay());
 
     ServiceLocator.getEntityService().register(ui);

@@ -1,6 +1,5 @@
 package com.deco2800.game.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
@@ -18,6 +17,9 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The game screen containing the main menu.
+ */
 public class MainMenuScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuScreen.class);
   private final GdxGame game;
@@ -27,9 +29,7 @@ public class MainMenuScreen extends ScreenAdapter {
   public MainMenuScreen(GdxGame game) {
     this.game = game;
 
-    // set background to light yellow
-    Gdx.gl.glClearColor(248f/255f, 249/255f, 178/255f, 1);
-
+    logger.debug("Initialising main menu screen services");
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());
@@ -76,17 +76,24 @@ public class MainMenuScreen extends ScreenAdapter {
   }
 
   private void loadAssets() {
+    logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainMenuTextures);
     ServiceLocator.getResourceService().loadAll();
   }
 
   private void unloadAssets() {
+    logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainMenuTextures);
   }
 
+  /**
+   * Creates the main menu's ui including components for rendering ui elements to the screen and
+   * capturing and handling ui input.
+   */
   private void createUI() {
+    logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
     Entity ui = new Entity();
     ui.addComponent(new MainMenuDisplay())

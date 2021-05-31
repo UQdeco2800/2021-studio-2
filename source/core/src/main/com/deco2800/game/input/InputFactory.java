@@ -16,7 +16,7 @@ public abstract class InputFactory {
   /** Input device types */
   public enum InputType {
     KEYBOARD, // keyboard and touch
-    TOUCH // intended for adding touch gestures
+    TOUCH // alternate keyboard and touch
   }
 
   /**
@@ -30,9 +30,13 @@ public abstract class InputFactory {
     }
 
     if (inputType == InputType.KEYBOARD) {
+      logger.debug("Creating keyboard input factory");
       return new KeyboardInputFactory();
+    } else if (inputType == InputType.TOUCH) {
+      logger.debug("Creating touch input factory");
+      return new TouchInputFactory();
     }
-    // Add other input forms here
+    // Add other input types here
 
     logger.error("Unrecognised input type: {} ", inputType);
     return null;

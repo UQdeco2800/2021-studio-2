@@ -37,6 +37,12 @@ public class NPCFactory {
   private static final NPCConfigs configs =
       FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
 
+  /**
+   * Creates a ghost entity.
+   *
+   * @param target entity to chase
+   * @return entity
+   */
   public static Entity createGhost(Entity target) {
     Entity ghost = createBaseNPC(target);
     BaseEntityConfig config = configs.ghost;
@@ -44,8 +50,8 @@ public class NPCFactory {
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
             ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
     animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
 
     ghost
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -57,6 +63,12 @@ public class NPCFactory {
     return ghost;
   }
 
+  /**
+   * Creates a ghost king entity.
+   *
+   * @param target entity to chase
+   * @return entity
+   */
   public static Entity createGhostKing(Entity target) {
     Entity ghostKing = createBaseNPC(target);
     GhostKingConfig config = configs.ghostKing;

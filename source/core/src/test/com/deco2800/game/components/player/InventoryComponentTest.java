@@ -12,13 +12,13 @@ class InventoryComponentTest {
   @Test
   void shouldSetGetGold() {
     InventoryComponent inventory = new InventoryComponent(100);
-    assertEquals(inventory.getGold(), 100);
+    assertEquals(100, inventory.getGold());
 
     inventory.setGold(150);
-    assertEquals(inventory.getGold(), 150);
+    assertEquals(150, inventory.getGold());
 
     inventory.setGold(-50);
-    assertEquals(inventory.getGold(), 0);
+    assertEquals(0, inventory.getGold());
   }
 
   @Test
@@ -32,10 +32,10 @@ class InventoryComponentTest {
   void shouldAddGold() {
     InventoryComponent inventory = new InventoryComponent(100);
     inventory.addGold(-500);
-    assertEquals(inventory.getGold(), 0);
+    assertEquals(0, inventory.getGold());
 
     inventory.addGold(100);
     inventory.addGold(-20);
-    assertEquals(inventory.getGold(), 80);
+    assertEquals(80, inventory.getGold());
   }
 }

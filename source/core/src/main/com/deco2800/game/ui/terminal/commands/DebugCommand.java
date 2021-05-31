@@ -1,6 +1,8 @@
-package com.deco2800.game.terminal.commands;
+package com.deco2800.game.ui.terminal.commands;
 
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
@@ -8,12 +10,15 @@ import java.util.ArrayList;
  * A command for toggling debug mode on and off.
  */
 public class DebugCommand implements Command {
+  private static final Logger logger = LoggerFactory.getLogger(DebugCommand.class);
+
   /**
    * Toggles debug mode on or off if the corresponding argument is received.
    * @param args command arguments
    */
   public boolean action(ArrayList<String> args) {
     if (!isValid(args)) {
+      logger.debug("Invalid arguments received for 'debug' command: {}", args);
       return false;
     }
 
@@ -26,6 +31,7 @@ public class DebugCommand implements Command {
         ServiceLocator.getRenderService().getDebug().setActive(false);
         return true;
       default:
+        logger.debug("Unrecognised argument received for 'debug' command: {}", args);
         return false;
     }
   }

@@ -16,12 +16,15 @@ import com.deco2800.game.files.UserSettings.DisplaySettings;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.StringDecorator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Settings menu display and logic. If you bork the settings, they can be changed manually in
  * DECO2800Game/settings.json under your home directory (This is C:/users/[username] on Windows).
  */
 public class SettingsMenuDisplay extends UIComponent {
+  private static final Logger logger = LoggerFactory.getLogger(SettingsMenuDisplay.class);
   private final GdxGame game;
 
   private Table rootTable;
@@ -162,6 +165,7 @@ public class SettingsMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Exit button clicked");
             exitMenu();
           }
         });
@@ -170,6 +174,7 @@ public class SettingsMenuDisplay extends UIComponent {
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Apply button clicked");
             applyChanges();
           }
         });
@@ -209,7 +214,7 @@ public class SettingsMenuDisplay extends UIComponent {
 
   @Override
   protected void draw(SpriteBatch batch) {
-    stage.getRoot().draw(batch, 1f);
+    // draw is handled by the stage
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.deco2800.game.terminal;
+package com.deco2800.game.ui.terminal;
 
 import com.badlogic.gdx.Input;
 import com.deco2800.game.extensions.GameExtension;
@@ -15,14 +15,17 @@ class KeyboardTerminalInputComponentTest {
     Terminal terminal = spy(Terminal.class);
     KeyboardTerminalInputComponent terminalInput = new KeyboardTerminalInputComponent(terminal);
 
-    boolean startingIsOpen = terminal.isOpen();
+    terminal.setClosed();
 
     terminalInput.keyDown(Input.Keys.F1);
-    assertNotEquals(startingIsOpen, terminal.isOpen());
+    assertTrue(terminal.isOpen());
+
     terminalInput.keyDown(Input.Keys.F1);
-    assertEquals(startingIsOpen, terminal.isOpen());
+    assertFalse(terminal.isOpen());
 
     verify(terminal, times(2)).toggleIsOpen();
+    verify(terminal).setOpen();
+    verify(terminal, times(2)).setClosed();
   }
 
   @Test
@@ -46,14 +49,13 @@ class KeyboardTerminalInputComponentTest {
   @Test
   void shouldHandleMessageWhenTerminalOpen() {
     Terminal terminal = mock(Terminal.class);
-    when(terminal.isOpen()).thenReturn(true);
     KeyboardTerminalInputComponent terminalInput = new KeyboardTerminalInputComponent(terminal);
 
+    when(terminal.isOpen()).thenReturn(true);
     assertTrue(terminalInput.keyDown('a'));
     assertTrue(terminalInput.keyUp('a'));
 
     when(terminal.isOpen()).thenReturn(false);
-
     assertFalse(terminalInput.keyDown('a'));
     assertFalse(terminalInput.keyUp('a'));
   }

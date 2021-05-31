@@ -30,6 +30,8 @@ public class Renderer implements Disposable {
   /** Create a new renderer with default settings */
   public Renderer(CameraComponent camera) {
     SpriteBatch spriteBatch = new SpriteBatch();
+    DebugRenderer debugRenderer = new DebugRenderer();
+    debugRenderer.setActive(false);
 
     init(
         camera,
@@ -37,7 +39,7 @@ public class Renderer implements Disposable {
         spriteBatch,
         new Stage(new ScreenViewport(), spriteBatch),
         ServiceLocator.getRenderService(),
-        new DebugRenderer());
+        debugRenderer);
   }
 
   /**
@@ -107,6 +109,11 @@ public class Renderer implements Disposable {
     resizeCamera(width, height);
     resizeStage(width, height);
     logger.debug("Resizing to ({}x{})", width, height);
+  }
+
+  /** @return The debug renderer attached to this renderer */
+  public DebugRenderer getDebug() {
+    return debugRenderer;
   }
 
   private void resizeCamera(int screenWidth, int screenHeight) {
