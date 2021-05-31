@@ -27,7 +27,22 @@
         <task path="$PROJECT_DIR$/core">
           <activation />
         </task>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Source" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Source" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
@@ -91,7 +106,7 @@
       <recent name="C:\Coding\Repos\deco2800-engine\Source\core" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Run Tests">
+  <component name="RunManager" selected="Gradle.Generate Javadoc">
     <configuration name="Generate Javadoc" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -103,7 +118,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="javadocii" />
+            <option value="javadoc" />
           </list>
         </option>
         <option name="vmOptions" value="" />
@@ -164,11 +179,11 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="470" y="150" key="#Project_Structure/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616207245258" />
-    <state x="-3288" y="250" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622422962185">
+    <state x="-3288" y="250" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622424804087">
       <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
     <state x="-3288" y="252" key="#com.intellij.execution.impl.EditConfigurationsDialog/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1617756123756" />
-    <state x="-3288" y="250" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622422962185" />
+    <state x="-3288" y="250" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622424804087" />
     <state x="-2951" y="282" width="534" height="586" key="#com.intellij.ide.util.MemberChooser" timestamp="1620964393976">
       <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
@@ -207,33 +222,33 @@
     <state x="-2979" y="323" key="FileChooserDialogImpl/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1616714733511" />
     <state x="804" y="298" key="FileChooserDialogImpl/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616207022682" />
     <state x="-2979" y="320" key="FileChooserDialogImpl/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622422160207" />
-    <state width="2136" height="191" key="GridCell.Tab.0.bottom" timestamp="1622421788210">
+    <state width="2136" height="191" key="GridCell.Tab.0.bottom" timestamp="1622423968300">
       <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
     <state width="2151" height="408" key="GridCell.Tab.0.bottom/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1617779972669" />
     <state width="2005" height="156" key="GridCell.Tab.0.bottom/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616910087537" />
-    <state width="2136" height="191" key="GridCell.Tab.0.bottom/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622421788210" />
+    <state width="2136" height="191" key="GridCell.Tab.0.bottom/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622423968300" />
     <state width="2005" height="178" key="GridCell.Tab.0.bottom/0.0.2048.1112/-3840.0.2194.1194@0.0.2048.1112" timestamp="1620907075643" />
-    <state width="2136" height="191" key="GridCell.Tab.0.center" timestamp="1622421788210">
+    <state width="2136" height="191" key="GridCell.Tab.0.center" timestamp="1622423968300">
       <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
     <state width="2151" height="408" key="GridCell.Tab.0.center/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1617779972669" />
     <state width="2005" height="156" key="GridCell.Tab.0.center/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616910087537" />
-    <state width="2136" height="191" key="GridCell.Tab.0.center/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622421788210" />
+    <state width="2136" height="191" key="GridCell.Tab.0.center/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622423968300" />
     <state width="2005" height="178" key="GridCell.Tab.0.center/0.0.2048.1112/-3840.0.2194.1194@0.0.2048.1112" timestamp="1620907075643" />
-    <state width="2136" height="191" key="GridCell.Tab.0.left" timestamp="1622421788210">
+    <state width="2136" height="191" key="GridCell.Tab.0.left" timestamp="1622423968300">
       <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
     <state width="2151" height="408" key="GridCell.Tab.0.left/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1617779972669" />
     <state width="2005" height="156" key="GridCell.Tab.0.left/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616910087537" />
-    <state width="2136" height="191" key="GridCell.Tab.0.left/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622421788210" />
+    <state width="2136" height="191" key="GridCell.Tab.0.left/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622423968300" />
     <state width="2005" height="178" key="GridCell.Tab.0.left/0.0.2048.1112/-3840.0.2194.1194@0.0.2048.1112" timestamp="1620907075643" />
-    <state width="2136" height="191" key="GridCell.Tab.0.right" timestamp="1622421788210">
+    <state width="2136" height="191" key="GridCell.Tab.0.right" timestamp="1622423968300">
       <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
     <state width="2151" height="408" key="GridCell.Tab.0.right/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1617779972669" />
     <state width="2005" height="156" key="GridCell.Tab.0.right/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616910087537" />
-    <state width="2136" height="191" key="GridCell.Tab.0.right/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622421788210" />
+    <state width="2136" height="191" key="GridCell.Tab.0.right/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622423968300" />
     <state width="2005" height="178" key="GridCell.Tab.0.right/0.0.2048.1112/-3840.0.2194.1194@0.0.2048.1112" timestamp="1620907075643" />
     <state width="2136" height="235" key="GridCell.Tab.1.bottom" timestamp="1621733013647">
       <screen x="-3840" y="0" width="2194" height="1194" />
@@ -263,11 +278,12 @@
     <state width="2005" height="376" key="GridCell.Tab.1.right/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616564728060" />
     <state width="2136" height="235" key="GridCell.Tab.1.right/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1621733013647" />
     <state width="2005" height="218" key="GridCell.Tab.1.right/0.0.2048.1112/-3840.0.2194.1194@0.0.2048.1112" timestamp="1620907075640" />
-    <state x="-3299" y="142" key="SettingsEditor" timestamp="1616884411790">
-      <screen x="-3840" y="0" width="2194" height="1205" />
+    <state x="-3299" y="141" key="SettingsEditor" timestamp="1622423707111">
+      <screen x="-3840" y="0" width="2194" height="1194" />
     </state>
     <state x="-3299" y="142" key="SettingsEditor/-3840.0.2194.1205/0.0.2048.1112@-3840.0.2194.1205" timestamp="1616884411790" />
     <state x="505" y="131" key="SettingsEditor/-3840.0.2194.1205/0.0.2048.1112@0.0.2048.1112" timestamp="1616323217020" />
+    <state x="-3299" y="141" key="SettingsEditor/0.0.2048.1112/-3840.0.2194.1194@-3840.0.2194.1194" timestamp="1622423707111" />
     <state x="754" y="448" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1616205398511">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

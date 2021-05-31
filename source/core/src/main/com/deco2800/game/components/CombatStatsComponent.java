@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
  * extended for more specific combat needs.
  */
 public class CombatStatsComponent extends Component {
+
   private static final Logger logger = LoggerFactory.getLogger(CombatStatsComponent.class);
   private int health;
   private int baseAttack;
@@ -54,6 +55,7 @@ public class CombatStatsComponent extends Component {
 
   /**
    * Adds to the player's health. The amount added can be negative.
+   *
    * @param health health to add
    */
   public void addHealth(int health) {
@@ -62,6 +64,7 @@ public class CombatStatsComponent extends Component {
 
   /**
    * Returns the entity's base attack damage.
+   *
    * @return base attack damage
    */
   public int getBaseAttack() {
@@ -70,7 +73,8 @@ public class CombatStatsComponent extends Component {
 
   /**
    * Sets the entity's attack damage. Attack damage has a minimum bound of 0.
-   * @param attack
+   *
+   * @param attack Attack damage
    */
   public void setBaseAttack(int attack) {
     if (attack >= 0) {

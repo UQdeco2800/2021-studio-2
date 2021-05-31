@@ -4,7 +4,12 @@ package com.deco2800.game.ai.tasks;
  * An AI task can be started and stopped at any time. When updating, the task can succeed or fail.
  */
 public interface Task {
-  /** Create the task and attach it to the task runner. */
+
+  /**
+   * Create the task and attach it to the task runner.
+   *
+   * @param taskRunner Task runner to attach to
+   */
   void create(TaskRunner taskRunner);
 
   /** Start running this task. This will usually be called by an AI controller. */

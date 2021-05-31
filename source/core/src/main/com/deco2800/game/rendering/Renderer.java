@@ -27,7 +27,10 @@ public class Renderer implements Disposable {
   private RenderService renderService;
   private DebugRenderer debugRenderer;
 
-  /** Create a new renderer with default settings */
+  /**
+   * Create a new renderer with default settings
+   * @param camera camera to render to
+   */
   public Renderer(CameraComponent camera) {
     SpriteBatch spriteBatch = new SpriteBatch();
     DebugRenderer debugRenderer = new DebugRenderer();
@@ -49,6 +52,9 @@ public class Renderer implements Disposable {
    * @param gameWidth Desired game width in metres the screen should show. Height is then based on *
    *     the aspect ratio.
    * @param batch Batch to render to.
+   * @param stage Scene2D stage for UI rendering
+   * @param renderService Render service to use
+   * @param debugRenderer Debug renderer to render
    */
   public Renderer(
       CameraComponent camera,

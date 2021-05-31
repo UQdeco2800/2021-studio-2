@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Wrapper for reading Java objects from Json files.
+ * Wrapper for reading Java objects from JSON files.
  *
  * <p>A generic method is provided already, but methods for reading specific classes can be added
  * for more control.
@@ -17,11 +17,12 @@ public class FileLoader {
   static final Json json = new Json();
 
   /**
-   * Read generic Java classes from a Json file. Properties in the Json file will override class
+   * Read generic Java classes from a JSON file. Properties in the JSON file will override class
    * defaults.
    *
    * @param type class type
    * @param filename file to read from
+   * @param <T> Class type to read JSON into
    * @return instance of class, may be null
    */
   public static <T> T readClass(Class<T> type, String filename) {
@@ -36,6 +37,7 @@ public class FileLoader {
    * @param filename file to read from
    * @param location File storage type. See
    *     https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
+   * @param <T> Class type to read JSON into
    * @return instance of class, may be null
    */
   public static <T> T readClass(Class<T> type, String filename, Location location) {

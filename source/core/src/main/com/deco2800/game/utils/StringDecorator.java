@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 /**
  * Apply a custom toString() for a class without overriding the class, using a decorator.
- * @param <T>
+ * @param <T> Class to decorate
  */
 public class StringDecorator<T> {
   public T object;

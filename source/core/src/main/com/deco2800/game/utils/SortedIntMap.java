@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  * A map sorted by the value of key with O(1) iteration. put/get/contains are O(n). useful when we
  * don't modify values often, but want to iterate quickly.
  *
- * @param <V>
+ * @param <V> Class type to map
  */
 public class SortedIntMap<V> implements Iterable<V> {
   private final IntArray keys;

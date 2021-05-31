@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
  * methods when new types of resources are added to the game.
  */
 public class ResourceService implements Disposable {
+
   private static final Logger logger = LoggerFactory.getLogger(ResourceService.class);
   private final AssetManager assetManager;
 
@@ -25,12 +26,26 @@ public class ResourceService implements Disposable {
     this.assetManager = assetManager;
   }
 
-  /** @see AssetManager#get(String, Class)  */
+  /**
+   * Load an asset from a file
+   * @param filename Asset path
+   * @param type     Class to load into
+   * @param <T>      Type of class to load into
+   * @return Instance of class loaded from path
+   * @see AssetManager#get(String, Class)
+   */
   public <T> T getAsset(String filename, Class<T> type) {
     return assetManager.get(filename, type);
   }
 
-  /** @see AssetManager#contains(String) */
+  /**
+   * Check if an asset has been loaded already
+   * @param resourceName path of the asset
+   * @param type Class type of the asset
+   * @param <T> Type of the asset
+   * @return true if asset has been loaded, false otherwise
+   * @see AssetManager#contains(String)
+   */
   public <T> boolean containsAsset(String resourceName, Class<T> type) {
     return assetManager.contains(resourceName, type);
   }
@@ -46,8 +61,9 @@ public class ResourceService implements Disposable {
 
   /**
    * Blocking call to load all assets.
+   *
    * @see AssetManager#finishLoading()
-   * */
+   */
   public void loadAll() {
     logger.debug("Loading all assets");
     try {
@@ -59,10 +75,10 @@ public class ResourceService implements Disposable {
 
   /**
    * Loads assets for the specified duration in milliseconds.
-   * @see AssetManager#update(int)
    *
    * @param duration duration to load for
    * @return finished loading
+   * @see AssetManager#update(int)
    */
   public boolean loadForMillis(int duration) {
     logger.debug("Loading assets for {} ms", duration);
@@ -76,8 +92,9 @@ public class ResourceService implements Disposable {
 
   /**
    * Clears all loaded assets and assets in the preloading queue.
+   *
    * @see AssetManager#clear()
-   * */
+   */
   public void clearAllAssets() {
     logger.debug("Clearing all assets");
     assetManager.clear();
@@ -85,9 +102,10 @@ public class ResourceService implements Disposable {
 
   /**
    * Loads a single asset into the asset manager.
+   *
    * @param assetName asset name
-   * @param type asset type
-   * @param <T> type
+   * @param type      asset type
+   * @param <T>       type
    */
   private <T> void loadAsset(String assetName, Class<T> type) {
     logger.debug("Loading {}: {}", type.getSimpleName(), assetName);
@@ -100,9 +118,10 @@ public class ResourceService implements Disposable {
 
   /**
    * Loads multiple assets into the asset manager.
+   *
    * @param assetNames list of asset names
-   * @param type asset type
-   * @param <T> type
+   * @param type       asset type
+   * @param <T>        type
    */
   private <T> void loadAssets(String[] assetNames, Class<T> type) {
     for (String resource : assetNames) {
@@ -151,7 +170,7 @@ public class ResourceService implements Disposable {
       logger.debug("Unloading {}", assetName);
       try {
         assetManager.unload(assetName);
-      } catch(Exception e) {
+      } catch (Exception e) {
         logger.error("Could not unload {}", assetName);
       }
     }
