@@ -2,12 +2,14 @@ package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
@@ -21,6 +23,7 @@ public class ForestGameArea extends GameArea {
   private static final int NUM_TREES = 7;
   private static final int NUM_GHOSTS = 2;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+  private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
     "images/tree.png",
@@ -75,8 +78,33 @@ public class ForestGameArea extends GameArea {
   }
 
   private void spawnTerrain() {
+    // Background terrain
     terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
     spawnEntity(new Entity().addComponent(terrain));
+
+    // Terrain walls
+    float tileSize = terrain.getTileSize();
+    GridPoint2 tileBounds = terrain.getMapBounds(0);
+    Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
+
+    // Left
+    spawnEntityAt(
+        ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+    // Right
+    spawnEntityAt(
+        ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+        new GridPoint2(tileBounds.x, 0),
+        false,
+        false);
+    // Top
+    spawnEntityAt(
+        ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+        new GridPoint2(0, tileBounds.y),
+        false,
+        false);
+    // Bottom
+    spawnEntityAt(
+        ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
   }
 
   private void spawnTrees() {

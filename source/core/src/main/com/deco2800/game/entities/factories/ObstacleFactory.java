@@ -33,6 +33,20 @@ public class ObstacleFactory {
     return tree;
   }
 
+  /**
+   * Creates an invisible physics wall.
+   * @param width Wall width in world units
+   * @param height Wall height in world units
+   * @return Wall entity of given width and height
+   */
+  public static Entity createWall(float width, float height) {
+    Entity wall = new Entity()
+        .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
+        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+    wall.setScale(width, height);
+    return wall;
+  }
+
   private ObstacleFactory() {
     throw new IllegalStateException("Instantiating static util class");
   }
