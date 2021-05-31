@@ -86,6 +86,7 @@ public class Terminal extends Component {
   /**
    * Processes the completed message entered by the user. If the message corresponds to a valid
    * command, the command will be actioned.
+   * @return true if command handled, false otherwise
    */
   public boolean processMessage() {
     logger.debug("Processing message");
@@ -124,7 +125,10 @@ public class Terminal extends Component {
     }
   }
 
-  /** Sets the entered message to the empty string. */
+  /**
+   * Sets the text shown on the terminal
+   * @param text Text to show
+   */
   public void setEnteredMessage(String text) {
     enteredMessage = text;
   }
