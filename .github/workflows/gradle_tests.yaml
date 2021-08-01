@@ -32,19 +32,13 @@ jobs:
         env:
           GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
 
-      - name: Post to Slack # Notify the channel specified in the env variables
+      - name: Discord notification
         if: always() && github.ref == 'refs/heads/main' # Always run when on main
-        uses: rtCamp/action-slack-notify@v2.1.3
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} # Same bot used for all, don't change
-          SLACK_CHANNEL: 'bot-testing' # Where are we posting to?
-          SLACK_TITLE: 'Test Results'
-          SLACK_MESSAGE: 'Unit Tests reported *${{steps.tests.conclusion}}*! Commit message: ```${{ github.event.head_commit.message }}```'
-          SLACK_COLOR: ${{ job.status }} # Automatically changes color of the message
-          SLACK_USERNAME: DECO2800 Overwatch
-          SLACK_ICON: https://static.wikia.nocookie.net/1547a0b1-0227-43c5-ac81-9f1d0895824b
-          SLACK_FOOTER: ''
-          MSG_MINIMAL: commit,actions url # We only want the commit link and actions url
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Unit Tests reported **${{steps.tests.conclusion}}**! Commit message: ```${{ github.event.head_commit.message }}```'
 
       - name: Cleanup Gradle Cache
         if: always()
