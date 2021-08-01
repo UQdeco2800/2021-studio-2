@@ -36,6 +36,12 @@ jobs:
         if: always() && github.ref == 'refs/heads/main' # Always run when on main
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '{
+                            "embeds": [{
+                              "title": "Hello!",
+                              "description": "Hi! :grinning:"
+                            }]
+                          }'
         uses: Ilshidur/action-discord@master
         with:
           args: 'Unit Tests reported **${{steps.tests.conclusion}}**! Commit message: ```${{ github.event.head_commit.message }}```'
