@@ -35,14 +35,15 @@ jobs:
       - name: Discord notification
         if: always() && github.ref == 'refs/heads/main' # Always run when on main
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} # The colors are magic numbers for JS color codes (as ints)
           DISCORD_EMBEDS: '[{
-                              "title": "Hello!",
-                              "description": "Hi! :grinning:"
+                              "title": "Build Information",
+                              "description": "Commit message: ```${{ github.event.head_commit.message }}```",
+                              "color": ${{ steps.tests.conclusion == "success" && 3066993 || 15158332 }}",
                             }]'
         uses: Ilshidur/action-discord@master
         with:
-          args: 'Unit Tests reported **${{steps.tests.conclusion}}**! Commit message: ```${{ github.event.head_commit.message }}```'
+          args: 'Unit Tests reported **${{steps.tests.conclusion}}**!'
 
       - name: Cleanup Gradle Cache
         if: always()
