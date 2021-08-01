@@ -46,7 +46,7 @@ jobs:
           echo "TEST_OUTCOME=15158332" >> $GITHUB_ENV
 
       - name: Discord notification
-        if: always() #&& github.ref == 'refs/heads/main' # Always run when on main
+        if: always() && github.ref == 'refs/heads/main' # Always run when on main
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{
