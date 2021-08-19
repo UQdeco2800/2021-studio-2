@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.utils.math.Vector2Utils;
 
-//This class has been imported to allow for a short delay
+//This class has been imported to allow for a short delay for dash abilities
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,14 +20,19 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   /** Distance scale for moving in a diagonal direction. */
   public final float DIAGONAL_DISTANCE = 0.7071f;
 
+  /** When the player is pressing W, up is 1, else, up is 0. */
   private float up = 0f;
 
+  /** When the player is pressing A, up is 1, else, up is 0. */
   private float left = 0f;
 
+  /** When the player is pressing S, up is 1, else, up is 0. */
   private float down = 0f;
 
+  /** When the player is pressing D, up is 1, else, up is 0. */
   private float right = 0f;
 
+  /** Used to change the speed of the player quickly. */
   private float speedMultiplier = 1;
 
   public KeyboardPlayerInputComponent() {
