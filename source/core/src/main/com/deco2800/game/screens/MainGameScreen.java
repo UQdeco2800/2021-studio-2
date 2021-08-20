@@ -24,6 +24,8 @@ import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
+import com.deco2800.game.ui.textbox.TextBox;
+import com.deco2800.game.ui.textbox.TextBoxDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,6 +131,7 @@ public class MainGameScreen extends ScreenAdapter {
     Stage stage = ServiceLocator.getRenderService().getStage();
     InputComponent inputComponent =
         ServiceLocator.getInputService().getInputFactory().createForTerminal();
+    InputComponent textBoxInput = ServiceLocator.getInputService().getInputFactory().createForTextBox();
 
     Entity ui = new Entity();
     ui.addComponent(new InputDecorator(stage, 10))
@@ -137,7 +140,10 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(new MainGameExitDisplay())
         .addComponent(new Terminal())
         .addComponent(inputComponent)
-        .addComponent(new TerminalDisplay());
+        .addComponent(new TerminalDisplay())
+        .addComponent(new TextBox())
+        .addComponent(textBoxInput)
+        .addComponent(new TextBoxDisplay());
 
     ServiceLocator.getEntityService().register(ui);
   }
