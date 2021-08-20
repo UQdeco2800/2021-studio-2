@@ -37,6 +37,7 @@ public class PlayerStatsDisplay extends UIComponent {
     table.top().left();
     table.setFillParent(true);
     table.padTop(45f).padLeft(5f);
+    table.setDebug(true); //to see the outlines
 
     // Heart image
     float heartSideLength = 30f;
@@ -62,6 +63,13 @@ public class PlayerStatsDisplay extends UIComponent {
    * @param health player health
    */
   public void updatePlayerHealthUI(int health) {
+    if (entity.getComponent(CombatStatsComponent.class).getHealth() <  20) { //how to access his
+      // total healtH?
+    //call the event trigger for "blood View" when hp is < 20%
+      entity.getEvents().trigger("bloodyViewOn");
+    } else if (entity.getComponent(CombatStatsComponent.class).getHealth() >  20) {
+      entity.getEvents().trigger("bloodyViewOff");
+    }
     CharSequence text = String.format("Health: %d", health);
     healthLabel.setText(text);
   }
