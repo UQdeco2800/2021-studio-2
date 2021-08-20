@@ -91,6 +91,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             speedMultiplier = 1f;
             dashing = 0;
             triggerWalkEvent();
+            timer.cancel();
           }
         }, 150);
       default:
