@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.services.ServiceLocator;
 
-//This class has been imported to allow for a short delay for dash abilities
+//This class has been imported to allow for a short delay for abilities
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,7 +36,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   private byte right = 0;
 
   /** While the player is in their dash, it is 1, else it is 0. */
-  private byte dashing = 0;
+  private boolean dashing = false;
 
   /** Used to change the speed of the player quickly. */
   private float speedMultiplier = 1;
@@ -81,19 +81,21 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         triggerWalkEvent();
         return true;
       case Keys.CAPS_LOCK:
-        dashing = 1;
+        dashing = true;
         triggerDashEvent();
         update();
+
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
           @Override
           public void run() {
-            speedMultiplier = 1f;
-            dashing = 0;
+            dashing = false;
             triggerWalkEvent();
             timer.cancel();
           }
         }, 150);
+        return true;
+
       default:
         return false;
     }
@@ -139,7 +141,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    * the player is no longer moving.
    */
   private void triggerWalkEvent() {
-    if (dashing == 1) {
+    if (dashing) {
       return;
     }
     //Checks to see if the player should be static or is currently moving.
@@ -176,6 +178,14 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     }
     walkDirection.x = x * multiplier;
     walkDirection.y = y * multiplier;
+  }
+
+  /**
+   * This method has been created to test that the correct direction is
+   * to be walked in.
+   */
+  public Vector2 getWalkDirection() {
+    return this.walkDirection;
   }
 }
 
