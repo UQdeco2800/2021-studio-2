@@ -63,11 +63,11 @@ public class PlayerStatsDisplay extends UIComponent {
    * @param health player health
    */
   public void updatePlayerHealthUI(int health) {
-    if (entity.getComponent(CombatStatsComponent.class).getHealth() <  20) { //how to access his
+    if (entity.getComponent(CombatStatsComponent.class).getHealth() <=  0.2 * entity.getComponent(CombatStatsComponent.class).getMaxHealth()) { //how to access his
       // total healtH?
     //call the event trigger for "blood View" when hp is < 20%
       entity.getEvents().trigger("bloodyViewOn");
-    } else if (entity.getComponent(CombatStatsComponent.class).getHealth() >  20) {
+    } else if (entity.getComponent(CombatStatsComponent.class).getHealth() >  0.2 * entity.getComponent(CombatStatsComponent.class).getMaxHealth()) {
       entity.getEvents().trigger("bloodyViewOff");
     }
     CharSequence text = String.format("Health: %d", health);
