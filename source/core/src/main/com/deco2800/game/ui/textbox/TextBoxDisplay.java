@@ -10,6 +10,7 @@ public class TextBoxDisplay extends UIComponent {
 
     private TextBox textBox;
     private Label label;
+    private int messageIndex = 0;
 
     @Override
     public void create() {
@@ -28,10 +29,7 @@ public class TextBoxDisplay extends UIComponent {
     public void draw(SpriteBatch batch) {
         if (textBox.isOpen()) {
             label.setVisible(true);
-            String message = "Hello Team-1, TODO: Make an enum/class to store the dialogue " +
-                    "that's \ncurrently planned to be added. Also might need to dissect the messages by" +
-                    "\ntheir character length for different lines.";
-            label.setText(message);
+            label.setText(textBox.getSubMessage());
         } else {
             label.setVisible(false);
         }

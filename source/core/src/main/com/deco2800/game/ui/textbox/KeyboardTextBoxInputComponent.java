@@ -1,7 +1,6 @@
 package com.deco2800.game.ui.textbox;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.deco2800.game.input.InputComponent;
 
 /**
@@ -29,25 +28,9 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
     }
 
     /**
-     * If the toggle key is pressed, the terminal will open / close.
-     *
-     * <p>Otherwise, handles input if the terminal is open. This is because keyDown events are
-     * triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
-     * trigger any other input handlers.
-     *
-     * @return whether the input was processed
-     * @see InputProcessor#keyDown(int)
+     * At the moment, this is used to trigger the text box to appear on the screen but
+     * this will be changed to be triggered on events within the game.
      */
-//    @Override
-//    public boolean keyDown(int keycode) {
-//
-//        if (textBox.isOpen()) {
-//            //Finishes the line of dialogue in the text box.
-//        }
-//
-//        return textBox.isOpen();
-//    }
-
     @Override
     public boolean keyDown(int keycode) {
         // handle open and close terminal
@@ -60,11 +43,11 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
     }
 
     /**
-     * Handles input if the terminal is open. If 'enter' is typed, the entered message will be
-     * processed, otherwise the message will be updated with the new character.
+     * Handles input if the text box is open. If 'ESCAPE' is typed, then the text box will close.
+     * Any other keys will finish the line or it will move to the next line if the line has
+     * already been finished.
      *
      * @return whether the input was processed
-     * @see InputProcessor#keyTyped(char)
      */
     @Override
     public boolean keyTyped(char character) {
@@ -74,18 +57,18 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
 
         if (character == SKIP_KEY) {
             textBox.handleEscape();
-            return true;
+        } else {
+            textBox.setSkip();
         }
-        return false;
+        return true;
     }
 
     /**
-     * Handles input if the terminal is open. This is because keyUp events are
-     * triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
+     * Handles input if the text box is open. This is because keyUp events are
+     * triggered alongside keyTyped events. If the user is typing buttons, the input shouldn't
      * trigger any other input handlers.
      *
      * @return whether the input was processed
-     * @see InputProcessor#keyUp(int)
      */
     @Override
     public boolean keyUp(int keycode) {
