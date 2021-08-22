@@ -29,6 +29,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: $GRADLE_DIR/core/build/docs/javadoc/ # The folder the action should deploy.
-         env:
-          GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
+          folder: source/core/build/docs/javadoc/ # The folder the action should deploy.
