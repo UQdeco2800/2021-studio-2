@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.death.DeathDisplay;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -16,6 +18,11 @@ public class PlayerStatsDisplay extends UIComponent {
   Table table;
   private Image heartImage;
   private Label healthLabel;
+  private final GdxGame game;
+
+  public PlayerStatsDisplay(GdxGame game) {
+    this.game = game;
+  }
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
@@ -63,6 +70,9 @@ public class PlayerStatsDisplay extends UIComponent {
    * @param health player health
    */
   public void updatePlayerHealthUI(int health) {
+    if (entity.getComponent(CombatStatsComponent.class).isDead()) {
+      //game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+    }
     if (entity.getComponent(CombatStatsComponent.class).getHealth() <=  0.2 * entity.getComponent(CombatStatsComponent.class).getMaxHealth()) { //how to access his
       // total healtH?
     //call the event trigger for "blood View" when hp is < 20%

@@ -1,5 +1,6 @@
 package com.deco2800.game.entities.factories;
 
+import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.InventoryComponent;
 import com.deco2800.game.components.player.PlayerActions;
@@ -31,7 +32,7 @@ public class PlayerFactory {
    * Create a player entity.
    * @return entity
    */
-  public static Entity createPlayer() {
+  public static Entity createPlayer(GdxGame game) {
     InputComponent inputComponent =
         ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
@@ -45,7 +46,7 @@ public class PlayerFactory {
             .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
             .addComponent(new InventoryComponent(stats.gold))
             .addComponent(inputComponent)
-            .addComponent(new PlayerStatsDisplay())
+            .addComponent(new PlayerStatsDisplay(game))
             .addComponent(new PlayerLowHealthDisplay());
 
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
