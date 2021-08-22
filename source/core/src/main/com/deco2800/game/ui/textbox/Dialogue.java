@@ -9,10 +9,21 @@ public enum Dialogue {
      * This is currently being used as a placeholder but the elements in the enum will be used to display
      * all of the text that is to be used in a particular sequence, in this case, the opening.
      */
-    OPENING(new ArrayList(Arrays.asList("Hello, this is the first line in the opening, things that will",
-            "need to be tested is that I am able to press to finish loading the text \nand another press once",
-            "all of the text is finished displaying will move on to the next one or \nclose the text box.",
-            "Other things that need to be done is that pressing escape will escape \nout of all dialogue."))),
+    OPENING(new ArrayList(Arrays.asList("Hello, the dialogue has been created in an enum\n" +
+                    "but could also use a file to store lines and \nread them. " +
+                    "This allows for all the dialogue to \nbe kept in the same place.",
+            "At the moment, the text can be hard to see\n" +
+                    "so it might be useful to add a box around it.\n" +
+                    "We could even have the character when he is talking.",
+            "The size of the font could be changed but\n" +
+                    "changing the line shifts should be done as well.",
+            "It is quite easy to add to the dialogue,\n" +
+                    "It is all done in one big array in sequence.",
+            "The dialogue should be triggered on events\n" +
+                    "such as entering a new area or defeating a boss.\n" +
+                    "All we would need to do is set the UI component\n" +
+                    "to the new Dialogue content and display the text",
+            "There is definitely more to change so let me know."))),
 
     HELLO(new ArrayList(Arrays.asList("Welcome, hello! This is the second value in the enum and will be used\n" +
             "mostly to test things, I'm not too sure if the text should be \nadded by hard coding the strings" +

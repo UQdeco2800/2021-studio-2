@@ -22,6 +22,7 @@ public class TextBoxDisplay extends UIComponent {
     private void addActors() {
         label = new Label("", skin);
         label.setPosition(200f, 200f);
+        label.setFontScale(1.5f);
         stage.addActor(label);
     }
 

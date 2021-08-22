@@ -65,8 +65,8 @@ public class TextBox extends Component {
      */
     public void setOpen() {
         logger.debug("Opening text box");
-        this.nextMessage();
         isOpen = true;
+        this.nextMessage();
     }
 
     /**
@@ -123,7 +123,7 @@ public class TextBox extends Component {
             subMessageIndex = message.length();
             skip = true;
             subMessage = message;
-        } else {
+        } else if (isOpen) {
             subMessage = message.substring(0, subMessageIndex);
             subMessageIndex++;
             Timer timer = new Timer();
