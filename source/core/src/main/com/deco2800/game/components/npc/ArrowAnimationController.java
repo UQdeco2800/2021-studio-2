@@ -7,7 +7,7 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  * This class listens to events relevant to a ghost entity's state and plays the animation when one
  * of the events is triggered.
  */
-public class GhostAnimationController extends Component {
+public class ArrowAnimationController extends Component {
   AnimationRenderComponent animator;
 
   @Override
