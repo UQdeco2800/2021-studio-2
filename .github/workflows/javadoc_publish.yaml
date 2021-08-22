@@ -1,11 +1,11 @@
 name: Publish Javadoc to web
 
-on: push
-  #push:
-  #  # Sequence of patterns matched against refs/heads
-  #  branches:    
-  #    # Push events on main branch
-  #    - main
+on: 
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      # Push events on main branch
+      - main
 
 jobs:
   build_and_publish_jdoc:
@@ -25,7 +25,7 @@ jobs:
         env:
           GRADLE_DIR: 'source' # Modify this to wherever './gradlew' is 
 
-      - name: Deploy 🚀
+      - name: Deploy docs to GH Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages # The branch the action should deploy to.
