@@ -174,6 +174,10 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
+  public Entity getPlayer() {
+    return this.player;
+  }
+
   @Override
   public void dispose() {
     super.dispose();
