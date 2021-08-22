@@ -1,9 +1,8 @@
 package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.DefaultTask;
+import com.deco2800.game.ai.tasks.DefaultMultiTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.ai.tasks.Task;
 import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +11,14 @@ import org.slf4j.LoggerFactory;
  * Wander around by moving a random position within a range of the starting position. Wait a little
  * bit between movements. Requires an entity with a PhysicsMovementComponent.
  */
-public class WanderTask extends DefaultTask implements PriorityTask {
+public class WanderTask extends DefaultMultiTask implements PriorityTask {
   private static final Logger logger = LoggerFactory.getLogger(WanderTask.class);
 
   private final Vector2 wanderRange;
   private final float waitTime;
   private Vector2 startPos;
-  private MovementTask movementTask;
-  private WaitTask waitTask;
-  private Task currentTask;
+  protected MovementTask movementTask;
+  protected WaitTask waitTask;
 
   /**
    * @param wanderRange Distance in X and Y the entity can move from its position when start() is
@@ -74,14 +72,6 @@ public class WanderTask extends DefaultTask implements PriorityTask {
     logger.debug("Starting moving");
     movementTask.setTarget(getRandomPosInRange());
     swapTask(movementTask);
-  }
-
-  private void swapTask(Task newTask) {
-    if (currentTask != null) {
-      currentTask.stop();
-    }
-    currentTask = newTask;
-    currentTask.start();
   }
 
   private Vector2 getRandomPosInRange() {

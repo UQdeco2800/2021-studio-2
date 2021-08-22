@@ -22,6 +22,7 @@ public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
   private static final int NUM_TREES = 7;
   private static final int NUM_GHOSTS = 2;
+  private static final int NUM_ANCHORED_GHOSTS = 1;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
@@ -37,7 +38,9 @@ public class ForestGameArea extends GameArea {
     "images/hex_grass_3.png",
     "images/iso_grass_1.png",
     "images/iso_grass_2.png",
-    "images/iso_grass_3.png"
+    "images/iso_grass_3.png",
+    "images/mud.png",
+    "images/ghost_crown.png"
   };
   private static final String[] forestTextureAtlases = {
     "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas"
@@ -67,6 +70,7 @@ public class ForestGameArea extends GameArea {
     player = spawnPlayer();
     spawnGhosts();
     spawnGhostKing();
+    spawnAnchoredGhosts();
 
     playMusic();
   }
@@ -142,6 +146,20 @@ public class ForestGameArea extends GameArea {
     GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
     Entity ghostKing = NPCFactory.createGhostKing(player);
     spawnEntityAt(ghostKing, randomPos, true, true);
+  }
+
+  private void spawnAnchoredGhosts() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
+      GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
+      GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3,3), basePos.cpy().add(3,3));
+      Entity anchor = ObstacleFactory.createAnchor();
+      Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+      spawnEntityAt(anchor, basePos, true, true);
+      spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+    }
   }
 
   private void playMusic() {

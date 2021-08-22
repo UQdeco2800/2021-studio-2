@@ -12,7 +12,7 @@ import com.deco2800.game.services.ServiceLocator;
 
 /** Chases a target entity until they get too far away or line of sight is lost */
 public class ChaseTask extends DefaultTask implements PriorityTask {
-  private final Entity target;
+  protected final Entity target;
   private final int priority;
   private final float viewDistance;
   private final float maxChaseDistance;
