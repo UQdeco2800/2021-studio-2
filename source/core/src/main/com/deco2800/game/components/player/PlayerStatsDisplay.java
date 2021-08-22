@@ -18,11 +18,7 @@ public class PlayerStatsDisplay extends UIComponent {
   Table table;
   private Image heartImage;
   private Label healthLabel;
-  private final GdxGame game;
 
-  public PlayerStatsDisplay(GdxGame game) {
-    this.game = game;
-  }
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
@@ -89,6 +85,7 @@ public class PlayerStatsDisplay extends UIComponent {
     //checks if player is dead, turns off bloody view
     if (isDead) {
       entity.getEvents().trigger("bloodyViewOff");
+      entity.getEvents().trigger("deathScreen");
       //triggerDeath(); //somehow trigger the  death screen?
     } else if (currentHealth <=  lowHealthThreshold) {
       //call the event trigger for bloodyViewOn when hp reaches below threshold

@@ -30,6 +30,8 @@ public class DeathDisplay extends UIComponent {
         super.create();
         loadAssets();
         addActors();
+
+        entity.getEvents().addListener("deathScreen", this::deathDisplay);
     }
 
     private void addActors() {
@@ -77,6 +79,9 @@ public class DeathDisplay extends UIComponent {
         table.add(exitBtn).padTop(15f);
         table.row();
 
+        stack.setVisible(false);
+        table.setVisible(false);
+
         stage.addActor(stack);
         stage.addActor(table);
     }
@@ -105,6 +110,11 @@ public class DeathDisplay extends UIComponent {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(deathScreenTextures);
+    }
+
+    public void deathDisplay() {
+        stack.setVisible(true);
+        table.setVisible(true);
     }
 
     @Override
