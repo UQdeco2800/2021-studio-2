@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.ArrowFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
@@ -25,8 +26,14 @@ public class ForestGameArea extends GameArea {
   private static final int NUM_ANCHORED_GHOSTS = 1;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final float WALL_WIDTH = 0.1f;
+  private static GridPoint2 enemyPos;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
+    "images/arrow1.png",
+    "images/arrow2.png",
+    "images/arrow3.png",
+    "images/arrow4.png",
+    "images/test.png",
     "images/tree.png",
     "images/ghost_king.png",
     "images/ghost_1.png",
@@ -70,8 +77,9 @@ public class ForestGameArea extends GameArea {
     player = spawnPlayer();
     spawnGhosts();
     spawnGhostKing();
+    spawnArrow();
     spawnAnchoredGhosts();
-
+    
     playMusic();
   }
 
@@ -139,11 +147,18 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  private void spawnArrow() {
+    Entity arrow = ArrowFactory.createArrow(player);
+    spawnEntityAt(arrow, enemyPos, true, true);
+
+  }
+
   private void spawnGhostKing() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
     GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+    enemyPos = randomPos;
     Entity ghostKing = NPCFactory.createGhostKing(player);
     spawnEntityAt(ghostKing, randomPos, true, true);
   }
