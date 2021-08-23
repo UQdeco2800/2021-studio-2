@@ -28,7 +28,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
         super.create();
         addActors();
         entity.getEvents().addListener("bloodyViewOn", this::displayBloodyViewOn);
-        entity.getEvents().addListener("bloodyViewoff", this::displayBloodyViewOff);
+        entity.getEvents().addListener("bloodyViewOff", this::displayBloodyViewOff);
     }
 
     /**
