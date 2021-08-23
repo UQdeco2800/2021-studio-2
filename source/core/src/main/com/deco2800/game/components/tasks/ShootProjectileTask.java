@@ -16,13 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 
-/**
- * Stopped using this class for ranged attacks as it
- * requires the basic arrow to see the target before it attacks
- * Will be used later on as the ground work for the tracking arrow
- */
-
-/** Chases a target entity's static location until they get too far away or line of sight is lost */
+/** Spawns an arrow to shoot at the player */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private final Entity target;
@@ -41,6 +35,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * @param target The entity to chase.
+     * @param cooldownMS how long to wait in MS before shooting again
+     * @param gameArea used to spawn in the arrow
      */
     public ShootProjectileTask(Entity target, long cooldownMS, GameArea gameArea) {
         this.target = target;
