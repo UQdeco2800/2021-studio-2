@@ -37,6 +37,8 @@ public class Entity {
   private Vector2 position = Vector2.Zero.cpy();
   private Vector2 scale = new Vector2(1, 1);
   private Array<Component> createdComponents;
+  private boolean disposeYourself = false;
+  private float attackRange;
 
   public Entity() {
     id = nextId;
@@ -249,6 +251,9 @@ public class Entity {
     for (Component component : createdComponents) {
       component.triggerUpdate();
     }
+    if (disposeYourself) {
+      dispose();
+    }
   }
 
   /**
@@ -268,6 +273,29 @@ public class Entity {
    */
   public EventHandler getEvents() {
     return eventHandler;
+  }
+
+  /**
+   * Queue a dispose call
+   */
+  public void prepareDispose() {
+    disposeYourself = true;
+  }
+
+  /**
+   *
+   * @return current attack range of entity
+   */
+  public float getAttackRange() {
+    return attackRange;
+  }
+
+  /**
+   *
+   * @param attackRange new attack range of entity
+   */
+  public void setAttackRange(float attackRange) {
+    this.attackRange = attackRange;
   }
 
   @Override

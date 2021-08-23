@@ -13,13 +13,13 @@ import com.deco2800.game.services.ServiceLocator;
 /** Chases a target entity until they get too far away or line of sight is lost */
 public class ChaseTask extends DefaultTask implements PriorityTask {
   protected final Entity target;
+  protected MovementTask movementTask;
   private final int priority;
   private final float viewDistance;
   private final float maxChaseDistance;
   private final PhysicsEngine physics;
   private final DebugRenderer debugRenderer;
   private final RaycastHit hit = new RaycastHit();
-  private MovementTask movementTask;
 
   /**
    * @param target The entity to chase.

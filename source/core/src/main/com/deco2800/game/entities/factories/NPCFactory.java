@@ -97,7 +97,7 @@ public class NPCFactory {
    * @return entity
    */
   public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSize) {
-    Entity anchoredGhost = createBaseNPCNoAI(target);
+    Entity anchoredGhost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
         new AITaskComponent()
@@ -134,7 +134,7 @@ public class NPCFactory {
    * @return entity
    */
   public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
-    Entity anchoredGhost = createBaseNPCNoAI(target);
+    Entity anchoredGhost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
         new AITaskComponent()
@@ -159,6 +159,42 @@ public class NPCFactory {
     anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
 
     return anchoredGhost;
+  }
+
+
+  /**
+   * Creates a ghost entity.
+   *
+   * @param target entity to chase
+   * @return entity
+   */
+  public static Entity createRangedGhost(Entity target) {
+    Entity ghost = createBaseNPCNoAI();
+    BaseEntityConfig config = configs.ghost;
+    AITaskComponent aiComponent =
+        new AITaskComponent()
+            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+            .addTask(new RangedChaseTask(target, 10, 15f, 20f));
+            //.addTask(new RangedAttackTask(target));
+
+    AnimationRenderComponent animator =
+        new AnimationRenderComponent(
+            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+
+    ghost
+        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+        .addComponent(animator)
+        .addComponent(new GhostAnimationController())
+        .addComponent(aiComponent);
+    ghost.setAttackRange(5);
+    //remove melee ability
+    ghost.getComponent(TouchAttackComponent.class).dispose();
+
+    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+
+    return ghost;
   }
 
   /**
@@ -189,7 +225,7 @@ public class NPCFactory {
    *
    * @return entity
    */
-  private static Entity createBaseNPCNoAI(Entity target) {
+  private static Entity createBaseNPCNoAI() {
     Entity npc =
         new Entity()
             .addComponent(new PhysicsComponent())

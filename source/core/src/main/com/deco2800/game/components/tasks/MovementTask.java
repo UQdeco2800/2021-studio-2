@@ -5,6 +5,7 @@ import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,7 @@ public class MovementTask extends DefaultTask {
   private final GameTime gameTime;
   private Vector2 target;
   private float stopDistance = 0.01f;
+  private Vector2 moveSpeed = Vector2Utils.ONE;
   private long lastTimeMoved;
   private Vector2 lastPos;
   private PhysicsMovementComponent movementComponent;
@@ -32,11 +34,18 @@ public class MovementTask extends DefaultTask {
     this.stopDistance = stopDistance;
   }
 
+  public MovementTask(Vector2 target, Vector2 moveSpeed) {
+    this(target);
+    this.moveSpeed = moveSpeed;
+    stopDistance = stopDistance * Math.max(moveSpeed.x, moveSpeed.y);
+  }
+
   @Override
   public void start() {
     super.start();
     this.movementComponent = owner.getEntity().getComponent(PhysicsMovementComponent.class);
     movementComponent.setTarget(target);
+    movementComponent.setMaxSpeed(moveSpeed);
     movementComponent.setMoving(true);
     logger.debug("Starting movement towards {}", target);
     lastTimeMoved = gameTime.getTime();
@@ -51,12 +60,18 @@ public class MovementTask extends DefaultTask {
       logger.debug("Finished moving to {}", target);
     } else {
       checkIfStuck();
+      movementComponent.setMaxSpeed(moveSpeed);
     }
   }
 
   public void setTarget(Vector2 target) {
     this.target = target;
     movementComponent.setTarget(target);
+  }
+
+
+  public void setMoveSpeed(Vector2 moveSpeed) {
+    this.moveSpeed = moveSpeed;
   }
 
   @Override
@@ -66,11 +81,11 @@ public class MovementTask extends DefaultTask {
     logger.debug("Stopping movement");
   }
 
-  private boolean isAtTarget() {
+  protected boolean isAtTarget() {
     return owner.getEntity().getPosition().dst(target) <= stopDistance;
   }
 
-  private void checkIfStuck() {
+  protected boolean checkIfStuck() {
     if (didMove()) {
       lastTimeMoved = gameTime.getTime();
       lastPos = owner.getEntity().getPosition();
@@ -78,10 +93,15 @@ public class MovementTask extends DefaultTask {
       movementComponent.setMoving(false);
       status = Status.FAILED;
       logger.debug("Got stuck! Failing movement task");
+      return (true);
     }
+    return (false);
   }
 
-  private boolean didMove() {
-    return owner.getEntity().getPosition().dst2(lastPos) > 0.001f;
+  protected boolean didMove() {
+    if (this.getStatus() == Status.ACTIVE) {
+      return owner.getEntity().getPosition().dst2(lastPos) > 0.001f;
+    }
+    return true; // if not started
   }
 }

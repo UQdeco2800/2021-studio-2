@@ -1,0 +1,21 @@
+{
+  "baseArrow": {
+    "health": 10000,
+    "baseAttack": 10,
+    "speedX": 2,
+    "speedY": 2
+  },
+  "fastArrow": {
+    "health": 10000,
+    "baseAttack": 40,
+    "speedX": 10,
+    "speedY": 10
+  },
+  "trackingArrow": {
+    "health": 10000,
+    "baseAttack": 20,
+    "speedX": 0.5,
+    "speedY": 0.5
+  }
+}
+

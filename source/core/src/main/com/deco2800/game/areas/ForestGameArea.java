@@ -6,10 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.ArrowFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -76,6 +76,7 @@ public class ForestGameArea extends GameArea {
     spawnTrees();
     player = spawnPlayer();
     spawnGhosts();
+    spawnRangedGhosts();
     spawnGhostKing();
     spawnArrow();
     spawnAnchoredGhosts();
@@ -147,8 +148,19 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  private void spawnRangedGhosts() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_GHOSTS; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity ghost = NPCFactory.createRangedGhost(player);
+      spawnEntityAt(ghost, randomPos, true, true);
+    }
+  }
+
   private void spawnArrow() {
-    Entity arrow = ArrowFactory.createArrow(player);
+    Entity arrow = WeaponFactory.createNormalArrow(player.getCenterPosition());
     spawnEntityAt(arrow, enemyPos, true, true);
 
   }
