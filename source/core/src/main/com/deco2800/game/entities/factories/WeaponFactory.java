@@ -31,10 +31,11 @@ public class WeaponFactory {
         new AITaskComponent()
             .addTask(movementTask);
     normalArrow
-        .addComponent(new TextureRenderComponent("images/arrow1.png"))
+        .addComponent(new TextureRenderComponent("images/arrow_normal.png"))
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
     //PhysicsUtils.setScaledCollider(normalArrow, 0.5f, 0.4f);
+    normalArrow.setScale(0.86f,0.22f);
     return normalArrow;
   }
 

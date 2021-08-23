@@ -29,10 +29,7 @@ public class ForestGameArea extends GameArea {
   private static GridPoint2 enemyPos;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
-    "images/arrow1.png",
-    "images/arrow2.png",
-    "images/arrow3.png",
-    "images/arrow4.png",
+    "images/arrow_normal.png",
     "images/test.png",
     "images/tree.png",
     "images/ghost_king.png",
