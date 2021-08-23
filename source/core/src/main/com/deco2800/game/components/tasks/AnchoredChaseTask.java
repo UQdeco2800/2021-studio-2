@@ -6,7 +6,7 @@ import com.deco2800.game.entities.Entity;
 
 /** Chases a target entity until they get too far away, leaves the base anchor, or line of sight is lost */
 public class AnchoredChaseTask extends ChaseTask implements PriorityTask {
-  private MovementTask movementTask;
+
   private final Entity base;
   private final float protectRadius;
   private final float protectX;
@@ -20,7 +20,6 @@ public class AnchoredChaseTask extends ChaseTask implements PriorityTask {
    */
   public AnchoredChaseTask(Entity target, float viewDistance, float maxChaseDistance, Entity anchor, float protectRadius) {
     super(target, 10, viewDistance, maxChaseDistance);
-    //super(target, 10, protectRadius * 2, protectRadius * 2);
     this.base = anchor;
     this.protectRadius = protectRadius;
     this.protectX = 0;
@@ -38,7 +37,6 @@ public class AnchoredChaseTask extends ChaseTask implements PriorityTask {
    */
   public AnchoredChaseTask(Entity target, float viewDistance, float maxChaseDistance, Entity anchor, float protectX, float protectY) {
     super(target, 10, viewDistance, maxChaseDistance);
-    //super(target, 10, Math.max(protectX, protectY), Math.max(protectX, protectY));
     this.base = anchor;
     this.protectRadius = 0;
     this.protectX = protectX;

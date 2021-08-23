@@ -118,12 +118,11 @@ public class AnchoredRetreatTask extends DefaultTask implements PriorityTask {
   }
 
   /**
-   *
    * @return true if the entity is outside of it's base or false if it is in it's base
    *    if the enemy is on the bounds of it's base, true if returning or false is doing something else.
    */
   private boolean returnToBase() {
-    /** How long to wait before updating returning again*/
+    // How long to wait before updating returning again
     if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - retreatingLastUpdated <= 2000) {
       return retreating;
     }

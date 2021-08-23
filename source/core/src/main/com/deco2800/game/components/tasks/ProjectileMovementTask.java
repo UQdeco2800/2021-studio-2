@@ -6,7 +6,7 @@ import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Move to a given position, finishing when you get close enough. Requires an entity with a
- * PhysicsMovementComponent.
+ * PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
  */
 public class ProjectileMovementTask extends MovementTask implements PriorityTask {
 
@@ -33,6 +33,7 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
   @Override
   public void stop() {
     super.stop();
+    //Arrows disappears when at destination to stop it from looping in the same place
     owner.getEntity().prepareDispose();
   }
 

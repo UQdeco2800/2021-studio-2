@@ -155,7 +155,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         } else {
             to = targetLoc;
         }
-
         // If there is an obstacle in the path to the player, not visible.
         if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
             debugRenderer.drawLine(from, hit.point);

@@ -102,9 +102,7 @@ public class NPCFactory {
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
         new AITaskComponent()
-            //.addTask(new WanderTask(new Vector2(2f, 2f), 2f))
             .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
-            //.addTask(new ChaseTask(target, 10, 3f, 4f));
             .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
             .addTask(new AnchoredRetreatTask(anchor, anchorSize));
     anchoredGhost.addComponent(aiComponent);
@@ -139,9 +137,7 @@ public class NPCFactory {
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
         new AITaskComponent()
-            //.addTask(new WanderTask(new Vector2(2f, 2f), 2f))
             .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
-            //.addTask(new ChaseTask(target, 10, 3f, 4f));
             .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
             .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
     anchoredGhost.addComponent(aiComponent);

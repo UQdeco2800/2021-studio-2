@@ -11,12 +11,11 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
 
-/** Spawns an arrow to shoot at the player */
+/** Spawns an arrow to shoot at a target */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private final Entity target;
@@ -116,7 +115,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private boolean canShoot() {
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS) {
-            LoggerFactory.getLogger(ShootProjectileTask.class).info("cooldown over!!!!!");
         }
 
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS

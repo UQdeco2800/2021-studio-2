@@ -5,15 +5,12 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.utils.math.RandomUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Wander around by moving to a random position within a range of the base anchor. Wait a little
  * bit between movements. Requires an entity with a PhysicsMovementComponent.
  */
 public class AnchoredWanderTask extends WanderTask implements PriorityTask {
-  private static final Logger logger = LoggerFactory.getLogger(AnchoredWanderTask.class);
 
   private final Entity base;
   private final float protectRadius;
@@ -68,12 +65,10 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
   }
 
   private void startWaiting() {
-    logger.debug("Starting waiting");
     swapTask(waitTask);
   }
 
   private void startMoving() {
-    logger.debug("Starting moving");
     movementTask.setTarget(getRandomPosInRange());
     swapTask(movementTask);
   }

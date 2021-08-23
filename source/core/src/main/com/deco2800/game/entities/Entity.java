@@ -252,7 +252,7 @@ public class Entity {
       component.triggerUpdate();
     }
     if (disposeYourself) {
-      //death animation then dispose
+      //todo: add a death animation then dispose
       //remove attack abilities and related components first
       dispose();
     }
