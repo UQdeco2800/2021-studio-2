@@ -101,14 +101,14 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private boolean isTargetVisible() {
         Vector2 from = owner.getEntity().getCenterPosition();
-        Vector2 to;
-        to = target.getCenterPosition();
+        Vector2 to = target.getCenterPosition();
 
         // If there is an obstacle in the path to the player, not visible.
         if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
             debugRenderer.drawLine(from, hit.point);
             return false;
         }
+        //to.add(owner.getEntity().getCenterPosition().sub(owner.getEntity().getPosition()));
         debugRenderer.drawLine(from, to);
         return true;
     }
