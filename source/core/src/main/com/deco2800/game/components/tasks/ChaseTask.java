@@ -70,7 +70,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     return getInactivePriority();
   }
 
-  private float getDistanceToTarget() {
+  protected float getDistanceToTarget() {
     return owner.getEntity().getPosition().dst(target.getPosition());
   }
 

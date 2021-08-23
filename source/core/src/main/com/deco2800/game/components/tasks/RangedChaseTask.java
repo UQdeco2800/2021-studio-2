@@ -1,11 +1,11 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.deco2800.game.rendering.DebugRenderer;
+import com.deco2800.game.services.ServiceLocator;
 
 /** Chases a target entity until they get too far away or line of sight is lost */
 public class RangedChaseTask extends ChaseTask implements PriorityTask {
@@ -42,7 +42,14 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
 
   @Override
   public int getPriority() {
-    return (super.getPriority());
+    //Deadzone
+    if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8/10) {
+      return (super.getPriority());
+    } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
+      return (super.getPriority());
+    }
+    return (-1);
+
   }
 
   /**
@@ -50,9 +57,28 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
    * @return position that is close enough to attack but staying as far away as possible
    */
   private Vector2 calculatePos() {
-    Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
     Vector2 v1 = owner.getEntity().getPosition().cpy();
     Vector2 v2 = target.getPosition().cpy();
+    Vector2 v3 = v1.cpy().sub(v2); //heading relative to entity
+    float range = owner.getEntity().getAttackRange();
+    float distanceFrom = v3.len();
+    if (range/v3.len() < 1) {
+      v3.scl(range / v3.len());
+      v3.add(v2);
+    } else {
+      //invert v3 direction
+      v3 = v2.cpy().sub(v1);
+      v3.rotate90(1).rotate90(1); //heading relative to target
+      //v3.scl(v3.len() / range);
+      if (range/(v3.len()+distanceFrom) < 1) {
+        v3.scl(range / (v3.len()+distanceFrom));
+      }
+      v3.add(v1);
+    }
+    DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
+    debugRenderer.drawLine(v1, v3, Color.RED, 2);
+    return v3;
+    /*
     Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity
     float range = owner.getEntity().getAttackRange();
     if (Math.abs(v3.x) > Math.abs(v3.y)) {
@@ -68,6 +94,6 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
         v3.y += range;
       }
     }
-    return v3.add(v1);
+    return v3.add(v1);*/
   }
 }

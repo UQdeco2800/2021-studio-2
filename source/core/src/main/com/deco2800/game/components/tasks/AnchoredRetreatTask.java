@@ -128,6 +128,7 @@ public class AnchoredRetreatTask extends DefaultTask implements PriorityTask {
       return retreating;
     }
     if (protectRadius > 0f) {
+      //Deadzone
       if (distanceFromBase() - protectRadius < protectRadius/4) {
         return false;
       } else if (distanceFromBase() - protectRadius > protectRadius/2) {
@@ -136,6 +137,7 @@ public class AnchoredRetreatTask extends DefaultTask implements PriorityTask {
         return retreating;
       }
     } else {
+      //Deadzone
       if ((distanceFromBaseX() - protectX < protectX / 4 * 3) || (distanceFromBaseY() - protectY < protectY / 4 * 3)) {
         return false;
       } else if ((distanceFromBaseX() - protectX > protectX) || (distanceFromBaseY() - protectY > protectY)) {
