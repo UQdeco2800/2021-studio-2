@@ -18,6 +18,11 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Screen containing the death screen UI and functionality components
+ *
+ * Note that this screen is not currently in use and the the death screen is simply displayed as an UI component
+ */
 public class DeathScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(DeathScreen.class);
 

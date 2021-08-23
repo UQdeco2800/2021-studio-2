@@ -16,6 +16,9 @@ import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * UI component for displaying the death screen
+ */
 public class DeathDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
     private static final float Z_INDEX = 2f;
@@ -34,6 +37,9 @@ public class DeathDisplay extends UIComponent {
         entity.getEvents().addListener("deathScreen", this::deathDisplay);
     }
 
+    /**
+     * Adds the death screen visual components to the class
+     */
     private void addActors() {
         stack = new Stack();
         stack.setFillParent(true);

@@ -5,6 +5,9 @@ import com.deco2800.game.components.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Handles the functionality of the death screen button components
+ */
 public class DeathActions extends Component {
 
     private static final Logger logger = LoggerFactory.getLogger(DeathActions.class);
