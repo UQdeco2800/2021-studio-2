@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -168,14 +169,14 @@ public class NPCFactory {
    * @param target entity to chase
    * @return entity
    */
-  public static Entity createRangedGhost(Entity target) {
+  public static Entity createRangedGhost(Entity target, GameArea gameArea) {
     Entity ghost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new RangedChaseTask(target, 10, 15f, 20f));
-            //.addTask(new RangedAttackTask(target));
+            .addTask(new RangedChaseTask(target, 10, 15f, 20f))
+            .addTask(new ShootProjectileTask(target, 2000, gameArea));
 
     AnimationRenderComponent animator =
         new AnimationRenderComponent(

@@ -2,15 +2,13 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Move to a given position, finishing when you get close enough. Requires an entity with a
  * PhysicsMovementComponent.
  */
 public class ProjectileMovementTask extends MovementTask implements PriorityTask {
-  private static final Logger logger = LoggerFactory.getLogger(ProjectileMovementTask.class);
 
   public ProjectileMovementTask(Vector2 target, Vector2 moveSpeed) {
     super(target, moveSpeed);
@@ -19,6 +17,7 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
   @Override
   public void update() {
     super.update();
+    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target);
   }
 
   public int getPriority() {

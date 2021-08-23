@@ -9,7 +9,6 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
-import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -75,7 +74,6 @@ public class ForestGameArea extends GameArea {
     spawnGhosts();
     spawnRangedGhosts();
     spawnGhostKing();
-    spawnArrow();
     spawnAnchoredGhosts();
     
     playMusic();
@@ -151,15 +149,9 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = NPCFactory.createRangedGhost(player);
+      Entity ghost = NPCFactory.createRangedGhost(player, this);
       spawnEntityAt(ghost, randomPos, true, true);
     }
-  }
-
-  private void spawnArrow() {
-    Entity arrow = WeaponFactory.createNormalArrow(player.getCenterPosition());
-    spawnEntityAt(arrow, enemyPos, true, true);
-
   }
 
   private void spawnGhostKing() {

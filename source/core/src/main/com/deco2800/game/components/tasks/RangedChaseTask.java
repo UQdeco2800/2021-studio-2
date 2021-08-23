@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 
 /** Chases a target entity until they get too far away or line of sight is lost */
@@ -75,8 +74,7 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
       }
       v3.add(v1);
     }
-    DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
-    debugRenderer.drawLine(v1, v3, Color.RED, 2);
+    ServiceLocator.getRenderService().getDebug().drawLine(v1, v3, Color.RED, 2);
     return v3;
     /*
     Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity

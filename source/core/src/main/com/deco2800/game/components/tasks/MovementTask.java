@@ -17,7 +17,7 @@ public class MovementTask extends DefaultTask {
   private static final Logger logger = LoggerFactory.getLogger(MovementTask.class);
 
   private final GameTime gameTime;
-  private Vector2 target;
+  protected Vector2 target;
   private float stopDistance = 0.01f;
   private Vector2 moveSpeed = Vector2Utils.ONE;
   private long lastTimeMoved;
