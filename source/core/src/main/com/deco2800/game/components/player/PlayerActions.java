@@ -1,11 +1,13 @@
 package com.deco2800.game.components.player;
 
+
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.services.ServiceLocator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Action component for interacting with the player. Player events should be initialised in create()
@@ -24,6 +26,7 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
     entity.getEvents().addListener("attack", this::attack);
+    entity.getEvents().addListener("mouseAttack", this::mouseAttack);
   }
 
   @Override
@@ -67,5 +70,21 @@ public class PlayerActions extends Component {
   void attack() {
     Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
     attackSound.play();
+  }
+
+  /**
+   * Makes the player attack. This method is called using a single parameter.
+   * @param coordinates the mouse coordinates of the click
+   */
+  void mouseAttack(Vector2 coordinates) {
+    // Lock movement, but preserve player direction prior to attack.
+    Vector2 tempDirection = walkDirection.cpy();
+    stopWalking();
+
+    System.out.println(coordinates.toString() + ' '+  entity.getPosition());
+    Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
+    attackSound.play();
+
+    walk(tempDirection);
   }
 }
