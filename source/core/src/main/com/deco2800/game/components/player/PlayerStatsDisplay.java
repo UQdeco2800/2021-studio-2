@@ -40,7 +40,7 @@ public class PlayerStatsDisplay extends UIComponent {
     table.top().left();
     table.setFillParent(true);
     table.padTop(45f).padLeft(5f);
-    table.setDebug(true); //to see the outlines
+    //table.setDebug(true); //to see the outlines
 
     // Heart image
     float heartSideLength = 30f;
@@ -80,20 +80,17 @@ public class PlayerStatsDisplay extends UIComponent {
     float currentHealth =  entity.getComponent(CombatStatsComponent.class).getHealth();
     float maxHealth =  entity.getComponent(CombatStatsComponent.class).getMaxHealth();
     boolean isDead = entity.getComponent(CombatStatsComponent.class).isDead();
-    float lowHealthThreshold = 0.33f * maxHealth;
+    float lowHealthThreshold = 0.33f * maxHealth; //change float value to change the threshold
 
     //checks if player is dead, turns off bloody view
     if (isDead) {
       entity.getEvents().trigger("bloodyViewOff");
       entity.getEvents().trigger("deathScreen");
-      //triggerDeath(); //somehow trigger the  death screen?
     } else if (currentHealth <=  lowHealthThreshold) {
       //call the event trigger for bloodyViewOn when hp reaches below threshold
-      System.out.println("Blood View on");
       entity.getEvents().trigger("bloodyViewOn");
     } else {
       //turn off blood view when above low health threshold
-      System.out.println("Blood View off");
       entity.getEvents().trigger("bloodyViewOff");
     }
   }
