@@ -5,17 +5,20 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
+import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
- * Core entity class. Entities exist in the game and are updated each frame. All entities have a
- * position and scale, but have no default behaviour. Components should be added to an entity to
- * give it specific behaviour. This class should not be inherited or modified directly.
- *
- * <p>Example use:
+ * All enemy entities control
+ * if one enemy is alert - all others enemy will chase the player with the given position from
+ * the alert enemy
  *
  * <pre>
  * Entity player = new Entity()
@@ -24,8 +27,8 @@ import org.slf4j.LoggerFactory;
  * ServiceLocator.getEntityService().register(player);
  * </pre>
  */
-public class Entity {
-  private static final Logger logger = LoggerFactory.getLogger(Entity.class);
+public class GhostEntitiesControl {
+  private static final Logger logger = LoggerFactory.getLogger(GhostEntitiesControl.class);
   private static int nextId = 0;
   private static final String EVT_NAME_POS = "setPosition";
 
@@ -39,13 +42,22 @@ public class Entity {
   private Array<Component> createdComponents;
   private boolean disposeYourself = false;
   private float attackRange;
+  private static List<Entity> listOfGhost;
 
-  public Entity() {
+  public GhostEntitiesControl() {
     id = nextId;
     nextId++;
 
     components = new IntMap<>(4);
     eventHandler = new EventHandler();
+  }
+
+  /**
+   * add ghost entity to the list
+   * @param entity ghost entities
+   */
+  public void addEntity(Entity entity) {
+    listOfGhost.add(entity);
   }
 
   /**
@@ -180,34 +192,6 @@ public class Entity {
    * @param component The component to add. Only one component of a type can be added to an entity.
    * @return Itself
    */
-  public Entity addComponent(Component component) {
-    if (created) {
-      logger.error(
-          "Adding {} to {} after creation is not supported and will be ignored", component, this);
-      return this;
-    }
-    ComponentType componentType = ComponentType.getFrom(component.getClass());
-    if (components.containsKey(componentType.getId())) {
-      logger.error(
-          "Attempted to add multiple components of class {} to {}. Only one component of a class "
-              + "can be added to an entity, this will be ignored.",
-          component,
-          this);
-      return this;
-    }
-    components.put(componentType.getId(), component);
-    component.setEntity(this);
-
-    return this;
-  }
-
-  /** Dispose of the entity. This will dispose of all components on this entity. */
-  public void dispose() {
-    for (Component component : createdComponents) {
-      component.dispose();
-    }
-    ServiceLocator.getEntityService().unregister(this);
-  }
 
   /**
    * Create the entity and start running. This is called when the entity is registered in the world,
@@ -237,24 +221,6 @@ public class Entity {
     }
     for (Component component : createdComponents) {
       component.triggerEarlyUpdate();
-    }
-  }
-
-  /**
-   * Perform an update on all components. This is called by the entity service and should not be
-   * called manually.
-   */
-  public void update() {
-    if (!enabled) {
-      return;
-    }
-    for (Component component : createdComponents) {
-      component.triggerUpdate();
-    }
-    if (disposeYourself) {
-      //todo: add a death animation then dispose
-      //remove attack abilities and related components first
-      dispose();
     }
   }
 
@@ -302,7 +268,7 @@ public class Entity {
 
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof Entity && ((Entity) obj).getId() == this.getId());
+    return (obj instanceof GhostEntitiesControl && ((GhostEntitiesControl) obj).getId() == this.getId());
   }
 
   @Override
