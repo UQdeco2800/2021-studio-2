@@ -171,8 +171,11 @@ public class NPCFactory {
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new RangedChaseTask(target, 10, 15f, 20f))
-            .addTask(new ShootProjectileTask(target, 2000, gameArea));
+            .addTask(new RangedChaseTask(target, 10, 15f, 20f));
+    ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000, gameArea);
+    shootProjectileTask.setProjectileType("normalArrow");
+    shootProjectileTask.setMultishotChance(0.1);
+    aiComponent.addTask(shootProjectileTask);
 
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
