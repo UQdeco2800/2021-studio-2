@@ -16,6 +16,7 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
+
 /**
  * Factory to create non-playable character weapon entities with predefined components.
  */
@@ -32,6 +33,7 @@ public class WeaponFactory {
             .addTask(movementTask);
     normalArrow
         .addComponent(new TextureRenderComponent("images/arrow_normal.png"))
+
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
     //PhysicsUtils.setScaledCollider(normalArrow, 0.5f, 0.4f);

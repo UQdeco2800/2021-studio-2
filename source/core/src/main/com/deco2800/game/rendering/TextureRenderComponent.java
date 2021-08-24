@@ -2,8 +2,12 @@ package com.deco2800.game.rendering;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
+
+import java.awt.*;
 
 /** Render a static texture. */
 public class TextureRenderComponent extends RenderComponent {
@@ -31,6 +35,21 @@ public class TextureRenderComponent extends RenderComponent {
   public void draw(SpriteBatch batch) {
     Vector2 position = entity.getPosition();
     Vector2 scale = entity.getScale();
-    batch.draw(texture, position.x, position.y, scale.x, scale.y);
+    if (scale.x == 0.86f && scale.y == 0.22f) {
+
+      float degree = (float) Math.toDegrees(Math.atan2(position.y, position.x));
+      batch.draw(new TextureRegion(texture),
+              position.x,
+              position.y,
+              0,
+              0,
+              scale.x,
+              scale.y,
+              1,
+              1,
+              degree);
+    } else {
+      batch.draw(texture, position.x, position.y, scale.x, scale.y);
+    }
   }
 }
