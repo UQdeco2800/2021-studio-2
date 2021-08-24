@@ -62,7 +62,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     public void shoot() {
         lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-        Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition());
+        Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition(), getDirectionOfTarget());
         gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
     }
 
@@ -97,6 +97,14 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private float getDistanceToTarget() {
         return owner.getEntity().getPosition().dst(target.getPosition());
+    }
+
+
+    private float getDirectionOfTarget() {
+        Vector2 v1 = owner.getEntity().getPosition().cpy();
+        Vector2 v2 = target.getPosition().cpy();
+        Vector2 v3 = v1.cpy().sub(v2);
+        return (v3.angleDeg());
     }
 
     private boolean isTargetVisible() {
