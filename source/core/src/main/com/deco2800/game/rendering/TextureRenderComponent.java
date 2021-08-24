@@ -48,30 +48,13 @@ public class TextureRenderComponent extends RenderComponent {
     Vector2 positionCenter = entity.getCenterPosition();
     Vector2 positionCenterRelative = positionCenter.cpy().sub(position);
     Vector2 scale = entity.getScale();
-<<<<<<< HEAD
-    if (scale.x == 0.86f && scale.y == 0.22f) {
 
-      float degree = (float) Math.toDegrees(Math.atan2(position.y, position.x));
-      batch.draw(new TextureRegion(texture),
-              position.x,
-              position.y,
-              0,
-              0,
-              scale.x,
-              scale.y,
-              1,
-              1,
-              degree);
-    } else {
-      batch.draw(texture, position.x, position.y, scale.x, scale.y);
-=======
     if (texture != null) {
       batch.draw(texture, position.x, position.y, scale.x, scale.y);
     } else {
       Vector2 newScale = scale.cpy().rotateAroundDeg(new Vector2(0,0),  -rotation);
       //batch.draw(sprite, position.x, position.y, positionCenterRelative.x, positionCenterRelative.y, 1, 1, scale.x, scale.y, rotation);
       batch.draw(sprite, position.x, position.y, 0, 0, 1, 1, newScale.x, newScale.y, rotation);
->>>>>>> remotes/origin/team-2
     }
   }
 }

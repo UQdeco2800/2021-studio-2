@@ -37,12 +37,9 @@ public class WeaponFactory {
             .addTask(movementTask);
     Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
     normalArrow
-<<<<<<< HEAD
         .addComponent(new TextureRenderComponent("images/arrow_normal.png"))
 
-=======
         .addComponent(new TextureRenderComponent(sprite, rotation))
->>>>>>> remotes/origin/team-2
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
     Vector2 scale = new Vector2(0.86f,0.22f);
