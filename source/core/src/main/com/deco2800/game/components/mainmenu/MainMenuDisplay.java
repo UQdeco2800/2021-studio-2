@@ -42,13 +42,7 @@ public class MainMenuDisplay extends UIComponent {
 
     table = new Table();
     table.setFillParent(true);
-    Image title =
-        new Image(
-            ServiceLocator.getResourceService()
-                .getAsset("images/Valhalla_title.png", Texture.class));
 
-    title.setSize(0.1f, 0.1f);
-    title.setScaling(Scaling.contain);
 
     Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
@@ -95,8 +89,7 @@ public class MainMenuDisplay extends UIComponent {
           }
         });
 
-    //table.add(title);
-    //table.row();
+
     table.add(startBtn).padTop(30f);
     table.row();
     table.add(loadBtn).padTop(30f);
