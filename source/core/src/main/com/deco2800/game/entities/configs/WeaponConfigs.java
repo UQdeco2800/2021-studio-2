@@ -1,7 +1,7 @@
 package com.deco2800.game.entities.configs;
 
 /**
- * Defines all NPC configs to be loaded by the NPC Factory.
+ * Defines all Weapon configs to be loaded by the Weapon Factory.
  */
 public class WeaponConfigs {
   public BaseArrowConfig baseArrow = new BaseArrowConfig();

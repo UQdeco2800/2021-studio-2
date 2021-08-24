@@ -3,17 +3,11 @@ package com.deco2800.game.components;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.ai.tasks.AITaskComponent;
-import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.rendering.TextureRenderComponent;
-
-import java.util.Locale;
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -73,6 +67,7 @@ public class TouchAttackComponent extends Component {
     }
 
     // Apply knockback
+    //Maybe this should be called during collision as sometimes hitboxes can overlap without onCollision being called in time
     PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
     if (physicsComponent != null && knockbackForce > 0f) {
       Body targetBody = physicsComponent.getBody();

@@ -1,5 +1,8 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -15,6 +18,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
 
 /**
@@ -24,20 +28,28 @@ public class WeaponFactory {
   private static final WeaponConfigs configs =
       FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
 
-  public static Entity createNormalArrow(Vector2 targetLoc) {
+  public static Entity createNormalArrow(Vector2 targetLoc, float rotation) {
     Entity normalArrow = createBaseArrow();
     BaseArrowConfig config = configs.baseArrow;
     ProjectileMovementTask movementTask = new ProjectileMovementTask(targetLoc, new Vector2(config.speedX, config.speedY));
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(movementTask);
+    Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
     normalArrow
+<<<<<<< HEAD
         .addComponent(new TextureRenderComponent("images/arrow_normal.png"))
 
+=======
+        .addComponent(new TextureRenderComponent(sprite, rotation))
+>>>>>>> remotes/origin/team-2
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
-    //PhysicsUtils.setScaledCollider(normalArrow, 0.5f, 0.4f);
-    normalArrow.setScale(0.86f,0.22f);
+    Vector2 scale = new Vector2(0.86f,0.22f);
+    //scale = new Vector2(sprite.getRegionWidth()/50f,sprite.getRegionHeight()/50f);
+    scale = new Vector2(sprite.getWidth()/40f,sprite.getHeight()/40f);
+    scale.rotateAroundDeg(new Vector2(0,0),  rotation);
+    normalArrow.setScale(scale);
     return normalArrow;
   }
 

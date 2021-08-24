@@ -6,7 +6,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 
-/** Chases a target entity until they get too far away or line of sight is lost */
+/** Chases a target entity but stays far enough away so it can attack safely */
 public class RangedChaseTask extends ChaseTask implements PriorityTask {
 
   /**
@@ -25,8 +25,14 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
     movementTask = new MovementTask(calculatePos());
     movementTask.create(owner);
     movementTask.start();
-    
-    this.owner.getEntity().getEvents().trigger("chaseStart");
+    //Deadzone
+    if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8/10) {
+      this.owner.getEntity().getEvents().trigger("wanderStart");
+    } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
+      //this.owner.getEntity().getEvents().trigger("fleeStart");
+      this.owner.getEntity().getEvents().trigger("chaseStart");
+    }
+
   }
 
 

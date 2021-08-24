@@ -11,18 +11,11 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
 
-/**
- * Stopped using this class for ranged attacks as it
- * requires the basic arrow to see the target before it attacks
- * Will be used later on as the ground work for the tracking arrow
- */
-
-/** Chases a target entity's static location until they get too far away or line of sight is lost */
+/** Spawns an arrow to shoot at a target */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private final Entity target;
@@ -41,6 +34,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * @param target The entity to chase.
+     * @param cooldownMS how long to wait in MS before shooting again
+     * @param gameArea used to spawn in the arrow
      */
     public ShootProjectileTask(Entity target, long cooldownMS, GameArea gameArea) {
         this.target = target;
@@ -67,7 +62,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     public void shoot() {
         lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-        Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition());
+        Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition(), getDirectionOfTarget());
         gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
     }
 
@@ -104,23 +99,30 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         return owner.getEntity().getPosition().dst(target.getPosition());
     }
 
+
+    private float getDirectionOfTarget() {
+        Vector2 v1 = owner.getEntity().getPosition().cpy();
+        Vector2 v2 = target.getPosition().cpy();
+        Vector2 v3 = v1.cpy().sub(v2);
+        return (v3.angleDeg());
+    }
+
     private boolean isTargetVisible() {
         Vector2 from = owner.getEntity().getCenterPosition();
-        Vector2 to;
-        to = target.getCenterPosition();
+        Vector2 to = target.getCenterPosition();
 
         // If there is an obstacle in the path to the player, not visible.
         if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
             debugRenderer.drawLine(from, hit.point);
             return false;
         }
+        //to.add(owner.getEntity().getCenterPosition().sub(owner.getEntity().getPosition()));
         debugRenderer.drawLine(from, to);
         return true;
     }
 
     private boolean canShoot() {
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS) {
-            LoggerFactory.getLogger(ShootProjectileTask.class).info("cooldown over!!!!!");
         }
 
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
