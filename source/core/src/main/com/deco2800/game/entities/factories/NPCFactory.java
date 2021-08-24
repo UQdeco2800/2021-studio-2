@@ -158,7 +158,6 @@ public class NPCFactory {
     return anchoredGhost;
   }
 
-
   /**
    * Creates a ranged ghost entity.
    *
