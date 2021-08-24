@@ -67,6 +67,7 @@ public class TouchAttackComponent extends Component {
     }
 
     // Apply knockback
+    //Maybe this should be called during collision as sometimes hitboxes can overlap without onCollision being called in time
     PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
     if (physicsComponent != null && knockbackForce > 0f) {
       Body targetBody = physicsComponent.getBody();
