@@ -1,4 +1,4 @@
-package com.deco2800.game.death;
+package com.deco2800.game.components.death;
 
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.Component;
