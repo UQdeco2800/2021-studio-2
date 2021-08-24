@@ -18,7 +18,6 @@ import com.deco2800.game.ui.UIComponent;
 public class PlayerLowHealthDisplay extends UIComponent {
     //add variables here
     private Image bloodImage;
-    Table table;
     Stack stack;
     /**
      * Add all actors to the stage here and event listener

@@ -1,4 +1,4 @@
-package com.deco2800.game.death;
+package com.deco2800.game.components.death;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

@@ -1,5 +1,6 @@
 package com.deco2800.game.components.mainmenu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -49,11 +50,12 @@ public class MainMenuDisplay extends UIComponent {
     title.setSize(0.1f, 0.1f);
     title.setScaling(Scaling.contain);
 
+    Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
-    TextButton startBtn = new TextButton("Start", skin);
-    TextButton loadBtn = new TextButton("Load", skin);
-    TextButton settingsBtn = new TextButton("Settings", skin);
-    TextButton exitBtn = new TextButton("Exit", skin);
+    TextButton startBtn = new TextButton("Start", menuButtons);
+    TextButton loadBtn = new TextButton("Load", menuButtons);
+    TextButton settingsBtn = new TextButton("Settings", menuButtons);
+    TextButton exitBtn = new TextButton("Exit", menuButtons);
 
     // Triggers an event when the button is pressed
     startBtn.addListener(
