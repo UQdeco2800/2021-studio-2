@@ -46,12 +46,12 @@ public class TextureRenderComponent extends RenderComponent {
   public void draw(SpriteBatch batch) {
     Vector2 position = entity.getPosition();
     Vector2 positionCenter = entity.getCenterPosition();
-    Vector2 positionCenterRelative = positionCenter.cpy().sub(position);
+    //Vector2 positionCenterRelative = positionCenter.cpy().sub(position);
     Vector2 scale = entity.getScale();
 
     if (texture != null) {
       batch.draw(texture, position.x, position.y, scale.x, scale.y);
-    } else {
+    } else if (sprite != null) {
       Vector2 newScale = scale.cpy().rotateAroundDeg(new Vector2(0,0),  -rotation);
       //batch.draw(sprite, position.x, position.y, positionCenterRelative.x, positionCenterRelative.y, 1, 1, scale.x, scale.y, rotation);
       batch.draw(sprite, position.x, position.y, 0, 0, 1, 1, newScale.x, newScale.y, rotation);

@@ -11,8 +11,8 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
-
 import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 
 /** Spawns an arrow to shoot at a target */
@@ -27,10 +27,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private GameArea gameArea;
     //Below are currently unused and will be used for future arrows
     private Vector2 moveSpeed = new Vector2(2,2);
-    private boolean followTarget;
-    private boolean showTrajectory;
-    private double multishotChance;
-    private String projectileType;
+    private boolean followTarget = false;
+    private boolean showTrajectory = false;
+    private double multishotChance = 0.00;
+    private String projectileType = "normalArrow";
 
     /**
      * @param target The entity to chase.
@@ -62,8 +62,23 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     public void shoot() {
         lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-        Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition(), getDirectionOfTarget());
-        gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
+        if (projectileType.equals("normalArrow")) {
+            Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition(), getDirectionOfTarget());
+            gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
+            int multiplier = 0;
+            Random rand = new Random();
+            double chance = rand.nextDouble();
+            double multishotChanceTemp = multishotChance;
+            while (multishotChanceTemp >= chance) {
+                multiplier++;
+                Entity arrowLeft = WeaponFactory.createNormalArrow(getMultishotVector(-1, multiplier), getMultishotDirection(-1, multiplier));
+                gameArea.spawnEntityAt(arrowLeft, owner.getEntity().getCenterPosition(), true, true);
+                Entity arrowRight = WeaponFactory.createNormalArrow(getMultishotVector(1, multiplier), getMultishotDirection(1, multiplier));
+                gameArea.spawnEntityAt(arrowRight, owner.getEntity().getCenterPosition(), true, true);
+                chance = rand.nextDouble();
+                multishotChanceTemp -=1;
+            }
+        }
     }
 
     public void setFollowTarget(boolean followTarget) {
@@ -96,15 +111,43 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     private float getDistanceToTarget() {
-        return owner.getEntity().getPosition().dst(target.getPosition());
+        return owner.getEntity().getCenterPosition().dst(target.getPosition());
     }
 
-
     private float getDirectionOfTarget() {
-        Vector2 v1 = owner.getEntity().getPosition().cpy();
-        Vector2 v2 = target.getPosition().cpy();
+        Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
+        Vector2 v2 = target.getCenterPosition().cpy();
         Vector2 v3 = v1.cpy().sub(v2);
         return (v3.angleDeg());
+    }
+
+    /**
+     *
+     * @param direction 1 to calculate right arrow, -1 to calculate left arrow
+     * @param multiplier how many arrows over to calculate
+     * @return direction arrow should go
+     */
+    private float getMultishotDirection(int direction, int multiplier) {
+        //creates a nice ring effect at multishots above 8
+        float angle = (float) (360/(Math.max(8, Math.floor(multishotChance))*2+1));
+        return (getDirectionOfTarget() + ((-direction) * angle * multiplier));
+    }
+
+    /**
+     *
+     * @param direction 1 to calculate right arrow, -1 to calculate left arrow
+     * @param multiplier how many arrows over to calculate
+     * @return direction arrow should go
+     */
+    private Vector2 getMultishotVector(int direction, int multiplier) {
+        //creates a nice ring effect at multishots above 8
+        float angle = (float) (360/(Math.max(8, Math.floor(multishotChance))*2+1));
+        Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
+        Vector2 v2 = target.getCenterPosition().cpy();
+        Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity
+        v3.rotateAroundDeg(new Vector2(0,0), ((-direction) * angle * multiplier));
+        v3.add(v1);
+        return (v3);
     }
 
     private boolean isTargetVisible() {

@@ -7,6 +7,7 @@ import com.deco2800.game.services.ServiceLocator;
 /**
  * Move to a given position, finishing when you get close enough. Requires an entity with a
  * PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
+ * todo: may need to offset the target by the sprites center size to stop it approaching with the corner
  */
 public class ProjectileMovementTask extends MovementTask implements PriorityTask {
 
