@@ -1,7 +1,7 @@
 package com.deco2800.game.entities.configs;
 
 /**
- * Defines the properties stored in ghost king config files to be loaded by the NPC Factory.
+ * Defines the properties stored in arrow config files to be loaded by the Weapon Factory.
  */
 public class FastArrowConfig extends BaseArrowConfig {
   public int baseAttack = 40;

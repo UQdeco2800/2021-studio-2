@@ -160,7 +160,7 @@ public class NPCFactory {
 
 
   /**
-   * Creates a ghost entity.
+   * Creates a ranged ghost entity.
    *
    * @param target entity to chase
    * @return entity
@@ -218,7 +218,7 @@ public class NPCFactory {
   }
 
   /**
-   * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
+   * Creates a generic NPC, with no ai, to be used as a base entity by more specific NPC creation methods.
    *
    * @return entity
    */
