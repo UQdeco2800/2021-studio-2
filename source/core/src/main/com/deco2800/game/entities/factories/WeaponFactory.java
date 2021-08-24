@@ -37,8 +37,6 @@ public class WeaponFactory {
             .addTask(movementTask);
     Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
     normalArrow
-        .addComponent(new TextureRenderComponent("images/arrow_normal.png"))
-
         .addComponent(new TextureRenderComponent(sprite, rotation))
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
