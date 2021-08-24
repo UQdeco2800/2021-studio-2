@@ -3,10 +3,11 @@ package com.deco2800.game.components.mainmenu;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 public class MainMenuDisplay extends UIComponent {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
   private static final float Z_INDEX = 2f;
+  private Stack stack;
   private Table table;
 
   @Override
@@ -27,12 +29,26 @@ public class MainMenuDisplay extends UIComponent {
   }
 
   private void addActors() {
+    stack = new Stack();
+    stack.setFillParent(true);
+    stack.setDebug(true);
+    stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
+    Image background = new Image(ServiceLocator.getResourceService().getAsset("images/main_menu_background.png",
+            Texture.class));
+    background.setScaling(Scaling.stretch);
+    stack.add(background);
+
+
     table = new Table();
     table.setFillParent(true);
     Image title =
         new Image(
             ServiceLocator.getResourceService()
-                .getAsset("images/box_boy_title.png", Texture.class));
+                .getAsset("images/Valhalla_title.png", Texture.class));
+
+    title.setSize(0.1f, 0.1f);
+    title.setScaling(Scaling.contain);
+
 
     TextButton startBtn = new TextButton("Start", skin);
     TextButton loadBtn = new TextButton("Load", skin);
@@ -77,16 +93,17 @@ public class MainMenuDisplay extends UIComponent {
           }
         });
 
-    table.add(title);
-    table.row();
+    //table.add(title);
+    //table.row();
     table.add(startBtn).padTop(30f);
     table.row();
-    table.add(loadBtn).padTop(15f);
+    table.add(loadBtn).padTop(30f);
     table.row();
-    table.add(settingsBtn).padTop(15f);
+    table.add(settingsBtn).padTop(30f);
     table.row();
-    table.add(exitBtn).padTop(15f);
+    table.add(exitBtn).padTop(30f);
 
+    stage.addActor(stack);
     stage.addActor(table);
   }
 
