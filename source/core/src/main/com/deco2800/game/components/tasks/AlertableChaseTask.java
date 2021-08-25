@@ -4,9 +4,13 @@ package com.deco2800.game.components.tasks;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Chases a target entity if they've been alerted or can see the target */
 public class AlertableChaseTask extends ChaseTask implements PriorityTask {
+
+  private boolean alerted = false;
   /**
    * @param target The entity to chase.
    * @param priority Task priority when chasing (0 when not chasing).
@@ -17,12 +21,32 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
     super(target, priority, viewDistance, maxChaseDistance);
   }
 
+  private void alerted() {
+    alerted = true;
+  }
+  private void unAlerted() {
+    alerted = false;
+  }
+
   @Override
-  public void update() {
-    super.update();
+  public int getPriority() {
     for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
       //get event triggered
+      if (entity.getEntityType() != null) {
+
+        if (entity.getEntityType().equals("AlertCaller")) {
+          Logger logger = LoggerFactory.getLogger(WanderTask.class);
+          logger.info("added the listener to the entity");
+          //todo: dont re-add to same entity
+          entity.getEvents().addListener("alert", this::alerted);
+          entity.getEvents().addListener("unAlert", this::unAlerted);
+        }
+      }
       //if (entity.getEvents().addListener();)
     }
+    if (alerted) {
+      return 10;
+    }
+    return super.getPriority();
   }
 }

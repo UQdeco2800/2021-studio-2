@@ -90,7 +90,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     return -1;
   }
 
-  private boolean isTargetVisible() {
+  public boolean isTargetVisible() {
     Vector2 from = owner.getEntity().getCenterPosition();
     Vector2 to = target.getCenterPosition();
 

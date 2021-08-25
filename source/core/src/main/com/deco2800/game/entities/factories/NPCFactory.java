@@ -58,6 +58,10 @@ public class NPCFactory {
         .addComponent(animator)
         .addComponent(new GhostAnimationController());
 
+
+    ghost.getComponent(AITaskComponent.class).addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+
+
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
 
     return ghost;
@@ -71,6 +75,7 @@ public class NPCFactory {
    */
   public static Entity createGhostKing(Entity target) {
     Entity ghostKing = createBaseNPCNoAI();
+    ghostKing.setEntityType("AlertCaller");
     GhostKingConfig config = configs.ghostKing;
     AITaskComponent aiTaskComponent = new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))

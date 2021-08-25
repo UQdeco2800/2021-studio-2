@@ -11,6 +11,8 @@ import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,15 +39,25 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
   }
 
   @Override
+  public void stop() {
+    super.start();
+    alert = false;
+    owner.getEntity().getEvents().trigger("unAlert");
+  }
+
+  @Override
   public void update() {
     super.update();
     if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
+       Logger logger = LoggerFactory.getLogger(WanderTask.class);
+       logger.info("found3 secs");
+      owner.getEntity().getEvents().trigger("alert");
       updateAlert();
     }
   }
 
   // set alert if other ghost found enemy
-  public void updateAlert() {
+  private void updateAlert() {
     this.alert = true;
   }
 }

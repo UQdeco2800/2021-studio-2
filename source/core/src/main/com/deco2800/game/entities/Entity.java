@@ -39,13 +39,21 @@ public class Entity {
   private Array<Component> createdComponents;
   private boolean disposeYourself = false;
   private float attackRange;
+  private String entityType;
 
   public Entity() {
     id = nextId;
     nextId++;
-
     components = new IntMap<>(4);
     eventHandler = new EventHandler();
+  }
+
+  public void setEntityType(String entityType) {
+    this.entityType = entityType;
+  }
+
+  public String getEntityType() {
+    return entityType;
   }
 
   /**
