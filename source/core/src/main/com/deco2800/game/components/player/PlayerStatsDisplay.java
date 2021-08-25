@@ -83,6 +83,11 @@ public class PlayerStatsDisplay extends UIComponent {
     //checks if player is dead, turns off bloody view
     if (isDead) {
       entity.getEvents().trigger("bloodyViewOff");
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
       entity.getEvents().trigger("deathScreen");
     } else if (currentHealth <=  lowHealthThreshold) {
       //call the event trigger for bloodyViewOn when hp reaches below threshold
