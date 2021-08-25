@@ -1,5 +1,8 @@
 package com.deco2800.game.components.npc;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
@@ -13,16 +16,19 @@ public class ArrowAnimationController extends Component {
   @Override
   public void create() {
     super.create();
+    // create the image of arrow - rotate so that it face toward the character
+    Image arrow = new Image(new Texture("images/arrow_normal.png"));
+    arrow.addAction(Actions.parallel(Actions.moveTo(1, 1, 10), Actions.rotateBy(20)));
+
+
     animator = this.entity.getComponent(AnimationRenderComponent.class);
-    entity.getEvents().addListener("wanderStart", this::animateWander);
-    entity.getEvents().addListener("chaseStart", this::animateChase);
   }
 
-  void animateWander() {
-    animator.startAnimation("float");
+  public float setXPosition(float x) {
+    return x;
   }
 
-  void animateChase() {
-    animator.startAnimation("angry_float");
+  public float setYPosition(float y) {
+    return y;
   }
 }

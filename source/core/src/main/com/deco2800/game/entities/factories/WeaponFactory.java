@@ -20,6 +20,7 @@ import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
+
 /**
  * Factory to create non-playable character weapon entities with predefined components.
  */
