@@ -68,7 +68,8 @@ public class MovementTask extends DefaultTask {
       checkIfStuck();
       movementComponent.setMaxSpeed(moveSpeed);
     }
-    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target);
+    Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
   }
 
   public void setTarget(Vector2 target) {
