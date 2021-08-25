@@ -80,7 +80,8 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
       }
       v3.add(v1);
     }
-    ServiceLocator.getRenderService().getDebug().drawLine(v1, v3, Color.RED, 2);
+    Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), v3.cpy().add(bodyOffset), Color.WHITE, 1);
     return v3;
     /*
     Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity

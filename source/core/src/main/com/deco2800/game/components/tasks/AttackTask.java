@@ -158,7 +158,7 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         }
         // If there is an obstacle in the path to the player, not visible.
         if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point);
+            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
             return false;
         }
         Vector2 from2 = owner.getEntity().getPosition();
@@ -169,7 +169,7 @@ public class AttackTask extends DefaultTask implements PriorityTask {
             debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
             return false;
         }
-        debugRenderer.drawLine(from, to);
+        debugRenderer.drawLine(from, to, Color.BLUE, 1);
         return true;
     }
 }

@@ -18,7 +18,8 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
   @Override
   public void update() {
     super.update();
-    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target);
+    Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
   }
 
   public int getPriority() {
