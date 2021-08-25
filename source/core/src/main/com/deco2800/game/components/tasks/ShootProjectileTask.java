@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
@@ -156,7 +157,15 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
         // If there is an obstacle in the path to the player, not visible.
         if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point);
+            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
+            return false;
+        }
+        Vector2 from2 = owner.getEntity().getPosition();
+        Vector2 to2 = target.getPosition();
+
+        // If there is an obstacle in the path to the player, not visible.
+        if (physics.raycast(from2, to2, PhysicsLayer.OBSTACLE, hit)) {
+            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
             return false;
         }
         //to.add(owner.getEntity().getCenterPosition().sub(owner.getEntity().getPosition()));
