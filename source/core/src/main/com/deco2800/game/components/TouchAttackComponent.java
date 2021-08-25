@@ -29,7 +29,7 @@ public class TouchAttackComponent extends Component {
   private HitboxComponent hitboxComponent;
 
   private Scanner scanner = new Scanner(System.in);
-  private long start = System.currentTimeMillis();
+  private long start = 0;
 
   /**
    * Create a component which attacks entities on collision, without knockback.
