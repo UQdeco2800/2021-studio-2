@@ -43,7 +43,6 @@ public class DeathDisplay extends UIComponent {
     private void addActors() {
         stack = new Stack();
         stack.setFillParent(true);
-        stack.setDebug(true);
         stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
         background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
                 Texture.class));

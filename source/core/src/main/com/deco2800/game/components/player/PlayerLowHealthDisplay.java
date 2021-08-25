@@ -38,7 +38,6 @@ public class PlayerLowHealthDisplay extends UIComponent {
         //initialise layout widget - stack
         stack = new Stack();
         stack.setFillParent(true);
-        stack.setDebug(true);
         stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
         stack.setVisible(false);
 

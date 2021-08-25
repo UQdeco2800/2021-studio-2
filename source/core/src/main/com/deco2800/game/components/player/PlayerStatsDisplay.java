@@ -38,7 +38,7 @@ public class PlayerStatsDisplay extends UIComponent {
     table.top().left();
     table.setFillParent(true);
     table.padTop(45f).padLeft(5f);
-    table.setDebug(true); //to see the outlines
+    //table.setDebug(true); //to see the outlines
 
     // Heart image
     float heartSideLength = 30f;
