@@ -71,11 +71,10 @@ public class TouchAttackComponent extends Component {
     // Try to attack target.
     Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
     CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-    if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 2.0) {
+    if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
       //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
       targetStats.hit(combatStats);
       start = System.currentTimeMillis();
-
     }
 
     // Apply knockback

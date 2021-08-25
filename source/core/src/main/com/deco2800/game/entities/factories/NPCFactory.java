@@ -12,6 +12,7 @@ import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
 import com.deco2800.game.entities.configs.GhostKingConfig;
+import com.deco2800.game.entities.configs.GhostRangedConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -175,7 +176,7 @@ public class NPCFactory {
    */
   public static Entity createRangedGhost(Entity target, GameArea gameArea) {
     Entity ghost = createBaseNPCNoAI();
-    BaseEntityConfig config = configs.ghost;
+    GhostRangedConfig config = configs.ghostRanged;
     AITaskComponent aiComponent =
         new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -197,9 +198,6 @@ public class NPCFactory {
         .addComponent(new GhostAnimationController())
         .addComponent(aiComponent);
     ghost.setAttackRange(5);
-    //remove melee ability
-    ghost.getComponent(TouchAttackComponent.class).dispose();
-
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
 
     return ghost;
