@@ -70,8 +70,12 @@ public class NPCFactory {
    * @return entity
    */
   public static Entity createGhostKing(Entity target) {
-    Entity ghostKing = createBaseNPC(target);
+    Entity ghostKing = createBaseNPCNoAI();
     GhostKingConfig config = configs.ghostKing;
+    AITaskComponent aiTaskComponent = new AITaskComponent()
+            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+            .addTask(new AlertChaseTask(target, 10, 3f, 4f));
+    ghostKing.addComponent(aiTaskComponent);
 
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
