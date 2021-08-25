@@ -37,6 +37,7 @@ public class MainGameScreen extends ScreenAdapter {
   private static final String[] mainGameTextures = {"images/heart.png", "lowHealthImages" +
           "/testBlood2.png"}; //the testBlood.png is a placeholder for the actual UI image
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
+  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.wav"};
 
   private final GdxGame game;
   private final Renderer renderer;
@@ -112,6 +113,7 @@ public class MainGameScreen extends ScreenAdapter {
     logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainGameTextures);
+    resourceService.loadSounds(playerLowHealthSounds);
     ServiceLocator.getResourceService().loadAll();
   }
 
@@ -119,6 +121,7 @@ public class MainGameScreen extends ScreenAdapter {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainGameTextures);
+    resourceService.unloadAssets(playerLowHealthSounds);
   }
 
   /**
