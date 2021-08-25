@@ -1,0 +1,69 @@
+package com.deco2800.game.components.tasks;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.ai.tasks.DefaultTask;
+import com.deco2800.game.ai.tasks.PriorityTask;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.PhysicsEngine;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.raycast.RaycastHit;
+import com.deco2800.game.rendering.DebugRenderer;
+import com.deco2800.game.services.ServiceLocator;
+
+public class ZigChaseTask extends ChaseTask implements PriorityTask {
+
+    private float maxChaseDistance;
+    private final PhysicsEngine physics;
+    private final DebugRenderer debugRenderer;
+    private final RaycastHit hit = new RaycastHit();
+    private long start = System.currentTimeMillis();
+    private boolean zigLeft = false;
+
+    public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
+        super(target, priority, viewDistance, maxChaseDistance);
+        this.maxChaseDistance = maxChaseDistance;
+        physics = ServiceLocator.getPhysicsService().getPhysics();
+        debugRenderer = ServiceLocator.getRenderService().getDebug();
+    }
+
+    @Override
+    public void update() {
+        if(((System.currentTimeMillis() - start) / 1000.0) > 0.5
+                || getDistanceToTarget() < maxChaseDistance * 2.5/10) {
+            if (getDistanceToTarget() < maxChaseDistance * 2.5 / 10) {
+                movementTask.setTarget(target.getCenterPosition());
+                movementTask.setMoveSpeed(new Vector2(1f,1f));
+            } else {
+                movementTask.setMoveSpeed(new Vector2(2.5f,2.5f));
+                if (zigLeft) {
+                    movementTask.setTarget(zigLeftRight(-1,40));
+                    zigLeft = false;
+                } else {
+                    movementTask.setTarget(zigLeftRight(1,40));
+                    zigLeft = true;
+                }
+            }
+
+            movementTask.update();
+            if (movementTask.getStatus() != Status.ACTIVE) {
+                movementTask.start();
+            }
+            start = System.currentTimeMillis();
+        }
+    }
+
+    private Vector2 zigLeftRight(int direction, float angle) {
+        //creates a nice ring effect at multishots above 8
+        Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
+        Vector2 v2 = target.getCenterPosition().cpy();
+        Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity
+        v3.rotateAroundDeg(new Vector2(0,0), ((-direction) * angle));
+        v3.add(v1);
+        return (v3);
+    }
+
+    protected float getDistanceToTarget() {
+        return owner.getEntity().getPosition().dst(target.getPosition());
+    }
+}

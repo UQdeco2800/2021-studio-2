@@ -68,6 +68,7 @@ public class MovementTask extends DefaultTask {
       checkIfStuck();
       movementComponent.setMaxSpeed(moveSpeed);
     }
+    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target);
   }
 
   public void setTarget(Vector2 target) {

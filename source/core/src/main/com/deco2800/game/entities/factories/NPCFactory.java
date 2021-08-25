@@ -61,6 +61,7 @@ public class NPCFactory {
 
 
     ghost.getComponent(AITaskComponent.class).addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+    ghost.getComponent(AITaskComponent.class).addTask(new ZigChaseTask(target, 11, 3f, 6f));
 
 
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
