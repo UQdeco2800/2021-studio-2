@@ -67,9 +67,11 @@ public class MovementTask extends DefaultTask {
     } else {
       checkIfStuck();
       movementComponent.setMaxSpeed(moveSpeed);
+      Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+      if (ServiceLocator.getRenderService() != null) {
+        ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
+      }
     }
-    Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
-    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
   }
 
   public void setTarget(Vector2 target) {
@@ -111,14 +113,5 @@ public class MovementTask extends DefaultTask {
       return owner.getEntity().getPosition().dst2(lastPos) > 0.001f;
     }
     return true; // if not started
-  }
-
-  /**
-   * if time since target is discovered is more than 3 seconds and owner is still chasing target
-   * it will start warning other enemies to attack player
-   * @return true if enemies chase after target for more than 3 seconds
-   */
-  protected boolean discover() {
-    return gameTime.getTimeSince(timeDiscoveredTarget) > 3000 && this.getStatus() == Status.ACTIVE;
   }
 }
