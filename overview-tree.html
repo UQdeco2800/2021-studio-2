@@ -74,6 +74,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="com/deco2800/game/areas/package-tree.html">com.deco2800.game.areas</a>, </li>
 <li><a href="com/deco2800/game/areas/terrain/package-tree.html">com.deco2800.game.areas.terrain</a>, </li>
 <li><a href="com/deco2800/game/components/package-tree.html">com.deco2800.game.components</a>, </li>
+<li><a href="com/deco2800/game/components/death/package-tree.html">com.deco2800.game.components.death</a>, </li>
 <li><a href="com/deco2800/game/components/gamearea/package-tree.html">com.deco2800.game.components.gamearea</a>, </li>
 <li><a href="com/deco2800/game/components/maingame/package-tree.html">com.deco2800.game.components.maingame</a>, </li>
 <li><a href="com/deco2800/game/components/mainmenu/package-tree.html">com.deco2800.game.components.mainmenu</a>, </li>
@@ -126,6 +127,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </ul>
 </li>
 <li class="circle">com.deco2800.game.components.<a href="com/deco2800/game/components/CombatStatsComponent.html" title="class in com.deco2800.game.components"><span class="typeNameLink">CombatStatsComponent</span></a></li>
+<li class="circle">com.deco2800.game.components.death.<a href="com/deco2800/game/components/death/DeathActions.html" title="class in com.deco2800.game.components.death"><span class="typeNameLink">DeathActions</span></a></li>
 <li class="circle">com.deco2800.game.components.npc.<a href="com/deco2800/game/components/npc/GhostAnimationController.html" title="class in com.deco2800.game.components.npc"><span class="typeNameLink">GhostAnimationController</span></a></li>
 <li class="circle">com.deco2800.game.input.<a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input"><span class="typeNameLink">InputComponent</span></a> (implements com.badlogic.gdx.input.<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/input/GestureDetector.GestureListener.html?is-external=true" title="class or interface in com.badlogic.gdx.input" class="externalLink">GestureDetector.GestureListener</a>, com.badlogic.gdx.<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">InputProcessor</a>)
 <ul>
@@ -149,10 +151,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/TextureRenderComponent.html" title="class in com.deco2800.game.rendering"><span class="typeNameLink">TextureRenderComponent</span></a></li>
 <li class="circle">com.deco2800.game.ui.<a href="com/deco2800/game/ui/UIComponent.html" title="class in com.deco2800.game.ui"><span class="typeNameLink">UIComponent</span></a> (implements com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/Renderable.html" title="interface in com.deco2800.game.rendering">Renderable</a>)
 <ul>
+<li class="circle">com.deco2800.game.components.death.<a href="com/deco2800/game/components/death/DeathDisplay.html" title="class in com.deco2800.game.components.death"><span class="typeNameLink">DeathDisplay</span></a></li>
 <li class="circle">com.deco2800.game.components.gamearea.<a href="com/deco2800/game/components/gamearea/GameAreaDisplay.html" title="class in com.deco2800.game.components.gamearea"><span class="typeNameLink">GameAreaDisplay</span></a></li>
 <li class="circle">com.deco2800.game.components.maingame.<a href="com/deco2800/game/components/maingame/MainGameExitDisplay.html" title="class in com.deco2800.game.components.maingame"><span class="typeNameLink">MainGameExitDisplay</span></a></li>
 <li class="circle">com.deco2800.game.components.mainmenu.<a href="com/deco2800/game/components/mainmenu/MainMenuDisplay.html" title="class in com.deco2800.game.components.mainmenu"><span class="typeNameLink">MainMenuDisplay</span></a></li>
 <li class="circle">com.deco2800.game.components.gamearea.<a href="com/deco2800/game/components/gamearea/PerformanceDisplay.html" title="class in com.deco2800.game.components.gamearea"><span class="typeNameLink">PerformanceDisplay</span></a></li>
+<li class="circle">com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player"><span class="typeNameLink">PlayerLowHealthDisplay</span></a></li>
 <li class="circle">com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerStatsDisplay.html" title="class in com.deco2800.game.components.player"><span class="typeNameLink">PlayerStatsDisplay</span></a></li>
 <li class="circle">com.deco2800.game.components.settingsmenu.<a href="com/deco2800/game/components/settingsmenu/SettingsMenuDisplay.html" title="class in com.deco2800.game.components.settingsmenu"><span class="typeNameLink">SettingsMenuDisplay</span></a></li>
 <li class="circle">com.deco2800.game.ui.terminal.<a href="com/deco2800/game/ui/terminal/TerminalDisplay.html" title="class in com.deco2800.game.ui.terminal"><span class="typeNameLink">TerminalDisplay</span></a></li>
@@ -216,6 +220,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="circle">com.deco2800.game.services.<a href="com/deco2800/game/services/ResourceService.html" title="class in com.deco2800.game.services"><span class="typeNameLink">ResourceService</span></a> (implements com.badlogic.gdx.utils.<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/utils/Disposable.html?is-external=true" title="class or interface in com.badlogic.gdx.utils" class="externalLink">Disposable</a>)</li>
 <li class="circle">com.badlogic.gdx.<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/ScreenAdapter.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink"><span class="typeNameLink">ScreenAdapter</span></a> (implements com.badlogic.gdx.<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">Screen</a>)
 <ul>
+<li class="circle">com.deco2800.game.screens.<a href="com/deco2800/game/screens/DeathScreen.html" title="class in com.deco2800.game.screens"><span class="typeNameLink">DeathScreen</span></a></li>
 <li class="circle">com.deco2800.game.screens.<a href="com/deco2800/game/screens/MainGameScreen.html" title="class in com.deco2800.game.screens"><span class="typeNameLink">MainGameScreen</span></a></li>
 <li class="circle">com.deco2800.game.screens.<a href="com/deco2800/game/screens/MainMenuScreen.html" title="class in com.deco2800.game.screens"><span class="typeNameLink">MainMenuScreen</span></a></li>
 <li class="circle">com.deco2800.game.screens.<a href="com/deco2800/game/screens/SettingsScreen.html" title="class in com.deco2800.game.screens"><span class="typeNameLink">SettingsScreen</span></a></li>
