@@ -17,16 +17,19 @@ import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
+
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
   private static final int NUM_TREES = 7;
-  private static final int NUM_GHOSTS = 2;
+  private static final int NUM_GHOSTS = 4;
+  private static final int NUM_TRAP = 4;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
-    "images/tree.png",
+    "images/tree.png", "images/trap.png",
     "images/ghost_king.png",
     "images/ghost_1.png",
     "images/grass_1.png",
@@ -67,6 +70,7 @@ public class ForestGameArea extends GameArea {
     player = spawnPlayer();
     spawnGhosts();
     spawnGhostKing();
+    spawnTraps();
 
     playMusic();
   }
@@ -116,6 +120,16 @@ public class ForestGameArea extends GameArea {
       Entity tree = ObstacleFactory.createTree();
       spawnEntityAt(tree, randomPos, true, false);
     }
+  }
+
+  private void spawnTraps() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+        GridPoint2 fixedPos = new GridPoint2(10,10);
+        Entity trap = ObstacleFactory.createPhysicalTrap();
+        spawnEntityAt(trap, fixedPos, true, true);
   }
 
   private Entity spawnPlayer() {

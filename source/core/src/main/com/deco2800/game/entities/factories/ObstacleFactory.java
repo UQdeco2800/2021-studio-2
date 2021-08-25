@@ -33,6 +33,24 @@ public class ObstacleFactory {
     return tree;
   }
 
+
+  public static Entity createPhysicalTrap() {
+    Entity trap = new Entity()
+            .addComponent(new TextureRenderComponent("images/trap.png"))
+            .addComponent(new PhysicsComponent())
+            .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+
+    trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+    trap.getComponent(TextureRenderComponent.class).scaleEntity();
+    trap.scaleHeight(1f);
+    PhysicsUtils.setScaledCollider(trap, 1f, 1f);
+    return trap;
+  }
+
+  //public static Entity createNonePhysicalTrap(){
+
+  //}
+
   /**
    * Creates an invisible physics wall.
    * @param width Wall width in world units
