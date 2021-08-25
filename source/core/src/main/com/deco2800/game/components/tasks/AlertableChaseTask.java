@@ -35,8 +35,6 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
       if (entity.getEntityType() != null) {
 
         if (entity.getEntityType().equals("AlertCaller")) {
-          Logger logger = LoggerFactory.getLogger(WanderTask.class);
-          logger.info("added the listener to the entity");
           //todo: dont re-add to same entity
           entity.getEvents().addListener("alert", this::alerted);
           entity.getEvents().addListener("unAlert", this::unAlerted);
