@@ -4,9 +4,9 @@ size: 512, 256
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-default
+default_backward
   rotate: false
-  xy: 2, 68
+  xy: 2, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -39,6 +39,13 @@ walk_backward
   orig: 64, 64
   offset: 0, 0
   index: 3
+default
+  rotate: false
+  xy: 2, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
 walk_forward
   rotate: false
   xy: 134, 2
@@ -67,6 +74,13 @@ walk_forward
   orig: 64, 64
   offset: 0, 0
   index: 3
+default_left
+  rotate: false
+  xy: 68, 134
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
 walk_left
   rotate: false
   xy: 68, 134
@@ -95,6 +109,13 @@ walk_left
   orig: 64, 64
   offset: 0, 0
   index: 3
+default_right
+   rotate: false
+   xy: 134, 68
+   size: 64, 64
+   orig: 64, 64
+   offset: 0, 0
+   index: 0
 walk_right
   rotate: false
   xy: 134, 68

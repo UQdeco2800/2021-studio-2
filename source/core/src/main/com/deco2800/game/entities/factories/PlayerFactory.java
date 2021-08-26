@@ -49,6 +49,9 @@ public class PlayerFactory {
     animator.addAnimation("walk_backward", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("default", 0.25f, Animation.PlayMode.LOOP);
+    animator.addAnimation("default_backward", 0.25f, Animation.PlayMode.LOOP);
+    animator.addAnimation("default_right", 0.25f, Animation.PlayMode.LOOP);
+    animator.addAnimation("default_left", 0.25f, Animation.PlayMode.LOOP);
 
     Entity player =
             new Entity()

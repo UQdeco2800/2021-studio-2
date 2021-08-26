@@ -41,6 +41,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   /** Used to change the speed of the player quickly. */
   private float speedMultiplier = 1;
 
+  /** The last direction the player was moving in. */
+  private Vector2 lastDirection;
+
   /** Stores the last system time since the dash ability was pressed.*/
   private long lastDash = 0L;
 
@@ -147,18 +150,28 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     //Checks to see if the player should be static or is currently moving.
     if ((this.up - this.down) == 0 && (this.right - this.left) == 0) {
       entity.getEvents().trigger("walkStop");
+      if (lastDirection.y > 0) {
+        entity.getEvents().trigger("stopBackward");
+      } else if (lastDirection.y < 0) {
+        entity.getEvents().trigger("stopForward");
+      } else if (lastDirection.x > 0) {
+        entity.getEvents().trigger("stopRight");
+      } else if (lastDirection.x < 0) {
+        entity.getEvents().trigger("stopLeft");
+      }
     } else {
       calculateDistance(speedMultiplier);
+      lastDirection = walkDirection;
       entity.getEvents().trigger("walk", walkDirection);
-    }
-    if (walkDirection.y > 0) {
-      entity.getEvents().trigger("walkBackward");
-    } else if (walkDirection.y < 0) {
-      entity.getEvents().trigger("walkForward");
-    } else if (walkDirection.x > 0) {
-      entity.getEvents().trigger("walkRight");
-    } else if (walkDirection.x < 0) {
-      entity.getEvents().trigger("walkLeft");
+      if (walkDirection.y > 0) {
+        entity.getEvents().trigger("walkBackward");
+      } else if (walkDirection.y < 0) {
+        entity.getEvents().trigger("walkForward");
+      } else if (walkDirection.x > 0) {
+        entity.getEvents().trigger("walkRight");
+      } else if (walkDirection.x < 0) {
+        entity.getEvents().trigger("walkLeft");
+      }
     }
   }
 
@@ -197,88 +210,3 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     return this.walkDirection;
   }
 }
-
-
-// Original Code
-///**
-// * Input handler for the player for keyboard and touch (mouse) input.
-// * This input handler only uses keyboard input.
-// */
-//public class KeyboardPlayerInputComponent extends InputComponent {
-//  private final Vector2 walkDirection = Vector2.Zero.cpy();
-//
-//  public KeyboardPlayerInputComponent() {
-//    super(5);
-//  }
-//
-//  /**
-//   * Triggers player events on specific keycodes.
-//   *
-//   * @return whether the input was processed
-//   * @see InputProcessor#keyDown(int)
-//   */
-//  @Override
-//  public boolean keyDown(int keycode) {
-//    switch (keycode) {
-//      case Keys.W:
-//        walkDirection.add(Vector2Utils.UP);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.A:
-//        walkDirection.add(Vector2Utils.LEFT);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.S:
-//        walkDirection.add(Vector2Utils.DOWN);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.D:
-//        walkDirection.add(Vector2Utils.RIGHT);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.SPACE:
-//        entity.getEvents().trigger("attack");
-//        return true;
-//      default:
-//        return false;
-//    }
-//  }
-//
-//  /**
-//   * Triggers player events on specific keycodes.
-//   *
-//   * @return whether the input was processed
-//   * @see InputProcessor#keyUp(int)
-//   */
-//  @Override
-//  public boolean keyUp(int keycode) {
-//    switch (keycode) {
-//      case Keys.W:
-//        walkDirection.sub(Vector2Utils.UP);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.A:
-//        walkDirection.sub(Vector2Utils.LEFT);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.S:
-//        walkDirection.sub(Vector2Utils.DOWN);
-//        triggerWalkEvent();
-//        return true;
-//      case Keys.D:
-//        walkDirection.sub(Vector2Utils.RIGHT);
-//        triggerWalkEvent();
-//        return true;
-//      default:
-//        return false;
-//    }
-//  }
-//
-//  private void triggerWalkEvent() {
-//    if (walkDirection.epsilonEquals(Vector2.Zero)) {
-//      entity.getEvents().trigger("walkStop");
-//    } else {
-//      entity.getEvents().trigger("walk", walkDirection);
-//    }
-//  }
-//}

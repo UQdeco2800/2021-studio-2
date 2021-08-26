@@ -18,8 +18,11 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("walkRight", this::animateRightWalk);
         entity.getEvents().addListener("walkLeft", this::animateLeftWalk);
         entity.getEvents().addListener("walkBackward", this::animateBackwardWalk);
-        entity.getEvents().addListener("stop", this::stopWalking);
-        stopWalking();
+        entity.getEvents().addListener("stopForward", this::stopForwardWalk);
+        entity.getEvents().addListener("stopRight", this::stopRightWalk);
+        entity.getEvents().addListener("stopLeft", this::stopLeftWalk);
+        entity.getEvents().addListener("stopBackward", this::stopBackwardWalk);
+        stopForwardWalk();
     }
 
     void animateForwardWalk() {
@@ -38,7 +41,19 @@ public class PlayerAnimationController extends Component {
         animator.startAnimation("walk_backward");
     }
 
-    void stopWalking() {
+    void stopForwardWalk() {
         animator.startAnimation("default");
+    }
+
+    void stopBackwardWalk() {
+        animator.startAnimation("default_backward");
+    }
+
+    void stopLeftWalk() {
+        animator.startAnimation("default_left");
+    }
+
+    void stopRightWalk() {
+        animator.startAnimation("default_right");
     }
 }
