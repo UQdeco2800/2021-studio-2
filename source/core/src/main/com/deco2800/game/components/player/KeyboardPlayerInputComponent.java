@@ -151,6 +151,15 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       calculateDistance(speedMultiplier);
       entity.getEvents().trigger("walk", walkDirection);
     }
+    if (walkDirection.y > 0) {
+      entity.getEvents().trigger("walkBackward");
+    } else if (walkDirection.y < 0) {
+      entity.getEvents().trigger("walkForward");
+    } else if (walkDirection.x > 0) {
+      entity.getEvents().trigger("walkRight");
+    } else if (walkDirection.x < 0) {
+      entity.getEvents().trigger("walkLeft");
+    }
   }
 
   /**

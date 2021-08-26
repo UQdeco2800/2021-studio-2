@@ -95,6 +95,13 @@ public class AnimationRenderComponent extends RenderComponent {
     entity.setScale(1f, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
   }
 
+  /** Scale the entity to a width of 1.3 and a height matching the texture's ratio */
+  public void scalePlayer() {
+    TextureRegion defaultTexture = this.atlas.findRegion("default");
+    System.out.println(defaultTexture);
+    entity.setScale(1.3f, 1.3f * (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
+  }
+
   /**
    * Remove an animation from this animator. This is not required before disposing.
    * @param name Name of the previously added animation.
