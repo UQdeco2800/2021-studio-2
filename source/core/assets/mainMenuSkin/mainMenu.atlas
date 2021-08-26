@@ -1,0 +1,21 @@
+
+mainMenu.png
+size: 512, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+5895d2d1cba9841eabab6077 (2)
+  rotate: false
+  xy: 1, 357
+  size: 100, 50
+  split: 17, 14, 12, 10
+  orig: 100, 50
+  offset: 0, 0
+  index: -1
+pixel
+  rotate: false
+  xy: 1, 409
+  size: 505, 95
+  orig: 505, 95
+  offset: 0, 0
+  index: -1
