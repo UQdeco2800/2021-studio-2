@@ -150,14 +150,18 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     //Checks to see if the player should be static or is currently moving.
     if ((this.up - this.down) == 0 && (this.right - this.left) == 0) {
       entity.getEvents().trigger("walkStop");
-      if (lastDirection.y > 0) {
-        entity.getEvents().trigger("stopBackward");
-      } else if (lastDirection.y < 0) {
+      if (lastDirection != null) {
+        if (lastDirection.y > 0) {
+          entity.getEvents().trigger("stopBackward");
+        } else if (lastDirection.y < 0) {
+          entity.getEvents().trigger("stopForward");
+        } else if (lastDirection.x > 0) {
+          entity.getEvents().trigger("stopRight");
+        } else if (lastDirection.x < 0) {
+          entity.getEvents().trigger("stopLeft");
+        }
+      } else {
         entity.getEvents().trigger("stopForward");
-      } else if (lastDirection.x > 0) {
-        entity.getEvents().trigger("stopRight");
-      } else if (lastDirection.x < 0) {
-        entity.getEvents().trigger("stopLeft");
       }
     } else {
       calculateDistance(speedMultiplier);
