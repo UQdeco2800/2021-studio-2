@@ -35,7 +35,7 @@ public class TextBox extends Component {
     private int subMessageIndex = 0;
 
     /** Dialogue object that the text box is currently on. */
-    private Dialogue dialogue = Dialogue.OPENING;
+    private Dialogue dialogue;
 
     public TextBox() {
         this(new HashMap<>());
@@ -44,6 +44,7 @@ public class TextBox extends Component {
     public TextBox(Map<String, Command> commands) {
         this.commands = commands;
         addCommand("debug", new DebugCommand());
+        setDialogue(Dialogue.OPENING);
     }
 
     /**
@@ -173,5 +174,6 @@ public class TextBox extends Component {
         this.dialogue = dialogue;
         this.index = 0;
         this.subMessageIndex = 0;
+        setOpen();
     }
 }
