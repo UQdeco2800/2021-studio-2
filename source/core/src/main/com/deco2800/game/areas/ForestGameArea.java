@@ -128,7 +128,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        GridPoint2 fixedPos = new GridPoint2(20,20);
+        GridPoint2 fixedPos = new GridPoint2(15,15);
         Entity trap = ObstacleFactory.createPhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
   }

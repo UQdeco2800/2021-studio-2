@@ -1,5 +1,6 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -44,12 +45,12 @@ public class ObstacleFactory {
             .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
             .addComponent(new CombatStatsComponent(1000000, 1))
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 4f));
+            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 3));
 
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
-    trap.scaleHeight(0.8f);
-    PhysicsUtils.setScaledCollider(trap, 0.01f, 0.01f);
+    trap.scaleHeight(0.5f);
+    PhysicsUtils.setScaledCollider(trap, 0, 0);
     return trap;
   }
 
