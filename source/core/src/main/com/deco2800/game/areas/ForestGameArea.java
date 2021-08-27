@@ -62,6 +62,10 @@ public class ForestGameArea extends GameArea {
 
   private Entity player;
 
+  /**
+   * Intialise the forest game
+   * @param terrainFactory intialise the terrain factory
+   */
   public ForestGameArea(TerrainFactory terrainFactory) {
     super();
     this.terrainFactory = terrainFactory;
@@ -85,12 +89,18 @@ public class ForestGameArea extends GameArea {
     playMusic();
   }
 
+  /**
+   * Display the UI
+   */
   private void displayUI() {
     Entity ui = new Entity();
     ui.addComponent(new GameAreaDisplay("Box Forest"));
     spawnEntity(ui);
   }
 
+  /**
+   * Spawn the terrain - spawn map entity on terrain
+   */
   private void spawnTerrain() {
     // Background terrain
     terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
@@ -121,6 +131,9 @@ public class ForestGameArea extends GameArea {
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
   }
 
+  /**
+   * Spawn tree on terrain
+   */
   private void spawnTrees() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -132,12 +145,19 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  /**
+   * Spawn player at the terrain, create the player
+   * @return newPlayer intialise player entity and spawn the player on the terrain
+   */
   private Entity spawnPlayer() {
     Entity newPlayer = PlayerFactory.createPlayer();
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     return newPlayer;
   }
 
+  /**
+   * Randomly spawn ghost on a random position of the terrain, the number of ghost limit to 2
+   */
   private void spawnGhosts() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -149,6 +169,9 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  /**
+   * Spawn range ghost on terrain, range ghost can shoot target
+   */
   private void spawnRangedGhosts() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -160,6 +183,9 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  /**
+   * Spawn ghost king, ghost king can perform alert task to alert other melee ghost
+   */
   private void spawnGhostKing() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -169,6 +195,9 @@ public class ForestGameArea extends GameArea {
     spawnEntityAt(ghostKing, randomPos, true, true);
   }
 
+  /**
+   * Spawn anchored ghost, ghost only move at the certain anchored
+   */
   private void spawnAnchoredGhosts() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -183,6 +212,9 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  /**
+   * Play the music on the background of the game
+   */
   private void playMusic() {
     Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
     music.setLooping(true);
@@ -190,6 +222,9 @@ public class ForestGameArea extends GameArea {
     music.play();
   }
 
+  /**
+   * Load the texture from files
+   */
   private void loadAssets() {
     logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
@@ -205,6 +240,9 @@ public class ForestGameArea extends GameArea {
     }
   }
 
+  /**
+   * Unload the assets (include image and sound)
+   */
   private void unloadAssets() {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
@@ -214,6 +252,9 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
+  /**
+   * Dispose the asset (call unloadAssets).
+   */
   @Override
   public void dispose() {
     super.dispose();

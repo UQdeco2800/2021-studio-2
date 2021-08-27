@@ -105,14 +105,26 @@ public class AnchoredRetreatTask extends DefaultTask implements PriorityTask {
     movementTask.update();
   }
 
+  /**
+   * return the distance of the entity from base (displacement)
+   * @return float distance from base to entity
+   */
   private float distanceFromBase() {
     return (owner.getEntity().getCenterPosition().dst(base.getCenterPosition()));
   }
 
+  /**
+   * return the x axis distance of the entity from base
+   * @return float x-axis distance
+   */
   private float distanceFromBaseX() {
     return (Math.abs(owner.getEntity().getCenterPosition().x - base.getCenterPosition().x));
   }
 
+  /**
+   * return the y axis distance of the entity from base
+   * @return float y-axis distance
+   */
   private float distanceFromBaseY() {
     return (Math.abs(owner.getEntity().getCenterPosition().y - base.getCenterPosition().y));
   }

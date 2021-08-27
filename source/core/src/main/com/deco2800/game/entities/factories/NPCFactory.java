@@ -60,8 +60,10 @@ public class NPCFactory {
         .addComponent(new GhostAnimationController());
 
 
-    ghost.getComponent(AITaskComponent.class).addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-    ghost.getComponent(AITaskComponent.class).addTask(new ZigChaseTask(target, 11, 3f, 6f));
+    ghost.getComponent(AITaskComponent.class).
+            addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+    ghost.getComponent(AITaskComponent.class).
+            addTask(new ZigChaseTask(target, 11, 3f, 6f));
 
 
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
@@ -71,7 +73,8 @@ public class NPCFactory {
 
   /**
    * Creates a ghost king entity.
-   *
+   * Ghost king has the ability to alert melee ghost - so melee ghost will chase the target
+   * if the ghost king discover the target for over 3 seconds
    * @param target entity to chase
    * @return entity
    */
@@ -136,7 +139,7 @@ public class NPCFactory {
 
   /**
    * Creates a anchored ghost entity.
-   *
+   * Anchor ghost only chase the target if the target approach the anchor point
    * @param target entity to chase
    * @param anchor base entity to anchor to
    * @param anchorSizeX how big the base's area is in the X axis
@@ -171,6 +174,8 @@ public class NPCFactory {
 
   /**
    * Creates a ranged ghost entity.
+   * Ghost that shoot arrow at target
+   * It will retreat if the target is appraoch in certain range
    *
    * @param target entity to chase
    * @return entity
@@ -228,7 +233,8 @@ public class NPCFactory {
   }
 
   /**
-   * Creates a generic NPC, with no ai, to be used as a base entity by more specific NPC creation methods.
+   * Creates a generic NPC, with no ai,
+   * to be used as a base entity by more specific NPC creation methods.
    *
    * @return entity
    */

@@ -19,6 +19,9 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
     super(target, priority, viewDistance, maxChaseDistance);
   }
 
+  /**
+   * Start the range chase task
+   */
   @Override
   public void start() {
     super.start();
@@ -32,10 +35,11 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
       //this.owner.getEntity().getEvents().trigger("fleeStart");
       this.owner.getEntity().getEvents().trigger("chaseStart");
     }
-
   }
 
-
+  /**
+   * Update the ranged chase task
+   */
   @Override
   public void update() {
     movementTask.setTarget(calculatePos());
@@ -45,6 +49,12 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
     }
   }
 
+  /**
+   * Get the priority of ranged chase task - the priority is 10 if the distance to target is
+   * less than 0.8 times of the attack range of entity
+   * or distance greater than attack range
+   * @return 10 if satisfy the requirement or -1 otherwise
+   */
   @Override
   public int getPriority() {
     //Deadzone

@@ -30,11 +30,21 @@ public class WanderTask extends DefaultMultiTask implements PriorityTask {
     this.waitTime = waitTime;
   }
 
+  /**
+   * return the priority of wander task
+   * The priority of wander task is the lowest compare to other task and only higher if
+   * other task is set to -1 on purpose to set to wander task
+   * @return 1
+   */
   @Override
   public int getPriority() {
     return 1; // Low priority task
   }
 
+  /**
+   * Start the wandering task
+   *
+   */
   @Override
   public void start() {
     super.start();
@@ -51,6 +61,9 @@ public class WanderTask extends DefaultMultiTask implements PriorityTask {
     this.owner.getEntity().getEvents().trigger("wanderStart");
   }
 
+  /**
+   * update the wandering task
+   */
   @Override
   public void update() {
     if (currentTask.getStatus() != Status.ACTIVE) {
@@ -63,17 +76,27 @@ public class WanderTask extends DefaultMultiTask implements PriorityTask {
     currentTask.update();
   }
 
+  /**
+   * start waiting task - swap the current task to wait task
+   */
   private void startWaiting() {
     logger.debug("Starting waiting");
     swapTask(waitTask);
   }
 
+  /**
+   * start wandering task - swap the task to wandering task
+   */
   private void startMoving() {
     logger.debug("Starting moving");
     movementTask.setTarget(getRandomPosInRange());
     swapTask(movementTask);
   }
 
+  /**
+   * randomly move around
+   * @return Vector2 position to move around
+   */
   private Vector2 getRandomPosInRange() {
     Vector2 halfRange = wanderRange.cpy().scl(0.5f);
     Vector2 min = startPos.cpy().sub(halfRange);

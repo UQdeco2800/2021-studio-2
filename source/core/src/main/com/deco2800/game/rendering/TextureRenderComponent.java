@@ -42,6 +42,10 @@ public class TextureRenderComponent extends RenderComponent {
     entity.setScale(1f, (float) texture.getHeight() / texture.getWidth());
   }
 
+  /**
+   * draw the image
+   * @param batch Batch to render to.
+   */
   @Override
   public void draw(SpriteBatch batch) {
     Vector2 position = entity.getPosition();

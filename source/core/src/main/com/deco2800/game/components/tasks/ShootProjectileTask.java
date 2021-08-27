@@ -47,16 +47,25 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
+
     private void shootingSound(){
         Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_shoot.mp3", Sound.class);
         arrowEffect.play();
     }
+
+
+    /**
+     * Set the time of the last arrow fire to 0;
+     */
 
     @Override
     public void start() {
         lastFired = 0;
     }
 
+    /**
+     * update the arrow - check whether the entity can shoot the arrow or not
+     */
     @Override
     public void update() {
         if (canShoot()) {
@@ -89,27 +98,50 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         }
     }
 
+    /**
+     * set the target to follow target
+     * @param followTarget true if follow, false otherwise
+     */
     public void setFollowTarget(boolean followTarget) {
         this.followTarget = followTarget;
     }
 
+    /**
+     * Set the arrow to show trajectory before shot
+     * @param showTrajectory true if show, false otherwise
+     */
     public void setShowTrajectory(boolean showTrajectory) {
         this.showTrajectory = showTrajectory;
     }
 
+    /**
+     * Set the chance that the entity shoot more than one arrow at a time
+     * @param multishotChance chance for the entity to shoot multiple arrows
+     */
     public void setMultishotChance(double multishotChance) {
         this.multishotChance = multishotChance;
     }
 
+    /**
+     * Set the type of the projectile - whether it multishots, follow target or show trajectory
+     * @param projectileType type of arrow
+     */
     public void setProjectileType(String projectileType) {
         this.projectileType = projectileType;
     }
 
+    /**
+     * Stop the arrow task
+     */
     @Override
     public void stop() {
         super.stop();
     }
 
+    /**
+     * return the priority of arrow task
+     * @return highest priority if can shoot, else -1
+     */
     @Override
     public int getPriority() {
         if (canShoot()) {
@@ -118,10 +150,18 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         return -1;
     }
 
+    /**
+     * return the distance of the entity to the target
+     * @return return the d
+     */
     private float getDistanceToTarget() {
         return owner.getEntity().getCenterPosition().dst(target.getPosition());
     }
 
+    /**
+     * return the position of the target and return the angle from the entity (owner) to the target
+     * @return float angle from owner to target
+     */
     private float getDirectionOfTarget() {
         Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
         Vector2 v2 = target.getCenterPosition().cpy();
@@ -158,6 +198,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         return (v3);
     }
 
+    /**
+     * check if target is block by any object
+     * @return true if it not block, false otherwise
+     */
     private boolean isTargetVisible() {
         Vector2 from = owner.getEntity().getCenterPosition();
         Vector2 to = target.getCenterPosition();
@@ -180,6 +224,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         return true;
     }
 
+    /**
+     * check if target can shoot based on given cooldown of the shooting and target is visible
+     * @return true if can shoot, false otherwise
+     */
     private boolean canShoot() {
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS) {
         }

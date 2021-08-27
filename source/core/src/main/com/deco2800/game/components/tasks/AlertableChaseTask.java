@@ -28,20 +28,20 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
     alerted = false;
   }
 
+  /**
+   * Add listener to melee ghost to detect event where ghost king (AlertCaller) trigger "alert"
+   * @return 10 if alerted (always see the target), default otherwise
+   */
   @Override
   public int getPriority() {
     for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
       //get event triggered
-      if (entity.getEntityType() != null) {
-
-        if (entity.getEntityType().equals("AlertCaller")) {
+      if (entity.getEntityType() != null && entity.getEntityType().equals("AlertCaller")) {
           //todo: dont re-add to same entity
           entity.getEvents().addListener("alert", this::alerted);
           entity.getEvents().addListener("unAlert", this::unAlerted);
         }
       }
-      //if (entity.getEvents().addListener();)
-    }
     if (alerted) {
       return 10;
     }

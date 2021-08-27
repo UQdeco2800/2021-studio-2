@@ -21,19 +21,29 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     super(target, moveSpeed);
   }
 
+
   //Arrow have sound effect when they disappear
   private void playArrow(){
     Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class);
     arrowEffect.play();
   }
 
-  @Override
+
+  /**
+   * Update the arrow position on the screen
+   */
+
   public void update() {
     super.update();
     Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
     ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
   }
 
+  /**
+   * return the priority of the arrow
+   * If arrow is in moving, return 10, else return -1 and dispose the arrow
+   * @return int 10 if arrow is moving, -1 if arrow is not
+   */
   public int getPriority() {
     if (stoppedMoving()) {
       //Arrows disappears when at destination to stop it from looping in the same place
@@ -44,16 +54,27 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     }
   }
 
+  /**
+   * stop the arrow movement - dispose the arrow
+   */
   @Override
   public void stop() {
     super.stop();
+
     //Arrows disappears when at destination to stop it from looping in the same place
     playArrow();
     //ForestGameArea.playArrow();
+
+    //Arrows disappear when at destination to stop it from looping in the same place
+
     owner.getEntity().prepareDispose();
 
   }
 
+  /**
+   * check if the arrow is at target or if it stuck by an object (tree)
+   * @return true if stop move, false otherwise
+   */
   public boolean stoppedMoving() {
     return (isAtTarget() || checkIfStuck());
   }

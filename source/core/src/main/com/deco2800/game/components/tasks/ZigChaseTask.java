@@ -20,6 +20,13 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     private long start = System.currentTimeMillis();
     private boolean zigLeft = false;
 
+    /**
+     * Initialise zig zag chase task - advance movement task
+     * @param target chase target entity
+     * @param priority priority of the task
+     * @param viewDistance max view distance of entity to target
+     * @param maxChaseDistance max chase distance of entity to target
+     */
     public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
         super(target, priority, viewDistance, maxChaseDistance);
         this.maxChaseDistance = maxChaseDistance;
@@ -27,6 +34,10 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
+    /**
+     * Update the zig zag chase task
+     * move zig zag on time based
+     */
     @Override
     public void update() {
         if(((System.currentTimeMillis() - start) / 1000.0) > 0.5
@@ -53,6 +64,12 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
         }
     }
 
+    /**
+     * Return the movement direction when apply angle rotation
+     * @param direction current direction of entity
+     * @param angle angle to rotate
+     * @return v3 new vector2 position
+     */
     private Vector2 zigLeftRight(int direction, float angle) {
         //creates a nice ring effect at multishots above 8
         Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
@@ -63,6 +80,10 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
         return (v3);
     }
 
+    /**
+     * Return the distance of entity to target
+     * @return float distance from entity (owner) to target
+     */
     protected float getDistanceToTarget() {
         return owner.getEntity().getPosition().dst(target.getPosition());
     }
