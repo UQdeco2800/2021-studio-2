@@ -20,6 +20,7 @@ public class PlayerStatsDisplay extends UIComponent {
   private Image healthBarLeft;
   private Image healthBarMiddle;
   private Image healthBarRight;
+  private Label healthLabel;
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
@@ -44,7 +45,7 @@ public class PlayerStatsDisplay extends UIComponent {
     // Health text
     int health = entity.getComponent(CombatStatsComponent.class).getHealth();
     CharSequence healthText = "HP";
-    //healthLabel = new Label(healthText, skin, "large");
+    healthLabel = new Label(healthText, skin, "large");
 
     // Heart image
     heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/hp_icon.png", Texture.class));
@@ -121,6 +122,6 @@ public class PlayerStatsDisplay extends UIComponent {
     healthBarLeft.remove();
     healthBarRight.remove();
     healthBarMiddle.remove();
-    //healthLabel.remove();
+    healthLabel.remove();
   }
 }
