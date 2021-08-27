@@ -28,8 +28,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   @Override
   public boolean keyDown(int keycode) {
-    Vector2 newVector;
-    System.out.println(keycode);
     switch (keycode) {
       case Keys.W:
         lastKeyPressed = Keys.W;
