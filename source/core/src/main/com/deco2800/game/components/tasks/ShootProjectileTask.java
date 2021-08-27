@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
@@ -46,6 +47,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
+    private void shootingSound(){
+        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_shoot.mp3", Sound.class);
+        arrowEffect.play();
+    }
+
     @Override
     public void start() {
         lastFired = 0;
@@ -54,6 +60,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     @Override
     public void update() {
         if (canShoot()) {
+            shootingSound();
             shoot();
         }
     }
