@@ -48,7 +48,8 @@ public class CameraComponent extends Component {
   }
 
   private Vector2 averagePositions() {
-    float x = 0, y = 0;
+    float x = 0;
+    float y = 0;
     for (Vector2 vector : lastPositions) {
       x+= vector.x;
       y+= vector.y;

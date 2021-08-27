@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -20,7 +19,6 @@ import org.slf4j.LoggerFactory;
 public class MainMenuDisplay extends UIComponent {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
   private static final float Z_INDEX = 2f;
-  private Stack stack;
   private Table table;
 
   @Override
@@ -30,19 +28,16 @@ public class MainMenuDisplay extends UIComponent {
   }
 
   private void addActors() {
-    stack = new Stack();
+    Stack stack = new Stack();
     stack.setFillParent(true);
-    //stack.setDebug(true);
     stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
     Image background = new Image(ServiceLocator.getResourceService().getAsset("images/main_menu_background.png",
             Texture.class));
     background.setScaling(Scaling.stretch);
     stack.add(background);
 
-
     table = new Table();
     table.setFillParent(true);
-
 
     Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
@@ -88,7 +83,6 @@ public class MainMenuDisplay extends UIComponent {
             entity.getEvents().trigger("exit");
           }
         });
-
 
     table.add(startBtn).padTop(30f);
     table.row();
