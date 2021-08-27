@@ -29,5 +29,6 @@ com.deco2800.game.services
 com.deco2800.game.ui
 com.deco2800.game.ui.terminal
 com.deco2800.game.ui.terminal.commands
+com.deco2800.game.ui.textbox
 com.deco2800.game.utils
 com.deco2800.game.utils.math
