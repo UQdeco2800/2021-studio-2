@@ -74,6 +74,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
         if (fixture != null) { // destroy fixture if one exists
             physBody.destroyFixture(fixture);
+            logger.warn("{} Added weapon hit box without destroying it first.", this);
         }
         this.fixture = physBody.createFixture(fixtureDef);
         return this;
