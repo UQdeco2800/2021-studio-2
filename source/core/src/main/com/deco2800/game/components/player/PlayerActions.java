@@ -1,11 +1,17 @@
 package com.deco2800.game.components.player;
 
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.weapons.MeleeWeapon;
+import com.deco2800.game.components.weapons.Weapon;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +24,8 @@ public class PlayerActions extends Component {
 
   private PhysicsComponent physicsComponent;
   private Vector2 walkDirection = Vector2.Zero.cpy();
+  private long lockDuration;
+  private long timeSinceStopped;
   private boolean moving = false;
 
   @Override
@@ -27,12 +35,21 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walkStop", this::stopWalking);
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("mouseAttack", this::mouseAttack);
+    entity.getEvents().addListener("lockMovement", this::lockMovement);
   }
 
   @Override
   public void update() {
     if (moving) {
       updateSpeed();
+      // lock movement for a specified duration, if a lock duration is specified
+    } else if (lockDuration != 0) {
+      long currentTime = ServiceLocator.getTimeSource().getTime();
+      // determine whether lock duration has passed
+      if ((currentTime - timeSinceStopped) >= lockDuration) {
+        lockDuration = 0;
+        moving = true;
+      }
     }
   }
 
@@ -52,7 +69,9 @@ public class PlayerActions extends Component {
    */
   void walk(Vector2 direction) {
     this.walkDirection = direction;
-    moving = true;
+    if (lockDuration == 0) {
+      moving = true;
+    }
   }
 
   /**
@@ -67,24 +86,51 @@ public class PlayerActions extends Component {
   /**
    * Makes the player attack.
    */
-  void attack() {
-    Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
-    attackSound.play();
+  void attack(int keycode) {
+    Weapon weapon = entity.getComponent(MeleeWeapon.class);
+    if (weapon == null) {
+      return;
+    }
+    // determine direction of attack based on last pressed key
+    int attackDirection = 0;
+    switch (keycode) {
+      case Input.Keys.W:
+        attackDirection = MeleeWeapon.UP;
+        break;
+      case Input.Keys.S:
+        attackDirection = MeleeWeapon.DOWN;
+        break;
+      case Input.Keys.A:
+        attackDirection = MeleeWeapon.LEFT;
+        break;
+      case Input.Keys.D:
+        attackDirection = MeleeWeapon.RIGHT;
+        break;
+    }
+    weapon.attack(attackDirection);
+    lockMovement(600L);
   }
 
   /**
-   * Makes the player attack. This method is called using a single parameter.
+   * Makes the player attack using a mouse click.
    * @param coordinates the mouse coordinates of the click
    */
   void mouseAttack(Vector2 coordinates) {
-    // Lock movement, but preserve player direction prior to attack.
-    Vector2 tempDirection = walkDirection.cpy();
-    stopWalking();
-
-    System.out.println(coordinates.toString() + ' '+  entity.getPosition());
+    System.out.println("called in mouseattack");
+    Weapon weapon = entity.getComponent(MeleeWeapon.class);
+    if (weapon != null) {
+      System.out.println("called in player actions");
+      weapon.attack(0);
+      return;
+    }
     Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
     attackSound.play();
+    entity.getComponent(AnimationRenderComponent.class).startAnimation("sprite");
+  }
 
-    walk(tempDirection);
+  void lockMovement(long duration) {
+    timeSinceStopped = ServiceLocator.getTimeSource().getTime();
+    lockDuration = duration;
+    stopWalking();
   }
 }

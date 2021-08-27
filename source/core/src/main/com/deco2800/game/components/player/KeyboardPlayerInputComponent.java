@@ -14,6 +14,7 @@ import com.deco2800.game.utils.math.Vector2Utils;
  */
 public class KeyboardPlayerInputComponent extends InputComponent {
   private final Vector2 walkDirection = Vector2.Zero.cpy();
+  private int lastKeyPressed;
 
   public KeyboardPlayerInputComponent() {
     super(5);
@@ -27,25 +28,31 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   @Override
   public boolean keyDown(int keycode) {
+    Vector2 newVector;
+    System.out.println(keycode);
     switch (keycode) {
       case Keys.W:
+        lastKeyPressed = Keys.W;
         walkDirection.add(Vector2Utils.UP);
         triggerWalkEvent();
         return true;
       case Keys.A:
+        lastKeyPressed = Keys.A;
         walkDirection.add(Vector2Utils.LEFT);
         triggerWalkEvent();
         return true;
       case Keys.S:
+        lastKeyPressed = Keys.S;
         walkDirection.add(Vector2Utils.DOWN);
         triggerWalkEvent();
         return true;
       case Keys.D:
+        lastKeyPressed = Keys.D;
         walkDirection.add(Vector2Utils.RIGHT);
         triggerWalkEvent();
         return true;
       case Keys.SPACE:
-        entity.getEvents().trigger("attack");
+        entity.getEvents().trigger("attack", lastKeyPressed);
         return true;
       default:
         return false;
