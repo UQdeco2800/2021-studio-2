@@ -55,4 +55,11 @@ public abstract class InputFactory {
    * @return Terminal input handler
    */
   public abstract InputComponent createForTerminal();
+
+  /**
+   * Creates an input handler for the text box
+   *
+   * @return TextBox input handler
+   */
+  public abstract InputComponent createForTextBox();
 }
