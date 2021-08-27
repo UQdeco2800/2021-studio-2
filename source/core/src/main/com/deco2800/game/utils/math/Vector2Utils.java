@@ -36,6 +36,17 @@ public class Vector2Utils {
     return Math.toDegrees(Math.atan2(to.y - from.y, to.x - from.x));
   }
 
+  /**
+   * Swaps the elements (x & y) of a vector.
+   *
+   * @param vector The vector to be swapped
+   * @return The vector that's been swapped
+   */
+  public static Vector2 swapAxis(Vector2 vector) {
+    vector.set(vector.y, vector.x);
+    return vector;
+  }
+
   private Vector2Utils() {
     throw new IllegalStateException("Instantiating static util class");
   }
