@@ -29,7 +29,8 @@ public class ForestGameArea extends GameArea {
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
-    "images/tree.png", "images/trap.png",
+    "images/tree.png",
+    "images/trap.png",
     "images/ghost_king.png",
     "images/ghost_1.png",
     "images/grass_1.png",
@@ -127,7 +128,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        GridPoint2 fixedPos = new GridPoint2(10,10);
+        GridPoint2 fixedPos = new GridPoint2(15,15);
         Entity trap = ObstacleFactory.createPhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
   }
