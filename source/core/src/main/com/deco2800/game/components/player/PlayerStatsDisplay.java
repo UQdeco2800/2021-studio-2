@@ -2,6 +2,7 @@ package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -13,10 +14,12 @@ import com.deco2800.game.ui.UIComponent;
  * A ui component for displaying player stats, e.g. health.
  */
 public class PlayerStatsDisplay extends UIComponent {
-  Table table;
-  private Image heartImage;
-  private Label healthLabel;
 
+  private Table table;
+  private Image heartImage;
+  private Image healthBarLeft;
+  private Image healthBarMiddle;
+  private Image healthBarRight;
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
@@ -35,22 +38,23 @@ public class PlayerStatsDisplay extends UIComponent {
    */
   private void addActors() {
     table = new Table();
-    table.top().left();
-    table.setFillParent(true);
-    table.padTop(45f).padLeft(5f);
+    createTable();
     //table.setDebug(true); //to see the outlines
-
-    // Heart image
-    float heartSideLength = 30f;
-    heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/heart.png", Texture.class));
 
     // Health text
     int health = entity.getComponent(CombatStatsComponent.class).getHealth();
-    CharSequence healthText = String.format("Health: %d", health);
-    healthLabel = new Label(healthText, skin, "large");
+    CharSequence healthText = "HP";
+    //healthLabel = new Label(healthText, skin, "large");
 
-    table.add(heartImage).size(heartSideLength).pad(5);
-    table.add(healthLabel);
+    // Heart image
+    heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/hp_icon.png", Texture.class));
+
+    // Health image
+    healthBarLeft = new Image(ServiceLocator.getResourceService().getAsset("images/health_left.png", Texture.class));
+    healthBarMiddle = new Image(ServiceLocator.getResourceService().getAsset("images/health_middle.png", Texture.class));
+    healthBarRight = new Image(ServiceLocator.getResourceService().getAsset("images/health_right.png", Texture.class));
+
+    updatePlayerHealthUI(100);
     stage.addActor(table);
   }
 
@@ -66,8 +70,19 @@ public class PlayerStatsDisplay extends UIComponent {
    */
   public void updatePlayerHealthUI(int health) {
     updateLowHealthUI();
-    CharSequence text = String.format("Health: %d", health);
-    healthLabel.setText(text);
+    table.reset();
+    createTable();
+    table.add(healthBarLeft).height(30f);
+    table.add(healthBarMiddle).height(30f).width(2 * health - 10);
+    table.add(healthBarRight).height(30f);
+  }
+
+  /** Sets the properties of the table to add the health bar items. */
+  private void createTable() {
+    table.top().left();
+    table.setFillParent(true);
+    table.padTop(20f);
+    table.add(heartImage).size(50f).pad(10);
   }
 
   /**
@@ -103,6 +118,9 @@ public class PlayerStatsDisplay extends UIComponent {
   public void dispose() {
     super.dispose();
     heartImage.remove();
-    healthLabel.remove();
+    healthBarLeft.remove();
+    healthBarRight.remove();
+    healthBarMiddle.remove();
+    //healthLabel.remove();
   }
 }

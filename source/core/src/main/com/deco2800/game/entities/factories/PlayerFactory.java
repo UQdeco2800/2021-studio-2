@@ -4,11 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.player.InventoryComponent;
-import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.player.PlayerAnimationController;
-import com.deco2800.game.components.player.PlayerLowHealthDisplay;
-import com.deco2800.game.components.player.PlayerStatsDisplay;
+import com.deco2800.game.components.player.*;
 import com.deco2800.game.components.death.DeathActions;
 import com.deco2800.game.components.death.DeathDisplay;
 import com.deco2800.game.entities.Entity;
@@ -48,10 +44,10 @@ public class PlayerFactory {
     animator.addAnimation("walk_forward", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_backward", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default", 0.25f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default_backward", 0.25f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default_right", 0.25f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default_left", 0.25f, Animation.PlayMode.LOOP);
+    animator.addAnimation("default", 0.25f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("default_backward", 0.25f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("default_right", 0.25f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("default_left", 0.25f, Animation.PlayMode.NORMAL);
 
     Entity player =
             new Entity()
