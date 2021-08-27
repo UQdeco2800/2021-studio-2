@@ -53,6 +53,9 @@ public class AITaskComponent extends Component implements TaskRunner {
     currentTask.update();
   }
 
+  /**
+   * Stop the current task
+   */
   @Override
   public void dispose() {
     if (currentTask != null) {
@@ -60,6 +63,10 @@ public class AITaskComponent extends Component implements TaskRunner {
     }
   }
 
+  /**
+   * return the Task with highest priority
+   * @return PriorityTask
+   */
   private PriorityTask getHighestPriorityTask() {
     try {
       return Collections.max(priorityTasks, Comparator.comparingInt(PriorityTask::getPriority));
@@ -68,6 +75,10 @@ public class AITaskComponent extends Component implements TaskRunner {
     }
   }
 
+  /**
+   * Change the task to the desired task
+   * @param desiredTask
+   */
   private void changeTask(PriorityTask desiredTask) {
     logger.debug("{} Changing to task {}", this, desiredTask);
     if (currentTask != null) {

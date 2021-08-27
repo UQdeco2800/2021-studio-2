@@ -49,8 +49,10 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
   public void update() {
     super.update();
     if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
-       Logger logger = LoggerFactory.getLogger(WanderTask.class);
+      /*
+      Logger logger = LoggerFactory.getLogger(WanderTask.class);
        logger.info("found3 secs");
+       */
       owner.getEntity().getEvents().trigger("alert");
       updateAlert();
     }

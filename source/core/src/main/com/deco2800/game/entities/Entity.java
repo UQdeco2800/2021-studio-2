@@ -48,10 +48,18 @@ public class Entity {
     eventHandler = new EventHandler();
   }
 
+  /**
+   * Set the type of the entity
+   * @param entityType type of entity
+   */
   public void setEntityType(String entityType) {
     this.entityType = entityType;
   }
 
+  /**
+   * return the type of the entity
+   * @return String type of entity that is previously set
+   */
   public String getEntityType() {
     return entityType;
   }

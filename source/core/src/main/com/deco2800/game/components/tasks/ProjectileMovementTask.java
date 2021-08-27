@@ -15,6 +15,9 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     super(target, moveSpeed);
   }
 
+  /**
+   * Update the arrow position on the screen
+   */
   @Override
   public void update() {
     super.update();
@@ -22,6 +25,11 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
   }
 
+  /**
+   * return the priority of the arrow
+   * If arrow is in moving, return 10, else return -1 and dispose the arrow
+   * @return int 10 if arrow is moving, -1 if arrow is not
+   */
   public int getPriority() {
     if (stoppedMoving()) {
       //Arrows disappears when at destination to stop it from looping in the same place
@@ -32,13 +40,20 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     }
   }
 
+  /**
+   * stop the arrow movement - dispose the arrow
+   */
   @Override
   public void stop() {
     super.stop();
-    //Arrows disappears when at destination to stop it from looping in the same place
+    //Arrows disappear when at destination to stop it from looping in the same place
     owner.getEntity().prepareDispose();
   }
 
+  /**
+   * check if the arrow is at target or if it stuck by an object (tree)
+   * @return true if stop move, false otherwise
+   */
   public boolean stoppedMoving() {
     return (isAtTarget() || checkIfStuck());
   }

@@ -46,12 +46,18 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
     this.protectY = (float) (protectY * 1.5);
   }
 
+  /**
+   * Start wander task - the entity move toward the target but target need to be in range of anchor
+   */
   @Override
   public void start() {
     super.start();
     movementTask.setTarget(getRandomPosInRange());
   }
 
+  /**
+   * update the status of current task
+   */
   @Override
   public void update() {
     if (currentTask.getStatus() != Status.ACTIVE) {
@@ -64,10 +70,16 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
     currentTask.update();
   }
 
+  /**
+   * update task to waiting
+   */
   private void startWaiting() {
     swapTask(waitTask);
   }
 
+  /**
+   * update task to move task
+   */
   private void startMoving() {
     movementTask.setTarget(getRandomPosInRange());
     swapTask(movementTask);
