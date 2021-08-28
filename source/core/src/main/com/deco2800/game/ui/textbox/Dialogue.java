@@ -27,7 +27,9 @@ public enum Dialogue {
 
     HELLO(new String[]{"Welcome, hello! This is the second value in the enum and will be used\n" +
             "mostly to test things, I'm not too sure if the text should be \nadded by hard coding the strings" +
-            "or should we use a text file that the game will read off.", "Good Luck."});
+            "or should we use a text file that the game will read off.", "Good Luck."}),
+
+    TEST(new String[]{"Message 1", "Message 2", "Message 3"});
 
     /** An array list used to store the strings in a dialogue sequence. */
     private String[] text;

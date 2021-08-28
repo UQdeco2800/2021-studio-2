@@ -14,15 +14,34 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class PlayerStatsDisplay extends UIComponent {
 
+  /** Table which holds the icon and changeable health bar. */
   private Table table;
+
+  /** HP Icon */
   private Image heartImage;
+
+  /** Holds the left image of the health bar */
   private Image healthBarLeft;
+
+  /** Holds the middle image of the health bar that will change in width*/
   private Image healthBarMiddle;
+
+  /** Holds the right image of the health bar */
   private Image healthBarRight;
+
+  /** Holds the left image of the health bar frame */
   private Image frameLeft;
+
+  /** Holds the middle image of the health bar frame */
   private Image frameMiddle;
+
+  /** Holds the right image of the health bar frame */
   private Image frameRight;
+
+  /** Holds the health percentage label that will update with health changes */
   private Label healthLabel;
+
+  /** Dash Icon */
   private Image dash;
 
   /**
@@ -53,7 +72,6 @@ public class PlayerStatsDisplay extends UIComponent {
     healthText.padLeft(220f).padTop(40f);
 
     healthLabel = new Label("100%", skin, "health");
-
     healthText.add(healthLabel);
 
     // Heart image

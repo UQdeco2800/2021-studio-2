@@ -146,6 +146,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     if (dashing) {
       return;
     }
+    calculateDistance(speedMultiplier);
     //Checks to see if the player should be static or is currently moving.
     if ((this.up - this.down) == 0 && (this.right - this.left) == 0) {
       entity.getEvents().trigger("walkStop");
@@ -155,7 +156,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         entity.getEvents().trigger("stopForward");
       }
     } else {
-      calculateDistance(speedMultiplier);
       lastDirection = walkDirection;
       triggerWalkAnimation();
       entity.getEvents().trigger("walk", walkDirection);

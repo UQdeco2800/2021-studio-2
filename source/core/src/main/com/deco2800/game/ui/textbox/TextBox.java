@@ -55,6 +55,13 @@ public class TextBox extends Component {
     }
 
     /**
+     * @return entire message to be displayed on the text box
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
      * @return text box is open
      */
     public boolean isOpen() {
