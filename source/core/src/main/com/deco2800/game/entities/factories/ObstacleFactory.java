@@ -50,7 +50,6 @@ public class ObstacleFactory {
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
     trap.scaleHeight(0.5f);
-    PhysicsUtils.setScaledCollider(trap, 0, 0);
     return trap;
   }
 
