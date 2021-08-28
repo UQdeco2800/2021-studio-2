@@ -15,11 +15,10 @@ import com.deco2800.game.ui.UIComponent;
  * threshold.
  */
 public class PlayerLowHealthDisplay extends UIComponent {
-    //add variables here
     private Image bloodImage;
     Stack stack;
     Sound heartBeat;
-    boolean heartBeatTracker = false;
+    boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
     /**
      * Add all actors to the stage here and event listener
      */
@@ -39,47 +38,48 @@ public class PlayerLowHealthDisplay extends UIComponent {
         //sound
         heartBeat = ServiceLocator.getResourceService().getAsset("sounds/heartBeat_placeholder" +
                 ".wav", Sound.class);
-        //initialise layout widget - stack
-        stack = new Stack();
-        stack.setFillParent(true);
-        //stack.setDebug(true); uncomment for debugging
-        stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
-        stack.setVisible(false);
-
-        //load and scale blood view
-        bloodImage = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages" +
-                "/testBlood2.png", Texture.class));
-        bloodImage.setScaling(Scaling.stretch);
+        //setup layout widgets and loading images
+        loadImages();
+        stackSetup();
 
         //add to stage
-        stack.add(bloodImage);
         stage.addActor(stack);
     }
 
-    @Override
-    protected void draw(SpriteBatch batch) {
-        // draw is handled by the stage
-    }
-
-    public void playHeartBeat() {
-        if (!heartBeatTracker) {
-            heartBeat.loop();
-            heartBeatTracker = true;
-        }
-    }
-
-    public void stopHeartBeat() {
-        heartBeat.stop();
-        heartBeatTracker = false;
+    /**
+     * initialisation of the stack and adding images to layout
+     */
+    public void stackSetup() {
+        //initialise layout widget - stack
+        stack = new Stack();
+        stack.setFillParent(true);
+        stack.setTouchable(Touchable.disabled); //disable touch inputs so its click through
+        stack.setVisible(false);
+        stack.add(bloodImage);
     }
 
     /**
-     * turn the stack visibility on.
-     * this is called when the event "bloodyViewOn" is triggered
+     * retrieves images from service locator to use for the low health UI
      */
-    public void displayBloodyViewOn() {
-        //change the opacity somehow of the image?
-        playHeartBeat();
+    public void loadImages() {
+        //load and scale blood view
+        bloodImage = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages" +
+                "/BloodScreenDarkRepositioned.png", Texture.class));
+        bloodImage.setScaling(Scaling.stretch);
+    }
+
+    /**
+     * Turn the stack visibility on.
+     * This is called when the event "bloodyViewOn" is triggered.
+     *
+     * @param alpha the opacity to set the bloody view to.
+     * @param play if true the heart beat sound will play otherwise nothing else will occur
+     */
+    public void displayBloodyViewOn(float alpha, boolean play) {
+        if (play) {
+            playHeartBeat();
+        }
+        bloodImage.setColor(1,0,0,alpha); //opacity of image changes depending on hp %
         stack.setVisible(true);
     }
     /**
@@ -90,6 +90,30 @@ public class PlayerLowHealthDisplay extends UIComponent {
         stopHeartBeat();
         stack.setVisible(false);
     }
+
+    /**
+     * plays the heart beat sound only if the tracker is currently false
+     */
+    public void playHeartBeat() {
+        if (!heartBeatTracker) {
+            heartBeat.loop();
+            heartBeatTracker = true;
+        }
+    }
+
+    /**
+     * stops the playing of heart beat sound and sets the tracker to false
+     */
+    public void stopHeartBeat() {
+        heartBeat.stop();
+        heartBeatTracker = false;
+    }
+
+    @Override
+    protected void draw(SpriteBatch batch) {
+        // draw is handled by the stage
+    }
+
     /**
      * dispose all widgets and added images from addActor
      */
@@ -97,5 +121,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     public void dispose() {
         super.dispose();
         bloodImage.remove();
+        heartBeat.dispose();
+
     }
 }
