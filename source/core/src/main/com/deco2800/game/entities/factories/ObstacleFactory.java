@@ -45,12 +45,11 @@ public class ObstacleFactory {
             .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
             .addComponent(new CombatStatsComponent(1000000, 1))
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 3));
+            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2));
 
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
     trap.scaleHeight(0.5f);
-    PhysicsUtils.setScaledCollider(trap, 0, 0);
     return trap;
   }
 
