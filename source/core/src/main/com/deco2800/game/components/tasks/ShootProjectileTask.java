@@ -37,22 +37,19 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     /**
      * @param target The entity to chase.
      * @param cooldownMS how long to wait in MS before shooting again
-     * @param gameArea used to spawn in the arrow
      */
-    public ShootProjectileTask(Entity target, long cooldownMS, GameArea gameArea) {
+    public ShootProjectileTask(Entity target, long cooldownMS) {
         this.target = target;
-        this.gameArea = gameArea;
         this.cooldownMS = cooldownMS;
+        this.gameArea = ServiceLocator.getGameAreaService();
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
-
 
     private void shootingSound(){
         Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_shoot.mp3", Sound.class);
         arrowEffect.play();
     }
-
 
     /**
      * Set the time of the last arrow fire to 0;
@@ -229,10 +226,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * @return true if can shoot, false otherwise
      */
     private boolean canShoot() {
-        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS) {
-        }
-
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
-                && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
+            && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
     }
 }

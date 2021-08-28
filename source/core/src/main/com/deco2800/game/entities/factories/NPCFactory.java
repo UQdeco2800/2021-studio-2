@@ -83,21 +83,21 @@ public class NPCFactory {
     ghostKing.setEntityType("AlertCaller");
     GhostKingConfig config = configs.ghostKing;
     AITaskComponent aiTaskComponent = new AITaskComponent()
-            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new AlertChaseTask(target, 10, 3f, 4f));
+      .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+      .addTask(new AlertChaseTask(target, 10, 3f, 4f));
     ghostKing.addComponent(aiTaskComponent);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService()
-                .getAsset("images/ghostKing.atlas", TextureAtlas.class));
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService()
+          .getAsset("images/ghostKing.atlas", TextureAtlas.class));
     animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
     animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
 
     ghostKing
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
 
     ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
     return ghostKing;
@@ -115,25 +115,24 @@ public class NPCFactory {
     Entity anchoredGhost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
-            .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
-            .addTask(new AnchoredRetreatTask(anchor, anchorSize));
+      new AITaskComponent()
+        .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
+        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
+        .addTask(new AnchoredRetreatTask(anchor, anchorSize));
     anchoredGhost.addComponent(aiComponent);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+      new AnimationRenderComponent(
+          ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
     animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
     animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
 
     anchoredGhost
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
 
     anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
     return anchoredGhost;
   }
 
@@ -150,62 +149,60 @@ public class NPCFactory {
     Entity anchoredGhost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
-            .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
-            .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
+      new AITaskComponent()
+        .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
+        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
+        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
     anchoredGhost.addComponent(aiComponent);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
     animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
     animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
 
     anchoredGhost
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
 
     anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
     return anchoredGhost;
   }
 
   /**
    * Creates a ranged ghost entity.
    * Ghost that shoot arrow at target
-   * It will retreat if the target is appraoch in certain range
+   * It will retreat if the target is approach in certain range
    *
    * @param target entity to chase
    * @return entity
    */
-  public static Entity createRangedGhost(Entity target, GameArea gameArea) {
+  public static Entity createRangedGhost(Entity target) {
     Entity ghost = createBaseNPCNoAI();
     GhostRangedConfig config = configs.ghostRanged;
     AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new RangedChaseTask(target, 10, 15f, 20f));
-    ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000, gameArea);
+      new AITaskComponent()
+        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+        .addTask(new RangedChaseTask(target, 10, 15f, 20f));
+    ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
     shootProjectileTask.setProjectileType("normalArrow");
     shootProjectileTask.setMultishotChance(0.1);
     aiComponent.addTask(shootProjectileTask);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
     animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
     animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
 
     ghost
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController())
-        .addComponent(aiComponent);
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController())
+      .addComponent(aiComponent);
     ghost.setAttackRange(5);
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
     return ghost;
   }
 

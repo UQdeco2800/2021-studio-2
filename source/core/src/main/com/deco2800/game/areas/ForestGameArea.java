@@ -1,7 +1,6 @@
 package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
@@ -26,7 +25,6 @@ public class ForestGameArea extends GameArea {
   private static final int NUM_ANCHORED_GHOSTS = 1;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final float WALL_WIDTH = 0.1f;
-  private static GridPoint2 enemyPos;
   private static final String[] forestTextures = {
     "images/box_boy_leaf.png",
     "images/arrow_normal.png",
@@ -74,8 +72,8 @@ public class ForestGameArea extends GameArea {
   /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
   @Override
   public void create() {
+    super.create();
     loadAssets();
-
     displayUI();
 
     spawnTerrain();
@@ -85,7 +83,6 @@ public class ForestGameArea extends GameArea {
     spawnRangedGhosts();
     spawnGhostKing();
     spawnAnchoredGhosts();
-    
     playMusic();
   }
 
@@ -178,7 +175,7 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_GHOSTS; i++) {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = NPCFactory.createRangedGhost(player, this);
+      Entity ghost = NPCFactory.createRangedGhost(player);
       spawnEntityAt(ghost, randomPos, true, true);
     }
   }
