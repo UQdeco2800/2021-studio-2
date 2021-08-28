@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AlertTaskTest {
+class AnchoredRetreatTaskTest {
 
     @BeforeEach
     void setUp() {
@@ -14,6 +14,10 @@ class AlertTaskTest {
 
     @AfterEach
     void tearDown() {
+    }
+
+    @Test
+    void create() {
     }
 
     @Test
@@ -25,7 +29,23 @@ class AlertTaskTest {
     }
 
     @Test
+    void stop() {
+    }
+
+    @Test
+    void getStatus() {
+    }
+
+    @Test
+    void getPriority() {
+    }
+
+    @Test
     void testStart() {
+    }
+
+    @Test
+    void testStop() {
     }
 
     @Test

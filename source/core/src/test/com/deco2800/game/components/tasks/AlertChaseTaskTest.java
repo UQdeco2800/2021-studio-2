@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.Game;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -11,23 +12,19 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.Vector2Utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * AlertableChaseTaskTest is the same as Alert task test because both method inherit from chase task
- * and both method is dependent on each other
- */
 @ExtendWith(GameExtension.class)
-class AlertableChaseTaskTest {
+class AlertChaseTaskTest {
 
     @BeforeEach
     void beforeEach() {
@@ -95,5 +92,4 @@ class AlertableChaseTaskTest {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new PhysicsMovementComponent());
     }
-
 }
