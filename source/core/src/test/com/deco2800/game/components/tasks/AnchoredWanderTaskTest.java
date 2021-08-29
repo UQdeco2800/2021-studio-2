@@ -1,62 +1,44 @@
 package com.deco2800.game.components.tasks;
 
-import org.junit.jupiter.api.AfterEach;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.events.listeners.EventListener0;
+import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.utils.math.Vector2Utils;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@ExtendWith(GameExtension.class)
+@ExtendWith(MockitoExtension.class)
 class AnchoredWanderTaskTest {
+    @Mock
+    GameTime gameTime;
 
     @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
+    void beforeEach() {
+    ServiceLocator.registerTimeSource(gameTime);
     }
 
     @Test
-    void getPriority() {
-    }
+    void triggerWanderEvent() { //Should be the same as wander task but only move within based range
+        Entity anchor = new Entity();
+        AnchoredWanderTask anchoredWanderTask = new AnchoredWanderTask(anchor, 2f, 3f, 2f);
+        AITaskComponent aiTaskComponent = new AITaskComponent().addTask(anchoredWanderTask);
+        Entity entity = new Entity().addComponent(aiTaskComponent).addComponent(new PhysicsMovementComponent());
+        entity.create();
 
-    @Test
-    void start() {
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void swapTask() {
-    }
-
-    @Test
-    void create() {
-    }
-
-    @Test
-    void testStart() {
-    }
-
-    @Test
-    void testUpdate() {
-    }
-
-    @Test
-    void stop() {
-    }
-
-    @Test
-    void getStatus() {
-    }
-
-    @Test
-    void testStart1() {
-    }
-
-    @Test
-    void testUpdate1() {
+        EventListener0 call = mock(EventListener0.class);
+        entity.getEvents().addListener("wanderStart", call);
+        anchoredWanderTask.start();
+        verify(call).handle();
     }
 }

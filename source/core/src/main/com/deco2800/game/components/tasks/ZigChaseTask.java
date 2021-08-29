@@ -11,6 +11,7 @@ import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 
+/** Advance movement, the enemies chase the target in zig zag movement from distance a far **/
 public class ZigChaseTask extends ChaseTask implements PriorityTask {
 
     private float maxChaseDistance;
@@ -40,18 +41,18 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if(((System.currentTimeMillis() - start) / 1000.0) > 0.5
-                || getDistanceToTarget() < maxChaseDistance * 2.5/10) {
+        if (((System.currentTimeMillis() - start) / 1000.0) > 0.5
+                || getDistanceToTarget() < maxChaseDistance * 2.5 / 10) {
             if (getDistanceToTarget() < maxChaseDistance * 2.5 / 10) {
                 movementTask.setTarget(target.getCenterPosition());
-                movementTask.setMoveSpeed(new Vector2(1f,1f));
+                movementTask.setMoveSpeed(new Vector2(1f, 1f));
             } else {
-                movementTask.setMoveSpeed(new Vector2(2.5f,2.5f));
+                movementTask.setMoveSpeed(new Vector2(2.5f, 2.5f));
                 if (zigLeft) {
-                    movementTask.setTarget(zigLeftRight(-1,40));
+                    movementTask.setTarget(zigLeftRight(-1, 40));
                     zigLeft = false;
                 } else {
-                    movementTask.setTarget(zigLeftRight(1,40));
+                    movementTask.setTarget(zigLeftRight(1, 40));
                     zigLeft = true;
                 }
             }
