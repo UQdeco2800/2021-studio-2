@@ -44,7 +44,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   private Vector2 lastDirection;
 
   /** Stores the last system time since the dash ability was pressed.*/
-  private long lastDash = 0L;
+  //Used to check cool down of the dash ability: private long lastDash = 0L;
 
   public KeyboardPlayerInputComponent() {
     super(5);
@@ -215,7 +215,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   private void triggerDashEvent() {
     calculateDistance(DASH_MULTIPLIER);
-    entity.getEvents().trigger("dash", walkDirection);
+    entity.getEvents().trigger("walk", walkDirection);
   }
 
   /**
@@ -226,8 +226,8 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    * @param multiplier multiplies the distance moved by the character
    */
   private void calculateDistance(float multiplier) {
-    float x = this.right - this.left;
-    float y = this.up - this.down;
+    float x = (float)this.right - this.left;
+    float y = (float)this.up - this.down;
     if (x != 0 && y != 0) {
       x = (this.right - this.left) * DIAGONAL_DISTANCE;
       y = (this.up - this.down) * DIAGONAL_DISTANCE;

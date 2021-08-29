@@ -42,7 +42,7 @@ public class PlayerStatsDisplay extends UIComponent {
   private Label healthLabel;
 
   /** Dash Icon */
-  private Image dash;
+  // Stores the dash image, private Image dash;
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
@@ -87,8 +87,7 @@ public class PlayerStatsDisplay extends UIComponent {
             .getAsset("images/health_right.png", Texture.class));
 
     // Dash image
-    //dash = new Image(ServiceLocator.getResourceService()
-    // .getAsset("images/dash_icon.png", Texture.class));
+    //Gets image dash = new Image(ServiceLocator.getResourceService().getAsset("images/dash_icon.png", Texture.class));
 
     // Health Bar Frame
     Table tableFrame = new Table();
@@ -128,10 +127,10 @@ public class PlayerStatsDisplay extends UIComponent {
     table.reset();
     createTable();
     table.add(healthBarLeft).height(40f).width(20f);
-    table.add(healthBarMiddle).height(40f).width(3 * health - 20);
+    table.add(healthBarMiddle).height(40f).width(3f * health - 20f);
     table.add(healthBarRight).height(40f).width(20f);
-    //table.row();
-    //table.add(dash).size(64f).pad(5);
+    //This creates a new row to add actors: table.row();
+    //Adds the dash icon to the table: table.add(dash).size(64f).pad(5);
   }
 
   /** Sets the properties of the table to add the health bar items. */
@@ -176,6 +175,6 @@ public class PlayerStatsDisplay extends UIComponent {
     frameRight.remove();
     frameMiddle.remove();
     healthLabel.remove();
-    //dash.remove();
+    //Disposes of the dash image: dash.remove();
   }
 }

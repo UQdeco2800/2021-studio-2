@@ -10,7 +10,7 @@ import java.util.TimerTask;
 public class TextBox extends Component {
     private static final Logger logger = LoggerFactory.getLogger(TextBox.class);
 
-    /** 
+    /**
      * The message that the text box will display, based on the dialogue object stored
      * and which message it is on.
      */

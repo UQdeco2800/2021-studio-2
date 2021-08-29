@@ -17,12 +17,6 @@ public class TouchTextBoxInputComponent extends InputComponent {
         super(9);
     }
 
-    public TouchTextBoxInputComponent(TextBox textBox) {
-        this();
-        this.textBox = textBox;
-    }
-
-
     @Override
     public void create() {
         super.create();

@@ -10,7 +10,6 @@ public class TextBoxDisplay extends UIComponent {
 
     private TextBox textBox;
     private Label label;
-    private int messageIndex = 0;
 
     @Override
     public void create() {
