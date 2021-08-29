@@ -17,6 +17,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
     @Override
     public void create() {
         setSensor(true);
+        // Weapon hit boxes aren't set on construction.
     }
 
     /**
@@ -30,16 +31,15 @@ public class WeaponHitboxComponent extends ColliderComponent {
         Vector2 position = new Vector2(0.5f, 0.5f); // center around entity
 
         /*
-        From the origin, defined at the entity's center (0.5f, 0.5f), we
-        want to change the location of the box's center such that it is just outside
-        the entity. e.g. RIGHT = [entity][box]. We do this by adding half the entity's
-        size, and half the size of the weapon box, both in the direction we want
-        the box to be located. We also (sometimes) want to switch the axis of the
-        weapon box, such that its dimensions are preserved for UP & DOWN vs
-        LEFT & RIGHT.
-         */
+        From the origin, defined at the entity's center (0.5f, 0.5f), we want to change
+        the location of the box's center such that it is just outside the entity.
+         e.g. RIGHT = [entity][box]. We do this by adding half the entity's size, and
+         half the size of the weapon box, both in the direction we want the box to be
+         located. We also (sometimes) want to switch the axis of the weapon box, such
+          that its dimensions are preserved for UP & DOWN vs LEFT & RIGHT. */
         switch (direction) {
             case MeleeWeapon.UP:
+                // add half entity size (1f / 2) + half size of box (size/2)
                 position.add(0, (1f + size.y) / 2);
                 break;
             case MeleeWeapon.DOWN:
@@ -73,8 +73,8 @@ public class WeaponHitboxComponent extends ColliderComponent {
         fixtureDef.shape = shape;
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
         if (fixture != null) { // destroy fixture if one exists
-            physBody.destroyFixture(fixture);
             logger.warn("{} Added weapon hit box without destroying it first.", this);
+            physBody.destroyFixture(fixture);
         }
         this.fixture = physBody.createFixture(fixtureDef);
         return this;
@@ -85,6 +85,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
      */
     public void destroy() {
         if (fixture == null) {
+            logger.warn("{} Tried to destroy an already unset weapon hit box", this);
             return;
         }
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();

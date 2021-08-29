@@ -7,13 +7,12 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.weapons.MeleeWeapon;
-import com.deco2800.game.components.weapons.Weapon;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Action component for interacting with the player. Player events should be initialised in create()
@@ -42,11 +41,12 @@ public class PlayerActions extends Component {
   public void update() {
     if (moving) {
       updateSpeed();
-      // lock movement for a specified duration, if a lock duration is specified
+      // lock movement if a duration is specified.
     } else if (lockDuration != 0) {
       long currentTime = ServiceLocator.getTimeSource().getTime();
       // determine whether lock duration has passed
       if ((currentTime - timeSinceStopped) >= lockDuration) {
+        // unlock movement
         lockDuration = 0;
         moving = true;
       }
@@ -84,10 +84,11 @@ public class PlayerActions extends Component {
   }
 
   /**
-   * Makes the player attack.
+   * Makes the player attack. Player currently only uses an axe.
+   * @param keycode - the last pressed player key.
    */
   void attack(int keycode) {
-    Weapon weapon = entity.getComponent(MeleeWeapon.class);
+    MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon == null) {
       return;
     }
@@ -108,7 +109,7 @@ public class PlayerActions extends Component {
         break;
     }
     weapon.attack(attackDirection);
-    lockMovement(600L);
+    lockMovement(weapon.getTotalAttackTime());
   }
 
   /**
@@ -117,17 +118,18 @@ public class PlayerActions extends Component {
    */
   void mouseAttack(Vector2 coordinates) {
     System.out.println("called in mouseattack");
-    Weapon weapon = entity.getComponent(MeleeWeapon.class);
+    MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon != null) {
       System.out.println("called in player actions");
       weapon.attack(0);
       return;
     }
-    Sound attackSound = ServiceLocator.getResourceService().getAsset("sounds/Impact4.ogg", Sound.class);
-    attackSound.play();
-    entity.getComponent(AnimationRenderComponent.class).startAnimation("sprite");
   }
 
+  /**
+   * Locks player movement for a specified duration
+   * @param duration - the time the movement lock will last, measured in milliseconds.
+   */
   void lockMovement(long duration) {
     timeSinceStopped = ServiceLocator.getTimeSource().getTime();
     lockDuration = duration;
