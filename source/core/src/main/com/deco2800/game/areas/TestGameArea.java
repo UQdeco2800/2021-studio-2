@@ -2,6 +2,7 @@ package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.GridPoint3;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
@@ -18,6 +19,9 @@ import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.areas.terrain.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class TestGameArea extends GameArea {
@@ -101,8 +105,88 @@ public class TestGameArea extends GameArea {
     // Bottom
     spawnEntityAt(
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
-  }
 
+    //Walls imported from JSON (Not working as intended, leave for sprint 2)
+    /*Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
+    HashMap<String, Integer>[] walls = m.getWallObjects();
+    int X = 0;
+    int Y = 2;
+    int WIDTH = 1;
+    int HEIGHT = 3;
+
+    for (HashMap<String, Integer> wall : walls) {
+      String wallString = wall.values().toString();
+      String wallNoBracket = wallString.substring(1, wallString.length() - 1);
+      String[] wallValues = wallNoBracket.split(", ");
+
+      float xFloat = Float.parseFloat(wallValues[X]);
+      int x = (int) xFloat;
+
+      float yFloat = Float.parseFloat(wallValues[Y]);
+      int y = (int) yFloat;
+
+      float width = Float.parseFloat(wallValues[WIDTH]);
+
+      float height = Float.parseFloat(wallValues[HEIGHT]);
+
+      int unitHeight = (int) ((height/32f));
+      spawnEntityAt(
+              ObstacleFactory.createWall((width/32f)*0.5f, (height/32f)*0.5f),
+              new GridPoint2(x, 25 - (y + unitHeight)),
+              false,
+              false);
+    }
+     */
+
+    //Manually placed walls, will be deleted in next sprint
+    //Left Wall
+    spawnEntityAt(ObstacleFactory.createWall(0.5f, 6f),
+            new GridPoint2(3, 7),
+            false,
+            false);
+
+    //Bottom-Left Wall
+    spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
+            new GridPoint2(3, 6),
+            false,
+            false);
+
+    //Bottom-Right Wall
+    spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
+            new GridPoint2(14, 10),
+            false,
+            false);
+
+    //Right Wall
+    spawnEntityAt(ObstacleFactory.createWall(0.5f, 4.5f),
+            new GridPoint2(21, 10),
+            false,
+            false);
+
+    //Top-Right Wall
+    spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
+            new GridPoint2(14, 19),
+            false,
+            false);
+
+    //Top-Left Wall
+    spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
+            new GridPoint2(3, 16),
+            false,
+            false);
+
+    //Middle-Top Wall
+    spawnEntityAt(ObstacleFactory.createWall(0.5f, 3f),
+            new GridPoint2(13, 16),
+            false,
+            false);
+
+    //Middle-Bottom Wall
+    spawnEntityAt(ObstacleFactory.createWall(0.5f, 2f),
+            new GridPoint2(14, 7),
+            false,
+            false);
+  }
 
   private void spawnTraps() {
     GridPoint2 minPos = new GridPoint2(0, 0);
