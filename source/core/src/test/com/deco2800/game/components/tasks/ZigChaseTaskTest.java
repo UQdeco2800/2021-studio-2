@@ -51,17 +51,27 @@ class ZigChaseTaskTest {
         // Run the game for a few cycles
         long time = System.nanoTime();
         long timeCompare = System.nanoTime();
+        int count = 0;
         // Can't really test the zig zag movement, just test the enemies always move toward target
         while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - time) < 2000) {
             entity.earlyUpdate();
             entity.update();
             ServiceLocator.getPhysicsService().getPhysics().update();
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCompare) > 100) {
-                timeCompare = System.nanoTime();
+            if (initialDistance - entity.getPosition().dst(target.getPosition()) == 0
+                && entity.getPosition().dst(target.getPosition()) > 1f) {
+                // distance > 1 because if less than 1, the entity is approach target
+                count++;
+            }
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCompare) > 500) {
+                //System.out.println(initialDistance - entity.getPosition().dst(target.getPosition()));
                 assertTrue(initialDistance - entity.getPosition().dst(target.getPosition()) != 0);
                 initialDistance = entity.getPosition().dst(target.getPosition());
+                // angle of zig zag update every 0.5 seconds.
+                timeCompare = System.nanoTime();
+                break;
             }
         }
+        //System.out.println(count);
     }
 
     @Test
