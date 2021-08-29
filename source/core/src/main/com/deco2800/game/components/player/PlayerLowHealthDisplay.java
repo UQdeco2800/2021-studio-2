@@ -19,6 +19,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     Stack stack;
     Sound heartBeat;
     boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
+    long heartID;
     /**
      * Add all actors to the stage here and event listener
      */
@@ -37,7 +38,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     private void addActors() {
         //sound
         heartBeat = ServiceLocator.getResourceService().getAsset("sounds/heartBeat_placeholder" +
-                ".wav", Sound.class);
+                ".mp3", Sound.class);
         //setup layout widgets and loading images
         loadImages();
         stackSetup();
@@ -77,7 +78,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
      */
     public void displayBloodyViewOn(float alpha, boolean play) {
         if (play) {
-            playHeartBeat();
+            playHeartBeat(alpha);
         }
         bloodImage.setColor(1,0,0,alpha); //opacity of image changes depending on hp %
         stack.setVisible(true);
@@ -92,13 +93,17 @@ public class PlayerLowHealthDisplay extends UIComponent {
     }
 
     /**
-     * plays the heart beat sound only if the tracker is currently false
+     * plays the heart beat sound only if the tracker is currently false.
+     * Speeds up the sound depending on hp%.
+     * @param modify the float value that will modify the speed of the sound
      */
-    public void playHeartBeat() {
+    public void playHeartBeat(float modify) {
         if (!heartBeatTracker) {
-            heartBeat.loop();
+            heartID = heartBeat.loop();
             heartBeatTracker = true;
         }
+        float pitch = modify * 2f;
+        heartBeat.setPitch(heartID, Math.min(pitch, 1.35f)); //speeds up the sound, capped at 1.35f
     }
 
     /**

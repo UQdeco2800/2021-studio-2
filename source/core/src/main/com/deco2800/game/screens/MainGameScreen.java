@@ -42,7 +42,7 @@ public class MainGameScreen extends ScreenAdapter {
 
   };
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
-  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.wav"};
+  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
