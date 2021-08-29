@@ -59,6 +59,7 @@ class KeyboardTextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST);
+        textBox.acceptInput();
 
         textBoxInput.keyTyped(' ');
         textBox.setSubMessage();
@@ -83,6 +84,7 @@ class KeyboardTextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST);
+        textBox.acceptInput();
 
         textBoxInput.keyTyped(' ');
         textBoxInput.keyTyped(' ');
