@@ -75,31 +75,31 @@ public class PlayerStatsDisplay extends UIComponent {
     healthText.add(healthLabel);
 
     // Heart image
-    heartImage =
-            new Image(ServiceLocator.getResourceService().getAsset("images/hp_icon.png", Texture.class));
+    heartImage = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/hp_icon.png", Texture.class));
 
     // Health image
-    healthBarLeft =
-            new Image(ServiceLocator.getResourceService().getAsset("images/health_left.png", Texture.class));
-    healthBarMiddle =
-            new Image(ServiceLocator.getResourceService().getAsset("images/health_middle.png", Texture.class));
-    healthBarRight =
-            new Image(ServiceLocator.getResourceService().getAsset("images/health_right.png", Texture.class));
+    healthBarLeft = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/health_left.png", Texture.class));
+    healthBarMiddle = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/health_middle.png", Texture.class));
+    healthBarRight = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/health_right.png", Texture.class));
 
     // Dash image
-    dash = new
-            Image(ServiceLocator.getResourceService().getAsset("images/dash_icon.png", Texture.class));
+    //dash = new Image(ServiceLocator.getResourceService()
+    // .getAsset("images/dash_icon.png", Texture.class));
 
     // Health Bar Frame
     Table tableFrame = new Table();
     tableFrame.top().left();
     tableFrame.setFillParent(true);
-    frameLeft =
-            new Image(ServiceLocator.getResourceService().getAsset("images/health_frame_left.png", Texture.class));
-    frameMiddle =
-            new Image(ServiceLocator.getResourceService().getAsset("images/health_frame_middle.png", Texture.class));
-    frameRight =
-            new Image(ServiceLocator.getResourceService().getAsset("images/health_frame_right.png", Texture.class));
+    frameLeft = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/health_frame_left.png", Texture.class));
+    frameMiddle = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/health_frame_middle.png", Texture.class));
+    frameRight = new Image(ServiceLocator.getResourceService().
+            getAsset("images/health_frame_right.png", Texture.class));
     tableFrame.padLeft(94f).padTop(36.5f);
     tableFrame.add(frameLeft).height(40f).width(20f);
     tableFrame.add(frameMiddle).height(40f).width(280f);
@@ -130,8 +130,8 @@ public class PlayerStatsDisplay extends UIComponent {
     table.add(healthBarLeft).height(40f).width(20f);
     table.add(healthBarMiddle).height(40f).width(3 * health - 20);
     table.add(healthBarRight).height(40f).width(20f);
-    table.row();
-    table.add(dash).size(64f).pad(5);
+    //table.row();
+    //table.add(dash).size(64f).pad(5);
   }
 
   /** Sets the properties of the table to add the health bar items. */
@@ -176,6 +176,6 @@ public class PlayerStatsDisplay extends UIComponent {
     frameRight.remove();
     frameMiddle.remove();
     healthLabel.remove();
-    dash.remove();
+    //dash.remove();
   }
 }

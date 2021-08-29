@@ -25,10 +25,9 @@ public class ForestGameArea extends GameArea {
   private static final int NUM_TREES = 7;
   private static final int NUM_GHOSTS = 2;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(30, 30);
+  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(27, 28);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
-          "images/box_boy.png",
           "images/box_boy_leaf.png",
           "images/tree.png",
           "images/ghost_king.png",
@@ -51,6 +50,7 @@ public class ForestGameArea extends GameArea {
           "images/health_frame_right.png",
           "images/hp_icon.png",
           "images/dash_icon.png",
+          "images/rock.png",
 
   };
   private static final String[] forestTextureAtlases = {

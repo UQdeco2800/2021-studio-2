@@ -33,11 +33,16 @@ public class TouchCutsceneComponent extends TouchComponent {
         super(targetLayer);
     }
 
+    /**
+     * Creates the component by adding the text box so the dialogue can be changed
+     * once the entity has been collided with.
+     */
     @Override
     public void create() {
         super.create();
         hitboxComponent = entity.getComponent(HitboxComponent.class);
-        textBox = ServiceLocator.getEntityService().getUIEntity().getComponent(TextBox.class);
+        textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
     }
 
     @Override
@@ -51,11 +56,12 @@ public class TouchCutsceneComponent extends TouchComponent {
             // Doesn't match our target layer, ignore
             return;
         }
-        textBox.setDialogue(Dialogue.BOX_BOY);
+        textBox.setDialogue(Dialogue.THE_ROCK);
 
         Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
         PlayerActions actions = player.getComponent(PlayerActions.class);
-        KeyboardPlayerInputComponent input = player.getComponent(KeyboardPlayerInputComponent.class);
+        KeyboardPlayerInputComponent input =
+                player.getComponent(KeyboardPlayerInputComponent.class);
         //Checks if the entity that has collided is the player
         if (actions == null) {
             return;

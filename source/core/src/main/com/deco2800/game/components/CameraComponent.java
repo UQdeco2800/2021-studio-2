@@ -47,6 +47,12 @@ public class CameraComponent extends Component {
     camera.update();
   }
 
+  /**
+   * Averages the last 50 positions the player was before and returns the average.
+   * This is used to smooth the camera movement.
+   *
+   * @return average of the last 50 positions of the camera
+   */
   private Vector2 averagePositions() {
     float x = 0;
     float y = 0;
@@ -72,6 +78,11 @@ public class CameraComponent extends Component {
     camera.update();
   }
 
+  /**
+   * Sets the player entity the camera will track.
+   *
+   * @param player entity that is controlled by the user
+   */
   public void setPlayer(Entity player) {
     this.player = player;
   }

@@ -37,8 +37,8 @@ public class PlayerLowHealthDisplay extends UIComponent {
      */
     private void addActors() {
         //sound
-        heartBeat = ServiceLocator.getResourceService().getAsset("sounds/heartBeat_placeholder" +
-                ".wav", Sound.class);
+        heartBeat = ServiceLocator.getResourceService()
+                .getAsset("sounds/heartBeat_placeholder" + ".wav", Sound.class);
         //initialise layout widget - stack
         stack = new Stack();
         stack.setFillParent(true);
@@ -47,8 +47,8 @@ public class PlayerLowHealthDisplay extends UIComponent {
         stack.setVisible(false);
 
         //load and scale blood view
-        bloodImage = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages" +
-                "/testBlood2.png", Texture.class));
+        bloodImage = new Image(ServiceLocator.getResourceService()
+                .getAsset("lowHealthImages" + "/testBlood2.png", Texture.class));
         bloodImage.setScaling(Scaling.stretch);
 
         //add to stage

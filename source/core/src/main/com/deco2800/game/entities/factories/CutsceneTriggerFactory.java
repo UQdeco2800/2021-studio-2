@@ -20,12 +20,12 @@ public class CutsceneTriggerFactory {
 
     /**
      * Creates an entity that can trigger a cutscene to start.
-     * @return entity
+     * @return entity that will create the trigger within the map
      */
     public static Entity createTrigger() {
         Entity tree =
                 new Entity()
-                        .addComponent(new TextureRenderComponent("images/box_boy.png"))
+                        .addComponent(new TextureRenderComponent("images/rock.png"))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))

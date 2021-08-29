@@ -31,8 +31,8 @@ public class MainMenuDisplay extends UIComponent {
     Stack stack = new Stack();
     stack.setFillParent(true);
     stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
-    Image background = new Image(ServiceLocator.getResourceService().getAsset("images/main_menu_background.png",
-            Texture.class));
+    Image background = new Image(ServiceLocator.getResourceService()
+            .getAsset("images/main_menu_background.png", Texture.class));
     background.setScaling(Scaling.stretch);
     stack.add(background);
 
