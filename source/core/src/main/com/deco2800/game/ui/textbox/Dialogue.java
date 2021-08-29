@@ -25,9 +25,7 @@ public enum Dialogue {
                     "to the new Dialogue content and display the text",
             "There is definitely more to change so let me know."}),
 
-    HELLO(new String[]{"Welcome, hello! This is the second value in the enum and will be used\n" +
-            "mostly to test things, I'm not too sure if the text should be \nadded by hard coding the strings" +
-            "or should we use a text file that the game will read off.", "Good Luck."}),
+    BOX_BOY(new String[]{"DON'T LEAVE ME", "I DON'T WANT TO GO", "TAKE ME WITH YOU", "I JUST WANT TO LIVE"}),
 
     TEST(new String[]{"Message 1", "Message 2", "Message 3"});
 

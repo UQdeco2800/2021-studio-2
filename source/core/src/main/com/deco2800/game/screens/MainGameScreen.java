@@ -151,6 +151,6 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(textBoxInput)
         .addComponent(new TextBoxDisplay());
 
-    ServiceLocator.getEntityService().register(ui);
+    ServiceLocator.getEntityService().registerUI(ui);
   }
 }

@@ -51,7 +51,7 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
      */
     @Override
     public boolean keyTyped(char character) {
-        if (!textBox.isOpen()) {
+        if (!textBox.isOpen() || !textBox.isAcceptingInput()) {
             return false;
         }
 
@@ -72,6 +72,9 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
      */
     @Override
     public boolean keyUp(int keycode) {
+        if (textBox.isOpen()) {
+            textBox.acceptInput();
+        }
         return textBox.isOpen();
     }
 }

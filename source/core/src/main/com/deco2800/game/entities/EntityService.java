@@ -15,6 +15,9 @@ public class EntityService {
   private static final Logger logger = LoggerFactory.getLogger(EntityService.class);
   private static final int INITIAL_CAPACITY = 16;
 
+  /** Stores a UI entity so the UI can be updated from other locations. */
+  private Entity ui;
+
   private final Array<Entity> entities = new Array<>(false, INITIAL_CAPACITY);
 
   /**
@@ -25,6 +28,19 @@ public class EntityService {
     logger.debug("Registering {} in entity service", entity);
     entities.add(entity);
     entity.create();
+  }
+
+  /**
+   * Register a UI entity with the entity service. The entity will be created and start updating.
+   * @param entity new entity.
+   */
+  public void registerUI(Entity entity) {
+    register(entity);
+    ui = entity;
+  }
+
+  public Entity getUIEntity() {
+    return this.ui;
   }
 
   /**

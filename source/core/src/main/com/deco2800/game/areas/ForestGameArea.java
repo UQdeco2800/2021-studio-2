@@ -7,6 +7,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
@@ -24,8 +25,10 @@ public class ForestGameArea extends GameArea {
   private static final int NUM_TREES = 7;
   private static final int NUM_GHOSTS = 2;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(30, 30);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
+          "images/box_boy.png",
           "images/box_boy_leaf.png",
           "images/tree.png",
           "images/ghost_king.png",
@@ -77,9 +80,10 @@ public class ForestGameArea extends GameArea {
 
     spawnTerrain();
     spawnTrees();
-    player = spawnPlayer();
+    spawnPlayer();
     spawnGhosts();
     spawnGhostKing();
+    spawnCutsceneTrigger();
 
     playMusic();
   }
@@ -131,10 +135,10 @@ public class ForestGameArea extends GameArea {
     }
   }
 
-  private Entity spawnPlayer() {
+  private void spawnPlayer() {
     Entity newPlayer = PlayerFactory.createPlayer(game);
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
-    return newPlayer;
+    player = newPlayer;
   }
 
   private void spawnGhosts() {
@@ -155,6 +159,11 @@ public class ForestGameArea extends GameArea {
     GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
     Entity ghostKing = NPCFactory.createGhostKing(player);
     spawnEntityAt(ghostKing, randomPos, true, true);
+  }
+
+  private void spawnCutsceneTrigger() {
+    Entity trigger = CutsceneTriggerFactory.createTrigger();
+    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
   }
 
   private void playMusic() {
@@ -187,6 +196,11 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
+  /**
+   * Returns the player entity that is created.
+   *
+   * @return player entity - main character being controlled
+   */
   public Entity getPlayer() {
     return this.player;
   }

@@ -1,20 +1,14 @@
 package com.deco2800.game.ui.textbox;
 
 import com.deco2800.game.components.Component;
-import com.deco2800.game.ui.terminal.commands.Command;
-import com.deco2800.game.ui.terminal.commands.DebugCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TextBox extends Component {
     private static final Logger logger = LoggerFactory.getLogger(TextBox.class);
-    private final Map<String, Command> commands;
 
     /** The message that the text box will display, based on the dialogue object stored and which message it is on. */
     private String message = "";
@@ -37,13 +31,10 @@ public class TextBox extends Component {
     /** Dialogue object that the text box is currently on. */
     private Dialogue dialogue;
 
-    public TextBox() {
-        this(new HashMap<>());
-    }
+    /** Checks if the player has lifted a key to prevent the text box from skipping. */
+    private boolean acceptingInput;
 
-    public TextBox(Map<String, Command> commands) {
-        this.commands = commands;
-        addCommand("debug", new DebugCommand());
+    public TextBox() {
         setDialogue(Dialogue.OPENING);
     }
 
@@ -159,17 +150,15 @@ public class TextBox extends Component {
     }
 
     /**
-     * Adds a command to the list of valid text box commands.
-     *
-     * @param name command name
-     * @param command command
+     * Checks if the text box is accepting input from the player.
+     * @return true if text box can altered with input, false otherwise
      */
-    public void addCommand(String name, Command command) {
-        logger.debug("Adding command: {}", name);
-        if (commands.containsKey(name)) {
-            logger.error("Command {} is already registered", name);
-        }
-        commands.put(name, command);
+    public boolean isAcceptingInput() {
+        return this.acceptingInput;
+    }
+
+    public void acceptInput() {
+        this.acceptingInput = true;
     }
 
     /**
@@ -181,6 +170,7 @@ public class TextBox extends Component {
         this.dialogue = dialogue;
         this.index = 0;
         this.subMessageIndex = 0;
+        this.acceptingInput = false;
         setOpen();
     }
 }

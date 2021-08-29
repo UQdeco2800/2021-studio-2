@@ -138,6 +138,23 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   }
 
   /**
+   * Disables all of the inputs that are currently being pressed.
+   */
+  public void stopWalking() {
+    this.left = 0;
+    this.right = 0;
+    this.down = 0;
+    this.up = 0;
+    this.speedMultiplier = 1;
+    entity.getEvents().trigger("walkStop");
+    if (lastDirection != null) {
+      triggerStandAnimation();
+    } else {
+      entity.getEvents().trigger("stopForward");
+    }
+  }
+
+  /**
    * Triggers the walk event for the player character. The method will handle
    * diagonal movement to ensure that walk speed is consistent and check if
    * the player is no longer moving.
@@ -147,8 +164,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       return;
     }
     calculateDistance(speedMultiplier);
-    //Checks to see if the player should be static or is currently moving.
-    if ((this.up - this.down) == 0 && (this.right - this.left) == 0) {
+    if (walkDirection.x == 0 && walkDirection.y == 0) {
       entity.getEvents().trigger("walkStop");
       if (lastDirection != null) {
         triggerStandAnimation();
@@ -156,7 +172,8 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         entity.getEvents().trigger("stopForward");
       }
     } else {
-      lastDirection = walkDirection;
+      calculateDistance(speedMultiplier);
+      lastDirection = walkDirection.cpy();
       triggerWalkAnimation();
       entity.getEvents().trigger("walk", walkDirection);
     }

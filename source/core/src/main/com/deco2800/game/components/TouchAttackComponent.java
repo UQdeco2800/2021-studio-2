@@ -17,18 +17,16 @@ import com.deco2800.game.physics.components.PhysicsComponent;
  * <p>Damage is only applied if target entity has a CombatStatsComponent. Knockback is only applied
  * if target entity has a PhysicsComponent.
  */
-public class TouchAttackComponent extends Component {
-  private short targetLayer;
+public class TouchAttackComponent extends TouchComponent {
   private float knockbackForce = 0f;
   private CombatStatsComponent combatStats;
-  private HitboxComponent hitboxComponent;
 
   /**
    * Create a component which attacks entities on collision, without knockback.
    * @param targetLayer The physics layer of the target's collider.
    */
   public TouchAttackComponent(short targetLayer) {
-    this.targetLayer = targetLayer;
+    super(targetLayer);
   }
 
   /**
@@ -37,18 +35,19 @@ public class TouchAttackComponent extends Component {
    * @param knockback The magnitude of the knockback applied to the entity.
    */
   public TouchAttackComponent(short targetLayer, float knockback) {
-    this.targetLayer = targetLayer;
+    super(targetLayer);
     this.knockbackForce = knockback;
   }
 
   @Override
   public void create() {
-    entity.getEvents().addListener("collisionStart", this::onCollisionStart);
+    super.create();
     combatStats = entity.getComponent(CombatStatsComponent.class);
     hitboxComponent = entity.getComponent(HitboxComponent.class);
   }
 
-  private void onCollisionStart(Fixture me, Fixture other) {
+  @Override
+  protected void onCollisionStart(Fixture me, Fixture other) {
     if (hitboxComponent.getFixture() != me) {
       // Not triggered by hitbox, ignore
       return;
