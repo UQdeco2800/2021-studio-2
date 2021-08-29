@@ -42,10 +42,10 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     @Override
     public void update() {
         if (((System.currentTimeMillis() - start) / 1000.0) > 0.5
-                || getDistanceToTarget() < maxChaseDistance * 2.5 / 10) {
-            if (getDistanceToTarget() < maxChaseDistance * 2.5 / 10) {
+                || getDistanceToTarget() < maxChaseDistance * 3 / 10) {
+            if (getDistanceToTarget() < maxChaseDistance * 3 / 10) {
                 movementTask.setTarget(target.getCenterPosition());
-                movementTask.setMoveSpeed(new Vector2(1f, 1f));
+                movementTask.setMoveSpeed(new Vector2(1.5f, 1.5f));
             } else {
                 movementTask.setMoveSpeed(new Vector2(2.5f, 2.5f));
                 if (zigLeft) {
@@ -72,10 +72,9 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      * @return v3 new vector2 position
      */
     private Vector2 zigLeftRight(int direction, float angle) {
-        //creates a nice ring effect at multishots above 8
         Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
         Vector2 v2 = target.getCenterPosition().cpy();
-        Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity
+        Vector2 v3 = v2.cpy().sub(v1);
         v3.rotateAroundDeg(new Vector2(0,0), ((-direction) * angle));
         v3.add(v1);
         return (v3);
