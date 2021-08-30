@@ -8,11 +8,19 @@ import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import com.deco2800.game.rendering.AnimationRenderComponent;
+
 /** Movement controller for a physics-based entity. */
 public class PhysicsMovementComponent extends Component implements MovementController {
+
+  AnimationRenderComponent animator;
+
+
   private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
 
-  private PhysicsComponent physicsComponent;
+  public PhysicsComponent physicsComponent;
+
   private Vector2 targetPosition;
   private boolean movementEnabled = true;
   private Vector2 maxSpeed = Vector2Utils.ONE;
@@ -74,7 +82,25 @@ public class PhysicsMovementComponent extends Component implements MovementContr
   private void updateDirection(Body body) {
     Vector2 desiredVelocity = getDirection().scl(maxSpeed);
     setToVelocity(body, desiredVelocity);
-  }
+
+    //entity.getEvents().trigger("floatDown");
+
+    //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
+    if (this.getDirection().x>this.getDirection().y) {
+        if (this.getDirection().x < 0) {
+          this.getEntity().getEvents().trigger("LeftStart");
+        } else if (this.getDirection().x > 0) {
+          this.getEntity().getEvents().trigger("RightStart");
+        }
+      }
+    else{
+        if (this.getDirection().y < 0) {
+          this.getEntity().getEvents().trigger("DownStart");
+        } else if (this.getDirection().y > 0) {
+          this.getEntity().getEvents().trigger("UpStart");
+        }
+      }
+    }
 
   private void setToVelocity(Body body, Vector2 desiredVelocity) {
     // impulse force = (desired velocity - current velocity) * mass
@@ -83,8 +109,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
   }
 
-  private Vector2 getDirection() {
-    // Move towards targetPosition based on our current position
+  public Vector2 getDirection() {
     return targetPosition.cpy().sub(entity.getPosition()).nor();
   }
 }

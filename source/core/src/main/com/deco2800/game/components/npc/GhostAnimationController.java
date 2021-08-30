@@ -16,13 +16,30 @@ public class GhostAnimationController extends Component {
     animator = this.entity.getComponent(AnimationRenderComponent.class);
     entity.getEvents().addListener("wanderStart", this::animateWander);
     entity.getEvents().addListener("chaseStart", this::animateChase);
+
+    entity.getEvents().addListener("LeftStart", this::animateLeft);
+    entity.getEvents().addListener("RightStart", this::animateRight);
+    entity.getEvents().addListener("UpStart", this::animateUp);
+    entity.getEvents().addListener("DownStart", this::animateDown);
   }
 
-  void animateWander() {
-    animator.startAnimation("float");
+  public void animateLeft(){
+    animator.startAnimation("floatLeft");
+  }
+  public void animateRight(){
+    animator.startAnimation("floatRight");
   }
 
-  void animateChase() {
-    animator.startAnimation("angry_float");
+  public void animateUp(){
+    animator.startAnimation("floatUp");
   }
+
+  public void animateDown(){
+    animator.startAnimation("floatDown");
+  }
+
+  //should be able to get rid of these but will test later
+  public void animateWander() {animator.startAnimation("floatUp");}
+
+  void animateChase() {animator.startAnimation("floatDown");}
 }

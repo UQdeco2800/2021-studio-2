@@ -73,7 +73,7 @@ public class ForestGameArea extends GameArea {
     player = spawnPlayer();
     spawnGhosts();
     spawnRangedGhosts();
-    spawnGhostKing();
+    //spawnGhostKing(); //use this later to make evil assasins with different sprites
     spawnAnchoredGhosts();
     
     playMusic();
@@ -154,15 +154,15 @@ public class ForestGameArea extends GameArea {
     }
   }
 
-  private void spawnGhostKing() {
-    GridPoint2 minPos = new GridPoint2(0, 0);
-    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-    enemyPos = randomPos;
-    Entity ghostKing = NPCFactory.createGhostKing(player);
-    spawnEntityAt(ghostKing, randomPos, true, true);
-  }
+//  private void spawnGhostKing() {
+//    GridPoint2 minPos = new GridPoint2(0, 0);
+//    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+//    enemyPos = randomPos;
+//    Entity ghostKing = NPCFactory.createGhostKing(player);
+//    spawnEntityAt(ghostKing, randomPos, true, true);
+//  }
 
   private void spawnAnchoredGhosts() {
     GridPoint2 minPos = new GridPoint2(0, 0);

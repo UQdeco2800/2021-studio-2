@@ -2,6 +2,7 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
@@ -22,11 +23,20 @@ public class MovementTask extends DefaultTask {
   private Vector2 moveSpeed = Vector2Utils.ONE;
   private long lastTimeMoved;
   private Vector2 lastPos;
+  //private float x=lastPos.x;
+
+  //public Vector2 lastPos;
   private PhysicsMovementComponent movementComponent;
+  private long timeDiscoveredTarget;
 
   public MovementTask(Vector2 target) {
     this.target = target;
     this.gameTime = ServiceLocator.getTimeSource();
+  }
+
+  public MovementTask(Vector2 target, long time) {
+    this(target);
+    this.timeDiscoveredTarget = time;
   }
 
   public MovementTask(Vector2 target, float stopDistance) {
@@ -39,6 +49,15 @@ public class MovementTask extends DefaultTask {
     this.moveSpeed = moveSpeed;
     stopDistance = stopDistance * Math.max(moveSpeed.x, moveSpeed.y);
   }
+//
+//  public MovementTask(Vector2 target, float x){
+//    this(target);
+//    this.lastPos.x = x;
+//  }
+
+//  public Vector2 getLastPos (Entity entity) {
+//    return entity.getPosition();
+//  }
 
   @Override
   public void start() {
@@ -103,5 +122,19 @@ public class MovementTask extends DefaultTask {
       return owner.getEntity().getPosition().dst2(lastPos) > 0.001f;
     }
     return true; // if not started
+  }
+public float findingLastPositions(){
+    System.out.println("owner.getEntity().getPosition().dst2(lastPos"+owner.getEntity().getPosition().dst2(lastPos));
+    return owner.getEntity().getPosition().dst2(lastPos);
+    //lastpos;
+}
+
+  /**
+   * if time since target is discovered is more than 3 seconds and owner is still chasing target
+   * it will start warning other enemies to attack player
+   * @return true if enemies chase after target for more than 3 seconds
+   */
+  protected boolean discover() {
+    return gameTime.getTimeSince(timeDiscoveredTarget) > 3000 && this.getStatus() == Status.ACTIVE;
   }
 }
