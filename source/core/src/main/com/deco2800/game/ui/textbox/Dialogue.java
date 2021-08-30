@@ -6,9 +6,9 @@ public enum Dialogue {
      * This is currently being used as a placeholder but the elements in the enum will be used to display
      * all of the text that is to be used in a particular sequence, in this case, the opening.
      */
-    OPENING(new String[]{"You're running out of time... \nQuickly! Press any key once" +
-            "you're ready \nto see the next" +
-             "message.", "Your WASD keys will help guide you warrior \ninto Valhalla",
+    OPENING(new String[]{"You're running out of time... \nQuickly! Press any key once " +
+            "you're ready \nto see the next " + "message.",
+            "Your WASD keys will help guide you warrior \ninto Valhalla",
             "Press ESCAPE if you're urgent to \ncarry on with your journey to Valhalla.", "Good Luck"}),
 
     THE_ROCK(new String[]{"Ragnarok is nearing warrior.", "You mustn't hesitate nor die an unworthy death.",

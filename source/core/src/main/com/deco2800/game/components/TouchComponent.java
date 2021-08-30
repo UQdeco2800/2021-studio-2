@@ -1,17 +1,11 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 
 abstract class TouchComponent extends Component {
 
-    protected short targetLayer;;
+    protected short targetLayer;
     protected HitboxComponent hitboxComponent;
 
     /**
@@ -23,8 +17,9 @@ abstract class TouchComponent extends Component {
     }
 
     @Override
-    public void create() {
+    public void create()  {
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
+        hitboxComponent = entity.getComponent(HitboxComponent.class);
     }
 
     abstract void onCollisionStart(Fixture me, Fixture other);

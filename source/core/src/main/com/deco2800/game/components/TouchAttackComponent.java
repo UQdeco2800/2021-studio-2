@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 
 /**
@@ -43,7 +42,6 @@ public class TouchAttackComponent extends TouchComponent {
   public void create() {
     super.create();
     combatStats = entity.getComponent(CombatStatsComponent.class);
-    hitboxComponent = entity.getComponent(HitboxComponent.class);
   }
 
   @Override

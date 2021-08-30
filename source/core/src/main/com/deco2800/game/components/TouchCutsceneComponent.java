@@ -6,7 +6,6 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.Dialogue;
 import com.deco2800.game.ui.textbox.TextBox;
@@ -20,9 +19,6 @@ import com.deco2800.game.ui.textbox.TextBox;
  * if target entity has a PhysicsComponent.
  */
 public class TouchCutsceneComponent extends TouchComponent {
-
-    /** Text box that can be used to change the set of messages being displayed. */
-    private TextBox textBox;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -40,9 +36,6 @@ public class TouchCutsceneComponent extends TouchComponent {
     @Override
     public void create() {
         super.create();
-        hitboxComponent = entity.getComponent(HitboxComponent.class);
-        textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
     }
 
     @Override
@@ -56,6 +49,9 @@ public class TouchCutsceneComponent extends TouchComponent {
             // Doesn't match our target layer, ignore
             return;
         }
+
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
         textBox.setDialogue(Dialogue.THE_ROCK);
 
         Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
