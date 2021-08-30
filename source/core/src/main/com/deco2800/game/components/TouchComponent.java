@@ -9,7 +9,7 @@ abstract class TouchComponent extends Component {
     protected HitboxComponent hitboxComponent;
 
     /**
-     * Create a component which attacks entities on collision, without knockback.
+     * Create a component which allows entities to interact with each other once they are within the vicinity.
      * @param targetLayer The physics layer of the target's collider.
      */
     public TouchComponent(short targetLayer) {

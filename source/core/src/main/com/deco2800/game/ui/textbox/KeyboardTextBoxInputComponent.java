@@ -10,12 +10,15 @@ import com.deco2800.game.input.InputComponent;
 public class KeyboardTextBoxInputComponent extends InputComponent {
     private static final int SKIP_KEY = Input.Keys.ESCAPE;
 
+    /** Instance of the Text Box that will be manipulated by input. */
     private TextBox textBox;
 
+    /** Constructor to create the input with a priority of 9, under terminal. */
     public KeyboardTextBoxInputComponent() {
         super(9);
     }
 
+    /** Instantiates the InputComponent and stores the TextBox instance within the class. */
     public KeyboardTextBoxInputComponent(TextBox textBox) {
         this();
         this.textBox = textBox;

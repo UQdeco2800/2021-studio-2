@@ -24,6 +24,13 @@ public class CameraComponent extends Component {
     lastPositions = new ArrayList<>();
   }
 
+  /**
+   * Updates the position of the camera to a point within the map. If the camera is already
+   * a player, it will attempt to change the position of the camera to match the player position.
+   *
+   * To smooth the camera movement, the current camera position is an average of the last positions
+   * the main character was.
+   */
   @Override
   public void update() {
     Vector2 position;

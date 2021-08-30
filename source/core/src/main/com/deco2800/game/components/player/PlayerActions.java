@@ -33,6 +33,10 @@ public class PlayerActions extends Component {
     }
   }
 
+  /**
+   * Updates the walking speed of the main character to allow for physics collision
+   * calculations and change of position.
+   */
   private void updateSpeed() {
     Body body = physicsComponent.getBody();
     Vector2 velocity = body.getLinearVelocity();

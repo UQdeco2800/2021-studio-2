@@ -39,6 +39,10 @@ public class EntityService {
     ui = entity;
   }
 
+  /**
+   * Returns the UI entity of the game so the UI can be changed from any location.
+   * @return UI entity that displays items on the screen
+   */
   public Entity getUIEntity() {
     return this.ui;
   }
