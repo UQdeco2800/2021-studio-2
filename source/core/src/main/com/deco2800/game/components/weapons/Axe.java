@@ -12,14 +12,14 @@ import com.deco2800.game.services.ServiceLocator;
  * including combos, strong-attacks, etc.
  */
 public class Axe extends MeleeWeapon {
-    //private final Sound attackSound;
-    //private final Sound impactSound;
+    private final Sound attackSound;
+    private final Sound impactSound;
 
 
     public Axe(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
-        //attackSound = ServiceLocator.getResourceService().getAsset("sounds/swish.ogg", Sound.class);
-        //impactSound = ServiceLocator.getResourceService().getAsset("sounds/impact.ogg", Sound.class);
+        attackSound = ServiceLocator.getResourceService().getAsset("sounds/swish.ogg", Sound.class);
+        impactSound = ServiceLocator.getResourceService().getAsset("sounds/impact.ogg", Sound.class);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Axe extends MeleeWeapon {
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
         if (hasAttacked && timeSinceAttack > frameDuration & timeSinceAttack < 2 * frameDuration) {
-            //attackSound.play();
+            attackSound.play();
         }
         super.triggerAttackStage(timeSinceAttack);
     }
@@ -69,7 +69,7 @@ public class Axe extends MeleeWeapon {
     protected boolean onCollisionStart(Fixture me, Fixture other) {
         // if weapon collides with enemy, play impact sound
         if (super.onCollisionStart(me, other)) {
-            //impactSound.play();
+            impactSound.play();
             return true;
         }
         return false;

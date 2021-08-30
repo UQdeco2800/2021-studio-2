@@ -47,9 +47,10 @@ class MeleeWeaponTest {
         MeleeWeapon weapon = entity.getComponent(MeleeWeapon.class); // arbitrary
         weapon.setFrameDuration(100L);
         weapon.attack(MeleeWeapon.UP);
-        weapon.triggerAttackStage(150L);
+        weapon.triggerAttackStage(150L); // attack frame
 
-        assertNotEquals(null, entity.getComponent(WeaponHitboxComponent.class).getFixture());
+        assertNotEquals(null,
+                entity.getComponent(WeaponHitboxComponent.class).getFixture());
     }
 
     @Test
