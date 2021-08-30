@@ -2,6 +2,9 @@ package com.deco2800.game.ui.textbox;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.graphics.Texture;
+import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
 public class TextBoxDisplay extends UIComponent {
@@ -14,6 +17,9 @@ public class TextBoxDisplay extends UIComponent {
 
     /** The label that will be added to the screen to display the message. */
     private Label label;
+
+    /** Stores the image that will surround the text message. */
+    private Image image;
 
     @Override
     public void create() {
@@ -29,6 +35,8 @@ public class TextBoxDisplay extends UIComponent {
         label = new Label("", skin);
         label.setPosition(200f, 200f);
         label.setFontScale(1.5f);
+        image = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/test_box.png", Texture.class));
         stage.addActor(label);
     }
 
