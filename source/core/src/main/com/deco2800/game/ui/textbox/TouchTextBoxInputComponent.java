@@ -2,7 +2,6 @@ package com.deco2800.game.ui.textbox;
 
 import com.badlogic.gdx.InputProcessor;
 import com.deco2800.game.input.InputComponent;
-import com.deco2800.game.ui.terminal.Terminal;
 
 /**
  * Input handler for the debug terminal for keyboard and touch (mouse) input.
@@ -18,12 +17,6 @@ public class TouchTextBoxInputComponent extends InputComponent {
         super(9);
     }
 
-    public TouchTextBoxInputComponent(TextBox textBox) {
-        this();
-        this.textBox = textBox;
-    }
-
-
     @Override
     public void create() {
         super.create();
@@ -31,8 +24,8 @@ public class TouchTextBoxInputComponent extends InputComponent {
     }
 
     /**
-     * Handles input if the terminal is open. This is because keyDown events are
-     * triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
+     * Handles input if the text vox is open. This is because keyDown events are
+     * triggered alongside keyTyped events. If the user is typing in the text box, the input shouldn't
      * trigger any other input handlers.
      *
      * @return whether the input was processed
@@ -44,7 +37,7 @@ public class TouchTextBoxInputComponent extends InputComponent {
     }
 
     /**
-     * Handles input if the terminal is open. If 'enter' is typed, the entered message will be
+     * Handles input if the text box is open. If 'enter' is typed, the entered message will be
      * processed, otherwise the message will be updated with the new character.
      *
      * @return whether the input was processed
@@ -52,16 +45,15 @@ public class TouchTextBoxInputComponent extends InputComponent {
      */
     @Override
     public boolean keyTyped(char character) {
-        if (!textBox.isOpen()) {
-            return false;
+        if (textBox.isOpen()) {
+            return true;
         }
-
         return false;
     }
 
     /**
-     * Handles input if the terminal is open. This is because keyUp events are
-     * triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
+     * Handles input if the text box is open. This is because keyUp events are
+     * triggered alongside keyTyped events. If the user is typing in the text box, the input shouldn't
      * trigger any other input handlers.
      *
      * @return whether the input was processed
@@ -70,21 +62,5 @@ public class TouchTextBoxInputComponent extends InputComponent {
     @Override
     public boolean keyUp(int keycode) {
         return textBox.isOpen();
-    }
-
-    /**
-     * Scrolling up will open the terminal and scrolling down will close the terminal.
-     *
-     * @return whether the input was processed
-     * @see InputProcessor#scrolled(float, float)
-     */
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        if (amountY < 0) {
-            textBox.setOpen();
-        } else if (amountY > 0) {
-            textBox.setClosed();
-        }
-        return true;
     }
 }

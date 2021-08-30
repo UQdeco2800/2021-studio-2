@@ -7,6 +7,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
@@ -28,31 +29,37 @@ public class ForestGameArea extends GameArea {
   private static final int NUM_ANCHORED_GHOSTS = 1;
   private static final int NUM_TRAP = 4;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
-    "images/box_boy_leaf.png",
-    "images/tree.png",
-    "images/trap.png",
-    "images/arrow_normal.png",
-    "images/test.png",
-    "images/ghost_king.png",
-    "images/ghost_1.png",
-    "images/grass_1.png",
-    "images/grass_2.png",
-    "images/grass_3.png",
-    "images/hex_grass_1.png",
-    "images/hex_grass_2.png",
-    "images/hex_grass_3.png",
-    "images/iso_grass_1.png",
-    "images/iso_grass_2.png",
-    "images/iso_grass_3.png",
-    "images/mud.png",
-    "images/ghost_crown.png",
-    "images/player.png",
-    "images/health_left.png",
-    "images/health_middle.png",
-    "images/health_right.png",
-    "images/hp_icon.png"
+          "images/box_boy_leaf.png",
+          "images/tree.png",
+          "images/trap.png",
+          "images/test.png",
+          "images/arrow_normal.png",
+          "images/ghost_king.png",
+          "images/ghost_crown.png",
+          "images/ghost_1.png",
+          "images/grass_1.png",
+          "images/grass_2.png",
+          "images/grass_3.png",
+          "images/hex_grass_1.png",
+          "images/hex_grass_2.png",
+          "images/hex_grass_3.png",
+          "images/iso_grass_1.png",
+          "images/iso_grass_2.png",
+          "images/iso_grass_3.png",
+          "images/mud.png",
+          "images/player.png",
+          "images/health_left.png",
+          "images/health_middle.png",
+          "images/health_right.png",
+          "images/health_frame_left.png",
+          "images/health_frame_middle.png",
+          "images/health_frame_right.png",
+          "images/hp_icon.png",
+          "images/dash_icon.png",
+          "images/rock.png"
   };
   private static final String[] forestTextureAtlases = {
           "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
@@ -92,14 +99,16 @@ public class ForestGameArea extends GameArea {
 
     spawnTerrain();
     spawnTrees();
-    player = spawnPlayer();
+    spawnPlayer();
     spawnGhosts();
+    spawnCutsceneTrigger();
     spawnGhostKing();
     spawnRangedGhosts();
     spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
     spawnTraps();
     
+    spawnCutsceneTrigger();
     playMusic();
   }
 
@@ -173,10 +182,10 @@ public class ForestGameArea extends GameArea {
    * Spawn player at the terrain, create the player
    * @return newPlayer intialise player entity and spawn the player on the terrain
    */
-  private Entity spawnPlayer() {
+  private void spawnPlayer() {
     Entity newPlayer = PlayerFactory.createPlayer(game);
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
-    return newPlayer;
+    player = newPlayer;
   }
 
   /**
@@ -205,6 +214,11 @@ public class ForestGameArea extends GameArea {
       Entity ghost = NPCFactory.createRangedGhost(player);
       spawnEntityAt(ghost, randomPos, true, true);
     }
+  }
+
+  private void spawnCutsceneTrigger() {
+    Entity trigger = CutsceneTriggerFactory.createTrigger();
+    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
   }
 
   private void spawnGhostKing() {
@@ -273,6 +287,11 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
+  /**
+   * Returns the player entity that is created.
+   *
+   * @return player entity - main character being controlled
+   */
   public Entity getPlayer() {
     return this.player;
   }

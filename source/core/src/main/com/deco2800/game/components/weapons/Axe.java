@@ -35,21 +35,21 @@ public class Axe extends MeleeWeapon {
         AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
-        } /* TODO: Add animations when player.atlas is completed.
+        }
         switch (attackDirection) {
             case UP:
-                animator.startAnimation("BackAxe_Attack");
+                animator.startAnimation("back_axe_attack");
                 break;
             case DOWN:
-                animator.startAnimation("FrontAxe_Attack");
+                animator.startAnimation("front_axe_attack");
                 break;
             case LEFT:
-                animator.startAnimation("LeftAxe_Attack");
+                animator.startAnimation("left_axe_attack");
                 break;
             case RIGHT:
-                animator.startAnimation("RightAxe_Attack");
+                animator.startAnimation("right_axe_attack");
                 break;
-        } */
+        }
     }
 
     /**

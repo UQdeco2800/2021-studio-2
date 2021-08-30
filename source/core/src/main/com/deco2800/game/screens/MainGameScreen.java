@@ -40,6 +40,7 @@ public class MainGameScreen extends ScreenAdapter {
   private static final String[] mainGameTextures = {
           "images/heart.png",
           "lowHealthImages/BloodScreenDarkRepositioned.png",
+          "images/text_box.png"
   };
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
   private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
@@ -64,7 +65,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
 
     renderer = RenderFactory.createRenderer();
-    renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
+    renderer.getCamera().getCamera().position.set(4.75f, 4.75f, 0f);
     renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
     loadAssets();
@@ -160,6 +161,6 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(textBoxInput)
         .addComponent(new TextBoxDisplay());
 
-    ServiceLocator.getEntityService().register(ui);
+    ServiceLocator.getEntityService().registerUI(ui);
   }
 }

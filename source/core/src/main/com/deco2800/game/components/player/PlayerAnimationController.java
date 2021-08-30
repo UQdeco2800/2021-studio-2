@@ -25,34 +25,58 @@ public class PlayerAnimationController extends Component {
         stopForwardWalk();
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to walk forward.
+     */
     void animateForwardWalk() {
         animator.startAnimation("walk_forward");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to walk to the right.
+     */
     void animateRightWalk() {
         animator.startAnimation("walk_right");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to walk to the left.
+     */
     void animateLeftWalk() {
         animator.startAnimation("walk_left");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to walk backwards.
+     */
     void animateBackwardWalk() {
         animator.startAnimation("walk_backward");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to be shown in the default frame.
+     */
     void stopForwardWalk() {
         animator.startAnimation("default");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to default frame facing backwards.
+     */
     void stopBackwardWalk() {
         animator.startAnimation("default_backward");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to the default frame facing to the left.
+     */
     void stopLeftWalk() {
         animator.startAnimation("default_left");
     }
 
+    /**
+     * Once triggered, it changes the animation of the sprite to the default frame facing to the right.
+     */
     void stopRightWalk() {
         animator.startAnimation("default_right");
     }

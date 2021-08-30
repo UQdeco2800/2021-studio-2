@@ -50,8 +50,7 @@ class RendererTest {
     when(graphics.getHeight()).thenReturn(200);
     Renderer renderer =
         new Renderer(cameraComponent, 10, spriteBatch, stage, renderService, debugRenderer);
-
-    assertEquals(Vector3.Zero, camera.position);
+    
     assertEquals(10, camera.viewportWidth);
     assertEquals(20, camera.viewportHeight);
 

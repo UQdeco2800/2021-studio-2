@@ -45,20 +45,17 @@ public class PlayerFactory {
                     ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
 
     animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_forward", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_backward", 0.18f, Animation.PlayMode.LOOP);
+    animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
+    animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default", 0.25f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_backward", 0.25f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_right", 0.25f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_left", 0.25f, Animation.PlayMode.NORMAL);
-
-    /* TODO: Add axe animations once character atlas has been completed.
-    NOTE: If names change, also update them in weapons/Axe.java
-    animator.addAnimation("BackAxe_Attack", 0.1f);
-    animator.addAnimation("FrontAxe_Attack", 0.1f);
-    animator.addAnimation("RightAxe_Attack", 0.1f);
-    animator.addAnimation("LeftAxe_Attack", 0.1f); */
+    animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("default_backward", 1, Animation.PlayMode.NORMAL);
+    animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("back_axe_attack", 0.1f);
+    animator.addAnimation("front_axe_attack", 0.1f);
+    animator.addAnimation("right_axe_attack", 0.1f);
+    animator.addAnimation("left_axe_attack", 0.1f);
 
     Entity player =
             new Entity()
@@ -82,12 +79,8 @@ public class PlayerFactory {
                     .addComponent(new DeathActions(game));
 
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
+    player.getComponent(AnimationRenderComponent.class).scaleEntity();
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
-    /* TODO: Fix bug in below function, or just remove function call.
-    Bug: Setting scale after adding hit boxes / collider component messes up the
-    size that they use. */
-    // player.getComponent(AnimationRenderComponent.class).scalePlayer();
-
     return player;
   }
 

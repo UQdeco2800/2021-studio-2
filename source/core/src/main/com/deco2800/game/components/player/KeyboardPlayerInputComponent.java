@@ -22,21 +22,21 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   private int lastKeyPressed;
 
   /** Distance scale for moving in a diagonal direction. */
-  public final float DIAGONAL_DISTANCE = 0.7071f;
+  public static final float DIAGONAL_DISTANCE = 0.7071f;
 
   /** Multiplier difference for the dash ability. */
-  public final float DASH_MULTIPLIER = 2.5f;
+  public static final float DASH_MULTIPLIER = 2.5f;
 
   /** When the player is pressing W, up is 1, else, up is 0. */
   private byte up = 0;
 
-  /** When the player is pressing A, up is 1, else, up is 0. */
+  /** When the player is pressing A, left is 1, else, left is 0. */
   private byte left = 0;
 
-  /** When the player is pressing S, up is 1, else, up is 0. */
+  /** When the player is pressing S, down is 1, else, down is 0. */
   private byte down = 0;
 
-  /** When the player is pressing D, up is 1, else, up is 0. */
+  /** When the player is pressing D, right is 1, else, right is 0. */
   private byte right = 0;
 
   /** While the player is in their dash, it is 1, else it is 0. */
@@ -49,7 +49,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   private Vector2 lastDirection;
 
   /** Stores the last system time since the dash ability was pressed.*/
-  private long lastDash = 0L;
+  //Used to check cool down of the dash ability: private long lastDash = 0L;
 
   public KeyboardPlayerInputComponent() {
     super(5);
@@ -146,7 +146,23 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   }
 
   /**
-   * Triggers player events on a mouse click. Direction is determined by
+   * Disables all of the inputs that are currently being pressed.
+   */
+  public void stopWalking() {
+    this.left = 0;
+    this.right = 0;
+    this.down = 0;
+    this.up = 0;
+    this.speedMultiplier = 1;
+    entity.getEvents().trigger("walkStop");
+    if (lastDirection != null) {
+      triggerStandAnimation();
+    } else {
+      entity.getEvents().trigger("stopForward");
+    }
+  }
+
+   /** Triggers player events on a mouse click. Direction is determined by
    * mouse click coordinates (screenX, screenY).
    * @return whether the mouse input was processed.
    * @see InputProcessor#touchDown(int, int, int, int)
@@ -171,35 +187,49 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     if (dashing) {
       return;
     }
-    //Checks to see if the player should be static or is currently moving.
-    if ((this.up - this.down) == 0 && (this.right - this.left) == 0) {
+    calculateDistance(speedMultiplier);
+    if (walkDirection.x == 0 && walkDirection.y == 0) {
       entity.getEvents().trigger("walkStop");
       if (lastDirection != null) {
-        if (lastDirection.y > 0) {
-          entity.getEvents().trigger("stopBackward");
-        } else if (lastDirection.y < 0) {
-          entity.getEvents().trigger("stopForward");
-        } else if (lastDirection.x > 0) {
-          entity.getEvents().trigger("stopRight");
-        } else if (lastDirection.x < 0) {
-          entity.getEvents().trigger("stopLeft");
-        }
+        triggerStandAnimation();
       } else {
         entity.getEvents().trigger("stopForward");
       }
     } else {
       calculateDistance(speedMultiplier);
-      lastDirection = walkDirection;
+      lastDirection = walkDirection.cpy();
+      triggerWalkAnimation();
       entity.getEvents().trigger("walk", walkDirection);
-      if (walkDirection.y > 0) {
-        entity.getEvents().trigger("walkBackward");
-      } else if (walkDirection.y < 0) {
-        entity.getEvents().trigger("walkForward");
-      } else if (walkDirection.x > 0) {
-        entity.getEvents().trigger("walkRight");
-      } else if (walkDirection.x < 0) {
-        entity.getEvents().trigger("walkLeft");
-      }
+    }
+  }
+
+  /**
+   * Checks the direction that the player was last facing and changes the animation to match.
+   */
+  private void triggerStandAnimation() {
+    if (lastDirection.y > 0) {
+      entity.getEvents().trigger("stopBackward");
+    } else if (lastDirection.y < 0) {
+      entity.getEvents().trigger("stopForward");
+    } else if (lastDirection.x > 0) {
+      entity.getEvents().trigger("stopRight");
+    } else if (lastDirection.x < 0) {
+      entity.getEvents().trigger("stopLeft");
+    }
+  }
+
+  /**
+   * Checks the direction that the player is moving in and changes the animation to match.
+   */
+  private void triggerWalkAnimation() {
+    if (walkDirection.y > 0) {
+      entity.getEvents().trigger("walkBackward");
+    } else if (walkDirection.y < 0) {
+      entity.getEvents().trigger("walkForward");
+    } else if (walkDirection.x > 0) {
+      entity.getEvents().trigger("walkRight");
+    } else if (walkDirection.x < 0) {
+      entity.getEvents().trigger("walkLeft");
     }
   }
 
@@ -209,7 +239,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   private void triggerDashEvent() {
     calculateDistance(DASH_MULTIPLIER);
-    entity.getEvents().trigger("dash", walkDirection);
+    entity.getEvents().trigger("walk", walkDirection);
   }
 
   /**
@@ -220,11 +250,11 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    * @param multiplier multiplies the distance moved by the character
    */
   private void calculateDistance(float multiplier) {
-    float x = this.right - this.left;
-    float y = this.up - this.down;
+    float x = (float)this.right - this.left;
+    float y = (float)this.up - this.down;
     if (x != 0 && y != 0) {
-      x = (float)(this.right - this.left) * DIAGONAL_DISTANCE;
-      y = (float)(this.up - this.down) * DIAGONAL_DISTANCE;
+      x = (this.right - this.left) * DIAGONAL_DISTANCE;
+      y = (this.up - this.down) * DIAGONAL_DISTANCE;
     }
     walkDirection.x = x * multiplier;
     walkDirection.y = y * multiplier;

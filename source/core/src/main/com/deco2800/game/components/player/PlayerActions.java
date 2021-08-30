@@ -56,6 +56,10 @@ public class PlayerActions extends Component {
     }
   }
 
+  /**
+   * Updates the walking speed of the main character to allow for physics collision
+   * calculations and change of position.
+   */
   private void updateSpeed() {
     Body body = physicsComponent.getBody();
     Vector2 velocity = body.getLinearVelocity();
@@ -70,7 +74,19 @@ public class PlayerActions extends Component {
    *
    * @param direction direction to move in
    */
-  void walk(Vector2 direction) {
+  public void walk(Vector2 direction) {
+    this.walkDirection = direction;
+    if (lockDuration == 0) {
+      moving = true;
+    }
+  }
+
+  /**
+   * Moves the player towards a given direction.
+   *
+   * @param direction direction to move in
+   */
+  public void dash(Vector2 direction) {
     this.walkDirection = direction;
     if (lockDuration == 0) {
       moving = true;
@@ -80,7 +96,7 @@ public class PlayerActions extends Component {
   /**
    * Stops the player from walking.
    */
-  void stopWalking() {
+  public void stopWalking() {
     this.walkDirection = Vector2.Zero.cpy();
     updateSpeed();
     moving = false;
@@ -91,7 +107,6 @@ public class PlayerActions extends Component {
    * @param keycode - the last pressed player key.
    */
   void attack(int keycode) {
-    System.out.println(keycode);
     MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon == null) {
       return;
@@ -141,13 +156,5 @@ public class PlayerActions extends Component {
     timeSinceStopped = ServiceLocator.getTimeSource().getTime();
     lockDuration = duration;
     moving = false;
-  }
-
-  /**
-   * The player dashes in the direction that they are currently moving in.
-   */
-  void dash(Vector2 direction) {
-    this.walkDirection = direction;
-    moving = true;
   }
 }
