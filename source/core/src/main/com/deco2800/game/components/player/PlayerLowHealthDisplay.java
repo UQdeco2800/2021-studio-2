@@ -23,6 +23,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     /**
      * Add all actors to the stage here and event listener
      */
+
     @Override
     public void create() {
         super.create();
@@ -83,6 +84,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
         bloodImage.setColor(1,0,0,alpha); //opacity of image changes depending on hp %
         stack.setVisible(true);
     }
+
     /**
      * turn the stack visibility off.
      * this is called when the event "bloodyViewOff" is triggered
