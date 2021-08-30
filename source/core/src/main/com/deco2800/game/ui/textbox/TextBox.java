@@ -123,7 +123,7 @@ public class TextBox extends Component {
      */
     public void setSubMessage() {
         if (skip || message.length() - 1 == subMessageIndex) {
-            subMessageIndex = message.length();
+            subMessageIndex = message.length() - 1;
             skip = true;
             subMessage = message;
         } else if (isOpen) {
