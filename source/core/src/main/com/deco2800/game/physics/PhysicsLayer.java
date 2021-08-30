@@ -11,6 +11,7 @@ public class PhysicsLayer {
   // Weapon colliders
   public static final short MELEEWEAPON = (1 << 4);
   public static final short PROJECTILEWEAPON = (1 << 5);
+
   public static final short ALL = ~0;
 
   public static boolean contains(short filterBits, short layer) {

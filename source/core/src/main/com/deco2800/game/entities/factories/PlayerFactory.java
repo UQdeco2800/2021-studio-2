@@ -2,8 +2,10 @@ package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.deco2800.game.GdxGame;
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.weapons.Axe;
+import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.player.*;
 import com.deco2800.game.components.death.DeathActions;
 import com.deco2800.game.components.death.DeathDisplay;
@@ -16,6 +18,7 @@ import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -40,6 +43,7 @@ public class PlayerFactory {
     AnimationRenderComponent animator =
             new AnimationRenderComponent(
                     ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
+
     animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_forward", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_backward", 0.18f, Animation.PlayMode.LOOP);
@@ -49,6 +53,13 @@ public class PlayerFactory {
     animator.addAnimation("default_right", 0.25f, Animation.PlayMode.NORMAL);
     animator.addAnimation("default_left", 0.25f, Animation.PlayMode.NORMAL);
 
+    /* TODO: Add axe animations once character atlas has been completed.
+    NOTE: If names change, also update them in weapons/Axe.java
+    animator.addAnimation("BackAxe_Attack", 0.1f);
+    animator.addAnimation("FrontAxe_Attack", 0.1f);
+    animator.addAnimation("RightAxe_Attack", 0.1f);
+    animator.addAnimation("LeftAxe_Attack", 0.1f); */
+
     Entity player =
             new Entity()
                     .addComponent(animator)
@@ -56,6 +67,9 @@ public class PlayerFactory {
                     .addComponent(new PhysicsComponent())
                     .addComponent(new ColliderComponent())
                     .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
+                    .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.WEAPON))
+                    .addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
+                            new Vector2(1f, 0.5f)))
                     .addComponent(new PlayerActions())
                     .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                     .addComponent(new InventoryComponent(stats.gold))
@@ -65,9 +79,13 @@ public class PlayerFactory {
                     .addComponent(new DeathDisplay())
                     .addComponent(new DeathActions(game));
 
-    PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
-    player.getComponent(AnimationRenderComponent.class).scalePlayer();
+    PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
+    /* TODO: Fix bug in below function, or just remove function call.
+    Bug: Setting scale after adding hit boxes / collider component messes up the
+    size that they use. */
+    // player.getComponent(AnimationRenderComponent.class).scalePlayer();
+
     return player;
   }
 

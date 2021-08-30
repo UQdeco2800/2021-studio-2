@@ -2,9 +2,7 @@ package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
@@ -20,6 +18,7 @@ public class PlayerStatsDisplay extends UIComponent {
   private Image healthBarLeft;
   private Image healthBarMiddle;
   private Image healthBarRight;
+  private float maxHealth;
 
   /**
    * Creates reusable ui styles and adds actors to the stage.
@@ -39,12 +38,6 @@ public class PlayerStatsDisplay extends UIComponent {
   private void addActors() {
     table = new Table();
     createTable();
-    //table.setDebug(true); //to see the outlines
-
-    // Health text
-    int health = entity.getComponent(CombatStatsComponent.class).getHealth();
-    CharSequence healthText = "HP";
-    //healthLabel = new Label(healthText, skin, "large");
 
     // Heart image
     heartImage = new Image(ServiceLocator.getResourceService().getAsset("images/hp_icon.png", Texture.class));
@@ -54,7 +47,8 @@ public class PlayerStatsDisplay extends UIComponent {
     healthBarMiddle = new Image(ServiceLocator.getResourceService().getAsset("images/health_middle.png", Texture.class));
     healthBarRight = new Image(ServiceLocator.getResourceService().getAsset("images/health_right.png", Texture.class));
 
-    updatePlayerHealthUI(100);
+    maxHealth =  entity.getComponent(CombatStatsComponent.class).getMaxHealth();
+    updatePlayerHealthUI((int)maxHealth); //initialise hp bar size
     stage.addActor(table);
   }
 
@@ -65,15 +59,17 @@ public class PlayerStatsDisplay extends UIComponent {
 
   /**
    * Updates the player's health on the ui.
-   * Also checks for when to display the low health changes
+   * Also checks for when to display the low health changes and death screen
    * @param health player health
    */
   public void updatePlayerHealthUI(int health) {
     updateLowHealthUI();
+    deathScreen();
     table.reset();
     createTable();
     table.add(healthBarLeft).height(30f);
-    table.add(healthBarMiddle).height(30f).width(2 * health - 10);
+    float scale = (health / maxHealth * 100) * 2; //hp bar, same size even if increasing max hp
+    table.add(healthBarMiddle).height(30f).width(scale);
     table.add(healthBarRight).height(30f);
   }
 
@@ -87,32 +83,39 @@ public class PlayerStatsDisplay extends UIComponent {
 
   /**
    * Updates the PlayerLowHealthDisplay components by triggering the respective events
-   * also checks if the player is dead.
    */
   public void updateLowHealthUI() {
     float currentHealth =  entity.getComponent(CombatStatsComponent.class).getHealth();
-    float maxHealth =  entity.getComponent(CombatStatsComponent.class).getMaxHealth();
-    boolean isDead = entity.getComponent(CombatStatsComponent.class).isDead();
-    float lowHealthThreshold = 0.33f * maxHealth; //change float value to change the threshold
+    float lowHealthThreshold = 0.30f * maxHealth; //change float value to change the threshold
+    float alpha = 1.2f - (currentHealth/lowHealthThreshold); //changing opacity of bloody view
+    boolean play = currentHealth < (maxHealth * 0.30f); //heart beat sound plays at 30% max health
 
-    //checks if player is dead, turns off bloody view
-    if (isDead) {
-      entity.getEvents().trigger("bloodyViewOff");
-      entity.getEvents().trigger("deathScreen");
-    } else if (currentHealth <=  lowHealthThreshold) {
+    if (currentHealth <=  lowHealthThreshold) {
       //call the event trigger for bloodyViewOn when hp reaches below threshold
-      entity.getEvents().trigger("bloodyViewOn");
+      entity.getEvents().trigger("bloodyViewOn", alpha, play);
     } else {
       //turn off blood view when above low health threshold
       entity.getEvents().trigger("bloodyViewOff");
     }
   }
 
-//can't access another entities events find a diff way to trigger death screen
-//  public void triggerDeath() {
-//    System.out.println("Trigger Death");
-//    entity.getEvents().trigger("deathScreen");
-//  }
+  /**
+   * checks if player is dead if so trigger the death screen.
+   * uses event triggers to turn off the bloody view and display
+   * the death screen.
+   */
+  public void deathScreen() {
+    boolean isDead = entity.getComponent(CombatStatsComponent.class).isDead();
+    if (isDead) {
+      entity.getEvents().trigger("bloodyViewOff");
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      entity.getEvents().trigger("deathScreen");
+    }
+  }
 
   @Override
   public void dispose() {
@@ -121,6 +124,5 @@ public class PlayerStatsDisplay extends UIComponent {
     healthBarLeft.remove();
     healthBarRight.remove();
     healthBarMiddle.remove();
-    //healthLabel.remove();
   }
 }

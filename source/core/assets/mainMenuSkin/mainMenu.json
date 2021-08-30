@@ -24,6 +24,26 @@ com.badlogic.gdx.graphics.Color: {
 		a: 1
 	}
 }
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: {
+		up: 5895d2d1cba9841eabab6077 (2)
+	}
+	start: {
+		up: StartButton
+		down: START_Broken
+		over: START_Highlighted
+	}
+	settings: {
+		up: SettingsButton
+		down: SETTINGS_Broken
+		over: SETTINGS_Highlighted
+	}
+	quit: {
+		up: QuitButton
+		down: QUIT_Broken
+		over: QUIT_Highlighted
+	}
+}
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
 		font: pixel
