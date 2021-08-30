@@ -19,7 +19,7 @@ import com.deco2800.game.services.ServiceLocator;
  * Enables entities to attack using a weapon.
  */
 public class MeleeWeapon extends Component {
-    protected final long frameDuration; // animation frame duration measured in milliseconds
+    protected long frameDuration; // animation frame duration measured in milliseconds
     protected boolean hasAttacked; // determines whether entity has attacked.
 
     private long timeAtAttack; // time when the entity last attacked
@@ -28,12 +28,12 @@ public class MeleeWeapon extends Component {
     protected int attackPower; // damage
     protected short targetLayer; // what physics layer the weapon can damage
     protected float knockback; // physical knockback of weapon
-    protected CombatStatsComponent combatStats; // base stats of entity
+    protected CombatStatsComponent combatStats; // base stats of owner entity
 
     /* Weapon attack width & range in terms of x & y, relative to entity size */
     private final Vector2 weaponSize;
     /* Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
-    entity can re-use the same weapon hit box instance, provided they are never setting/destroying
+    entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
     it simultaneously. */
     private WeaponHitboxComponent weaponHitbox;
 
@@ -79,13 +79,12 @@ public class MeleeWeapon extends Component {
     /**
      * Weapon attack, called by owner entity.
      * Sets flags used in update(), to sync the attack with the animation.
-     * Actual functionality for attacking is implemented inside update().
+     * Actual functionality for attacking is implemented inside triggerAttackStage()
      * @param attackDirection direction of attack (see above for defined constants).
      */
     public void attack(int attackDirection) {
         this.attackDirection = attackDirection;
         timeAtAttack = ServiceLocator.getTimeSource().getTime();
-        entity.getComponent(AnimationRenderComponent.class).startAnimation("");
         entity.getEvents().trigger("lockMovement", 3 * frameDuration);
         hasAttacked = true;
     }
@@ -99,12 +98,20 @@ public class MeleeWeapon extends Component {
         // Set hit box during attack frame (2nd frame).
         if (hasAttacked && timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
             weaponHitbox.set(weaponSize.cpy(),  attackDirection);
-            hasAttacked = false;
+            hasAttacked = false; // use flag to ensure weapon is only set once.
         // Destroy hit box as soon as attack frame ends (3rd frame).
         } else if (timeSinceAttack >= 3 * frameDuration) {
             timeAtAttack = 0;
             weaponHitbox.destroy();
         }
+    }
+
+    /**
+     * Sets frame duration, which determines how long an attack lasts.
+     * @param frameDuration how long each attack animation frame takes.
+     */
+    public void setFrameDuration(long frameDuration) {
+        this.frameDuration = frameDuration;
     }
 
     /**
