@@ -17,12 +17,13 @@ public class WeaponHitboxComponent extends ColliderComponent {
     @Override
     public void create() {
         setSensor(true);
-        // Weapon hit boxes aren't set on construction.
+        // Weapon hit boxes aren't set by default.
     }
 
     /**
      * Set physics as a box with a given size. Box is centered around the entity.
      * @param size size of the box, relative to the entity's size.
+     *             NOTE: Pass cpy() to avoid bugs.
      * @param direction the direction of the hit box, relative to the entity.
      * @return self
      */
@@ -66,6 +67,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
      * Sets the hit box shape, but also allows for resizing. This is called by
      * all setBox methods (defined in ColliderComponent)
      * @param shape shape, default = bounding box the same size as the entity
+     * @see ColliderComponent
      * @return self
      * */
     @Override
@@ -73,7 +75,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
         fixtureDef.shape = shape;
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
         if (fixture != null) { // destroy fixture if one exists
-            logger.warn("{} Added weapon hit box without destroying it first.", this);
+            logger.debug("{} Added weapon hit box without destroying it first.", this);
             physBody.destroyFixture(fixture);
         }
         this.fixture = physBody.createFixture(fixtureDef);
@@ -85,7 +87,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
      */
     public void destroy() {
         if (fixture == null) {
-            logger.warn("{} Tried to destroy an already unset weapon hit box", this);
+            logger.debug ("{} Tried to destroy an already unset weapon hit box", this);
             return;
         }
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();

@@ -35,8 +35,13 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("attack", this::attack);
     entity.getEvents().addListener("mouseAttack", this::mouseAttack);
     entity.getEvents().addListener("lockMovement", this::lockMovement);
+    entity.getEvents().addListener("dash", this::dash);
   }
 
+  /**
+   * Updates speed of player if moving.
+   * Also keeps track of lockMovement() duration.
+   */
   @Override
   public void update() {
     if (moving) {
@@ -88,6 +93,7 @@ public class PlayerActions extends Component {
    * @param keycode - the last pressed player key.
    */
   void attack(int keycode) {
+    System.out.println(keycode);
     MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon == null) {
       return;
@@ -127,12 +133,20 @@ public class PlayerActions extends Component {
   }
 
   /**
-   * Locks player movement for a specified duration
+   * Locks player movement for a specified duration.
    * @param duration - the time the movement lock will last, measured in milliseconds.
    */
   void lockMovement(long duration) {
     timeSinceStopped = ServiceLocator.getTimeSource().getTime();
     lockDuration = duration;
-    stopWalking();
+    moving = false;
+  }
+
+  /**
+   * The player dashes in the direction that they are currently moving in.
+   */
+  void dash(Vector2 direction) {
+    this.walkDirection = direction;
+    moving = true;
   }
 }
