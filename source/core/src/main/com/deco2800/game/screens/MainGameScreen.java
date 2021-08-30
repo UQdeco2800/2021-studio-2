@@ -65,7 +65,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
 
     renderer = RenderFactory.createRenderer();
-    renderer.getCamera().getCamera().position.set(4.75f, 4.75f, 0f);
+    renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
     renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
     loadAssets();
@@ -80,9 +80,11 @@ public class MainGameScreen extends ScreenAdapter {
     if (world.equals("forest")) {
       ForestGameArea gameArea = new ForestGameArea(terrainFactory, game);
       gameArea.create();
+      renderer.getCamera().setPlayer(gameArea.getPlayer());
     } else if (world.equals("test")) {
       TestGameArea gameArea = new TestGameArea(terrainFactory, game);
       gameArea.create();
+      renderer.getCamera().setPlayer(gameArea.getPlayer());
     }
   }
 
