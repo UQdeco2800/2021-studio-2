@@ -13,6 +13,7 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.Vector2Utils;
 
 /**
  * Melee weapon superclass from which all melee weapons will inherit from.
@@ -166,6 +167,25 @@ public class MeleeWeapon extends Component {
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         return true; // successfully collided with target.
+    }
+
+    /**
+     * Converts Vector2Utils direction to MeleeWeapon direction.
+     * @param vectorDirection defined in Vector2Utils
+     * @return MeleeWeapon direction represented by an integer, or -1 if failed
+     */
+    public static int toWeaponDirection(Vector2 vectorDirection) {
+        if (vectorDirection == Vector2Utils.UP) {
+            return UP;
+        } else if (vectorDirection == Vector2Utils.DOWN) {
+            return DOWN;
+        } else if (vectorDirection == Vector2Utils.LEFT) {
+            return LEFT;
+        } else if (vectorDirection == Vector2Utils.RIGHT) {
+            return RIGHT;
+        } else {
+            return -1;
+        }
     }
 }
 

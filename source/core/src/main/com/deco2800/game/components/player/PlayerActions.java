@@ -1,14 +1,20 @@
 package com.deco2800.game.components.player;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.Vector2Utils;
+import com.badlogic.gdx.assets.AssetManager;
 
 /**
  * Action component for interacting with the player. Player events should be initialised in create()
@@ -116,17 +122,19 @@ public class PlayerActions extends Component {
 
   /**
    * Makes the player attack using a mouse click.
-   * Currently, this function is only used to test AOE attacks, and
-   * can't determine direction of attack based on click.
    * @param coordinates the mouse coordinates of the click
    */
   void mouseAttack(Vector2 coordinates) {
-    System.out.println("called in mouseattack");
     MeleeWeapon weapon = entity.getComponent(Axe.class);
-    if (weapon != null) {
-      System.out.println("called in player actions");
-      weapon.attack(MeleeWeapon.CENTER);
+    if (weapon == null) {
+      return;
     }
+    Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
+            coordinates.x - Gdx.graphics.getWidth() / 2,
+            coordinates.y - Gdx.graphics.getHeight() / 2
+    ));
+    weapon.attack(MeleeWeapon.toWeaponDirection(attackDirection));
+    lockMovement(weapon.getTotalAttackTime());
   }
 
   /**
