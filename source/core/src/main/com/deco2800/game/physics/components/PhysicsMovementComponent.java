@@ -74,6 +74,22 @@ public class PhysicsMovementComponent extends Component implements MovementContr
   private void updateDirection(Body body) {
     Vector2 desiredVelocity = getDirection().scl(maxSpeed);
     setToVelocity(body, desiredVelocity);
+
+    //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
+    if (this.getDirection().x>this.getDirection().y) {
+      if (this.getDirection().x < 0) {
+        this.getEntity().getEvents().trigger("LeftStart");
+      } else if (this.getDirection().x > 0) {
+        this.getEntity().getEvents().trigger("RightStart");
+      }
+    }
+    else{
+      if (this.getDirection().y < 0) {
+        this.getEntity().getEvents().trigger("DownStart");
+      } else if (this.getDirection().y > 0) {
+        this.getEntity().getEvents().trigger("UpStart");
+      }
+    }
   }
 
   private void setToVelocity(Body body, Vector2 desiredVelocity) {

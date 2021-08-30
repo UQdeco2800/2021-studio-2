@@ -51,8 +51,10 @@ public class NPCFactory {
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
             ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     ghost
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -90,9 +92,11 @@ public class NPCFactory {
     AnimationRenderComponent animator =
       new AnimationRenderComponent(
         ServiceLocator.getResourceService()
-          .getAsset("images/ghostKing.atlas", TextureAtlas.class));
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
+          .getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     ghostKing
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -124,8 +128,11 @@ public class NPCFactory {
     AnimationRenderComponent animator =
       new AnimationRenderComponent(
           ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
 
     anchoredGhost
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -158,8 +165,10 @@ public class NPCFactory {
     AnimationRenderComponent animator =
       new AnimationRenderComponent(
         ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     anchoredGhost
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -193,8 +202,10 @@ public class NPCFactory {
     AnimationRenderComponent animator =
       new AnimationRenderComponent(
         ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     ghost
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
