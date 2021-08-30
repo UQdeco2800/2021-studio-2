@@ -8,8 +8,8 @@ import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Represents the axe used by entities. Main difference to its superclass is that
- * Axe uses axe-related assets. In future development this will have different attack functionality,
- * including combos, strong-attacks, etc.
+ * Axe uses axe-related assets. In future development this will have different
+ * attack functionality, including combos, strong-attacks, etc.
  */
 public class Axe extends MeleeWeapon {
     /** Sound that plays every axe swing */
@@ -35,7 +35,7 @@ public class Axe extends MeleeWeapon {
         AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
-        }
+        } /* TODO: Add animations when player.atlas is completed.
         switch (attackDirection) {
             case UP:
                 animator.startAnimation("BackAxe_Attack");
@@ -49,7 +49,7 @@ public class Axe extends MeleeWeapon {
             case RIGHT:
                 animator.startAnimation("RightAxe_Attack");
                 break;
-        }
+        } */
     }
 
     /**
