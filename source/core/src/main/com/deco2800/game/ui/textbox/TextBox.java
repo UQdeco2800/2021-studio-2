@@ -37,6 +37,9 @@ public class TextBox extends Component {
     /** Checks if the player has lifted a key to prevent the text box from skipping. */
     private boolean acceptingInput;
 
+    /** Boolean to check if the delayed recursive call should be performed. */
+    private boolean generateCharacter = true;
+
     public TextBox() {
         setDialogue(Dialogue.OPENING);
         acceptInput();
@@ -118,8 +121,8 @@ public class TextBox extends Component {
     }
 
     /**
-     * The sub message displayed will be updated at a delay of 20ms each character. If the player
-     * has pressed a button while it is appearing, then the entire line will appear.
+     * The sub message displayed will be updated at a delay of 30ms each character. If the player
+     * has pressed a button while it is appearing, then the entire line will ap pear.
      */
     public void setSubMessage() {
         if (skip || message.length() - 1 == subMessageIndex) {
@@ -129,14 +132,16 @@ public class TextBox extends Component {
         } else if (isOpen) {
             subMessage = message.substring(0, subMessageIndex);
             subMessageIndex++;
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    setSubMessage();
-                    timer.cancel();
-                }
-            }, 20);
+            if (generateCharacter) {
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        setSubMessage();
+                        timer.cancel();
+                    }
+                }, 30);
+            }
         }
     }
 
@@ -176,5 +181,9 @@ public class TextBox extends Component {
         this.subMessageIndex = 0;
         this.acceptingInput = false;
         setOpen();
+    }
+
+    public void setNewCharactersOff() {
+        this.generateCharacter = false;
     }
 }

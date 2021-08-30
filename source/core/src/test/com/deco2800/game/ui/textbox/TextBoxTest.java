@@ -95,6 +95,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.setSkip();
         textBox.setSubMessage();
 
@@ -107,6 +108,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.setSubMessage();
 
         assertEquals("M", textBox.getSubMessage());
@@ -118,6 +120,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.setSubMessage();
         textBox.setSubMessage();
         textBox.setSubMessage();
@@ -131,6 +134,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.setSkip();
         textBox.setSkip();
 
@@ -143,6 +147,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.setSkip();
         textBox.setSubMessage();
         textBox.setClosed();

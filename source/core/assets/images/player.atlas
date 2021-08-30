@@ -4,21 +4,21 @@ size: 2048, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-BackAxe_Attack
+back_axe_attack
   rotate: false
   xy: 134, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-BackAxe_Attack
+back_axe_attack
   rotate: false
   xy: 860, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-BackAxe_Attack
+back_axe_attack
   rotate: false
   xy: 1388, 2
   size: 64, 64
@@ -123,42 +123,42 @@ walk_forward
   orig: 64, 64
   offset: 0, 0
   index: 5
-FrontAxe_Attack
+front_axe_attack
   rotate: false
   xy: 398, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 3
-FrontAxe_Attack
+front_axe_attack
   rotate: false
   xy: 1256, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-FrontAxe_Attack
+front_axe_attack
   rotate: false
   xy: 1916, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-LeftAxe_Attack
+left_axe_attack
   rotate: false
   xy: 728, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-LeftAxe_Attack
+left_axe_attack
   rotate: false
   xy: 1520, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-LeftAxe_Attack
+left_axe_attack
   rotate: false
   xy: 1850, 2
   size: 64, 64
@@ -200,21 +200,21 @@ walk_left
   orig: 64, 64
   offset: 0, 0
   index: 3
-RightAxe_Attack
+right_axe_attack
   rotate: false
   xy: 266, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 2
-RightAxe_Attack
+right_axe_attack
   rotate: false
   xy: 992, 2
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: 1
-RightAxe_Attack
+right_axe_attack
   rotate: false
   xy: 1586, 2
   size: 64, 64
