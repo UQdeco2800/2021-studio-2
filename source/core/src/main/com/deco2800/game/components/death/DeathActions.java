@@ -11,6 +11,10 @@ import org.slf4j.LoggerFactory;
  */
 public class DeathActions extends MainMenuActions {
 
+    /**
+     * create an instance of this class
+     * @param game instance of game
+     */
     public DeathActions(GdxGame game) {
         super(game);
     }
