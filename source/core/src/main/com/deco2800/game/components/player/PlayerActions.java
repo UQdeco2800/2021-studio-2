@@ -121,10 +121,8 @@ public class PlayerActions extends Component {
    * @param coordinates the mouse coordinates of the click
    */
   void mouseAttack(Vector2 coordinates) {
-    System.out.println("called in mouseattack");
     MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon != null) {
-      System.out.println("called in player actions");
       weapon.attack(MeleeWeapon.CENTER);
     }
   }
