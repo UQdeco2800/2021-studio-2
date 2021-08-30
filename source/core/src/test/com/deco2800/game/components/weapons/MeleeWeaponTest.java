@@ -71,6 +71,7 @@ class MeleeWeaponTest {
         MeleeWeapon weapon = (new MeleeWeapon(targetLayer,
                 0,0, new Vector2(0f, 0f)));
         weapon.setFrameDuration(200L);
+        // assumes 3 frames in attack
         assertEquals(200L * 3, weapon.getTotalAttackTime());
     }
 

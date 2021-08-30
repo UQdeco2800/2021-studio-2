@@ -12,14 +12,17 @@ import com.deco2800.game.services.ServiceLocator;
  * including combos, strong-attacks, etc.
  */
 public class Axe extends MeleeWeapon {
+    /** Sound that plays every axe swing */
     private final Sound attackSound;
+    /** Sound that plays when axe hits enemy */
     private final Sound impactSound;
-
 
     public Axe(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
-        attackSound = ServiceLocator.getResourceService().getAsset("sounds/swish.ogg", Sound.class);
-        impactSound = ServiceLocator.getResourceService().getAsset("sounds/impact.ogg", Sound.class);
+        attackSound = ServiceLocator.getResourceService().
+                getAsset("sounds/swish.ogg", Sound.class);
+        impactSound = ServiceLocator.getResourceService()
+                .getAsset("sounds/impact.ogg", Sound.class);
     }
 
     /**

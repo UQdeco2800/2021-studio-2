@@ -19,25 +19,33 @@ import com.deco2800.game.services.ServiceLocator;
  * Enables entities to attack using a weapon.
  */
 public class MeleeWeapon extends Component {
-    protected long frameDuration; // animation frame duration measured in milliseconds
-    protected boolean hasAttacked; // determines whether entity has attacked.
+    /** animation frame duration measured in milliseconds */
+    protected long frameDuration;
+    /** determines whether entity has attacked. */
+    protected boolean hasAttacked;
 
-    private long timeAtAttack; // time when the entity last attacked
-                               // 0 if entity is not attacking.
+    /** Time when the entity last attacked, 0 if entity is not attacking. */
+    private long timeAtAttack;
 
-    protected int attackPower; // damage
-    protected short targetLayer; // what physics layer the weapon can damage
-    protected float knockback; // physical knockback of weapon
-    protected CombatStatsComponent combatStats; // base stats of owner entity
+    /** Weapon Damage */
+    protected int attackPower;
+    /** The physics layer the weapon can damage */
+    protected short targetLayer;
+    /** Physical Knockback of weapon */
+    protected float knockback;
 
-    /* Weapon attack width & range in terms of x & y, relative to entity size */
+    /** Base stats of owner entity */
+    protected CombatStatsComponent combatStats;
+
+    /** Weapon attack width & range in terms of x & y, relative to entity size */
     private final Vector2 weaponSize;
-    /* Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
+    /** Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
     entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
     it simultaneously. */
     private WeaponHitboxComponent weaponHitbox;
 
-    private int attackDirection; // attack direction (see below for constants)
+    /** attack direction (see below for constants) */
+    private int attackDirection;
     public static final int CENTER = 0; // used for AOE (area of effect) attacks
     public static final int UP = 1;
     public static final int DOWN = 2;
@@ -133,7 +141,7 @@ public class MeleeWeapon extends Component {
     protected boolean onCollisionStart(Fixture me, Fixture other) {
 
         if (weaponHitbox == null || weaponHitbox.getFixture() != me) {
-            // Not triggered by hitbox, ignore
+            // Not triggered by weapon hit box, ignore
             return false;
         }
 
