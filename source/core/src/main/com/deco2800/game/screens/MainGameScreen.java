@@ -4,6 +4,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.TestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.maingame.MainGameActions;
@@ -69,21 +70,20 @@ public class MainGameScreen extends ScreenAdapter {
 
     loadAssets();
     createUI();
+  }
 
+  public MainGameScreen(GdxGame game, String world) {
+    this(game);
     logger.debug("Initialising main game screen entities");
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
 
-    TestGameArea TestGameArea = new TestGameArea(terrainFactory, game);
-    TestGameArea.create();
-
-    /*
-    ForestGameArea forestGameArea = new ForestGameArea(terrainFactory, game);
-    forestGameArea.create();
-
-     */
-
-    renderer.getCamera().setPlayer(TestGameArea.getPlayer());
-
+    if (world.equals("forest")) {
+      ForestGameArea gameArea = new ForestGameArea(terrainFactory, game);
+      gameArea.create();
+    } else if (world.equals("test")) {
+      TestGameArea gameArea = new TestGameArea(terrainFactory, game);
+      gameArea.create();
+    }
   }
 
   @Override

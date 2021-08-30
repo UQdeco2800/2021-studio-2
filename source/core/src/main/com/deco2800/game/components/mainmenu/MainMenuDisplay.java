@@ -19,7 +19,8 @@ import org.slf4j.LoggerFactory;
 public class MainMenuDisplay extends UIComponent {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
   private static final float Z_INDEX = 2f;
-  private Table table;
+  protected Stack stack;
+  protected Table table;
 
   @Override
   public void create() {
@@ -27,8 +28,9 @@ public class MainMenuDisplay extends UIComponent {
     addActors();
   }
 
-  private void addActors() {
-    Stack stack = new Stack();
+
+  protected void addActors() {
+    stack = new Stack();
     stack.setFillParent(true);
     stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
     Image background = new Image(ServiceLocator.getResourceService()
@@ -41,20 +43,30 @@ public class MainMenuDisplay extends UIComponent {
 
     Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
-    Button startBtn = new Button(menuButtons, "start");
+    Button startForestBtn = new Button(menuButtons, "start");
+    Button startTestBtn = new Button(menuButtons, "start");
     Button settingsBtn = new Button(menuButtons, "settings");
     Button exitBtn = new Button(menuButtons, "quit");
 
     // Triggers an event when the button is pressed
-    startBtn.addListener(
+    startForestBtn.addListener(
         new ChangeListener() {
           @Override
           public void changed(ChangeEvent changeEvent, Actor actor) {
             logger.debug("Start button clicked");
-            entity.getEvents().trigger("start");
+            entity.getEvents().trigger("startForest");
           }
         });
 
+    // Triggers an event when the button is pressed
+      startTestBtn.addListener(
+        new ChangeListener() {
+              @Override
+              public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Start button clicked");
+            entity.getEvents().trigger("startTest");
+              }
+        });
 
     settingsBtn.addListener(
         new ChangeListener() {
@@ -74,8 +86,9 @@ public class MainMenuDisplay extends UIComponent {
             entity.getEvents().trigger("exit");
           }
         });
-
-    table.add(startBtn).padTop(30f);
+    table.add(startForestBtn).padTop(30f);
+    table.row();
+    table.add(startTestBtn).padTop(30f);
     table.row();
     table.add(settingsBtn).padTop(30f);
     table.row();
