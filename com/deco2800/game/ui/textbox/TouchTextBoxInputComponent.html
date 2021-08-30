@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -152,10 +152,6 @@ extends <a href="../../input/InputComponent.html" title="class in com.deco2800.g
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">TouchTextBoxInputComponent</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.deco2800.game.ui.textbox.TextBox)">TouchTextBoxInputComponent</a></span>&#8203;(<a href="TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a>&nbsp;textBox)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -190,29 +186,21 @@ extends <a href="../../input/InputComponent.html" title="class in com.deco2800.g
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#keyDown(int)">keyDown</a></span>&#8203;(int&nbsp;keycode)</code></th>
 <td class="colLast">
-<div class="block">Handles input if the terminal is open.</div>
+<div class="block">Handles input if the text vox is open.</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#keyTyped(char)">keyTyped</a></span>&#8203;(char&nbsp;character)</code></th>
 <td class="colLast">
-<div class="block">Handles input if the terminal is open.</div>
+<div class="block">Handles input if the text box is open.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#keyUp(int)">keyUp</a></span>&#8203;(int&nbsp;keycode)</code></th>
 <td class="colLast">
-<div class="block">Handles input if the terminal is open.</div>
-</td>
-</tr>
-<tr class="altColor" id="i4">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scrolled(float,float)">scrolled</a></span>&#8203;(float&nbsp;amountX,
-float&nbsp;amountY)</code></th>
-<td class="colLast">
-<div class="block">Scrolling up will open the terminal and scrolling down will close the terminal.</div>
+<div class="block">Handles input if the text box is open.</div>
 </td>
 </tr>
 </tbody>
@@ -223,7 +211,7 @@ float&nbsp;amountY)</code></th>
 <h3>Methods inherited from class&nbsp;com.deco2800.game.input.<a href="../../input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.input.InputComponent">
 <!--   -->
-</a><code><a href="../../input/InputComponent.html#dispose()">dispose</a>, <a href="../../input/InputComponent.html#fling(float,float,int)">fling</a>, <a href="../../input/InputComponent.html#getPriority()">getPriority</a>, <a href="../../input/InputComponent.html#longPress(float,float)">longPress</a>, <a href="../../input/InputComponent.html#mouseMoved(int,int)">mouseMoved</a>, <a href="../../input/InputComponent.html#pan(float,float,float,float)">pan</a>, <a href="../../input/InputComponent.html#panStop(float,float,int,int)">panStop</a>, <a href="../../input/InputComponent.html#pinch(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">pinch</a>, <a href="../../input/InputComponent.html#pinchStop()">pinchStop</a>, <a href="../../input/InputComponent.html#pinchStopHandled()">pinchStopHandled</a>, <a href="../../input/InputComponent.html#setPriority(int)">setPriority</a>, <a href="../../input/InputComponent.html#tap(float,float,int,int)">tap</a>, <a href="../../input/InputComponent.html#touchDown(float,float,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDown(int,int,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDragged(int,int,int)">touchDragged</a>, <a href="../../input/InputComponent.html#touchUp(int,int,int,int)">touchUp</a>, <a href="../../input/InputComponent.html#zoom(float,float)">zoom</a></code></div>
+</a><code><a href="../../input/InputComponent.html#dispose()">dispose</a>, <a href="../../input/InputComponent.html#fling(float,float,int)">fling</a>, <a href="../../input/InputComponent.html#getPriority()">getPriority</a>, <a href="../../input/InputComponent.html#longPress(float,float)">longPress</a>, <a href="../../input/InputComponent.html#mouseMoved(int,int)">mouseMoved</a>, <a href="../../input/InputComponent.html#pan(float,float,float,float)">pan</a>, <a href="../../input/InputComponent.html#panStop(float,float,int,int)">panStop</a>, <a href="../../input/InputComponent.html#pinch(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">pinch</a>, <a href="../../input/InputComponent.html#pinchStop()">pinchStop</a>, <a href="../../input/InputComponent.html#pinchStopHandled()">pinchStopHandled</a>, <a href="../../input/InputComponent.html#scrolled(float,float)">scrolled</a>, <a href="../../input/InputComponent.html#setPriority(int)">setPriority</a>, <a href="../../input/InputComponent.html#tap(float,float,int,int)">tap</a>, <a href="../../input/InputComponent.html#touchDown(float,float,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDown(int,int,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDragged(int,int,int)">touchDragged</a>, <a href="../../input/InputComponent.html#touchUp(int,int,int,int)">touchUp</a>, <a href="../../input/InputComponent.html#zoom(float,float)">zoom</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="../../components/Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
@@ -253,12 +241,6 @@ float&nbsp;amountY)</code></th>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">TouchTextBoxInputComponent</span>()</div>
 </section>
 </li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="&lt;init&gt;(com.deco2800.game.ui.textbox.TextBox)">TouchTextBoxInputComponent</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">TouchTextBoxInputComponent</span>&#8203;(<span class="arguments"><a href="TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a>&nbsp;textBox)</span></div>
-</section>
-</li>
 </ul>
 </section>
 </li>
@@ -286,8 +268,8 @@ float&nbsp;amountY)</code></th>
 <section class="detail">
 <h3><a id="keyDown(int)">keyDown</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">keyDown</span>&#8203;(<span class="arguments">int&nbsp;keycode)</span></div>
-<div class="block">Handles input if the terminal is open. This is because keyDown events are
- triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
+<div class="block">Handles input if the text vox is open. This is because keyDown events are
+ triggered alongside keyTyped events. If the user is typing in the text box, the input shouldn't
  trigger any other input handlers.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -305,7 +287,7 @@ float&nbsp;amountY)</code></th>
 <section class="detail">
 <h3><a id="keyTyped(char)">keyTyped</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">keyTyped</span>&#8203;(<span class="arguments">char&nbsp;character)</span></div>
-<div class="block">Handles input if the terminal is open. If 'enter' is typed, the entered message will be
+<div class="block">Handles input if the text box is open. If 'enter' is typed, the entered message will be
  processed, otherwise the message will be updated with the new character.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -323,8 +305,8 @@ float&nbsp;amountY)</code></th>
 <section class="detail">
 <h3><a id="keyUp(int)">keyUp</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">keyUp</span>&#8203;(<span class="arguments">int&nbsp;keycode)</span></div>
-<div class="block">Handles input if the terminal is open. This is because keyUp events are
- triggered alongside keyTyped events. If the user is typing in the terminal, the input shouldn't
+<div class="block">Handles input if the text box is open. This is because keyUp events are
+ triggered alongside keyTyped events. If the user is typing in the text box, the input shouldn't
  trigger any other input handlers.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -335,24 +317,6 @@ float&nbsp;amountY)</code></th>
 <dd>whether the input was processed</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true#keyUp(int)" title="class or interface in com.badlogic.gdx" class="externalLink"><code>InputProcessor.keyUp(int)</code></a></dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="scrolled(float,float)">scrolled</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">scrolled</span>&#8203;(<span class="arguments">float&nbsp;amountX,
-float&nbsp;amountY)</span></div>
-<div class="block">Scrolling up will open the terminal and scrolling down will close the terminal.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true#scrolled(float,float)" title="class or interface in com.badlogic.gdx" class="externalLink">scrolled</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">InputProcessor</a></code></dd>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../input/InputComponent.html#scrolled(float,float)">scrolled</a></code>&nbsp;in class&nbsp;<code><a href="../../input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>whether the input was processed</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true#scrolled(float,float)" title="class or interface in com.badlogic.gdx" class="externalLink"><code>InputProcessor.scrolled(float, float)</code></a></dd>
 </dl>
 </section>
 </li>

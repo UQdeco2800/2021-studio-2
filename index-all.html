@@ -74,6 +74,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/FileLoader.Location.html#ABSOLUTE">ABSOLUTE</a></span> - com.deco2800.game.files.<a href="com/deco2800/game/files/FileLoader.Location.html" title="enum in com.deco2800.game.files">FileLoader.Location</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#acceptInput()">acceptInput()</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/terminal/commands/Command.html#action(java.util.ArrayList)">action(ArrayList&lt;String&gt;)</a></span> - Method in interface com.deco2800.game.ui.terminal.commands.<a href="com/deco2800/game/ui/terminal/commands/Command.html" title="interface in com.deco2800.game.ui.terminal.commands">Command</a></dt>
 <dd>
 <div class="block">Action a command.</div>
@@ -101,10 +103,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/terminal/Terminal.html#addCommand(java.lang.String,com.deco2800.game.ui.terminal.commands.Command)">addCommand(String, Command)</a></span> - Method in class com.deco2800.game.ui.terminal.<a href="com/deco2800/game/ui/terminal/Terminal.html" title="class in com.deco2800.game.ui.terminal">Terminal</a></dt>
 <dd>
 <div class="block">Adds a command to the list of valid terminal commands.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#addCommand(java.lang.String,com.deco2800.game.ui.terminal.commands.Command)">addCommand(String, Command)</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
-<dd>
-<div class="block">Adds a command to the list of valid text box commands.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#addComponent(com.deco2800.game.components.Component)">addComponent(Component)</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
 <dd>
@@ -512,6 +510,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchAttackComponent.html#create()">create()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchAttackComponent.html" title="class in com.deco2800.game.components">TouchAttackComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchCutsceneComponent.html#create()">create()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchCutsceneComponent.html" title="class in com.deco2800.game.components">TouchCutsceneComponent</a></dt>
+<dd>
+<div class="block">Creates the component by adding the text box so the dialogue can be changed
+ once the entity has been collided with.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/weapons/MeleeWeapon.html#create()">create()</a></span> - Method in class com.deco2800.game.components.weapons.<a href="com/deco2800/game/components/weapons/MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#create()">create()</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
@@ -640,19 +643,31 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Creates a tree entity.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html#createTrigger()">createTrigger()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories">CutsceneTriggerFactory</a></dt>
+<dd>
+<div class="block">Creates an entity that can trigger a cutscene to start.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createWall(float,float)">createWall(float, float)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
 <dd>
 <div class="block">Creates an invisible physics wall.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ai/tasks/DefaultMultiTask.html#currentTask">currentTask</a></span> - Variable in class com.deco2800.game.ai.tasks.<a href="com/deco2800/game/ai/tasks/DefaultMultiTask.html" title="class in com.deco2800.game.ai.tasks">DefaultMultiTask</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories"><span class="typeNameLink">CutsceneTriggerFactory</span></a> - Class in <a href="com/deco2800/game/entities/factories/package-summary.html">com.deco2800.game.entities.factories</a></dt>
+<dd>
+<div class="block">Factory to create obstacle entities.</div>
+</dd>
 </dl>
 <a id="I:D">
 <!--   -->
 </a>
 <h2 class="title">D</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#DASH_MULTIPLIER">DASH_MULTIPLIER</a></span> - Variable in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerActions.html#dash(com.badlogic.gdx.math.Vector2)">dash(Vector2)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerActions.html" title="class in com.deco2800.game.components.player">PlayerActions</a></dt>
+<dd>
+<div class="block">Moves the player towards a given direction.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#DASH_MULTIPLIER">DASH_MULTIPLIER</a></span> - Static variable in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
 <dd>
 <div class="block">Multiplier difference for the dash ability.</div>
 </dd>
@@ -722,7 +737,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsEngine.html#destroyJoint(com.badlogic.gdx.physics.box2d.Joint)">destroyJoint(Joint)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsEngine.html" title="class in com.deco2800.game.physics">PhysicsEngine</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#DIAGONAL_DISTANCE">DIAGONAL_DISTANCE</a></span> - Variable in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#DIAGONAL_DISTANCE">DIAGONAL_DISTANCE</a></span> - Static variable in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
 <dd>
 <div class="block">Distance scale for moving in a diagonal direction.</div>
 </dd>
@@ -864,7 +879,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/terminal/TerminalDisplay.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw(SpriteBatch)</a></span> - Method in class com.deco2800.game.ui.terminal.<a href="com/deco2800/game/ui/terminal/TerminalDisplay.html" title="class in com.deco2800.game.ui.terminal">TerminalDisplay</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBoxDisplay.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw(SpriteBatch)</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBoxDisplay.html" title="class in com.deco2800.game.ui.textbox">TextBoxDisplay</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Displays the message to the screen if the text box is open, the sub message will be
+ displayed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/DebugRenderer.html#drawLine(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">drawLine(Vector2, Vector2)</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/DebugRenderer.html" title="class in com.deco2800.game.rendering">DebugRenderer</a></dt>
 <dd>
 <div class="block">Draw a line between two positions</div>
@@ -1190,6 +1208,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Return's entity's health maximum</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#getMessage()">getMessage()</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/Dialogue.html#getMessage(int)">getMessage(int)</a></span> - Method in enum com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></dt>
 <dd>
 <div class="block">Returns the line of the dialogue at the index that has been passed in as an argument.</div>
@@ -1211,7 +1231,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/services/ServiceLocator.html#getPhysicsService()">getPhysicsService()</a></span> - Static method in class com.deco2800.game.services.<a href="com/deco2800/game/services/ServiceLocator.html" title="class in com.deco2800.game.services">ServiceLocator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#getPlayer()">getPlayer()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the player entity that is created.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/TestGameArea.html#getPlayer()">getPlayer()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/TestGameArea.html" title="class in com.deco2800.game.areas">TestGameArea</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#getPosition()">getPosition()</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
@@ -1314,6 +1336,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the total time the attack will take.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/EntityService.html#getUIEntity()">getUIEntity()</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/EntityService.html" title="class in com.deco2800.game.entities">EntityService</a></dt>
+<dd>
+<div class="block">Returns the UI entity of the game so the UI can be changed from any location.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#getWalkDirection()">getWalkDirection()</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
 <dd>
 <div class="block">This method has been created to test that the correct direction is
@@ -1340,7 +1366,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/terminal/TerminalDisplay.html#getZIndex()">getZIndex()</a></span> - Method in class com.deco2800.game.ui.terminal.<a href="com/deco2800/game/ui/terminal/TerminalDisplay.html" title="class in com.deco2800.game.ui.terminal">TerminalDisplay</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBoxDisplay.html#getZIndex()">getZIndex()</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBoxDisplay.html" title="class in com.deco2800.game.ui.textbox">TextBoxDisplay</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Gets the priority of the text display.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/UIComponent.html#getZIndex()">getZIndex()</a></span> - Method in class com.deco2800.game.ui.<a href="com/deco2800/game/ui/UIComponent.html" title="class in com.deco2800.game.ui">UIComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/NPCConfigs.html#ghost">ghost</a></span> - Variable in class com.deco2800.game.entities.configs.<a href="com/deco2800/game/entities/configs/NPCConfigs.html" title="class in com.deco2800.game.entities.configs">NPCConfigs</a></dt>
@@ -1418,8 +1446,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/UserSettings.DisplaySettings.html#height">height</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/UserSettings.DisplaySettings.html" title="class in com.deco2800.game.files">UserSettings.DisplaySettings</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/Dialogue.html#HELLO">HELLO</a></span> - com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainComponent.TerrainOrientation.html#HEXAGONAL">HEXAGONAL</a></span> - com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainComponent.TerrainOrientation.html" title="enum in com.deco2800.game.areas.terrain">TerrainComponent.TerrainOrientation</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/raycast/SingleHitCallback.html#hit">hit</a></span> - Variable in class com.deco2800.game.physics.raycast.<a href="com/deco2800/game/physics/raycast/SingleHitCallback.html" title="class in com.deco2800.game.physics.raycast">SingleHitCallback</a></dt>
@@ -1484,6 +1510,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/InventoryComponent.html#%3Cinit%3E(int)">InventoryComponent(int)</a></span> - Constructor for class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/InventoryComponent.html" title="class in com.deco2800.game.components.player">InventoryComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#isAcceptingInput()">isAcceptingInput()</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
+<dd>
+<div class="block">Checks if the text box is accepting input from the player.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/MovementTask.html#isAtTarget()">isAtTarget()</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/MovementTask.html" title="class in com.deco2800.game.components.tasks">MovementTask</a></dt>
 <dd>
 <div class="block">check if the entity is at target</div>
@@ -1537,7 +1567,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Input handler for the player for keyboard and touch (mouse) input.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#%3Cinit%3E()">KeyboardPlayerInputComponent()</a></span> - Constructor for class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Stores the last system time since the dash ability was pressed.</div>
+</dd>
 <dt><a href="com/deco2800/game/ui/terminal/KeyboardTerminalInputComponent.html" title="class in com.deco2800.game.ui.terminal"><span class="typeNameLink">KeyboardTerminalInputComponent</span></a> - Class in <a href="com/deco2800/game/ui/terminal/package-summary.html">com.deco2800.game.ui.terminal</a></dt>
 <dd>
 <div class="block">Input handler for the debug terminal for keyboard and touch (mouse) input.</div>
@@ -1551,9 +1583,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Input handler for the text box for keyboard input.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/KeyboardTextBoxInputComponent.html#%3Cinit%3E()">KeyboardTextBoxInputComponent()</a></span> - Constructor for class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/KeyboardTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">KeyboardTextBoxInputComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor to create the input with a priority of 9, under terminal.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/KeyboardTextBoxInputComponent.html#%3Cinit%3E(com.deco2800.game.ui.textbox.TextBox)">KeyboardTextBoxInputComponent(TextBox)</a></span> - Constructor for class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/KeyboardTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">KeyboardTextBoxInputComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Instantiates the InputComponent and stores the TextBox instance within the class.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#keyDown(int)">keyDown(int)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
 <dd>
 <div class="block">Triggers player events on specific keycodes.</div>
@@ -1586,7 +1622,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html#keyDown(int)">keyDown(int)</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">TouchTextBoxInputComponent</a></dt>
 <dd>
-<div class="block">Handles input if the terminal is open.</div>
+<div class="block">Handles input if the text vox is open.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/input/InputComponent.html#keyTyped(char)">keyTyped(char)</a></span> - Method in class com.deco2800.game.input.<a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></dt>
 <dd>&nbsp;</dd>
@@ -1611,7 +1647,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html#keyTyped(char)">keyTyped(char)</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">TouchTextBoxInputComponent</a></dt>
 <dd>
-<div class="block">Handles input if the terminal is open.</div>
+<div class="block">Handles input if the text box is open.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#keyUp(int)">keyUp(int)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
 <dd>
@@ -1644,7 +1680,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html#keyUp(int)">keyUp(int)</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">TouchTextBoxInputComponent</a></dt>
 <dd>
-<div class="block">Handles input if the terminal is open.</div>
+<div class="block">Handles input if the text box is open.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/weapons/MeleeWeapon.html#knockback">knockback</a></span> - Variable in class com.deco2800.game.components.weapons.<a href="com/deco2800/game/components/weapons/MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></dt>
 <dd>
@@ -1862,6 +1898,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories"><span class="typeNameLink">ObstacleFactory</span></a> - Class in <a href="com/deco2800/game/entities/factories/package-summary.html">com.deco2800.game.entities.factories</a></dt>
 <dd>
 <div class="block">Factory to create obstacle entities.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchAttackComponent.html#onCollisionStart(com.badlogic.gdx.physics.box2d.Fixture,com.badlogic.gdx.physics.box2d.Fixture)">onCollisionStart(Fixture, Fixture)</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchAttackComponent.html" title="class in com.deco2800.game.components">TouchAttackComponent</a></dt>
+<dd>
+<div class="block">action apply when the hitbox component collide</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchCutsceneComponent.html#onCollisionStart(com.badlogic.gdx.physics.box2d.Fixture,com.badlogic.gdx.physics.box2d.Fixture)">onCollisionStart(Fixture, Fixture)</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchCutsceneComponent.html" title="class in com.deco2800.game.components">TouchCutsceneComponent</a></dt>
+<dd>
+<div class="block">The method that is called once a collision event is triggered.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/weapons/Axe.html#onCollisionStart(com.badlogic.gdx.physics.box2d.Fixture,com.badlogic.gdx.physics.box2d.Fixture)">onCollisionStart(Fixture, Fixture)</a></span> - Method in class com.deco2800.game.components.weapons.<a href="com/deco2800/game/components/weapons/Axe.html" title="class in com.deco2800.game.components.weapons">Axe</a></dt>
 <dd>
@@ -2145,6 +2189,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/services/ServiceLocator.html#registerTimeSource(com.deco2800.game.services.GameTime)">registerTimeSource(GameTime)</a></span> - Static method in class com.deco2800.game.services.<a href="com/deco2800/game/services/ServiceLocator.html" title="class in com.deco2800.game.services">ServiceLocator</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/EntityService.html#registerUI(com.deco2800.game.entities.Entity)">registerUI(Entity)</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/EntityService.html" title="class in com.deco2800.game.entities">EntityService</a></dt>
+<dd>
+<div class="block">Register a UI entity with the entity service.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/AnimationRenderComponent.html#removeAnimation(java.lang.String)">removeAnimation(String)</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/AnimationRenderComponent.html" title="class in com.deco2800.game.rendering">AnimationRenderComponent</a></dt>
 <dd>
 <div class="block">Remove an animation from this animator.</div>
@@ -2259,10 +2307,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Set the entity's height and scale the width to maintain aspect ratio.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/AnimationRenderComponent.html#scalePlayer()">scalePlayer()</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/AnimationRenderComponent.html" title="class in com.deco2800.game.rendering">AnimationRenderComponent</a></dt>
-<dd>
-<div class="block">Scale the entity to a width of 1.3 and a height matching the texture's ratio</div>
-</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#scaleWidth(float)">scaleWidth(float)</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
 <dd>
 <div class="block">Set the entity's width and scale the height to maintain aspect ratio.</div>
@@ -2277,10 +2321,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  processed</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/terminal/TouchTerminalInputComponent.html#scrolled(float,float)">scrolled(float, float)</a></span> - Method in class com.deco2800.game.ui.terminal.<a href="com/deco2800/game/ui/terminal/TouchTerminalInputComponent.html" title="class in com.deco2800.game.ui.terminal">TouchTerminalInputComponent</a></dt>
-<dd>
-<div class="block">Scrolling up will open the terminal and scrolling down will close the terminal.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html#scrolled(float,float)">scrolled(float, float)</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">TouchTextBoxInputComponent</a></dt>
 <dd>
 <div class="block">Scrolling up will open the terminal and scrolling down will close the terminal.</div>
 </dd>
@@ -2405,6 +2445,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Set the chance that the entity shoot more than one arrow at a time</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#setNewCharactersOff()">setNewCharactersOff()</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainTile.html#setOffsetX(float)">setOffsetX(float)</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainTile.html" title="class in com.deco2800.game.areas.terrain">TerrainTile</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainTile.html#setOffsetY(float)">setOffsetY(float)</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainTile.html" title="class in com.deco2800.game.areas.terrain">TerrainTile</a></dt>
@@ -2418,7 +2460,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Opens the text box.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/CameraComponent.html#setPlayer(com.deco2800.game.entities.Entity)">setPlayer(Entity)</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/CameraComponent.html" title="class in com.deco2800.game.components">CameraComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the player entity the camera will track.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/Entity.html#setPosition(float,float)">setPosition(float, float)</a></span> - Method in class com.deco2800.game.entities.<a href="com/deco2800/game/entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></dt>
 <dd>
 <div class="block">Set the entity's game position.</div>
@@ -2480,7 +2524,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#setSubMessage()">setSubMessage()</a></span> - Method in class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
 <dd>
-<div class="block">The sub message displayed will be updated at a delay of 20ms each character.</div>
+<div class="block">The sub message displayed will be updated at a delay of 30ms each character.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ai/movement/MovementController.html#setTarget(com.badlogic.gdx.math.Vector2)">setTarget(Vector2)</a></span> - Method in interface com.deco2800.game.ai.movement.<a href="com/deco2800/game/ai/movement/MovementController.html" title="interface in com.deco2800.game.ai.movement">MovementController</a></dt>
 <dd>&nbsp;</dd>
@@ -2678,6 +2722,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">check if the arrow is at target or if it stuck by an object (tree)</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html#stopWalking()">stopWalking()</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/KeyboardPlayerInputComponent.html" title="class in com.deco2800.game.components.player">KeyboardPlayerInputComponent</a></dt>
+<dd>
+<div class="block">Disables all of the inputs that are currently being pressed.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerActions.html#stopWalking()">stopWalking()</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerActions.html" title="class in com.deco2800.game.components.player">PlayerActions</a></dt>
+<dd>
+<div class="block">Stops the player from walking.</div>
+</dd>
 <dt><a href="com/deco2800/game/utils/StringDecorator.html" title="class in com.deco2800.game.utils"><span class="typeNameLink">StringDecorator</span></a>&lt;<a href="com/deco2800/game/utils/StringDecorator.html" title="type parameter in StringDecorator">T</a>&gt; - Class in <a href="com/deco2800/game/utils/package-summary.html">com.deco2800.game.utils</a></dt>
 <dd>
 <div class="block">Apply a custom toString() for a class without overriding the class, using a decorator.</div>
@@ -2774,6 +2826,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainFactory.TerrainType.html#TEST">TEST</a></span> - com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainFactory.TerrainType.html" title="enum in com.deco2800.game.areas.terrain">TerrainFactory.TerrainType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/Dialogue.html#TEST">TEST</a></span> - com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/areas/TestGameArea.html" title="class in com.deco2800.game.areas"><span class="typeNameLink">TestGameArea</span></a> - Class in <a href="com/deco2800/game/areas/package-summary.html">com.deco2800.game.areas</a></dt>
 <dd>
 <div class="block">Forest area for the demo game with trees, a player, and some enemies.</div>
@@ -2783,8 +2837,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox"><span class="typeNameLink">TextBox</span></a> - Class in <a href="com/deco2800/game/ui/textbox/package-summary.html">com.deco2800.game.ui.textbox</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#%3Cinit%3E()">TextBox()</a></span> - Constructor for class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TextBox.html#%3Cinit%3E(java.util.Map)">TextBox(Map&lt;String, Command&gt;)</a></span> - Constructor for class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TextBox.html" title="class in com.deco2800.game.ui.textbox">TextBox</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/ui/textbox/TextBoxDisplay.html" title="class in com.deco2800.game.ui.textbox"><span class="typeNameLink">TextBoxDisplay</span></a> - Class in <a href="com/deco2800/game/ui/textbox/package-summary.html">com.deco2800.game.ui.textbox</a></dt>
 <dd>&nbsp;</dd>
@@ -2799,6 +2851,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/TextureRenderComponent.html#%3Cinit%3E(com.badlogic.gdx.graphics.Texture)">TextureRenderComponent(Texture)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/TextureRenderComponent.html" title="class in com.deco2800.game.rendering">TextureRenderComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/TextureRenderComponent.html#%3Cinit%3E(java.lang.String)">TextureRenderComponent(String)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/TextureRenderComponent.html" title="class in com.deco2800.game.rendering">TextureRenderComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/Dialogue.html#THE_ROCK">THE_ROCK</a></span> - com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/Map.html#TileRefsArray()">TileRefsArray()</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/Map.html" title="class in com.deco2800.game.areas.terrain">Map</a></dt>
 <dd>&nbsp;</dd>
@@ -2839,6 +2893,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchAttackComponent.html#%3Cinit%3E(short,float)">TouchAttackComponent(short, float)</a></span> - Constructor for class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchAttackComponent.html" title="class in com.deco2800.game.components">TouchAttackComponent</a></dt>
 <dd>
 <div class="block">Create a component which attacks entities on collision, with knockback.</div>
+</dd>
+<dt><a href="com/deco2800/game/components/TouchCutsceneComponent.html" title="class in com.deco2800.game.components"><span class="typeNameLink">TouchCutsceneComponent</span></a> - Class in <a href="com/deco2800/game/components/package-summary.html">com.deco2800.game.components</a></dt>
+<dd>
+<div class="block">When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchCutsceneComponent.html#%3Cinit%3E(short)">TouchCutsceneComponent(short)</a></span> - Constructor for class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchCutsceneComponent.html" title="class in com.deco2800.game.components">TouchCutsceneComponent</a></dt>
+<dd>
+<div class="block">Create a component which attacks entities on collision, without knockback.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/input/InputComponent.html#touchDown(float,float,int,int)">touchDown(float, float, int, int)</a></span> - Method in class com.deco2800.game.input.<a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></dt>
 <dd>&nbsp;</dd>
@@ -2896,8 +2958,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Input handler for the debug terminal for keyboard and touch (mouse) input.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html#%3Cinit%3E()">TouchTextBoxInputComponent()</a></span> - Constructor for class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">TouchTextBoxInputComponent</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html#%3Cinit%3E(com.deco2800.game.ui.textbox.TextBox)">TouchTextBoxInputComponent(TextBox)</a></span> - Constructor for class com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/TouchTextBoxInputComponent.html" title="class in com.deco2800.game.ui.textbox">TouchTextBoxInputComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/input/InputComponent.html#touchUp(int,int,int,int)">touchUp(int, int, int, int)</a></span> - Method in class com.deco2800.game.input.<a href="com/deco2800/game/input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></dt>
 <dd>&nbsp;</dd>
@@ -2999,7 +3059,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Run one frame of the task.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/CameraComponent.html#update()">update()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/CameraComponent.html" title="class in com.deco2800.game.components">CameraComponent</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the position of the camera to a point within the map.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Component.html#update()">update()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/Component.html" title="class in com.deco2800.game.components">Component</a></dt>
 <dd>
 <div class="block">Called once per frame of the game, and should be used for most component logic.</div>
@@ -3200,6 +3262,10 @@ the order they are declared.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/WaitTask.html#%3Cinit%3E(float)">WaitTask(float)</a></span> - Constructor for class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/WaitTask.html" title="class in com.deco2800.game.components.tasks">WaitTask</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerActions.html#walk(com.badlogic.gdx.math.Vector2)">walk(Vector2)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerActions.html" title="class in com.deco2800.game.components.player">PlayerActions</a></dt>
+<dd>
+<div class="block">Moves the player towards a given direction.</div>
+</dd>
 <dt><a href="com/deco2800/game/components/tasks/WanderTask.html" title="class in com.deco2800.game.components.tasks"><span class="typeNameLink">WanderTask</span></a> - Class in <a href="com/deco2800/game/components/tasks/package-summary.html">com.deco2800.game.components.tasks</a></dt>
 <dd>
 <div class="block">Wander around by moving a random position within a range of the starting position.</div>

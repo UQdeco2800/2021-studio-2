@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -136,10 +136,6 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">TextBox</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.Map)">TextBox</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;<a href="../terminal/commands/Command.html" title="interface in com.deco2800.game.ui.terminal.commands">Command</a>&gt;&nbsp;commands)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -165,30 +161,39 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addCommand(java.lang.String,com.deco2800.game.ui.terminal.commands.Command)">addCommand</a></span>&#8203;(java.lang.String&nbsp;name,
-<a href="../terminal/commands/Command.html" title="interface in com.deco2800.game.ui.terminal.commands">Command</a>&nbsp;command)</code></th>
-<td class="colLast">
-<div class="block">Adds a command to the list of valid text box commands.</div>
-</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#acceptInput()">acceptInput</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i1">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMessage()">getMessage</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubMessage()">getSubMessage</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleEscape()">handleEscape</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Handles the escape key being pressed to close to text box.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAcceptingInput()">isAcceptingInput</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Checks if the text box is accepting input from the player.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOpen()">isOpen</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#nextMessage()">nextMessage</a></span>()</code></th>
 <td class="colLast">
@@ -196,28 +201,33 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
  then the text box will be closed.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setClosed()">setClosed</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Closes the terminal and clears the stored message.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDialogue(com.deco2800.game.ui.textbox.Dialogue)">setDialogue</a></span>&#8203;(<a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a>&nbsp;dialogue)</code></th>
 <td class="colLast">
 <div class="block">Sets the dialogue to a certain message depending on cutscene that is to be displayed.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="rowColor" id="i9">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setNewCharactersOff()">setNewCharactersOff</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOpen()">setOpen</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Opens the text box.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSkip()">setSkip</a></span>()</code></th>
 <td class="colLast">
@@ -225,14 +235,14 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
  which will display the entire message.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSubMessage()">setSubMessage</a></span>()</code></th>
 <td class="colLast">
-<div class="block">The sub message displayed will be updated at a delay of 20ms each character.</div>
+<div class="block">The sub message displayed will be updated at a delay of 30ms each character.</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toggleIsOpen()">toggleIsOpen</a></span>()</code></th>
 <td class="colLast">
@@ -272,12 +282,6 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">TextBox</span>()</div>
 </section>
 </li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="&lt;init&gt;(java.util.Map)">TextBox</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">TextBox</span>&#8203;(<span class="arguments">java.util.Map&lt;java.lang.String,&#8203;<a href="../terminal/commands/Command.html" title="interface in com.deco2800.game.ui.terminal.commands">Command</a>&gt;&nbsp;commands)</span></div>
-</section>
-</li>
 </ul>
 </section>
 </li>
@@ -295,6 +299,16 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>message to be displayed on the text box</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getMessage()">getMessage</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">getMessage</span>()</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entire message to be displayed on the text box</dd>
 </dl>
 </section>
 </li>
@@ -348,8 +362,8 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <section class="detail">
 <h3><a id="setSubMessage()">setSubMessage</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setSubMessage</span>()</div>
-<div class="block">The sub message displayed will be updated at a delay of 20ms each character. If the player
- has pressed a button while it is appearing, then the entire line will appear.</div>
+<div class="block">The sub message displayed will be updated at a delay of 30ms each character. If the player
+ has pressed a button while it is appearing, then the entire line will ap pear.</div>
 </section>
 </li>
 <li class="blockList">
@@ -363,15 +377,19 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addCommand(java.lang.String,com.deco2800.game.ui.terminal.commands.Command)">addCommand</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addCommand</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name,
-<a href="../terminal/commands/Command.html" title="interface in com.deco2800.game.ui.terminal.commands">Command</a>&nbsp;command)</span></div>
-<div class="block">Adds a command to the list of valid text box commands.</div>
+<h3><a id="isAcceptingInput()">isAcceptingInput</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isAcceptingInput</span>()</div>
+<div class="block">Checks if the text box is accepting input from the player.</div>
 <dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>name</code> - command name</dd>
-<dd><code>command</code> - command</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if text box can altered with input, false otherwise</dd>
 </dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="acceptInput()">acceptInput</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">acceptInput</span>()</div>
 </section>
 </li>
 <li class="blockList">
@@ -383,6 +401,12 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>dialogue</code> - the sequence of strings that are to be displayed in the text box</dd>
 </dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setNewCharactersOff()">setNewCharactersOff</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setNewCharactersOff</span>()</div>
 </section>
 </li>
 </ul>

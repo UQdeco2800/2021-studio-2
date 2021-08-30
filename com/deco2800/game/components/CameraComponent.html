@@ -183,13 +183,15 @@ float&nbsp;gameWidth)</code></th>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPlayer(com.deco2800.game.entities.Entity)">setPlayer</a></span>&#8203;(<a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;player)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets the player entity the camera will track.</div>
+</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Called once per frame of the game, and should be used for most component logic.</div>
+<div class="block">Updates the position of the camera to a point within the map.</div>
 </td>
 </tr>
 </tbody>
@@ -245,9 +247,11 @@ float&nbsp;gameWidth)</code></th>
 <section class="detail">
 <h3><a id="update()">update</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Component.html#update()">Component</a></code></span></div>
-<div class="block">Called once per frame of the game, and should be used for most component logic. Not called if
- component is disabled.</div>
+<div class="block">Updates the position of the camera to a point within the map. If the camera is already
+ a player, it will attempt to change the position of the camera to match the player position.
+
+ To smooth the camera movement, the current camera position is an average of the last positions
+ the main character was.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="Component.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="Component.html" title="class in com.deco2800.game.components">Component</a></code></dd>
@@ -278,6 +282,11 @@ float&nbsp;gameWidth)</span></div>
 <section class="detail">
 <h3><a id="setPlayer(com.deco2800.game.entities.Entity)">setPlayer</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setPlayer</span>&#8203;(<span class="arguments"><a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;player)</span></div>
+<div class="block">Sets the player entity the camera will track.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>player</code> - entity that is controlled by the user</dd>
+</dl>
 </section>
 </li>
 </ul>
