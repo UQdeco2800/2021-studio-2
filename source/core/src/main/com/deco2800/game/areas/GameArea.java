@@ -25,7 +25,9 @@ public abstract class GameArea implements Disposable {
   }
 
   /** Create the game area in the world. */
-  public abstract void create();
+  public void create() {
+    ServiceLocator.registerGameArea(this);
+  }
 
   /** Dispose of all internal entities in the area */
   public void dispose() {

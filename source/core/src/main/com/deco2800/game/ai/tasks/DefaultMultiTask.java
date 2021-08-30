@@ -8,6 +8,10 @@ package com.deco2800.game.ai.tasks;
 public abstract class DefaultMultiTask extends DefaultTask implements Task {
   protected Task currentTask;
 
+  /**
+   * swap the current task with the new given param task
+   * @param newTask swap with current task and start the task
+   */
   protected void swapTask(Task newTask) {
     if (currentTask != null) {
       currentTask.stop();

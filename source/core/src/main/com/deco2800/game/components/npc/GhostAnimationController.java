@@ -10,6 +10,11 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class GhostAnimationController extends Component {
   AnimationRenderComponent animator;
 
+  /**
+   * Create the animation
+   * add listener on entity with wander and chase task
+   * play animation on corresponding atlas
+   */
   @Override
   public void create() {
     super.create();

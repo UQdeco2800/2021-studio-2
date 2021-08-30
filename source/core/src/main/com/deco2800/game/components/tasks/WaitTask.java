@@ -30,6 +30,9 @@ public class WaitTask extends DefaultTask {
     endTime = timeSource.getTime() + (int)(duration * 1000);
   }
 
+  /**
+   * Update the wait task
+   */
   @Override
   public void update() {
     if (timeSource.getTime() >= endTime) {

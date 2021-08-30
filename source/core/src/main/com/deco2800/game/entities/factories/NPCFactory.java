@@ -68,6 +68,13 @@ public class NPCFactory {
         .addComponent(animator)
         .addComponent(new GhostAnimationController());
 
+
+    ghost.getComponent(AITaskComponent.class).
+            addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+    ghost.getComponent(AITaskComponent.class).
+            addTask(new ZigChaseTask(target, 11, 3f, 6f));
+
+
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
 
 
@@ -76,7 +83,8 @@ public class NPCFactory {
 
   /**
    * Creates a ghost king entity.
-   *
+   * Ghost king has the ability to alert melee ghost - so melee ghost will chase the target
+   * if the ghost king discover the target for over 3 seconds
    * @param target entity to chase
    * @return entity
    */
@@ -125,13 +133,14 @@ public class NPCFactory {
     Entity anchoredGhost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
-            .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
-            .addTask(new AnchoredRetreatTask(anchor, anchorSize));
+      new AITaskComponent()
+        .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
+        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
+        .addTask(new AnchoredRetreatTask(anchor, anchorSize));
     anchoredGhost.addComponent(aiComponent);
 
     AnimationRenderComponent animator =
+
         new AnimationRenderComponent(
             ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
     animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
@@ -140,18 +149,17 @@ public class NPCFactory {
     animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
 
     anchoredGhost
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
 
     anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
     return anchoredGhost;
   }
 
   /**
    * Creates a anchored ghost entity.
-   *
+   * Anchor ghost only chase the target if the target approach the anchor point
    * @param target entity to chase
    * @param anchor base entity to anchor to
    * @param anchorSizeX how big the base's area is in the X axis
@@ -162,10 +170,10 @@ public class NPCFactory {
     Entity anchoredGhost = createBaseNPCNoAI();
     BaseEntityConfig config = configs.ghost;
     AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
-            .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
-            .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
+      new AITaskComponent()
+        .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
+        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
+        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
     anchoredGhost.addComponent(aiComponent);
 
     AnimationRenderComponent animator =
@@ -177,29 +185,30 @@ public class NPCFactory {
     animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
 
     anchoredGhost
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
 
     anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
     return anchoredGhost;
   }
 
   /**
    * Creates a ranged ghost entity.
+   * Ghost that shoot arrow at target
+   * It will retreat if the target is approach in certain range
    *
    * @param target entity to chase
    * @return entity
    */
-  public static Entity createRangedGhost(Entity target, GameArea gameArea) {
+  public static Entity createRangedGhost(Entity target) {
     Entity ghost = createBaseNPCNoAI();
     GhostRangedConfig config = configs.ghostRanged;
     AITaskComponent aiComponent =
-        new AITaskComponent()
-            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-            .addTask(new RangedChaseTask(target, 10, 15f, 20f));
-    ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000, gameArea);
+      new AITaskComponent()
+        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+        .addTask(new RangedChaseTask(target, 10, 15f, 20f));
+    ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
     shootProjectileTask.setProjectileType("normalArrow");
     shootProjectileTask.setMultishotChance(0.1);
     aiComponent.addTask(shootProjectileTask);
@@ -213,13 +222,12 @@ public class NPCFactory {
     animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
 
     ghost
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController())
-        .addComponent(aiComponent);
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController())
+      .addComponent(aiComponent);
     ghost.setAttackRange(5);
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
     return ghost;
   }
 
@@ -247,7 +255,8 @@ public class NPCFactory {
   }
 
   /**
-   * Creates a generic NPC, with no ai, to be used as a base entity by more specific NPC creation methods.
+   * Creates a generic NPC, with no ai,
+   * to be used as a base entity by more specific NPC creation methods.
    *
    * @return entity
    */

@@ -12,6 +12,9 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.TimeUnit;
 
 /** Chases a target entity and alerts nearby enemies after 3 secinds */
@@ -37,14 +40,33 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
   }
 
   @Override
+<<<<<<< HEAD
   public void update() {
     super.update();
     if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
+=======
+  public void stop() {
+    super.start();
+    alert = false;
+    owner.getEntity().getEvents().trigger("unAlert");
+  }
+
+  @Override
+  public void update() {
+    super.update();
+    if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
+      /*
+      Logger logger = LoggerFactory.getLogger(WanderTask.class);
+       logger.info("found3 secs");
+       */
+      owner.getEntity().getEvents().trigger("alert");
+>>>>>>> e35cd399968119d29aed01242f8f7da36f7fa794
       updateAlert();
     }
   }
 
   // set alert if other ghost found enemy
+
   public void updateAlert() {
     this.alert = true;
   }
