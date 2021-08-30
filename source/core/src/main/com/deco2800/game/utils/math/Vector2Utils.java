@@ -1,6 +1,7 @@
 package com.deco2800.game.utils.math;
 
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.components.weapons.MeleeWeapon;
 
 /**
  * Contains additional utility constants and functions for common Vector2 operations.
@@ -40,6 +41,24 @@ public class Vector2Utils {
     return direction;
   }
 
+  /**
+   * Converts Vector2Utils direction to MeleeWeapon direction.
+   * @param vectorDirection defined in Vector2Utils
+   * @return MeleeWeapon direction represented by an integer, or -1 if failed
+   */
+  public static int toWeaponDirection(Vector2 vectorDirection) {
+    if (vectorDirection == Vector2Utils.UP) {
+      return MeleeWeapon.UP;
+    } else if (vectorDirection == Vector2Utils.DOWN) {
+      return MeleeWeapon.DOWN;
+    } else if (vectorDirection == Vector2Utils.LEFT) {
+      return MeleeWeapon.LEFT;
+    } else if (vectorDirection == Vector2Utils.RIGHT) {
+      return MeleeWeapon.RIGHT;
+    } else {
+      return -1;
+    }
+  }
 
   /**
    * Calculate the angle in degrees of a vector.

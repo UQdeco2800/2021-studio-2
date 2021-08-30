@@ -168,25 +168,6 @@ public class MeleeWeapon extends Component {
         }
         return true; // successfully collided with target.
     }
-
-    /**
-     * Converts Vector2Utils direction to MeleeWeapon direction.
-     * @param vectorDirection defined in Vector2Utils
-     * @return MeleeWeapon direction represented by an integer, or -1 if failed
-     */
-    public static int toWeaponDirection(Vector2 vectorDirection) {
-        if (vectorDirection == Vector2Utils.UP) {
-            return UP;
-        } else if (vectorDirection == Vector2Utils.DOWN) {
-            return DOWN;
-        } else if (vectorDirection == Vector2Utils.LEFT) {
-            return LEFT;
-        } else if (vectorDirection == Vector2Utils.RIGHT) {
-            return RIGHT;
-        } else {
-            return -1;
-        }
-    }
 }
 
 

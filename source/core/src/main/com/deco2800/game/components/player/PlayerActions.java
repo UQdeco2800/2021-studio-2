@@ -3,18 +3,14 @@ package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.Vector2Utils;
-import com.badlogic.gdx.assets.AssetManager;
 
 /**
  * Action component for interacting with the player. Player events should be initialised in create()
@@ -130,10 +126,10 @@ public class PlayerActions extends Component {
       return;
     }
     Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
-            coordinates.x - Gdx.graphics.getWidth() / 2,
-            coordinates.y - Gdx.graphics.getHeight() / 2
+            coordinates.x - Gdx.graphics.getWidth() / 2f,
+            coordinates.y - Gdx.graphics.getHeight() / 2f
     ));
-    weapon.attack(MeleeWeapon.toWeaponDirection(attackDirection));
+    weapon.attack(Vector2Utils.toWeaponDirection(attackDirection));
     lockMovement(weapon.getTotalAttackTime());
   }
 
