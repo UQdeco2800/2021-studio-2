@@ -15,10 +15,10 @@ import org.slf4j.LoggerFactory;
  * without interaction (if sensor = true)
  */
 public class ColliderComponent extends Component {
-  private static final Logger logger = LoggerFactory.getLogger(ColliderComponent.class);
+  protected static final Logger logger = LoggerFactory.getLogger(ColliderComponent.class);
 
-  private final FixtureDef fixtureDef;
-  private Fixture fixture;
+  protected final FixtureDef fixtureDef;
+  protected Fixture fixture;
 
   public ColliderComponent() {
     fixtureDef = new FixtureDef();

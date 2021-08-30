@@ -41,10 +41,9 @@ public class MainMenuDisplay extends UIComponent {
 
     Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
-    TextButton startBtn = new TextButton("Start", menuButtons);
-    TextButton loadBtn = new TextButton("Load", menuButtons);
-    TextButton settingsBtn = new TextButton("Settings", menuButtons);
-    TextButton exitBtn = new TextButton("Exit", menuButtons);
+    Button startBtn = new Button(menuButtons, "start");
+    Button settingsBtn = new Button(menuButtons, "settings");
+    Button exitBtn = new Button(menuButtons, "quit");
 
     // Triggers an event when the button is pressed
     startBtn.addListener(
@@ -56,14 +55,6 @@ public class MainMenuDisplay extends UIComponent {
           }
         });
 
-    loadBtn.addListener(
-        new ChangeListener() {
-          @Override
-          public void changed(ChangeEvent changeEvent, Actor actor) {
-            logger.debug("Load button clicked");
-            entity.getEvents().trigger("load");
-          }
-        });
 
     settingsBtn.addListener(
         new ChangeListener() {
@@ -85,8 +76,6 @@ public class MainMenuDisplay extends UIComponent {
         });
 
     table.add(startBtn).padTop(30f);
-    table.row();
-    table.add(loadBtn).padTop(30f);
     table.row();
     table.add(settingsBtn).padTop(30f);
     table.row();

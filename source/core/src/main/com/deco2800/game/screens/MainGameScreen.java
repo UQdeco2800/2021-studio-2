@@ -36,11 +36,13 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-  private static final String[] mainGameTextures = {"images/heart.png", "lowHealthImages" +
-          "/testBlood2.png", "images/text_box.png"}; //the testBlood.png is a placeholder for the actual UI image
-  private static final Vector2 CAMERA_POSITION = new Vector2(4.75f, 4.75f);
-  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.wav"};
-
+  private static final String[] mainGameTextures = {
+          "images/heart.png",
+          "lowHealthImages/BloodScreenDarkRepositioned.png",
+          "images/text_box.png"
+  };
+  private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
+  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;

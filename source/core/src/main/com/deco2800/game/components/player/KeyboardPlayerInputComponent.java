@@ -1,6 +1,7 @@
 package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
@@ -11,10 +12,14 @@ import java.util.TimerTask;
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
- * This input handler only uses keyboard input.
+ * This input handler uses keyboard input and mouse input.
  */
 public class KeyboardPlayerInputComponent extends InputComponent {
+  /** Current walk direction of player */
   private final Vector2 walkDirection = Vector2.Zero.cpy();
+
+  /** The last key the player pressed, used to determine attack direction */
+  private int lastKeyPressed;
 
   /** Distance scale for moving in a diagonal direction. */
   public static final float DIAGONAL_DISTANCE = 0.7071f;
@@ -52,7 +57,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
   /**
    * Triggers player events on specific keycodes.
-   *
    * @return whether the input was processed
    * @see InputProcessor#keyDown(int)
    */
@@ -60,23 +64,27 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   public boolean keyDown(int keycode) {
     switch (keycode) {
       case Keys.W:
+        lastKeyPressed = Keys.W;
         this.up = 1;
         triggerWalkEvent();
         return true;
       case Keys.A:
+        lastKeyPressed = Keys.A;
         this.left = 1;
         triggerWalkEvent();
         return true;
       case Keys.S:
+        lastKeyPressed = Keys.S;
         this.down = 1;
         triggerWalkEvent();
         return true;
       case Keys.D:
+        lastKeyPressed = Keys.D;
         this.right = 1;
         triggerWalkEvent();
         return true;
       case Keys.SPACE:
-        entity.getEvents().trigger("attack");
+        entity.getEvents().trigger("attack", lastKeyPressed);
         return true;
       case Keys.SHIFT_LEFT:
         this.speedMultiplier = 1.4f;
@@ -138,6 +146,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   }
 
   /**
+<<<<<<< HEAD
    * Disables all of the inputs that are currently being pressed.
    */
   public void stopWalking() {
@@ -152,6 +161,22 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     } else {
       entity.getEvents().trigger("stopForward");
     }
+  }
+
+   /** Triggers player events on a mouse click. Direction is determined by
+   * mouse click coordinates (screenX, screenY).
+   * @return whether the mouse input was processed.
+   * @see InputProcessor#touchDown(int, int, int, int)
+   */
+  @Override
+  public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    if (button == Buttons.LEFT) { // Attack using left mouse button
+      entity.getEvents().trigger("mouseAttack",
+              new Vector2(screenX, screenY));
+      return true;
+    }
+    // other mouse buttons go here (TBD).
+    return false;
   }
 
   /**
@@ -239,6 +264,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   /**
    * This method has been created to test that the correct direction is
    * to be walked in.
+   * @return walk direction.
    */
   public Vector2 getWalkDirection() {
     return this.walkDirection;
