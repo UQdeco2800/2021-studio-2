@@ -202,6 +202,7 @@ public class ForestGameArea extends GameArea {
    * @return player entity - main character being controlled
    */
   public Entity getPlayer() {
+    System.out.println(player.getPosition());
     return this.player;
   }
 

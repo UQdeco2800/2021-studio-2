@@ -38,7 +38,7 @@ public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
   private static final String[] mainGameTextures = {"images/heart.png", "lowHealthImages" +
           "/testBlood2.png", "images/text_box.png"}; //the testBlood.png is a placeholder for the actual UI image
-  private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
+  private static final Vector2 CAMERA_POSITION = new Vector2(4.75f, 4.75f);
   private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.wav"};
 
   private final GdxGame game;
@@ -62,7 +62,7 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.registerRenderService(new RenderService());
 
     renderer = RenderFactory.createRenderer();
-    renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
+    renderer.getCamera().getCamera().position.set(4.75f, 4.75f, 0f);
     renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
     loadAssets();
