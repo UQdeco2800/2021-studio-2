@@ -6,10 +6,73 @@ filter: Linear, Linear
 repeat: none
 5895d2d1cba9841eabab6077 (2)
   rotate: false
-  xy: 1, 357
+  xy: 1, 179
   size: 100, 50
   split: 17, 14, 12, 10
   orig: 100, 50
+  offset: 0, 0
+  index: -1
+QUIT_Broken
+  rotate: false
+  xy: 288, 325
+  size: 80, 40
+  orig: 80, 40
+  offset: 0, 0
+  index: -1
+QUIT_Highlighted
+  rotate: false
+  xy: 164, 283
+  size: 92, 40
+  orig: 92, 40
+  offset: 0, 0
+  index: -1
+QuitButton
+  rotate: false
+  xy: 289, 367
+  size: 92, 40
+  orig: 92, 40
+  offset: 0, 0
+  index: -1
+SETTINGS_Broken
+  rotate: false
+  xy: 1, 278
+  size: 161, 45
+  orig: 161, 45
+  offset: 0, 0
+  index: -1
+SETTINGS_Highlighted
+  rotate: false
+  xy: 1, 325
+  size: 163, 40
+  orig: 163, 40
+  offset: 0, 0
+  index: -1
+START_Broken
+  rotate: false
+  xy: 1, 231
+  size: 109, 45
+  orig: 109, 45
+  offset: 0, 0
+  index: -1
+START_Highlighted
+  rotate: false
+  xy: 167, 367
+  size: 120, 40
+  orig: 120, 40
+  offset: 0, 0
+  index: -1
+SettingsButton
+  rotate: false
+  xy: 1, 367
+  size: 164, 40
+  orig: 164, 40
+  offset: 0, 0
+  index: -1
+StartButton
+  rotate: false
+  xy: 166, 325
+  size: 120, 40
+  orig: 120, 40
   offset: 0, 0
   index: -1
 pixel
