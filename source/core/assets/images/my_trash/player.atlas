@@ -1,0 +1,90 @@
+
+player.png
+size: 2048, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+BackAxe_Attack
+  rotate: false
+  xy: 2, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+BackAxe_Attack
+  rotate: false
+  xy: 522, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+BackAxe_Attack
+  rotate: false
+  xy: 912, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+FrontAxe_Attack
+  rotate: false
+  xy: 262, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+FrontAxe_Attack
+  rotate: false
+  xy: 782, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+FrontAxe_Attack
+  rotate: false
+  xy: 1302, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+LeftAxe_Attack
+  rotate: false
+  xy: 392, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+LeftAxe_Attack
+  rotate: false
+  xy: 1042, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+LeftAxe_Attack
+  rotate: false
+  xy: 1432, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+RightAxe_Attack
+  rotate: false
+  xy: 132, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+RightAxe_Attack
+  rotate: false
+  xy: 652, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+RightAxe_Attack
+  rotate: false
+  xy: 1172, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3

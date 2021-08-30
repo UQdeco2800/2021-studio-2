@@ -68,7 +68,7 @@ public class MeleeWeapon extends Component {
      */
     @Override
     public void update() {
-        if (timeAtAttack != 0) {
+        if (timeAtAttack != 0L) {
             // calculate elapsed time since attack started
             long currentTime = ServiceLocator.getTimeSource().getTime();
             long timeSinceAttacked = currentTime - timeAtAttack;

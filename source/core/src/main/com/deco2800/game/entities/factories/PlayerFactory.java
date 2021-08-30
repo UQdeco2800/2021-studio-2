@@ -59,7 +59,7 @@ public class PlayerFactory {
             .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
             .addComponent(new InventoryComponent(stats.gold))
             .addComponent(inputComponent)
-            .addComponent(new Axe(PhysicsLayer.NPC, 10, 50, new Vector2(1.25f, 0.5f)))
+            .addComponent(new Axe(PhysicsLayer.NPC, 10, 50, new Vector2(1f, 0.5f)))
             .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.WEAPON))
             .addComponent(new PlayerStatsDisplay())
             .addComponent(animator);
