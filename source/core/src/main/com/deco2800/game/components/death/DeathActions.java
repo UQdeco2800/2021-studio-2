@@ -13,6 +13,10 @@ public class DeathActions extends Component {
     private static final Logger logger = LoggerFactory.getLogger(DeathActions.class);
     private GdxGame game;
 
+    /**
+     * create an instance of this class
+     * @param game instance of game
+     */
     public DeathActions(GdxGame game) {
         this.game = game;
     }

@@ -34,6 +34,7 @@ public class PlayerFactory {
 
   /**
    * Create a player entity.
+   * @param game instance of the game
    * @return entity
    */
   public static Entity createPlayer(GdxGame game) {
