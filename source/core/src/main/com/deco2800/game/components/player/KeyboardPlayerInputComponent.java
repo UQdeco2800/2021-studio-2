@@ -146,7 +146,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   }
 
   /**
-<<<<<<< HEAD
    * Disables all of the inputs that are currently being pressed.
    */
   public void stopWalking() {
