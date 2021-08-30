@@ -19,8 +19,8 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":6,"i1":10,"i2":10,"i3":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -180,7 +180,7 @@ implements <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/b
 </a>
 <h2>Method Summary</h2>
 <div class="memberSummary">
-<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t3" class="tableTab" onclick="show(4);">Abstract Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
+<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
 <div id="memberSummary_tabpanel" role="tabpanel">
 <table aria-labelledby="t0">
 <thead>
@@ -192,7 +192,7 @@ implements <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/b
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code>abstract void</code></td>
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Create the game area in the world.</div>
@@ -213,9 +213,19 @@ implements <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/b
 </td>
 </tr>
 <tr class="rowColor" id="i3">
-<td class="colFirst"><code>protected void</code></td>
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a></span>&#8203;(<a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/GridPoint2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">GridPoint2</a>&nbsp;tilePos,
+boolean&nbsp;centerX,
+boolean&nbsp;centerY)</code></th>
+<td class="colLast">
+<div class="block">Spawn entity on a given tile.</div>
+</td>
+</tr>
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2,boolean,boolean)">spawnEntityAt</a></span>&#8203;(<a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;entityPos,
 boolean&nbsp;centerX,
 boolean&nbsp;centerY)</code></th>
 <td class="colLast">
@@ -285,7 +295,7 @@ boolean&nbsp;centerY)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="create()">create</a></h3>
-<div class="memberSignature"><span class="modifiers">public abstract</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
 <div class="block">Create the game area in the world.</div>
 </section>
 </li>
@@ -314,7 +324,7 @@ boolean&nbsp;centerY)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnEntityAt</span>&#8203;(<span class="arguments"><a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnEntityAt</span>&#8203;(<span class="arguments"><a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/GridPoint2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">GridPoint2</a>&nbsp;tilePos,
 boolean&nbsp;centerX,
 boolean&nbsp;centerY)</span></div>
@@ -323,6 +333,23 @@ boolean&nbsp;centerY)</span></div>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>entity</code> - Entity (not yet registered)</dd>
 <dd><code>tilePos</code> - tile position to spawn at</dd>
+<dd><code>centerX</code> - true to center entity X on the tile, false to align the bottom left corner</dd>
+<dd><code>centerY</code> - true to center entity Y on the tile, false to align the bottom left corner</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2,boolean,boolean)">spawnEntityAt</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnEntityAt</span>&#8203;(<span class="arguments"><a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;entityPos,
+boolean&nbsp;centerX,
+boolean&nbsp;centerY)</span></div>
+<div class="block">Spawn entity on a given tile. Requires the terrain to be set first.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>entity</code> - Entity (not yet registered)</dd>
+<dd><code>entityPos</code> - world position to spawn at</dd>
 <dd><code>centerX</code> - true to center entity X on the tile, false to align the bottom left corner</dd>
 <dd><code>centerY</code> - true to center entity Y on the tile, false to align the bottom left corner</dd>
 </dl>

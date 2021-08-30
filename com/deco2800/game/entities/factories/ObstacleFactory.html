@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -124,12 +124,19 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAnchor()">createAnchor</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Creates an anchor entity to be referenced by other entities.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createTree()">createTree</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates a tree entity.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createWall(float,float)">createWall</a></span>&#8203;(float&nbsp;width,
 float&nbsp;height)</code></th>
@@ -182,6 +189,17 @@ float&nbsp;height)</span></div>
 <dd><code>height</code> - Wall height in world units</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Wall entity of given width and height</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createAnchor()">createAnchor</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createAnchor</span>()</div>
+<div class="block">Creates an anchor entity to be referenced by other entities.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity to serve as the base's real world location</dd>
 </dl>
 </section>
 </li>

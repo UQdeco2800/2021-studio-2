@@ -140,7 +140,9 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.deco2800.game.areas.terrain.TerrainFactory,com.deco2800.game.GdxGame)">ForestGameArea</a></span>&#8203;(<a href="terrain/TerrainFactory.html" title="class in com.deco2800.game.areas.terrain">TerrainFactory</a>&nbsp;terrainFactory,
 <a href="../GdxGame.html" title="class in com.deco2800.game">GdxGame</a>&nbsp;game)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Intialise the forest game</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -176,7 +178,7 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Dispose of all internal entities in the area</div>
+<div class="block">Dispose the asset (call unloadAssets).</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
@@ -192,7 +194,7 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <h3>Methods inherited from class&nbsp;com.deco2800.game.areas.<a href="GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.areas.GameArea">
 <!--   -->
-</a><code><a href="GameArea.html#spawnEntity(com.deco2800.game.entities.Entity)">spawnEntity</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a></code></div>
+</a><code><a href="GameArea.html#spawnEntity(com.deco2800.game.entities.Entity)">spawnEntity</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2,boolean,boolean)">spawnEntityAt</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <a id="methods.inherited.from.class.java.lang.Object">
@@ -216,6 +218,11 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <h3><a id="&lt;init&gt;(com.deco2800.game.areas.terrain.TerrainFactory,com.deco2800.game.GdxGame)">ForestGameArea</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ForestGameArea</span>&#8203;(<span class="arguments"><a href="terrain/TerrainFactory.html" title="class in com.deco2800.game.areas.terrain">TerrainFactory</a>&nbsp;terrainFactory,
 <a href="../GdxGame.html" title="class in com.deco2800.game">GdxGame</a>&nbsp;game)</span></div>
+<div class="block">Intialise the forest game</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>terrainFactory</code> - intialise the terrain factory</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -234,7 +241,7 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
 <div class="block">Create the game area, including terrain, static entities (trees), dynamic entities (player)</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="GameArea.html#create()">create</a></code>&nbsp;in class&nbsp;<code><a href="GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></code></dd>
 </dl>
 </section>
@@ -249,8 +256,7 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <section class="detail">
 <h3><a id="dispose()">dispose</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">dispose</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="GameArea.html#dispose()">GameArea</a></code></span></div>
-<div class="block">Dispose of all internal entities in the area</div>
+<div class="block">Dispose the asset (call unloadAssets).</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/utils/Disposable.html?is-external=true#dispose()" title="class or interface in com.badlogic.gdx.utils" class="externalLink">dispose</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/utils/Disposable.html?is-external=true" title="class or interface in com.badlogic.gdx.utils" class="externalLink">Disposable</a></code></dd>

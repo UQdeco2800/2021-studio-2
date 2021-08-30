@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -62,7 +62,7 @@ loadScripts(document, 'script');</script>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -101,6 +101,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="../../ai/tasks/Task.html" title="interface in com.deco2800.game.ai.tasks">Task</a></code></dd>
 </dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><code><a href="ProjectileMovementTask.html" title="class in com.deco2800.game.components.tasks">ProjectileMovementTask</a></code></dd>
+</dl>
 <hr>
 <pre>public class <span class="typeNameLabel">MovementTask</span>
 extends <a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></pre>
@@ -128,6 +132,25 @@ extends <a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.g
 <!--   -->
 </a>
 <h2>Field Summary</h2>
+<div class="memberSummary">
+<table>
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<thead>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Field</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#target">target</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="inheritedList">
 <h3>Fields inherited from class&nbsp;com.deco2800.game.ai.tasks.<a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.ai.tasks.DefaultTask">
@@ -153,12 +176,30 @@ extends <a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.g
 <tbody>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2)">MovementTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Set the target for the entity - entity will move toward the target</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2,float)">MovementTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
 float&nbsp;stopDistance)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Move task that take position of the target and the stop distance</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2,long)">MovementTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+long&nbsp;time)</code></th>
+<td class="colLast">
+<div class="block">Move task that take position of the target and the time of the game</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">MovementTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</code></th>
+<td class="colLast">
+<div class="block">Move task that take position of the target and the move speed</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -184,29 +225,73 @@ float&nbsp;stopDistance)</code></th>
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>protected boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#checkIfStuck()">checkIfStuck</a></span>()</code></th>
+<td class="colLast">
+<div class="block">check if the entity is blocked by an object (tree)
+ set status to Fail if true</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start()">start</a></span>()</code></th>
+<td class="colFirst"><code>protected boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#didMove()">didMove</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Start running this task.</div>
+<div class="block">check if the entity is move - so the position is not the same when comparing to previsou pos</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stop()">stop</a></span>()</code></th>
+<td class="colFirst"><code>protected boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#discover()">discover</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Stop the task immediately.</div>
+<div class="block">if time since target is discovered is more than 3 seconds and owner is still chasing target
+ it will start warning other enemies to attack player</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
+<td class="colFirst"><code>float</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findingLastPositions()">findingLastPositions</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>protected boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAtTarget()">isAtTarget</a></span>()</code></th>
+<td class="colLast">
+<div class="block">check if the entity is at target</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMoveSpeed(com.badlogic.gdx.math.Vector2)">setMoveSpeed</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</code></th>
+<td class="colLast">
+<div class="block">update the movement speed of the entity, higher move speed, the entity travel at higher fps</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</code></th>
+<td class="colLast">
+<div class="block">set the target of the entity</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start()">start</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Start the movement task</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stop()">stop</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Stop the task - the entity stop moving</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Run one frame of the task.</div>
+<div class="block">Update the movement task of the entity</div>
 </td>
 </tr>
 </tbody>
@@ -229,6 +314,22 @@ float&nbsp;stopDistance)</code></th>
 </section>
 <section class="details">
 <ul class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<li class="blockList">
+<section class="fieldDetails"><a id="field.detail">
+<!--   -->
+</a>
+<h2>Field Details</h2>
+<ul class="blockList">
+<li class="blockList">
+<section class="detail">
+<h3><a id="target">target</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></span>&nbsp;<span class="memberName">target</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li class="blockList">
 <section class="constructorDetails"><a id="constructor.detail">
@@ -240,6 +341,24 @@ float&nbsp;stopDistance)</code></th>
 <section class="detail">
 <h3><a id="&lt;init&gt;(com.badlogic.gdx.math.Vector2)">MovementTask</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">MovementTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</span></div>
+<div class="block">Set the target for the entity - entity will move toward the target</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - position the entity will move toward</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="&lt;init&gt;(com.badlogic.gdx.math.Vector2,long)">MovementTask</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">MovementTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+long&nbsp;time)</span></div>
+<div class="block">Move task that take position of the target and the time of the game</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - position of target</dd>
+<dd><code>time</code> - game time</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -247,6 +366,25 @@ float&nbsp;stopDistance)</code></th>
 <h3><a id="&lt;init&gt;(com.badlogic.gdx.math.Vector2,float)">MovementTask</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">MovementTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
 float&nbsp;stopDistance)</span></div>
+<div class="block">Move task that take position of the target and the stop distance</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - position of target</dd>
+<dd><code>stopDistance</code> - distance to stop when move</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="&lt;init&gt;(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">MovementTask</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">MovementTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</span></div>
+<div class="block">Move task that take position of the target and the move speed</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - position of target</dd>
+<dd><code>moveSpeed</code> - speed of entity</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -263,8 +401,7 @@ float&nbsp;stopDistance)</span></div>
 <section class="detail">
 <h3><a id="start()">start</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">start</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../ai/tasks/Task.html#start()">Task</a></code></span></div>
-<div class="block">Start running this task. This will usually be called by an AI controller.</div>
+<div class="block">Start the movement task</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../ai/tasks/Task.html#start()">start</a></code>&nbsp;in interface&nbsp;<code><a href="../../ai/tasks/Task.html" title="interface in com.deco2800.game.ai.tasks">Task</a></code></dd>
@@ -277,8 +414,7 @@ float&nbsp;stopDistance)</span></div>
 <section class="detail">
 <h3><a id="update()">update</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../ai/tasks/Task.html#update()">Task</a></code></span></div>
-<div class="block">Run one frame of the task. Similar to the update() in Components.</div>
+<div class="block">Update the movement task of the entity</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../ai/tasks/Task.html#update()">update</a></code>&nbsp;in interface&nbsp;<code><a href="../../ai/tasks/Task.html" title="interface in com.deco2800.game.ai.tasks">Task</a></code></dd>
@@ -291,19 +427,86 @@ float&nbsp;stopDistance)</span></div>
 <section class="detail">
 <h3><a id="setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setTarget</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</span></div>
+<div class="block">set the target of the entity</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - the position move toward</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setMoveSpeed(com.badlogic.gdx.math.Vector2)">setMoveSpeed</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMoveSpeed</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</span></div>
+<div class="block">update the movement speed of the entity, higher move speed, the entity travel at higher fps</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>moveSpeed</code> - speed of the entity</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="stop()">stop</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">stop</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../ai/tasks/Task.html#stop()">Task</a></code></span></div>
-<div class="block">Stop the task immediately. This can be called at any time by the AI controller.</div>
+<div class="block">Stop the task - the entity stop moving</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../ai/tasks/Task.html#stop()">stop</a></code>&nbsp;in interface&nbsp;<code><a href="../../ai/tasks/Task.html" title="interface in com.deco2800.game.ai.tasks">Task</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../ai/tasks/DefaultTask.html#stop()">stop</a></code>&nbsp;in class&nbsp;<code><a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></code></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isAtTarget()">isAtTarget</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isAtTarget</span>()</div>
+<div class="block">check if the entity is at target</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if it is, false otherwise</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="checkIfStuck()">checkIfStuck</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">checkIfStuck</span>()</div>
+<div class="block">check if the entity is blocked by an object (tree)
+ set status to Fail if true</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if stuck, false otherwise</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="didMove()">didMove</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">didMove</span>()</div>
+<div class="block">check if the entity is move - so the position is not the same when comparing to previsou pos</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if moved, false otherwise</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="findingLastPositions()">findingLastPositions</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">float</span>&nbsp;<span class="memberName">findingLastPositions</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="discover()">discover</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">discover</span>()</div>
+<div class="block">if time since target is discovered is more than 3 seconds and owner is still chasing target
+ it will start warning other enemies to attack player</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if enemies chase after target for more than 3 seconds</dd>
 </dl>
 </section>
 </li>
@@ -346,7 +549,7 @@ float&nbsp;stopDistance)</span></div>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

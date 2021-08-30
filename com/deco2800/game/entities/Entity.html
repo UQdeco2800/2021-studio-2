@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -190,74 +190,105 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i5">
+<td class="colFirst"><code>float</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAttackRange()">getAttackRange</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCenterPosition()">getCenterPosition</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the entity's center position</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>&lt;T extends <a href="../components/Component.html" title="class in com.deco2800.game.components">Component</a>&gt;<br>T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getComponent(java.lang.Class)">getComponent</a></span>&#8203;(java.lang.Class&lt;T&gt;&nbsp;type)</code></th>
 <td class="colLast">
 <div class="block">Get a component of type T on the entity.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getEntityType()">getEntityType</a></span>()</code></th>
+<td class="colLast">
+<div class="block">return the type of the entity</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code><a href="../events/EventHandler.html" title="class in com.deco2800.game.events">EventHandler</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getEvents()">getEvents</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the event handler attached to this entity.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getId()">getId</a></span>()</code></th>
 <td class="colLast">
 <div class="block">This entity's unique ID.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPosition()">getPosition</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the entity's game position.</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScale()">getScale</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the entity's scale.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i12">
+<tr class="altColor" id="i14">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#prepareDispose()">prepareDispose</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Queue a dispose call</div>
+</td>
+</tr>
+<tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleHeight(float)">scaleHeight</a></span>&#8203;(float&nbsp;y)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's height and scale the width to maintain aspect ratio.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i13">
+<tr class="altColor" id="i16">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleWidth(float)">scaleWidth</a></span>&#8203;(float&nbsp;x)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's width and scale the height to maintain aspect ratio.</div>
 </td>
 </tr>
-<tr class="altColor" id="i14">
+<tr class="rowColor" id="i17">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAttackRange(float)">setAttackRange</a></span>&#8203;(float&nbsp;attackRange)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i18">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setEnabled(boolean)">setEnabled</a></span>&#8203;(boolean&nbsp;enabled)</code></th>
 <td class="colLast">
 <div class="block">Enable or disable an entity.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i15">
+<tr class="rowColor" id="i19">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setEntityType(java.lang.String)">setEntityType</a></span>&#8203;(java.lang.String&nbsp;entityType)</code></th>
+<td class="colLast">
+<div class="block">Set the type of the entity</div>
+</td>
+</tr>
+<tr class="altColor" id="i20">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPosition(float,float)">setPosition</a></span>&#8203;(float&nbsp;x,
 float&nbsp;y)</code></th>
@@ -265,14 +296,14 @@ float&nbsp;y)</code></th>
 <div class="block">Set the entity's game position.</div>
 </td>
 </tr>
-<tr class="altColor" id="i16">
+<tr class="rowColor" id="i21">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPosition(com.badlogic.gdx.math.Vector2)">setPosition</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's game position.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i17">
+<tr class="altColor" id="i22">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPosition(com.badlogic.gdx.math.Vector2,boolean)">setPosition</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;position,
 boolean&nbsp;notify)</code></th>
@@ -280,7 +311,7 @@ boolean&nbsp;notify)</code></th>
 <div class="block">Set the entity's game position and optionally notifies listeners.</div>
 </td>
 </tr>
-<tr class="altColor" id="i18">
+<tr class="rowColor" id="i23">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScale(float,float)">setScale</a></span>&#8203;(float&nbsp;x,
 float&nbsp;y)</code></th>
@@ -288,19 +319,19 @@ float&nbsp;y)</code></th>
 <div class="block">Set the entity's scale.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i19">
+<tr class="altColor" id="i24">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScale(com.badlogic.gdx.math.Vector2)">setScale</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;scale)</code></th>
 <td class="colLast">
 <div class="block">Set the entity's scale.</div>
 </td>
 </tr>
-<tr class="altColor" id="i20">
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i21">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -345,6 +376,28 @@ float&nbsp;y)</code></th>
 </a>
 <h2>Method Details</h2>
 <ul class="blockList">
+<li class="blockList">
+<section class="detail">
+<h3><a id="setEntityType(java.lang.String)">setEntityType</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setEntityType</span>&#8203;(<span class="arguments">java.lang.String&nbsp;entityType)</span></div>
+<div class="block">Set the type of the entity</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>entityType</code> - type of entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getEntityType()">getEntityType</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">getEntityType</span>()</div>
+<div class="block">return the type of the entity</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>String type of entity that is previously set</dd>
+</dl>
+</section>
+</li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setEnabled(boolean)">setEnabled</a></h3>
@@ -552,6 +605,33 @@ float&nbsp;y)</span></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>entity's event handler</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="prepareDispose()">prepareDispose</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">prepareDispose</span>()</div>
+<div class="block">Queue a dispose call</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getAttackRange()">getAttackRange</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">float</span>&nbsp;<span class="memberName">getAttackRange</span>()</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>current attack range of entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setAttackRange(float)">setAttackRange</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAttackRange</span>&#8203;(<span class="arguments">float&nbsp;attackRange)</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>attackRange</code> - new attack range of entity</dd>
 </dl>
 </section>
 </li>
