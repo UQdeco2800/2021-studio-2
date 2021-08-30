@@ -2,16 +2,12 @@ package com.deco2800.game.components.player;
 
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.rendering.AnimationRenderComponent;
-import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -120,6 +116,8 @@ public class PlayerActions extends Component {
 
   /**
    * Makes the player attack using a mouse click.
+   * Currently, this function is only used to test AOE attacks, and
+   * can't determine direction of attack based on click.
    * @param coordinates the mouse coordinates of the click
    */
   void mouseAttack(Vector2 coordinates) {
@@ -127,8 +125,7 @@ public class PlayerActions extends Component {
     MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon != null) {
       System.out.println("called in player actions");
-      weapon.attack(0);
-      return;
+      weapon.attack(MeleeWeapon.CENTER);
     }
   }
 
