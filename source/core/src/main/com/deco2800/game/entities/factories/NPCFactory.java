@@ -55,13 +55,10 @@ public class NPCFactory {
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
             ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-
-
     animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
     animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
     animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
     animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.NORMAL);
 
     ghost
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -80,16 +77,6 @@ public class NPCFactory {
 
     return ghost;
   }
-
-  /**
-   * Creates a ghost king entity.
-   * Ghost king has the ability to alert melee ghost - so melee ghost will chase the target
-   * if the ghost king discover the target for over 3 seconds
-   * @param target entity to chase
-   * @return entity
-   */
-
-  //use this code later to animate evil assassin elves
 
 //  public static Entity createGhostKing(Entity target) {
 //    Entity ghostKing = createBaseNPCNoAI();
@@ -140,13 +127,12 @@ public class NPCFactory {
     anchoredGhost.addComponent(aiComponent);
 
     AnimationRenderComponent animator =
-
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
+      new AnimationRenderComponent(
+          ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     anchoredGhost
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -177,12 +163,12 @@ public class NPCFactory {
     anchoredGhost.addComponent(aiComponent);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     anchoredGhost
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -214,12 +200,13 @@ public class NPCFactory {
     aiComponent.addTask(shootProjectileTask);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
+
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     ghost
       .addComponent(new CombatStatsComponent(config.health, config.baseAttack))

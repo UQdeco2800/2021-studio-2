@@ -83,6 +83,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     Vector2 desiredVelocity = getDirection().scl(maxSpeed);
     setToVelocity(body, desiredVelocity);
 
+<<<<<<< HEAD
     //entity.getEvents().trigger("floatDown");
 
     //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
@@ -101,6 +102,24 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         }
       }
     }
+=======
+    //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
+    if (this.getDirection().x>this.getDirection().y) {
+      if (this.getDirection().x < 0) {
+        this.getEntity().getEvents().trigger("LeftStart");
+      } else if (this.getDirection().x > 0) {
+        this.getEntity().getEvents().trigger("RightStart");
+      }
+    }
+    else{
+      if (this.getDirection().y < 0) {
+        this.getEntity().getEvents().trigger("DownStart");
+      } else if (this.getDirection().y > 0) {
+        this.getEntity().getEvents().trigger("UpStart");
+      }
+    }
+  }
+>>>>>>> efa83b0cbd9165ff08a786e46b0fbc1ddd770f83
 
   private void setToVelocity(Body body, Vector2 desiredVelocity) {
     // impulse force = (desired velocity - current velocity) * mass
