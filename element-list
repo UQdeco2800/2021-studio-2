@@ -12,6 +12,7 @@ com.deco2800.game.components.npc
 com.deco2800.game.components.player
 com.deco2800.game.components.settingsmenu
 com.deco2800.game.components.tasks
+com.deco2800.game.components.weapons
 com.deco2800.game.concurrency
 com.deco2800.game.entities
 com.deco2800.game.entities.configs

@@ -62,7 +62,7 @@ loadScripts(document, 'script');</script>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -99,7 +99,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <section class="description">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="HitboxComponent.html" title="class in com.deco2800.game.physics.components">HitboxComponent</a></code></dd>
+<dd><code><a href="HitboxComponent.html" title="class in com.deco2800.game.physics.components">HitboxComponent</a></code>, <code><a href="WeaponHitboxComponent.html" title="class in com.deco2800.game.physics.components">WeaponHitboxComponent</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">ColliderComponent</span>
@@ -116,6 +116,35 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <!--   -->
 </a>
 <h2>Field Summary</h2>
+<div class="memberSummary">
+<table>
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<thead>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Field</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fixture">fixture</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">FixtureDef</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fixtureDef">fixtureDef</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected static org.slf4j.Logger</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#logger">logger</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="inheritedList">
 <h3>Fields inherited from class&nbsp;com.deco2800.game.components.<a href="../../components/Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.components.Component">
@@ -276,6 +305,34 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 </section>
 <section class="details">
 <ul class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<li class="blockList">
+<section class="fieldDetails"><a id="field.detail">
+<!--   -->
+</a>
+<h2>Field Details</h2>
+<ul class="blockList">
+<li class="blockList">
+<section class="detail">
+<h3><a id="logger">logger</a></h3>
+<div class="memberSignature"><span class="modifiers">protected static final</span>&nbsp;<span class="returnType">org.slf4j.Logger</span>&nbsp;<span class="memberName">logger</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="fixtureDef">fixtureDef</a></h3>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">FixtureDef</a></span>&nbsp;<span class="memberName">fixtureDef</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="fixture">fixture</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a></span>&nbsp;<span class="memberName">fixture</span></div>
+</section>
+</li>
+</ul>
+</section>
+</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li class="blockList">
 <section class="constructorDetails"><a id="constructor.detail">
@@ -509,7 +566,7 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

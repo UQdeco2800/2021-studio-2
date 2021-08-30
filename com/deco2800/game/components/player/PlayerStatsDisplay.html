@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -182,27 +182,33 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deathScreen()">deathScreen</a></span>()</code></th>
+<td class="colLast">
+<div class="block">checks if player is dead if so trigger the death screen.</div>
+</td>
+</tr>
+<tr class="altColor" id="i2">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the component is disposed.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</code></th>
 <td class="colLast">
 <div class="block">Draw the renderable.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateLowHealthUI()">updateLowHealthUI</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Updates the PlayerLowHealthDisplay components by triggering the respective events
- also checks if the player is dead.</div>
+<div class="block">Updates the PlayerLowHealthDisplay components by triggering the respective events</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updatePlayerHealthUI(int)">updatePlayerHealthUI</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
@@ -302,7 +308,7 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <h3><a id="updatePlayerHealthUI(int)">updatePlayerHealthUI</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">updatePlayerHealthUI</span>&#8203;(<span class="arguments">int&nbsp;health)</span></div>
 <div class="block">Updates the player's health on the ui.
- Also checks for when to display the low health changes</div>
+ Also checks for when to display the low health changes and death screen</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>health</code> - player health</dd>
@@ -313,8 +319,16 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <section class="detail">
 <h3><a id="updateLowHealthUI()">updateLowHealthUI</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">updateLowHealthUI</span>()</div>
-<div class="block">Updates the PlayerLowHealthDisplay components by triggering the respective events
- also checks if the player is dead.</div>
+<div class="block">Updates the PlayerLowHealthDisplay components by triggering the respective events</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="deathScreen()">deathScreen</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">deathScreen</span>()</div>
+<div class="block">checks if player is dead if so trigger the death screen.
+ uses event triggers to turn off the bloody view and display
+ the death screen.</div>
 </section>
 </li>
 <li class="blockList">

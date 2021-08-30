@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -190,9 +190,10 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayBloodyViewOn()">displayBloodyViewOn</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayBloodyViewOn(float,boolean)">displayBloodyViewOn</a></span>&#8203;(float&nbsp;alpha,
+boolean&nbsp;play)</code></th>
 <td class="colLast">
-<div class="block">turn the stack visibility on.</div>
+<div class="block">Turn the stack visibility on.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
@@ -211,13 +212,31 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playHeartBeat()">playHeartBeat</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadImages()">loadImages</a></span>()</code></th>
+<td class="colLast">
+<div class="block">retrieves images from service locator to use for the low health UI</div>
+</td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playHeartBeat(float)">playHeartBeat</a></span>&#8203;(float&nbsp;modify)</code></th>
+<td class="colLast">
+<div class="block">plays the heart beat sound only if the tracker is currently false.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stackSetup()">stackSetup</a></span>()</code></th>
+<td class="colLast">
+<div class="block">initialisation of the stack and adding images to layout</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopHeartBeat()">stopHeartBeat</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">stops the playing of heart beat sound and sets the tracker to false</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -295,6 +314,61 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="stackSetup()">stackSetup</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">stackSetup</span>()</div>
+<div class="block">initialisation of the stack and adding images to layout</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="loadImages()">loadImages</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">loadImages</span>()</div>
+<div class="block">retrieves images from service locator to use for the low health UI</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="displayBloodyViewOn(float,boolean)">displayBloodyViewOn</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOn</span>&#8203;(<span class="arguments">float&nbsp;alpha,
+boolean&nbsp;play)</span></div>
+<div class="block">Turn the stack visibility on.
+ This is called when the event "bloodyViewOn" is triggered.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>alpha</code> - the opacity to set the bloody view to.</dd>
+<dd><code>play</code> - if true the heart beat sound will play otherwise nothing else will occur</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="displayBloodyViewOff()">displayBloodyViewOff</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOff</span>()</div>
+<div class="block">turn the stack visibility off.
+ this is called when the event "bloodyViewOff" is triggered</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="playHeartBeat(float)">playHeartBeat</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">playHeartBeat</span>&#8203;(<span class="arguments">float&nbsp;modify)</span></div>
+<div class="block">plays the heart beat sound only if the tracker is currently false.
+ Speeds up the sound depending on hp%.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>modify</code> - the float value that will modify the speed of the sound</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="stopHeartBeat()">stopHeartBeat</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">stopHeartBeat</span>()</div>
+<div class="block">stops the playing of heart beat sound and sets the tracker to false</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">draw</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../rendering/RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">RenderComponent</a></code></span></div>
@@ -305,34 +379,6 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>batch</code> - Batch to render to.</dd>
 </dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="playHeartBeat()">playHeartBeat</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">playHeartBeat</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="stopHeartBeat()">stopHeartBeat</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">stopHeartBeat</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="displayBloodyViewOn()">displayBloodyViewOn</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOn</span>()</div>
-<div class="block">turn the stack visibility on.
- this is called when the event "bloodyViewOn" is triggered</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="displayBloodyViewOff()">displayBloodyViewOff</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOff</span>()</div>
-<div class="block">turn the stack visibility off.
- this is called when the event "bloodyViewOff" is triggered</div>
 </section>
 </li>
 <li class="blockList">
