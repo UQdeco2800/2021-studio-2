@@ -3,6 +3,7 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
@@ -26,6 +27,7 @@ public class ForestGameArea extends GameArea {
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
+
     "images/box_boy_leaf.png",
     "images/arrow_normal.png",
     "images/test.png",
@@ -43,9 +45,14 @@ public class ForestGameArea extends GameArea {
     "images/iso_grass_3.png",
     "images/mud.png",
     "images/ghost_crown.png"
+    "images/player.png",
+    "images/health_left.png",
+    "images/health_middle.png",
+    "images/health_right.png",
+    "images/hp_icon.png"
   };
   private static final String[] forestTextureAtlases = {
-    "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas"
+          "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas", "images/player.atlas"
   };
   private static final String[] arrowSounds = {
           "sounds/arrow_disappear.mp3",
@@ -57,6 +64,7 @@ public class ForestGameArea extends GameArea {
   private static final String[] forestMusic = {backgroundMusic};
 
   private final TerrainFactory terrainFactory;
+  private final GdxGame game;
 
   private Entity player;
 
@@ -64,8 +72,10 @@ public class ForestGameArea extends GameArea {
    * Intialise the forest game
    * @param terrainFactory intialise the terrain factory
    */
-  public ForestGameArea(TerrainFactory terrainFactory) {
+  public ForestGameArea(TerrainFactory terrainFactory, GdxGame game) {
+
     super();
+    this.game = game;
     this.terrainFactory = terrainFactory;
   }
 
@@ -147,7 +157,7 @@ public class ForestGameArea extends GameArea {
    * @return newPlayer intialise player entity and spawn the player on the terrain
    */
   private Entity spawnPlayer() {
-    Entity newPlayer = PlayerFactory.createPlayer();
+    Entity newPlayer = PlayerFactory.createPlayer(game);
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     return newPlayer;
   }
@@ -249,6 +259,10 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
+  public Entity getPlayer() {
+    return this.player;
+  }
+  
   /**
    * Dispose the asset (call unloadAssets).
    */

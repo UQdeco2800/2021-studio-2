@@ -11,6 +11,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '13'
+      
+      - name: Slice commit message # Grab first 15 characters so we don't overflow discord; can't do this in the embed
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "COMMIT_MSG=${{ github.event.head_commit.message }}" | head -c 40 >> $GITHUB_ENV
 
       - name: Set Actions URL # We don't have a better way of grabbing this due to the discord settings not being executed in the bash env
         run: |
@@ -51,13 +56,13 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{
                               "title": "Build Information",
-                              "description": "Commit message: ```${{ github.event.head_commit.message }}```",
-                              "color": "${{env.TEST_OUTCOME}}",
+                              "description": "Commit message: ```${{ env.COMMIT_MSG }}...```",
+                              "color": "${{ env.TEST_OUTCOME }}",
                               "url": "${{ env.ACTIONS_URL }}"
                             }]'
         uses: Ilshidur/action-discord@master
         with:
-          args: 'Unit Tests reported **${{steps.tests.conclusion}}**!'
+          args: 'Unit Tests reported **${{ steps.tests.conclusion }}**!'
 
       - name: Cleanup Gradle Cache
         if: always()
