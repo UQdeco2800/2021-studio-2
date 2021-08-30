@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
+import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
@@ -19,20 +20,24 @@ import org.slf4j.LoggerFactory;
 /**
  * UI component for displaying the death screen
  */
-public class DeathDisplay extends UIComponent {
+public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
-    private static final float Z_INDEX = 2f;
-    private Image background;
-    private Image dead;
-    private Stack stack;
-    private Table table;
-    private String[] deathScreenTextures = new String[]{"lowHealthImages/testDeath1.png", "lowHealthImages/youdied.png"};
+    private final String[] deathScreenTextures = new String[]{
+      "lowHealthImages/testDeath1.png",
+      "lowHealthImages/youdied.png",
+      "lowHealthImages/testDeath1.png",
+      "images/main_menu_background.png"
+    };
+
+    public void deathDisplay() {
+        stack.setVisible(true);
+        table.setVisible(true);
+    }
 
     @Override
     public void create() {
-        super.create();
         loadAssets();
-        addActors();
+        super.create();
 
         entity.getEvents().addListener("deathScreen", this::deathDisplay);
     }
@@ -40,27 +45,36 @@ public class DeathDisplay extends UIComponent {
     /**
      * Adds the death screen visual components to the class
      */
-    private void addActors() {
-        stack = new Stack();
-        stack.setFillParent(true);
-        stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
-        background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
+    @Override
+    protected void addActors() {
+        super.addActors();
+
+        TextButton restartForestBtn = new TextButton("Restart Forest", skin);
+        TextButton restartTestBtn = new TextButton("Restart Test", skin);
+        TextButton exitBtn = new TextButton("Exit", skin);
+        Image background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
                 Texture.class));
         background.setScaling(Scaling.stretch);
         stack.add(background);
-        table = new Table();
-        table.setFillParent(true);
-
-        TextButton startBtn = new TextButton("Restart", skin);
-        TextButton exitBtn = new TextButton("Exit", skin);
 
         // Triggers an event when the button is pressed
-        startBtn.addListener(
+        restartForestBtn.addListener(
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
                         logger.debug("Start button clicked");
-                        entity.getEvents().trigger("start");
+                        //Needs to check which one it is in
+                        entity.getEvents().trigger("startForest");
+                    }
+                });
+        // Triggers an event when the button is pressed
+        restartTestBtn.addListener(
+                new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent changeEvent, Actor actor) {
+                        logger.debug("Start button clicked");
+                        //Needs to check which one it is in
+                        entity.getEvents().trigger("startTest");
                     }
                 });
         exitBtn.addListener(
@@ -72,33 +86,19 @@ public class DeathDisplay extends UIComponent {
                         entity.getEvents().trigger("exit");
                     }
                 });
-
-
-        dead = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/youdied.png",
+        Image dead = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/youdied.png",
                 Texture.class));
-
+        table.clear();
         table.add(dead);
         table.row();
-        table.add(startBtn).padTop(30f);
+        table.add(restartForestBtn).padTop(30f);
         table.row();
-        table.add(exitBtn).padTop(15f);
+        table.add(restartTestBtn).padTop(30f);
         table.row();
-
+        table.add(exitBtn).padTop(30f);
+        table.row();
         stack.setVisible(false);
         table.setVisible(false);
-
-        stage.addActor(stack);
-        stage.addActor(table);
-    }
-
-    @Override
-    public void draw(SpriteBatch batch) {
-        // draw is handled by the stage
-    }
-
-    @Override
-    public float getZIndex() {
-        return Z_INDEX;
     }
 
     private void loadAssets() {
@@ -117,16 +117,10 @@ public class DeathDisplay extends UIComponent {
         resourceService.unloadAssets(deathScreenTextures);
     }
 
-    public void deathDisplay() {
-        stack.setVisible(true);
-        table.setVisible(true);
-    }
-
     @Override
     public void dispose() {
-        stack.clear();
-        table.clear();
         super.dispose();
+        stack.clear();
         this.unloadAssets();
     }
 }
