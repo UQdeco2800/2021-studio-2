@@ -1,6 +1,7 @@
 package com.deco2800.game.input;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.ui.terminal.KeyboardTerminalInputComponent;
+import com.deco2800.game.ui.textbox.KeyboardTextBoxInputComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,5 +29,15 @@ public class KeyboardInputFactory extends InputFactory {
     public InputComponent createForTerminal() {
         logger.debug("Creating terminal input handler");
         return new KeyboardTerminalInputComponent();
+    }
+
+    /**
+     * Creates an input handler for the text box.
+     *
+     * @return TextBox input handler
+     */
+    public InputComponent createForTextBox() {
+        logger.debug("Creating text box input handler");
+        return new KeyboardTextBoxInputComponent();
     }
 }
