@@ -40,11 +40,12 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
   }
 
   @Override
-<<<<<<< HEAD
-  public void update() {
-    super.update();
-    if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
-=======
+
+//<<<<<<< HEAD
+//  public void update() {
+//    super.update();
+//    if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
+//=======
   public void stop() {
     super.start();
     alert = false;
@@ -60,7 +61,7 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
        logger.info("found3 secs");
        */
       owner.getEntity().getEvents().trigger("alert");
->>>>>>> e35cd399968119d29aed01242f8f7da36f7fa794
+//>>>>>>> e35cd399968119d29aed01242f8f7da36f7fa794
       updateAlert();
     }
   }

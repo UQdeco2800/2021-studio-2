@@ -21,15 +21,15 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
     super(target, priority, viewDistance, maxChaseDistance);
   }
 
-<<<<<<< HEAD
-  @Override
-  public void update() {
-    super.update();
-    for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
-      //get event triggered
-      //if (entity.getEvents().addListener();)
-    }
-=======
+//<<<<<<< HEAD
+//  @Override
+//  public void update() {
+//    super.update();
+//    for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
+//      //get event triggered
+//      //if (entity.getEvents().addListener();)
+//    }
+//=======
   private void alerted() {
     alerted = true;
   }
@@ -55,6 +55,6 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
       return 10;
     }
     return super.getPriority();
->>>>>>> e35cd399968119d29aed01242f8f7da36f7fa794
+//>>>>>>> e35cd399968119d29aed01242f8f7da36f7fa794
   }
 }
