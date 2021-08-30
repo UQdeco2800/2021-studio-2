@@ -75,8 +75,9 @@ class AlertChaseTaskTest {
         // target is too far from enemy
         assertTrue(oldDistance - newDistance1 == 0);
 
-        while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - time) < 3000) {
+        for (int i = 0; i < 3; i++) {
             entity.update();
+            alertableEntity.earlyUpdate();
             alertableEntity.update();
             ServiceLocator.getPhysicsService().getPhysics().update();
         }
@@ -85,7 +86,7 @@ class AlertChaseTaskTest {
         float newDistance2 = alertableEntity.getPosition().dst(target.getPosition());
         //System.out.println(newDistance - oldDistance);
         // fail because the enemy is not alerted - alert task fail
-        //assertTrue(newDistance2 - oldDistance != 0);
+        assertEquals(newDistance2 - oldDistance, 0);
     }
 
     private Entity makePhysicsEntity() {
