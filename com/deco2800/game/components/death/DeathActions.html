@@ -19,13 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
-var altColor = "altColor";
-var rowColor = "rowColor";
-var tableTab = "tableTab";
-var activeTableTab = "activeTableTab";
-var pathtoroot = "../../../../../";
+<script type="text/javascript">var pathtoroot = "../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -64,7 +58,7 @@ loadScripts(document, 'script');</script>
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <div class="navListSearch"><label for="search">SEARCH:</label>
@@ -93,13 +87,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
 <div class="inheritance"><a href="../Component.html" title="class in com.deco2800.game.components">com.deco2800.game.components.Component</a>
+<div class="inheritance"><a href="../mainmenu/MainMenuActions.html" title="class in com.deco2800.game.components.mainmenu">com.deco2800.game.components.mainmenu.MainMenuActions</a>
 <div class="inheritance">com.deco2800.game.components.death.DeathActions</div>
+</div>
 </div>
 </div>
 <section class="description">
 <hr>
 <pre>public class <span class="typeNameLabel">DeathActions</span>
-extends <a href="../Component.html" title="class in com.deco2800.game.components">Component</a></pre>
+extends <a href="../mainmenu/MainMenuActions.html" title="class in com.deco2800.game.components.mainmenu">MainMenuActions</a></pre>
 <div class="block">Handles the functionality of the death screen button components</div>
 </section>
 <section class="summary">
@@ -148,29 +144,11 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <!--   -->
 </a>
 <h2>Method Summary</h2>
-<div class="memberSummary">
-<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t4" class="tableTab" onclick="show(8);">Concrete Methods</button></div>
-<div id="memberSummary_tabpanel" role="tabpanel">
-<table aria-labelledby="t0">
-<thead>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colSecond" scope="col">Method</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="altColor" id="i0">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Called when the entity is created and registered.</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div class="inheritedList">
+<h3>Methods inherited from class&nbsp;com.deco2800.game.components.mainmenu.<a href="../mainmenu/MainMenuActions.html" title="class in com.deco2800.game.components.mainmenu">MainMenuActions</a></h3>
+<a id="methods.inherited.from.class.com.deco2800.game.components.mainmenu.MainMenuActions">
+<!--   -->
+</a><code><a href="../mainmenu/MainMenuActions.html#create()">create</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="../Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
@@ -198,29 +176,6 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <section class="detail">
 <h3><a id="&lt;init&gt;(com.deco2800.game.GdxGame)">DeathActions</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">DeathActions</span>&#8203;(<span class="arguments"><a href="../../GdxGame.html" title="class in com.deco2800.game">GdxGame</a>&nbsp;game)</span></div>
-</section>
-</li>
-</ul>
-</section>
-</li>
-<!-- ============ METHOD DETAIL ========== -->
-<li class="blockList">
-<section class="methodDetails"><a id="method.detail">
-<!--   -->
-</a>
-<h2>Method Details</h2>
-<ul class="blockList">
-<li class="blockList">
-<section class="detail">
-<h3><a id="create()">create</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../Component.html#create()">Component</a></code></span></div>
-<div class="block">Called when the entity is created and registered. Initial logic such as calls to GetComponent
- should be made here, not in the constructor which is called before an entity is finished.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../Component.html#create()">create</a></code>&nbsp;in class&nbsp;<code><a href="../Component.html" title="class in com.deco2800.game.components">Component</a></code></dd>
-</dl>
 </section>
 </li>
 </ul>
@@ -264,7 +219,7 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 </div>
