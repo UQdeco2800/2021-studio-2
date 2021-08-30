@@ -49,6 +49,7 @@ public class FileLoader {
     }
 
     T object;
+
     try {
       object = json.fromJson(type, file);
     } catch (Exception e) {
