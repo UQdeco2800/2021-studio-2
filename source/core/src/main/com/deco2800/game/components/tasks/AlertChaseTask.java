@@ -1,19 +1,7 @@
 package com.deco2800.game.components.tasks;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.rendering.DebugRenderer;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ServiceLocator;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 public class AlertChaseTask extends ChaseTask implements PriorityTask {
 
   private long timeDiscoveredTarget;
-  private boolean alert;
   /**
    * @param target The entity to chase.
    * @param priority Task priority when chasing (0 when not chasing).
@@ -35,20 +22,12 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
   @Override
   public void start() {
     super.start();
-    alert = false;
     timeDiscoveredTarget = System.nanoTime();
   }
 
   @Override
-
-//<<<<<<< HEAD
-//  public void update() {
-//    super.update();
-//    if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
-//=======
   public void stop() {
     super.start();
-    alert = false;
     owner.getEntity().getEvents().trigger("unAlert");
   }
 
@@ -58,17 +37,9 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
     if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeDiscoveredTarget) >= 3000) {
       /*
       Logger logger = LoggerFactory.getLogger(WanderTask.class);
-       logger.info("found3 secs");
-       */
+      logger.info("found3 secs");
+      */
       owner.getEntity().getEvents().trigger("alert");
-//>>>>>>> e35cd399968119d29aed01242f8f7da36f7fa794
-      updateAlert();
     }
-  }
-
-  // set alert if other ghost found enemy
-
-  public void updateAlert() {
-    this.alert = true;
   }
 }

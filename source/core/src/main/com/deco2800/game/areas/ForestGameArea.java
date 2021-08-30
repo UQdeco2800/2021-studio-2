@@ -97,7 +97,7 @@ public class ForestGameArea extends GameArea {
     spawnGhosts();
     spawnCutsceneTrigger();
     spawnRangedGhosts();
-    //spawnGhostKing(); //use this later to make evil assasins with different sprites
+    spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
     playMusic();
   }
@@ -199,6 +199,15 @@ public class ForestGameArea extends GameArea {
   private void spawnCutsceneTrigger() {
     Entity trigger = CutsceneTriggerFactory.createTrigger();
     spawnEntityAt(trigger, TEST_TRIGGER, true, true);
+  }
+
+  private void spawnGhostKing() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+    Entity ghostKing = NPCFactory.createGhostKing(player);
+    spawnEntityAt(ghostKing, randomPos, true, true);
   }
 
   /**
