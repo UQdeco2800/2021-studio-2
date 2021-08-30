@@ -3,16 +3,12 @@ package com.deco2800.game.components.tasks;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.TimeUnit;
 
 /** Chases a target entity and alerts nearby enemies after 3 secinds */
 public class AlertChaseTask extends ChaseTask implements PriorityTask {
 
   private long timeDiscoveredTarget;
-  private boolean alert;
   /**
    * @param target The entity to chase.
    * @param priority Task priority when chasing (0 when not chasing).
@@ -26,14 +22,12 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
   @Override
   public void start() {
     super.start();
-    alert = false;
     timeDiscoveredTarget = System.nanoTime();
   }
 
   @Override
   public void stop() {
     super.start();
-    alert = false;
     owner.getEntity().getEvents().trigger("unAlert");
   }
 
@@ -46,13 +40,6 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
       logger.info("found3 secs");
       */
       owner.getEntity().getEvents().trigger("alert");
-      updateAlert();
     }
-  }
-
-  // set alert if other ghost found enemy
-
-  public void updateAlert() {
-    this.alert = true;
   }
 }
