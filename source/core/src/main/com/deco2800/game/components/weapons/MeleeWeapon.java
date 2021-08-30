@@ -136,6 +136,8 @@ public class MeleeWeapon extends Component {
      * Collision method used by weapon to detect collisions with enemy entities,
      * defined by the target layer.
      * @see com.deco2800.game.components.TouchAttackComponent
+     * @param me - the fixture used to represent this weapon
+     * @param other - the fixture that our weapon is colliding with.
      * @return true - if weapon collided with enemy target
      *         false - otherwise.
      */
