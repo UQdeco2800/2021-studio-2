@@ -8,14 +8,22 @@ import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import com.deco2800.game.rendering.AnimationRenderComponent;
+
 /** Movement controller for a physics-based entity. */
 public class PhysicsMovementComponent extends Component implements MovementController {
-  private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
-  private static final Vector2 maxSpeed = Vector2Utils.ONE;
 
-  private PhysicsComponent physicsComponent;
+  AnimationRenderComponent animator;
+
+
+  private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
+
+  public PhysicsComponent physicsComponent;
+
   private Vector2 targetPosition;
   private boolean movementEnabled = true;
+  private Vector2 maxSpeed = Vector2Utils.ONE;
 
   @Override
   public void create() {
@@ -67,9 +75,29 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     this.targetPosition = target;
   }
 
+  public void setMaxSpeed(Vector2 maxSpeed) {
+    this.maxSpeed = maxSpeed;
+  }
+
   private void updateDirection(Body body) {
     Vector2 desiredVelocity = getDirection().scl(maxSpeed);
     setToVelocity(body, desiredVelocity);
+
+    //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
+    if (this.getDirection().x>this.getDirection().y) {
+      if (this.getDirection().x < 0) {
+        this.getEntity().getEvents().trigger("LeftStart");
+      } else if (this.getDirection().x > 0) {
+        this.getEntity().getEvents().trigger("RightStart");
+      }
+    }
+    else{
+      if (this.getDirection().y < 0) {
+        this.getEntity().getEvents().trigger("DownStart");
+      } else if (this.getDirection().y > 0) {
+        this.getEntity().getEvents().trigger("UpStart");
+      }
+    }
   }
 
   private void setToVelocity(Body body, Vector2 desiredVelocity) {
@@ -79,8 +107,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
   }
 
-  private Vector2 getDirection() {
-    // Move towards targetPosition based on our current position
+  public Vector2 getDirection() {
     return targetPosition.cpy().sub(entity.getPosition()).nor();
   }
 }

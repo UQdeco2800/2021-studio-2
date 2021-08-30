@@ -67,9 +67,11 @@ public class PlayerFactory {
                     .addComponent(new PhysicsComponent())
                     .addComponent(new ColliderComponent())
                     .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-                    .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.WEAPON))
+                    //Remove the below lines when the player uses a separate weapon entity
+                    .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                     .addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
                             new Vector2(1f, 0.5f)))
+                    
                     .addComponent(new PlayerActions())
                     .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                     .addComponent(new InventoryComponent(stats.gold))
