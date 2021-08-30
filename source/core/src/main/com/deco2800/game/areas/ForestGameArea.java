@@ -108,6 +108,7 @@ public class ForestGameArea extends GameArea {
     spawnAnchoredGhosts();
     spawnTraps();
     
+    spawnCutsceneTrigger();
     playMusic();
   }
 
