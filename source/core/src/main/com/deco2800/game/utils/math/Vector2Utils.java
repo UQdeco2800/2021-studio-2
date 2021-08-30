@@ -82,9 +82,8 @@ public class Vector2Utils {
   }
 
   /**
-   * Swaps the elements (x & y) of a vector.
-   *
-   * @param vector The vector to be swapped
+   * Swaps the elements / axis of a vector.
+   * @param vector The vector whose axis will be swapped
    * @return The vector that's been swapped
    */
   public static Vector2 swapAxis(Vector2 vector) {

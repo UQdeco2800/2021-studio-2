@@ -233,6 +233,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   /**
    * This method has been created to test that the correct direction is
    * to be walked in.
+   * @return walk direction.
    */
   public Vector2 getWalkDirection() {
     return this.walkDirection;
