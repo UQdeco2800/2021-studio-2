@@ -78,34 +78,34 @@ public class NPCFactory {
     return ghost;
   }
 
-//  public static Entity createGhostKing(Entity target) {
-//    Entity ghostKing = createBaseNPCNoAI();
-//    GhostKingConfig config = configs.ghostKing;
-//    AITaskComponent aiTaskComponent = new AITaskComponent()
-//            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-//            .addTask(new AlertChaseTask(target, 5, 3f, 4f)); //priority orig 10
-//
-//
-//    ghostKing.addComponent(aiTaskComponent);
-//
-//    AnimationRenderComponent animator =
-//        new AnimationRenderComponent(
-//            ServiceLocator.getResourceService()
-//                .getAsset("images/ghostKing.atlas", TextureAtlas.class));
-//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
-//
-//
-//    ghostKing
-//        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-//        .addComponent(animator)
-//        .addComponent(new GhostAnimationController());
-//
-//    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
-//    return ghostKing;
-//  }
+  public static Entity createGhostKing(Entity target) {
+    Entity ghostKing = createBaseNPCNoAI();
+    GhostKingConfig config = configs.ghostKing;
+    AITaskComponent aiTaskComponent = new AITaskComponent()
+            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+            .addTask(new AlertChaseTask(target, 10, 3f, 4f));
+
+    ghostKing.addComponent(aiTaskComponent);
+
+    AnimationRenderComponent animator =
+        new AnimationRenderComponent(
+            ServiceLocator.getResourceService()
+                .getAsset("images/ghost.atlas", TextureAtlas.class));
+        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
+
+
+    ghostKing
+        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+        .addComponent(animator)
+        .addComponent(new GhostAnimationController());
+    ghostKing.setEntityType("AlertCaller");
+
+    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
+    return ghostKing;
+  }
 
   /**
    * Creates an anchored ghost entity.
