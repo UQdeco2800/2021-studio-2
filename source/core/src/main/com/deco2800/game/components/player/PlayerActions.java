@@ -107,7 +107,6 @@ public class PlayerActions extends Component {
    * @param keycode - the last pressed player key.
    */
   void attack(int keycode) {
-    System.out.println(keycode);
     MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon == null) {
       return;

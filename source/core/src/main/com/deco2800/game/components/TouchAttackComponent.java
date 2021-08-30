@@ -6,7 +6,11 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+
+import java.util.Scanner;
+
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -16,9 +20,13 @@ import com.deco2800.game.physics.components.PhysicsComponent;
  * <p>Damage is only applied if target entity has a CombatStatsComponent. Knockback is only applied
  * if target entity has a PhysicsComponent.
  */
+
 public class TouchAttackComponent extends TouchComponent {
   private float knockbackForce = 0f;
   private CombatStatsComponent combatStats;
+
+  private Scanner scanner = new Scanner(System.in);
+  private long start = 0;
 
   /**
    * Create a component which attacks entities on collision, without knockback.
@@ -44,10 +52,15 @@ public class TouchAttackComponent extends TouchComponent {
     combatStats = entity.getComponent(CombatStatsComponent.class);
   }
 
+  /**
+   * action apply when the hitbox component collide
+   * @param me the owner of the hitbox
+   * @param other the target of the hitbox
+   */
   @Override
   protected void onCollisionStart(Fixture me, Fixture other) {
     if (hitboxComponent.getFixture() != me) {
-      // Not triggered by hitbox, ignore
+      //do nothing
       return;
     }
 
@@ -59,17 +72,26 @@ public class TouchAttackComponent extends TouchComponent {
     // Try to attack target.
     Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
     CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-    if (targetStats != null) {
+    if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
+      //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
       targetStats.hit(combatStats);
+      start = System.currentTimeMillis();
     }
 
     // Apply knockback
+    //Maybe this should be called during collision as sometimes hitboxes can overlap without onCollision being called in time
     PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-    if (physicsComponent != null && knockbackForce > 0f) {
+    if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
       Body targetBody = physicsComponent.getBody();
       Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
       Vector2 impulse = direction.setLength(knockbackForce);
       targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+    }
+
+    //Dissolve arrow attacks after successful hits
+    if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
+      //Remove later on to make arrows stick into walls and more
+      getEntity().prepareDispose();
     }
   }
 }

@@ -4,14 +4,15 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.tasks.ChaseTask;
-import com.deco2800.game.components.tasks.WanderTask;
+import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
 import com.deco2800.game.entities.configs.GhostKingConfig;
+import com.deco2800.game.entities.configs.GhostRangedConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -22,6 +23,8 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+
+
 
 /**
  * Factory to create non-playable character (NPC) entities with predefined components.
@@ -34,6 +37,8 @@ import com.deco2800.game.services.ServiceLocator;
  * similar characteristics.
  */
 public class NPCFactory {
+  //protected PhysicsMovementComponent getDirection;
+  PhysicsMovementComponent physicsMove;
   private static final NPCConfigs configs =
       FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
 
@@ -50,43 +55,167 @@ public class NPCFactory {
     AnimationRenderComponent animator =
         new AnimationRenderComponent(
             ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
     ghost
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(animator)
         .addComponent(new GhostAnimationController());
 
+
+    ghost.getComponent(AITaskComponent.class).
+            addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+    ghost.getComponent(AITaskComponent.class).
+            addTask(new ZigChaseTask(target, 11, 3f, 6f));
+
+
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+
 
     return ghost;
   }
 
+//  public static Entity createGhostKing(Entity target) {
+//    Entity ghostKing = createBaseNPCNoAI();
+//    GhostKingConfig config = configs.ghostKing;
+//    AITaskComponent aiTaskComponent = new AITaskComponent()
+//            .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+//            .addTask(new AlertChaseTask(target, 5, 3f, 4f)); //priority orig 10
+//
+//
+//    ghostKing.addComponent(aiTaskComponent);
+//
+//    AnimationRenderComponent animator =
+//        new AnimationRenderComponent(
+//            ServiceLocator.getResourceService()
+//                .getAsset("images/ghostKing.atlas", TextureAtlas.class));
+//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
+//
+//
+//    ghostKing
+//        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+//        .addComponent(animator)
+//        .addComponent(new GhostAnimationController());
+//
+//    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
+//    return ghostKing;
+//  }
+
   /**
-   * Creates a ghost king entity.
+   * Creates an anchored ghost entity.
+   *
+   * @param target entity to chase
+   * @param anchor base entity to anchor to
+   * @param anchorSize how big the base's area
+   * @return entity
+   */
+
+  public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSize) {
+    Entity anchoredGhost = createBaseNPCNoAI();
+    BaseEntityConfig config = configs.ghost;
+    AITaskComponent aiComponent =
+      new AITaskComponent()
+        .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
+        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
+        .addTask(new AnchoredRetreatTask(anchor, anchorSize));
+    anchoredGhost.addComponent(aiComponent);
+
+    AnimationRenderComponent animator =
+      new AnimationRenderComponent(
+          ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+    anchoredGhost
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
+
+    anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
+    return anchoredGhost;
+  }
+
+  /**
+   * Creates a anchored ghost entity.
+   * Anchor ghost only chase the target if the target approach the anchor point
+   * @param target entity to chase
+   * @param anchor base entity to anchor to
+   * @param anchorSizeX how big the base's area is in the X axis
+   * @param anchorSizeY how big the base's area is in the Y axis
+   * @return entity
+   */
+  public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
+    Entity anchoredGhost = createBaseNPCNoAI();
+    BaseEntityConfig config = configs.ghost;
+    AITaskComponent aiComponent =
+      new AITaskComponent()
+        .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
+        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
+        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
+    anchoredGhost.addComponent(aiComponent);
+
+    AnimationRenderComponent animator =
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+    anchoredGhost
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController());
+
+    anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
+    return anchoredGhost;
+  }
+
+  /**
+   * Creates a ranged ghost entity.
+   * Ghost that shoot arrow at target
+   * It will retreat if the target is approach in certain range
    *
    * @param target entity to chase
    * @return entity
    */
-  public static Entity createGhostKing(Entity target) {
-    Entity ghostKing = createBaseNPC(target);
-    GhostKingConfig config = configs.ghostKing;
+  public static Entity createRangedGhost(Entity target) {
+    Entity ghost = createBaseNPCNoAI();
+    GhostRangedConfig config = configs.ghostRanged;
+    AITaskComponent aiComponent =
+      new AITaskComponent()
+        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+        .addTask(new RangedChaseTask(target, 10, 15f, 20f));
+    ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+    shootProjectileTask.setProjectileType("normalArrow");
+    shootProjectileTask.setMultishotChance(0.1);
+    aiComponent.addTask(shootProjectileTask);
 
     AnimationRenderComponent animator =
-        new AnimationRenderComponent(
-            ServiceLocator.getResourceService()
-                .getAsset("images/ghostKing.atlas", TextureAtlas.class));
-    animator.addAnimation("float", 0.1f, Animation.PlayMode.LOOP);
-    animator.addAnimation("angry_float", 0.1f, Animation.PlayMode.LOOP);
 
-    ghostKing
-        .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-        .addComponent(animator)
-        .addComponent(new GhostAnimationController());
+      new AnimationRenderComponent(
+        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+    animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+    animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
-    ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
-    return ghostKing;
+    ghost
+      .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+      .addComponent(animator)
+      .addComponent(new GhostAnimationController())
+      .addComponent(aiComponent);
+    ghost.setAttackRange(5);
+    ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+    return ghost;
   }
 
   /**
@@ -105,8 +234,27 @@ public class NPCFactory {
             .addComponent(new PhysicsMovementComponent())
             .addComponent(new ColliderComponent())
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1.5f))
+            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2.5f))
             .addComponent(aiComponent);
+
+    PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
+    return npc;
+  }
+
+  /**
+   * Creates a generic NPC, with no ai,
+   * to be used as a base entity by more specific NPC creation methods.
+   *
+   * @return entity
+   */
+  private static Entity createBaseNPCNoAI() {
+    Entity npc =
+        new Entity()
+            .addComponent(new PhysicsComponent())
+            .addComponent(new PhysicsMovementComponent())
+            .addComponent(new ColliderComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2.5f));
 
     PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
     return npc;
