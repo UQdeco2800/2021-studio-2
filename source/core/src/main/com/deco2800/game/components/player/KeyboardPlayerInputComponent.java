@@ -25,13 +25,13 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   /** When the player is pressing W, up is 1, else, up is 0. */
   private byte up = 0;
 
-  /** When the player is pressing A, up is 1, else, up is 0. */
+  /** When the player is pressing A, left is 1, else, left is 0. */
   private byte left = 0;
 
-  /** When the player is pressing S, up is 1, else, up is 0. */
+  /** When the player is pressing S, down is 1, else, down is 0. */
   private byte down = 0;
 
-  /** When the player is pressing D, up is 1, else, up is 0. */
+  /** When the player is pressing D, right is 1, else, right is 0. */
   private byte right = 0;
 
   /** While the player is in their dash, it is 1, else it is 0. */
