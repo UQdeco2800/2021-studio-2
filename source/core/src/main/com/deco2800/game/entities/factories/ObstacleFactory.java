@@ -49,7 +49,7 @@ public class ObstacleFactory {
 
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
-    trap.scaleHeight(0.5f);
+    trap.scaleHeight(0.3f);
     return trap;
   }
 
