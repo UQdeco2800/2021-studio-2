@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
+import java.security.KeyStore;
+
 public class TextBoxDisplay extends UIComponent {
 
     /** The priority of the UI component to be displayed on the screen. */
@@ -36,7 +38,11 @@ public class TextBoxDisplay extends UIComponent {
         label.setPosition(200f, 200f);
         label.setFontScale(1.5f);
         image = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/test_box.png", Texture.class));
+                .getAsset("images/text_box.png", Texture.class));
+        image.setPosition(100f, 80f);
+        image.setWidth(1000f);
+        image.setHeight(500f);
+        stage.addActor(image);
         stage.addActor(label);
     }
 
@@ -50,9 +56,11 @@ public class TextBoxDisplay extends UIComponent {
     public void draw(SpriteBatch batch) {
         if (textBox.isOpen()) {
             label.setVisible(true);
+            image.setVisible(true);
             label.setText(textBox.getSubMessage());
         } else {
             label.setVisible(false);
+            image.setVisible(false);
         }
     }
 
@@ -70,5 +78,6 @@ public class TextBoxDisplay extends UIComponent {
     public void dispose() {
         super.dispose();
         label.remove();
+        //image.remove();
     }
 }

@@ -11,7 +11,7 @@ public enum Dialogue {
             "Your WASD keys will help guide you warrior \ninto Valhalla",
             "Press ESCAPE if you're urgent to \ncarry on with your journey to Valhalla.", "Good Luck"}),
 
-    THE_ROCK(new String[]{"Ragnarok is nearing warrior.", "You mustn't hesitate nor die an unworthy death.",
+    THE_ROCK(new String[]{"Ragnarok is nearing warrior.", "You mustn't hesitate nor die an\n unworthy death.",
             "If you want a seat at Valhalla...", "Earn it"}),
 
     TEST(new String[]{"Message 1", "Message 2", "Message 3"});
