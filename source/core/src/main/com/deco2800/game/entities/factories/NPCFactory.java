@@ -65,16 +65,12 @@ public class NPCFactory {
         .addComponent(animator)
         .addComponent(new GhostAnimationController());
 
-
     ghost.getComponent(AITaskComponent.class).
             addTask(new AlertableChaseTask(target, 10, 3f, 4f));
     ghost.getComponent(AITaskComponent.class).
             addTask(new ZigChaseTask(target, 11, 3f, 6f));
 
-
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-
-
     return ghost;
   }
 
@@ -84,7 +80,6 @@ public class NPCFactory {
     AITaskComponent aiTaskComponent = new AITaskComponent()
             .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
             .addTask(new AlertChaseTask(target, 10, 3f, 4f));
-
     ghostKing.addComponent(aiTaskComponent);
 
     AnimationRenderComponent animator =
@@ -95,7 +90,6 @@ public class NPCFactory {
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
-
 
     ghostKing
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -259,7 +253,6 @@ public class NPCFactory {
     PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
     return npc;
   }
-
   private NPCFactory() {
     throw new IllegalStateException("Instantiating static util class");
   }
