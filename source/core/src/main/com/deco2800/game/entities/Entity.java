@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class Entity {
   private boolean disposeYourself = false;
   private float attackRange;
   private String entityType;
+  private float angle;
 
   public Entity() {
     id = nextId;
@@ -135,6 +137,19 @@ public class Entity {
    */
   public void setScale(Vector2 scale) {
     this.scale = scale.cpy();
+  }
+
+  public float getAngle() {
+    return angle;
+  }
+
+  /**
+   *
+   * @param angle to rotate in degrees
+   */
+  public void setAngle(float angle) {
+    this.angle = angle;
+    //this.getComponent(HitboxComponent.class).setAngle(angle);
   }
 
   /**

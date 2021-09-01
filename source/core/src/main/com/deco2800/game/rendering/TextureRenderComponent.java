@@ -14,7 +14,6 @@ import java.awt.*;
 public class TextureRenderComponent extends RenderComponent {
   private final Texture texture;
   private final Sprite sprite;
-  private float rotation = 0;
 
   /**
    * @param texturePath internal path of static teture to render. Will be scaled to the entity's
@@ -31,10 +30,9 @@ public class TextureRenderComponent extends RenderComponent {
   }
 
   /** @param sprite Sprite to render,  Will be scaled to the entity's scale. */
-  public TextureRenderComponent(Sprite sprite, float rotation) {
+  public TextureRenderComponent(Sprite sprite) {
     this.texture = null;
     this.sprite = sprite;
-    this.rotation = rotation;
   }
 
   /** Scale the entity to a width of 1 and a height matching the texture's ratio */
@@ -52,13 +50,14 @@ public class TextureRenderComponent extends RenderComponent {
     Vector2 positionCenter = entity.getCenterPosition();
     //Vector2 positionCenterRelative = positionCenter.cpy().sub(position);
     Vector2 scale = entity.getScale();
+    float angle = entity.getAngle();
 
     if (texture != null) {
       batch.draw(texture, position.x, position.y, scale.x, scale.y);
     } else if (sprite != null) {
-      Vector2 newScale = scale.cpy().rotateAroundDeg(new Vector2(0,0),  -rotation);
+      Vector2 newScale = scale.cpy().rotateAroundDeg(new Vector2(0,0),  -angle);
       //batch.draw(sprite, position.x, position.y, positionCenterRelative.x, positionCenterRelative.y, 1, 1, scale.x, scale.y, rotation);
-      batch.draw(sprite, position.x, position.y, 0, 0, 1, 1, newScale.x, newScale.y, rotation);
+      batch.draw(sprite, position.x, position.y, 0, 0, 1, 1, newScale.x, newScale.y, angle);
     }
   }
 }
