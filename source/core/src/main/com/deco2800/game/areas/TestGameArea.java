@@ -80,8 +80,7 @@ public class TestGameArea extends GameArea {
 
   private final TerrainFactory terrainFactory;
   private final GdxGame game;
-
-  private Entity player;
+  private static Map map;
 
   public TestGameArea(TerrainFactory terrainFactory, GdxGame game) {
     super();
@@ -92,8 +91,8 @@ public class TestGameArea extends GameArea {
   /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
   @Override
   public void create() {
-    Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
-    tileTextures = m.TileRefsArray();
+    map = FileLoader.readClass(Map.class, "maps/test_map.json");
+    tileTextures = map.TileRefsArray();
 
     super.create();
     loadAssets();
@@ -151,7 +150,7 @@ public class TestGameArea extends GameArea {
 
   private void spawnTerrain() {
     // Background terrain
-    terrain = terrainFactory.createTerrain(TerrainType.TEST);
+    terrain = terrainFactory.createTerrain(TerrainType.TEST, map);
     spawnEntity(new Entity().addComponent(terrain));
 
     // Terrain walls
@@ -179,8 +178,8 @@ public class TestGameArea extends GameArea {
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
     //Walls imported from JSON (Not working as intended, leave for sprint 2)
-    /*Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
-    HashMap<String, Integer>[] walls = m.getWallObjects();
+  
+    HashMap<String, Integer>[] walls = map.getWallObjects();
     int X = 0;
     int Y = 2;
     int WIDTH = 1;
@@ -208,8 +207,8 @@ public class TestGameArea extends GameArea {
               false,
               false);
     }
-     */
-
+     
+    /*
     //Manually placed walls, will be deleted in next sprint
     //Left Wall
     spawnEntityAt(ObstacleFactory.createWall(0.5f, 6f),
@@ -258,7 +257,9 @@ public class TestGameArea extends GameArea {
             new GridPoint2(14, 7),
             false,
             false);
+            */
   }
+  
 
   private void spawnTraps() {
     GridPoint2 minPos = new GridPoint2(0, 0);
@@ -334,11 +335,6 @@ public class TestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
     resourceService.unloadAssets(arrowSounds);
   }
-
-  public Entity getPlayer() {
-    return this.player;
-  }
-
 
   @Override
   public void dispose() {

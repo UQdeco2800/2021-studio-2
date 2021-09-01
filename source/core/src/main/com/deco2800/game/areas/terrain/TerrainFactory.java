@@ -64,7 +64,7 @@ public class TerrainFactory {
    */
   public TerrainComponent createTerrain(TerrainType terrainType) {
     ResourceService resourceService = ServiceLocator.getResourceService();
-    switch (terrainType) {
+    switch (terrainType){
       case FOREST_DEMO:
         TextureRegion orthoGrass =
             new TextureRegion(resourceService.getAsset("images/grass_1.png", Texture.class));
@@ -89,17 +89,30 @@ public class TerrainFactory {
         TextureRegion hexRocks =
             new TextureRegion(resourceService.getAsset("images/hex_grass_3.png", Texture.class));
         return createForestDemoTerrain(1f, hexGrass, hexTuft, hexRocks);
-      case TEST:
-        Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
+      
+      default:
+        return null;
+    }
+  }
 
-        String[] tileRefs = m.TileRefsArray();
+  /**
+   * A version of createTerrain that takes a map object as an input to render a specific map
+   * @param terrainType
+   * @param map
+   * @return
+   */
+  public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    switch (terrainType){
+      case TEST:
+        String[] tileRefs = map.TileRefsArray();
         ArrayList<TextureRegion> textures = new ArrayList<>();
 
         for (String s:tileRefs){
           textures.add(new TextureRegion(resourceService.getAsset(s,Texture.class)));
         }
 
-        return createWorldTerrain(0.5f, textures, m.getMapTiles(), m.getDimensions());
+        return createWorldTerrain(0.5f, textures, map.getMapTiles(), map.getDimensions());
 
       default:
         return null;
@@ -113,7 +126,6 @@ public class TerrainFactory {
     TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
     return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
-
 
 
   private TiledMapRenderer createRenderer(TiledMap tiledMap, float tileScale) {
