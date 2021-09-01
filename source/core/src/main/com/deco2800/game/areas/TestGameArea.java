@@ -208,10 +208,7 @@ public class TestGameArea extends GameArea {
               false,
               false);
     }
-<<<<<<< HEAD
      
-=======
->>>>>>> c3427904ba9f39c224d81417e272818ffb94d93d
     /*
     //Manually placed walls, will be deleted in next sprint
     //Left Wall
@@ -261,12 +258,7 @@ public class TestGameArea extends GameArea {
             new GridPoint2(14, 7),
             false,
             false);
-<<<<<<< HEAD
             */
-=======
-
-     */
->>>>>>> c3427904ba9f39c224d81417e272818ffb94d93d
   }
   
 
