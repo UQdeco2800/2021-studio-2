@@ -81,11 +81,11 @@ public class MainGameScreen extends ScreenAdapter {
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
 
     if (world.equals("forest")) {
-      this.gameArea = new ForestGameArea(terrainFactory, game);
+      this.gameArea = new ForestGameArea(terrainFactory);
       this.gameArea.create();
       renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     } else if (world.equals("test")) {
-      this.gameArea = new TestGameArea(terrainFactory, game);
+      this.gameArea = new TestGameArea(terrainFactory);
       this.gameArea.create();
       renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     }

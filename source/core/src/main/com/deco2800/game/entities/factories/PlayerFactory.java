@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.weapons.Axe;
-import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.player.*;
-import com.deco2800.game.components.death.DeathActions;
-import com.deco2800.game.components.death.DeathDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.files.FileLoader;
@@ -34,10 +31,9 @@ public class PlayerFactory {
 
   /**
    * Create a player entity.
-   * @param game instance of the game
    * @return entity
    */
-  public static Entity createPlayer(GdxGame game) {
+  public static Entity createPlayer() {
     InputComponent inputComponent =
             ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
