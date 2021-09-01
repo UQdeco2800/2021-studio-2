@@ -107,7 +107,7 @@ public class TestGameArea extends GameArea {
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
     //Walls imported from JSON (Not working as intended, leave for sprint 2)
-    /*Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
+    Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
     HashMap<String, Integer>[] walls = m.getWallObjects();
     int X = 0;
     int Y = 2;
@@ -136,8 +136,7 @@ public class TestGameArea extends GameArea {
               false,
               false);
     }
-     */
-
+    /*
     //Manually placed walls, will be deleted in next sprint
     //Left Wall
     spawnEntityAt(ObstacleFactory.createWall(0.5f, 6f),
@@ -186,6 +185,8 @@ public class TestGameArea extends GameArea {
             new GridPoint2(14, 7),
             false,
             false);
+
+     */
   }
 
   private void spawnTraps() {
