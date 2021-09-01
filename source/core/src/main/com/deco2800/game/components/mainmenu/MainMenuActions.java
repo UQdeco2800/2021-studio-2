@@ -19,18 +19,25 @@ public class MainMenuActions extends Component {
 
   @Override
   public void create() {
-    entity.getEvents().addListener("start", this::onStart);
-    entity.getEvents().addListener("load", this::onLoad);
+    entity.getEvents().addListener("startForest", this::onStartForest);
+    entity.getEvents().addListener("startTest", this::onStartTest);
     entity.getEvents().addListener("exit", this::onExit);
-    entity.getEvents().addListener("settings", this::onSettings);
   }
 
   /**
-   * Swaps to the Main Game screen.
+   * Swaps to the Forest Main Game screen.
    */
-  private void onStart() {
+  private void onStartForest() {
     logger.info("Start game");
-    game.setScreen(GdxGame.ScreenType.MAIN_GAME);
+    game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST);
+  }
+
+  /**
+   * Swaps to the Test Main Game screen.
+   */
+  private void onStartTest() {
+    logger.info("Start game");
+    game.setScreen(GdxGame.ScreenType.MAIN_GAME_TEST);
   }
 
   /**

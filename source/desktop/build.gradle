@@ -4,13 +4,19 @@ sourceSets.main.resources.srcDirs = ["../core/assets"]
 project.ext.mainClassName = "com.deco2800.game.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets")
 
+
+
+
+
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
     workingDir = project.assetsDir
     ignoreExitValue = true
+
     jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]
+    //jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
 }
 
 task debug(dependsOn: classes, type: JavaExec) {

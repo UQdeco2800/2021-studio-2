@@ -10,19 +10,44 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class GhostAnimationController extends Component {
   AnimationRenderComponent animator;
 
+  /**
+   * Create the animation
+   * add listener on entity with wander and chase task
+   * play animation on corresponding atlas
+   */
   @Override
   public void create() {
     super.create();
     animator = this.entity.getComponent(AnimationRenderComponent.class);
-    entity.getEvents().addListener("wanderStart", this::animateWander);
-    entity.getEvents().addListener("chaseStart", this::animateChase);
+
+    entity.getEvents().addListener("LeftStart", this::animateLeft);
+    entity.getEvents().addListener("RightStart", this::animateRight);
+    entity.getEvents().addListener("UpStart", this::animateUp);
+    entity.getEvents().addListener("DownStart", this::animateDown);
   }
 
-  void animateWander() {
-    animator.startAnimation("float");
+  public void animateLeft() {
+    animator.startAnimation("floatLeft");
+  }
+
+  public void animateRight() {
+    animator.startAnimation("floatRight");
+  }
+
+  public void animateUp() {
+    animator.startAnimation("floatUp");
+  }
+
+  public void animateDown() {
+    animator.startAnimation("floatDown");
+  }
+
+  //should be able to get rid of these but will test later
+  public void animateWander() {
+    animator.startAnimation("floatUp");
   }
 
   void animateChase() {
-    animator.startAnimation("angry_float");
+    animator.startAnimation("floatDown");
   }
 }

@@ -20,6 +20,7 @@ public class AITaskComponent extends Component implements TaskRunner {
   private final List<PriorityTask> priorityTasks = new ArrayList<>(2);
   private PriorityTask currentTask;
 
+
   /**
    * Add a priority task to the list of tasks. This task will be run only when it has the highest
    * priority, and can be stopped to run a higher priority task.
@@ -52,6 +53,9 @@ public class AITaskComponent extends Component implements TaskRunner {
     currentTask.update();
   }
 
+  /**
+   * Stop the current task
+   */
   @Override
   public void dispose() {
     if (currentTask != null) {
@@ -59,6 +63,10 @@ public class AITaskComponent extends Component implements TaskRunner {
     }
   }
 
+  /**
+   * return the Task with highest priority
+   * @return PriorityTask
+   */
   private PriorityTask getHighestPriorityTask() {
     try {
       return Collections.max(priorityTasks, Comparator.comparingInt(PriorityTask::getPriority));
@@ -67,6 +75,10 @@ public class AITaskComponent extends Component implements TaskRunner {
     }
   }
 
+  /**
+   * Change the task to the desired task
+   * @param desiredTask
+   */
   private void changeTask(PriorityTask desiredTask) {
     logger.debug("{} Changing to task {}", this, desiredTask);
     if (currentTask != null) {

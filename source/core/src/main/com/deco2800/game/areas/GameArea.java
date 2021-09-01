@@ -25,7 +25,9 @@ public abstract class GameArea implements Disposable {
   }
 
   /** Create the game area in the world. */
-  public abstract void create();
+  public void create() {
+    ServiceLocator.registerGameArea(this);
+  }
 
   /** Dispose of all internal entities in the area */
   public void dispose() {
@@ -52,8 +54,8 @@ public abstract class GameArea implements Disposable {
    * @param centerX true to center entity X on the tile, false to align the bottom left corner
    * @param centerY true to center entity Y on the tile, false to align the bottom left corner
    */
-  protected void spawnEntityAt(
-      Entity entity, GridPoint2 tilePos, boolean centerX, boolean centerY) {
+  public void spawnEntityAt(
+          Entity entity, GridPoint2 tilePos, boolean centerX, boolean centerY) {
     Vector2 worldPos = terrain.tileToWorldPosition(tilePos);
     float tileSize = terrain.getTileSize();
 
@@ -65,6 +67,29 @@ public abstract class GameArea implements Disposable {
     }
 
     entity.setPosition(worldPos);
+    spawnEntity(entity);
+  }
+
+  /**
+   * Spawn entity on a given tile. Requires the terrain to be set first.
+   *
+   * @param entity Entity (not yet registered)
+   * @param entityPos world position to spawn at
+   * @param centerX true to center entity X on the tile, false to align the bottom left corner
+   * @param centerY true to center entity Y on the tile, false to align the bottom left corner
+   */
+  public void spawnEntityAt(
+          Entity entity, Vector2 entityPos, boolean centerX, boolean centerY) {
+    float tileSize = terrain.getTileSize();
+
+    if (centerX) {
+      entityPos.x += (tileSize / 2) - entity.getCenterPosition().x;
+    }
+    if (centerY) {
+      entityPos.y += (tileSize / 2) - entity.getCenterPosition().y;
+    }
+
+    entity.setPosition(entityPos);
     spawnEntity(entity);
   }
 }

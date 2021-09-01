@@ -37,7 +37,10 @@ public class ObstacleFactory {
     return tree;
   }
 
-
+  /**
+   * Creates a trap with collation.
+   * @return trap
+   */
   public static Entity createPhysicalTrap() {
     Entity trap = new Entity()
             .addComponent(new TextureRenderComponent("images/trap.png"))
@@ -49,7 +52,7 @@ public class ObstacleFactory {
 
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
-    trap.scaleHeight(0.5f);
+    trap.scaleHeight(0.3f);
     return trap;
   }
 
@@ -71,6 +74,27 @@ public class ObstacleFactory {
     return wall;
   }
 
+  /**
+   * Creates an anchor entity to be referenced by other entities.
+   *
+   * @return entity to serve as the base's real world location
+   */
+  public static Entity createAnchor() {
+    Entity anchor =
+            new Entity()
+                    .addComponent(new PhysicsComponent())
+                    //hitbox allows the anchor to be seen in debug mode but should be removed out of testing.
+                    //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+                    //collision can be used instead to test how the follower reacts to a moving anchor
+                    //.addComponent(new ColliderComponent())
+                    // or an obstacle based anchor (cant see through)
+                    //.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                    //Uncomment below to render in game
+                    .addComponent(new TextureRenderComponent("images/ghost_crown.png"));
+    //Stop from moving
+    anchor.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+    return anchor;
+  }
   private ObstacleFactory() {
     throw new IllegalStateException("Instantiating static util class");
   }

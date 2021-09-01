@@ -4,6 +4,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.TestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.maingame.MainGameActions;
@@ -24,6 +25,8 @@ import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
+import com.deco2800.game.ui.textbox.TextBox;
+import com.deco2800.game.ui.textbox.TextBoxDisplay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,9 +37,13 @@ import org.slf4j.LoggerFactory;
  */
 public class MainGameScreen extends ScreenAdapter {
   private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-  private static final String[] mainGameTextures = {"images/heart.png"};
+  private static final String[] mainGameTextures = {
+          "images/heart.png",
+          "lowHealthImages/BloodScreenDarkRepositioned.png",
+          "images/text_box.png"
+  };
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
-
+  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
@@ -63,11 +70,22 @@ public class MainGameScreen extends ScreenAdapter {
 
     loadAssets();
     createUI();
+  }
 
+  public MainGameScreen(GdxGame game, String world) {
+    this(game);
     logger.debug("Initialising main game screen entities");
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
-    TestGameArea TestGameArea = new TestGameArea(terrainFactory);
-    TestGameArea.create();
+
+    if (world.equals("forest")) {
+      ForestGameArea gameArea = new ForestGameArea(terrainFactory, game);
+      gameArea.create();
+      renderer.getCamera().setPlayer(gameArea.getPlayer());
+    } else if (world.equals("test")) {
+      TestGameArea gameArea = new TestGameArea(terrainFactory, game);
+      gameArea.create();
+      renderer.getCamera().setPlayer(gameArea.getPlayer());
+    }
   }
 
   @Override
@@ -111,6 +129,7 @@ public class MainGameScreen extends ScreenAdapter {
     logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainGameTextures);
+    resourceService.loadSounds(playerLowHealthSounds);
     ServiceLocator.getResourceService().loadAll();
   }
 
@@ -118,6 +137,7 @@ public class MainGameScreen extends ScreenAdapter {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainGameTextures);
+    resourceService.unloadAssets(playerLowHealthSounds);
   }
 
   /**
@@ -129,6 +149,7 @@ public class MainGameScreen extends ScreenAdapter {
     Stage stage = ServiceLocator.getRenderService().getStage();
     InputComponent inputComponent =
         ServiceLocator.getInputService().getInputFactory().createForTerminal();
+    InputComponent textBoxInput = ServiceLocator.getInputService().getInputFactory().createForTextBox();
 
     Entity ui = new Entity();
     ui.addComponent(new InputDecorator(stage, 10))
@@ -137,8 +158,11 @@ public class MainGameScreen extends ScreenAdapter {
         .addComponent(new MainGameExitDisplay())
         .addComponent(new Terminal())
         .addComponent(inputComponent)
-        .addComponent(new TerminalDisplay());
+        .addComponent(new TerminalDisplay())
+        .addComponent(new TextBox())
+        .addComponent(textBoxInput)
+        .addComponent(new TextBoxDisplay());
 
-    ServiceLocator.getEntityService().register(ui);
+    ServiceLocator.getEntityService().registerUI(ui);
   }
 }
