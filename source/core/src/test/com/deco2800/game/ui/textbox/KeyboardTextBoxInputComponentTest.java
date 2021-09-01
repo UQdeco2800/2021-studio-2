@@ -12,14 +12,11 @@ import static org.mockito.Mockito.*;
 class KeyboardTextBoxInputComponentTest {
 
     @Test
-    void shouldToggleTextBoxOpenClose() {
+    void shouldCloseTextBox() {
         TextBox textBox = spy(TextBox.class);
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
 
         textBox.setClosed();
-
-        textBoxInput.keyDown(Input.Keys.ESCAPE);
-        assertTrue(textBox.isOpen());
 
         textBoxInput.keyDown(Input.Keys.ESCAPE);
         assertFalse(textBox.isOpen());
