@@ -3,7 +3,6 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.entities.Entity;
@@ -76,17 +75,13 @@ public class ForestGameArea extends GameArea {
   private static final String[] forestMusic = {backgroundMusic};
 
   private final TerrainFactory terrainFactory;
-  private final GdxGame game;
-
-  private Entity player;
 
   /**
    * Intialise the forest game
    * @param terrainFactory intialise the terrain factory
    */
-  public ForestGameArea(TerrainFactory terrainFactory, GdxGame game) {
+  public ForestGameArea(TerrainFactory terrainFactory) {
     super();
-    this.game = game;
     this.terrainFactory = terrainFactory;
   }
 
@@ -183,7 +178,7 @@ public class ForestGameArea extends GameArea {
    * @return newPlayer intialise player entity and spawn the player on the terrain
    */
   private void spawnPlayer() {
-    Entity newPlayer = PlayerFactory.createPlayer(game);
+    Entity newPlayer = PlayerFactory.createPlayer();
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
   }
@@ -287,15 +282,7 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
-  /**
-   * Returns the player entity that is created.
-   *
-   * @return player entity - main character being controlled
-   */
-  public Entity getPlayer() {
-    return this.player;
-  }
-  
+
   /**
    * Dispose the asset (call unloadAssets).
    */
