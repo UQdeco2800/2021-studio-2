@@ -12,23 +12,10 @@ import static org.mockito.Mockito.*;
 class KeyboardTextBoxInputComponentTest {
 
     @Test
-    void shouldToggleTextBoxOpenClose() {
-        TextBox textBox = spy(TextBox.class);
-        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-
-        textBox.setClosed();
-
-        textBoxInput.keyDown(Input.Keys.ESCAPE);
-        assertTrue(textBox.isOpen());
-
-        textBoxInput.keyDown(Input.Keys.ESCAPE);
-        assertFalse(textBox.isOpen());
-    }
-
-    @Test
     void shouldNotClose() {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
+        textBox.setNewCharactersOff();
 
         textBoxInput.keyDown(Input.Keys.SPACE);
         assertTrue(textBox.isOpen());
@@ -41,6 +28,7 @@ class KeyboardTextBoxInputComponentTest {
     void shouldBeClosed() {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
+        textBox.setNewCharactersOff();
 
         textBoxInput.keyDown(Input.Keys.SPACE);
         assertTrue(textBox.isOpen());
@@ -50,15 +38,11 @@ class KeyboardTextBoxInputComponentTest {
     }
 
     @Test
-    void shouldStartSubMessage() {
-
-    }
-
-    @Test
     void shouldFlushMessage() {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.keyTyped(' ');
@@ -72,6 +56,7 @@ class KeyboardTextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
 
         textBoxInput.keyTyped(' ');
         textBoxInput.keyTyped(' ');
@@ -84,6 +69,7 @@ class KeyboardTextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.keyTyped(' ');
