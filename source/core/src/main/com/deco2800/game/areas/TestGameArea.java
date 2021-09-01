@@ -81,8 +81,6 @@ public class TestGameArea extends GameArea {
   private final TerrainFactory terrainFactory;
   private final GdxGame game;
 
-  private Entity player;
-
   public TestGameArea(TerrainFactory terrainFactory, GdxGame game) {
     super();
     this.game = game;
@@ -333,10 +331,6 @@ public class TestGameArea extends GameArea {
     resourceService.unloadAssets(forestSounds);
     resourceService.unloadAssets(forestMusic);
     resourceService.unloadAssets(arrowSounds);
-  }
-
-  public Entity getPlayer() {
-    return this.player;
   }
 
 

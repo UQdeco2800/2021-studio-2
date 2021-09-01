@@ -5,8 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
+import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.areas.TestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -47,6 +49,7 @@ public class MainGameScreen extends ScreenAdapter {
   private final GdxGame game;
   private final Renderer renderer;
   private final PhysicsEngine physicsEngine;
+  private GameArea gameArea;
 
   public MainGameScreen(GdxGame game) {
     this.game = game;
@@ -78,13 +81,21 @@ public class MainGameScreen extends ScreenAdapter {
     TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
 
     if (world.equals("forest")) {
-      ForestGameArea gameArea = new ForestGameArea(terrainFactory, game);
-      gameArea.create();
-      renderer.getCamera().setPlayer(gameArea.getPlayer());
+      this.gameArea = new ForestGameArea(terrainFactory, game);
+      this.gameArea.create();
+      renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     } else if (world.equals("test")) {
-      TestGameArea gameArea = new TestGameArea(terrainFactory, game);
-      gameArea.create();
-      renderer.getCamera().setPlayer(gameArea.getPlayer());
+      this.gameArea = new TestGameArea(terrainFactory, game);
+      this.gameArea.create();
+      renderer.getCamera().setPlayer(this.gameArea.getPlayer());
+    }
+  }
+
+  private void isPlayerDead() {
+    if (this.gameArea.getPlayer() != null) {
+      if (this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
+        game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+      }
     }
   }
 
@@ -93,6 +104,7 @@ public class MainGameScreen extends ScreenAdapter {
     physicsEngine.update();
     ServiceLocator.getEntityService().update();
     renderer.render();
+    isPlayerDead();
   }
 
   @Override

@@ -75,9 +75,7 @@ public class PlayerFactory {
                     .addComponent(new InventoryComponent(stats.gold))
                     .addComponent(inputComponent)
                     .addComponent(new PlayerStatsDisplay())
-                    .addComponent(new PlayerLowHealthDisplay())
-                    .addComponent(new DeathDisplay())
-                    .addComponent(new DeathActions(game));
+                    .addComponent(new PlayerLowHealthDisplay());
 
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
     player.getComponent(AnimationRenderComponent.class).scaleEntity();

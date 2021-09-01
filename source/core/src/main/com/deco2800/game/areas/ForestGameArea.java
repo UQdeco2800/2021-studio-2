@@ -78,7 +78,6 @@ public class ForestGameArea extends GameArea {
   private final TerrainFactory terrainFactory;
   private final GdxGame game;
 
-  private Entity player;
 
   /**
    * Intialise the forest game
@@ -287,15 +286,7 @@ public class ForestGameArea extends GameArea {
     resourceService.unloadAssets(forestMusic);
   }
 
-  /**
-   * Returns the player entity that is created.
-   *
-   * @return player entity - main character being controlled
-   */
-  public Entity getPlayer() {
-    return this.player;
-  }
-  
+
   /**
    * Dispose the asset (call unloadAssets).
    */
