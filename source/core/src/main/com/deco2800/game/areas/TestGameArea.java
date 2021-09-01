@@ -178,8 +178,9 @@ public class TestGameArea extends GameArea {
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
     //Walls imported from JSON (Not working as intended, leave for sprint 2)
-  
+
     HashMap<String, Integer>[] walls = map.getWallObjects();
+
     int X = 0;
     int Y = 2;
     int WIDTH = 1;
@@ -207,7 +208,10 @@ public class TestGameArea extends GameArea {
               false,
               false);
     }
+<<<<<<< HEAD
      
+=======
+>>>>>>> c3427904ba9f39c224d81417e272818ffb94d93d
     /*
     //Manually placed walls, will be deleted in next sprint
     //Left Wall
@@ -257,7 +261,12 @@ public class TestGameArea extends GameArea {
             new GridPoint2(14, 7),
             false,
             false);
+<<<<<<< HEAD
             */
+=======
+
+     */
+>>>>>>> c3427904ba9f39c224d81417e272818ffb94d93d
   }
   
 
