@@ -41,7 +41,7 @@ public class TextBox extends Component {
     private boolean generateCharacter = true;
 
     /** Boolean to check if the main character text box should be displayed or the enemy. */
-    private boolean mainCharacterShowing = false;
+    private boolean mainCharacterShowing = true;
 
     public TextBox() {
         setDialogue(Dialogue.OPENING);
@@ -59,6 +59,7 @@ public class TextBox extends Component {
      * @return entire message to be displayed on the text box
      */
     public String getMessage() {
+
         return message;
     }
 
@@ -116,6 +117,7 @@ public class TextBox extends Component {
         subMessageIndex = 0;
         if (this.index < dialogue.size()) {
             message = dialogue.getMessage(index);
+            mainCharacterShowing = dialogue.isMainCharacter(index);
             setSubMessage();
             this.index++;
         } else {
@@ -186,6 +188,12 @@ public class TextBox extends Component {
         setOpen();
     }
 
+    /**
+     * Checks which character will be displaying the text,
+     * returns true if the main character is talking, false otherwise
+     *
+     * @return boolean to determine who is talking
+     */
     public boolean isMainCharacterShowing() {
         return mainCharacterShowing;
     }

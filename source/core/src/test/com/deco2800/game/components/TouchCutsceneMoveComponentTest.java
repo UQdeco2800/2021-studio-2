@@ -28,27 +28,27 @@ import static org.mockito.Mockito.when;
 @ExtendWith(GameExtension.class)
 class TouchCutsceneMoveComponentTest {
 
-    TextBox textBox;
-
-    @BeforeEach
-    void beforeEach() {
-        ServiceLocator.registerPhysicsService(new PhysicsService());
-        ServiceLocator.registerInputService(new InputService());
-        Entity ui = new Entity();
-        ui.addComponent(new TextBox());
-
-        ServiceLocator.registerEntityService(new EntityService());
-        ServiceLocator.getEntityService().registerUI(ui);
-        textBox = ServiceLocator.getEntityService().getUIEntity().getComponent(TextBox.class);
-    }
-
-    @Test
-    void inputMovementParameters() {
-        short targetLayer = (1 << 3);
-        short triggerLayer = (1 << 3);
-        Entity entity = createTrigger(triggerLayer);
-        Entity target = createTarget(targetLayer);
-    }
+//    TextBox textBox;
+//
+//    @BeforeEach
+//    void beforeEach() {
+//        ServiceLocator.registerPhysicsService(new PhysicsService());
+//        ServiceLocator.registerInputService(new InputService());
+//        Entity ui = new Entity();
+//        ui.addComponent(new TextBox());
+//
+//        ServiceLocator.registerEntityService(new EntityService());
+//        ServiceLocator.getEntityService().registerUI(ui);
+//        textBox = ServiceLocator.getEntityService().getUIEntity().getComponent(TextBox.class);
+//    }
+//
+//    @Test
+//    void inputMovementParameters() {
+//        short targetLayer = (1 << 3);
+//        short triggerLayer = (1 << 3);
+//        Entity entity = createTrigger(triggerLayer);
+//        Entity target = createTarget(targetLayer);
+//    }
 
 
 //import static org.mockito.Mockito.verify;
