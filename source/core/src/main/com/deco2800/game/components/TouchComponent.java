@@ -1,6 +1,7 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 
 abstract class TouchComponent extends Component {
@@ -23,4 +24,17 @@ abstract class TouchComponent extends Component {
     }
 
     abstract void onCollisionStart(Fixture me, Fixture other);
+
+    protected boolean checkEntities(Fixture me, Fixture other) {
+        if (hitboxComponent.getFixture() != me) {
+            // Not triggered by hitbox, ignore
+            return false;
+        }
+
+        if (!PhysicsLayer.contains(targetLayer, other.getFilterData().categoryBits)) {
+            // Doesn't match our target layer, ignore
+            return false;
+        }
+        return true;
+    }
 }

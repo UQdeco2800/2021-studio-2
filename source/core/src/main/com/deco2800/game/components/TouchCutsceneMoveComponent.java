@@ -14,26 +14,23 @@ import com.deco2800.game.ui.textbox.TextBox;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
- *
- * <p>Requires CombatStatsComponent, HitboxComponent on this entity.
- *
- * <p>Damage is only applied if target entity has a CombatStatsComponent. Knockback is only applied
- * if target entity has a PhysicsComponent.
- */
-public class TouchCutsceneComponent extends TouchComponent {
+public class TouchCutsceneMoveComponent extends TouchCutsceneComponent{
 
-    protected Entity collidedEntity;
-    protected PlayerActions actions;
+    private Vector2 direction;
+    private float x;
+    private float y;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchCutsceneComponent(short targetLayer) {
+    public TouchCutsceneMoveComponent(short targetLayer, Vector2 direction, float x, float y) {
         super(targetLayer);
+        this.direction = direction;
+        this.x = x;
+        this.y = y;
+
     }
 
     /**
@@ -61,20 +58,30 @@ public class TouchCutsceneComponent extends TouchComponent {
         if (!this.checkEntities(me, other)) {
             return;
         }
-
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setDialogue(Dialogue.THE_ROCK);
-
-        collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
-        actions = collidedEntity.getComponent(PlayerActions.class);
-        KeyboardPlayerInputComponent input =  collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
-        //Checks if the entity that has collided is the player
-        if (actions == null) {
-            return;
-        }
-        actions.stopWalking();
-        input.stopWalking();
+        super.onCollisionStart(me, other);
+        movePlayer(collidedEntity, actions);
     }
 
+    private void movePlayer(Entity player, PlayerActions actions) {
+        Vector2 position = player.getPosition();
+
+        //actions.walk(new Vector2(0, 1f));
+        checkPosition(player, actions, position);
+
+    }
+
+    private void checkPosition(Entity player, PlayerActions actions, Vector2 position) {
+        if (player.getPosition().x < position.x + x || player.getPosition().y < position.y + y) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    checkPosition(player, actions, position);
+                    timer.cancel();
+                }
+            }, 50);
+        } else {
+            actions.stopWalking();
+        }
+    }
 }

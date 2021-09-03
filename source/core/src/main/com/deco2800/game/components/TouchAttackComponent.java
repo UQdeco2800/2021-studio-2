@@ -59,13 +59,7 @@ public class TouchAttackComponent extends TouchComponent {
    */
   @Override
   protected void onCollisionStart(Fixture me, Fixture other) {
-    if (hitboxComponent.getFixture() != me) {
-      //do nothing
-      return;
-    }
-
-    if (!PhysicsLayer.contains(targetLayer, other.getFilterData().categoryBits)) {
-      // Doesn't match our target layer, ignore
+    if (!this.checkEntities(me, other)) {
       return;
     }
 

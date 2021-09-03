@@ -155,11 +155,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     this.up = 0;
     this.speedMultiplier = 1;
     entity.getEvents().trigger("walkStop");
-    if (lastDirection != null) {
-      triggerStandAnimation();
-    } else {
-      entity.getEvents().trigger("stopForward");
-    }
   }
 
    /** Triggers player events on a mouse click. Direction is determined by
@@ -190,46 +185,10 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     calculateDistance(speedMultiplier);
     if (walkDirection.x == 0 && walkDirection.y == 0) {
       entity.getEvents().trigger("walkStop");
-      if (lastDirection != null) {
-        triggerStandAnimation();
-      } else {
-        entity.getEvents().trigger("stopForward");
-      }
     } else {
       calculateDistance(speedMultiplier);
       lastDirection = walkDirection.cpy();
-      triggerWalkAnimation();
       entity.getEvents().trigger("walk", walkDirection);
-    }
-  }
-
-  /**
-   * Checks the direction that the player was last facing and changes the animation to match.
-   */
-  private void triggerStandAnimation() {
-    if (lastDirection.y > 0) {
-      entity.getEvents().trigger("stopBackward");
-    } else if (lastDirection.y < 0) {
-      entity.getEvents().trigger("stopForward");
-    } else if (lastDirection.x > 0) {
-      entity.getEvents().trigger("stopRight");
-    } else if (lastDirection.x < 0) {
-      entity.getEvents().trigger("stopLeft");
-    }
-  }
-
-  /**
-   * Checks the direction that the player is moving in and changes the animation to match.
-   */
-  private void triggerWalkAnimation() {
-    if (walkDirection.y > 0) {
-      entity.getEvents().trigger("walkBackward");
-    } else if (walkDirection.y < 0) {
-      entity.getEvents().trigger("walkForward");
-    } else if (walkDirection.x > 0) {
-      entity.getEvents().trigger("walkRight");
-    } else if (walkDirection.x < 0) {
-      entity.getEvents().trigger("walkLeft");
     }
   }
 

@@ -40,6 +40,9 @@ public class TextBox extends Component {
     /** Boolean to check if the delayed recursive call should be performed. */
     private boolean generateCharacter = true;
 
+    /** Boolean to check if the main character text box should be displayed or the enemy. */
+    private boolean mainCharacterShowing = false;
+
     public TextBox() {
         setDialogue(Dialogue.OPENING);
         acceptInput();
@@ -140,7 +143,7 @@ public class TextBox extends Component {
                         setSubMessage();
                         timer.cancel();
                     }
-                }, 30);
+                }, 50);
             }
         }
     }
@@ -183,6 +186,13 @@ public class TextBox extends Component {
         setOpen();
     }
 
+    public boolean isMainCharacterShowing() {
+        return mainCharacterShowing;
+    }
+
+    /**
+     * Prevents the timer from recursively calling the method to generate a new character.
+     */
     public void setNewCharactersOff() {
         this.generateCharacter = false;
     }

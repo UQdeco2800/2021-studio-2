@@ -21,6 +21,7 @@ public class PlayerActions extends Component {
 
   private PhysicsComponent physicsComponent;
   private Vector2 walkDirection = Vector2.Zero.cpy();
+  private Vector2 lastDirection = Vector2.Zero.cpy();
   private long lockDuration;
   private long timeSinceStopped;
   private boolean moving = false;
@@ -76,6 +77,8 @@ public class PlayerActions extends Component {
    */
   public void walk(Vector2 direction) {
     this.walkDirection = direction;
+    this.lastDirection = walkDirection.cpy();
+    triggerWalkAnimation();
     if (lockDuration == 0) {
       moving = true;
     }
@@ -98,6 +101,7 @@ public class PlayerActions extends Component {
    */
   public void stopWalking() {
     this.walkDirection = Vector2.Zero.cpy();
+    this.triggerStandAnimation();
     updateSpeed();
     moving = false;
   }
@@ -156,5 +160,35 @@ public class PlayerActions extends Component {
     timeSinceStopped = ServiceLocator.getTimeSource().getTime();
     lockDuration = duration;
     moving = false;
+  }
+
+  /**
+   * Checks the direction that the player was last facing and changes the animation to match.
+   */
+  private void triggerStandAnimation() {
+    if (lastDirection.y > 0) {
+      entity.getEvents().trigger("stopBackward");
+    } else if (lastDirection.y < 0) {
+      entity.getEvents().trigger("stopForward");
+    } else if (lastDirection.x > 0) {
+      entity.getEvents().trigger("stopRight");
+    } else if (lastDirection.x < 0) {
+      entity.getEvents().trigger("stopLeft");
+    }
+  }
+
+  /**
+   * Checks the direction that the player is moving in and changes the animation to match.
+   */
+  private void triggerWalkAnimation() {
+    if (walkDirection.y > 0) {
+      entity.getEvents().trigger("walkBackward");
+    } else if (walkDirection.y < 0) {
+      entity.getEvents().trigger("walkForward");
+    } else if (walkDirection.x > 0) {
+      entity.getEvents().trigger("walkRight");
+    } else if (walkDirection.x < 0) {
+      entity.getEvents().trigger("walkLeft");
+    }
   }
 }
