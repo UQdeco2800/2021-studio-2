@@ -130,5 +130,7 @@ public class TextBoxDisplay extends UIComponent {
         super.dispose();
         mainCharacterLabel.remove();
         mainCharacterImage.remove();
+        enemyLabel.remove();
+        enemyImage.remove();
     }
 }

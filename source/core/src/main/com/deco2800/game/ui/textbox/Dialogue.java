@@ -32,11 +32,11 @@ public enum Dialogue {
     }),
 
     THE_ROCK(new Message[]{
-            new Message(false, "Welcome warrior... \nRagnarok is nearly here, finally our escape." ),
+            new Message(true, "Welcome warrior... \nRagnarok is nearly here, finally our escape." ),
             new Message(false, "Where am I?"),
-            new Message(false, "Let me out or I'll make you."),
+            new Message(true, "Let me out or I'll make you."),
             new Message(false, "I'm stuck here with you."),
-            new Message(false, "Please help me enter Valhalla \nI can teach you how to get out."),
+            new Message(true, "Please help me enter Valhalla \nI can teach you how to get out."),
     }),
 
     TESTER(new Message[]{

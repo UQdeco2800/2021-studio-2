@@ -6,18 +6,19 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.Dialogue;
-import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TouchCutsceneMoveComponent extends TouchCutsceneComponent{
+public class TouchMoveComponent extends TouchComponent{
 
+    /** The direction the character will move in*/
     private Vector2 direction;
+
+    /** The distance on the x axis the character will need to move. */
     private float x;
+
+    /** The distance on the y axis the character will need to move. */
     private float y;
 
     /**
@@ -25,7 +26,7 @@ public class TouchCutsceneMoveComponent extends TouchCutsceneComponent{
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchCutsceneMoveComponent(short targetLayer, Vector2 direction, float x, float y) {
+    public TouchMoveComponent(short targetLayer, Vector2 direction, float x, float y) {
         super(targetLayer);
         this.direction = direction;
         this.x = x;
@@ -58,30 +59,53 @@ public class TouchCutsceneMoveComponent extends TouchCutsceneComponent{
         if (!this.checkEntities(me, other)) {
             return;
         }
-        super.onCollisionStart(me, other);
+
+        Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
+        PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
+        KeyboardPlayerInputComponent input =  collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
+        //Checks if the entity that has collided is the player
+        if (actions == null) {
+            return;
+        }
+        actions.stopWalking();
+        input.stopWalking();
         movePlayer(collidedEntity, actions);
     }
 
+    /**
+     * Moves the character in the direction specified in the constructor,
+     * the character is the entity that will be moved and changing the actions of that entity.
+     *
+     * @param player the entity that will be moved
+     * @param actions the actions of the entity moving
+     */
     private void movePlayer(Entity player, PlayerActions actions) {
         Vector2 position = player.getPosition();
 
-        //actions.walk(new Vector2(0, 1f));
+        actions.walk(direction);
         checkPosition(player, actions, position);
 
     }
 
+    /**
+     * Repeatedly checks if the player has moved in the correct direction.
+     *
+     * @param player the entity to be moved
+     * @param actions class to change the what the entity is doing
+     * @param position start position of the entity
+     */
     private void checkPosition(Entity player, PlayerActions actions, Vector2 position) {
-        if (player.getPosition().x < position.x + x || player.getPosition().y < position.y + y) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    checkPosition(player, actions, position);
-                    timer.cancel();
-                }
-            }, 50);
-        } else {
-            actions.stopWalking();
-        }
+//        if (player.getPosition().x < position.x + x || player.getPosition().y < position.y + y) {
+//            Timer timer = new Timer();
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    checkPosition(player, actions, position);
+//                    timer.cancel();
+//                }
+//            }, 50);
+//        } else {
+//            actions.stopWalking();
+//        }
     }
 }

@@ -24,8 +24,8 @@ import java.util.TimerTask;
  */
 public class TouchCutsceneComponent extends TouchComponent {
 
-    protected Entity collidedEntity;
-    protected PlayerActions actions;
+    private Entity collidedEntity;
+    private PlayerActions actions;
 
     /**
      * Create a component which attacks entities on collision, without knockback.

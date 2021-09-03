@@ -76,6 +76,7 @@ public class TextBox extends Component {
     public void setOpen() {
         logger.debug("Opening text box");
         isOpen = true;
+        generateCharacter = true;
         this.nextMessage();
     }
 
@@ -97,6 +98,7 @@ public class TextBox extends Component {
         logger.debug("Closing text box");
         isOpen = false;
         message = "";
+        generateCharacter = false;
         this.index = 0;
     }
 

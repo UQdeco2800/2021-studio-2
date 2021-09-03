@@ -100,13 +100,13 @@ public class ForestGameArea extends GameArea {
     spawnTerrain();
     spawnTrees();
     spawnPlayer();
-    spawnGhosts();
+//    spawnGhosts();
     spawnCutsceneTrigger();
-    spawnGhostKing();
-    spawnRangedGhosts();
-    spawnGhostKing(); //use this later to make evil assassins with different sprites
-    spawnAnchoredGhosts();
-    spawnTraps();
+//    spawnGhostKing();
+//    spawnRangedGhosts();
+//    spawnGhostKing(); //use this later to make evil assassins with different sprites
+//    spawnAnchoredGhosts();
+//    spawnTraps();
     
     spawnCutsceneTrigger();
     playMusic();

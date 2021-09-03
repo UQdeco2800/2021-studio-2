@@ -1,29 +1,15 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.input.InputService;
-import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.rendering.TextureRenderComponent;
-import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.TextBox;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class TouchCutsceneMoveComponentTest {
@@ -91,7 +77,7 @@ class TouchCutsceneMoveComponentTest {
                         .addComponent(new PhysicsComponent())
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
-                        .addComponent(new TouchCutsceneMoveComponent(triggerLayer,
+                        .addComponent(new TouchMoveComponent(triggerLayer,
                                 new Vector2(1f, 0), 5f, 0f));
         entity.create();
         return entity;

@@ -1,8 +1,10 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchCutsceneComponent;
+import com.deco2800.game.components.TouchMoveComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -23,19 +25,21 @@ public class CutsceneTriggerFactory {
      * @return entity that will create the trigger within the map
      */
     public static Entity createTrigger() {
-        Entity tree =
+        Entity trigger =
                 new Entity()
                         .addComponent(new TextureRenderComponent("images/rock.png"))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER));
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER))
+                        .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
+                                new Vector2(0f, 1f), 0, 2));
 
-        tree.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        tree.getComponent(TextureRenderComponent.class).scaleEntity();
-        tree.scaleHeight(2.5f);
-        PhysicsUtils.setScaledCollider(tree, 0f, 0f);
-        return tree;
+        trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        trigger.getComponent(TextureRenderComponent.class).scaleEntity();
+        PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
+        trigger.scaleHeight(0.1f);
+        return trigger;
     }
 
     private CutsceneTriggerFactory () {
