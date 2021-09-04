@@ -19,9 +19,40 @@ public class ColliderComponent extends Component {
 
   protected final FixtureDef fixtureDef;
   protected Fixture fixture;
+  protected double angle = 0;
+  protected float scale = 1;
 
   public ColliderComponent() {
     fixtureDef = new FixtureDef();
+  }
+
+  /**
+   *
+   * @param angle angle to rotate the box in degrees
+   */
+  public ColliderComponent(float angle) {
+    this();
+    this.angle = Math.toRadians(angle);
+  }
+
+  /**
+   *
+   * @param angle angle to rotate the box in degrees
+   * @param scale cale in relation to entity
+   */
+  public ColliderComponent(float angle, float scale) {
+    this(angle);
+    this.scale = scale;
+  }
+
+  public void setScale(float scale) {
+    this.scale = scale;
+    create();
+  }
+
+  public void setAngle(double angle) {
+    this.angle = Math.toRadians(angle);
+    create();
   }
 
   @Override
@@ -216,8 +247,8 @@ public class ColliderComponent extends Component {
 
   private Shape makeBoundingBox() {
     PolygonShape bbox = new PolygonShape();
-    Vector2 center = entity.getScale().scl(0.5f);
-    bbox.setAsBox(center.x, center.y, center, 0f);
+    Vector2 center = entity.getScale().scl(scale/2);
+    bbox.setAsBox(center.x, center.y, center, (float) angle);
     return bbox;
   }
 }

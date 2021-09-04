@@ -28,7 +28,7 @@ public class WeaponFactory {
   private static final WeaponConfigs configs =
       FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
 
-  public static Entity createNormalArrow(Vector2 targetLoc, float rotation) {
+  public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
     Entity normalArrow = createBaseArrow();
     BaseArrowConfig config = configs.baseArrow;
     ProjectileMovementTask movementTask = new ProjectileMovementTask(targetLoc, new Vector2(config.speedX, config.speedY));
@@ -37,14 +37,14 @@ public class WeaponFactory {
             .addTask(movementTask);
     Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
     normalArrow
-        .addComponent(new TextureRenderComponent(sprite, rotation))
+        .addComponent(new TextureRenderComponent(sprite))
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
     Vector2 scale = new Vector2(0.86f,0.22f);
-    //scale = new Vector2(sprite.getRegionWidth()/50f,sprite.getRegionHeight()/50f);
     scale = new Vector2(sprite.getWidth()/40f,sprite.getHeight()/40f);
-    scale.rotateAroundDeg(new Vector2(0,0),  rotation);
     normalArrow.setScale(scale);
+    normalArrow.setAngle(angle);
+
     return normalArrow;
   }
 
