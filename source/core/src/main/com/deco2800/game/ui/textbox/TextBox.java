@@ -31,6 +31,8 @@ public class TextBox extends Component {
     /** Index of the furthest character to be displayed of the substring of the message to be displayed. */
     private int subMessageIndex = 0;
 
+    private RandomDialogueSet randomDialogueSet;
+
     /** Dialogue object that the text box is currently on. */
     private Dialogue dialogue;
 
@@ -44,7 +46,8 @@ public class TextBox extends Component {
     private boolean mainCharacterShowing = true;
 
     public TextBox() {
-        setDialogue(Dialogue.OPENING);
+        setRandomDialogueSet(RandomDialogueSet.GARMR);
+        setDialogue(randomDialogueSet.getRandomBossDefeatedBefore());
         acceptInput();
     }
 
@@ -77,6 +80,9 @@ public class TextBox extends Component {
         logger.debug("Opening text box");
         isOpen = true;
         generateCharacter = true;
+        if (this.randomDialogueSet != null) {
+            this.dialogue = randomDialogueSet.getRandomPlayerDefeatedBefore();
+        }
         this.nextMessage();
     }
 
@@ -188,6 +194,15 @@ public class TextBox extends Component {
         this.subMessageIndex = 0;
         this.acceptingInput = false;
         setOpen();
+    }
+
+    /**
+     * Sets the dialogue set to the set of dialogue determined by the NPC that was reached.
+     *
+     * @param dialogueSet the sequence of strings that are to be displayed in the text box
+     */
+    public void setRandomDialogueSet(RandomDialogueSet dialogueSet) {
+        this.randomDialogueSet = dialogueSet;
     }
 
     /**

@@ -11,7 +11,41 @@ package com.deco2800.game.ui.textbox;
  */
 public enum RandomDialogueSet {
 
-    HELLO(new Dialogue[5], new Dialogue[5], new Dialogue[5]);
+    LOKI_OPENING(
+            new Dialogue[] {
+                    Dialogue.LOKI_FIRST
+            },
+            new Dialogue[] {
+                    Dialogue.LOKI_DEFEAT_1,
+                    Dialogue.LOKI_DEFEAT_2,
+                    Dialogue.LOKI_DEFEAT_3,
+                    Dialogue.LOKI_DEFEAT_4,
+                    Dialogue.LOKI_DEFEAT_5,
+            },
+            new Dialogue[] {
+                    Dialogue.LOKI_DEFEAT_1,
+                    Dialogue.LOKI_DEFEAT_2,
+                    Dialogue.LOKI_DEFEAT_3,
+                    Dialogue.LOKI_DEFEAT_4,
+                    Dialogue.LOKI_DEFEAT_5,
+            }
+    ),
+
+    GARMR(
+            new Dialogue[] {
+                    Dialogue.GARMR_FIRST
+            },
+            new Dialogue[] {
+                    Dialogue.GARMR_BEATEN_1,
+                    Dialogue.GARMR_BEATEN_2,
+                    Dialogue.GARMR_BEATEN_3,
+                    Dialogue.GARMR_BEATEN_4,
+            },
+            new Dialogue[] {
+                    Dialogue.GARMR_DEFEAT_1,
+                    Dialogue.GARMR_DEFEAT_2,
+            }
+    );
 
     RandomDialogueSet(Dialogue[] firstEncounter, Dialogue[] bossDefeatedBefore,
                       Dialogue[] playerDefeatedBefore) {

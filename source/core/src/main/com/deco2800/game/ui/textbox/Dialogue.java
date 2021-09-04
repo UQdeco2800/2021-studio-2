@@ -23,15 +23,7 @@ package com.deco2800.game.ui.textbox;
  */
 public enum Dialogue {
 
-    OPENING(new Message[]{
-            new Message(false, "Welcome warrior... \nRagnarok is nearly here, finally our escape." ),
-            new Message(true, "Where am I?"),
-            new Message(true, "Let me out or I'll make you."),
-            new Message(false, "I'm stuck here with you."),
-            new Message(false, "Please help me enter Valhalla \nI can teach you how to get out."),
-    }),
-
-    THE_ROCK(new Message[]{
+    THE_ROCK(new Message[] {
             new Message(true, "Welcome warrior... \nRagnarok is nearly here, finally our escape." ),
             new Message(false, "Where am I?"),
             new Message(true, "Let me out or I'll make you."),
@@ -39,16 +31,86 @@ public enum Dialogue {
             new Message(true, "Please help me enter Valhalla \nI can teach you how to get out."),
     }),
 
-    TESTER(new Message[]{
-            new Message(false, "Hello"),
-            new Message(true, "Hello"),
-            new Message(true, "Hello"),
-            new Message(false, "Hello"),
-            new Message(false, "Hello"),
-            new Message(false, "Hello"),
-            new Message(false, "Hello"),
-            new Message(false, "Hello"),
+    LOKI_FIRST(new Message[] {
+            new Message(false, "Ahhh, you've awakened warrior."),
+            new Message(false, "Did you think that you with your hubris and" +
+                    "\npride could just so easily join the ranks of" +
+                    "\nthose in Valhalla?"),
+            new Message(false, "Nay I have placed you here in this cell that" +
+                    "\nyou might reflect on your deeds and learn" +
+                    "\nsome humility."),
+            new Message(false, "If you do however think that you can face off" +
+                    "\nagainst me and those on the journey to me," +
+                    "\nthen the door lies open."),
+            new Message(false, "Know this though, it is a fools errand and" +
+                    "\nwith every failure you only prove all the" +
+                    "\nmore unworthy of Valhalla."),
+            new Message(false, "Better to sit here and think on your deeds."),
 
+    }),
+
+    LOKI_DEFEAT_1(new Message[] {
+            new Message(false, "I told you it was a fools errand." +
+                    "\nStay here and give up on your ideas" +
+                    "\nof making it to me."),
+    }),
+
+    LOKI_DEFEAT_2(new Message[] {
+            new Message(false, "No matter how many times you try," +
+                    "\nyour fate will always be the same."),
+    }),
+
+    LOKI_DEFEAT_3(new Message[] {
+            new Message(false, "Come now, have you not embarrassed" +
+                    "\nyourself enough? Accept your fate and stay."),
+    }),
+
+    LOKI_DEFEAT_4(new Message[] {
+        new Message(false, "Still trying? How quaint."),
+    }),
+
+    LOKI_DEFEAT_5(new Message[] {
+            new Message(false, "Good attempt, are you really going" +
+                    "\n to try again?"),
+    }),
+
+    GARMR_FIRST(new Message[] {
+            new Message(true, "What is this foul beast that blocks my way?"),
+            new Message(true, "I shall slay you just as easily as" +
+                    "\nI would any other wild animal."),
+    }),
+
+    GARMR_DEFEAT_1(new Message[] {
+            new Message(true, "This time you shall not even manage to" +
+                    "\nscratch me, let alone bite."),
+    }),
+
+    GARMR_DEFEAT_2(new Message[] {
+            new Message(true, "You can only remain guard for so long," +
+                    "\neventually I will make it past."),
+            new Message(false, "Grrrrrr")
+    }),
+
+    GARMR_BEATEN_1(new Message[] {
+            new Message(true, "Ah, still obediently guarding the entrance?" +
+                    "\nCome, I shall cast you aside just as" +
+                    "\nquickly as the last time."),
+    }),
+
+    GARMR_BEATEN_2(new Message[] {
+            new Message(true, "Your bark is definitely worst than your bite."),
+            new Message(false, "Grrrrrr")
+    }),
+
+    GARMR_BEATEN_3(new Message[] {
+            new Message(true, "Fierce only in looks, why do you yet still" +
+                    "\nstand guard? I shall remove you" +
+                    "\nfrom your post yet again."),
+            new Message(false, "Grrrrrr")
+    }),
+
+    GARMR_BEATEN_4(new Message[] {
+        new Message(true, "Hopefully it will be as fun as last time mutt."),
     });
 
     private Message[] messages;
