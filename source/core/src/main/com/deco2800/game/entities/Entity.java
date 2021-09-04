@@ -7,6 +7,7 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
 import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -240,6 +241,19 @@ public class Entity {
     ServiceLocator.getEntityService().unregister(this);
   }
 
+  /** Dispose of the entity. This will dispose of all components on this entity. */
+  public void enemyDispose() {
+    for (Component component : createdComponents) {
+      if(!(components.equalsIdentity(AnimationRenderComponent.class))) {
+        component.dispose();
+      } else {
+        component.dispose();
+      }
+    }
+    ServiceLocator.getEntityService().unregister(this);
+  }
+
+
   /**
    * Create the entity and start running. This is called when the entity is registered in the world,
    * and should not be called manually.
@@ -285,7 +299,11 @@ public class Entity {
     if (disposeYourself) {
       //todo: add a death animation then dispose
       //remove attack abilities and related components first
-      dispose();
+      if(this.getEntityType() == "arrow") {
+        dispose();
+      } else {
+        dispose();
+      }
     }
   }
 

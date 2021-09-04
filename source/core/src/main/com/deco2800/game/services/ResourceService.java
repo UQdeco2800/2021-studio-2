@@ -38,6 +38,10 @@ public class ResourceService implements Disposable {
     return assetManager.get(filename, type);
   }
 
+  public AssetManager getAssetManager() {
+    return assetManager;
+  }
+
   /**
    * Check if an asset has been loaded already
    * @param resourceName path of the asset

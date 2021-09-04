@@ -1,5 +1,6 @@
 package com.deco2800.game.services;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.input.InputService;
@@ -7,6 +8,10 @@ import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
+
+import static com.badlogic.gdx.Input.Keys.T;
 
 /**
  * A simplified implementation of the Service Locator pattern:
@@ -52,6 +57,16 @@ public class ServiceLocator {
    */
   public static ResourceService getResourceService() {
     return resourceService;
+  }
+
+  public static ResourceService copyResourceService() {
+    AssetManager cpy = new AssetManager();
+    Iterator<String> assetIterator= resourceService.getAssetManager().getAssetNames().iterator();
+    while(assetIterator.hasNext()) {
+      cpy.load(resourceService.getAssetManager().get(assetIterator.next()));
+    }
+    ResourceService copy = new ResourceService(cpy);
+    return copy;
   }
 
   public static GameArea getGameAreaService() {
