@@ -149,7 +149,7 @@ public class Entity {
    */
   public void setAngle(float angle) {
     this.angle = angle;
-    //this.getComponent(HitboxComponent.class).setAngle(angle);
+    this.getComponent(HitboxComponent.class).setAngle(angle);
   }
 
   /**

@@ -41,12 +41,9 @@ public class WeaponFactory {
         .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
         .addComponent(aiComponent);
     Vector2 scale = new Vector2(0.86f,0.22f);
-    //scale = new Vector2(sprite.getRegionWidth()/50f,sprite.getRegionHeight()/50f);
     scale = new Vector2(sprite.getWidth()/40f,sprite.getHeight()/40f);
-    scale.rotateAroundDeg(new Vector2(0,0),  angle);
     normalArrow.setScale(scale);
     normalArrow.setAngle(angle);
-    //normalArrow.getComponent(HitboxComponent.class).setAngle(0);
 
     return normalArrow;
   }

@@ -3,12 +3,8 @@ package com.deco2800.game.rendering;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
-
-import java.awt.*;
 
 /** Render a static texture. */
 public class TextureRenderComponent extends RenderComponent {
@@ -55,9 +51,12 @@ public class TextureRenderComponent extends RenderComponent {
     if (texture != null) {
       batch.draw(texture, position.x, position.y, scale.x, scale.y);
     } else if (sprite != null) {
-      Vector2 newScale = scale.cpy().rotateAroundDeg(new Vector2(0,0),  -angle);
-      //batch.draw(sprite, position.x, position.y, positionCenterRelative.x, positionCenterRelative.y, 1, 1, scale.x, scale.y, rotation);
-      batch.draw(sprite, position.x, position.y, 0, 0, 1, 1, newScale.x, newScale.y, angle);
+      //Prepare sprite to be drawn
+      sprite.setScale(entity.getScale().x / sprite.getWidth(),
+              entity.getScale().y / sprite.getHeight());
+      sprite.setRotation(angle);
+      sprite.setCenter(positionCenter.x, positionCenter.y);
+      sprite.draw(batch);
     }
   }
 }
