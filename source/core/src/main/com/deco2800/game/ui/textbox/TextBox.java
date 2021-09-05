@@ -31,7 +31,11 @@ public class TextBox extends Component {
     /** Index of the furthest character to be displayed of the substring of the message to be displayed. */
     private int subMessageIndex = 0;
 
+    /** Set of dialogue that can be randomised depending on previous NPC interactions. */
     private RandomDialogueSet randomDialogueSet;
+
+    /** Index of the sequence of ordered dialogue. */
+    private int orderedDialogueIndex = 0;
 
     /** Dialogue object that the text box is currently on. */
     private Dialogue dialogue;
@@ -46,7 +50,7 @@ public class TextBox extends Component {
     private boolean mainCharacterShowing = true;
 
     public TextBox() {
-        setRandomDialogueSet(RandomDialogueSet.GARMR);
+        setRandomDialogueSet(RandomDialogueSet.TUTORIAL);
         setDialogue(randomDialogueSet.getRandomBossDefeatedBefore());
         acceptInput();
     }
@@ -80,8 +84,10 @@ public class TextBox extends Component {
         logger.debug("Opening text box");
         isOpen = true;
         generateCharacter = true;
-        if (this.randomDialogueSet != null) {
-            this.dialogue = randomDialogueSet.getRandomPlayerDefeatedBefore();
+        if (this.randomDialogueSet != null && randomDialogueSet.getOrderedDialogueSize() > orderedDialogueIndex) {
+            this.dialogue = randomDialogueSet.getOrderedDialogue(orderedDialogueIndex++);
+        } else {
+            this.orderedDialogueIndex = 0;
         }
         this.nextMessage();
     }
@@ -203,6 +209,7 @@ public class TextBox extends Component {
      */
     public void setRandomDialogueSet(RandomDialogueSet dialogueSet) {
         this.randomDialogueSet = dialogueSet;
+        orderedDialogueIndex = 0;
     }
 
     /**
