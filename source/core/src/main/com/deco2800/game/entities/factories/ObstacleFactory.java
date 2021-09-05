@@ -1,6 +1,7 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -95,6 +96,47 @@ public class ObstacleFactory {
     anchor.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     return anchor;
   }
+
+  /**
+   * creates a crate entity that can be destroyed and will have a potion entity inside.
+   *
+   * @return crate entity
+   */
+  public static Entity createCrate() {
+    Entity crate =
+            new Entity()
+                    .addComponent(new TextureRenderComponent("healthRegen/crate_placeholder.png"))
+                    .addComponent(new PhysicsComponent())
+                    .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
+                    .addComponent(new CombatStatsComponent(100, 0));
+
+    crate.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+    crate.getComponent(TextureRenderComponent.class).scaleEntity();
+    crate.scaleHeight(0.3f);
+    return crate;
+  }
+
+  /**
+   * create a potion entity that the player can walk over and gain health.
+   *
+   * @return potion entity
+   */
+  public static Entity createHealthPotion() {
+    Entity potion =
+            new Entity()
+                    .addComponent(new TextureRenderComponent("healthRegen" +
+                            "/healthPotion_placeholder.png"))
+                    .addComponent(new PhysicsComponent())
+                    .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
+    potion.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+    potion.getComponent(TextureRenderComponent.class).scaleEntity();
+    potion.scaleHeight(0.3f);
+    return potion;
+  }
+
+
   private ObstacleFactory() {
     throw new IllegalStateException("Instantiating static util class");
   }

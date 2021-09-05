@@ -60,6 +60,10 @@ public class ForestGameArea extends GameArea {
           "images/dash_icon.png",
           "images/rock.png"
   };
+  public static final String[] healthRegenTextures = {
+          "healthRegen/create_placeholder.png",
+          "healthRegen/healthPotion_placeholder.png"
+  };
   private static final String[] forestTextureAtlases = {
           "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
           "images/player.atlas"
@@ -259,6 +263,7 @@ public class ForestGameArea extends GameArea {
     logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(forestTextures);
+    resourceService.loadTextures(healthRegenTextures);
     resourceService.loadTextureAtlases(forestTextureAtlases);
     resourceService.loadSounds(forestSounds);
     resourceService.loadMusic(forestMusic);
@@ -277,6 +282,7 @@ public class ForestGameArea extends GameArea {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(forestTextures);
+    resourceService.unloadAssets(healthRegenTextures);
     resourceService.unloadAssets(forestTextureAtlases);
     resourceService.unloadAssets(forestSounds);
     resourceService.unloadAssets(forestMusic);
