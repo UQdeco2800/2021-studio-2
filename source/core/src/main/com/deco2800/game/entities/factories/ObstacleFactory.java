@@ -1,7 +1,6 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -111,9 +110,9 @@ public class ObstacleFactory {
                     .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                     .addComponent(new CombatStatsComponent(100, 0));
 
-    crate.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+    crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     crate.getComponent(TextureRenderComponent.class).scaleEntity();
-    crate.scaleHeight(0.3f);
+    crate.scaleHeight(0.6f);
     return crate;
   }
 
@@ -130,9 +129,9 @@ public class ObstacleFactory {
                     .addComponent(new PhysicsComponent())
                     .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                     .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
-    potion.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+    potion.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     potion.getComponent(TextureRenderComponent.class).scaleEntity();
-    potion.scaleHeight(0.3f);
+    potion.scaleHeight(0.4f);
     return potion;
   }
 

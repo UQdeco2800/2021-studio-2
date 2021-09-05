@@ -61,7 +61,7 @@ public class ForestGameArea extends GameArea {
           "images/rock.png"
   };
   public static final String[] healthRegenTextures = {
-          "healthRegen/create_placeholder.png",
+          "healthRegen/crate_placeholder.png",
           "healthRegen/healthPotion_placeholder.png"
   };
   private static final String[] forestTextureAtlases = {
@@ -96,6 +96,7 @@ public class ForestGameArea extends GameArea {
     loadAssets();
     displayUI();
 
+
     spawnTerrain();
     spawnTrees();
     spawnPlayer();
@@ -106,7 +107,8 @@ public class ForestGameArea extends GameArea {
     spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
     spawnTraps();
-    
+    spawnCrate();
+
     spawnCutsceneTrigger();
     playMusic();
   }
@@ -151,6 +153,22 @@ public class ForestGameArea extends GameArea {
     // Bottom
     spawnEntityAt(
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+  }
+
+  /**
+   * spawns the crate with the potion entity inside.
+   * the crate is placed on top of the potion entity.
+   */
+  private void spawnCrate() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+    Entity crate = ObstacleFactory.createCrate();
+    Entity health = ObstacleFactory.createHealthPotion();
+    spawnEntityAt(crate, randomPos, true, true);
+    spawnEntityAt(health, randomPos, true, true);
+
   }
 
   /**
@@ -245,6 +263,7 @@ public class ForestGameArea extends GameArea {
       spawnEntityAt(AnchoredGhost, ghostPos, true, true);
     }
   }
+
 
   /**
    * Play the music on the background of the game
