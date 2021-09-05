@@ -11,6 +11,26 @@ package com.deco2800.game.ui.textbox;
  */
 public enum RandomDialogueSet {
 
+    TUTORIAL(
+            new Dialogue[] {
+                    Dialogue.TUTORIAL_FIRST
+            },
+            new Dialogue[] {
+                    Dialogue.TUTORIAL_REPEAT
+            },
+            new Dialogue[] {
+                    Dialogue.TUTORIAL_REPEAT
+            }
+            ,
+            new Dialogue[] {
+                    Dialogue.TUTORIAL_MOVE,
+                    Dialogue.TUTORIAL_DASH,
+                    Dialogue.TUTORIAL_ATTACK,
+                    Dialogue.TUTORIAL_EXIT
+
+            }
+    ),
+
     LOKI_OPENING(
             new Dialogue[] {
                     Dialogue.LOKI_FIRST
@@ -29,6 +49,8 @@ public enum RandomDialogueSet {
                     Dialogue.LOKI_DEFEAT_4,
                     Dialogue.LOKI_DEFEAT_5,
             }
+            ,
+            null
     ),
 
     GARMR(
@@ -44,14 +66,16 @@ public enum RandomDialogueSet {
             new Dialogue[] {
                     Dialogue.GARMR_DEFEAT_1,
                     Dialogue.GARMR_DEFEAT_2,
-            }
+            },
+            null
     );
 
     RandomDialogueSet(Dialogue[] firstEncounter, Dialogue[] bossDefeatedBefore,
-                      Dialogue[] playerDefeatedBefore) {
+                      Dialogue[] playerDefeatedBefore, Dialogue[] orderedDialogue) {
         this.firstEncounter = firstEncounter;
         this.defeatedBossBefore = bossDefeatedBefore;
         this.defeatedPlayerBefore = playerDefeatedBefore;
+        this.orderedDialogue = orderedDialogue;
     }
 
     /** Set of dialogue to be used if the player has not been used before. */
@@ -62,6 +86,9 @@ public enum RandomDialogueSet {
 
     /** Set of dialogue to be used if the player has been defeated by the NPC before. */
     private Dialogue[] defeatedPlayerBefore;
+
+    /** Sets of dialogue that are within the same area but are not displayed right after each other. */
+    private Dialogue[] orderedDialogue;
 
     /**
      * Gets a random Dialogue object from the set for first encounters.
@@ -99,5 +126,25 @@ public enum RandomDialogueSet {
     private static int randomIndex(int size) {
         int index = ((int)System.currentTimeMillis()) % size;
         return index > 0? index : index * -1;
+    }
+
+    /**
+     * Gets the set of dialogue at the index specified, used for sets of dialogue
+     * that will be used sequentially.
+     *
+     * @param index the positional order of where the dialogue will come
+     * @return returns the dialogue in the ordered array
+     */
+    public Dialogue getOrderedDialogue(int index) {
+        return orderedDialogue[index];
+    }
+
+    /**
+     * Returns the size of the ordered dialogue so all of the elements will be accounted for.
+     *
+     * @return integer size of the array
+     */
+    public int getOrderedDialogueSize() {
+        return orderedDialogue.length;
     }
 }

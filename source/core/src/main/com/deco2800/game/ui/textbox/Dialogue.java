@@ -31,6 +31,55 @@ public enum Dialogue {
             new Message(true, "Please help me enter Valhalla \nI can teach you how to get out."),
     }),
 
+    TUTORIAL_FIRST(new Message[] {
+            new Message(false, "Hey psst" +
+                    "\nit's nice to see a new face here."),
+            new Message(true, "What! Where am"),
+            new Message(false, "Keep it down! He'll hear you."),
+            new Message(true, "Who'll hear me!?"),
+            new Message(false, "Quiet! Or we're both done."),
+            new Message(false, "Loki. What did you do to him anyway?"),
+            new Message(true, "Nothing. I need to get out of here." +
+                    "\nRagnarok hasn't come yet has it?" +
+                    "\nI need to get out of here."),
+            new Message(false, "Good luck with that." +
+                    "\nWhy do you think I'm still here."),
+            new Message(true, "Cause you're not me."),
+            new Message(false, "You remind me a lot of my younger self" +
+                    "\nI'll help you."),
+    }),
+
+    TUTORIAL_REPEAT(new Message[] {
+            new Message(false, "Welcome back. Sounds like everything went well."),
+            new Message(false, "Beaten too hard that you've forgotten" +
+                    "\nhow to walk?")
+    }),
+
+    TUTORIAL_MOVE(new Message[] {
+            new Message(false, "Your legs may not be like they" +
+                    "\nused to be. Use the WASD to get around." +
+                    "\nOnce you're ready, walk over to me.")
+    }),
+
+    TUTORIAL_DASH(new Message[] {
+            new Message(false, "To get around quickly, press SHIFT" +
+                    "\nto sprint around and CAPS_LOCK to dash." +
+                    "\nTake it easy though, you'll tire yourself out."),
+            new Message(false, "Get back to me once you're ready" +
+                    "\nto escape.")
+    }),
+
+    TUTORIAL_ATTACK(new Message[] {
+            new Message(false, "Use SPACE BAR to swing the axe at" +
+                    "\nthe gate. Careful though, this is the" +
+                    "\nonly thing that won't attack back.")
+    }),
+
+    TUTORIAL_EXIT(new Message[] {
+            new Message(false, "Good luck warrior, I hope I never" +
+                    "\nsee you again.")
+    }),
+
     LOKI_FIRST(new Message[] {
             new Message(false, "Ahhh, you've awakened warrior."),
             new Message(false, "Did you think that you with your hubris and" +
@@ -146,7 +195,7 @@ public enum Dialogue {
 
     /**
      * Returns the number of different lines in the dialogue.
-     * @return
+     * @return returns the number of messages in the dialogue sequence
      */
     public int size() {
         return messages.length;
