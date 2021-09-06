@@ -12,6 +12,8 @@ public class PhysicsLayer {
   public static final short MELEEWEAPON = (1 << 4);
   public static final short PROJECTILEWEAPON = (1 << 5);
 
+  public static final short TRAP = (1 << 6);
+
   public static final short ALL = ~0;
 
   public static boolean contains(short filterBits, short layer) {

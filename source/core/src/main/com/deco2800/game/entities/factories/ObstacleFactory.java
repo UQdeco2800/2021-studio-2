@@ -7,9 +7,7 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
-import com.deco2800.game.physics.components.ColliderComponent;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.*;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
 /**
@@ -46,19 +44,30 @@ public class ObstacleFactory {
             .addComponent(new TextureRenderComponent("images/trap.png"))
             .addComponent(new PhysicsComponent())
             .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new CombatStatsComponent(1000000, 1))
+            .addComponent(new CombatStatsComponent(1000000, 10))
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2));
+            .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 4));
 
+    trap.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
     trap.scaleHeight(0.3f);
     return trap;
   }
 
-  //public static Entity createNonePhysicalTrap(){
+  public static Entity createNonePhysicalTrap(){
+    Entity trap = new Entity()
+            .addComponent(new TextureRenderComponent("images/trap.png"))
+            .addComponent(new PhysicsComponent())
+            .addComponent(new CombatStatsComponent(1000000, 10))
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0));
 
-  //}
+    trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+    trap.getComponent(TextureRenderComponent.class).scaleEntity();
+    trap.scaleHeight(0.3f);
+    return trap;
+  }
 
   /**
    * Creates an invisible physics wall.
