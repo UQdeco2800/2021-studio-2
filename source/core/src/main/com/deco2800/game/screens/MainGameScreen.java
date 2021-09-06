@@ -40,8 +40,9 @@ public class MainGameScreen extends ScreenAdapter {
   private static final String[] mainGameTextures = {
           "images/heart.png",
           "lowHealthImages/BloodScreenDarkRepositioned.png",
-          "images/text_box.png",
-          "images/text_box_enemy.png"
+          "images/textBoxDisplay/default_text_box.png",
+          "images/textBoxDisplay/main_character_image.png",
+          "images/textBoxDisplay/prisoner_image.png"
   };
   private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
   private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};

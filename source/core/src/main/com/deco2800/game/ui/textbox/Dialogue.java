@@ -32,9 +32,9 @@ public enum Dialogue {
     }),
 
     TUTORIAL_FIRST(new Message[] {
-            new Message(false, "Hey psst" +
+            new Message(false, "Hey psst," +
                     "\nit's nice to see a new face here."),
-            new Message(true, "What! Where am"),
+            new Message(true, "What! Where am I?"),
             new Message(false, "Keep it down! He'll hear you."),
             new Message(true, "Who'll hear me!?"),
             new Message(false, "Quiet! Or we're both done."),
@@ -46,7 +46,7 @@ public enum Dialogue {
                     "\nWhy do you think I'm still here."),
             new Message(true, "Cause you're not me."),
             new Message(false, "You remind me a lot of my younger self" +
-                    "\nI'll help you."),
+                    "\nI'll help you. Come over to me."),
     }),
 
     TUTORIAL_REPEAT(new Message[] {
@@ -58,7 +58,7 @@ public enum Dialogue {
     TUTORIAL_MOVE(new Message[] {
             new Message(false, "Your legs may not be like they" +
                     "\nused to be. Use the WASD to get around." +
-                    "\nOnce you're ready, walk over to me.")
+                    "\nOnce you're ready, walk back over to me.")
     }),
 
     TUTORIAL_DASH(new Message[] {

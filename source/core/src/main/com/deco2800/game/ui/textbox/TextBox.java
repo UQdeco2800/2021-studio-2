@@ -53,8 +53,7 @@ public class TextBox extends Component {
     private boolean orderedDialogue = false;
 
     public TextBox() {
-        setRandomDialogueSet(RandomDialogueSet.LOKI_OPENING);
-        setDialogue(randomDialogueSet.LOKI_OPENING.getRandomFirstEncounter());
+        setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
         acceptInput();
     }
 
@@ -212,7 +211,33 @@ public class TextBox extends Component {
      *
      * @param dialogueSet the sequence of strings that are to be displayed in the text box
      */
-    public void setRandomDialogueSet(RandomDialogueSet dialogueSet) {
+    public void setRandomDefeatDialogueSet(RandomDialogueSet dialogueSet) {
+        this.randomDialogueSet = dialogueSet;
+        orderedDialogueIndex = 0;
+        setDialogue(randomDialogueSet.getRandomFirstEncounter());
+        orderedDialogue = false;
+        setOpen();
+    }
+
+    /**
+     * Sets the dialogue set to the set of dialogue determined by the NPC that was reached.
+     *
+     * @param dialogueSet the sequence of strings that are to be displayed in the text box
+     */
+    public void setRandomBeatenDialogueSet(RandomDialogueSet dialogueSet) {
+        this.randomDialogueSet = dialogueSet;
+        orderedDialogueIndex = 0;
+        setDialogue(randomDialogueSet.getRandomBossDefeatedBefore());
+        orderedDialogue = false;
+        setOpen();
+    }
+
+    /**
+     * Sets the dialogue set to the set of dialogue determined by the NPC that was reached.
+     *
+     * @param dialogueSet the sequence of strings that are to be displayed in the text box
+     */
+    public void setRandomFirstEncounter(RandomDialogueSet dialogueSet) {
         this.randomDialogueSet = dialogueSet;
         orderedDialogueIndex = 0;
         setDialogue(randomDialogueSet.getRandomFirstEncounter());
