@@ -92,7 +92,7 @@ public class WeaponFactory {
     Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
     normalArrow
             .addComponent(new TextureRenderComponent(sprite))
-            .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+            .addComponent(new CombatStatsComponent(config.health, 0)) //damage applied when shooting, arrow is decorational
             .addComponent(aiComponent);
     Vector2 scale = new Vector2(sprite.getWidth()/40f,sprite.getHeight()/40f);
     normalArrow.setScale(scale);
