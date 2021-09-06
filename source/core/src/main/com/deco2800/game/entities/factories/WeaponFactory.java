@@ -43,6 +43,7 @@ public class WeaponFactory {
 
   public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
     Entity normalArrow = createBaseArrow();
+    normalArrow.setEntityType("arrow");
     BaseArrowConfig config = configs.baseArrow;
     ProjectileMovementTask movementTask = new ProjectileMovementTask(targetLoc, new Vector2(config.speedX, config.speedY));
     AITaskComponent aiComponent =
