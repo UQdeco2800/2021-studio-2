@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
-import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -149,7 +148,6 @@ public class Entity {
    */
   public void setAngle(float angle) {
     this.angle = angle;
-    this.getComponent(HitboxComponent.class).setAngle(angle);
   }
 
   /**

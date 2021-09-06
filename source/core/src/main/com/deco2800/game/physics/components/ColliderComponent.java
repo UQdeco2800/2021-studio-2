@@ -19,8 +19,8 @@ public class ColliderComponent extends Component {
 
   protected final FixtureDef fixtureDef;
   protected Fixture fixture;
-  protected double angle = 0;
   protected float scale = 1;
+  private float lastAngle;
 
   public ColliderComponent() {
     fixtureDef = new FixtureDef();
@@ -28,20 +28,10 @@ public class ColliderComponent extends Component {
 
   /**
    *
-   * @param angle angle to rotate the box in degrees
-   */
-  public ColliderComponent(float angle) {
-    this();
-    this.angle = Math.toRadians(angle);
-  }
-
-  /**
-   *
-   * @param angle angle to rotate the box in degrees
    * @param scale cale in relation to entity
    */
-  public ColliderComponent(float angle, float scale) {
-    this(angle);
+  public ColliderComponent(float scale) {
+    this();
     this.scale = scale;
   }
 
@@ -50,10 +40,10 @@ public class ColliderComponent extends Component {
     create();
   }
 
-  public void setAngle(double angle) {
+  /*public void setAngle(double angle) {
     this.angle = Math.toRadians(angle);
     create();
-  }
+  }*/
 
   @Override
   public void create() {
@@ -64,6 +54,16 @@ public class ColliderComponent extends Component {
 
     Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
     fixture = physBody.createFixture(fixtureDef);
+  }
+
+  @Override
+  public void update() {
+    if (lastAngle != entity.getAngle()) {
+      fixtureDef.shape = makeBoundingBox();
+      Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
+      physBody.destroyFixture(fixture);
+      fixture = physBody.createFixture(fixtureDef);
+    }
   }
 
   /**
@@ -248,7 +248,8 @@ public class ColliderComponent extends Component {
   private Shape makeBoundingBox() {
     PolygonShape bbox = new PolygonShape();
     Vector2 center = entity.getScale().scl(scale/2);
-    bbox.setAsBox(center.x, center.y, center, (float) angle);
+    lastAngle = entity.getAngle();
+    bbox.setAsBox(center.x, center.y, center, (float) Math.toRadians(lastAngle));
     return bbox;
   }
 }

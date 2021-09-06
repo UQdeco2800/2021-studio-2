@@ -39,17 +39,6 @@ public class MovementTask extends DefaultTask {
   }
 
   /**
-   * Move task that take position of the target and the time of the game
-   * @param target position of target
-   * @param time game time
-   */
-
-  public MovementTask(Vector2 target, long time) {
-    this(target);
-    this.timeDiscoveredTarget = time;
-  }
-
-  /**
    * Move task that take position of the target and the stop distance
    * @param target position of target
    * @param stopDistance distance to stop when move
@@ -70,15 +59,6 @@ public class MovementTask extends DefaultTask {
     this.moveSpeed = moveSpeed;
     stopDistance = stopDistance * Math.max(moveSpeed.x, moveSpeed.y);
   }
-//
-//  public MovementTask(Vector2 target, float x){
-//    this(target);
-//    this.lastPos.x = x;
-//  }
-
-//  public Vector2 getLastPos (Entity entity) {
-//    return entity.getPosition();
-//  }
 
   /**
    * Start the movement task
@@ -107,6 +87,7 @@ public class MovementTask extends DefaultTask {
     } else {
       checkIfStuck();
       movementComponent.setMaxSpeed(moveSpeed);
+      setTarget(target);
       Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
       if (ServiceLocator.getRenderService() != null) {
         ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));

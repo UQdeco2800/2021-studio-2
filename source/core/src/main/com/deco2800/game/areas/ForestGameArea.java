@@ -96,13 +96,11 @@ public class ForestGameArea extends GameArea {
     spawnTrees();
     spawnPlayer();
     spawnGhosts();
-    spawnCutsceneTrigger();
     spawnGhostKing();
     spawnRangedGhosts();
-    spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
     spawnTraps();
-    
+
     spawnCutsceneTrigger();
     playMusic();
   }

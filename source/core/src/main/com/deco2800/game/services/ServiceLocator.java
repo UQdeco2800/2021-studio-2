@@ -5,6 +5,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
+import com.deco2800.game.rendering.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +25,7 @@ public class ServiceLocator {
   private static InputService inputService;
   private static ResourceService resourceService;
   private static GameArea gameAreaService;
+  private static Renderer renderer;
 
 
   public static EntityService getEntityService() {
@@ -56,6 +58,10 @@ public class ServiceLocator {
 
   public static GameArea getGameAreaService() {
     return gameAreaService;
+  }
+
+  public static Renderer getRenderer() {
+    return renderer;
   }
 
   public static void registerEntityService(EntityService service) {
@@ -106,7 +112,12 @@ public class ServiceLocator {
     resourceService = null;
   }
 
+  public static void registerRenderer(Renderer renderer) {
+    ServiceLocator.renderer = renderer;
+  }
+
   private ServiceLocator() {
     throw new IllegalStateException("Instantiating static util class");
   }
+
 }

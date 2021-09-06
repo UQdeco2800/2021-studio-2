@@ -88,7 +88,7 @@ public class TouchAttackComponent extends TouchComponent {
       targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
     }
 
-    //Dissolve arrow attacks after successful hits
+    //Dissolve arrow attacks after hits
     if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
       //Remove later on to make arrows stick into walls and more
       getEntity().prepareDispose();

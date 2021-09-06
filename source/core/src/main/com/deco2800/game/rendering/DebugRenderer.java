@@ -171,7 +171,7 @@ public class DebugRenderer {
     public DrawRequestType drawRequestType;
     public Vector2 pos;
     public Color color;
-    public float lineWidth;
+    public float lineWidth = 1;
 
     public Vector2 end;
   }
