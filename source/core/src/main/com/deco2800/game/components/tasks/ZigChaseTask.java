@@ -15,6 +15,7 @@ import com.deco2800.game.services.ServiceLocator;
 public class ZigChaseTask extends ChaseTask implements PriorityTask {
 
     private float maxChaseDistance;
+    private float speedMultiplier;
     private final PhysicsEngine physics;
     private final DebugRenderer debugRenderer;
     private final RaycastHit hit = new RaycastHit();
@@ -28,9 +29,10 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      * @param viewDistance max view distance of entity to target
      * @param maxChaseDistance max chase distance of entity to target
      */
-    public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
+    public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance, float speedMultiplier) {
         super(target, priority, viewDistance, maxChaseDistance);
         this.maxChaseDistance = maxChaseDistance;
+        this.speedMultiplier = speedMultiplier;
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
@@ -42,17 +44,17 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     @Override
     public void update() {
         if (((System.currentTimeMillis() - start) / 1000.0) > 0.5
-                || getDistanceToTarget() < maxChaseDistance * 3 / 10) {
-            if (getDistanceToTarget() < maxChaseDistance * 3 / 10) {
+                || getDistanceToTarget() < (maxChaseDistance * (2 / 10))) {
+            if (getDistanceToTarget() < (maxChaseDistance * (2 / 10))) {
                 movementTask.setTarget(target.getCenterPosition());
-                movementTask.setMoveSpeed(new Vector2(1.5f, 1.5f));
+                movementTask.setMoveSpeed(new Vector2(1f * speedMultiplier, 1 * speedMultiplier));
             } else {
-                movementTask.setMoveSpeed(new Vector2(2.5f, 2.5f));
+                movementTask.setMoveSpeed(new Vector2(2f * speedMultiplier, 2f * speedMultiplier));
                 if (zigLeft) {
-                    movementTask.setTarget(zigLeftRight(-1, 40));
+                    movementTask.setTarget(zigLeftRight(-1, 45 * (getDistanceToTarget() / maxChaseDistance)));
                     zigLeft = false;
                 } else {
-                    movementTask.setTarget(zigLeftRight(1, 40));
+                    movementTask.setTarget(zigLeftRight(1, 45 * (getDistanceToTarget() / maxChaseDistance)));
                     zigLeft = true;
                 }
             }
