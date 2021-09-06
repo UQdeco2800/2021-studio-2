@@ -9,6 +9,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.Dialogue;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
@@ -26,14 +27,16 @@ public class TouchCutsceneComponent extends TouchComponent {
 
     private Entity collidedEntity;
     private PlayerActions actions;
+    private RandomDialogueSet dialogueSet;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchCutsceneComponent(short targetLayer) {
+    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet) {
         super(targetLayer);
+        this.dialogueSet = dialogueSet;
     }
 
     /**
@@ -64,7 +67,7 @@ public class TouchCutsceneComponent extends TouchComponent {
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        textBox.setDialogue(Dialogue.THE_ROCK);
+        textBox.setOrderedDialogue(dialogueSet);
 
         collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         actions = collidedEntity.getComponent(PlayerActions.class);

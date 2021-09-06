@@ -27,7 +27,6 @@ public enum RandomDialogueSet {
                     Dialogue.TUTORIAL_DASH,
                     Dialogue.TUTORIAL_ATTACK,
                     Dialogue.TUTORIAL_EXIT
-
             }
     ),
 

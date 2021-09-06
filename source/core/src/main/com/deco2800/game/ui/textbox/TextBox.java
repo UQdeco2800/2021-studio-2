@@ -35,7 +35,7 @@ public class TextBox extends Component {
     private RandomDialogueSet randomDialogueSet;
 
     /** Index of the sequence of ordered dialogue. */
-    private int orderedDialogueIndex = 0;
+    private float orderedDialogueIndex = 0;
 
     /** Dialogue object that the text box is currently on. */
     private Dialogue dialogue;
@@ -49,9 +49,12 @@ public class TextBox extends Component {
     /** Boolean to check if the main character text box should be displayed or the enemy. */
     private boolean mainCharacterShowing = true;
 
+    /** Checks if the set of dialogue is ordered or random. */
+    private boolean orderedDialogue = false;
+
     public TextBox() {
-        setRandomDialogueSet(RandomDialogueSet.TUTORIAL);
-        setDialogue(randomDialogueSet.getRandomBossDefeatedBefore());
+        setRandomDialogueSet(RandomDialogueSet.LOKI_OPENING);
+        setDialogue(randomDialogueSet.LOKI_OPENING.getRandomFirstEncounter());
         acceptInput();
     }
 
@@ -78,21 +81,6 @@ public class TextBox extends Component {
     }
 
     /**
-     * Opens the text box.
-     */
-    public void setOpen() {
-        logger.debug("Opening text box");
-        isOpen = true;
-        generateCharacter = true;
-        if (this.randomDialogueSet != null && randomDialogueSet.getOrderedDialogueSize() > orderedDialogueIndex) {
-            this.dialogue = randomDialogueSet.getOrderedDialogue(orderedDialogueIndex++);
-        } else {
-            this.orderedDialogueIndex = 0;
-        }
-        this.nextMessage();
-    }
-
-    /**
      * Toggles between the text box being open and closed.
      */
     public void toggleIsOpen() {
@@ -115,6 +103,17 @@ public class TextBox extends Component {
     }
 
     /**
+     * Opens the text box.
+     */
+    public void setOpen() {
+        logger.debug("Opening text box");
+        isOpen = true;
+        generateCharacter = true;
+        this.nextMessage();
+    }
+
+
+    /**
      * Handles the escape key being pressed to close to text box.
      */
     public void handleEscape() {
@@ -135,6 +134,7 @@ public class TextBox extends Component {
             setSubMessage();
             this.index++;
         } else {
+            this.index = 0;
             this.setClosed();
         }
     }
@@ -179,12 +179,18 @@ public class TextBox extends Component {
 
     /**
      * Checks if the text box is accepting input from the player.
+     *
      * @return true if text box can altered with input, false otherwise
      */
     public boolean isAcceptingInput() {
         return this.acceptingInput;
     }
 
+    /**
+     * When walking into an entity that triggers a text box to appear, repeatedly holding down a
+     * key would instantly cycle through all of the messages. To prevent this, the player needs to
+     * press start accepting keyboard input.
+     */
     public void acceptInput() {
         this.acceptingInput = true;
     }
@@ -199,7 +205,6 @@ public class TextBox extends Component {
         this.index = 0;
         this.subMessageIndex = 0;
         this.acceptingInput = false;
-        setOpen();
     }
 
     /**
@@ -210,6 +215,34 @@ public class TextBox extends Component {
     public void setRandomDialogueSet(RandomDialogueSet dialogueSet) {
         this.randomDialogueSet = dialogueSet;
         orderedDialogueIndex = 0;
+        setDialogue(randomDialogueSet.getRandomFirstEncounter());
+        orderedDialogue = false;
+        setOpen();
+    }
+
+    /**
+     * This method will be called repeatedly to trigger an ordered sequence of dialogue.
+     *
+     * @param dialogueSet the set of dialogue that dialogue will be retrieved from
+     */
+    public void setOrderedDialogue(RandomDialogueSet dialogueSet) {
+        // If the dialogue set is new, it will change the count back to 0 to retrieve the first message
+        if (dialogueSet != this.randomDialogueSet) {
+            this.randomDialogueSet = dialogueSet;
+            orderedDialogueIndex = 0;
+        }
+        // Checks to see if the last message has been already read.
+        if (randomDialogueSet.getOrderedDialogueSize() > orderedDialogueIndex) {
+            setDialogue(randomDialogueSet.getOrderedDialogue((int)orderedDialogueIndex));
+            // Collisions are called on both entities within the collision so this method is called twice
+            // per collision.
+            orderedDialogueIndex += 0.5;
+            orderedDialogue = true;
+            setOpen();
+        } else {
+            orderedDialogueIndex = 0;
+            orderedDialogue = false;
+        }
     }
 
     /**

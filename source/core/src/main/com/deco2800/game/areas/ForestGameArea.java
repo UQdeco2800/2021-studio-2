@@ -11,6 +11,7 @@ import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -59,7 +60,7 @@ public class ForestGameArea extends GameArea {
           "images/health_frame_right.png",
           "images/hp_icon.png",
           "images/dash_icon.png",
-          "images/rock.png"
+          "images/prisoner.png"
   };
   private static final String[] forestTextureAtlases = {
           "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
@@ -217,7 +218,7 @@ public class ForestGameArea extends GameArea {
   }
 
   private void spawnCutsceneTrigger() {
-    Entity trigger = CutsceneTriggerFactory.createTrigger();
+    Entity trigger = CutsceneTriggerFactory.createTrigger(RandomDialogueSet.TUTORIAL);
     spawnEntityAt(trigger, TEST_TRIGGER, true, true);
   }
 

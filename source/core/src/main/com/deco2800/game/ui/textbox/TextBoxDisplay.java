@@ -43,7 +43,7 @@ public class TextBoxDisplay extends UIComponent {
             ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH - MAIN_CHARACTER_DISPLAY_X;
 
     private final float ENEMY_TEXT_X =
-            ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH + 100f;
+            ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH + 90f;
 
 
     @Override

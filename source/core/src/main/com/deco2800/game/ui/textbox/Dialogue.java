@@ -76,7 +76,7 @@ public enum Dialogue {
     }),
 
     TUTORIAL_EXIT(new Message[] {
-            new Message(false, "Good luck warrior, I hope I never" +
+            new Message(false, "Good luck warrior, I hope to never" +
                     "\nsee you again.")
     }),
 

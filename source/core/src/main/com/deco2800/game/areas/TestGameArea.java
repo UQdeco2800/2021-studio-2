@@ -102,7 +102,6 @@ public class TestGameArea extends GameArea {
     spawnTerrain();
     spawnPlayer();
     spawnGhosts();
-    spawnCutsceneTrigger();
     spawnGhostKing();
     spawnRangedGhosts();
     spawnGhostKing(); //use this later to make evil assassins with different sprites
@@ -294,11 +293,6 @@ public class TestGameArea extends GameArea {
     GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
     Entity ghostKing = NPCFactory.createGhostKing(player);
     spawnEntityAt(ghostKing, randomPos, true, true);
-  }
-
-  private void spawnCutsceneTrigger() {
-    Entity trigger = CutsceneTriggerFactory.createTrigger();
-    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
   }
 
   private void playMusic() {
