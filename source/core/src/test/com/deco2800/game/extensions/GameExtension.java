@@ -16,21 +16,21 @@ import org.mockito.Mockito;
  * this extension when testing game-related classes.
  */
 public class GameExtension implements AfterEachCallback, BeforeAllCallback {
-  private Application game;
-
-  @Override
-  public void beforeAll(ExtensionContext context) {
     // 'Headless' back-end, so no rendering happens
-    game = new HeadlessApplication(new ApplicationAdapter() {});
+    private final Application game = new HeadlessApplication(new ApplicationAdapter() {
+    });
 
-    // Mock any calls to OpenGL
-    Gdx.gl20 = Mockito.mock(GL20.class);
-    Gdx.gl = Gdx.gl20;
-  }
+    @Override
+    public void beforeAll(ExtensionContext context) {
 
-  @Override
-  public void afterEach(ExtensionContext context) {
-    // Clear the global state from the service locator
-    ServiceLocator.clear();
-  }
+        // Mock any calls to OpenGL
+        Gdx.gl20 = Mockito.mock(GL20.class);
+        Gdx.gl = Gdx.gl20;
+    }
+
+    @Override
+    public void afterEach(ExtensionContext context) {
+        // Clear the global state from the service locator
+        ServiceLocator.clear();
+    }
 }

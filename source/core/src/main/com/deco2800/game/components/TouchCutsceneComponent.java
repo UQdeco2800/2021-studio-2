@@ -30,23 +30,14 @@ public class TouchCutsceneComponent extends TouchComponent {
     }
 
     /**
-     * Creates the component by adding the text box so the dialogue can be changed
-     * once the entity has been collided with.
-     */
-    @Override
-    public void create() {
-        super.create();
-    }
-
-    /**
      * The method that is called once a collision event is triggered. The method
      * will check that the correct entities are in the collision, if they are not
      * then the method will terminate prematurely.
-     *
+     * <p>
      * If the entities are correct, a text box will be displayed and the player will
      * stop moving.
      *
-     * @param me the entity that will trigger the event
+     * @param me    the entity that will trigger the event
      * @param other the entity that is required to trigger the event on collision
      */
     @Override
@@ -56,7 +47,7 @@ public class TouchCutsceneComponent extends TouchComponent {
             return;
         }
 
-        if (!PhysicsLayer.contains(targetLayer, other.getFilterData().categoryBits)) {
+        if (PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }

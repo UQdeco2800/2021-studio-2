@@ -1,4 +1,5 @@
 package com.deco2800.game.input;
+
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.ui.terminal.KeyboardTerminalInputComponent;
 import com.deco2800.game.ui.textbox.KeyboardTextBoxInputComponent;
@@ -13,6 +14,7 @@ public class KeyboardInputFactory extends InputFactory {
 
     /**
      * Creates an input handler for the player.
+     *
      * @return Player input handler
      */
     @Override

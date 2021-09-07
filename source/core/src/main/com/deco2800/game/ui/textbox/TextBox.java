@@ -16,28 +16,44 @@ public class TextBox extends Component {
      */
     private String message = "";
 
-    /** The substring of the message that will be displayed on the screen. */
+    /**
+     * The substring of the message that will be displayed on the screen.
+     */
     private String subMessage = "";
 
-    /** Whether the text box is open or not. */
+    /**
+     * Whether the text box is open or not.
+     */
     private boolean isOpen = false;
 
-    /** Used to determine if the line should be completed or the next message should be displayed. */
+    /**
+     * Used to determine if the line should be completed or the next message should be displayed.
+     */
     private boolean skip = false;
 
-    /** The index of the message in the Dialogue object. */
+    /**
+     * The index of the message in the Dialogue object.
+     */
     private int index = 0;
 
-    /** Index of the furthest character to be displayed of the substring of the message to be displayed. */
+    /**
+     * Index of the furthest character to be displayed of the substring of the message to be displayed.
+     */
     private int subMessageIndex = 0;
 
-    /** Dialogue object that the text box is currently on. */
+    /**
+     * Dialogue object that the text box is currently on.
+     */
     private Dialogue dialogue;
 
-    /** Checks if the player has lifted a key to prevent the text box from skipping. */
+    /**
+     * Checks if the player has lifted a key to prevent the text box from skipping.
+     */
     private boolean acceptingInput;
 
-    /** Boolean to check if the delayed recursive call should be performed. */
+    /**
+     * Boolean to check if the delayed recursive call should be performed.
+     */
     private boolean generateCharacter = true;
 
     public TextBox() {
@@ -160,6 +176,7 @@ public class TextBox extends Component {
 
     /**
      * Checks if the text box is accepting input from the player.
+     *
      * @return true if text box can altered with input, false otherwise
      */
     public boolean isAcceptingInput() {

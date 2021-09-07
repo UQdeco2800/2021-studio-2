@@ -8,70 +8,68 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.anyFloat;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(GameExtension.class)
 class PhysicsEngineTest {
-  @Mock
-  GameTime gameTime;
-  @Mock
-  World world;
+    @Mock
+    GameTime gameTime;
+    @Mock
+    World world;
 
-  @Test
-  void shouldNotStepWithoutEnoughTime() {
-    when(gameTime.getDeltaTime()).thenReturn(0f);
-    PhysicsEngine engine = new PhysicsEngine(world, gameTime);
-    engine.update();
-    verify(world, times(0)).step(anyFloat(), anyInt(), anyInt());
-  }
+    @Test
+    void shouldNotStepWithoutEnoughTime() {
+        when(gameTime.getDeltaTime()).thenReturn(0f);
+        PhysicsEngine engine = new PhysicsEngine(world, gameTime);
+        engine.update();
+        verify(world, times(0)).step(anyFloat(), anyInt(), anyInt());
+    }
 
-  @Test
-  void shouldStepOnceAfterTime() {
-    when(gameTime.getDeltaTime()).thenReturn(0.02f);
-    PhysicsEngine engine = new PhysicsEngine(world, gameTime);
+    @Test
+    void shouldStepOnceAfterTime() {
+        when(gameTime.getDeltaTime()).thenReturn(0.02f);
+        PhysicsEngine engine = new PhysicsEngine(world, gameTime);
 
-    engine.update();
-    verify(world, times(1)).step(anyFloat(), anyInt(), anyInt());
-  }
+        engine.update();
+        verify(world, times(1)).step(anyFloat(), anyInt(), anyInt());
+    }
 
-  @Test
-  void shouldStepMultipleAfterLongTime() {
-    PhysicsEngine engine = new PhysicsEngine(world, gameTime);
-    when(gameTime.getDeltaTime()).thenReturn(0.06f);
+    @Test
+    void shouldStepMultipleAfterLongTime() {
+        PhysicsEngine engine = new PhysicsEngine(world, gameTime);
+        when(gameTime.getDeltaTime()).thenReturn(0.06f);
 
-    engine.update();
-    verify(world, times(3)).step(anyFloat(), anyInt(), anyInt());
-  }
+        engine.update();
+        verify(world, times(3)).step(anyFloat(), anyInt(), anyInt());
+    }
 
-  @Test
-  void shouldCreateBody() {
-    PhysicsEngine engine = new PhysicsEngine(world, gameTime);
-    BodyDef bodyDef = new BodyDef();
-    Body body = engine.createBody(bodyDef);
-    verify(world).createBody(bodyDef);
+    @Test
+    void shouldCreateBody() {
+        PhysicsEngine engine = new PhysicsEngine(world, gameTime);
+        BodyDef bodyDef = new BodyDef();
+        Body body = engine.createBody(bodyDef);
+        verify(world).createBody(bodyDef);
 
-    engine.destroyBody(body);
-    verify(world).destroyBody(body);
-  }
+        engine.destroyBody(body);
+        verify(world).destroyBody(body);
+    }
 
-  @Test
-  void shouldCreateJoint() {
-    PhysicsEngine engine = new PhysicsEngine(world, gameTime);
-    JointDef jointDef = new JointDef();
-    Joint joint = engine.createJoint(jointDef);
-    verify(world).createJoint(jointDef);
+    @Test
+    void shouldCreateJoint() {
+        PhysicsEngine engine = new PhysicsEngine(world, gameTime);
+        JointDef jointDef = new JointDef();
+        Joint joint = engine.createJoint(jointDef);
+        verify(world).createJoint(jointDef);
 
-    engine.destroyJoint(joint);
-    verify(world).destroyJoint(joint);
-  }
+        engine.destroyJoint(joint);
+        verify(world).destroyJoint(joint);
+    }
 
-  @Test
-  void shouldDisposeWorld() {
-    PhysicsEngine engine = new PhysicsEngine(world, gameTime);
-    engine.dispose();
-    verify(world).dispose();
-  }
+    @Test
+    void shouldDisposeWorld() {
+        PhysicsEngine engine = new PhysicsEngine(world, gameTime);
+        engine.dispose();
+        verify(world).dispose();
+    }
 }

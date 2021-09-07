@@ -9,16 +9,24 @@ import com.deco2800.game.ui.UIComponent;
 
 public class TextBoxDisplay extends UIComponent {
 
-    /** The priority of the UI component to be displayed on the screen. */
+    /**
+     * The priority of the UI component to be displayed on the screen.
+     */
     private static final float Z_INDEX = 10f;
 
-    /** Instance of the Text Box that will be displayed to the screen. */
+    /**
+     * Instance of the Text Box that will be displayed to the screen.
+     */
     private TextBox textBox;
 
-    /** The label that will be added to the screen to display the message. */
+    /**
+     * The label that will be added to the screen to display the message.
+     */
     private Label label;
 
-    /** Stores the image that will surround the text message. */
+    /**
+     * Stores the image that will surround the text message.
+     */
     private Image image;
 
     @Override

@@ -19,7 +19,9 @@ import com.deco2800.game.utils.math.Vector2Utils;
  * Will be used later on as the ground work for the tracking arrow
  */
 
-/** Chases a target entity's static location until they get too far away or line of sight is lost */
+/**
+ * Chases a target entity's static location until they get too far away or line of sight is lost
+ */
 public class AttackTask extends DefaultTask implements PriorityTask {
     private final Entity target;
     private final Vector2 targetLoc;
@@ -33,9 +35,9 @@ public class AttackTask extends DefaultTask implements PriorityTask {
     private MovementTask movementTask;
 
     /**
-     * @param target The entity to chase.
-     * @param priority Task priority when chasing (0 when not chasing).
-     * @param viewDistance Maximum distance from the entity at which chasing can start.
+     * @param target           The entity to chase.
+     * @param priority         Task priority when chasing (0 when not chasing).
+     * @param viewDistance     Maximum distance from the entity at which chasing can start.
      * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
      */
     public AttackTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
@@ -49,20 +51,21 @@ public class AttackTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * @param target The entity to chase.
-     * @param priority Task priority when chasing (0 when not chasing).
-     * @param viewDistance Maximum distance from the entity at which chasing can start.
+     * @param target           The entity to chase.
+     * @param priority         Task priority when chasing (0 when not chasing).
+     * @param viewDistance     Maximum distance from the entity at which chasing can start.
      * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
-     * @param moveSpeed speed to approach the target at.
+     * @param moveSpeed        speed to approach the target at.
      */
     public AttackTask(Entity target, int priority, float viewDistance, float maxChaseDistance, Vector2 moveSpeed) {
         this(target, priority, viewDistance, maxChaseDistance);
         this.moveSpeed = moveSpeed;
     }
+
     /**
-     * @param targetLoc The location to go to.
-     * @param priority Task priority when chasing (0 when not chasing).
-     * @param viewDistance Maximum distance from the entity at which chasing can start.
+     * @param targetLoc        The location to go to.
+     * @param priority         Task priority when chasing (0 when not chasing).
+     * @param viewDistance     Maximum distance from the entity at which chasing can start.
      * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
      */
     public AttackTask(Vector2 targetLoc, int priority, float viewDistance, float maxChaseDistance) {
@@ -76,11 +79,11 @@ public class AttackTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * @param targetLoc The location to go to.
-     * @param priority Task priority when chasing (0 when not chasing).
-     * @param viewDistance Maximum distance from the entity at which chasing can start.
+     * @param targetLoc        The location to go to.
+     * @param priority         Task priority when chasing (0 when not chasing).
+     * @param viewDistance     Maximum distance from the entity at which chasing can start.
      * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
-     * @param moveSpeed speed to approach the target at.
+     * @param moveSpeed        speed to approach the target at.
      */
     public AttackTask(Vector2 targetLoc, int priority, float viewDistance, float maxChaseDistance, Vector2 moveSpeed) {
         this(targetLoc, priority, viewDistance, maxChaseDistance);

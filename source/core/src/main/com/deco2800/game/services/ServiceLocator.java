@@ -17,116 +17,119 @@ import org.slf4j.LoggerFactory;
  * <p>Allows global access to a few core game services. Warning: global access is a trap and should
  * be used extremely sparingly. Read the README for details.
  */
+@SuppressWarnings({"GDXJavaStaticResource", "GDXJavaUnsafeIterator"})
 public class ServiceLocator {
-  private static final Logger logger = LoggerFactory.getLogger(ServiceLocator.class);
-  private static EntityService entityService;
-  private static RenderService renderService;
-  private static PhysicsService physicsService;
-  private static GameTime timeSource;
-  private static InputService inputService;
-  private static ResourceService resourceService;
-  private static GameArea gameAreaService;
-  private static Renderer renderer;
+    private static final Logger logger = LoggerFactory.getLogger(ServiceLocator.class);
+    private static EntityService entityService;
+    private static RenderService renderService;
+    private static PhysicsService physicsService;
+    private static GameTime timeSource;
+    private static InputService inputService;
+    private static ResourceService resourceService;
+    private static GameArea gameAreaService;
+    private static Renderer renderer;
 
 
-  public static EntityService getEntityService() {
-    return entityService;
-  }
-
-  public static RenderService getRenderService() {
-    return renderService;
-  }
-
-  public static PhysicsService getPhysicsService() {
-    return physicsService;
-  }
-
-  public static GameTime getTimeSource() {
-    return timeSource;
-  }
-
-  public static InputService getInputService() {
-    return inputService;
-  }
-
-  /**
-   * Allows entities to access gameArea and spawn entities.
-   * @return current game area
-   */
-  public static ResourceService getResourceService() {
-    return resourceService;
-  }
-
-  public static ResourceService copyResourceService() {
-    AssetManager cpy = new AssetManager();
-    for (String s : resourceService.getAssetManager().getAssetNames()) {
-      cpy.load(resourceService.getAssetManager().get(s));
+    private ServiceLocator() {
+        throw new IllegalStateException("Instantiating static util class");
     }
-    return new ResourceService(cpy);
-  }
 
-  public static GameArea getGameAreaService() {
-    return gameAreaService;
-  }
+    public static EntityService getEntityService() {
+        return entityService;
+    }
 
-  public static Renderer getRenderer() {
-    return renderer;
-  }
+    public static RenderService getRenderService() {
+        return renderService;
+    }
 
-  public static void registerEntityService(EntityService service) {
-    logger.debug("Registering entity service {}", service);
-    entityService = service;
-  }
+    public static PhysicsService getPhysicsService() {
+        return physicsService;
+    }
 
-  public static void registerRenderService(RenderService service) {
-    logger.debug("Registering render service {}", service);
-    renderService = service;
-  }
+    public static GameTime getTimeSource() {
+        return timeSource;
+    }
 
-  public static void registerPhysicsService(PhysicsService service) {
-    logger.debug("Registering physics service {}", service);
-    physicsService = service;
-  }
+    public static InputService getInputService() {
+        return inputService;
+    }
 
-  public static void registerTimeSource(GameTime source) {
-    logger.debug("Registering time source {}", source);
-    timeSource = source;
-  }
+    /**
+     * Allows entities to access gameArea and spawn entities.
+     *
+     * @return current game area
+     */
+    public static ResourceService getResourceService() {
+        return resourceService;
+    }
 
-  public static void registerInputService(InputService source) {
-    logger.debug("Registering input service {}", source);
-    inputService = source;
-  }
+    public static ResourceService copyResourceService() {
+        AssetManager cpy = new AssetManager();
+        for (String s : resourceService.getAssetManager().getAssetNames()) {
+            cpy.load(resourceService.getAssetManager().get(s));
+        }
+        return new ResourceService(cpy);
+    }
 
-  public static void registerResourceService(ResourceService source) {
-    logger.debug("Registering resource service {}", source);
-    resourceService = source;
-  }
+    public static GameArea getGameAreaService() {
+        return gameAreaService;
+    }
 
-  /**
-   * Allows entities to access gameArea and spawn entities.
-   * @param source current game area
-   */
-  public static void registerGameArea(GameArea source) {
-    logger.debug("Registering GameArea service {}", source);
-    gameAreaService = source;
-  }
+    public static Renderer getRenderer() {
+        return renderer;
+    }
 
-  public static void clear() {
-    entityService = null;
-    renderService = null;
-    physicsService = null;
-    timeSource = null;
-    inputService = null;
-    resourceService = null;
-  }
+    public static void registerEntityService(EntityService service) {
+        logger.debug("Registering entity service {}", service);
+        entityService = service;
+    }
 
-  public static void registerRenderer(Renderer renderer) {
-    ServiceLocator.renderer = renderer;
-  }
+    public static void registerRenderService(RenderService service) {
+        logger.debug("Registering render service {}", service);
+        renderService = service;
+    }
 
-  private ServiceLocator() {
-    throw new IllegalStateException("Instantiating static util class");
-  }
+    public static void registerPhysicsService(PhysicsService service) {
+        logger.debug("Registering physics service {}", service);
+        physicsService = service;
+    }
+
+    public static void registerTimeSource(GameTime source) {
+        logger.debug("Registering time source {}", source);
+        timeSource = source;
+    }
+
+    public static void registerInputService(InputService source) {
+        logger.debug("Registering input service {}", source);
+        inputService = source;
+    }
+
+    public static void registerResourceService(ResourceService source) {
+        logger.debug("Registering resource service {}", source);
+        resourceService = source;
+    }
+
+    /**
+     * Allows entities to access gameArea and spawn entities.
+     *
+     * @param source current game area
+     */
+    public static void registerGameArea(GameArea source) {
+        logger.debug("Registering GameArea service {}", source);
+        gameAreaService = source;
+    }
+
+    public static void clear() {
+        entityService = null;
+        renderService = null;
+        physicsService = null;
+        timeSource = null;
+        inputService = null;
+        resourceService = null;
+    }
+
+    public static void registerRenderer(Renderer renderer) {
+        ServiceLocator.renderer = renderer;
+    }
 
 }

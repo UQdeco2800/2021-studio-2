@@ -18,19 +18,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @ExtendWith(GameExtension.class)
 class JobSystemTest {
-  @Test
-  void shouldRunTask() throws InterruptedException, ExecutionException, TimeoutException {
-    CompletableFuture<Integer> future = JobSystem.launch(() -> 10);
-    int result = future.get(500, TimeUnit.MILLISECONDS);
+    @Test
+    void shouldRunTask() throws InterruptedException, ExecutionException, TimeoutException {
+        CompletableFuture<Integer> future = JobSystem.launch(() -> 10);
+        int result = future.get(500, TimeUnit.MILLISECONDS);
 
-    assertEquals(10, result);
-  }
+        assertEquals(10, result);
+    }
 
-  @Test
-  void shouldRunBlockingTask() throws InterruptedException, ExecutionException, TimeoutException {
-    CompletableFuture<Integer> future = JobSystem.launchBlocking(() -> 10);
-    int result = future.get(500, TimeUnit.MILLISECONDS);
+    @Test
+    void shouldRunBlockingTask() throws InterruptedException, ExecutionException, TimeoutException {
+        CompletableFuture<Integer> future = JobSystem.launchBlocking(() -> 10);
+        int result = future.get(500, TimeUnit.MILLISECONDS);
 
-    assertEquals(10, result);
-  }
+        assertEquals(10, result);
+    }
 }

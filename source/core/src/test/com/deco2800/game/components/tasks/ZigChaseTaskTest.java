@@ -57,7 +57,7 @@ class ZigChaseTaskTest {
             entity.update();
             ServiceLocator.getPhysicsService().getPhysics().update();
             if (initialDistance - entity.getPosition().dst(target.getPosition()) == 0
-                && entity.getPosition().dst(target.getPosition()) > 1f) {
+                    && entity.getPosition().dst(target.getPosition()) > 1f) {
                 // distance > 1 because if less than 1, the entity is approach target
                 count++;
             }
@@ -78,7 +78,7 @@ class ZigChaseTaskTest {
         entity.create();
         entity.setPosition(0f, 0f);
 
-        ZigChaseTask zigChaseTask  = new ZigChaseTask(target, 10, 5, 10);
+        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10);
         zigChaseTask.create(() -> entity);
 
         // Not currently active, target is too far, should have negative priority

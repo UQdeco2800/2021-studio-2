@@ -70,6 +70,7 @@ class AnchoredRetreatTaskTest {
         anchoredRetreatTask.start();
         anchoredRetreatTask.update();
         long time = System.currentTimeMillis();
+        //noinspection StatementWithEmptyBody
         while (System.currentTimeMillis() - time <= 2000) {
             //wait
         }

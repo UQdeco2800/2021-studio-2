@@ -53,8 +53,6 @@ class AlertableChaseTaskTest {
         AITaskComponent aiAlertable = new AITaskComponent().addTask(alertableChaseTask);
         Entity alertableEntity = makePhysicsEntity().addComponent(aiAlertable);
         alertableChaseTask.create(() -> alertableEntity);
-        //entity.create();
-        //alertableEntity.create();;
         alertChaseTask.create(() -> entity);
         entity.setPosition(0f, 0f);
         alertableEntity.setPosition(8f, 8f);

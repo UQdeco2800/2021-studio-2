@@ -17,32 +17,52 @@ import com.deco2800.game.services.ServiceLocator;
  * Enables entities to attack using a weapon.
  */
 public class MeleeWeapon extends Component {
-    /** animation frame duration measured in milliseconds */
+    /**
+     * animation frame duration measured in milliseconds
+     */
     protected long frameDuration;
-    /** determines whether entity has attacked. */
+    /**
+     * determines whether entity has attacked.
+     */
     protected boolean hasAttacked;
 
-    /** Time when the entity last attacked, 0 if entity is not attacking. */
+    /**
+     * Time when the entity last attacked, 0 if entity is not attacking.
+     */
     private long timeAtAttack;
 
-    /** Weapon Damage */
-    protected int attackPower;
-    /** The physics layer the weapon can damage */
-    protected short targetLayer;
-    /** Physical Knockback of weapon */
-    protected float knockback;
+    /**
+     * Weapon Damage
+     */
+    protected final int attackPower;
+    /**
+     * The physics layer the weapon can damage
+     */
+    protected final short targetLayer;
+    /**
+     * Physical Knockback of weapon
+     */
+    protected final float knockback;
 
-    /** Base stats of owner entity */
+    /**
+     * Base stats of owner entity
+     */
     protected CombatStatsComponent combatStats;
 
-    /** Weapon attack width & range in terms of x & y, relative to entity size */
+    /**
+     * Weapon attack width & range in terms of x & y, relative to entity size
+     */
     private final Vector2 weaponSize;
-    /** Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
-    entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
-    it simultaneously. */
+    /**
+     * Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
+     * entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
+     * it simultaneously.
+     */
     private WeaponHitboxComponent weaponHitbox;
 
-    /** attack direction (see below for constants) */
+    /**
+     * attack direction (see below for constants)
+     */
     private int attackDirection;
     public static final int CENTER = 0; // used for AOE (area of effect) attacks
     public static final int UP = 1;
@@ -55,7 +75,7 @@ public class MeleeWeapon extends Component {
         this.targetLayer = targetLayer;
         this.attackPower = attackPower;
         this.knockback = knockback;
-        this.weaponSize= weaponSize;
+        this.weaponSize = weaponSize;
         timeAtAttack = 0L;
         frameDuration = 100L; // default frame duration is set at 100 milliseconds.
         hasAttacked = false;
@@ -86,6 +106,7 @@ public class MeleeWeapon extends Component {
      * Weapon attack, called by owner entity.
      * Sets flags used in update(), to sync the attack with the animation.
      * Actual functionality for attacking is implemented inside triggerAttackStage()
+     *
      * @param attackDirection direction of attack (see above for defined constants).
      */
     public void attack(int attackDirection) {
@@ -97,15 +118,16 @@ public class MeleeWeapon extends Component {
 
     /**
      * Used by update() to sync weapon hit box with animation.
+     *
      * @param timeSinceAttack the time elapsed since the entity last attacked
      *                        0 - if the entity is not attacking.
      */
     protected void triggerAttackStage(long timeSinceAttack) {
         // Set hit box during attack frame (2nd frame).
         if (hasAttacked && timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
-            weaponHitbox.set(weaponSize.cpy(),  attackDirection);
+            weaponHitbox.set(weaponSize.cpy(), attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
-        // Destroy hit box as soon as attack frame ends (3rd frame).
+            // Destroy hit box as soon as attack frame ends (3rd frame).
         } else if (timeSinceAttack >= 3 * frameDuration) {
             timeAtAttack = 0;
             weaponHitbox.destroy();
@@ -114,6 +136,7 @@ public class MeleeWeapon extends Component {
 
     /**
      * Sets frame duration, which determines how long an attack lasts.
+     *
      * @param frameDuration how long each attack animation frame takes.
      */
     public void setFrameDuration(long frameDuration) {
@@ -123,6 +146,7 @@ public class MeleeWeapon extends Component {
     /**
      * Returns the total time the attack will take. Assumes the attack animation only has
      * 3 frames.
+     *
      * @return total time of attack
      */
     public long getTotalAttackTime() {
@@ -132,11 +156,12 @@ public class MeleeWeapon extends Component {
     /**
      * Collision method used by weapon to detect collisions with enemy entities,
      * defined by the target layer.
-     * @see com.deco2800.game.components.TouchAttackComponent
-     * @param me - the fixture used to represent this weapon
+     *
+     * @param me    - the fixture used to represent this weapon
      * @param other - the fixture that our weapon is colliding with.
      * @return true - if weapon collided with enemy target
-     *         false - otherwise.
+     * false - otherwise.
+     * @see com.deco2800.game.components.TouchAttackComponent
      */
     protected boolean onCollisionStart(Fixture me, Fixture other) {
 
@@ -145,7 +170,7 @@ public class MeleeWeapon extends Component {
             return false;
         }
 
-        if (!PhysicsLayer.contains(this.targetLayer, other.getFilterData().categoryBits)) {
+        if (PhysicsLayer.notContains(this.targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return false;
         }

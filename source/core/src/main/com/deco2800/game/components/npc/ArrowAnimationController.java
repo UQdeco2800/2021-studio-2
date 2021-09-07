@@ -11,24 +11,24 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  * of the events is triggered.
  */
 public class ArrowAnimationController extends Component {
-  AnimationRenderComponent animator;
+    AnimationRenderComponent animator;
 
-  @Override
-  public void create() {
-    super.create();
-    // create the image of arrow - rotate so that it face toward the character
-    Image arrow = new Image(new Texture("images/arrow_normal.png"));
-    arrow.addAction(Actions.parallel(Actions.moveTo(1, 1, 10), Actions.rotateBy(20)));
+    @Override
+    public void create() {
+        super.create();
+        // create the image of arrow - rotate so that it face toward the character
+        Image arrow = new Image(new Texture("images/arrow_normal.png"));
+        arrow.addAction(Actions.parallel(Actions.moveTo(1, 1, 10), Actions.rotateBy(20)));
 
 
-    animator = this.entity.getComponent(AnimationRenderComponent.class);
-  }
+        animator = this.entity.getComponent(AnimationRenderComponent.class);
+    }
 
-  public float setXPosition(float x) {
-    return x;
-  }
+    public float setXPosition(float x) {
+        return x;
+    }
 
-  public float setYPosition(float y) {
-    return y;
-  }
+    public float setYPosition(float y) {
+        return y;
+    }
 }

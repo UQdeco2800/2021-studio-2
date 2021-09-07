@@ -47,11 +47,6 @@ class KeyboardTextBoxInputComponentTest {
     }
 
     @Test
-    void shouldStartSubMessage() {
-
-    }
-
-    @Test
     void shouldFlushMessage() {
         TextBox textBox = new TextBox();
         KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);

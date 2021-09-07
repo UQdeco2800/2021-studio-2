@@ -9,10 +9,10 @@ import static org.mockito.Mockito.mock;
 
 @ExtendWith(GameExtension.class)
 class PhysicsServiceTest {
-  @Test
-  void shouldGetSetEngine() {
-    PhysicsEngine engine = mock(PhysicsEngine.class);
-    PhysicsService service = new PhysicsService(engine);
-    assertEquals(engine, service.getPhysics());
-  }
+    @Test
+    void shouldGetSetEngine() {
+        PhysicsEngine engine = mock(PhysicsEngine.class);
+        PhysicsService service = new PhysicsService(engine);
+        assertEquals(engine, service.getPhysics());
+    }
 } 

@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
 public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
     private final String[] deathScreenTextures = new String[]{
-      "lowHealthImages/testDeath1.png",
-      "lowHealthImages/youdied.png",
-      "lowHealthImages/testDeath1.png",
-      "images/main_menu_background.png"
+            "lowHealthImages/testDeath1.png",
+            "lowHealthImages/youdied.png",
+            "lowHealthImages/testDeath1.png",
+            "images/main_menu_background.png"
     };
 
 

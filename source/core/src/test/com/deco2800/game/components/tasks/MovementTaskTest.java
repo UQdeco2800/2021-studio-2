@@ -19,48 +19,48 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class MovementTaskTest {
-  @BeforeEach
-  void beforeEach() {
-    ServiceLocator.registerPhysicsService(new PhysicsService());
-    GameTime gameTime = mock(GameTime.class);
-    when(gameTime.getTime()).thenReturn(0L);
-    ServiceLocator.registerTimeSource(gameTime);
-  }
+    @BeforeEach
+    void beforeEach() {
+        ServiceLocator.registerPhysicsService(new PhysicsService());
+        GameTime gameTime = mock(GameTime.class);
+        when(gameTime.getTime()).thenReturn(0L);
+        ServiceLocator.registerTimeSource(gameTime);
+    }
 
-  @Test
-  void shouldMoveOnStart() {
-    Vector2 target = new Vector2(10f, 10f);
-    MovementTask task = new MovementTask(target);
-    Entity entity = new Entity().addComponent(new PhysicsComponent());
-    PhysicsMovementComponent movementComponent = new PhysicsMovementComponent();
-    entity.addComponent(movementComponent);
-    entity.create();
+    @Test
+    void shouldMoveOnStart() {
+        Vector2 target = new Vector2(10f, 10f);
+        MovementTask task = new MovementTask(target);
+        Entity entity = new Entity().addComponent(new PhysicsComponent());
+        PhysicsMovementComponent movementComponent = new PhysicsMovementComponent();
+        entity.addComponent(movementComponent);
+        entity.create();
 
-    task.create(() -> entity);
-    task.start();
-    assertTrue(movementComponent.getMoving());
-    assertEquals(target, movementComponent.getTarget());
-    assertEquals(Status.ACTIVE, task.getStatus());
-  }
+        task.create(() -> entity);
+        task.start();
+        assertTrue(movementComponent.getMoving());
+        assertEquals(target, movementComponent.getTarget());
+        assertEquals(Status.ACTIVE, task.getStatus());
+    }
 
-  @Test
-  void shouldStopWhenClose() {
-    MovementTask task = new MovementTask(new Vector2(10f, 10f), 2f);
-    Entity entity = new Entity().addComponent(new PhysicsComponent());
-    PhysicsMovementComponent movementComponent = new PhysicsMovementComponent();
-    entity.addComponent(movementComponent);
-    entity.setPosition(5f, 5f);
-    entity.create();
+    @Test
+    void shouldStopWhenClose() {
+        MovementTask task = new MovementTask(new Vector2(10f, 10f), 2f);
+        Entity entity = new Entity().addComponent(new PhysicsComponent());
+        PhysicsMovementComponent movementComponent = new PhysicsMovementComponent();
+        entity.addComponent(movementComponent);
+        entity.setPosition(5f, 5f);
+        entity.create();
 
-    task.create(() -> entity);
-    task.start();
-    task.update();
-    assertTrue(movementComponent.getMoving());
-    assertEquals(Status.ACTIVE, task.getStatus());
+        task.create(() -> entity);
+        task.start();
+        task.update();
+        assertTrue(movementComponent.getMoving());
+        assertEquals(Status.ACTIVE, task.getStatus());
 
-    entity.setPosition(10f, 9f);
-    task.update();
-    assertFalse(movementComponent.getMoving());
-    assertEquals(Status.FINISHED, task.getStatus());
-  }
+        entity.setPosition(10f, 9f);
+        task.update();
+        assertFalse(movementComponent.getMoving());
+        assertEquals(Status.FINISHED, task.getStatus());
+    }
 } 

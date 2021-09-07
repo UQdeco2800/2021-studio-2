@@ -16,21 +16,21 @@ import static org.mockito.Mockito.when;
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
 class TextureRenderComponentTest {
-  @Mock
-  Texture texture;
-  @Mock
-  SpriteBatch spriteBatch;
-  @Mock
-  Entity entity;
+    @Mock
+    Texture texture;
+    @Mock
+    SpriteBatch spriteBatch;
+    @Mock
+    Entity entity;
 
-  @Test
-  void shouldDrawTexture() {
-    when(entity.getPosition()).thenReturn(new Vector2(2f, 2f));
-    when(entity.getScale()).thenReturn(new Vector2(1f, 1f));
-    TextureRenderComponent component = new TextureRenderComponent(texture);
-    component.setEntity(entity);
-    component.render(spriteBatch);
+    @Test
+    void shouldDrawTexture() {
+        when(entity.getPosition()).thenReturn(new Vector2(2f, 2f));
+        when(entity.getScale()).thenReturn(new Vector2(1f, 1f));
+        TextureRenderComponent component = new TextureRenderComponent(texture);
+        component.setEntity(entity);
+        component.render(spriteBatch);
 
-    verify(spriteBatch).draw(texture, 2f, 2f, 1f, 1f);
-  }
+        verify(spriteBatch).draw(texture, 2f, 2f, 1f, 1f);
+    }
 } 

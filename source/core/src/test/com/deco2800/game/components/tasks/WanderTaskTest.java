@@ -20,28 +20,28 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
 class WanderTaskTest {
-  @Mock
-  GameTime gameTime;
+    @Mock
+    GameTime gameTime;
 
-  @BeforeEach
-  void beforeEach() {
-    ServiceLocator.registerTimeSource(gameTime);
-  }
+    @BeforeEach
+    void beforeEach() {
+        ServiceLocator.registerTimeSource(gameTime);
+    }
 
-  @Test
-  void shouldTriggerEvent() {
-    WanderTask wanderTask = new WanderTask(Vector2Utils.ONE, 1f);
+    @Test
+    void shouldTriggerEvent() {
+        WanderTask wanderTask = new WanderTask(Vector2Utils.ONE, 1f);
 
-    AITaskComponent aiTaskComponent = new AITaskComponent().addTask(wanderTask);
-    Entity entity = new Entity().addComponent(aiTaskComponent).addComponent(new PhysicsMovementComponent());
-    entity.create();
+        AITaskComponent aiTaskComponent = new AITaskComponent().addTask(wanderTask);
+        Entity entity = new Entity().addComponent(aiTaskComponent).addComponent(new PhysicsMovementComponent());
+        entity.create();
 
-    // Register callbacks
-    EventListener0 callback = mock(EventListener0.class);
-    entity.getEvents().addListener("wanderStart", callback);
+        // Register callbacks
+        EventListener0 callback = mock(EventListener0.class);
+        entity.getEvents().addListener("wanderStart", callback);
 
-    wanderTask.start();
+        wanderTask.start();
 
-    verify(callback).handle();
-  }
+        verify(callback).handle();
+    }
 } 

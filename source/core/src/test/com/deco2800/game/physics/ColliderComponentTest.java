@@ -23,116 +23,116 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(GameExtension.class)
 class ColliderComponentTest {
-  @BeforeEach
-  void beforeEach() {
-    ServiceLocator.registerPhysicsService(new PhysicsService());
-  }
+    @BeforeEach
+    void beforeEach() {
+        ServiceLocator.registerPhysicsService(new PhysicsService());
+    }
 
-  @Test
-  void shouldSetFriction() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    @Test
+    void shouldSetFriction() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    component.setFriction(2f);
-    entity.create();
-    assertEquals(2f, component.getFixture().getFriction());
-    component.setFriction(3f);
-    assertEquals(3f, component.getFixture().getFriction());
-  }
+        component.setFriction(2f);
+        entity.create();
+        assertEquals(2f, component.getFixture().getFriction());
+        component.setFriction(3f);
+        assertEquals(3f, component.getFixture().getFriction());
+    }
 
-  @Test
-  void shouldSetSensor() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    @Test
+    void shouldSetSensor() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    component.setSensor(true);
-    entity.create();
-    assertTrue(component.getFixture().isSensor());
-    component.setSensor(false);
-    assertFalse(component.getFixture().isSensor());
-  }
+        component.setSensor(true);
+        entity.create();
+        assertTrue(component.getFixture().isSensor());
+        component.setSensor(false);
+        assertFalse(component.getFixture().isSensor());
+    }
 
-  @Test
-  void shouldSetDensity() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    @Test
+    void shouldSetDensity() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    component.setDensity(2f);
-    entity.create();
-    assertEquals(2f, component.getFixture().getDensity());
-    component.setDensity(3f);
-    assertEquals(3f, component.getFixture().getDensity());
-  }
+        component.setDensity(2f);
+        entity.create();
+        assertEquals(2f, component.getFixture().getDensity());
+        component.setDensity(3f);
+        assertEquals(3f, component.getFixture().getDensity());
+    }
 
-  @Test
-  void shouldSetRestitution() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    @Test
+    void shouldSetRestitution() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    component.setRestitution(2f);
-    entity.create();
-    assertEquals(2f, component.getFixture().getRestitution());
-    component.setRestitution(3f);
-    assertEquals(3f, component.getFixture().getRestitution());
-  }
+        component.setRestitution(2f);
+        entity.create();
+        assertEquals(2f, component.getFixture().getRestitution());
+        component.setRestitution(3f);
+        assertEquals(3f, component.getFixture().getRestitution());
+    }
 
-  @Test
-  void shouldSetShape() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    @Test
+    void shouldSetShape() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    Shape shape = new CircleShape();
-    component.setShape(shape);
-    entity.create();
-    assertEquals(shape.getType(), component.getFixture().getShape().getType());
-  }
+        Shape shape = new CircleShape();
+        component.setShape(shape);
+        entity.create();
+        assertEquals(shape.getType(), component.getFixture().getShape().getType());
+    }
 
-  @Test
-  void shouldSetBox() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    @Test
+    void shouldSetBox() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    entity.setScale(4f, 4f);
-    Vector2 box = new Vector2(2f, 2f);
-    component.setAsBox(box);
-    entity.create();
+        entity.setScale(4f, 4f);
+        Vector2 box = new Vector2(2f, 2f);
+        component.setAsBox(box);
+        entity.create();
 
-    PhysicsTestUtils.checkPolygonCollider(component, box);
-    Vector2 pos = PhysicsTestUtils.getRectanglePosition(component);
-    assertEquals(Vector2Utils.ONE, pos);
-  }
+        PhysicsTestUtils.checkPolygonCollider(component, box);
+        Vector2 pos = PhysicsTestUtils.getRectanglePosition(component);
+        assertEquals(Vector2Utils.ONE, pos);
+    }
 
-  @Test
-  void shouldSetAligned() {
-    testAlignedBox(AlignX.LEFT, AlignY.BOTTOM, Vector2.Zero);
-    testAlignedBox(AlignX.RIGHT, AlignY.TOP, new Vector2(2f, 2f));
-    testAlignedBox(AlignX.CENTER, AlignY.CENTER, new Vector2(1f, 1f));
-  }
+    @Test
+    void shouldSetAligned() {
+        testAlignedBox(AlignX.LEFT, AlignY.BOTTOM, Vector2.Zero);
+        testAlignedBox(AlignX.RIGHT, AlignY.TOP, new Vector2(2f, 2f));
+        testAlignedBox(AlignX.CENTER, AlignY.CENTER, new Vector2(1f, 1f));
+    }
 
-  private static void testAlignedBox(AlignX alignX, AlignY alignY, Vector2 position) {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    ColliderComponent component = new ColliderComponent();
-    entity.addComponent(component);
+    private static void testAlignedBox(AlignX alignX, AlignY alignY, Vector2 position) {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        ColliderComponent component = new ColliderComponent();
+        entity.addComponent(component);
 
-    entity.setScale(4f, 4f);
-    Vector2 box = new Vector2(2f, 2f);
-    component.setAsBoxAligned(box, alignX, alignY);
-    entity.create();
+        entity.setScale(4f, 4f);
+        Vector2 box = new Vector2(2f, 2f);
+        component.setAsBoxAligned(box, alignX, alignY);
+        entity.create();
 
-    Vector2 realPos = PhysicsTestUtils.getRectanglePosition(component);
-    assertEquals(position, realPos);
-  }
+        Vector2 realPos = PhysicsTestUtils.getRectanglePosition(component);
+        assertEquals(position, realPos);
+    }
 }

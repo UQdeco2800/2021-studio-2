@@ -26,60 +26,61 @@ import com.deco2800.game.services.ServiceLocator;
  * the properties stores in 'PlayerConfig'.
  */
 public class PlayerFactory {
-  private static final PlayerConfig stats =
-          FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+    private static final PlayerConfig stats =
+            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
-  /**
-   * Create a player entity.
-   * @return entity
-   */
-  public static Entity createPlayer() {
-    InputComponent inputComponent =
-            ServiceLocator.getInputService().getInputFactory().createForPlayer();
+    private PlayerFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
 
-    AnimationRenderComponent animator =
-            new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
+    /**
+     * Create a player entity.
+     *
+     * @return entity
+     */
+    public static Entity createPlayer() {
+        InputComponent inputComponent =
+                ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
-    animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_backward", 1, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("back_axe_attack", 0.1f);
-    animator.addAnimation("front_axe_attack", 0.1f);
-    animator.addAnimation("right_axe_attack", 0.1f);
-    animator.addAnimation("left_axe_attack", 0.1f);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
 
-    Entity player =
-            new Entity()
-                    .addComponent(animator)
-                    .addComponent(new PlayerAnimationController())
-                    .addComponent(new PhysicsComponent())
-                    .addComponent(new ColliderComponent())
-                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-                    //Remove the below lines when the player uses a separate weapon entity
-                    .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                    .addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
-                            new Vector2(1f, 0.5f)))
-                    
-                    .addComponent(new PlayerActions())
-                    .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                    .addComponent(new InventoryComponent(stats.gold))
-                    .addComponent(inputComponent)
-                    .addComponent(new PlayerStatsDisplay())
-                    .addComponent(new PlayerLowHealthDisplay());
+        animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_backward", 1, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("back_axe_attack", 0.1f);
+        animator.addAnimation("front_axe_attack", 0.1f);
+        animator.addAnimation("right_axe_attack", 0.1f);
+        animator.addAnimation("left_axe_attack", 0.1f);
 
-    player.getComponent(ColliderComponent.class).setDensity(1.5f);
-    player.getComponent(AnimationRenderComponent.class).scaleEntity();
-    PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
-    return player;
-  }
+        Entity player =
+                new Entity()
+                        .addComponent(animator)
+                        .addComponent(new PlayerAnimationController())
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent())
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
+                        //Remove the below lines when the player uses a separate weapon entity
+                        .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                        .addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
+                                new Vector2(1f, 0.5f)))
 
-  private PlayerFactory() {
-    throw new IllegalStateException("Instantiating static util class");
-  }
+                        .addComponent(new PlayerActions())
+                        .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                        .addComponent(new InventoryComponent(stats.gold))
+                        .addComponent(inputComponent)
+                        .addComponent(new PlayerStatsDisplay())
+                        .addComponent(new PlayerLowHealthDisplay());
+
+        player.getComponent(ColliderComponent.class).setDensity(1.5f);
+        player.getComponent(AnimationRenderComponent.class).scaleEntity();
+        PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
+        return player;
+    }
 }

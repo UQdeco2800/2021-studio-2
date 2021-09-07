@@ -47,6 +47,7 @@ class ShootProjectileTaskTest {
         shootProjectileTask.start();
         // need to wait 2 seconds (cool down) before can shoot
         long time = System.currentTimeMillis();
+        //noinspection StatementWithEmptyBody
         while (System.currentTimeMillis() - time <= 2000) {
             // Wait
         }

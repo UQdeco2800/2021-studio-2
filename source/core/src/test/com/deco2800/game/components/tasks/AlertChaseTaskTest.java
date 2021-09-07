@@ -46,8 +46,6 @@ class AlertChaseTaskTest {
         AITaskComponent aiAlertable = new AITaskComponent().addTask(alertableChaseTask);
         Entity alertableEntity = makePhysicsEntity().addComponent(aiAlertable);
         alertableChaseTask.create(() -> alertableEntity);
-        //entity.create();
-        //alertableEntity.create();;
         alertChaseTask.create(() -> entity);
         entity.setPosition(0f, 0f);
         alertableEntity.setPosition(8f, 8f);
@@ -56,10 +54,6 @@ class AlertChaseTaskTest {
         entityService.register(entity);
         entityService.register(alertableEntity);
         ServiceLocator.registerEntityService(entityService);
-
-        // Run the game for a few cycles
-
-        long time = System.nanoTime();
 
         float oldDistance = alertableEntity.getPosition().dst(target.getPosition());
 

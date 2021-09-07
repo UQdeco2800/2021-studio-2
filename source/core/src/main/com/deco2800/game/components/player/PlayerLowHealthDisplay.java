@@ -20,6 +20,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     Sound heartBeat;
     boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
     long heartID;
+
     /**
      * Add all actors to the stage here and event listener
      */
@@ -75,13 +76,13 @@ public class PlayerLowHealthDisplay extends UIComponent {
      * This is called when the event "bloodyViewOn" is triggered.
      *
      * @param alpha the opacity to set the bloody view to.
-     * @param play if true the heart beat sound will play otherwise nothing else will occur
+     * @param play  if true the heart beat sound will play otherwise nothing else will occur
      */
     public void displayBloodyViewOn(float alpha, boolean play) {
         if (play) {
             playHeartBeat(alpha);
         }
-        bloodImage.setColor(1,0,0,alpha); //opacity of image changes depending on hp %
+        bloodImage.setColor(1, 0, 0, alpha); //opacity of image changes depending on hp %
         stack.setVisible(true);
     }
 
@@ -97,6 +98,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     /**
      * plays the heart beat sound only if the tracker is currently false.
      * Speeds up the sound depending on hp%.
+     *
      * @param modify the float value that will modify the speed of the sound
      */
     public void playHeartBeat(float modify) {

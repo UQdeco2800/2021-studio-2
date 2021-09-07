@@ -17,49 +17,49 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
 class RenderComponentTest {
-  @Mock
-  RenderService service;
+    @Mock
+    RenderService service;
 
-  @Test
-  void shouldRegisterSelf() {
-    ServiceLocator.registerRenderService(service);
-    RenderComponent component = spy(RenderComponent.class);
-    component.create();
-    verify(service).register(component);
-  }
+    @Test
+    void shouldRegisterSelf() {
+        ServiceLocator.registerRenderService(service);
+        RenderComponent component = spy(RenderComponent.class);
+        component.create();
+        verify(service).register(component);
+    }
 
-  @Test
-  void shouldUnregisterOnDispose() {
-    ServiceLocator.registerRenderService(service);
-    RenderComponent component = spy(RenderComponent.class);
-    component.create();
-    component.dispose();
-    verify(service).unregister(component);
-  }
+    @Test
+    void shouldUnregisterOnDispose() {
+        ServiceLocator.registerRenderService(service);
+        RenderComponent component = spy(RenderComponent.class);
+        component.create();
+        component.dispose();
+        verify(service).unregister(component);
+    }
 
-  @Test
-  void shouldDrawOnRender() {
-    RenderComponent component = spy(RenderComponent.class);
-    component.render(null);
-    verify(component).draw(any());
-  }
+    @Test
+    void shouldDrawOnRender() {
+        RenderComponent component = spy(RenderComponent.class);
+        component.render(null);
+        verify(component).draw(any());
+    }
 
-  @Test
-  void shouldGiveCorrectRenderOrder() {
-    RenderComponent component1 = spy(RenderComponent.class);
-    RenderComponent component2 = spy(RenderComponent.class);
-    assertEquals(component1.getLayer(), component2.getLayer());
+    @Test
+    void shouldGiveCorrectRenderOrder() {
+        RenderComponent component1 = spy(RenderComponent.class);
+        RenderComponent component2 = spy(RenderComponent.class);
+        assertEquals(component1.getLayer(), component2.getLayer());
 
-    Entity entity1 = new Entity();
-    Entity entity2 = new Entity();
-    component1.setEntity(entity1);
-    component2.setEntity(entity2);
+        Entity entity1 = new Entity();
+        Entity entity2 = new Entity();
+        component1.setEntity(entity1);
+        component2.setEntity(entity2);
 
-    entity1.setPosition(0f, 1f);
-    entity2.setPosition(0f, 2f);
-    assertTrue(component1.getZIndex() > component2.getZIndex());
+        entity1.setPosition(0f, 1f);
+        entity2.setPosition(0f, 2f);
+        assertTrue(component1.getZIndex() > component2.getZIndex());
 
-    entity2.setPosition(5f, -3f);
-    assertTrue(component1.getZIndex() < component2.getZIndex());
-  }
+        entity2.setPosition(5f, -3f);
+        assertTrue(component1.getZIndex() < component2.getZIndex());
+    }
 } 

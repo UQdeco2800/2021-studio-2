@@ -22,7 +22,9 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
-/** Spawns an arrow to shoot at a target */
+/**
+ * Spawns an arrow to shoot at a target
+ */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private final Entity target;
@@ -39,7 +41,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private boolean poweringUp = false;
 
     /**
-     * @param target The entity to chase.
+     * @param target     The entity to chase.
      * @param cooldownMS how long to wait in MS before shooting again
      */
     public ShootProjectileTask(Entity target, long cooldownMS) {
@@ -191,6 +193,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * Set the chance that the entity shoot more than one arrow at a time
+     *
      * @param multishotChance chance for the entity to shoot multiple arrows
      */
     public void setMultishotChance(double multishotChance) {
@@ -199,6 +202,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * Set the type of the projectile - whether it multishots, follow target or show trajectory
+     *
      * @param projectileType type of arrow
      */
     public void setProjectileType(String projectileType) {
@@ -206,15 +210,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * Stop the arrow task
-     */
-    @Override
-    public void stop() {
-        super.stop();
-    }
-
-    /**
      * return the priority of arrow task
+     *
      * @return highest priority if can shoot, else -1
      */
     @Override
@@ -227,6 +224,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * return the distance of the entity to the target
+     *
      * @return return the d
      */
     private float getDistanceToTarget() {
@@ -235,6 +233,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * return the position of the target and return the angle from the entity (owner) to the target
+     *
      * @return float angle from owner to target
      */
     private float getDirectionOfTarget() {
@@ -245,30 +244,28 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     *
-     * @param direction 1 to calculate right arrow, -1 to calculate left arrow
+     * @param direction  1 to calculate right arrow, -1 to calculate left arrow
      * @param multiplier how many arrows over to calculate
      * @return direction arrow should go
      */
     private float getMultishotDirection(int direction, int multiplier) {
         //creates a nice ring effect at multishots above 8
-        float angle = (float) (360/(Math.max(8, Math.floor(multishotChance))*2+1));
+        float angle = (float) (360 / (Math.max(8, Math.floor(multishotChance)) * 2 + 1));
         return (getDirectionOfTarget() + ((-direction) * angle * multiplier));
     }
 
     /**
-     *
-     * @param direction 1 to calculate right arrow, -1 to calculate left arrow
+     * @param direction  1 to calculate right arrow, -1 to calculate left arrow
      * @param multiplier how many arrows over to calculate
      * @return direction arrow should go
      */
     private Vector2 getMultishotVector(int direction, int multiplier) {
         //creates a nice ring effect at multishots above 8
-        float angle = (float) (360/(Math.max(8, Math.floor(multishotChance))*2+1));
+        float angle = (float) (360 / (Math.max(8, Math.floor(multishotChance)) * 2 + 1));
         Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
         Vector2 v2 = target.getCenterPosition().cpy();
         Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity
-        v3.rotateAroundDeg(new Vector2(0,0), ((-direction) * angle * multiplier));
+        v3.rotateAroundDeg(new Vector2(0, 0), ((-direction) * angle * multiplier));
         v3.scl(30);
         v3.add(v1);
         return (v3);
@@ -276,6 +273,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * check if target is block by any object
+     *
      * @return true if it not block, false otherwise
      */
     private boolean isTargetVisible() {
@@ -302,10 +300,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * check if target can shoot based on given cooldown of the shooting and target is visible
+     *
      * @return true if can shoot, false otherwise
      */
     private boolean canShoot() {
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
-            && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
+                && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
     }
 }

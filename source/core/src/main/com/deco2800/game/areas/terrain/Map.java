@@ -8,27 +8,27 @@ public class Map {
     private HashMap<String, String> tileRefs;
     private HashMap<String, Integer>[] wallObjects;
 
-    public HashMap<String,Integer> getDimensions(){
+    public HashMap<String, Integer> getDimensions() {
         return dimensions;
     }
 
-    public int[][] getMapTiles(){
+    public int[][] getMapTiles() {
         return mapTilePlacement;
     }
 
-    public HashMap<String,String> getTileRefs(){
+    public HashMap<String, String> getTileRefs() {
         return tileRefs;
     }
 
-    public HashMap<String, Integer>[] getWallObjects(){
+    public HashMap<String, Integer>[] getWallObjects() {
         return wallObjects;
     }
 
-    public String[] TileRefsArray(){
+    public String[] TileRefsArray() {
         String[] s = new String[tileRefs.size()];
 
-        for(int i = 1; i <= tileRefs.size(); i++){
-            s[i-1] = tileRefs.get(String.valueOf(i));
+        for (int i = 1; i <= tileRefs.size(); i++) {
+            s[i - 1] = tileRefs.get(String.valueOf(i));
         }
 
         return s;

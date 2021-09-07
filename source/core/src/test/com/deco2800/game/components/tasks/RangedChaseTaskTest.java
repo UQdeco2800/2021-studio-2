@@ -20,7 +20,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
-
 class RangedChaseTaskTest {
     @BeforeEach
     void beforeEach() {

@@ -13,19 +13,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(GameExtension.class)
 class HitboxComponentTest {
-  @BeforeEach
-  void beforeEach() {
-    ServiceLocator.registerPhysicsService(new PhysicsService());
-  }
+    @BeforeEach
+    void beforeEach() {
+        ServiceLocator.registerPhysicsService(new PhysicsService());
+    }
 
-  @Test
-  void shouldBeSensor() {
-    Entity entity = new Entity();
-    entity.addComponent(new PhysicsComponent());
-    HitboxComponent component = new HitboxComponent();
-    entity.addComponent(component);
-    entity.create();
+    @Test
+    void shouldBeSensor() {
+        Entity entity = new Entity();
+        entity.addComponent(new PhysicsComponent());
+        HitboxComponent component = new HitboxComponent();
+        entity.addComponent(component);
+        entity.create();
 
-    assertTrue(component.getFixture().isSensor());
-  }
+        assertTrue(component.getFixture().isSensor());
+    }
 } 
