@@ -5,9 +5,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Controls the game time */
+/**
+ * Controls the game time
+ */
 public class GameTime {
-  private static Logger logger = LoggerFactory.getLogger(GameTime.class);
+  private static final Logger logger = LoggerFactory.getLogger(GameTime.class);
   private final long startTime;
   private float timeScale = 1f;
 
@@ -45,3 +47,4 @@ public class GameTime {
     return getTime() - lastTime;
   }
 }
+ 

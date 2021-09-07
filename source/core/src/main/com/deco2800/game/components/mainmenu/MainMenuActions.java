@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MainMenuActions extends Component {
   private static final Logger logger = LoggerFactory.getLogger(MainMenuActions.class);
-  private GdxGame game;
+  private final GdxGame game;
 
   public MainMenuActions(GdxGame game) {
     this.game = game;
@@ -64,3 +64,4 @@ public class MainMenuActions extends Component {
     game.setScreen(GdxGame.ScreenType.SETTINGS);
   }
 }
+ 

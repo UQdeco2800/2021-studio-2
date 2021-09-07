@@ -1,16 +1,6 @@
 package com.deco2800.game.physics;
 
-import static org.mockito.ArgumentMatchers.anyFloat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Joint;
-import com.badlogic.gdx.physics.box2d.JointDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.services.GameTime;
 import org.junit.jupiter.api.Test;
@@ -18,11 +8,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.ArgumentMatchers.anyFloat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(GameExtension.class)
 class PhysicsEngineTest {
-  @Mock GameTime gameTime;
-  @Mock World world;
+  @Mock
+  GameTime gameTime;
+  @Mock
+  World world;
 
   @Test
   void shouldNotStepWithoutEnoughTime() {
@@ -79,3 +75,4 @@ class PhysicsEngineTest {
     verify(world).dispose();
   }
 }
+ 

@@ -1,12 +1,11 @@
 package com.deco2800.game.components.player;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
 
-//This class has been imported to allow for a short delay for abilities
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -263,9 +262,10 @@ public class KeyboardPlayerInputComponent extends InputComponent {
   /**
    * This method has been created to test that the correct direction is
    * to be walked in.
+   *
    * @return walk direction.
    */
   public Vector2 getWalkDirection() {
     return this.walkDirection;
   }
-}
+} 

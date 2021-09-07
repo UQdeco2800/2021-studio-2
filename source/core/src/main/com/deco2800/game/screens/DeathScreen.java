@@ -79,3 +79,4 @@ public class DeathScreen extends ScreenAdapter {
         ServiceLocator.getEntityService().register(ui);
     }
 }
+ 

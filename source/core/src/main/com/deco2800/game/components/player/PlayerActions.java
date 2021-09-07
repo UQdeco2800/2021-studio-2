@@ -158,3 +158,4 @@ public class PlayerActions extends Component {
     moving = false;
   }
 }
+ 

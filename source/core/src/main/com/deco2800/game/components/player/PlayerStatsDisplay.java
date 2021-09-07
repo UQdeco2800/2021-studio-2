@@ -44,9 +44,6 @@ public class PlayerStatsDisplay extends UIComponent {
   /** Holds the health percentage label that will update with health changes */
   private Label healthLabel;
 
-  /** Dash Icon */
-  // Stores the dash image, private Image dash;
-
   /**
    * Creates reusable ui styles and adds actors to the stage.
    */
@@ -196,3 +193,4 @@ public class PlayerStatsDisplay extends UIComponent {
     //Disposes of the dash image: dash.remove();
   }
 }
+ 

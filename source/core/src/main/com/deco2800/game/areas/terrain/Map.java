@@ -1,6 +1,6 @@
 package com.deco2800.game.areas.terrain;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class Map {
     private HashMap<String, Integer> dimensions;
@@ -34,3 +34,4 @@ public class Map {
         return s;
     }
 }
+ 

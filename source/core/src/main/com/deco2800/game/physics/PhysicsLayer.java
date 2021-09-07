@@ -2,7 +2,7 @@ package com.deco2800.game.physics;
 
 public class PhysicsLayer {
   public static final short NONE = 0;
-  public static final short DEFAULT = (1 << 0);
+  public static final short DEFAULT = (1);
   public static final short PLAYER = (1 << 1);
   // Terrain obstacle, e.g. trees
   public static final short OBSTACLE = (1 << 2);
@@ -22,3 +22,4 @@ public class PhysicsLayer {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
+ 

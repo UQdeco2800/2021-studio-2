@@ -25,11 +25,12 @@ public class TouchAttackComponent extends TouchComponent {
   private float knockbackForce = 0f;
   private CombatStatsComponent combatStats;
 
-  private Scanner scanner = new Scanner(System.in);
+  private final Scanner scanner = new Scanner(System.in);
   private long start = 0;
 
   /**
    * Create a component which attacks entities on collision, without knockback.
+   *
    * @param targetLayer The physics layer of the target's collider.
    */
   public TouchAttackComponent(short targetLayer) {
@@ -82,10 +83,12 @@ public class TouchAttackComponent extends TouchComponent {
     //Maybe this should be called during collision as sometimes hitboxes can overlap without onCollision being called in time
     PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
     if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-      Body targetBody = physicsComponent.getBody();
-      Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-      Vector2 impulse = direction.setLength(knockbackForce);
-      targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+      if (physicsComponent != null) {
+        Body targetBody = physicsComponent.getBody();
+        Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+        Vector2 impulse = direction.setLength(knockbackForce);
+        targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+      }
     }
 
     //Dissolve arrow attacks after hits
@@ -95,3 +98,4 @@ public class TouchAttackComponent extends TouchComponent {
     }
   }
 }
+ 

@@ -8,7 +8,7 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.tasks.*;
+import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseArrowConfig;
 import com.deco2800.game.entities.configs.FastArrowConfig;
@@ -120,3 +120,4 @@ public class WeaponFactory {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
+ 

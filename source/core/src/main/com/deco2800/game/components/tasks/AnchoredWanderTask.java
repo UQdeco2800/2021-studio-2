@@ -110,3 +110,4 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
     return new Vector2 (Math.abs(RandomUtils.random(min, max).x), Math.abs(RandomUtils.random(min, max).y));
   }
 }
+ 

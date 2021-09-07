@@ -5,3 +5,4 @@ package com.deco2800.game.events.listeners;
  * definitions, serving as a grouping mechanism for subclasses.
  */
 public interface EventListener {}
+ 

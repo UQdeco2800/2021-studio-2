@@ -20,3 +20,4 @@ public abstract class DefaultMultiTask extends DefaultTask implements Task {
     currentTask.start();
   }
 }
+ 

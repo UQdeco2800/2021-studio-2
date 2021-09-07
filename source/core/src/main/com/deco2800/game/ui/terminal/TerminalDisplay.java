@@ -49,3 +49,4 @@ public class TerminalDisplay extends UIComponent {
     label.remove();
   }
 }
+ 

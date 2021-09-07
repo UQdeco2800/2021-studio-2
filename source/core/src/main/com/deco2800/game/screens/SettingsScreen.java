@@ -72,3 +72,4 @@ public class SettingsScreen extends ScreenAdapter {
     ServiceLocator.getEntityService().register(ui);
   }
 }
+ 

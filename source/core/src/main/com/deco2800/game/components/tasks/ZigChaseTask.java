@@ -1,12 +1,9 @@
 package com.deco2800.game.components.tasks;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
@@ -14,7 +11,7 @@ import com.deco2800.game.services.ServiceLocator;
 /** Advance movement, the enemies chase the target in zig zag movement from distance a far **/
 public class ZigChaseTask extends ChaseTask implements PriorityTask {
 
-    private float maxChaseDistance;
+    private final float maxChaseDistance;
     private final PhysicsEngine physics;
     private final DebugRenderer debugRenderer;
     private final RaycastHit hit = new RaycastHit();
@@ -82,9 +79,10 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
 
     /**
      * Return the distance of entity to target
+     *
      * @return float distance from entity (owner) to target
      */
     protected float getDistanceToTarget() {
         return owner.getEntity().getPosition().dst(target.getPosition());
     }
-}
+} 

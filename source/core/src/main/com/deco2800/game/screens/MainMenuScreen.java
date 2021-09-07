@@ -102,3 +102,4 @@ public class MainMenuScreen extends ScreenAdapter {
     ServiceLocator.getEntityService().register(ui);
   }
 }
+ 

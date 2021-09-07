@@ -46,3 +46,4 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
     return super.getPriority();
   }
 }
+ 

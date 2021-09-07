@@ -2,7 +2,6 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
@@ -173,3 +172,4 @@ public float findingLastPositions(){
     return gameTime.getTimeSince(timeDiscoveredTarget) > 3000 && this.getStatus() == Status.ACTIVE;
   }
 }
+ 

@@ -9,9 +9,6 @@ import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -57,8 +54,7 @@ class ResourceServiceTest {
     ResourceService resourceService = new ResourceService(assetManager);
 
     resourceService.loadTextures(textures);
-    while (!resourceService.loadForMillis(1)) {
-      ;
+    while (resourceService.loadForMillis(1)) {
     }
 
     verify(assetManager).load(texture1, Texture.class);
@@ -148,3 +144,4 @@ class ResourceServiceTest {
   }
 
 }
+ 

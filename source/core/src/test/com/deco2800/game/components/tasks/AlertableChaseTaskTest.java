@@ -76,7 +76,7 @@ class AlertableChaseTaskTest {
         float newDistance1 = alertableEntity.getPosition().dst(target.getPosition());
 
         // target is too far from enemy
-        assertTrue(oldDistance - newDistance1 == 0);
+        assertEquals(oldDistance - newDistance1, 0);
 
         while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - time) < 3000) {
             entity.update();
@@ -96,4 +96,4 @@ class AlertableChaseTaskTest {
                 .addComponent(new PhysicsMovementComponent());
     }
 
-}
+} 

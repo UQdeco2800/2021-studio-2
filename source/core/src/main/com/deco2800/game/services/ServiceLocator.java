@@ -10,10 +10,6 @@ import com.deco2800.game.rendering.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
-
-import static com.badlogic.gdx.Input.Keys.T;
-
 /**
  * A simplified implementation of the Service Locator pattern:
  * https://martinfowler.com/articles/injection.html#UsingAServiceLocator
@@ -63,12 +59,10 @@ public class ServiceLocator {
 
   public static ResourceService copyResourceService() {
     AssetManager cpy = new AssetManager();
-    Iterator<String> assetIterator= resourceService.getAssetManager().getAssetNames().iterator();
-    while(assetIterator.hasNext()) {
-      cpy.load(resourceService.getAssetManager().get(assetIterator.next()));
+    for (String s : resourceService.getAssetManager().getAssetNames()) {
+      cpy.load(resourceService.getAssetManager().get(s));
     }
-    ResourceService copy = new ResourceService(cpy);
-    return copy;
+    return new ResourceService(cpy);
   }
 
   public static GameArea getGameAreaService() {
@@ -136,3 +130,4 @@ public class ServiceLocator {
   }
 
 }
+ 

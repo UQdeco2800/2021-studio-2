@@ -108,3 +108,4 @@ class TerminalTest {
     assertEquals("a", terminal.getEnteredMessage());
   }
 }
+ 

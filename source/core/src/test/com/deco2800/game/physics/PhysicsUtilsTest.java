@@ -4,15 +4,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.utils.math.Vector2Utils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.Vector2Utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(GameExtension.class)
 class PhysicsUtilsTest {
@@ -51,3 +49,4 @@ class PhysicsUtilsTest {
         entity.getComponent(ColliderComponent.class), entityScale.cpy().scl(colliderScale));
   }
 }
+ 

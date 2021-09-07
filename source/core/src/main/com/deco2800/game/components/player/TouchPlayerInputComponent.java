@@ -1,10 +1,10 @@
 package com.deco2800.game.components.player;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.utils.math.Vector2Utils;
-import com.badlogic.gdx.InputProcessor;
 
 /**
  * Input handler for the player for keyboard and touch (mouse) input.
@@ -96,3 +96,4 @@ public class TouchPlayerInputComponent extends InputComponent {
     }
   }
 }
+ 

@@ -87,9 +87,8 @@ class EventHandlerTest {
 
   @Test
   void shouldFailIncorrectArgs() {
-    handler.addListener("stringEvent", (String s) -> {});
-    assertThrows(ClassCastException.class, () -> {
-      handler.trigger("stringEvent", true);
+    handler.addListener("stringEvent", (String s) -> {
     });
+    assertThrows(ClassCastException.class, () -> handler.trigger("stringEvent", true));
   }
-}
+} 

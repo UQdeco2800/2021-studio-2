@@ -22,22 +22,22 @@ class SortedIntMapTest {
 
   @Test
   void shouldContains() {
-    SortedIntMap<Integer> map = new SortedIntMap<>(2);
-    assertFalse(map.containsKey(4));
-    assertFalse(map.contains(5));
+      SortedIntMap<Integer> map = new SortedIntMap<>(2);
+      assertFalse(map.containsKey(4));
+      assertFalse(map.contains(5));
 
-    map.put(2, 5);
-    assertTrue(map.contains(5));
-    assertTrue(map.containsKey(2));
+      map.put(2, 5);
+      assertTrue(map.contains(5));
+      assertTrue(map.containsKey(2));
   }
 
-  @Test
-  void shouldClear() {
-    SortedIntMap<Integer> map = new SortedIntMap<>(2);
-    map.put(3, 1);
-    map.put(0, -2);
-    map.clear();
-    assertNull(map.get(3));
-    assertNull(map.get(0));
-  }
-}
+    @Test
+    void shouldClear() {
+        SortedIntMap<Integer> map = new SortedIntMap<>(2);
+        map.put(3, 1);
+        map.put(0, -2);
+        map.clear();
+        assertNull(map.get(3));
+        assertNull(map.get(0));
+    }
+} 

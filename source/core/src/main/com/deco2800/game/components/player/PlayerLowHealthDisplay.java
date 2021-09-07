@@ -131,4 +131,4 @@ public class PlayerLowHealthDisplay extends UIComponent {
         heartBeat.dispose();
 
     }
-}
+} 

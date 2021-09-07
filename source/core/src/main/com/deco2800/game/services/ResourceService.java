@@ -87,11 +87,11 @@ public class ResourceService implements Disposable {
   public boolean loadForMillis(int duration) {
     logger.debug("Loading assets for {} ms", duration);
     try {
-      return assetManager.update(duration);
+      return !assetManager.update(duration);
     } catch (Exception e) {
       logger.error(e.getMessage());
     }
-    return assetManager.isFinished();
+    return !assetManager.isFinished();
   }
 
   /**
@@ -185,3 +185,4 @@ public class ResourceService implements Disposable {
     assetManager.clear();
   }
 }
+ 

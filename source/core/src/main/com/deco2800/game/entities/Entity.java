@@ -297,7 +297,7 @@ public class Entity {
     if (disposeYourself) {
       //todo: add a death animation then dispose
       //remove attack abilities and related components first
-      if(this.getEntityType() == "arrow") {
+      if (this.getEntityType().equals("arrow")) {
         dispose();
       } else {
         dispose();
@@ -362,3 +362,4 @@ public class Entity {
     return String.format("Entity{id=%d}", id);
   }
 }
+ 

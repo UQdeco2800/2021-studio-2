@@ -2,8 +2,8 @@ package com.deco2800.game.areas;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.GridPoint3;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
@@ -17,12 +17,8 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
-import com.deco2800.game.areas.terrain.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /** Forest area for the demo game with trees, a player, and some enemies. */
 public class TestGameArea extends GameArea {
@@ -313,7 +309,7 @@ public class TestGameArea extends GameArea {
     resourceService.loadMusic(forestMusic);
     resourceService.loadSounds(arrowSounds);
 
-    while (!resourceService.loadForMillis(10)) {
+    while (resourceService.loadForMillis(10)) {
       // This could be upgraded to a loading screen
       logger.info("Loading... {}%", resourceService.getProgress());
     }
@@ -338,3 +334,4 @@ public class TestGameArea extends GameArea {
     this.unloadAssets();
   }
 }
+ 

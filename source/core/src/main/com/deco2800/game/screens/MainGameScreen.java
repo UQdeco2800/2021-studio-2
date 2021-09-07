@@ -9,7 +9,9 @@ import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.areas.TestGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -25,8 +27,6 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
-import com.deco2800.game.components.maingame.MainGameExitDisplay;
-import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.ui.textbox.TextBoxDisplay;
 import org.slf4j.Logger;
@@ -180,3 +180,4 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.getEntityService().registerUI(ui);
   }
 }
+ 

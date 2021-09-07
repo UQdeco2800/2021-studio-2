@@ -8,7 +8,6 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.LoggerFactory;
 
 /**
  * Move to a given position, finishing when you get close enough. Requires an entity with a
@@ -106,3 +105,4 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     return (isAtTarget() || checkIfStuck());
   }
 }
+ 

@@ -15,3 +15,4 @@ class KeyboardInputFactoryTest {
     assertTrue(keyboardInputFactory.createForPlayer() instanceof KeyboardPlayerInputComponent);
   }
 }
+ 

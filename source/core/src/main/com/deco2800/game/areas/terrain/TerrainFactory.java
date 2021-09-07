@@ -14,14 +14,13 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.files.FileLoader;
-import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 /** Factory for creating game terrains. */
@@ -191,10 +190,10 @@ public class TerrainFactory {
     GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
 
     for (int y = min.y; y <= max.y; y++) {
-      for (int x = min.y; x <= max.x; x++){
+      for (int x = min.x; x <= max.x; x++) {
 
         Cell cell = new Cell();
-        cell.setTile(tiles.get(map[y][x]-1));
+        cell.setTile(tiles.get(map[y][x] - 1));
         layer.setCell(x, max.y - y, cell);
 
         //Cell cell = layer.getCell(tilePos.x, tilePos.y);
@@ -237,3 +236,4 @@ public class TerrainFactory {
     TEST
   }
 }
+ 

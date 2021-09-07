@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CameraComponent extends Component {
   private final Camera camera;
   private Entity player;
-  private ArrayList<Vector2> lastPositions;
+  private final ArrayList<Vector2> lastPositions;
   private Vector2 lastPosition;
 
   public CameraComponent() {
@@ -91,3 +91,4 @@ public class CameraComponent extends Component {
     this.player = player;
   }
 }
+ 

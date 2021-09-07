@@ -1,6 +1,5 @@
 package com.deco2800.game.components.weapons;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -11,9 +10,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.WeaponHitboxComponent;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.utils.math.Vector2Utils;
 
 /**
  * Melee weapon superclass from which all melee weapons will inherit from.
@@ -177,3 +174,4 @@ public class MeleeWeapon extends Component {
 
 
 
+ 

@@ -10,7 +10,6 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,11 +62,7 @@ class ZigChaseTaskTest {
                 count++;
             }
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCompare) > 500) {
-                //System.out.println(initialDistance - entity.getPosition().dst(target.getPosition()));
                 assertTrue(initialDistance - entity.getPosition().dst(target.getPosition()) != 0);
-                initialDistance = entity.getPosition().dst(target.getPosition());
-                // angle of zig zag update every 0.5 seconds.
-                timeCompare = System.nanoTime();
                 break;
             }
         }
@@ -109,3 +104,4 @@ class ZigChaseTaskTest {
                 .addComponent(new PhysicsMovementComponent());
     }
 }
+ 

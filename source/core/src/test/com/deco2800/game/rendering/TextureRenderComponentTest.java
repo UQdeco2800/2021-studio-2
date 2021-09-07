@@ -1,8 +1,5 @@
 package com.deco2800.game.rendering;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,12 +10,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
 class TextureRenderComponentTest {
-  @Mock Texture texture;
-  @Mock SpriteBatch spriteBatch;
-  @Mock Entity entity;
+  @Mock
+  Texture texture;
+  @Mock
+  SpriteBatch spriteBatch;
+  @Mock
+  Entity entity;
 
   @Test
   void shouldDrawTexture() {
@@ -30,4 +33,4 @@ class TextureRenderComponentTest {
 
     verify(spriteBatch).draw(texture, 2f, 2f, 1f, 1f);
   }
-}
+} 

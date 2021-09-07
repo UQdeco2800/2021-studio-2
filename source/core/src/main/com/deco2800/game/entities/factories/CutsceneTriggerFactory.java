@@ -1,7 +1,6 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchCutsceneComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -42,3 +41,4 @@ public class CutsceneTriggerFactory {
         throw new IllegalStateException("Instantiating static util class");
     }
 }
+ 

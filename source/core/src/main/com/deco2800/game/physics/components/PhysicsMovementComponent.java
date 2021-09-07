@@ -4,12 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
-import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /** Movement controller for a physics-based entity. */
 public class PhysicsMovementComponent extends Component implements MovementController {
@@ -111,3 +109,4 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     return targetPosition.cpy().sub(entity.getPosition()).nor();
   }
 }
+ 

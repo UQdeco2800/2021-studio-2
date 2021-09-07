@@ -1,14 +1,14 @@
 package com.deco2800.game.physics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.deco2800.game.utils.math.Vector2Utils;
 import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.utils.math.Vector2Utils;
 import net.dermetfan.utils.Pair;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PhysicsTestUtils {
   public static Vector2 getBounds(PolygonShape shape) {
@@ -65,3 +65,4 @@ public class PhysicsTestUtils {
     return new Pair<>(min, max);
   }
 }
+ 

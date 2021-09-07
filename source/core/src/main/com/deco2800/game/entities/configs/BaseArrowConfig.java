@@ -9,3 +9,4 @@ public class BaseArrowConfig extends BaseEntityConfig {
   public float speedX = 5f;
   public float speedY = 5f;
 }
+ 

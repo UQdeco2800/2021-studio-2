@@ -8,3 +8,4 @@ public interface EventListener2<T0, T1> extends EventListener {
   void handle(T0 arg0, T1 arg1);
 }
 
+ 

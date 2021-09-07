@@ -16,3 +16,4 @@ public interface MovementController {
   /** @param target Target position in the world. Controller will steer toward the target. */
   void setTarget(Vector2 target);
 }
+ 

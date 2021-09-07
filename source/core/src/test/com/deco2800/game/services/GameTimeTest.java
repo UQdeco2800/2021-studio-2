@@ -53,3 +53,4 @@ class GameTimeTest {
     assertEquals(rawDelta, gameTime.getRawDeltaTime());
   }
 }
+ 

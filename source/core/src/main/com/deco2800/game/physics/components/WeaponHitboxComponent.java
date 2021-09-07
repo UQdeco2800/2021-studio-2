@@ -1,6 +1,5 @@
 package com.deco2800.game.physics.components;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -87,11 +86,11 @@ public class WeaponHitboxComponent extends ColliderComponent {
      */
     public void destroy() {
         if (fixture == null) {
-            logger.debug ("{} Tried to destroy an already unset weapon hit box", this);
+            logger.debug("{} Tried to destroy an already unset weapon hit box", this);
             return;
         }
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
         physBody.destroyFixture(fixture);
         fixture = null;
     }
-}
+} 

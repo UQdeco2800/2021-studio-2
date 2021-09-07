@@ -1,12 +1,5 @@
 package com.deco2800.game.rendering;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyFloat;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -20,12 +13,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
 class DebugRendererTest {
-  @Mock ShapeRenderer shapeRenderer;
-  @Mock Box2DDebugRenderer physicsRenderer;
-  @Mock Matrix4 projMatrix;
+  @Mock
+  ShapeRenderer shapeRenderer;
+  @Mock
+  Box2DDebugRenderer physicsRenderer;
+  @Mock
+  Matrix4 projMatrix;
 
   DebugRenderer debugRenderer;
 
@@ -82,3 +81,4 @@ class DebugRendererTest {
     verify(shapeRenderer, times(0)).line(any(Vector2.class), any(Vector2.class));
   }
 }
+ 

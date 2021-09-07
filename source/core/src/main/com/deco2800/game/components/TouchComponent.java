@@ -24,3 +24,4 @@ abstract class TouchComponent extends Component {
 
     abstract void onCollisionStart(Fixture me, Fixture other);
 }
+ 

@@ -186,4 +186,4 @@ public class TextBox extends Component {
     public void setNewCharactersOff() {
         this.generateCharacter = false;
     }
-}
+} 

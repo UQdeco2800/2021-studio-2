@@ -55,3 +55,4 @@ public class InputDecorator extends InputComponent {
     return inputProcessor.touchUp(screenX, screenY, pointer, button);
   }
 }
+ 

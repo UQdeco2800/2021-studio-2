@@ -1,13 +1,10 @@
 package com.deco2800.game.entities;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
 class EntityServiceTest {
@@ -49,4 +46,4 @@ class EntityServiceTest {
     entityService.dispose();
     verify(entity).dispose();
   }
-}
+} 

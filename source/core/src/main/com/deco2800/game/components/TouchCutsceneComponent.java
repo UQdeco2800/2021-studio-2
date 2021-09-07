@@ -76,4 +76,4 @@ public class TouchCutsceneComponent extends TouchComponent {
         actions.stopWalking();
         input.stopWalking();
     }
-}
+} 

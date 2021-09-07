@@ -100,3 +100,4 @@ public class Component {
     return entity + "." + className;
   }
 }
+ 

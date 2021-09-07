@@ -42,4 +42,4 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
       owner.getEntity().getEvents().trigger("alert");
     }
   }
-}
+} 

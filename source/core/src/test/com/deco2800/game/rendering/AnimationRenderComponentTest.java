@@ -135,4 +135,4 @@ class AnimationRenderComponentTest {
     when(atlas.findRegions(animationName)).thenReturn(regions);
     return atlas;
   }
-}
+} 

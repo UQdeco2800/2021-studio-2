@@ -77,7 +77,8 @@ public class AITaskComponent extends Component implements TaskRunner {
 
   /**
    * Change the task to the desired task
-   * @param desiredTask
+   *
+   * @param desiredTask task to switch to
    */
   private void changeTask(PriorityTask desiredTask) {
     logger.debug("{} Changing to task {}", this, desiredTask);
@@ -90,3 +91,4 @@ public class AITaskComponent extends Component implements TaskRunner {
     }
   }
 }
+ 

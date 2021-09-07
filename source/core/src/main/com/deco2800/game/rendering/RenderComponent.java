@@ -50,3 +50,4 @@ public abstract class RenderComponent extends Component implements Renderable, D
    */
   protected abstract void draw(SpriteBatch batch);
 }
+ 

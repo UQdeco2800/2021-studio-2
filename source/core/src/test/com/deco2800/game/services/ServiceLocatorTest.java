@@ -36,4 +36,4 @@ class ServiceLocatorTest {
     assertNull(ServiceLocator.getPhysicsService());
     assertNull(ServiceLocator.getTimeSource());
   }
-}
+} 

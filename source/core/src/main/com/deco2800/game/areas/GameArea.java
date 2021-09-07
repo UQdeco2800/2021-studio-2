@@ -103,3 +103,4 @@ public abstract class GameArea implements Disposable {
     spawnEntity(entity);
   }
 }
+ 

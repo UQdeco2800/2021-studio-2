@@ -4,10 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
-import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseEntityConfig;
@@ -261,3 +260,4 @@ public class NPCFactory {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
+ 

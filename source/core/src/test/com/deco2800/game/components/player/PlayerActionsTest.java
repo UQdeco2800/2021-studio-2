@@ -5,6 +5,7 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -310,3 +311,4 @@ public class PlayerActionsTest {
         assertTrue((-1.7678 - keyboardInput.getWalkDirection().y) < 0.001);
     }
 }
+ 

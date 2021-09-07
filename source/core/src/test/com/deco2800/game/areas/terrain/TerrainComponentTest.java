@@ -1,8 +1,5 @@
 package com.deco2800.game.areas.terrain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -11,6 +8,9 @@ import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(GameExtension.class)
 class TerrainComponentTest {
@@ -42,3 +42,4 @@ class TerrainComponentTest {
     return new TerrainComponent(camera, map, mapRenderer, orientation, tileSize);
   }
 }
+ 

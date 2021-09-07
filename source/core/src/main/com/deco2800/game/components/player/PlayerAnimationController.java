@@ -81,3 +81,4 @@ public class PlayerAnimationController extends Component {
         animator.startAnimation("default_right");
     }
 }
+ 

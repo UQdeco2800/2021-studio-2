@@ -6,6 +6,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -389,3 +390,4 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
     return false;
   }
 }
+ 

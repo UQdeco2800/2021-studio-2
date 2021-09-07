@@ -77,3 +77,4 @@ public class AnchoredChaseTask extends ChaseTask implements PriorityTask {
     return ((targetLoc.x >= min.x && targetLoc.y >= min.y) && (targetLoc.x <= max.x && targetLoc.y <= max.y));
   }
 }
+ 

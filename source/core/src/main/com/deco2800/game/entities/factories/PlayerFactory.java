@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.player.*;
+import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.files.FileLoader;
@@ -83,3 +83,4 @@ public class PlayerFactory {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
+ 
