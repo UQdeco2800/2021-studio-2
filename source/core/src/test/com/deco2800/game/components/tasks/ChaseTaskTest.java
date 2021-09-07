@@ -89,4 +89,3 @@ class ChaseTaskTest {
         .addComponent(new PhysicsMovementComponent());
   }
 }
- 

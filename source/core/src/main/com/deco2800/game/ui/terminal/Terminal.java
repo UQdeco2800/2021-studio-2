@@ -133,4 +133,3 @@ public class Terminal extends Component {
     enteredMessage = text;
   }
 }
- 

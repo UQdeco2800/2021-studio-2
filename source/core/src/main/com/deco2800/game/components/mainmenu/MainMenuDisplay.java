@@ -114,4 +114,3 @@ public class MainMenuDisplay extends UIComponent {
     super.dispose();
   }
 }
- 

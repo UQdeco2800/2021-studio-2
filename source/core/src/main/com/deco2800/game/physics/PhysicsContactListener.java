@@ -47,4 +47,3 @@ public class PhysicsContactListener implements ContactListener {
     }
   }
 }
- 

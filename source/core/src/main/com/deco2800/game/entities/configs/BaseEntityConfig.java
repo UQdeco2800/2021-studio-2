@@ -7,4 +7,3 @@ public class BaseEntityConfig {
     public int health = 1;
     public int baseAttack = 0;
 }
- 

@@ -52,4 +52,3 @@ class CombatStatsComponentTest {
     assertEquals(150, combat.getBaseAttack());
   }
 }
- 

@@ -40,5 +40,3 @@ public class Vector2UtilsTest {
     assertEquals(MeleeWeapon.RIGHT, Vector2Utils.toWeaponDirection(Vector2Utils.RIGHT));
   }
 }
-
- 

@@ -7,4 +7,3 @@ package com.deco2800.game.events.listeners;
 public interface EventListener1<T> extends EventListener {
   void handle(T arg);
 }
- 

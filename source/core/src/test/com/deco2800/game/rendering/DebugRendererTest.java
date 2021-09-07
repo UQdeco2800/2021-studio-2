@@ -81,4 +81,3 @@ class DebugRendererTest {
     verify(shapeRenderer, times(0)).line(any(Vector2.class), any(Vector2.class));
   }
 }
- 

@@ -105,4 +105,3 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     return (isAtTarget() || checkIfStuck());
   }
 }
- 

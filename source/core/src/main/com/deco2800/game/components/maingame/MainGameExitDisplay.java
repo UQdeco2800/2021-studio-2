@@ -61,4 +61,3 @@ public class MainGameExitDisplay extends UIComponent {
     super.dispose();
   }
 }
- 

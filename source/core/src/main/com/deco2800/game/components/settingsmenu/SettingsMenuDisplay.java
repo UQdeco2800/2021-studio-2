@@ -228,4 +228,3 @@ public class SettingsMenuDisplay extends UIComponent {
     super.dispose();
   }
 }
- 

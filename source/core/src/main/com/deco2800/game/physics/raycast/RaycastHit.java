@@ -15,4 +15,3 @@ public class RaycastHit {
   /** the normal vector of the collider surface at the hit point. */
   public Vector2 normal;
 }
- 

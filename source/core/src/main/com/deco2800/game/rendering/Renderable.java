@@ -24,4 +24,3 @@ public interface Renderable extends Comparable<Renderable> {
    */
   int getLayer();
 }
- 

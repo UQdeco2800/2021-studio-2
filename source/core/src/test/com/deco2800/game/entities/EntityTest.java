@@ -170,4 +170,3 @@ class EntityTest {
 
   static class TestComponent2 extends Component {}
 }
- 

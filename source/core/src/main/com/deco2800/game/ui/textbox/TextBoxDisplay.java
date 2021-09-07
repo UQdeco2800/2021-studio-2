@@ -79,4 +79,3 @@ public class TextBoxDisplay extends UIComponent {
         //image.remove();
     }
 }
- 

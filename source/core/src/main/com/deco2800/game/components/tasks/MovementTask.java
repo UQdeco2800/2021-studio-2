@@ -172,4 +172,3 @@ public float findingLastPositions(){
     return gameTime.getTimeSince(timeDiscoveredTarget) > 3000 && this.getStatus() == Status.ACTIVE;
   }
 }
- 

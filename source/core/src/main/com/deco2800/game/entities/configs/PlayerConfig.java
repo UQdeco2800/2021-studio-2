@@ -7,4 +7,3 @@ public class PlayerConfig extends BaseEntityConfig  {
   public int gold = 1;
   public String favouriteColour = "none";
 }
- 

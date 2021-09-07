@@ -41,4 +41,3 @@ public class TouchInputFactory extends InputFactory{
     return new TouchTextBoxInputComponent();
   }
 }
- 

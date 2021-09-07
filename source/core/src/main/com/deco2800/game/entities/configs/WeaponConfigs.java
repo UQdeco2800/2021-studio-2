@@ -8,4 +8,3 @@ public class WeaponConfigs {
   public FastArrowConfig fastArrow = new FastArrowConfig();
   public TrackingArrowConfig trackingArrow = new TrackingArrowConfig();
 }
- 

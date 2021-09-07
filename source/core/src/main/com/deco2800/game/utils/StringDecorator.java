@@ -25,4 +25,3 @@ public class StringDecorator<T> {
     return printFn.apply(object);
   }
 }
- 

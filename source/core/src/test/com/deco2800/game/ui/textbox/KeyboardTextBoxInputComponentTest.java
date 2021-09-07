@@ -94,4 +94,3 @@ class KeyboardTextBoxInputComponentTest {
         assertEquals("Message 3", textBox.getMessage());
     }
 }
- 

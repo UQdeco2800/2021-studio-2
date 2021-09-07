@@ -23,4 +23,3 @@ class InputFactoryTest {
     assertNull(invalidInputFactory);
   }
 }
- 

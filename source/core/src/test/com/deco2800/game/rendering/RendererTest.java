@@ -90,4 +90,3 @@ class RendererTest {
     return camEntity.getComponent(CameraComponent.class);
   }
 }
- 

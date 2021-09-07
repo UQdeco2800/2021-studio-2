@@ -309,4 +309,3 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
     }
 }
- 

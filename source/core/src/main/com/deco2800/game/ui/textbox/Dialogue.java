@@ -47,4 +47,3 @@ public enum Dialogue {
         return text.length;
     }
 }
- 

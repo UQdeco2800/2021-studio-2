@@ -311,4 +311,3 @@ public class PlayerActionsTest {
         assertTrue((-1.7678 - keyboardInput.getWalkDirection().y) < 0.001);
     }
 }
- 

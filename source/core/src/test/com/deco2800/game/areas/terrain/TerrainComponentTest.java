@@ -42,4 +42,3 @@ class TerrainComponentTest {
     return new TerrainComponent(camera, map, mapRenderer, orientation, tileSize);
   }
 }
- 

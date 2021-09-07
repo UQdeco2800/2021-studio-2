@@ -109,4 +109,3 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     return targetPosition.cpy().sub(entity.getPosition()).nor();
   }
 }
- 

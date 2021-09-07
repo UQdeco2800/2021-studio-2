@@ -59,4 +59,3 @@ public class PerformanceDisplay extends UIComponent {
     profileLabel.remove();
   }
 }
- 

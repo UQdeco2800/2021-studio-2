@@ -168,10 +168,3 @@ public class MeleeWeapon extends Component {
         return true; // successfully collided with target.
     }
 }
-
-
-
-
-
-
- 

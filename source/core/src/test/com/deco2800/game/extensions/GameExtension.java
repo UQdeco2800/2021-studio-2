@@ -34,4 +34,3 @@ public class GameExtension implements AfterEachCallback, BeforeAllCallback {
     ServiceLocator.clear();
   }
 }
- 

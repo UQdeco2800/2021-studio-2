@@ -61,4 +61,3 @@ public class TouchTextBoxInputComponent extends InputComponent {
         return textBox.isOpen();
     }
 }
- 

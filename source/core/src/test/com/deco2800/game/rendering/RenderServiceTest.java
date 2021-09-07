@@ -78,4 +78,3 @@ class RenderServiceTest {
     inOrder.verify(renderable2).render(any());
   }
 }
- 

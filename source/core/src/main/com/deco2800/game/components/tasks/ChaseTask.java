@@ -144,4 +144,3 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     return true;
   }
 }
- 

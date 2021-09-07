@@ -8,4 +8,3 @@ public class TrackingArrowConfig extends BaseArrowConfig {
   public float speedX = 2f;
   public float speedY = 2f;
 }
- 

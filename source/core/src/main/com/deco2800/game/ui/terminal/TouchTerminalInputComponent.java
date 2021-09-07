@@ -101,4 +101,3 @@ public class TouchTerminalInputComponent extends InputComponent {
     return true;
   }
 }
- 

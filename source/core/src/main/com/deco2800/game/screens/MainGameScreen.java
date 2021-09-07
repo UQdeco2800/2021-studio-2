@@ -180,4 +180,3 @@ public class MainGameScreen extends ScreenAdapter {
     ServiceLocator.getEntityService().registerUI(ui);
   }
 }
- 

@@ -64,4 +64,3 @@ public class MainMenuActions extends Component {
     game.setScreen(GdxGame.ScreenType.SETTINGS);
   }
 }
- 

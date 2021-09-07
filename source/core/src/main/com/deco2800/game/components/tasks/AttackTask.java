@@ -175,4 +175,3 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         return true;
     }
 }
- 

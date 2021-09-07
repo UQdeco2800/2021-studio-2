@@ -55,4 +55,3 @@ public class InventoryComponent extends Component {
     setGold(this.gold + gold);
   }
 }
- 

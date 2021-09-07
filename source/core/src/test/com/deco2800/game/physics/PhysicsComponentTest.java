@@ -64,4 +64,3 @@ class PhysicsComponentTest {
     verify(body).setTransform(eq(newPos), anyFloat());
   }
 }
- 

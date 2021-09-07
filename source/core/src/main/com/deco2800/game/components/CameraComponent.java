@@ -91,4 +91,3 @@ public class CameraComponent extends Component {
     this.player = player;
   }
 }
- 

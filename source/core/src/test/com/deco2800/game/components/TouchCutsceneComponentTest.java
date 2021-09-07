@@ -86,4 +86,3 @@ class TouchCutsceneComponentTest {
         return target;
     }
 }
- 

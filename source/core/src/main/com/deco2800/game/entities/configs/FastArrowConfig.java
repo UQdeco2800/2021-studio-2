@@ -8,4 +8,3 @@ public class FastArrowConfig extends BaseArrowConfig {
   public float speedX = 30f;
   public float speedY = 30f;
 }
- 

@@ -288,4 +288,3 @@ public class ForestGameArea extends GameArea {
     this.unloadAssets();
   }
 }
- 

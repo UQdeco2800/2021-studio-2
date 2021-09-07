@@ -49,4 +49,3 @@ class PhysicsUtilsTest {
         entity.getComponent(ColliderComponent.class), entityScale.cpy().scl(colliderScale));
   }
 }
- 

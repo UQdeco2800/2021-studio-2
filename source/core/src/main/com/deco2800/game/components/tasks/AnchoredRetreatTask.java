@@ -178,4 +178,3 @@ public class AnchoredRetreatTask extends DefaultTask implements PriorityTask {
   }
 
 }
- 

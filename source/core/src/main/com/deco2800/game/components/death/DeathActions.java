@@ -16,4 +16,3 @@ public class DeathActions extends MainMenuActions {
         super(game);
     }
 }
- 

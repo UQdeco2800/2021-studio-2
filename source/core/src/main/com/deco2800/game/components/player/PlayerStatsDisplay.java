@@ -193,4 +193,3 @@ public class PlayerStatsDisplay extends UIComponent {
     //Disposes of the dash image: dash.remove();
   }
 }
- 

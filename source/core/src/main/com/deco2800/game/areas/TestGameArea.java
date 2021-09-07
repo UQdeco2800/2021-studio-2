@@ -334,4 +334,3 @@ public class TestGameArea extends GameArea {
     this.unloadAssets();
   }
 }
- 

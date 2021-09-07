@@ -260,4 +260,3 @@ public class NPCFactory {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
- 

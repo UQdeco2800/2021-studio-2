@@ -34,4 +34,3 @@ class GameAreaTest {
         verify(entity).dispose();
     }
 }
- 

@@ -32,4 +32,3 @@ class ComponentTest {
     verify(component, times(0)).earlyUpdate();
   }
 }
- 

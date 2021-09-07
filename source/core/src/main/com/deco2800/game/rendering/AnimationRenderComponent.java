@@ -183,4 +183,3 @@ public class AnimationRenderComponent extends RenderComponent {
     super.dispose();
   }
 }
- 

@@ -253,4 +253,3 @@ public class ColliderComponent extends Component {
     return bbox;
   }
 }
- 

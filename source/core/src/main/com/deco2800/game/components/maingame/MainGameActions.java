@@ -30,4 +30,3 @@ public class MainGameActions extends Component {
     game.setScreen(GdxGame.ScreenType.MAIN_MENU);
   }
 }
- 

@@ -81,4 +81,3 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
         return textBox.isOpen();
     }
 }
- 

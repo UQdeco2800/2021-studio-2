@@ -95,4 +95,3 @@ public class TerrainComponent extends RenderComponent {
     HEXAGONAL
   }
 }
- 

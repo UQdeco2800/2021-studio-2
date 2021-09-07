@@ -38,4 +38,3 @@ class InventoryComponentTest {
     assertEquals(80, inventory.getGold());
   }
 }
- 

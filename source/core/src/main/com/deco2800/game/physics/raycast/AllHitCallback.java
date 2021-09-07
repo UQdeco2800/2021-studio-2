@@ -36,4 +36,3 @@ public class AllHitCallback implements RayCastCallback {
     return 1;
   }
 }
- 

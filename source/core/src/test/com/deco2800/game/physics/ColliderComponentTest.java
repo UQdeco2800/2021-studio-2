@@ -136,4 +136,3 @@ class ColliderComponentTest {
     assertEquals(position, realPos);
   }
 }
- 

@@ -35,4 +35,3 @@ public interface Task {
     INACTIVE // The task is currently not running
   }
 }
- 

@@ -390,4 +390,3 @@ public class InputService implements InputProcessor, GestureDetector.GestureList
     return false;
   }
 }
- 

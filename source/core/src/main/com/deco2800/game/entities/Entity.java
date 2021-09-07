@@ -362,4 +362,3 @@ public class Entity {
     return String.format("Entity{id=%d}", id);
   }
 }
- 

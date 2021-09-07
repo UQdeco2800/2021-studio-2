@@ -51,4 +51,3 @@ public class GhostAnimationController extends Component {
     animator.startAnimation("floatDown");
   }
 }
- 

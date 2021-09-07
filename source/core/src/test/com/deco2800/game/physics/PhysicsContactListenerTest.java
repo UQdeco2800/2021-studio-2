@@ -91,4 +91,3 @@ class PhysicsContactListenerTest {
     return body.createFixture(new FixtureDef());
   }
 }
- 

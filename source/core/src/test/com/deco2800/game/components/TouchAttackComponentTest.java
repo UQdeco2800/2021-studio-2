@@ -86,4 +86,3 @@ class TouchAttackComponentTest {
     return target;
   }
 }
- 

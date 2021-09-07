@@ -8,4 +8,3 @@ public class NPCConfigs {
   public GhostKingConfig ghostKing = new GhostKingConfig();
   public GhostRangedConfig ghostRanged = new GhostRangedConfig();
 }
- 

@@ -113,4 +113,3 @@ public class UserSettings {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
- 

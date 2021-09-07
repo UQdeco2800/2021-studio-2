@@ -140,4 +140,3 @@ public class Renderer implements Disposable {
     return stage;
   }
 }
- 

@@ -45,4 +45,3 @@ public class DebugCommand implements Command {
     return args.size() == 1;
   }
 }
- 

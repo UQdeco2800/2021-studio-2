@@ -41,4 +41,3 @@ public class CutsceneTriggerFactory {
         throw new IllegalStateException("Instantiating static util class");
     }
 }
- 

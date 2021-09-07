@@ -25,4 +25,3 @@ public class SingleHitCallback implements RayCastCallback {
     return 1; // Ignore this collision, it wasn't in the layer mask.
   }
 }
- 

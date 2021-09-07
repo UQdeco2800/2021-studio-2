@@ -53,4 +53,3 @@ class InputDecoratorTest {
     verify(inputProcessor).touchUp(8, 9, 10, 11);
   }
 }
- 

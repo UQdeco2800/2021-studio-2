@@ -61,4 +61,3 @@ class KeyboardTerminalInputComponentTest {
     assertFalse(terminalInput.keyUp('a'));
   }
 }
- 

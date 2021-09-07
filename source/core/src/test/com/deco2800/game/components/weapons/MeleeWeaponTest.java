@@ -130,5 +130,3 @@ class MeleeWeaponTest {
         return target;
     }
 }
-
- 

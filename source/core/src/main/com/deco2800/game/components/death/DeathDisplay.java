@@ -111,4 +111,3 @@ public class DeathDisplay extends MainMenuDisplay {
         this.unloadAssets();
     }
 }
- 

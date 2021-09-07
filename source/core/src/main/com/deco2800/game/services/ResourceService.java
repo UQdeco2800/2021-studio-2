@@ -185,4 +185,3 @@ public class ResourceService implements Disposable {
     assetManager.clear();
   }
 }
- 

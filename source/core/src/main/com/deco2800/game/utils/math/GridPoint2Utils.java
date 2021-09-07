@@ -12,4 +12,3 @@ public class GridPoint2Utils {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
- 

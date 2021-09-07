@@ -78,4 +78,3 @@ public class Axe extends MeleeWeapon {
         return false;
     }
 }
- 

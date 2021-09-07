@@ -79,4 +79,3 @@ public class EntityService {
     return new Array<>(entities);
   }
 }
- 

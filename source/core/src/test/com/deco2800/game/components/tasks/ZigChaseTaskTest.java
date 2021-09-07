@@ -104,4 +104,3 @@ class ZigChaseTaskTest {
                 .addComponent(new PhysicsMovementComponent());
     }
 }
- 

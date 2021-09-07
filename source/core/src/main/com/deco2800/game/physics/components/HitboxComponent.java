@@ -10,4 +10,3 @@ public class HitboxComponent extends ColliderComponent {
     super.create();
   }
 }
- 

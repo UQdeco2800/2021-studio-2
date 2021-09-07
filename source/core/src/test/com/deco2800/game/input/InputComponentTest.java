@@ -133,4 +133,3 @@ class InputComponentTest {
     assertFalse(inputComponent.zoom(5f, 6f));
   }
 }
- 

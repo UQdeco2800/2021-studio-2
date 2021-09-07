@@ -42,4 +42,3 @@ public class GameAreaDisplay extends UIComponent {
     title.remove();
   }
 }
- 

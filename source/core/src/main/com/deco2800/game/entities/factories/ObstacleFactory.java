@@ -98,4 +98,3 @@ public class ObstacleFactory {
     throw new IllegalStateException("Instantiating static util class");
   }
 }
- 
