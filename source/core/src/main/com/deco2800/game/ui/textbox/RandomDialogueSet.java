@@ -20,8 +20,7 @@ public enum RandomDialogueSet {
             },
             new Dialogue[] {
                     Dialogue.TUTORIAL_REPEAT
-            }
-            ,
+            },
             new Dialogue[] {
                     Dialogue.TUTORIAL_MOVE,
                     Dialogue.TUTORIAL_DASH,
@@ -47,8 +46,7 @@ public enum RandomDialogueSet {
                     Dialogue.LOKI_DEFEAT_3,
                     Dialogue.LOKI_DEFEAT_4,
                     Dialogue.LOKI_DEFEAT_5,
-            }
-            ,
+            },
             null
     ),
 
