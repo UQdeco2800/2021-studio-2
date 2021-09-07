@@ -29,17 +29,11 @@ public class DeathDisplay extends MainMenuDisplay {
       "images/main_menu_background.png"
     };
 
-    public void deathDisplay() {
-        stack.setVisible(true);
-        table.setVisible(true);
-    }
 
     @Override
     public void create() {
         loadAssets();
         super.create();
-
-        entity.getEvents().addListener("deathScreen", this::deathDisplay);
     }
 
     /**
@@ -97,8 +91,6 @@ public class DeathDisplay extends MainMenuDisplay {
         table.row();
         table.add(exitBtn).padTop(30f);
         table.row();
-        stack.setVisible(false);
-        table.setVisible(false);
     }
 
     private void loadAssets() {

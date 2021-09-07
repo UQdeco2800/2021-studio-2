@@ -4,7 +4,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.GridPoint3;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
@@ -79,13 +78,9 @@ public class TestGameArea extends GameArea {
   private static final String[] forestMusic = {backgroundMusic};
 
   private final TerrainFactory terrainFactory;
-  private final GdxGame game;
 
-  private Entity player;
-
-  public TestGameArea(TerrainFactory terrainFactory, GdxGame game) {
+  public TestGameArea(TerrainFactory terrainFactory) {
     super();
-    this.game = game;
     this.terrainFactory = terrainFactory;
   }
 
@@ -270,7 +265,7 @@ public class TestGameArea extends GameArea {
   }
 
   private void spawnPlayer() {
-    Entity newPlayer = PlayerFactory.createPlayer(game);
+    Entity newPlayer = PlayerFactory.createPlayer();
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
   }
@@ -327,10 +322,6 @@ public class TestGameArea extends GameArea {
     resourceService.unloadAssets(forestSounds);
     resourceService.unloadAssets(forestMusic);
     resourceService.unloadAssets(arrowSounds);
-  }
-
-  public Entity getPlayer() {
-    return this.player;
   }
 
 

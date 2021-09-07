@@ -38,7 +38,7 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
     public boolean keyDown(int keycode) {
         // handle open and close terminal
         if (keycode == SKIP_KEY) {
-            textBox.toggleIsOpen();
+            textBox.setClosed();
             return true;
         }
 

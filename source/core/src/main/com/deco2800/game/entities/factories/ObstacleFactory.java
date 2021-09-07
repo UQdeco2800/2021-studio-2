@@ -37,7 +37,10 @@ public class ObstacleFactory {
     return tree;
   }
 
-
+  /**
+   * Creates a trap with collation.
+   * @return trap
+   */
   public static Entity createPhysicalTrap() {
     Entity trap = new Entity()
             .addComponent(new TextureRenderComponent("images/trap.png"))
