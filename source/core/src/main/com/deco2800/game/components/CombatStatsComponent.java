@@ -16,8 +16,8 @@ public class CombatStatsComponent extends Component {
   private int baseAttack;
 
   public CombatStatsComponent(int health, int baseAttack) {
-    setHealth(health);
-    maxHealth = getHealth();
+    this.health = health;
+    maxHealth = health;
     setBaseAttack(baseAttack);
   }
 
@@ -49,12 +49,14 @@ public class CombatStatsComponent extends Component {
   }
 
   /**
-   * Sets the entity's health. Health has a minimum bound of 0.
+   * Sets the entity's health. Health has a minimum bound of 0. and cannot go above the max health
    *
    * @param health health
    */
   public void setHealth(int health) {
-    if (health >= 0) {
+    if (health > maxHealth) {
+      this.health = maxHealth;
+    } else if (health >= 0) {
       this.health = health;
     } else {
       this.health = 0;
