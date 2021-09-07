@@ -26,7 +26,7 @@ public class MeleeWeapon extends Component {
     protected boolean hasAttacked;
 
     /** Time when the entity last attacked, 0 if entity is not attacking. */
-    private long timeAtAttack;
+    protected long timeAtAttack;
 
     /** Weapon Damage */
     protected int attackPower;
@@ -38,12 +38,12 @@ public class MeleeWeapon extends Component {
     /** Base stats of owner entity */
     protected CombatStatsComponent combatStats;
 
-    /** Weapon attack width & range in terms of x & y, relative to entity size */
-    private final Vector2 weaponSize;
+    /** Weapon attack width and range in terms of x and y, relative to entity size */
+    protected Vector2 weaponSize;
     /** Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
     entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
     it simultaneously. */
-    private WeaponHitboxComponent weaponHitbox;
+    protected WeaponHitboxComponent weaponHitbox;
 
     /** attack direction (see below for constants) */
     private int attackDirection;
@@ -92,10 +92,19 @@ public class MeleeWeapon extends Component {
      * @param attackDirection direction of attack (see above for defined constants).
      */
     public void attack(int attackDirection) {
+        if (timeAtAttack != 0 || hasAttacked) return;
         this.attackDirection = attackDirection;
         timeAtAttack = ServiceLocator.getTimeSource().getTime();
-        entity.getEvents().trigger("lockMovement", 3 * frameDuration);
+        entity.getEvents().trigger("lockMovement", getTotalAttackTime());
         hasAttacked = true;
+    }
+
+    /**
+     * The weapon's strong / alternative attack. This is to be implemented
+     * in weapon sub-classes.
+     */
+    public void strongAttack() {
+        // To be implemented in sub-classes
     }
 
     /**
@@ -108,8 +117,7 @@ public class MeleeWeapon extends Component {
         if (hasAttacked && timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
             weaponHitbox.set(weaponSize.cpy(),  attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
-        // Destroy hit box as soon as attack frame ends (3rd frame).
-        } else if (timeSinceAttack >= 3 * frameDuration) {
+        } else if (timeSinceAttack >= 2 * frameDuration) {
             timeAtAttack = 0;
             weaponHitbox.destroy();
         }
@@ -157,7 +165,12 @@ public class MeleeWeapon extends Component {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (targetStats != null) {
-            targetStats.hit(combatStats);
+            // add entity's base attack to attack, if they exist.
+            if (combatStats == null) {
+                targetStats.weaponHit(attackPower);
+            } else {
+                targetStats.hit(combatStats, attackPower);
+            }
         }
 
         // Apply knockback

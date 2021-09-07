@@ -8,8 +8,8 @@ import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Represents the axe used by entities. Main difference to its superclass is that
- * Axe uses axe-related assets. In future development this will have different
- * attack functionality, including combos, strong-attacks, etc.
+ * Axe uses axe-related assets, and also has a strong attack which
+ * uses an AOE (area of effect) attack.
  */
 public class Axe extends MeleeWeapon {
     /** Sound that plays every axe swing */
@@ -17,12 +17,19 @@ public class Axe extends MeleeWeapon {
     /** Sound that plays when axe hits enemy */
     private final Sound impactSound;
 
+    /** AOE / Strong attack size */
+    private final Vector2 strongAttackSize;
+    /** Determines whether the axe has used its strong attack */
+    private boolean hasStrongAttacked;
+
     public Axe(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
         attackSound = ServiceLocator.getResourceService().
                 getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
+        strongAttackSize = new Vector2(2f, 2f); // default size
+        hasStrongAttacked = false;
     }
 
     /**
@@ -53,13 +60,34 @@ public class Axe extends MeleeWeapon {
     }
 
     /**
-     * Plays attack sound during attack frame.
+     * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
+     * connect with any enemies immediately around the entity.
+     */
+    public void strongAttack() {
+        if (timeAtAttack != 0 || hasStrongAttacked) {
+            return;
+        }
+        hasStrongAttacked = true;
+        super.attack(MeleeWeapon.CENTER);
+    }
+
+    /**
+     * Implements functionality for strong attacks, also plays attack sound
+     * during attack frame (for both light and strong).
      * @see MeleeWeapon
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (hasAttacked && timeSinceAttack > frameDuration & timeSinceAttack < 2 * frameDuration) {
-            attackSound.play();
+        if (timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
+            if (hasStrongAttacked) {
+                attackSound.play();
+                weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
+                hasStrongAttacked = false;
+                hasAttacked = false; // strong attack overrides light attack.
+
+            } else if (hasAttacked) {
+                attackSound.play();
+            }
         }
         super.triggerAttackStage(timeSinceAttack);
     }

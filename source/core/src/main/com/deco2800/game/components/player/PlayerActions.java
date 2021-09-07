@@ -31,6 +31,7 @@ public class PlayerActions extends Component {
     entity.getEvents().addListener("walk", this::walk);
     entity.getEvents().addListener("walkStop", this::stopWalking);
     entity.getEvents().addListener("attack", this::attack);
+    entity.getEvents().addListener("strongAttack", this::strongAttack);
     entity.getEvents().addListener("mouseAttack", this::mouseAttack);
     entity.getEvents().addListener("lockMovement", this::lockMovement);
     entity.getEvents().addListener("dash", this::dash);
@@ -129,6 +130,14 @@ public class PlayerActions extends Component {
     }
     weapon.attack(attackDirection);
     lockMovement(weapon.getTotalAttackTime());
+  }
+
+  void strongAttack() {
+    MeleeWeapon weapon = entity.getComponent(Axe.class);
+    if (weapon == null) {
+      return;
+    }
+    weapon.strongAttack();
   }
 
   /**

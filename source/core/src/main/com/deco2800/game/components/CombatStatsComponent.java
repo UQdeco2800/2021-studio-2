@@ -99,4 +99,23 @@ public class CombatStatsComponent extends Component {
     int newHealth = getHealth() - attacker.getBaseAttack();
     setHealth(newHealth);
   }
+
+  /**
+   * Entity receives a hit, but also adds a weapon attack.
+   * @param attacker the attacking entity with the weapon
+   * @param weaponAttackPower the weapon damage.
+   */
+  public void hit(CombatStatsComponent attacker, int weaponAttackPower) {
+    int newHealth = getHealth() - attacker.getBaseAttack() - weaponAttackPower;
+    setHealth(newHealth);
+  }
+
+  /**
+   * Hits purely by weapon attack, ignoring base combat stats of attacking entity.
+   * @param weaponAttackPower the weapon damage
+   */
+  public void weaponHit(int weaponAttackPower) {
+    int newHealth = getHealth() - weaponAttackPower;
+    setHealth(newHealth);
+  }
 }

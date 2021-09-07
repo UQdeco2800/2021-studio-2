@@ -87,7 +87,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
      */
     public void destroy() {
         if (fixture == null) {
-            logger.debug ("{} Tried to destroy an already unset weapon hit box", this);
+            logger.debug("{} Tried to destroy an already unset weapon hit box", this);
             return;
         }
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
