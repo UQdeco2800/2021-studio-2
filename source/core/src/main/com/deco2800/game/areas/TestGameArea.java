@@ -121,8 +121,8 @@ public class TestGameArea extends GameArea {
         Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL, 4);
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
-        Entity trigger2 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING, 2);
-        spawnEntityAt(trigger2, new Vector2(10f, 9.5f), true, true);
+        Entity trigger3 = CutsceneTriggerFactory.createAttackTrigger(RandomDialogueSet.LOKI_OPENING, 2, 5);
+        spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
 
 //        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
 //        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);

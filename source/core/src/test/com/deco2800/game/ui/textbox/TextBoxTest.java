@@ -160,6 +160,7 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
         textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
         textBox.setOpen();
         textBox.handleEscape();
 
@@ -172,6 +173,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
 
         String message = textBox.getMessage();
 
@@ -184,6 +186,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setRandomBeatenDialogueSet(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
 
         String message = textBox.getMessage();
 
@@ -196,6 +199,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setRandomBeatenDialogueSet(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
 
         String message = textBox.getMessage();
 
@@ -209,6 +213,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
 
         String message = textBox.getMessage();
 
@@ -222,6 +227,7 @@ class TextBoxTest {
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
 
         String message = textBox.getMessage();
 
@@ -234,6 +240,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
 
         String message = textBox.getMessage();
@@ -248,6 +255,7 @@ class TextBoxTest {
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
         textBox.nextMessage();
 
@@ -262,6 +270,7 @@ class TextBoxTest {
         textBox.setClosed();
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
         textBox.nextMessage();
 
@@ -275,6 +284,7 @@ class TextBoxTest {
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
 
         assertFalse(textBox.isMainCharacterShowing());
@@ -287,6 +297,7 @@ class TextBoxTest {
 
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
         textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
         textBox.nextMessage();
 

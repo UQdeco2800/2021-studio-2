@@ -1,0 +1,78 @@
+package com.deco2800.game.components;
+
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.components.player.PlayerActions;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.BodyUserData;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class TouchAttackCutsceneComponent extends TouchComponent{
+
+    private int repeats;
+
+    /**
+     * Create a component which attacks entities on collision, without knockback.
+     *
+     * @param targetLayer The physics layer of the target's collider.
+     */
+    public TouchAttackCutsceneComponent(short targetLayer, int repeats) {
+        super(targetLayer);
+        this.repeats = repeats;
+    }
+
+    /**
+     * Creates the component by adding the text box so the dialogue can be changed
+     * once the entity has been collided with.
+     */
+    @Override
+    public void create() {
+        super.create();
+    }
+
+    /**
+     * The method that is called once a collision event is triggered. The method
+     * will check that the correct entities are in the collision, if they are not
+     * then the method will terminate prematurely.
+     *
+     * If the entities are correct, a text box will be displayed and the player will
+     * stop moving.
+     *
+     * @param me the entity that will trigger the event
+     * @param other the entity that is required to trigger the event on collision
+     */
+    @Override
+    protected void onCollisionStart(Fixture me, Fixture other) {
+        if (!this.checkEntities(me, other)) {
+            return;
+        }
+
+        Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
+        PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
+        KeyboardPlayerInputComponent input =  collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
+        //Checks if the entity that has collided is the player
+        if (actions == null) {
+            return;
+        }
+        actions.stopWalking();
+        input.stopWalking();
+        repeatAttacks(input, 0);
+    }
+
+    private void repeatAttacks(KeyboardPlayerInputComponent input, int count) {
+        input.keyDown(Input.Keys.SPACE);
+        if (count < repeats) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    repeatAttacks(input, count + 1);
+                    timer.cancel();
+                }
+            }, 500);
+        }
+    }
+}

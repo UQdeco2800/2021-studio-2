@@ -15,6 +15,7 @@ class TextBoxInputComponentTest {
     void shouldCloseTextBox() {
         TextBox textBox = spy(TextBox.class);
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setNewCharactersOff();
 
         textBox.setClosed();
 
@@ -26,6 +27,7 @@ class TextBoxInputComponentTest {
     void shouldNotClose() {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setNewCharactersOff();
 
         textBoxInput.keyDown(Input.Keys.SPACE);
         assertTrue(textBox.isOpen());
@@ -38,6 +40,7 @@ class TextBoxInputComponentTest {
     void shouldBeClosed() {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setNewCharactersOff();
 
         textBoxInput.keyDown(Input.Keys.SPACE);
         assertTrue(textBox.isOpen());
@@ -51,6 +54,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
 
         textBoxInput.keyTyped(' ');
         textBoxInput.keyTyped(' ');
@@ -63,6 +67,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.keyTyped(' ');
@@ -81,6 +86,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.keyTyped(' ');
@@ -94,6 +100,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.touchDown(0,0,0,0);
@@ -107,6 +114,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.touchDown(0,0,0,0);
@@ -123,6 +131,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.touchDown(0,0,0,0);
@@ -139,6 +148,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.touchDown(0,0,0,0);
@@ -157,6 +167,7 @@ class TextBoxInputComponentTest {
         TextBox textBox = new TextBox();
         TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
         textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
         textBox.acceptInput();
 
         textBoxInput.touchDown(0,0,0,0);
