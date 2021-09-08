@@ -108,8 +108,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 extends <a href="MovementTask.html" title="class in com.deco2800.game.components.tasks">MovementTask</a>
 implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.deco2800.game.ai.tasks">PriorityTask</a></pre>
 <div class="block">Move to a given position, finishing when you get close enough. Requires an entity with a
- PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
- todo: may need to offset the target by the sprites center size to stop it approaching with the corner</div>
+ PhysicsMovementComponent. Entity will be disposed of after reaching its destination.</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -161,7 +160,12 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">ProjectileMovementTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">ProjectileMovementTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2)">ProjectileMovementTask</a></span>&#8203;(<a href="../../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -225,7 +229,7 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.tasks.<a href="MovementTask.html" title="class in com.deco2800.game.components.tasks">MovementTask</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.tasks.MovementTask">
 <!--   -->
-</a><code><a href="MovementTask.html#checkIfStuck()">checkIfStuck</a>, <a href="MovementTask.html#didMove()">didMove</a>, <a href="MovementTask.html#discover()">discover</a>, <a href="MovementTask.html#findingLastPositions()">findingLastPositions</a>, <a href="MovementTask.html#isAtTarget()">isAtTarget</a>, <a href="MovementTask.html#setMoveSpeed(com.badlogic.gdx.math.Vector2)">setMoveSpeed</a>, <a href="MovementTask.html#setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a>, <a href="MovementTask.html#start()">start</a></code></div>
+</a><code><a href="MovementTask.html#checkIfStuck()">checkIfStuck</a>, <a href="MovementTask.html#didMove()">didMove</a>, <a href="MovementTask.html#isAtTarget()">isAtTarget</a>, <a href="MovementTask.html#setMoveSpeed(com.badlogic.gdx.math.Vector2)">setMoveSpeed</a>, <a href="MovementTask.html#setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a>, <a href="MovementTask.html#start()">start</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;com.deco2800.game.ai.tasks.<a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.ai.tasks.DefaultTask">
@@ -257,7 +261,14 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 <li class="blockList">
 <section class="detail">
 <h3><a id="&lt;init&gt;(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">ProjectileMovementTask</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ProjectileMovementTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ProjectileMovementTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="&lt;init&gt;(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2)">ProjectileMovementTask</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ProjectileMovementTask</span>&#8203;(<span class="arguments"><a href="../../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</span></div>
 </section>
 </li>
