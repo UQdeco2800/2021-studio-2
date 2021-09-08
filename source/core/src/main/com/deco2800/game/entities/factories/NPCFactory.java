@@ -217,8 +217,8 @@ public class NPCFactory {
                 .addComponent(aiComponent);
         ghost.setAttackRange(5);
         //ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
         HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar,HealthBarFrame);
         ghost.addComponent(healthBarComponent);
         return ghost;
