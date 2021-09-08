@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.TouchHealComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -101,42 +102,49 @@ public class ObstacleFactory {
    *
    * @return crate entity
    */
-  public static Entity createCrate() {
-    Entity crate =
-            new Entity()
-                    .addComponent(new TextureRenderComponent("healthRegen/crate_placeholder.png"))
-                    .addComponent(new PhysicsComponent())
-                    .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-                    .addComponent(new CombatStatsComponent(100, 0));
+    public static Entity createCrate() {
+        Entity crate =
+                new Entity()
+                        .addComponent(new TextureRenderComponent("healthRegen/crate_placeholder.png"))
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent())
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                        .addComponent(new CombatStatsComponent(100, 0));
+                        //takes damage. now need to dispose crate on death.
 
-    crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-    crate.getComponent(TextureRenderComponent.class).scaleEntity();
-    crate.scaleHeight(0.6f);
-    return crate;
-  }
+        //create animations for the crate when its hit
+
+        crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        crate.getComponent(TextureRenderComponent.class).scaleEntity();
+        crate.scaleHeight(1f);
+        return crate;
+    }
 
   /**
    * create a potion entity that the player can walk over and gain health.
    *
    * @return potion entity
    */
-  public static Entity createHealthPotion() {
-    Entity potion =
+    public static Entity createHealthPotion() {
+        Entity potion =
             new Entity()
                     .addComponent(new TextureRenderComponent("healthRegen" +
                             "/healthPotion_placeholder.png"))
+                    .addComponent(new CombatStatsComponent(0, 99999)) //used to know how much health to restore
+                    //instead of using CombatStatComponent we could change the health given in the TouchHealComponent
                     .addComponent(new PhysicsComponent())
-                    .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE));
-    potion.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-    potion.getComponent(TextureRenderComponent.class).scaleEntity();
-    potion.scaleHeight(0.4f);
-    return potion;
+                    .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE).setSensor(true))
+                    .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                    .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
+                    //physics components is to detect whether the player has stepped onto the potion entity
+
+        potion.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        potion.getComponent(TextureRenderComponent.class).scaleEntity();
+        potion.scaleHeight(0.4f);
+        return potion;
   }
 
-
-  private ObstacleFactory() {
-    throw new IllegalStateException("Instantiating static util class");
-  }
+    private ObstacleFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
 }
