@@ -51,7 +51,7 @@ public class NPCFactory {
      * @return entity
      */
     public static Entity createGhost(Entity target) {
-        Entity ghost = createBaseNPCNoAI(target);
+        Entity ghost = createBaseNPCNoAI();
         BaseEntityConfig config = configs.ghost;
 
         AnimationRenderComponent animator =
@@ -63,7 +63,6 @@ public class NPCFactory {
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
       
       
-        AITaskComponent aiComponent =
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
