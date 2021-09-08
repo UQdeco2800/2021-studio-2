@@ -61,8 +61,9 @@ public class ObstacleFactory {
             .addComponent(new PhysicsComponent())
             .addComponent(new CombatStatsComponent(1000000, 10))
             .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0));
+            .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
 
+    trap.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
     trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
     trap.getComponent(TextureRenderComponent.class).scaleEntity();
     trap.scaleHeight(0.3f);
