@@ -73,6 +73,12 @@ public class NPCFactory {
         ghost.getComponent(AITaskComponent.class).
                 addTask(new ZigChaseTask(target, 11, 3f, 6f));
 
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        ghost.addComponent(healthBarComponent);
+
         ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
         return ghost;
     }
@@ -99,6 +105,12 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController());
         ghostKing.setEntityType("AlertCaller");
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        ghostKing.addComponent(healthBarComponent);
 
         ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
         return ghostKing;
@@ -136,6 +148,12 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController());
 
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        anchoredGhost.addComponent(healthBarComponent);
+
         anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
         return anchoredGhost;
     }
@@ -172,6 +190,12 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController());
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        anchoredGhost.addComponent(healthBarComponent);
 
         anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
         return anchoredGhost;
@@ -218,8 +242,9 @@ public class NPCFactory {
         ghost.setAttackRange(5);
         //ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
         Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar,HealthBarFrame);
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
         ghost.addComponent(healthBarComponent);
         return ghost;
     }

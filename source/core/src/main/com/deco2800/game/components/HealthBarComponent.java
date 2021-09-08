@@ -7,36 +7,45 @@ import com.deco2800.game.services.ServiceLocator;
 
 public class HealthBarComponent extends RenderComponent {
     private float ratioOfHealth = 1f;
+    private float ratioOfHealthPrevious = 1f;
     private final Sprite health;
     private final Sprite healthBar;
+    private final Sprite healthDecrease;
     private float heightOfHealth;
     private float size;
+    private float previousHealth;
+    private float saveHealth;
+    private boolean healthDecreaseCheck;
+    private long start = 0;
 
-    public HealthBarComponent(Sprite health, Sprite healthBar) {
+    public HealthBarComponent(Sprite health, Sprite healthBar, Sprite healthDecrease) {
         super();
         this.health = health;
         this.healthBar = healthBar;
+        this.healthDecrease = healthDecrease;
         this.heightOfHealth = 1f;
         this.size = 1f;
     }
 
-    public HealthBarComponent(Sprite health, Sprite healthBar, Float heightOfHealth) {
+    public HealthBarComponent(Sprite health, Sprite healthBar, Sprite healthDecrease, Float heightOfHealth) {
         super();
         this.health = health;
         this.healthBar = healthBar;
+        this.healthDecrease = healthDecrease;
         this.heightOfHealth = heightOfHealth;
         this.size = 1f;
     }
 
-    public HealthBarComponent(Sprite health, Sprite healthBar, Float heightOfHealth, Float size) {
+    public HealthBarComponent(Sprite health, Sprite healthBar, Sprite healthDecrease, Float heightOfHealth, Float size) {
         super();
         this.health = health;
         this.healthBar = healthBar;
+        this.healthDecrease = healthDecrease;
         this.heightOfHealth = heightOfHealth;
         this.size = size;
     }
 
-    public void scaleEntity(float xScale) {
+    public void scaleHealth(float xScale) {
         float width = (entity.getScale().x / health.getWidth()) * size;
         float height = (entity.getScale().y / health.getHeight()) * (xScale / 2) * size;
         health.setScale(height, width);
@@ -48,20 +57,40 @@ public class HealthBarComponent extends RenderComponent {
         healthBar.setScale(height, width);
     }
 
+    public void scaleHealthDecrease(float xScale, float xScalePrevious, double ratioHealthDecrease) {
+        float scale = xScale + (xScalePrevious - xScale)* (float)ratioHealthDecrease;
+        float width = (entity.getScale().x / healthBar.getWidth());
+        float height = (entity.getScale().y / health.getHeight()) * (scale / 2);
+        healthDecrease.setScale(height, width);
+    }
+
     @Override
     public void create() {
         super.create();
         scaleHealthBar();
+        healthDecreaseCheck = false;
+        start = System.currentTimeMillis();
+        previousHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
     }
 
     @Override
     public void update() {
         float currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
+        if(currentHealth != previousHealth) {
+            saveHealth = previousHealth;
+            healthDecreaseCheck = true;
+            ratioOfHealthPrevious = saveHealth / MaxHealth;
+            start = System.currentTimeMillis();
+
+        }
+        previousHealth = currentHealth;
+
         ratioOfHealth = currentHealth / MaxHealth;
         if (ratioOfHealth == 0f) {
             ratioOfHealth = 0.1f;
         }
+
     }
     @Override
     public void dispose() {
@@ -79,9 +108,20 @@ public class HealthBarComponent extends RenderComponent {
             scaleHealthBar();
             healthBar.draw(batch);
         }
+        if(healthDecreaseCheck && healthDecrease != null) {
+            if((System.currentTimeMillis() - start) / 1000 >= 1) {
+                healthDecreaseCheck = false;
+            }else {
+                healthDecrease.setRotation(angle);
+                healthDecrease.setCenter(positionCenter.x, positionCenter.y + heightOfHealth);
+                double ratioOfDecrease = 1 -((System.currentTimeMillis() - start) / 1000.0);
+                scaleHealthDecrease(ratioOfHealth, ratioOfHealthPrevious, ratioOfDecrease);
+                healthDecrease.draw(batch);
+            }
+        }
 
         if (health != null) {
-            scaleEntity(ratioOfHealth);
+            scaleHealth(ratioOfHealth);
             health.setRotation(angle);
             health.setCenter(positionCenter.x, positionCenter.y + heightOfHealth);
             health.draw(batch);
