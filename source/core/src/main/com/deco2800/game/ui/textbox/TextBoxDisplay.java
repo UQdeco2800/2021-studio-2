@@ -293,11 +293,11 @@ public class TextBoxDisplay extends UIComponent {
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
             case LOKI_OPENING:
-                enemyName = new Label("LOKI", skin);
+                enemyName = new Label("    LOKI", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/loki_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
-                        .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
+                        .getAsset("images/textBoxDisplay/loki_text_box.png", Texture.class));
                 break;
             case GARMR:
                 enemyName.setText("GARMR");

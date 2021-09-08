@@ -48,7 +48,8 @@ public class MainGameScreen extends ScreenAdapter {
             "images/textBoxDisplay/prisoner_image.png",
             "images/textBoxDisplay/black_bars.png",
             "images/textBoxDisplay/prison_text_box.png",
-            "images/textBoxDisplay/loki_image.png"
+            "images/textBoxDisplay/loki_image.png",
+            "images/textBoxDisplay/loki_text_box.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
