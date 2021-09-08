@@ -65,6 +65,23 @@ public enum RandomDialogueSet {
                     Dialogue.GARMR_DEFEAT_2,
             },
             null
+    ),
+
+    TEST(
+            new Dialogue[] {
+                    Dialogue.TEST_1
+            },
+            new Dialogue[] {
+                    Dialogue.TEST_1
+            },
+            new Dialogue[] {
+                    Dialogue.TEST_1,
+                    Dialogue.TEST_2
+            },
+            new Dialogue[] {
+                    Dialogue.TEST_1,
+                    Dialogue.TEST_2
+            }
     );
 
     RandomDialogueSet(Dialogue[] firstEncounter, Dialogue[] bossDefeatedBefore,

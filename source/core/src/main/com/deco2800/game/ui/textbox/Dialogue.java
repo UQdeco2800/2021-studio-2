@@ -152,6 +152,19 @@ public enum Dialogue {
 
     GARMR_BEATEN_4(new Message[] {
         new Message(true, "Hopefully it will be as fun as last time mutt."),
+    }),
+
+    TEST_1(new Message[] {
+            new Message(true, "Test 1 Message 1"),
+            new Message(false, "Test 1 Message 2"),
+            new Message(true, "Test 1 Message 3"),
+            new Message(true, "Test 1 Message 4")
+    }),
+
+    TEST_2(new Message[] {
+            new Message(true, "Test 2 Message 1"),
+            new Message(false, "Test 2 Message 2"),
+            new Message(false, "Test 2 Message 3")
     });
 
     private Message[] messages;
@@ -186,12 +199,8 @@ public enum Dialogue {
     }
 
     /**
-<<<<<<< HEAD
      * Returns the number of different lines in the dialogue.
      * @return returns the number of messages in the dialogue sequence
-=======
-     * @return the number of different lines in the dialogue.
->>>>>>> main
      */
     public int size() {
         return messages.length;

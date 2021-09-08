@@ -9,8 +9,6 @@ import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.BooleanObject;
 
-import javax.swing.*;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -161,36 +159,18 @@ public class TextBoxDisplay extends UIComponent {
                 openBars();
             }
             if (textBox.isMainCharacterShowing()) {
-                enemyName.setVisible(false);
-                enemyImage.setVisible(false);
-                enemyLabel.setVisible(false);
-                enemyBox.setVisible(false);
-                mainCharacterName.setVisible(true);
-                mainCharacterImage.setVisible(true);
-                mainCharacterLabel.setVisible(true);
-                mainCharacterBox.setVisible(true);
+                setNPCVisible(false);
+                setMainCharacterVisible(true);
                 mainCharacterLabel.setText(textBox.getSubMessage());
             } else {
-                mainCharacterName.setVisible(false);
-                mainCharacterImage.setVisible(false);
-                mainCharacterLabel.setVisible(false);
-                mainCharacterBox.setVisible(false);
-                enemyName.setVisible(true);
-                enemyImage.setVisible(true);
-                enemyLabel.setVisible(true);
-                enemyBox.setVisible(true);
+                setMainCharacterVisible(false);
+                setNPCVisible(true);
                 setEnemyTextBox();
                 enemyLabel.setText(textBox.getSubMessage());
             }
         } else {
-            mainCharacterName.setVisible(false);
-            mainCharacterImage.setVisible(false);
-            mainCharacterLabel.setVisible(false);
-            mainCharacterBox.setVisible(false);
-            enemyName.setVisible(false);
-            enemyImage.setVisible(false);
-            enemyLabel.setVisible(false);
-            enemyBox.setVisible(false);
+            setMainCharacterVisible(false);
+            setNPCVisible(false);
             if (!closing.getBoolean()) {
                 closing.setTrue();
                 opening.setFalse();
@@ -198,6 +178,31 @@ public class TextBoxDisplay extends UIComponent {
             }
         }
     }
+
+    /**
+     * Sets all of the display for the main character to the boolean value of visible
+     *
+     * @param visible boolean which is true if the items should be displayed, false otherwise
+     */
+    private void setMainCharacterVisible(boolean visible) {
+        mainCharacterName.setVisible(visible);
+        mainCharacterImage.setVisible(visible);
+        mainCharacterLabel.setVisible(visible);
+        mainCharacterBox.setVisible(visible);
+    }
+
+    /**
+     * Sets all of the display for the NPC to the boolean value of visible
+     *
+     * @param visible boolean which is true if the items should be displayed, false otherwise
+     */
+    private void setNPCVisible(boolean visible) {
+        enemyName.setVisible(visible);
+        enemyImage.setVisible(visible);
+        enemyLabel.setVisible(visible);
+        enemyBox.setVisible(visible);
+    }
+
 
     /**
      * Makes the bars fade into the screen.
@@ -303,6 +308,13 @@ public class TextBoxDisplay extends UIComponent {
                 enemyName.setText("GARMR");
                 break;
         }
+        setNPCPosition();
+    }
+
+    /**
+     * Sets the position of all the items to be displayed for the updated NPC.
+     */
+    private void setNPCPosition() {
         enemyLabel = new Label("", skin);
         enemyLabel.setPosition(ENEMY_TEXT_X, TEXT_Y_POS);
 
@@ -322,7 +334,6 @@ public class TextBoxDisplay extends UIComponent {
         stage.addActor(enemyName);
         stage.addActor(enemyLabel);
     }
-
 
     /**
      * Gets the priority of the text display.

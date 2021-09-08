@@ -2,6 +2,7 @@ package com.deco2800.game.ui.textbox;
 
 import com.badlogic.gdx.Input;
 import com.deco2800.game.extensions.GameExtension;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -10,86 +11,162 @@ import static org.mockito.Mockito.spy;
 
 @ExtendWith(GameExtension.class)
 class TextBoxInputComponentTest {
-//    @Test
-//    void shouldCloseTextBox() {
-//        TextBox textBox = spy(TextBox.class);
-//        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-//
-//        textBox.setClosed();
-//
-//        textBoxInput.keyDown(Input.Keys.ESCAPE);
-//        assertFalse(textBox.isOpen());
-//    }
-//
-//    @Test
-//    void shouldNotClose() {
-//        TextBox textBox = new TextBox();
-//        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-//
-//        textBoxInput.keyDown(Input.Keys.SPACE);
-//        assertTrue(textBox.isOpen());
-//
-//        textBoxInput.keyDown(Input.Keys.SPACE);
-//        assertTrue(textBox.isOpen());
-//    }
-//
-//    @Test
-//    void shouldBeClosed() {
-//        TextBox textBox = new TextBox();
-//        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-//
-//        textBoxInput.keyDown(Input.Keys.SPACE);
-//        assertTrue(textBox.isOpen());
-//
-//        textBoxInput.keyDown(Input.Keys.ESCAPE);
-//        assertFalse(textBox.isOpen());
-//    }
-//
-//    @Test
-//    void shouldStartSubMessage() {
-//
-//    }
-//
-//    @Test
-//    void shouldFlushMessage() {
-//        TextBox textBox = new TextBox();
-//        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-//        textBox.setDialogue(Dialogue.TEST);
-//        textBox.acceptInput();
-//
-//        textBoxInput.keyTyped(' ');
-//        textBox.setSubMessage();
-//
-//        assertEquals("Message 1", textBox.getSubMessage());
-//    }
-//
-//    @Test
-//    void shouldNotDisplay() {
-//        TextBox textBox = new TextBox();
-//        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-//        textBox.setDialogue(Dialogue.TEST);
-//
-//        textBoxInput.keyTyped(' ');
-//        textBoxInput.keyTyped(' ');
-//
-//        assertEquals("", textBox.getSubMessage());
-//    }
-//
-//    @Test
-//    void shouldGoNextMessage() {
-//        TextBox textBox = new TextBox();
-//        KeyboardTextBoxInputComponent textBoxInput = new KeyboardTextBoxInputComponent(textBox);
-//        textBox.setDialogue(Dialogue.TEST);
-//        textBox.acceptInput();
-//
-//        textBoxInput.keyTyped(' ');
-//        textBoxInput.keyTyped(' ');
-//
-//        assertEquals("Message 2", textBox.getMessage());
-//
-//        textBoxInput.keyTyped(' ');
-//        textBoxInput.keyTyped(' ');
-//
-//        assertEquals("Message 3", textBox.getMessage());
-//    }
+    @Test
+    void shouldCloseTextBox() {
+        TextBox textBox = spy(TextBox.class);
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+
+        textBox.setClosed();
+
+        textBoxInput.keyDown(Input.Keys.ESCAPE);
+        assertFalse(textBox.isOpen());
+    }
+
+    @Test
+    void shouldNotClose() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+
+        textBoxInput.keyDown(Input.Keys.SPACE);
+        assertTrue(textBox.isOpen());
+
+        textBoxInput.keyDown(Input.Keys.SPACE);
+        assertTrue(textBox.isOpen());
+    }
+
+    @Test
+    void shouldBeClosed() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+
+        textBoxInput.keyDown(Input.Keys.SPACE);
+        assertTrue(textBox.isOpen());
+
+        textBoxInput.keyDown(Input.Keys.ESCAPE);
+        assertFalse(textBox.isOpen());
+    }
+
+    @Test
+    void shouldNotDisplay() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setDialogue(Dialogue.TEST_1);
+
+        textBoxInput.keyTyped(' ');
+        textBoxInput.keyTyped(' ');
+
+        assertEquals("", textBox.getSubMessage());
+    }
+
+    @Test
+    void shouldGoNextMessage() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.acceptInput();
+
+        textBoxInput.keyTyped(' ');
+        textBoxInput.keyTyped(' ');
+
+        assertEquals("Test 1 Message 1", textBox.getMessage());
+
+        textBoxInput.keyTyped(' ');
+        textBoxInput.keyTyped(' ');
+
+        assertEquals("Test 1 Message 2", textBox.getMessage());
+    }
+
+    @Test
+    void shouldFlushMessageKey() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.acceptInput();
+
+        textBoxInput.keyTyped(' ');
+        textBox.setSubMessage();
+
+        assertEquals("Test 1 Message 1", textBox.getSubMessage());
+    }
+
+    @Test
+    void shouldFlushMessageTouch() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.acceptInput();
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBox.setSubMessage();
+
+        assertEquals("Test 1 Message 1", textBox.getSubMessage());
+    }
+
+    @Test
+    void shouldFlushMessageTouchEmpty() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.acceptInput();
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBox.setSubMessage();
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBox.setSubMessage();
+
+        assertEquals("T", textBox.getSubMessage());
+    }
+
+    @Test
+    void shouldFlushMessageTouch2() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.acceptInput();
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0,0,0,0);
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBox.setSubMessage();
+
+        assertEquals("Test 1 Message 2", textBox.getSubMessage());
+    }
+
+    @Test
+    void shouldFlushMessageTouchKey() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.acceptInput();
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.keyTyped(' ');
+
+        assertEquals("Test 1 Message 1", textBox.getMessage());
+
+        textBoxInput.keyTyped(' ');
+        textBoxInput.touchDown(0,0,0,0);
+
+        assertEquals("Test 1 Message 2", textBox.getMessage());
+    }
+
+    @Test
+    void shouldGoNextMessageTouch() {
+        TextBox textBox = new TextBox();
+        TextBoxInputComponent textBoxInput = new TextBoxInputComponent(textBox);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.acceptInput();
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0,0,0,0);
+
+        assertEquals("Test 1 Message 1", textBox.getMessage());
+
+        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0,0,0,0);
+
+        assertEquals("Test 1 Message 2", textBox.getMessage());
+    }
 }
