@@ -13,6 +13,7 @@ public class PhysicsLayer {
   public static final short PROJECTILEWEAPON = (1 << 5);
 
   public static final short TRAP = (1 << 6);
+  public static final short TELEPORT = (1 << 7);
 
   public static final short ALL = ~0;
 

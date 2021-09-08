@@ -100,16 +100,19 @@ public class TestGameArea extends GameArea {
 
     spawnTerrain();
     spawnPlayer();
+    
     spawnGhosts();
     spawnCutsceneTrigger();
     spawnGhostKing();
     spawnRangedGhosts();
     spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
+
     spawnTraps();
     spawnPTraps();
 
     playMusic();
+    spawnTeleport();
   }
 
   private void displayUI() {
@@ -283,11 +286,22 @@ public class TestGameArea extends GameArea {
     spawnEntityAt(trap, fixedPos, true, true);
   }
 
+  private void spawnTeleport() {
+    Entity teleport = ObstacleFactory.creatTeleport();
+    GridPoint2 fixedPos = new GridPoint2(10,8);
+    spawnEntityAt(teleport, fixedPos, true,true);
+  }
+
   private void spawnPlayer() {
     Entity newPlayer = PlayerFactory.createPlayer(game);
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
   }
+
+
+
+
+
 
   private void spawnGhosts() {
     GridPoint2 minPos = new GridPoint2(0, 0);

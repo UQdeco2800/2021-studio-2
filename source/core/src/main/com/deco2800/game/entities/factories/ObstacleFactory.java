@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.TeleportComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -69,6 +70,22 @@ public class ObstacleFactory {
     trap.scaleHeight(0.3f);
     return trap;
   }
+
+  public static Entity creatTeleport() {
+    Entity teleport = new Entity()
+            .addComponent(new TextureRenderComponent("images/trap.png"))
+            .addComponent(new PhysicsComponent())
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+            .addComponent(new TeleportComponent(PhysicsLayer.TRAP));
+
+    teleport.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
+    teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+    teleport.getComponent(TextureRenderComponent.class).scaleEntity();
+    teleport.scaleHeight(0.3f);
+    return teleport;
+  }
+
+
 
   /**
    * Creates an invisible physics wall.
