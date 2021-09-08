@@ -68,9 +68,8 @@ public class TouchMoveComponent extends TouchComponent{
             return;
         }
         actions.stopWalking();
-        input.lockPlayer();
         input.stopWalking();
-        movePlayer(collidedEntity, actions);
+        movePlayer(collidedEntity, actions, input);
     }
 
     /**
@@ -80,9 +79,10 @@ public class TouchMoveComponent extends TouchComponent{
      * @param player the entity that will be moved
      * @param actions the actions of the entity moving
      */
-    private void movePlayer(Entity player, PlayerActions actions) {
+    private void movePlayer(Entity player, PlayerActions actions, KeyboardPlayerInputComponent input) {
         Vector2 position = player.getPosition();
         if (direction.x != 0 || direction.y != 0) {
+            input.lockPlayer();
             actions.walk(direction);
             checkPosition(player, actions, position);
         }
