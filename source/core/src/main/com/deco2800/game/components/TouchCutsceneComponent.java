@@ -28,15 +28,17 @@ public class TouchCutsceneComponent extends TouchComponent {
     private Entity collidedEntity;
     private PlayerActions actions;
     private RandomDialogueSet dialogueSet;
+    private int type;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet) {
+    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, int type) {
         super(targetLayer);
         this.dialogueSet = dialogueSet;
+        this.type = type;
     }
 
     /**
@@ -59,6 +61,19 @@ public class TouchCutsceneComponent extends TouchComponent {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
         textBox.setClosed();
-        textBox.setOrderedDialogue(dialogueSet);
+        switch (type) {
+            case 1:
+                textBox.setRandomFirstEncounter(dialogueSet);
+                break;
+            case 2:
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+                break;
+            case 3:
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
+                break;
+            case 4:
+                textBox.setOrderedDialogue(dialogueSet);
+                break;
+        }
     }
 }

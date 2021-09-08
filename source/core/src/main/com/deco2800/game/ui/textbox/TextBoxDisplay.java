@@ -143,17 +143,7 @@ public class TextBoxDisplay extends UIComponent {
         stage.addActor(mainCharacterLabel);
         stage.addActor(mainCharacterName);
 
-        //Text box for any other NPC set up
-
-        enemyName = new Label("", skin);
-        enemyLabel = new Label("", skin);
-        enemyLabel.setPosition(ENEMY_TEXT_X, TEXT_Y_POS);
         setEnemyTextBox();
-
-        stage.addActor(enemyImage);
-        stage.addActor(enemyBox);
-        stage.addActor(enemyLabel);
-        stage.addActor(enemyName);
     }
 
     /**
@@ -189,6 +179,7 @@ public class TextBoxDisplay extends UIComponent {
                 enemyImage.setVisible(true);
                 enemyLabel.setVisible(true);
                 enemyBox.setVisible(true);
+                setEnemyTextBox();
                 enemyLabel.setText(textBox.getSubMessage());
             }
         } else {
@@ -280,6 +271,18 @@ public class TextBoxDisplay extends UIComponent {
         if (set == null) {
             return;
         }
+        if (enemyName != null) {
+            enemyName.remove();
+        }
+        if (enemyImage != null) {
+            enemyImage.remove();
+        }
+        if (enemyBox != null) {
+            enemyBox.remove();
+        }
+        if (enemyLabel != null) {
+            enemyLabel.remove();
+        }
 
         switch(set) {
             case TUTORIAL:
@@ -290,20 +293,34 @@ public class TextBoxDisplay extends UIComponent {
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
             case LOKI_OPENING:
-                enemyName.setText("LOKI");
+                enemyName = new Label("LOKI", skin);
+                enemyImage = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/loki_image.png", Texture.class));
+                enemyBox = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
             case GARMR:
                 enemyName.setText("GARMR");
                 break;
         }
+        enemyLabel = new Label("", skin);
+        enemyLabel.setPosition(ENEMY_TEXT_X, TEXT_Y_POS);
+
         enemyName.setAlignment(Align.center);
         enemyName.setPosition(ENEMY_NAME_X, NAME_Y);
+
         enemyImage.setPosition(ENEMY_CHARACTER_X, CHARACTER_IMAGE_Y_POS);
         enemyImage.setWidth(CHARACTER_SIZE);
         enemyImage.setHeight(CHARACTER_SIZE);
+
         enemyBox.setPosition(ENEMY_DISPLAY_X, DISPLAY_Y_POS);
         enemyBox.setWidth(TEXT_BOX_WIDTH);
         enemyBox.setHeight(TEXT_BOX_HEIGHT);
+
+        stage.addActor(enemyImage);
+        stage.addActor(enemyBox);
+        stage.addActor(enemyName);
+        stage.addActor(enemyLabel);
     }
 
 

@@ -228,7 +228,7 @@ public class TextBox extends Component {
     public void setRandomDefeatDialogueSet(RandomDialogueSet dialogueSet) {
         this.randomDialogueSet = dialogueSet;
         orderedDialogueIndex = 0;
-        setDialogue(randomDialogueSet.getRandomFirstEncounter());
+        setDialogue(randomDialogueSet.getRandomPlayerDefeatedBefore());
         orderedDialogue = false;
         setOpen();
     }

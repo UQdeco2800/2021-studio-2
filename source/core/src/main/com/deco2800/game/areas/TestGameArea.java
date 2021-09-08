@@ -16,6 +16,7 @@ import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
@@ -107,6 +108,7 @@ public class TestGameArea extends GameArea {
 //        spawnTraps();
 
         playMusic();
+        setDialogue();
     }
 
     private void displayUI() {
@@ -116,20 +118,23 @@ public class TestGameArea extends GameArea {
     }
 
     private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL);
+        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL, 4);
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
-        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
-        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
+        Entity trigger2 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING, 2);
+        spawnEntityAt(trigger2, new Vector2(10f, 9.5f), true, true);
 
-        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
-
-        Entity moveTrigger3 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0), 5, 0);
-        spawnEntityAt(moveTrigger3, new Vector2(7,9.2f), true, true);
-
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 5);
-        spawnEntityAt(moveTrigger4, new Vector2(6.8f,6), true, true);
+//        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
+//        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
+//
+//        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
+//        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
+//
+//        Entity moveTrigger3 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0), 5, 0);
+//        spawnEntityAt(moveTrigger3, new Vector2(7,9.2f), true, true);
+//
+//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 5);
+//        spawnEntityAt(moveTrigger4, new Vector2(6.8f,6), true, true);
     }
 
     private void spawnTerrain() {
@@ -337,6 +342,15 @@ public class TestGameArea extends GameArea {
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(arrowSounds);
+    }
+
+    /**
+     * Sets the dialogue for when the game first loads.
+     */
+    private void setDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
     }
 
 

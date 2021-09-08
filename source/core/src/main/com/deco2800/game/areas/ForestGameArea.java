@@ -12,6 +12,7 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
@@ -107,6 +108,7 @@ public class ForestGameArea extends GameArea {
         spawnAnchoredGhosts();
 
         playMusic();
+        setDialogue();
     }
 
     /**
@@ -266,6 +268,15 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(forestTextureAtlases);
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
+    }
+
+    /**
+     * Sets the dialogue for when the game first loads.
+     */
+    private void setDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
     }
 
 
