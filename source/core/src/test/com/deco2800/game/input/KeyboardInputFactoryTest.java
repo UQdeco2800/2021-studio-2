@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(GameExtension.class)
 class KeyboardInputFactoryTest {
-  @Test
-  void shouldReturnKeyboardPlayerInput() {
-    KeyboardInputFactory keyboardInputFactory = new KeyboardInputFactory();
-    assertTrue(keyboardInputFactory.createForPlayer() instanceof KeyboardPlayerInputComponent);
-  }
+    @Test
+    void shouldReturnKeyboardPlayerInput() {
+        KeyboardInputFactory keyboardInputFactory = new KeyboardInputFactory();
+        assertTrue(keyboardInputFactory.createForPlayer() instanceof KeyboardPlayerInputComponent);
+    }
 }

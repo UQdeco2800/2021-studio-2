@@ -45,10 +45,7 @@ public class TouchTextBoxInputComponent extends InputComponent {
      */
     @Override
     public boolean keyTyped(char character) {
-        if (textBox.isOpen()) {
-            return true;
-        }
-        return false;
+        return textBox.isOpen();
     }
 
     /**

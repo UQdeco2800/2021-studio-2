@@ -1,16 +1,16 @@
 {
-  "ghost": {
-    "health": 40,
-    "baseAttack": 10
-  },
-  "ghostKing": {
-    "health": 100,
-    "baseAttack": 25,
-    "spookyFactor": 7
-  },
-  "ghostRanged": {
-    "health": 40,
-    "baseAttack": 0
-  }
+    "ghost": {
+        "health": 40,
+        "baseAttack": 30
+    },
+    "ghostKing": {
+        "health": 100,
+        "baseAttack": 60,
+        "spookyFactor": 7
+    },
+    "ghostRanged": {
+        "health": 40,
+        "baseAttack": 0
+    }
 }
 

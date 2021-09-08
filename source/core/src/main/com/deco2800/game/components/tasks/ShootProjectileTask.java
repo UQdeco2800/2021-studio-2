@@ -1,42 +1,47 @@
 package com.deco2800.game.components.tasks;
 
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.entities.factories.WeaponFactory;
+import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
-import java.util.concurrent.TimeUnit;
+
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 
-/** Spawns an arrow to shoot at a target */
+/**
+ * Spawns an arrow to shoot at a target
+ */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private final Entity target;
     private final PhysicsEngine physics;
     private final DebugRenderer debugRenderer;
     private final RaycastHit hit = new RaycastHit();
-    private long cooldownMS;
+    private final long cooldownMS;
     private long lastFired;
-    private GameArea gameArea;
+    private final GameArea gameArea;
     //Below are currently unused and will be used for future arrows
-    private Vector2 moveSpeed = new Vector2(2,2);
-    private boolean followTarget = false;
-    private boolean showTrajectory = false;
+    private Vector2 tragectoryLocation = null;
     private double multishotChance = 0.00;
     private String projectileType = "normalArrow";
+    private boolean poweringUp = false;
 
     /**
-     * @param target The entity to chase.
+     * @param target     The entity to chase.
      * @param cooldownMS how long to wait in MS before shooting again
      */
     public ShootProjectileTask(Entity target, long cooldownMS) {
@@ -45,11 +50,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         this.gameArea = ServiceLocator.getGameAreaService();
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
-    }
-
-    private void shootingSound(){
-        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_shoot.mp3", Sound.class);
-        arrowEffect.play();
     }
 
     /**
@@ -66,8 +66,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (canShoot()) {
-            shootingSound();
+        if (canShoot() || poweringUp) {
+            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             shoot();
         }
     }
@@ -76,44 +76,124 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * Spawns in an arrow according to the classes variables
      */
     public void shoot() {
-        lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-        if (projectileType.equals("normalArrow")) {
-            Entity arrow = WeaponFactory.createNormalArrow(target.getCenterPosition(), getDirectionOfTarget());
-            gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
-            int multiplier = 0;
-            Random rand = new Random();
-            double chance = rand.nextDouble();
-            double multishotChanceTemp = multishotChance;
-            while (multishotChanceTemp >= chance) {
-                multiplier++;
-                Entity arrowLeft = WeaponFactory.createNormalArrow(getMultishotVector(-1, multiplier), getMultishotDirection(-1, multiplier));
-                gameArea.spawnEntityAt(arrowLeft, owner.getEntity().getCenterPosition(), true, true);
-                Entity arrowRight = WeaponFactory.createNormalArrow(getMultishotVector(1, multiplier), getMultishotDirection(1, multiplier));
-                gameArea.spawnEntityAt(arrowRight, owner.getEntity().getCenterPosition(), true, true);
-                chance = rand.nextDouble();
-                multishotChanceTemp -=1;
+        if (!poweringUp) {
+            lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+        }
+        switch (projectileType) {
+            case "normalArrow": {
+                Vector2 relativeLoc = target.getPosition().cpy().sub(owner.getEntity().getPosition());
+                relativeLoc.scl(30);
+                relativeLoc.add(owner.getEntity().getPosition());
+                Entity arrow = WeaponFactory.createNormalArrow(relativeLoc, getDirectionOfTarget());
+                gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
+                int multiplier = 0;
+                Random rand = new Random();
+                double chance = rand.nextDouble();
+                double multishotChanceTemp = multishotChance;
+                while (multishotChanceTemp >= chance) {
+                    multiplier++;
+                    Entity arrowLeft = WeaponFactory.createNormalArrow(getMultishotVector(-1, multiplier), getMultishotDirection(-1, multiplier));
+                    gameArea.spawnEntityAt(arrowLeft, owner.getEntity().getCenterPosition(), true, true);
+                    Entity arrowRight = WeaponFactory.createNormalArrow(getMultishotVector(1, multiplier), getMultishotDirection(1, multiplier));
+                    gameArea.spawnEntityAt(arrowRight, owner.getEntity().getCenterPosition(), true, true);
+                    chance = rand.nextDouble();
+                    multishotChanceTemp -= 1;
+                }
+                break;
             }
+            case "trackingArrow": {
+                //Spawns arrows in a different location on a circle around the entity
+                Vector2 offset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+                offset.setAngleDeg(getDirectionOfTarget());
+                //creates a nice ring effect at multishots above 8
+                float angle = (float) (360 / (Math.max(8, Math.floor(multishotChance)) * 2 + 1));
+
+                Entity arrow = WeaponFactory.createTrackingArrow(target, getDirectionOfTarget());
+                gameArea.spawnEntityAt(arrow, owner.getEntity().getPosition().cpy().sub(offset), true, true);
+                int multiplier = 0;
+                Random rand = new Random();
+                double chance = rand.nextDouble();
+                double multishotChanceTemp = multishotChance;
+                while (multishotChanceTemp >= chance) {
+                    multiplier++;
+                    arrow = WeaponFactory.createTrackingArrow(target, getDirectionOfTarget());
+                    offset.setAngleDeg(getDirectionOfTarget() + angle * multiplier);
+                    gameArea.spawnEntityAt(arrow, owner.getEntity().getPosition().cpy().sub(offset), true, true);
+                    arrow = WeaponFactory.createTrackingArrow(target, getDirectionOfTarget());
+                    offset.setAngleDeg(getDirectionOfTarget() - angle * multiplier);
+                    gameArea.spawnEntityAt(arrow, owner.getEntity().getPosition().cpy().sub(offset), true, true);
+                    chance = rand.nextDouble();
+                    multishotChanceTemp -= 1;
+                }
+                break;
+            }
+            case "fastArrow":
+                float AOE = 1f;
+                if (!poweringUp) {
+                    poweringUp = true;
+                    //Trigger powering up animation otherwise entity will not be rendered correctly
+                }
+                if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS) {
+                    poweringUp = false;
+                }
+                if (tragectoryLocation == null) {
+                    tragectoryLocation = target.getCenterPosition();
+                }
+                float turningAngle = 0.1f;//UserSettings.get().fps;
+
+                Vector2 relativeLocationTarget = tragectoryLocation.cpy().sub(owner.getEntity().getCenterPosition());
+                Vector2 relativeLocationEntity = target.getCenterPosition().cpy().sub(owner.getEntity().getCenterPosition());
+                if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
+                    physics.raycast(owner.getEntity().getCenterPosition(), tragectoryLocation.scl(30), PhysicsLayer.OBSTACLE, hit);
+                    if (relativeLocationTarget.angleDeg(relativeLocationEntity) > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
+                        //left
+                        relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
+                                .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
+                                .add(owner.getEntity().getCenterPosition());
+                        this.tragectoryLocation = relativeLocationTarget;
+                    } else {
+                        //right
+                        relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
+                                .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
+                                .add(owner.getEntity().getCenterPosition());
+                        this.tragectoryLocation = relativeLocationTarget;
+                    }
+                } else {
+                    this.tragectoryLocation = target.getCenterPosition();
+                }
+                //Currently only works in debug mode
+                //In the future an aiming line sprite will be drawn
+                showTrajectory(tragectoryLocation);
+                //Draw shot sprite
+                if (!poweringUp) {
+                    Entity arrow = WeaponFactory.createFastArrow(tragectoryLocation, getDirectionOfTarget());
+                    gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
+                    //Check if hit
+                    if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                        int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
+                        target.getComponent(CombatStatsComponent.class).addHealth(-damage);
+                    }
+                    tragectoryLocation = null;
+                }
+                break;
         }
     }
 
     /**
-     * set the target to follow target
-     * @param followTarget true if follow, false otherwise
+     * Show trajectory before shooting
      */
-    public void setFollowTarget(boolean followTarget) {
-        this.followTarget = followTarget;
-    }
-
-    /**
-     * Set the arrow to show trajectory before shot
-     * @param showTrajectory true if show, false otherwise
-     */
-    public void setShowTrajectory(boolean showTrajectory) {
-        this.showTrajectory = showTrajectory;
+    public void showTrajectory(Vector2 loc) {
+        // If there is an obstacle in the path to the player, not visible.
+        if (physics.raycast(owner.getEntity().getCenterPosition(), loc, PhysicsLayer.OBSTACLE, hit)) {
+            debugRenderer.drawLine(owner.getEntity().getCenterPosition(), hit.point, Color.YELLOW, 1);
+        } else {
+            debugRenderer.drawLine(owner.getEntity().getCenterPosition(), loc, Color.YELLOW, 1);
+        }
     }
 
     /**
      * Set the chance that the entity shoot more than one arrow at a time
+     *
      * @param multishotChance chance for the entity to shoot multiple arrows
      */
     public void setMultishotChance(double multishotChance) {
@@ -122,6 +202,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * Set the type of the projectile - whether it multishots, follow target or show trajectory
+     *
      * @param projectileType type of arrow
      */
     public void setProjectileType(String projectileType) {
@@ -129,20 +210,13 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * Stop the arrow task
-     */
-    @Override
-    public void stop() {
-        super.stop();
-    }
-
-    /**
      * return the priority of arrow task
+     *
      * @return highest priority if can shoot, else -1
      */
     @Override
     public int getPriority() {
-        if (canShoot()) {
+        if (canShoot() || poweringUp) {
             return 20;
         }
         return -1;
@@ -150,6 +224,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * return the distance of the entity to the target
+     *
      * @return return the d
      */
     private float getDistanceToTarget() {
@@ -158,6 +233,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * return the position of the target and return the angle from the entity (owner) to the target
+     *
      * @return float angle from owner to target
      */
     private float getDirectionOfTarget() {
@@ -168,36 +244,36 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     *
-     * @param direction 1 to calculate right arrow, -1 to calculate left arrow
+     * @param direction  1 to calculate right arrow, -1 to calculate left arrow
      * @param multiplier how many arrows over to calculate
      * @return direction arrow should go
      */
     private float getMultishotDirection(int direction, int multiplier) {
         //creates a nice ring effect at multishots above 8
-        float angle = (float) (360/(Math.max(8, Math.floor(multishotChance))*2+1));
+        float angle = (float) (360 / (Math.max(8, Math.floor(multishotChance)) * 2 + 1));
         return (getDirectionOfTarget() + ((-direction) * angle * multiplier));
     }
 
     /**
-     *
-     * @param direction 1 to calculate right arrow, -1 to calculate left arrow
+     * @param direction  1 to calculate right arrow, -1 to calculate left arrow
      * @param multiplier how many arrows over to calculate
      * @return direction arrow should go
      */
     private Vector2 getMultishotVector(int direction, int multiplier) {
         //creates a nice ring effect at multishots above 8
-        float angle = (float) (360/(Math.max(8, Math.floor(multishotChance))*2+1));
+        float angle = (float) (360 / (Math.max(8, Math.floor(multishotChance)) * 2 + 1));
         Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
         Vector2 v2 = target.getCenterPosition().cpy();
         Vector2 v3 = v2.cpy().sub(v1); //heading relative to entity
-        v3.rotateAroundDeg(new Vector2(0,0), ((-direction) * angle * multiplier));
+        v3.rotateAroundDeg(new Vector2(0, 0), ((-direction) * angle * multiplier));
+        v3.scl(30);
         v3.add(v1);
         return (v3);
     }
 
     /**
      * check if target is block by any object
+     *
      * @return true if it not block, false otherwise
      */
     private boolean isTargetVisible() {
@@ -224,10 +300,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * check if target can shoot based on given cooldown of the shooting and target is visible
+     *
      * @return true if can shoot, false otherwise
      */
     private boolean canShoot() {
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
-            && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
+                && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
     }
 }

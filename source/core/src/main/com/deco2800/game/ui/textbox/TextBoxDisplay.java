@@ -1,18 +1,22 @@
 package com.deco2800.game.ui.textbox;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
 public class TextBoxDisplay extends UIComponent {
 
-    /** The priority of the UI component to be displayed on the screen. */
+    /**
+     * The priority of the UI component to be displayed on the screen.
+     */
     private static final float Z_INDEX = 10f;
 
-    /** Instance of the Text Box that will be displayed to the screen. */
+    /**
+     * Instance of the Text Box that will be displayed to the screen.
+     */
     private TextBox textBox;
 
     /** The mainCharacterLabel that will be added to the screen to display the message. */
@@ -59,7 +63,6 @@ public class TextBoxDisplay extends UIComponent {
 
     private final float ENEMY_CHARACTER_X =
             ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X;
-
 
     @Override
     public void create() {

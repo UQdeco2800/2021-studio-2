@@ -23,14 +23,6 @@ package com.deco2800.game.ui.textbox;
  */
 public enum Dialogue {
 
-    THE_ROCK(new Message[] {
-            new Message(true, "Welcome warrior... \nRagnarok is nearly here, finally our escape." ),
-            new Message(false, "Where am I?"),
-            new Message(true, "Let me out or I'll make you."),
-            new Message(false, "I'm stuck here with you."),
-            new Message(true, "Please help me enter Valhalla \nI can teach you how to get out."),
-    }),
-
     TUTORIAL_FIRST(new Message[] {
             new Message(false, "Hey psst," +
                     "\nit's nice to see a new face here."),
@@ -194,8 +186,12 @@ public enum Dialogue {
     }
 
     /**
+<<<<<<< HEAD
      * Returns the number of different lines in the dialogue.
      * @return returns the number of messages in the dialogue sequence
+=======
+     * @return the number of different lines in the dialogue.
+>>>>>>> main
      */
     public int size() {
         return messages.length;

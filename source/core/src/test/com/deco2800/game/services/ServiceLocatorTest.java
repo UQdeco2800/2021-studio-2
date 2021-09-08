@@ -13,27 +13,27 @@ import static org.mockito.Mockito.mock;
 
 @ExtendWith(GameExtension.class)
 class ServiceLocatorTest {
-  @Test
-  void shouldGetSetServices() {
-    EntityService entityService = new EntityService();
-    RenderService renderService = new RenderService();
-    PhysicsService physicsService = mock(PhysicsService.class);
-    GameTime gameTime = new GameTime();
+    @Test
+    void shouldGetSetServices() {
+        EntityService entityService = new EntityService();
+        RenderService renderService = new RenderService();
+        PhysicsService physicsService = mock(PhysicsService.class);
+        GameTime gameTime = new GameTime();
 
-    ServiceLocator.registerEntityService(entityService);
-    ServiceLocator.registerRenderService(renderService);
-    ServiceLocator.registerPhysicsService(physicsService);
-    ServiceLocator.registerTimeSource(gameTime);
+        ServiceLocator.registerEntityService(entityService);
+        ServiceLocator.registerRenderService(renderService);
+        ServiceLocator.registerPhysicsService(physicsService);
+        ServiceLocator.registerTimeSource(gameTime);
 
-    assertEquals(ServiceLocator.getEntityService(), entityService);
-    assertEquals(ServiceLocator.getRenderService(), renderService);
-    assertEquals(ServiceLocator.getPhysicsService(), physicsService);
-    assertEquals(ServiceLocator.getTimeSource(), gameTime);
+        assertEquals(ServiceLocator.getEntityService(), entityService);
+        assertEquals(ServiceLocator.getRenderService(), renderService);
+        assertEquals(ServiceLocator.getPhysicsService(), physicsService);
+        assertEquals(ServiceLocator.getTimeSource(), gameTime);
 
-    ServiceLocator.clear();
-    assertNull(ServiceLocator.getEntityService());
-    assertNull(ServiceLocator.getRenderService());
-    assertNull(ServiceLocator.getPhysicsService());
-    assertNull(ServiceLocator.getTimeSource());
-  }
-}
+        ServiceLocator.clear();
+        assertNull(ServiceLocator.getEntityService());
+        assertNull(ServiceLocator.getRenderService());
+        assertNull(ServiceLocator.getPhysicsService());
+        assertNull(ServiceLocator.getTimeSource());
+    }
+} 

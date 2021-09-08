@@ -2,7 +2,6 @@ package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchCutsceneComponent;
 import com.deco2800.game.components.TouchMoveComponent;
 import com.deco2800.game.entities.Entity;
@@ -23,8 +22,13 @@ import java.util.Random;
  */
 public class CutsceneTriggerFactory {
 
+    private CutsceneTriggerFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
+
     /**
      * Creates an entity that can trigger a cutscene to start.
+     *
      * @return entity that will create the trigger within the map
      */
     public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet) {
@@ -60,9 +64,5 @@ public class CutsceneTriggerFactory {
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
         trigger.scaleHeight(0f);
         return trigger;
-    }
-
-    private CutsceneTriggerFactory () {
-        throw new IllegalStateException("Instantiating static util class");
     }
 }
