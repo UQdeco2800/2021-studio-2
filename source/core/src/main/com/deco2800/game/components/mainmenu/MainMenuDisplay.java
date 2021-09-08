@@ -1,6 +1,8 @@
 package com.deco2800.game.components.mainmenu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,6 +23,7 @@ public class MainMenuDisplay extends UIComponent {
   private static final float Z_INDEX = 2f;
   protected Stack stack;
   protected Table table;
+  private Pixmap mouseCursor;
 
   @Override
   public void create() {
@@ -30,6 +33,9 @@ public class MainMenuDisplay extends UIComponent {
 
 
   protected void addActors() {
+    mouseCursor = new Pixmap(Gdx.files.internal("images/swordcursor.png"));
+    Gdx.graphics.setCursor(Gdx.graphics.newCursor(mouseCursor, 0, 0));
+
     stack = new Stack();
     stack.setFillParent(true);
     stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
@@ -111,6 +117,7 @@ public class MainMenuDisplay extends UIComponent {
   @Override
   public void dispose() {
     table.clear();
+    mouseCursor.dispose();
     super.dispose();
   }
 }
