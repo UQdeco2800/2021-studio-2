@@ -178,8 +178,6 @@ public class TerrainFactory {
     TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get("n_tiles_width"),
             dimensions.get("n_tiles_height"), tileSize.x, tileSize.y);
 
-
-
     // Create Tiles
     ArrayList<TerrainTile> tiles = new ArrayList<>();
     for (TextureRegion t:textures
@@ -204,13 +202,10 @@ public class TerrainFactory {
 
     for (int y = min.y; y <= max.y; y++) {
       for (int x = min.y; x <= max.x; x++){
-
         Cell cell = new Cell();
+
         cell.setTile(tiles.get(map[y][x]-1));
         layer.setCell(x, max.y - y, cell);
-
-        //Cell cell = layer.getCell(tilePos.x, tilePos.y);
-        //cell.setTile(tiles.get(map[y][x]));
       }
     }
   }
