@@ -5,11 +5,12 @@ import com.deco2800.game.physics.components.HitboxComponent;
 
 abstract class TouchComponent extends Component {
 
-    protected short targetLayer;
+    protected final short targetLayer;
     protected HitboxComponent hitboxComponent;
 
     /**
      * Create a component which allows entities to interact with each other once they are within the vicinity.
+     *
      * @param targetLayer The physics layer of the target's collider.
      */
     public TouchComponent(short targetLayer) {
@@ -17,7 +18,7 @@ abstract class TouchComponent extends Component {
     }
 
     @Override
-    public void create()  {
+    public void create() {
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         hitboxComponent = entity.getComponent(HitboxComponent.class);
     }

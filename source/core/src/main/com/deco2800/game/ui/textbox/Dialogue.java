@@ -16,15 +16,17 @@ public enum Dialogue {
 
     TEST(new String[]{"Message 1", "Message 2", "Message 3"});
 
-    /** An array list used to store the strings in a dialogue sequence. */
-    private String[] text;
+    /**
+     * An array list used to store the strings in a dialogue sequence.
+     */
+    private final String[] text;
 
     /**
      * Constructor to create the dialogue enum object, used to take and store the array list passed in.
      *
      * @param text an ArrayList of Strings representing each new line of text to be displayed.
      */
-    Dialogue(String[] text){
+    Dialogue(String[] text) {
         this.text = text;
     }
 
@@ -39,8 +41,7 @@ public enum Dialogue {
     }
 
     /**
-     * Returns the number of different lines in the dialogue.
-     * @return
+     * @return the number of different lines in the dialogue.
      */
     public int size() {
         return text.length;

@@ -154,4 +154,4 @@ class TextBoxTest {
 
         assertFalse(textBox.isOpen());
     }
-}
+} 

@@ -8,11 +8,10 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -107,4 +106,4 @@ class AnchoredChaseTaskTest {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new PhysicsMovementComponent());
     }
-}
+} 

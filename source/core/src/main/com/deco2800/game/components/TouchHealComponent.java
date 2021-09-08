@@ -35,7 +35,7 @@ public class TouchHealComponent extends TouchComponent {
             return;
         }
 
-        if (!PhysicsLayer.contains(targetLayer, other.getFilterData().categoryBits)) {
+        if (PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return;
         }
