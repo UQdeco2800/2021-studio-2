@@ -1,0 +1,82 @@
+health_bar.png
+size: 1122, 202
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+0001
+  rotate: false
+  xy: 1, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 103, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 205, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 307, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0005
+  rotate: false
+  xy: 409, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0006
+  rotate: false
+  xy: 511, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0007
+  rotate: false
+  xy: 613, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0008
+  rotate: false
+  xy: 715, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0009
+  rotate: false
+  xy: 817, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0010
+  rotate: false
+  xy: 919, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
+0011
+  rotate: false
+  xy: 1021, 1
+  size: 100, 200
+  orig: 100, 200
+  offset: 0, 0
+  index: -1
