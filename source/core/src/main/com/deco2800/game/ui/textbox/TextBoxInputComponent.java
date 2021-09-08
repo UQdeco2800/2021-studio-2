@@ -7,7 +7,7 @@ import com.deco2800.game.input.InputComponent;
  * Input handler for the text box for keyboard input.
  * This input handler only uses keyboard input.
  */
-public class KeyboardTextBoxInputComponent extends InputComponent {
+public class TextBoxInputComponent extends InputComponent {
     private static final int SKIP_KEY = Input.Keys.ESCAPE;
 
     /**
@@ -18,14 +18,14 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
     /**
      * Constructor to create the input with a priority of 9, under terminal.
      */
-    public KeyboardTextBoxInputComponent() {
+    public TextBoxInputComponent() {
         super(9);
     }
 
     /**
      * Instantiates the InputComponent and stores the TextBox instance within the class.
      */
-    public KeyboardTextBoxInputComponent(TextBox textBox) {
+    public TextBoxInputComponent(TextBox textBox) {
         this();
         this.textBox = textBox;
     }
@@ -85,5 +85,19 @@ public class KeyboardTextBoxInputComponent extends InputComponent {
             textBox.acceptInput();
         }
         return textBox.isOpen();
+    }
+
+    /**
+     * Mouse input will also be used to advance text boxes.
+     *
+     * @return true if clicking of the mouse has affected the text box, else false
+     */
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (!textBox.isOpen()) {
+            return false;
+        }
+        textBox.setSkip();
+        return true;
     }
 }

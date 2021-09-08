@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 
 @ExtendWith(GameExtension.class)
-class KeyboardTextBoxInputComponentTest {
+class TextBoxInputComponentTest {
 //    @Test
 //    void shouldCloseTextBox() {
 //        TextBox textBox = spy(TextBox.class);
