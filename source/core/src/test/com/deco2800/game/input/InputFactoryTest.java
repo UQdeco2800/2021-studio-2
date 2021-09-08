@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(GameExtension.class)
 class InputFactoryTest {
 
-  @Test
-  void shouldGiveKeyboardFactoryType() {
-    InputFactory keyboardInputFactory = InputFactory.createFromInputType(InputFactory.InputType.KEYBOARD);
-    assertTrue(keyboardInputFactory instanceof KeyboardInputFactory);
-  }
+    @Test
+    void shouldGiveKeyboardFactoryType() {
+        InputFactory keyboardInputFactory = InputFactory.createFromInputType(InputFactory.InputType.KEYBOARD);
+        assertTrue(keyboardInputFactory instanceof KeyboardInputFactory);
+    }
 
-  @Test
-  void shouldGiveNoFactory() {
-    InputFactory invalidInputFactory = InputFactory.createFromInputType(null);
-    assertNull(invalidInputFactory);
-  }
+    @Test
+    void shouldGiveNoFactory() {
+        InputFactory invalidInputFactory = InputFactory.createFromInputType(null);
+        assertNull(invalidInputFactory);
+    }
 }

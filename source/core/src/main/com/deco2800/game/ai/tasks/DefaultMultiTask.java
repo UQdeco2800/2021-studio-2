@@ -6,17 +6,18 @@ package com.deco2800.game.ai.tasks;
  * Includes a method for switching the current task for more intricate tasks.
  */
 public abstract class DefaultMultiTask extends DefaultTask implements Task {
-  protected Task currentTask;
+    protected Task currentTask;
 
-  /**
-   * swap the current task with the new given param task
-   * @param newTask swap with current task and start the task
-   */
-  protected void swapTask(Task newTask) {
-    if (currentTask != null) {
-      currentTask.stop();
+    /**
+     * swap the current task with the new given param task
+     *
+     * @param newTask swap with current task and start the task
+     */
+    protected void swapTask(Task newTask) {
+        if (currentTask != null) {
+            currentTask.stop();
+        }
+        currentTask = newTask;
+        currentTask.start();
     }
-    currentTask = newTask;
-    currentTask.start();
-  }
 }

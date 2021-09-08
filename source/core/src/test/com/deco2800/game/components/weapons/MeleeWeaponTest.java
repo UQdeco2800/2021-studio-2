@@ -69,7 +69,7 @@ class MeleeWeaponTest {
     void shouldGetTotalAttackTime() {
         short targetLayer = (1 << 3);
         MeleeWeapon weapon = (new MeleeWeapon(targetLayer,
-                0,0, new Vector2(0f, 0f)));
+                0, 0, new Vector2(0f, 0f)));
         weapon.setFrameDuration(200L);
         // assumes 3 frames in attack
         assertEquals(200L * 3, weapon.getTotalAttackTime());
@@ -111,7 +111,7 @@ class MeleeWeaponTest {
         Entity entity =
                 new Entity()
                         .addComponent(new WeaponHitboxComponent().setLayer(targetLayer))
-                        .addComponent(new MeleeWeapon(targetLayer, 0,0,
+                        .addComponent(new MeleeWeapon(targetLayer, 0, 0,
                                 new Vector2(0f, 0f)))
                         .addComponent(new CombatStatsComponent(0, 10))
                         .addComponent(new PhysicsComponent())
@@ -130,4 +130,3 @@ class MeleeWeaponTest {
         return target;
     }
 }
-

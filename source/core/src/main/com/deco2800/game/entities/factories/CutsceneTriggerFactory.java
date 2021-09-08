@@ -1,7 +1,6 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchCutsceneComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -18,8 +17,13 @@ import com.deco2800.game.rendering.TextureRenderComponent;
  */
 public class CutsceneTriggerFactory {
 
+    private CutsceneTriggerFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
+
     /**
      * Creates an entity that can trigger a cutscene to start.
+     *
      * @return entity that will create the trigger within the map
      */
     public static Entity createTrigger() {
@@ -36,9 +40,5 @@ public class CutsceneTriggerFactory {
         tree.scaleHeight(2.5f);
         PhysicsUtils.setScaledCollider(tree, 0f, 0f);
         return tree;
-    }
-
-    private CutsceneTriggerFactory () {
-        throw new IllegalStateException("Instantiating static util class");
     }
 }
