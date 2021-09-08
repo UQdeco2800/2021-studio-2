@@ -10,6 +10,7 @@ public class Map {
     private int[][] mapTilePlacement;
     private HashMap<String, String> tileRefs;
     private HashMap<String, Integer>[] wallObjects;
+    private int[][] transObstacles;
 
     public HashMap<String,Integer> getDimensions(){
         return dimensions;
@@ -26,6 +27,8 @@ public class Map {
     public HashMap<String, Integer>[] getWallObjects(){
         return wallObjects;
     }
+
+    public int[][] getTransObstacles(){return transObstacles;}
 
     /**
      * Returns an array of the tile textures locations for easier loading

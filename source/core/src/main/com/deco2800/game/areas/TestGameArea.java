@@ -30,7 +30,7 @@ public class TestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(TestGameArea.class);
   private static final int NUM_GHOSTS = 1;
   private static final int NUM_ANCHORED_GHOSTS = 1;
-  private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+  private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(20, 370);
   private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
@@ -91,7 +91,7 @@ public class TestGameArea extends GameArea {
   /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
   @Override
   public void create() {
-    map = FileLoader.readClass(Map.class, "maps/test_map.json");
+    map = FileLoader.readClass(Map.class, "maps/MapObjects.json");
     tileTextures = map.TileRefsArray();
 
     super.create();
@@ -204,10 +204,12 @@ public class TestGameArea extends GameArea {
       int unitHeight = (int) ((height/32f));
       spawnEntityAt(
               ObstacleFactory.createWall((width/32f)*0.5f, (height/32f)*0.5f),
-              new GridPoint2(x, 25 - (y + unitHeight)),
+              new GridPoint2(x, map.getDimensions().get("n_tiles_height")- (y + unitHeight)),
               false,
               false);
     }
+
+
      
     /*
     //Manually placed walls, will be deleted in next sprint
