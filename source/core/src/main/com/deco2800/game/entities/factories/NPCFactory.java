@@ -198,7 +198,7 @@ public class NPCFactory {
         shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(0.1);
         //shootProjectileTask.setProjectileType("trackingArrow");
-        //shootProjectileTask.setMultishotChance(0.5);
+        //shootProjectileTask.setMultishotChance(0.05);
         //shootProjectileTask.setProjectileType("fastArrow");
         //shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
