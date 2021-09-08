@@ -1,10 +1,13 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.tasks.*;
@@ -213,7 +216,11 @@ public class NPCFactory {
                 .addComponent(new GhostAnimationController())
                 .addComponent(aiComponent);
         ghost.setAttackRange(5);
-        ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        //ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/arrow_normal.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar,HealthBarFrame);
+        ghost.addComponent(healthBarComponent);
         return ghost;
     }
 
