@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.tasks.*;
@@ -207,6 +208,14 @@ public class NPCFactory {
       .addComponent(animator)
       .addComponent(new GhostAnimationController())
       .addComponent(aiComponent);
+
+    /*
+    TextureAtlas healthAtlas =
+            ServiceLocator.getResourceService().getAsset("images/health_bar.atlas", TextureAtlas.class);
+    HealthBarComponent health = new HealthBarComponent(healthAtlas);
+    //health.setAsBox(new Vector2(1f,0.1f), new Vector2(0.5f,1.2f));
+    ghost.addComponent(health);
+    */
     ghost.setAttackRange(5);
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
     return ghost;
