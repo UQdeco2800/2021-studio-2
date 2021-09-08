@@ -282,6 +282,10 @@ public class TextBox extends Component {
         }
     }
 
+    public RandomDialogueSet getRandomDialogueSet() {
+        return this.randomDialogueSet;
+    }
+
     /**
      * Checks which character will be displaying the text,
      * returns true if the main character is talking, false otherwise

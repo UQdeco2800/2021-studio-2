@@ -4,10 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.BooleanObject;
 
+import javax.swing.*;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +26,9 @@ public class TextBoxDisplay extends UIComponent {
      */
     private TextBox textBox;
 
+    /** The name to be displayed on the text box for the main character. */
+    private Label mainCharacterName;
+
     /** The mainCharacterLabel that will be added to the screen to display the message. */
     private Label mainCharacterLabel;
 
@@ -31,6 +37,9 @@ public class TextBoxDisplay extends UIComponent {
 
     /** Stores the main character image that will surround the text message. */
     private Image mainCharacterImage;
+
+    /** The name to be displayed on the text box for the NPC. */
+    private Label enemyName;
 
     /** The mainCharacterLabel that will be added to the screen to display the message. */
     private Label enemyLabel;
@@ -69,6 +78,10 @@ public class TextBoxDisplay extends UIComponent {
 
     private final float MAIN_CHARACTER_TEXT_X = 180f;
 
+    private final float MAIN_CHARACTER_NAME_X = 550f;
+
+    private final float NAME_Y = 325f;
+
     private final float ENEMY_DISPLAY_X =
             ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH - MAIN_CHARACTER_DISPLAY_X;
 
@@ -78,13 +91,15 @@ public class TextBoxDisplay extends UIComponent {
     private final float ENEMY_CHARACTER_X =
             ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X;
 
+    private final float ENEMY_NAME_X = ServiceLocator.getRenderService().getStage().getWidth() - 705;
+
     private final float BAR_HEIGHT = 120f;
 
     @Override
     public void create() {
         super.create();
-        addActors();
         textBox = entity.getComponent(TextBox.class);
+        addActors();
     }
 
     /**
@@ -107,9 +122,11 @@ public class TextBoxDisplay extends UIComponent {
         stage.addActor(botBar);
 
         //Text box for the main character set up
+        mainCharacterName = new Label("WARRIOR", skin);
+        mainCharacterName.setAlignment(Align.center);
+        mainCharacterName.setPosition(MAIN_CHARACTER_NAME_X, NAME_Y);
         mainCharacterLabel = new Label("", skin);
         mainCharacterLabel.setPosition(MAIN_CHARACTER_TEXT_X, TEXT_Y_POS);
-        mainCharacterLabel.setFontScale(1f);
         mainCharacterBox = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/default_text_box.png", Texture.class));
         mainCharacterBox.setPosition(MAIN_CHARACTER_DISPLAY_X, DISPLAY_Y_POS);
@@ -124,26 +141,19 @@ public class TextBoxDisplay extends UIComponent {
         stage.addActor(mainCharacterImage);
         stage.addActor(mainCharacterBox);
         stage.addActor(mainCharacterLabel);
+        stage.addActor(mainCharacterName);
 
         //Text box for any other NPC set up
 
+        enemyName = new Label("", skin);
         enemyLabel = new Label("", skin);
         enemyLabel.setPosition(ENEMY_TEXT_X, TEXT_Y_POS);
-        enemyLabel.setFontScale(1f);
-        enemyBox = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/textBoxDisplay/default_text_box.png", Texture.class));
-        enemyBox.setPosition(ENEMY_DISPLAY_X, DISPLAY_Y_POS);
-        enemyBox.setWidth(TEXT_BOX_WIDTH);
-        enemyBox.setHeight(TEXT_BOX_HEIGHT);
-        enemyImage = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
-        enemyImage.setPosition(ENEMY_CHARACTER_X, CHARACTER_IMAGE_Y_POS);
-        enemyImage.setWidth(CHARACTER_SIZE);
-        enemyImage.setHeight(CHARACTER_SIZE);
+        setEnemyTextBox();
 
         stage.addActor(enemyImage);
         stage.addActor(enemyBox);
         stage.addActor(enemyLabel);
+        stage.addActor(enemyName);
     }
 
     /**
@@ -161,26 +171,32 @@ public class TextBoxDisplay extends UIComponent {
                 openBars();
             }
             if (textBox.isMainCharacterShowing()) {
+                enemyName.setVisible(false);
                 enemyImage.setVisible(false);
                 enemyLabel.setVisible(false);
                 enemyBox.setVisible(false);
+                mainCharacterName.setVisible(true);
                 mainCharacterImage.setVisible(true);
                 mainCharacterLabel.setVisible(true);
                 mainCharacterBox.setVisible(true);
                 mainCharacterLabel.setText(textBox.getSubMessage());
             } else {
+                mainCharacterName.setVisible(false);
                 mainCharacterImage.setVisible(false);
                 mainCharacterLabel.setVisible(false);
                 mainCharacterBox.setVisible(false);
+                enemyName.setVisible(true);
                 enemyImage.setVisible(true);
                 enemyLabel.setVisible(true);
                 enemyBox.setVisible(true);
                 enemyLabel.setText(textBox.getSubMessage());
             }
         } else {
+            mainCharacterName.setVisible(false);
             mainCharacterImage.setVisible(false);
             mainCharacterLabel.setVisible(false);
             mainCharacterBox.setVisible(false);
+            enemyName.setVisible(false);
             enemyImage.setVisible(false);
             enemyLabel.setVisible(false);
             enemyBox.setVisible(false);
@@ -256,6 +272,40 @@ public class TextBoxDisplay extends UIComponent {
         }
     }
 
+    /**
+     * Sets the display of the text box to match the NPC speaking.
+     */
+    private void setEnemyTextBox() {
+        RandomDialogueSet set = textBox.getRandomDialogueSet();
+        if (set == null) {
+            return;
+        }
+
+        switch(set) {
+            case TUTORIAL:
+                enemyName = new Label("PRISONER", skin);
+                enemyImage = new Image(ServiceLocator.getResourceService()
+                    .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
+                enemyBox = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
+                break;
+            case LOKI_OPENING:
+                enemyName.setText("LOKI");
+                break;
+            case GARMR:
+                enemyName.setText("GARMR");
+                break;
+        }
+        enemyName.setAlignment(Align.center);
+        enemyName.setPosition(ENEMY_NAME_X, NAME_Y);
+        enemyImage.setPosition(ENEMY_CHARACTER_X, CHARACTER_IMAGE_Y_POS);
+        enemyImage.setWidth(CHARACTER_SIZE);
+        enemyImage.setHeight(CHARACTER_SIZE);
+        enemyBox.setPosition(ENEMY_DISPLAY_X, DISPLAY_Y_POS);
+        enemyBox.setWidth(TEXT_BOX_WIDTH);
+        enemyBox.setHeight(TEXT_BOX_HEIGHT);
+    }
+
 
     /**
      * Gets the priority of the text display.
@@ -270,10 +320,12 @@ public class TextBoxDisplay extends UIComponent {
     @Override
     public void dispose() {
         super.dispose();
+        mainCharacterName.remove();
         mainCharacterImage.remove();
         mainCharacterLabel.remove();
         mainCharacterBox.remove();
-        enemyImage.setVisible(false);
+        enemyName.remove();
+        enemyImage.remove();
         enemyLabel.remove();
         enemyBox.remove();
         topBar.remove();
