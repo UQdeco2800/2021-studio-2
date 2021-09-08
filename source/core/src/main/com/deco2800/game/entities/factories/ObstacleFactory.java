@@ -37,6 +37,19 @@ public class ObstacleFactory {
   }
 
   /**
+   * Creates an obstacle entity with no hitbox
+   * @return entity
+   */
+  public static Entity createObstacle(String tileRef) {
+    Entity obstacle =
+            new Entity()
+                    .addComponent(new TextureRenderComponent(tileRef));
+    obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+    obstacle.scaleHeight(0.5f);
+    return obstacle;
+  }
+
+  /**
    * Creates a trap with collation.
    * @return trap
    */

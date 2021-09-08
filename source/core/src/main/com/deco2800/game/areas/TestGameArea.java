@@ -22,7 +22,6 @@ import com.deco2800.game.areas.terrain.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /** Forest area for the demo game with trees, a player, and some enemies. */
@@ -107,6 +106,7 @@ public class TestGameArea extends GameArea {
     spawnRangedGhosts();
     spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
+    spawnObstacles();
 
     spawnTraps();
     spawnPTraps();
@@ -300,6 +300,30 @@ public class TestGameArea extends GameArea {
     player = newPlayer;
   }
 
+  private void spawnObstacles(){
+    int[][] obstacles = map.getTransObstacles();
+    HashMap<String, String> tileRefs = map.getTileRefs();
+    if (obstacles != null) {
+      GridPoint2 min = new GridPoint2(0, 0);
+      GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
+              map.getDimensions().get("n_tiles_height") - 1);
+
+      for (int y = min.y; y <= max.y; y++) {
+        for (int x = min.y; x <= max.x; x++){
+          if (obstacles[y][x] != 0){
+
+            Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(obstacles[y][x])));
+            GridPoint2 pos = new GridPoint2(x, max.y - y);
+
+            Logger logger = LoggerFactory.getLogger(TestGameArea.class);
+            logger.info(pos.toString());
+
+            spawnEntityAt(obstacle, pos, true,false);
+          }
+        }
+      }
+    }
+  }
 
 
 
