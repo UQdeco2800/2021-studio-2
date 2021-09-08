@@ -7,6 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TextBoxDisplay extends UIComponent {
 
     /**
@@ -37,15 +40,25 @@ public class TextBoxDisplay extends UIComponent {
     /** Stores the enemy character image that will surround the text message. */
     private Image enemyImage;
 
+    /** Bars to indicate a cutscene is taking place. */
+    private Image topBar;
+    private Image botBar;
+
+    /** If the cutscene is currently opening. */
+    private boolean opening;
+
+    /** If the cutscene is currently closing. */
+    private boolean closing;
+
     private final float TEXT_BOX_HEIGHT = 400f;
 
     private final float TEXT_BOX_WIDTH = 800f;
 
-    private final float DISPLAY_Y_POS = 65f;
+    private final float DISPLAY_Y_POS = 115f;
 
-    private final float TEXT_Y_POS = 200f;
+    private final float TEXT_Y_POS = 250f;
 
-    private final float CHARACTER_IMAGE_Y_POS = 200f;
+    private final float CHARACTER_IMAGE_Y_POS = 250f;
 
     private final float CHARACTER_SIZE = 384f;
 
@@ -64,6 +77,8 @@ public class TextBoxDisplay extends UIComponent {
     private final float ENEMY_CHARACTER_X =
             ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X;
 
+    private final float BAR_HEIGHT = 120f;
+
     @Override
     public void create() {
         super.create();
@@ -75,6 +90,21 @@ public class TextBoxDisplay extends UIComponent {
      * Adds the mainCharacterLabel actor to the screen which will be constantly updated to display changes.
      */
     private void addActors() {
+
+        topBar = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
+        botBar = new Image(ServiceLocator.getResourceService()
+                .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
+        topBar.setWidth(ServiceLocator.getRenderService().getStage().getWidth());
+        topBar.setHeight(BAR_HEIGHT);
+        topBar.setY(ServiceLocator.getRenderService().getStage().getHeight());
+        botBar.setHeight(BAR_HEIGHT);
+        botBar.setWidth(ServiceLocator.getRenderService().getStage().getWidth());
+        botBar.setY(-BAR_HEIGHT);
+
+        stage.addActor(topBar);
+        stage.addActor(botBar);
+
         //Text box for the main character set up
         mainCharacterLabel = new Label("", skin);
         mainCharacterLabel.setPosition(MAIN_CHARACTER_TEXT_X, TEXT_Y_POS);
@@ -124,6 +154,11 @@ public class TextBoxDisplay extends UIComponent {
     @Override
     public void draw(SpriteBatch batch) {
         if (textBox.isOpen()) {
+            if (!opening) {
+                closing = false;
+                opening = true;
+                openBars();
+            }
             if (textBox.isMainCharacterShowing()) {
                 enemyImage.setVisible(false);
                 enemyLabel.setVisible(false);
@@ -148,8 +183,63 @@ public class TextBoxDisplay extends UIComponent {
             enemyImage.setVisible(false);
             enemyLabel.setVisible(false);
             enemyBox.setVisible(false);
+            if (!closing) {
+                opening = false;
+                closeBars();
+            }
+            closing = true;
         }
     }
+
+    /**
+     * Makes the top bar of the cutscene slowly move into frame.
+     */
+    private void openBars() {
+        moveDown(topBar);
+        moveUp(botBar);
+    }
+
+    private void closeBars() {
+        moveDown(botBar);
+        moveUp(topBar);
+    }
+
+    private void moveDown(Image bar) {
+        float initialHeight = -120;
+        if (bar == topBar) {
+            initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
+        }
+        if (bar.getY() > initialHeight - BAR_HEIGHT) {
+            bar.setY(bar.getY() - 2);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    moveDown(bar);
+                    timer.cancel();
+                }
+            }, 5);
+        }
+    }
+
+    private void moveUp(Image bar) {
+        float initialHeight = - 120;
+        if (bar == topBar) {
+            initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
+        }
+        if (bar.getY() < initialHeight + BAR_HEIGHT) {
+            bar.setY(bar.getY() + 2);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    moveUp(bar);
+                    timer.cancel();
+                }
+            }, 5);
+        }
+    }
+
 
     /**
      * Gets the priority of the text display.
@@ -170,5 +260,7 @@ public class TextBoxDisplay extends UIComponent {
         enemyImage.setVisible(false);
         enemyLabel.remove();
         enemyBox.remove();
+        topBar.remove();
+        botBar.remove();
     }
 }

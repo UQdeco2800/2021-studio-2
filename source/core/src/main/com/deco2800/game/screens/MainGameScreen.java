@@ -45,7 +45,8 @@ public class MainGameScreen extends ScreenAdapter {
             "lowHealthImages/BloodScreenDarkRepositioned.png",
             "images/textBoxDisplay/default_text_box.png",
             "images/textBoxDisplay/main_character_image.png",
-            "images/textBoxDisplay/prisoner_image.png"
+            "images/textBoxDisplay/prisoner_image.png",
+            "images/textBoxDisplay/black_bars.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
@@ -170,15 +171,15 @@ public class MainGameScreen extends ScreenAdapter {
 
         Entity ui = new Entity();
         ui.addComponent(new InputDecorator(stage, 10))
+                .addComponent(new TextBox())
+                .addComponent(textBoxInput)
+                .addComponent(new TextBoxDisplay())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
                 .addComponent(new Terminal())
                 .addComponent(inputComponent)
-                .addComponent(new TerminalDisplay())
-                .addComponent(new TextBox())
-                .addComponent(textBoxInput)
-                .addComponent(new TextBoxDisplay());
+                .addComponent(new TerminalDisplay());
 
         ServiceLocator.getEntityService().registerUI(ui);
     }

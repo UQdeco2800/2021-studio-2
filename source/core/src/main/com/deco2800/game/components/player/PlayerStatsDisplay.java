@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import com.deco2800.game.ui.textbox.TextBox;
 
 /**
  * A ui component for displaying player stats, e.g. health.
@@ -18,6 +19,11 @@ public class PlayerStatsDisplay extends UIComponent {
      * Table which holds the icon and changeable health bar.
      */
     private Table table;
+
+    /**
+     * Table to hold the frame of the health bar.
+     */
+    private Table tableFrame;
 
     /**
      * HP Icon
@@ -112,7 +118,7 @@ public class PlayerStatsDisplay extends UIComponent {
         //Gets image dash = new Image(ServiceLocator.getResourceService().getAsset("images/dash_icon.png", Texture.class));
 
         // Health Bar Frame
-        Table tableFrame = new Table();
+        tableFrame = new Table();
         tableFrame.top().left();
         tableFrame.setFillParent(true);
         frameLeft = new Image(ServiceLocator.getResourceService()
@@ -134,7 +140,19 @@ public class PlayerStatsDisplay extends UIComponent {
 
     @Override
     public void draw(SpriteBatch batch) {
-        // draw is handled by the stage
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        if (textBox.isOpen()) {
+            table.setVisible(false);
+            healthLabel.setVisible(false);
+            heartImage.setVisible(false);
+            tableFrame.setVisible(false);
+        } else {
+            table.setVisible(true);
+            healthLabel.setVisible(true);
+            heartImage.setVisible(true);
+            tableFrame.setVisible(true);
+        }
     }
 
     /**
