@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
@@ -48,9 +49,72 @@ public class HealthBarComponent extends RenderComponent {
         timeSource = ServiceLocator.getTimeSource();
     }
 
+
     public void setScale(float scale) {
-        this.scale = scale;
-        create();
+        TextureRegion defaultTexture = this.atlas.findRegion("default");
+        entity.setScale(scale, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
+    }
+
+    public boolean addAnimation(String name, float frameDuration, Animation.PlayMode playMode) {
+        Array<TextureAtlas.AtlasRegion> regions = atlas.findRegions(name);
+        if (regions == null || regions.size == 0) {
+            logger.warn("Animation {} not found in texture atlas", name);
+            return false;
+        } else if (animations.containsKey(name)) {
+            logger.warn(
+                    "Animation {} already added in texture atlas. Animations should only be added once.",
+                    name);
+            return false;
+        }
+
+        Animation<TextureRegion> animation = new Animation<>(frameDuration, regions, playMode);
+        animations.put(name, animation);
+        logger.debug("Adding animation {}", name);
+        return true;
+    }
+
+    public boolean removeAnimation(String name) {
+        logger.debug("Removing animation {}", name);
+        return animations.remove(name) != null;
+    }
+
+    public boolean hasAnimation(String name) {
+        return animations.containsKey(name);
+    }
+
+    public void startAnimation(String name) {
+        Animation<TextureRegion> animation = animations.getOrDefault(name, null);
+        if (animation == null) {
+            logger.error(
+                    "Attempted to play unknown animation {}. Ensure animation is added before playback.",
+                    name);
+            return;
+        }
+
+        currentAnimation = animation;
+        currentAnimationName = name;
+        animationPlayTime = 0f;
+        logger.debug("Starting animation {}", name);
+    }
+
+    public String getCurrentAnimation() {
+        return currentAnimationName;
+    }
+
+    public boolean isFinished() {
+        return currentAnimation != null && currentAnimation.isAnimationFinished(animationPlayTime);
+    }
+
+    public boolean stopAnimation() {
+        if (currentAnimation == null) {
+            return false;
+        }
+
+        logger.debug("Stopping animation {}", currentAnimationName);
+        currentAnimation = null;
+        currentAnimationName = null;
+        animationPlayTime = 0f;
+        return true;
     }
 
     @Override

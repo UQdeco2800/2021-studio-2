@@ -209,13 +209,29 @@ public class NPCFactory {
       .addComponent(new GhostAnimationController())
       .addComponent(aiComponent);
 
-    /*
+
     TextureAtlas healthAtlas =
             ServiceLocator.getResourceService().getAsset("images/health_bar.atlas", TextureAtlas.class);
     HealthBarComponent health = new HealthBarComponent(healthAtlas);
-    //health.setAsBox(new Vector2(1f,0.1f), new Vector2(0.5f,1.2f));
+
+    health.addAnimation("10",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("9",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("8",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("7",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("6",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("5",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("4",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("3",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("2",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("1",0.1f,Animation.PlayMode.NORMAL);
+    health.addAnimation("0",0.1f,Animation.PlayMode.NORMAL);
+
+
+
+
+
     ghost.addComponent(health);
-    */
+
     ghost.setAttackRange(5);
     ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
     return ghost;
