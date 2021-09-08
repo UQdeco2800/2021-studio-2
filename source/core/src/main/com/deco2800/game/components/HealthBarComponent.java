@@ -1,22 +1,15 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.components.ColliderComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import net.dermetfan.gdx.graphics.g2d.Box2DSprite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,7 +129,7 @@ public class HealthBarComponent extends RenderComponent {
     public void update() {
         currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
-        float ratioOfHealth = (float)(currentHealth/MaxHealth);
+        float ratioOfHealth = (float) (currentHealth / MaxHealth);
 
     }
 

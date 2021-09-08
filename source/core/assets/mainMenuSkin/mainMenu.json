@@ -26,7 +26,8 @@
     }
     ButtonStyle: {
         default: {
-            up: 5895d2d1cba9841eabab6077 (2)
+            up: 5895d2d1cba9841eabab6077
+            (2)
         }
         start: {
             up: StartButton
@@ -50,7 +51,8 @@
             fontColor: RGBA_255_255_255_255
             downFontColor: RGBA_129_129_129_255
             overFontColor: RGBA_0_0_0_255
-            up: 5895d2d1cba9841eabab6077 (2)
+            up: 5895d2d1cba9841eabab6077
+            (2)
         }
     }
 }

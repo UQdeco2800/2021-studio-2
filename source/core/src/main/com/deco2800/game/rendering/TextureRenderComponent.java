@@ -60,12 +60,9 @@ public class TextureRenderComponent extends RenderComponent {
         if (texture != null) {
             batch.draw(texture, position.x, position.y, scale.x, scale.y);
         } else if (sprite != null) {
-            //Prepare sprite to be drawn
-            sprite.setScale(entity.getScale().x / sprite.getWidth(),
-                    entity.getScale().y / sprite.getHeight());
-            sprite.setRotation(angle);
-            sprite.setCenter(positionCenter.x, positionCenter.y);
-            sprite.draw(batch);
+            Vector2 newScale = scale.cpy().rotateAroundDeg(new Vector2(0, 0), 0);
+            //batch.draw(sprite, position.x, position.y, positionCenterRelative.x, positionCenterRelative.y, 1, 1, scale.x, scale.y, rotation);
+            batch.draw(sprite, position.x, position.y, 0, 0, 1, 1, newScale.x, newScale.y, angle);
         }
     }
 }
