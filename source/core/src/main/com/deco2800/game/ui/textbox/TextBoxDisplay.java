@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import com.deco2800.game.utils.BooleanObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,10 +46,10 @@ public class TextBoxDisplay extends UIComponent {
     private Image botBar;
 
     /** If the cutscene is currently opening. */
-    private boolean opening;
+    private BooleanObject opening = new BooleanObject(false);
 
     /** If the cutscene is currently closing. */
-    private boolean closing;
+    private BooleanObject closing = new BooleanObject(false);
 
     private final float TEXT_BOX_HEIGHT = 400f;
 
@@ -154,9 +155,9 @@ public class TextBoxDisplay extends UIComponent {
     @Override
     public void draw(SpriteBatch batch) {
         if (textBox.isOpen()) {
-            if (!opening) {
-                closing = false;
-                opening = true;
+            if (!opening.getBoolean()) {
+                closing.setFalse();
+                opening.setTrue();
                 openBars();
             }
             if (textBox.isMainCharacterShowing()) {
@@ -183,57 +184,72 @@ public class TextBoxDisplay extends UIComponent {
             enemyImage.setVisible(false);
             enemyLabel.setVisible(false);
             enemyBox.setVisible(false);
-            if (!closing) {
-                opening = false;
+            if (!closing.getBoolean()) {
+                closing.setTrue();
+                opening.setFalse();
                 closeBars();
             }
-            closing = true;
         }
     }
 
     /**
-     * Makes the top bar of the cutscene slowly move into frame.
+     * Makes the bars fade into the screen.
      */
     private void openBars() {
-        moveDown(topBar);
-        moveUp(botBar);
+        moveDown(topBar, opening);
+        moveUp(botBar, opening);
     }
 
+    /**
+     * Makes the bars fade out of the screen.
+     */
     private void closeBars() {
-        moveDown(botBar);
-        moveUp(topBar);
+        moveDown(botBar, closing);
+        moveUp(topBar, closing);
     }
 
-    private void moveDown(Image bar) {
+    /**
+     * Moves the bars down relative to their original height.
+     *
+     * @param bar the image that will change position
+     * @param type the boolean type that will be checked to repeat
+     */
+    private void moveDown(Image bar, BooleanObject type) {
         float initialHeight = -120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
-        if (bar.getY() > initialHeight - BAR_HEIGHT) {
+        if (bar.getY() > initialHeight - BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() - 2);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveDown(bar);
+                    moveDown(bar, type);
                     timer.cancel();
                 }
             }, 5);
         }
     }
 
-    private void moveUp(Image bar) {
+    /**
+     * Moves the bars up relative to their original height.
+     *
+     * @param bar the image that will change position
+     * @param type the boolean type that will be checked to repeat
+     */
+    private void moveUp(Image bar, BooleanObject type) {
         float initialHeight = - 120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
-        if (bar.getY() < initialHeight + BAR_HEIGHT) {
+        if (bar.getY() < initialHeight + BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() + 2);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveUp(bar);
+                    moveUp(bar, type);
                     timer.cancel();
                 }
             }, 5);
