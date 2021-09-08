@@ -132,6 +132,9 @@ public class PlayerActions extends Component {
     lockMovement(weapon.getTotalAttackTime());
   }
 
+  /**
+   * Makes player use the strong attack associated with its equipped weapon.
+   */
   void strongAttack() {
     MeleeWeapon weapon = entity.getComponent(Axe.class);
     if (weapon == null) {

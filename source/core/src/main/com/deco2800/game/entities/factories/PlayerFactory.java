@@ -37,10 +37,13 @@ public class PlayerFactory {
     InputComponent inputComponent =
             ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
+    TextureAtlas atlas = ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class);
+
+
     AnimationRenderComponent animator =
             new AnimationRenderComponent(
                     ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
-
+/*
     animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
     animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
@@ -52,7 +55,13 @@ public class PlayerFactory {
     animator.addAnimation("back_axe_attack", 0.1f);
     animator.addAnimation("front_axe_attack", 0.1f);
     animator.addAnimation("right_axe_attack", 0.1f);
-    animator.addAnimation("left_axe_attack", 0.1f);
+    animator.addAnimation("left_axe_attack", 0.1f); */
+    animator.addAnimation("left_attack", 0.1f);
+    animator.addAnimation("right_attack", 0.1f);
+    animator.addAnimation("up_attack", 0.1f);
+    animator.addAnimation("down_attack", 0.1f);
+    animator.addAnimation("aoe_attack", 0.05f);
+    animator.addAnimation("default", 1f, Animation.PlayMode.LOOP);
 
     Entity player =
             new Entity()
@@ -61,7 +70,7 @@ public class PlayerFactory {
                     .addComponent(new PhysicsComponent())
                     .addComponent(new ColliderComponent())
                     .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-                    //Remove the below lines when the player uses a separate weapon entity
+                    // Remove the below lines when the player uses a separate weapon entity
                     .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                     .addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
                             new Vector2(1f, 0.5f)))
@@ -74,8 +83,9 @@ public class PlayerFactory {
                     .addComponent(new PlayerLowHealthDisplay());
 
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
-    player.getComponent(AnimationRenderComponent.class).scaleEntity();
+    player.getComponent(AnimationRenderComponent.class).scaleEntity(2f);
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
+
     return player;
   }
 

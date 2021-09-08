@@ -96,6 +96,15 @@ public class AnimationRenderComponent extends RenderComponent {
   }
 
   /**
+   * Scales the entity to the texture's ratio, and also scales up by a factor
+   * @param scaleFactor the factor for the entity to be scaled at.
+   */
+  public void scaleEntity(float scaleFactor) {
+    TextureRegion defaultTexture = this.atlas.findRegion("default");
+    entity.setScale(scaleFactor, scaleFactor * (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
+  }
+
+  /**
    * Remove an animation from this animator. This is not required before disposing.
    * @param name Name of the previously added animation.
    * @return true if removed, false if animation was not found.

@@ -43,6 +43,7 @@ public class Axe extends MeleeWeapon {
         if (animator == null) {
             return;
         }
+        /*
         switch (attackDirection) {
             case UP:
                 animator.startAnimation("back_axe_attack");
@@ -55,6 +56,21 @@ public class Axe extends MeleeWeapon {
                 break;
             case RIGHT:
                 animator.startAnimation("right_axe_attack");
+                break;
+        } */
+
+        switch (attackDirection) {
+            case UP:
+                animator.startAnimation("up_attack");
+                break;
+            case DOWN:
+                animator.startAnimation("down_attack");
+                break;
+            case LEFT:
+                animator.startAnimation("left_attack");
+                break;
+            case RIGHT:
+                animator.startAnimation("right_attack");
                 break;
         }
     }
@@ -69,6 +85,11 @@ public class Axe extends MeleeWeapon {
         }
         hasStrongAttacked = true;
         super.attack(MeleeWeapon.CENTER);
+        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
+        if (animator == null) {
+            return;
+        }
+        animator.startAnimation("aoe_attack");
     }
 
     /**

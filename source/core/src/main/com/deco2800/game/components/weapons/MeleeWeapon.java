@@ -95,7 +95,6 @@ public class MeleeWeapon extends Component {
         if (timeAtAttack != 0 || hasAttacked) return;
         this.attackDirection = attackDirection;
         timeAtAttack = ServiceLocator.getTimeSource().getTime();
-        entity.getEvents().trigger("lockMovement", getTotalAttackTime());
         hasAttacked = true;
     }
 
