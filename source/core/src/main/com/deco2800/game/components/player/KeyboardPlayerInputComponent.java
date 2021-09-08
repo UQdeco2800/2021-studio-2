@@ -65,9 +65,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     private float speedMultiplier = 1;
 
     /**
-     * The last direction the player was moving in.
+     * Locks the player from inputting any controls.
      */
-    private Vector2 lastDirection;
+    private boolean locked = false;
 
     /**
      * Stores the last system time since the dash ability was pressed.
@@ -204,7 +204,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      * the player is no longer moving.
      */
     private void triggerWalkEvent() {
-        if (dashing) {
+        if (dashing || locked) {
             return;
         }
         calculateDistance(speedMultiplier);
@@ -212,7 +212,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             entity.getEvents().trigger("walkStop");
         } else {
             calculateDistance(speedMultiplier);
-            lastDirection = walkDirection.cpy();
             entity.getEvents().trigger("walk", walkDirection);
         }
     }
@@ -252,5 +251,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      */
     public Vector2 getWalkDirection() {
         return this.walkDirection;
+    }
+
+    public void lockPlayer() {
+        this.locked = true;
     }
 } 

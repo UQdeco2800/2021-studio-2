@@ -68,6 +68,7 @@ public class TouchMoveComponent extends TouchComponent{
             return;
         }
         actions.stopWalking();
+        input.lockPlayer();
         input.stopWalking();
         movePlayer(collidedEntity, actions);
     }

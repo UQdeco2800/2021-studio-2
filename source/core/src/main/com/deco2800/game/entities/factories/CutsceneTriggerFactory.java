@@ -65,4 +65,20 @@ public class CutsceneTriggerFactory {
         trigger.scaleHeight(0f);
         return trigger;
     }
+
+    public static Entity createMoveTrigger(Vector2 direction, int x, int y) {
+        Entity trigger =
+                new Entity()
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                        .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
+                                direction, x, y));
+
+        trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        trigger.getComponent(ColliderComponent.class).setSensor(true);
+        PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
+        trigger.scaleHeight(0f);
+        return trigger;
+    }
 }

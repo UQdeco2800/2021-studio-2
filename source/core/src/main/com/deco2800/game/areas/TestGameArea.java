@@ -119,50 +119,46 @@ public class TestGameArea extends GameArea {
         Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL);
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
-//    Entity moveTrigger = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
-//            new Vector2(-1f, 0f), 5, 0);
-//    spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
-//
-//    Entity moveTrigger2 = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
-//            new Vector2(0f, -1f), 0, 5);
-//    spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
-//
-//    Entity moveTrigger3 = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
-//            new Vector2(1f, 0), 5, 0);
-//    spawnEntityAt(moveTrigger3, new Vector2(7,9.2f), true, true);
-//
-//    Entity moveTrigger4 = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
-//            new Vector2(0f, 1f), 0, 5);
-//    spawnEntityAt(moveTrigger4, new Vector2(6.8f,6), true, true);
+        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
+        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
+
+        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
+        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
+
+        Entity moveTrigger3 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0), 5, 0);
+        spawnEntityAt(moveTrigger3, new Vector2(7,9.2f), true, true);
+
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 5);
+        spawnEntityAt(moveTrigger4, new Vector2(6.8f,6), true, true);
     }
 
-  private void spawnTerrain() {
-      // Background terrain
-      terrain = terrainFactory.createTerrain(TerrainType.TEST);
-      spawnEntity(new Entity().addComponent(terrain));
+    private void spawnTerrain() {
+        // Background terrain
+        terrain = terrainFactory.createTerrain(TerrainType.TEST);
+        spawnEntity(new Entity().addComponent(terrain));
 
-      // Terrain walls
-      float tileSize = terrain.getTileSize();
-      GridPoint2 tileBounds = terrain.getMapBounds(0);
-      Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
+        // Terrain walls
+        float tileSize = terrain.getTileSize();
+        GridPoint2 tileBounds = terrain.getMapBounds(0);
+        Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-      // Left
-      spawnEntityAt(
+        // Left
+        spawnEntityAt(
               ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-      // Right
-      spawnEntityAt(
+        // Right
+        spawnEntityAt(
               ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
               new GridPoint2(tileBounds.x, 0),
               false,
               false);
-      // Top
-      spawnEntityAt(
+        // Top
+        spawnEntityAt(
               ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
               new GridPoint2(0, tileBounds.y),
               false,
               false);
-      // Bottom
-      spawnEntityAt(
+        // Bottom
+        spawnEntityAt(
               ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
       //Walls imported from JSON (Not working as intended, leave for sprint 2)
@@ -245,7 +241,7 @@ public class TestGameArea extends GameArea {
               new GridPoint2(14, 7),
               false,
               false);
-  }
+    }
     /**
      * Spawn anchored ghost, ghost only move at the certain anchored
      */
