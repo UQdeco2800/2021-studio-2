@@ -69,7 +69,6 @@ public class WeaponFactory {
 
     public static Entity createTrackingArrow(Entity targetEntity, float angle) {
         Entity normalArrow = createBaseArrow();
-        normalArrow.setEntityType("fireball");
         TrackingArrowConfig config = configs.trackingArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(targetEntity, new Vector2(config.speedX, config.speedY));
         AITaskComponent aiComponent =
@@ -90,7 +89,6 @@ public class WeaponFactory {
 
     public static Entity createFastArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
-        normalArrow.setEntityType("sniperArrow");
         FastArrowConfig config = configs.fastArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(targetLoc, new Vector2(config.speedX, config.speedY));
         AITaskComponent aiComponent =

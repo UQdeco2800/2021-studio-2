@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.tasks.*;
@@ -50,7 +49,7 @@ public class NPCFactory {
      * @return entity
      */
     public static Entity createGhost(Entity target) {
-        Entity ghost = createBaseNPCNoAI();
+        Entity ghost = createBaseNPC(target);
         BaseEntityConfig config = configs.ghost;
 
         AnimationRenderComponent animator =
@@ -61,18 +60,15 @@ public class NPCFactory {
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
-
-        AITaskComponent aiComponent =
-                new AITaskComponent()
-                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ZigChaseTask(target, 11, 4f, 4f, 1f))
-                        .addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-
         ghost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
-                .addComponent(aiComponent)
                 .addComponent(new GhostAnimationController());
+
+        ghost.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        ghost.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f));
 
         ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
         return ghost;
@@ -197,7 +193,7 @@ public class NPCFactory {
         shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(0.1);
         //shootProjectileTask.setProjectileType("trackingArrow");
-        //shootProjectileTask.setMultishotChance(0.05);
+        //shootProjectileTask.setMultishotChance(0.5);
         //shootProjectileTask.setProjectileType("fastArrow");
         //shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
@@ -216,28 +212,19 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController())
                 .addComponent(aiComponent);
-
-
-        TextureAtlas healthAtlas =
-                ServiceLocator.getResourceService().getAsset("images/health_bar.atlas", TextureAtlas.class);
-        HealthBarComponent health = new HealthBarComponent(healthAtlas);
-
-        health.addAnimation("10", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("9", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("8", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("7", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("6", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("5", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("4", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("3", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("2", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("1", 0.1f, Animation.PlayMode.NORMAL);
-        health.addAnimation("0", 0.1f, Animation.PlayMode.NORMAL);
-        ghost.addComponent(health);
-
         ghost.setAttackRange(5);
         ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
         return ghost;
+    }
+
+    public static Entity createBossNPC(Entity target) {
+        Entity boss = createBaseNPCNoAI();
+
+        //teleportation - despawn the enemy - if enemy health is lower than 50%
+        // everytime the enemy get hit, it randomly teleport to a random position on the map.
+        // weaknesses - it may teleport beside the character
+        boss.setEntityType("boss");
+        return boss;
     }
 
     /**

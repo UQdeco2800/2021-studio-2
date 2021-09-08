@@ -10,7 +10,6 @@ import com.deco2800.game.entities.Entity;
 public class ZigChaseTask extends ChaseTask implements PriorityTask {
 
     private final float maxChaseDistance;
-    private final float speedMultiplier;
     private long start = System.currentTimeMillis();
     private boolean zigLeft = false;
 
@@ -22,10 +21,9 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      * @param viewDistance     max view distance of entity to target
      * @param maxChaseDistance max chase distance of entity to target
      */
-    public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance, float speedMultiplier) {
+    public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
         super(target, priority, viewDistance, maxChaseDistance);
         this.maxChaseDistance = maxChaseDistance;
-        this.speedMultiplier = speedMultiplier;
     }
 
     /**
@@ -35,17 +33,17 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     @Override
     public void update() {
         if (((System.currentTimeMillis() - start) / 1000.0) > 0.5
-                || getDistanceToTarget() < (maxChaseDistance * (2 / 10))) {
-            if (getDistanceToTarget() < (maxChaseDistance * (2 / 10))) {
-                movementTask.setTarget(target.getCenterPosition());
-                movementTask.setMoveSpeed(new Vector2(1f * speedMultiplier, 1 * speedMultiplier));
+                || getDistanceToTarget() < maxChaseDistance * 3 / 10) {
+            if (getDistanceToTarget() < maxChaseDistance * 3 / 10) {
+                movementTask.setTarget(target.getPosition());
+                movementTask.setMoveSpeed(new Vector2(1.5f, 1.5f));
             } else {
-                movementTask.setMoveSpeed(new Vector2(2f * speedMultiplier, 2f * speedMultiplier));
+                movementTask.setMoveSpeed(new Vector2(2.5f, 2.5f));
                 if (zigLeft) {
-                    movementTask.setTarget(zigLeftRight(-1, 45f * (getDistanceToTarget() / maxChaseDistance)));
+                    movementTask.setTarget(zigLeftRight(-1));
                     zigLeft = false;
                 } else {
-                    movementTask.setTarget(zigLeftRight(1, 45f * (getDistanceToTarget() / maxChaseDistance)));
+                    movementTask.setTarget(zigLeftRight(1));
                     zigLeft = true;
                 }
             }
@@ -64,11 +62,11 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      * @param direction current direction of entity
      * @return v3 new vector2 position
      */
-    private Vector2 zigLeftRight(int direction, float angle) {
+    private Vector2 zigLeftRight(int direction) {
         Vector2 v1 = owner.getEntity().getCenterPosition().cpy();
         Vector2 v2 = target.getCenterPosition().cpy();
         Vector2 v3 = v2.cpy().sub(v1);
-        v3.rotateAroundDeg(new Vector2(0, 0), ((-direction) * angle));
+        v3.rotateAroundDeg(new Vector2(0, 0), ((-direction) * 40f));
         v3.add(v1);
         return (v3);
     }
