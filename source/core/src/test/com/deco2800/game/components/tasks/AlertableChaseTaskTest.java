@@ -53,8 +53,6 @@ class AlertableChaseTaskTest {
         AITaskComponent aiAlertable = new AITaskComponent().addTask(alertableChaseTask);
         Entity alertableEntity = makePhysicsEntity().addComponent(aiAlertable);
         alertableChaseTask.create(() -> alertableEntity);
-        //entity.create();
-        //alertableEntity.create();;
         alertChaseTask.create(() -> entity);
         entity.setPosition(0f, 0f);
         alertableEntity.setPosition(8f, 8f);
@@ -76,7 +74,7 @@ class AlertableChaseTaskTest {
         float newDistance1 = alertableEntity.getPosition().dst(target.getPosition());
 
         // target is too far from enemy
-        assertTrue(oldDistance - newDistance1 == 0);
+        assertEquals(oldDistance - newDistance1, 0);
 
         while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - time) < 3000) {
             entity.update();
@@ -96,4 +94,4 @@ class AlertableChaseTaskTest {
                 .addComponent(new PhysicsMovementComponent());
     }
 
-}
+} 

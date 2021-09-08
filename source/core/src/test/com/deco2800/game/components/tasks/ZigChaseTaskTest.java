@@ -1,26 +1,13 @@
 package com.deco2800.game.components.tasks;
 
-import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.physics.PhysicsService;
-import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.physics.PhysicsEngine;
+import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
-import com.deco2800.game.rendering.RenderService;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class ZigChaseTaskTest {
@@ -58,16 +45,12 @@ class ZigChaseTaskTest {
             entity.update();
             ServiceLocator.getPhysicsService().getPhysics().update();
             if (initialDistance - entity.getPosition().dst(target.getPosition()) == 0
-                && entity.getPosition().dst(target.getPosition()) > 1f) {
+                    && entity.getPosition().dst(target.getPosition()) > 1f) {
                 // distance > 1 because if less than 1, the entity is approach target
                 count++;
             }
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCompare) > 500) {
-                //System.out.println(initialDistance - entity.getPosition().dst(target.getPosition()));
                 assertTrue(initialDistance - entity.getPosition().dst(target.getPosition()) != 0);
-                initialDistance = entity.getPosition().dst(target.getPosition());
-                // angle of zig zag update every 0.5 seconds.
-                timeCompare = System.nanoTime();
                 break;
             }
         }

@@ -1,81 +1,109 @@
 package com.deco2800.game.components.tasks;
 
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.areas.ForestGameArea;
-import com.deco2800.game.services.ResourceService;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Move to a given position, finishing when you get close enough. Requires an entity with a
  * PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
- * todo: may need to offset the target by the sprites center size to stop it approaching with the corner
  */
 public class ProjectileMovementTask extends MovementTask implements PriorityTask {
 
-  public ProjectileMovementTask(Vector2 target, Vector2 moveSpeed) {
-    super(target, moveSpeed);
-  }
+    private int updateAngle = 0;
 
+    private Entity targetEntity;
 
-  //Arrow have sound effect when they disappear
-  private void playArrow(){
-    Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class);
-    arrowEffect.play();
-  }
-
-
-  /**
-   * Update the arrow position on the screen
-   */
-
-  public void update() {
-    super.update();
-    Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
-    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getCenterPosition(), target.cpy().add(bodyOffset));
-  }
-
-  /**
-   * return the priority of the arrow
-   * If arrow is in moving, return 10, else return -1 and dispose the arrow
-   * @return int 10 if arrow is moving, -1 if arrow is not
-   */
-  public int getPriority() {
-    if (stoppedMoving()) {
-      //Arrows disappears when at destination to stop it from looping in the same place
-      owner.getEntity().prepareDispose();
-      return (-1);
-    } else {
-      return (10);
+    public ProjectileMovementTask(Vector2 targetLoc, Vector2 moveSpeed) {
+        super(targetLoc, moveSpeed);
     }
-  }
 
-  /**
-   * stop the arrow movement - dispose the arrow
-   */
-  @Override
-  public void stop() {
-    super.stop();
+    public ProjectileMovementTask(Entity targetEntity, Vector2 moveSpeed) {
+        super(targetEntity.getPosition(), moveSpeed);
+        this.targetEntity = targetEntity;
+    }
 
-    //Arrows disappears when at destination to stop it from looping in the same place
-    playArrow();
-    //ForestGameArea.playArrow();
+    //Arrow have sound effect when they disappear
+    private void playArrow() {
+        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class);
+        arrowEffect.play();
+    }
 
-    //Arrows disappear when at destination to stop it from looping in the same place
+    /**
+     * Update the arrow position on the screen
+     */
+    @Override
+    public void update() {
+        //Change this if statement if there is too much lag
+        if (updateAngle > 0) {//UserSettings.get().fps/10) {
+            if (targetEntity != null) {
+                RaycastHit hit = new RaycastHit();
+                if (!ServiceLocator.getPhysicsService().getPhysics().raycast(owner.getEntity().getPosition(), targetEntity.getPosition(), PhysicsLayer.OBSTACLE, hit)) {
+                    float turningAngle = 0.4f;//UserSettings.get().fps;
+                    Vector2 relativeLocationTarget = target.cpy().sub(owner.getEntity().getPosition());
+                    Vector2 relativeLocationEntity = targetEntity.getPosition().cpy().sub(owner.getEntity().getPosition());
+                    if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
+                        if (relativeLocationTarget.angleDeg(relativeLocationEntity) > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
+                            //left
+                            this.target = relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle).setLength(1).add(owner.getEntity().getPosition());
+                        } else {
+                            //right
+                            this.target = relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle).setLength(1).add(owner.getEntity().getPosition());
+                        }
+                    } else {
+                        this.target = targetEntity.getPosition();
+                    }
+                } else {
+                    ServiceLocator.getRenderService().getDebug().drawLine(owner.getEntity().getPosition(), hit.point, Color.RED, 1);
+                }
+            }
+            //Can be very cpu intensive at times
+            owner.getEntity().setAngle(owner.getEntity().getPosition().cpy().sub(target).angleDeg());
+            updateAngle = 0;
+        }
+        updateAngle++;
+        super.update();
+    }
 
-    owner.getEntity().prepareDispose();
+    /**
+     * return the priority of the arrow
+     * If arrow is in moving, return 10, else return -1 and dispose the arrow
+     *
+     * @return int 10 if arrow is moving, -1 if arrow is not
+     */
+    public int getPriority() {
+        if (stoppedMoving()) {
+            //Arrows disappears when at destination to stop it from looping in the same place
+            owner.getEntity().prepareDispose();
+            return (-1);
+        } else {
+            return (10);
+        }
+    }
 
-  }
+    /**
+     * stop the arrow movement - dispose the arrow
+     */
+    @Override
+    public void stop() {
+        super.stop();
+        //Arrows disappears when at destination to stop it from looping in the same place
+        playArrow();
+        owner.getEntity().prepareDispose();
 
-  /**
-   * check if the arrow is at target or if it stuck by an object (tree)
-   * @return true if stop move, false otherwise
-   */
-  public boolean stoppedMoving() {
-    return (isAtTarget() || checkIfStuck());
-  }
+    }
+
+    /**
+     * check if the arrow is at target or if it stuck by an object (tree)
+     *
+     * @return true if stop move, false otherwise
+     */
+    public boolean stoppedMoving() {
+        return (isAtTarget() || checkIfStuck());
+    }
 }

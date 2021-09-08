@@ -1,19 +1,14 @@
 package com.deco2800.game.components.death;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,10 +18,10 @@ import org.slf4j.LoggerFactory;
 public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
     private final String[] deathScreenTextures = new String[]{
-      "lowHealthImages/testDeath1.png",
-      "lowHealthImages/youdied.png",
-      "lowHealthImages/testDeath1.png",
-      "images/main_menu_background.png"
+            "lowHealthImages/testDeath1.png",
+            "lowHealthImages/youdied.png",
+            "lowHealthImages/testDeath1.png",
+            "images/main_menu_background.png"
     };
 
 
@@ -97,7 +92,7 @@ public class DeathDisplay extends MainMenuDisplay {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         ServiceLocator.getResourceService().loadTextures(deathScreenTextures);
-        while (!resourceService.loadForMillis(10)) {
+        while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
         }
