@@ -35,7 +35,7 @@ public class TextBox extends Component {
     private RandomDialogueSet randomDialogueSet;
 
     /** Index of the sequence of ordered dialogue. */
-    private float orderedDialogueIndex = 0;
+    private int orderedDialogueIndex = 0;
 
     /** Dialogue object that the text box is currently on. */
     private Dialogue dialogue;
@@ -148,6 +148,8 @@ public class TextBox extends Component {
             skip = true;
             subMessage = message;
         } else if (isOpen) {
+            System.out.println("not closed");
+            System.out.println("1");
             subMessage = message.substring(0, subMessageIndex);
             subMessageIndex++;
             if (generateCharacter) {
@@ -158,7 +160,7 @@ public class TextBox extends Component {
                         setSubMessage();
                         timer.cancel();
                     }
-                }, 50);
+                }, 30);
             }
         }
     }
@@ -258,10 +260,8 @@ public class TextBox extends Component {
         }
         // Checks to see if the last message has been already read.
         if (randomDialogueSet.getOrderedDialogueSize() > orderedDialogueIndex) {
-            setDialogue(randomDialogueSet.getOrderedDialogue((int)orderedDialogueIndex));
-            // Collisions are called on both entities within the collision so this method is called twice
-            // per collision.
-            orderedDialogueIndex += 0.5;
+            setDialogue(randomDialogueSet.getOrderedDialogue(orderedDialogueIndex));
+            orderedDialogueIndex++;
             orderedDialogue = true;
             setOpen();
         } else {

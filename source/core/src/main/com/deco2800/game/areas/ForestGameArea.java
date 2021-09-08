@@ -96,15 +96,12 @@ public class ForestGameArea extends GameArea {
     spawnTerrain();
     spawnTrees();
     spawnPlayer();
-//    spawnGhosts();
-    spawnCutsceneTrigger();
-//    spawnGhostKing();
-//    spawnRangedGhosts();
+    spawnGhosts();
+    spawnGhostKing();
+    spawnRangedGhosts();
 //    spawnGhostKing(); //use this later to make evil assassins with different sprites
-//    spawnAnchoredGhosts();
-//    spawnTraps();
-    
-    spawnCutsceneTrigger();
+    spawnAnchoredGhosts();
+    spawnTraps();
     playMusic();
   }
 
@@ -213,7 +210,7 @@ public class ForestGameArea extends GameArea {
   }
 
   private void spawnCutsceneTrigger() {
-    Entity trigger = CutsceneTriggerFactory.createTrigger(RandomDialogueSet.TUTORIAL);
+    Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL);
     spawnEntityAt(trigger, TEST_TRIGGER, true, true);
   }
 

@@ -81,10 +81,10 @@ public class TouchMoveComponent extends TouchComponent{
      */
     private void movePlayer(Entity player, PlayerActions actions) {
         Vector2 position = player.getPosition();
-
-        actions.walk(direction);
-        checkPosition(player, actions, position);
-
+        if (direction.x != 0 || direction.y != 0) {
+            actions.walk(direction);
+            checkPosition(player, actions, position);
+        }
     }
 
     /**
@@ -95,17 +95,20 @@ public class TouchMoveComponent extends TouchComponent{
      * @param position start position of the entity
      */
     private void checkPosition(Entity player, PlayerActions actions, Vector2 position) {
-//        if (player.getPosition().x < position.x + x || player.getPosition().y < position.y + y) {
-//            Timer timer = new Timer();
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    checkPosition(player, actions, position);
-//                    timer.cancel();
-//                }
-//            }, 50);
-//        } else {
-//            actions.stopWalking();
-//        }
+        float xDifference = player.getPosition().x - position.x > 0?
+                player.getPosition().x - position.x : -1 * (player.getPosition().x - position.x);
+
+        float yDifference = player.getPosition().y - position.y > 0?
+                player.getPosition().y - position.y : -1 * (player.getPosition().y - position.y);
+        if (xDifference <= x && yDifference <= y) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    checkPosition(player, actions, position);
+                    timer.cancel();
+                }
+            }, 50);
+        }
     }
 }

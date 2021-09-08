@@ -15,6 +15,7 @@ import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.areas.terrain.Map;
@@ -30,7 +31,7 @@ public class TestGameArea extends GameArea {
   private static final int NUM_GHOSTS = 1;
   private static final int NUM_ANCHORED_GHOSTS = 1;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
+  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(6, 15);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
           "images/box_boy_leaf.png",
@@ -60,7 +61,7 @@ public class TestGameArea extends GameArea {
           "images/health_frame_right.png",
           "images/hp_icon.png",
           "images/dash_icon.png",
-          "images/rock.png"
+          "images/prisoner.png"
   };
   private static String[] tileTextures = null;
   private static final String[] forestTextureAtlases = {
@@ -96,12 +97,7 @@ public class TestGameArea extends GameArea {
 
     spawnTerrain();
     spawnPlayer();
-    spawnGhosts();
-    spawnGhostKing();
-    spawnRangedGhosts();
-    spawnGhostKing(); //use this later to make evil assassins with different sprites
-    spawnAnchoredGhosts();
-    spawnTraps();
+    spawnCutsceneTrigger();
 
     playMusic();
   }
@@ -143,6 +139,26 @@ public class TestGameArea extends GameArea {
     }
   }
 
+  private void spawnCutsceneTrigger() {
+    Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL);
+    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
+
+//    Entity moveTrigger = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
+//            new Vector2(-1f, 0f), 5, 0);
+//    spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
+//
+//    Entity moveTrigger2 = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
+//            new Vector2(0f, -1f), 0, 5);
+//    spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
+//
+//    Entity moveTrigger3 = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
+//            new Vector2(1f, 0), 5, 0);
+//    spawnEntityAt(moveTrigger3, new Vector2(7,9.2f), true, true);
+//
+//    Entity moveTrigger4 = CutsceneTriggerFactory.createMoveDialogueTrigger(RandomDialogueSet.TUTORIAL,
+//            new Vector2(0f, 1f), 0, 5);
+//    spawnEntityAt(moveTrigger4, new Vector2(6.8f,6), true, true);
+  }
   private void spawnTerrain() {
     // Background terrain
     terrain = terrainFactory.createTerrain(TerrainType.TEST);

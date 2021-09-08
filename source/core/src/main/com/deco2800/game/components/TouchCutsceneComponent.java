@@ -67,17 +67,8 @@ public class TouchCutsceneComponent extends TouchComponent {
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
+        textBox.setClosed();
         textBox.setOrderedDialogue(dialogueSet);
-
-        collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
-        actions = collidedEntity.getComponent(PlayerActions.class);
-        KeyboardPlayerInputComponent input =  collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
-        //Checks if the entity that has collided is the player
-        if (actions == null) {
-            return;
-        }
-        actions.stopWalking();
-        input.stopWalking();
     }
 
 }
