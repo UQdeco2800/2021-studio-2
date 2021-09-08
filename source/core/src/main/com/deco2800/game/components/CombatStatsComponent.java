@@ -17,7 +17,7 @@ public class CombatStatsComponent extends Component {
 
   public CombatStatsComponent(int health, int baseAttack) {
     this.health = health;
-    maxHealth = health;
+    setMaxHealth(health);
     setBaseAttack(baseAttack);
   }
 
@@ -46,6 +46,15 @@ public class CombatStatsComponent extends Component {
    */
   public int getMaxHealth() {
     return maxHealth;
+  }
+
+  /**
+   * to change the max health of the player
+   *
+   * @param health  the new max health of the player to set
+   */
+  public void setMaxHealth(int health) {
+     this.maxHealth = health;
   }
 
   /**
