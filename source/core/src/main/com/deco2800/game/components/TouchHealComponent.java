@@ -6,7 +6,6 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 
 public class TouchHealComponent extends TouchComponent {
-    private CombatStatsComponent healthCombatStats;
     /**
      * Create a component which allows Player entity to interact with the Health item and give itself health
      *
@@ -19,7 +18,6 @@ public class TouchHealComponent extends TouchComponent {
     @Override
     public void create() {
         super.create();
-        healthCombatStats = entity.getComponent(CombatStatsComponent.class);
     }
 
     /**
@@ -30,6 +28,7 @@ public class TouchHealComponent extends TouchComponent {
      */
     @Override
     void onCollisionStart(Fixture me, Fixture other) {
+
         if (hitboxComponent.getFixture() != me) {
             //do nothing
             return;
@@ -39,6 +38,9 @@ public class TouchHealComponent extends TouchComponent {
             // Doesn't match our target layer, ignore
             return;
         }
+
+        //get the potions combat stats so we know how much to heal the player
+        CombatStatsComponent healthCombatStats = entity.getComponent(CombatStatsComponent.class);
 
         Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
