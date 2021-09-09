@@ -81,10 +81,7 @@ public class TouchMoveComponent extends TouchComponent {
         }
         actions.stopWalking();
         input.stopWalking();
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setClosed();
-        textBox.showBars();
+        showCutsceneBars();
         movePlayer(collidedEntity, actions, input);
     }
 
