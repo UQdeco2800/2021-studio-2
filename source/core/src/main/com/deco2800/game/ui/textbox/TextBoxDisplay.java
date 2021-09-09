@@ -232,7 +232,7 @@ public class TextBoxDisplay extends UIComponent {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
         if (bar.getY() > initialHeight - BAR_HEIGHT && type.getBoolean()) {
-            bar.setY(bar.getY() - 2);
+            bar.setY(bar.getY() - 6);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -240,7 +240,7 @@ public class TextBoxDisplay extends UIComponent {
                     moveDown(bar, type);
                     timer.cancel();
                 }
-            }, 5);
+            }, 15);
         }
     }
 
@@ -256,7 +256,7 @@ public class TextBoxDisplay extends UIComponent {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
         if (bar.getY() < initialHeight + BAR_HEIGHT && type.getBoolean()) {
-            bar.setY(bar.getY() + 2);
+            bar.setY(bar.getY() + 6);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -264,7 +264,7 @@ public class TextBoxDisplay extends UIComponent {
                     moveUp(bar, type);
                     timer.cancel();
                 }
-            }, 5);
+            }, 15);
         }
     }
 
