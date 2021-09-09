@@ -52,7 +52,8 @@ public class TouchAttackComponent extends TouchComponent {
 
     /**
      * action apply when the hitbox component collide
-     * @param me the owner of the hitbox
+     *
+     * @param me    the owner of the hitbox
      * @param other the target of the hitbox
      */
     @Override

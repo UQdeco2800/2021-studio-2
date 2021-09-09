@@ -24,38 +24,60 @@ public class TextBoxDisplay extends UIComponent {
      */
     private TextBox textBox;
 
-    /** The name to be displayed on the text box for the main character. */
+    /**
+     * The name to be displayed on the text box for the main character.
+     */
     private Label mainCharacterName;
 
-    /** The mainCharacterLabel that will be added to the screen to display the message. */
+    /**
+     * The mainCharacterLabel that will be added to the screen to display the message.
+     */
     private Label mainCharacterLabel;
 
-    /** Stores the image that will surround the text message. */
+    /**
+     * Stores the image that will surround the text message.
+     */
     private Image mainCharacterBox;
 
-    /** Stores the main character image that will surround the text message. */
+    /**
+     * Stores the main character image that will surround the text message.
+     */
     private Image mainCharacterImage;
 
-    /** The name to be displayed on the text box for the NPC. */
+    /**
+     * The name to be displayed on the text box for the NPC.
+     */
     private Label enemyName;
 
-    /** The mainCharacterLabel that will be added to the screen to display the message. */
+    /**
+     * The mainCharacterLabel that will be added to the screen to display the message.
+     */
     private Label enemyLabel;
 
-    /** Stores the image that will surround the text message. */
+    /**
+     * Stores the image that will surround the text message.
+     */
     private Image enemyBox;
 
-    /** Stores the enemy character image that will surround the text message. */
+    /**
+     * Stores the enemy character image that will surround the text message.
+     */
     private Image enemyImage;
 
-    /** Bars to indicate a cutscene is taking place. */
+    /**
+     * Bars to indicate a cutscene is taking place.
+     */
     private Image topBar;
     private Image botBar;
 
-    /** If the cutscene is currently opening. */
+    /**
+     * If the cutscene is currently opening.
+     */
     private BooleanObject opening = new BooleanObject(false);
 
-    /** If the cutscene is currently closing. */
+    /**
+     * If the cutscene is currently closing.
+     */
     private BooleanObject closing = new BooleanObject(false);
 
     private final float TEXT_BOX_HEIGHT = 400f;
@@ -223,7 +245,7 @@ public class TextBoxDisplay extends UIComponent {
     /**
      * Moves the bars down relative to their original height.
      *
-     * @param bar the image that will change position
+     * @param bar  the image that will change position
      * @param type the boolean type that will be checked to repeat
      */
     private void moveDown(Image bar, BooleanObject type) {
@@ -247,11 +269,11 @@ public class TextBoxDisplay extends UIComponent {
     /**
      * Moves the bars up relative to their original height.
      *
-     * @param bar the image that will change position
+     * @param bar  the image that will change position
      * @param type the boolean type that will be checked to repeat
      */
     private void moveUp(Image bar, BooleanObject type) {
-        float initialHeight = - 120;
+        float initialHeight = -120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
@@ -289,11 +311,11 @@ public class TextBoxDisplay extends UIComponent {
             enemyLabel.remove();
         }
 
-        switch(set) {
+        switch (set) {
             case TUTORIAL:
                 enemyName = new Label("PRISONER", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
-                    .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
+                        .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;

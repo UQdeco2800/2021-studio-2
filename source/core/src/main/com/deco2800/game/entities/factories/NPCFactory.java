@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
-import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.tasks.*;
@@ -61,8 +60,8 @@ public class NPCFactory {
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-      
-      
+
+
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -223,17 +222,17 @@ public class NPCFactory {
                 ServiceLocator.getResourceService().getAsset("images/health_bar.atlas", TextureAtlas.class);
         HealthBarComponent health = new HealthBarComponent(healthAtlas);
 
-        health.addAnimation("10",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("9",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("8",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("7",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("6",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("5",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("4",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("3",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("2",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("1",0.1f,Animation.PlayMode.NORMAL);
-        health.addAnimation("0",0.1f,Animation.PlayMode.NORMAL);
+        health.addAnimation("10", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("9", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("8", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("7", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("6", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("5", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("4", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("3", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("2", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("1", 0.1f, Animation.PlayMode.NORMAL);
+        health.addAnimation("0", 0.1f, Animation.PlayMode.NORMAL);
         ghost.addComponent(health);
 
         ghost.setAttackRange(5);

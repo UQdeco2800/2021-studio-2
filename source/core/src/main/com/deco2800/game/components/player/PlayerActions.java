@@ -19,12 +19,12 @@ import com.deco2800.game.utils.math.Vector2Utils;
 public class PlayerActions extends Component {
     private static final Vector2 MAX_SPEED = new Vector2(3f, 3f); // Metres per second
 
-  private PhysicsComponent physicsComponent;
-  private Vector2 walkDirection = Vector2.Zero.cpy();
-  private Vector2 lastDirection = Vector2.Zero.cpy();
-  private long lockDuration;
-  private long timeSinceStopped;
-  private boolean moving = false;
+    private PhysicsComponent physicsComponent;
+    private Vector2 walkDirection = Vector2.Zero.cpy();
+    private Vector2 lastDirection = Vector2.Zero.cpy();
+    private long lockDuration;
+    private long timeSinceStopped;
+    private boolean moving = false;
 
     @Override
     public void create() {
@@ -71,28 +71,29 @@ public class PlayerActions extends Component {
     }
 
     /**
-    * Moves the player towards a given direction.
-    *
-    * @param direction direction to move in
-    */
+     * Moves the player towards a given direction.
+     *
+     * @param direction direction to move in
+     */
     public void walk(Vector2 direction) {
-      this.walkDirection = direction;
-      this.lastDirection = walkDirection.cpy();
-      triggerWalkAnimation();
-      if (lockDuration == 0) {
-          moving = true;
-      }
+        this.walkDirection = direction;
+        this.lastDirection = walkDirection.cpy();
+        triggerWalkAnimation();
+        if (lockDuration == 0) {
+            moving = true;
+        }
     }
 
-  /**
-   * Stops the player from walking.
-   */
-  public void stopWalking() {
-    this.walkDirection = Vector2.Zero.cpy();
-    this.triggerStandAnimation();
-    updateSpeed();
-    moving = false;
-  }
+    /**
+     * Stops the player from walking.
+     */
+    public void stopWalking() {
+        this.walkDirection = Vector2.Zero.cpy();
+        this.triggerStandAnimation();
+        updateSpeed();
+        moving = false;
+    }
+
     /**
      * Moves the player towards a given direction.
      *
@@ -154,43 +155,44 @@ public class PlayerActions extends Component {
         lockMovement(weapon.getTotalAttackTime());
     }
 
-  /**
-   * Locks player movement for a specified duration.
-   * @param duration - the time the movement lock will last, measured in milliseconds.
-   */
-  void lockMovement(long duration) {
-    timeSinceStopped = ServiceLocator.getTimeSource().getTime();
-    lockDuration = duration;
-    moving = false;
-  }
-
-  /**
-   * Checks the direction that the player was last facing and changes the animation to match.
-   */
-  private void triggerStandAnimation() {
-    if (lastDirection.y > 0) {
-      entity.getEvents().trigger("stopBackward");
-    } else if (lastDirection.y < 0) {
-      entity.getEvents().trigger("stopForward");
-    } else if (lastDirection.x > 0) {
-      entity.getEvents().trigger("stopRight");
-    } else if (lastDirection.x < 0) {
-      entity.getEvents().trigger("stopLeft");
+    /**
+     * Locks player movement for a specified duration.
+     *
+     * @param duration - the time the movement lock will last, measured in milliseconds.
+     */
+    void lockMovement(long duration) {
+        timeSinceStopped = ServiceLocator.getTimeSource().getTime();
+        lockDuration = duration;
+        moving = false;
     }
-  }
 
-  /**
-   * Checks the direction that the player is moving in and changes the animation to match.
-   */
-  private void triggerWalkAnimation() {
-    if (walkDirection.y > 0) {
-      entity.getEvents().trigger("walkBackward");
-    } else if (walkDirection.y < 0) {
-      entity.getEvents().trigger("walkForward");
-    } else if (walkDirection.x > 0) {
-      entity.getEvents().trigger("walkRight");
-    } else if (walkDirection.x < 0) {
-      entity.getEvents().trigger("walkLeft");
+    /**
+     * Checks the direction that the player was last facing and changes the animation to match.
+     */
+    private void triggerStandAnimation() {
+        if (lastDirection.y > 0) {
+            entity.getEvents().trigger("stopBackward");
+        } else if (lastDirection.y < 0) {
+            entity.getEvents().trigger("stopForward");
+        } else if (lastDirection.x > 0) {
+            entity.getEvents().trigger("stopRight");
+        } else if (lastDirection.x < 0) {
+            entity.getEvents().trigger("stopLeft");
+        }
     }
-  }
+
+    /**
+     * Checks the direction that the player is moving in and changes the animation to match.
+     */
+    private void triggerWalkAnimation() {
+        if (walkDirection.y > 0) {
+            entity.getEvents().trigger("walkBackward");
+        } else if (walkDirection.y < 0) {
+            entity.getEvents().trigger("walkForward");
+        } else if (walkDirection.x > 0) {
+            entity.getEvents().trigger("walkRight");
+        } else if (walkDirection.x < 0) {
+            entity.getEvents().trigger("walkLeft");
+        }
+    }
 }

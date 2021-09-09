@@ -169,8 +169,8 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     }
 
     /**
-    * Disables all of the inputs that are currently being pressed.
-    */
+     * Disables all of the inputs that are currently being pressed.
+     */
     public void stopWalking() {
         this.left = 0;
         this.right = 0;
@@ -217,9 +217,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     }
 
     /**
-    * Triggers the dash event for the player character. The method will
-    * call a movement at a certain speed.
-    */
+     * Triggers the dash event for the player character. The method will
+     * call a movement at a certain speed.
+     */
     private void triggerDashEvent() {
         calculateDistance(DASH_MULTIPLIER);
         entity.getEvents().trigger("walk", walkDirection);

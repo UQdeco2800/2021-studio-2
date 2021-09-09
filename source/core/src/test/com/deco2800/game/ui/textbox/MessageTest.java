@@ -2,14 +2,19 @@ package com.deco2800.game.ui.textbox;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MessageTest {
 
-    /** Message with main character speaking. */
+    /**
+     * Message with main character speaking.
+     */
     private Message messageMain;
 
-    /** Message with the NPC speaking. */
+    /**
+     * Message with the NPC speaking.
+     */
     private Message messageNPC;
 
     @BeforeEach

@@ -10,15 +10,21 @@ import com.deco2800.game.physics.BodyUserData;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TouchMoveComponent extends TouchComponent{
+public class TouchMoveComponent extends TouchComponent {
 
-    /** The direction the character will move in*/
+    /**
+     * The direction the character will move in
+     */
     private Vector2 direction;
 
-    /** The distance on the x axis the character will need to move. */
+    /**
+     * The distance on the x axis the character will need to move.
+     */
     private float x;
 
-    /** The distance on the y axis the character will need to move. */
+    /**
+     * The distance on the y axis the character will need to move.
+     */
     private float y;
 
     /**
@@ -47,11 +53,10 @@ public class TouchMoveComponent extends TouchComponent{
      * The method that is called once a collision event is triggered. The method
      * will check that the correct entities are in the collision, if they are not
      * then the method will terminate prematurely.
-     *
      * If the entities are correct, a text box will be displayed and the player will
      * stop moving.
      *
-     * @param me the entity that will trigger the event
+     * @param me    the entity that will trigger the event
      * @param other the entity that is required to trigger the event on collision
      */
     @Override
@@ -62,7 +67,7 @@ public class TouchMoveComponent extends TouchComponent{
 
         Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
-        KeyboardPlayerInputComponent input =  collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
+        KeyboardPlayerInputComponent input = collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
         //Checks if the entity that has collided is the player
         if (actions == null) {
             return;
@@ -76,7 +81,7 @@ public class TouchMoveComponent extends TouchComponent{
      * Moves the character in the direction specified in the constructor,
      * the character is the entity that will be moved and changing the actions of that entity.
      *
-     * @param player the entity that will be moved
+     * @param player  the entity that will be moved
      * @param actions the actions of the entity moving
      */
     private void movePlayer(Entity player, PlayerActions actions, KeyboardPlayerInputComponent input) {
@@ -91,15 +96,15 @@ public class TouchMoveComponent extends TouchComponent{
     /**
      * Repeatedly checks if the player has moved in the correct direction.
      *
-     * @param player the entity to be moved
-     * @param actions class to change the what the entity is doing
+     * @param player   the entity to be moved
+     * @param actions  class to change the what the entity is doing
      * @param position start position of the entity
      */
     private void checkPosition(Entity player, PlayerActions actions, Vector2 position) {
-        float xDifference = player.getPosition().x - position.x > 0?
+        float xDifference = player.getPosition().x - position.x > 0 ?
                 player.getPosition().x - position.x : -1 * (player.getPosition().x - position.x);
 
-        float yDifference = player.getPosition().y - position.y > 0?
+        float yDifference = player.getPosition().y - position.y > 0 ?
                 player.getPosition().y - position.y : -1 * (player.getPosition().y - position.y);
         if (xDifference <= x && yDifference <= y) {
             Timer timer = new Timer();

@@ -33,34 +33,34 @@ public class TestGameArea extends GameArea {
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(6, 15);
     private static final float WALL_WIDTH = 0.1f;
     private static final String[] forestTextures = {
-          "images/box_boy_leaf.png",
-          "images/tree.png",
-          "images/trap.png",
-          "images/test.png",
-          "images/arrow_normal.png",
-          "images/ghost_king.png",
-          "images/ghost_crown.png",
-          "images/ghost_1.png",
-          "images/grass_1.png",
-          "images/grass_2.png",
-          "images/grass_3.png",
-          "images/hex_grass_1.png",
-          "images/hex_grass_2.png",
-          "images/hex_grass_3.png",
-          "images/iso_grass_1.png",
-          "images/iso_grass_2.png",
-          "images/iso_grass_3.png",
-          "images/mud.png",
-          "images/player.png",
-          "images/health_left.png",
-          "images/health_middle.png",
-          "images/health_right.png",
-          "images/health_frame_left.png",
-          "images/health_frame_middle.png",
-          "images/health_frame_right.png",
-          "images/hp_icon.png",
-          "images/dash_icon.png",
-          "images/prisoner.png"
+            "images/box_boy_leaf.png",
+            "images/tree.png",
+            "images/trap.png",
+            "images/test.png",
+            "images/arrow_normal.png",
+            "images/ghost_king.png",
+            "images/ghost_crown.png",
+            "images/ghost_1.png",
+            "images/grass_1.png",
+            "images/grass_2.png",
+            "images/grass_3.png",
+            "images/hex_grass_1.png",
+            "images/hex_grass_2.png",
+            "images/hex_grass_3.png",
+            "images/iso_grass_1.png",
+            "images/iso_grass_2.png",
+            "images/iso_grass_3.png",
+            "images/mud.png",
+            "images/player.png",
+            "images/health_left.png",
+            "images/health_middle.png",
+            "images/health_right.png",
+            "images/health_frame_left.png",
+            "images/health_frame_middle.png",
+            "images/health_frame_right.png",
+            "images/hp_icon.png",
+            "images/dash_icon.png",
+            "images/prisoner.png"
     };
     private static String[] tileTextures = null;
     private static final String[] forestTextureAtlases = {
@@ -82,9 +82,9 @@ public class TestGameArea extends GameArea {
     public TestGameArea(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
-  }
+    }
 
-  /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
+    /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
@@ -149,24 +149,24 @@ public class TestGameArea extends GameArea {
 
         // Left
         spawnEntityAt(
-              ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
         // Right
         spawnEntityAt(
-              ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-              new GridPoint2(tileBounds.x, 0),
-              false,
-              false);
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+                new GridPoint2(tileBounds.x, 0),
+                false,
+                false);
         // Top
         spawnEntityAt(
-              ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
-              new GridPoint2(0, tileBounds.y),
-              false,
-              false);
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+                new GridPoint2(0, tileBounds.y),
+                false,
+                false);
         // Bottom
         spawnEntityAt(
-              ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-      //Walls imported from JSON (Not working as intended, leave for sprint 2)
+        //Walls imported from JSON (Not working as intended, leave for sprint 2)
     /*Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
     HashMap<String, Integer>[] walls = m.getWallObjects();
     int X = 0;
@@ -198,55 +198,56 @@ public class TestGameArea extends GameArea {
     }
      */
 
-      //Manually placed walls, will be deleted in next sprint
-      //Left Wall
-      spawnEntityAt(ObstacleFactory.createWall(0.5f, 6f),
-              new GridPoint2(3, 7),
-              false,
-              false);
+        //Manually placed walls, will be deleted in next sprint
+        //Left Wall
+        spawnEntityAt(ObstacleFactory.createWall(0.5f, 6f),
+                new GridPoint2(3, 7),
+                false,
+                false);
 
-      //Bottom-Left Wall
-      spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
-              new GridPoint2(3, 6),
-              false,
-              false);
+        //Bottom-Left Wall
+        spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
+                new GridPoint2(3, 6),
+                false,
+                false);
 
-      //Bottom-Right Wall
-      spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
-              new GridPoint2(14, 10),
-              false,
-              false);
+        //Bottom-Right Wall
+        spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
+                new GridPoint2(14, 10),
+                false,
+                false);
 
-      //Right Wall
-      spawnEntityAt(ObstacleFactory.createWall(0.5f, 4.5f),
-              new GridPoint2(21, 10),
-              false,
-              false);
+        //Right Wall
+        spawnEntityAt(ObstacleFactory.createWall(0.5f, 4.5f),
+                new GridPoint2(21, 10),
+                false,
+                false);
 
-      //Top-Right Wall
-      spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
-              new GridPoint2(14, 19),
-              false,
-              false);
+        //Top-Right Wall
+        spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
+                new GridPoint2(14, 19),
+                false,
+                false);
 
-      //Top-Left Wall
-      spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
-              new GridPoint2(3, 16),
-              false,
-              false);
+        //Top-Left Wall
+        spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
+                new GridPoint2(3, 16),
+                false,
+                false);
 
-      //Middle-Top Wall
-      spawnEntityAt(ObstacleFactory.createWall(0.5f, 3f),
-              new GridPoint2(13, 16),
-              false,
-              false);
+        //Middle-Top Wall
+        spawnEntityAt(ObstacleFactory.createWall(0.5f, 3f),
+                new GridPoint2(13, 16),
+                false,
+                false);
 
-      //Middle-Bottom Wall
-      spawnEntityAt(ObstacleFactory.createWall(0.5f, 2f),
-              new GridPoint2(14, 7),
-              false,
-              false);
+        //Middle-Bottom Wall
+        spawnEntityAt(ObstacleFactory.createWall(0.5f, 2f),
+                new GridPoint2(14, 7),
+                false,
+                false);
     }
+
     /**
      * Spawn anchored ghost, ghost only move at the certain anchored
      */

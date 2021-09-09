@@ -41,13 +41,19 @@ public class TextBox extends Component {
      */
     private int subMessageIndex = 0;
 
-    /** Set of dialogue that can be randomised depending on previous NPC interactions. */
+    /**
+     * Set of dialogue that can be randomised depending on previous NPC interactions.
+     */
     private RandomDialogueSet randomDialogueSet;
 
-    /** Index of the sequence of ordered dialogue. */
+    /**
+     * Index of the sequence of ordered dialogue.
+     */
     private int orderedDialogueIndex = 0;
 
-    /** Dialogue object that the text box is currently on. */
+    /**
+     * Dialogue object that the text box is currently on.
+     */
     private Dialogue dialogue;
 
     /**
@@ -60,10 +66,14 @@ public class TextBox extends Component {
      */
     private boolean generateCharacter = true;
 
-    /** Boolean to check if the main character text box should be displayed or the enemy. */
+    /**
+     * Boolean to check if the main character text box should be displayed or the enemy.
+     */
     private boolean mainCharacterShowing = true;
 
-    /** Checks if the set of dialogue is ordered or random. */
+    /**
+     * Checks if the set of dialogue is ordered or random.
+     */
     private boolean orderedDialogue = false;
 
     public TextBox() {

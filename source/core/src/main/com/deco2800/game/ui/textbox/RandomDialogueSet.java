@@ -4,7 +4,7 @@ package com.deco2800.game.ui.textbox;
  * To create a diverse storyline, interactions between the player and the characters throughout the map
  * will change on past interactions, mainly if they have defeated you or you have been defeated by them before.
  * To allow for this, an enum has been created to store all of the sets of dialogue that may occur.
- *
+ * <p>
  * For each character, there will be dialogue based on if it is the first time the player has encountered the
  * NPC before and what happened in the last interaction. There is currently 3 sets that may occur,
  * the first encounter, the player has defeated the NPC or the NPC has defeated the player.
@@ -12,16 +12,16 @@ package com.deco2800.game.ui.textbox;
 public enum RandomDialogueSet {
 
     TUTORIAL(
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TUTORIAL_FIRST
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TUTORIAL_REPEAT
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TUTORIAL_REPEAT
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TUTORIAL_MOVE,
                     Dialogue.TUTORIAL_DASH,
                     Dialogue.TUTORIAL_ATTACK,
@@ -30,17 +30,17 @@ public enum RandomDialogueSet {
     ),
 
     LOKI_OPENING(
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.LOKI_FIRST
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.LOKI_DEFEAT_1,
                     Dialogue.LOKI_DEFEAT_2,
                     Dialogue.LOKI_DEFEAT_3,
                     Dialogue.LOKI_DEFEAT_4,
                     Dialogue.LOKI_DEFEAT_5,
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.LOKI_DEFEAT_1,
                     Dialogue.LOKI_DEFEAT_2,
                     Dialogue.LOKI_DEFEAT_3,
@@ -51,16 +51,16 @@ public enum RandomDialogueSet {
     ),
 
     GARMR(
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.GARMR_FIRST
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.GARMR_BEATEN_1,
                     Dialogue.GARMR_BEATEN_2,
                     Dialogue.GARMR_BEATEN_3,
                     Dialogue.GARMR_BEATEN_4,
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.GARMR_DEFEAT_1,
                     Dialogue.GARMR_DEFEAT_2,
             },
@@ -68,17 +68,17 @@ public enum RandomDialogueSet {
     ),
 
     TEST(
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TEST_1
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TEST_1
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TEST_1,
                     Dialogue.TEST_2
             },
-            new Dialogue[] {
+            new Dialogue[]{
                     Dialogue.TEST_1,
                     Dialogue.TEST_2
             }
@@ -92,16 +92,24 @@ public enum RandomDialogueSet {
         this.orderedDialogue = orderedDialogue;
     }
 
-    /** Set of dialogue to be used if the player has not been used before. */
+    /**
+     * Set of dialogue to be used if the player has not been used before.
+     */
     private Dialogue[] firstEncounter;
 
-    /** Set of dialogue to be used if the player has defeated by the NPC before. */
+    /**
+     * Set of dialogue to be used if the player has defeated by the NPC before.
+     */
     private Dialogue[] defeatedBossBefore;
 
-    /** Set of dialogue to be used if the player has been defeated by the NPC before. */
+    /**
+     * Set of dialogue to be used if the player has been defeated by the NPC before.
+     */
     private Dialogue[] defeatedPlayerBefore;
 
-    /** Sets of dialogue that are within the same area but are not displayed right after each other. */
+    /**
+     * Sets of dialogue that are within the same area but are not displayed right after each other.
+     */
     private Dialogue[] orderedDialogue;
 
     /**
@@ -138,8 +146,8 @@ public enum RandomDialogueSet {
      * @return returns the random index
      */
     private static int randomIndex(int size) {
-        int index = ((int)System.currentTimeMillis()) % size;
-        return index > 0? index : index * -1;
+        int index = ((int) System.currentTimeMillis()) % size;
+        return index > 0 ? index : index * -1;
     }
 
     /**

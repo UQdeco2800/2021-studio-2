@@ -2,7 +2,6 @@ package com.deco2800.game.ui.textbox;
 
 import com.badlogic.gdx.Input;
 import com.deco2800.game.extensions.GameExtension;
-import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -103,7 +102,7 @@ class TextBoxInputComponentTest {
         textBox.setNewCharactersOff();
         textBox.acceptInput();
 
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
         textBox.setSubMessage();
 
         assertEquals("Test 1 Message 1", textBox.getSubMessage());
@@ -117,10 +116,10 @@ class TextBoxInputComponentTest {
         textBox.setNewCharactersOff();
         textBox.acceptInput();
 
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
         textBox.setSubMessage();
 
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
         textBox.setSubMessage();
 
         assertEquals("T", textBox.getSubMessage());
@@ -134,10 +133,10 @@ class TextBoxInputComponentTest {
         textBox.setNewCharactersOff();
         textBox.acceptInput();
 
-        textBoxInput.touchDown(0,0,0,0);
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
+        textBoxInput.touchDown(0, 0, 0, 0);
 
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
         textBox.setSubMessage();
 
         assertEquals("Test 1 Message 2", textBox.getSubMessage());
@@ -151,13 +150,13 @@ class TextBoxInputComponentTest {
         textBox.setNewCharactersOff();
         textBox.acceptInput();
 
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
         textBoxInput.keyTyped(' ');
 
         assertEquals("Test 1 Message 1", textBox.getMessage());
 
         textBoxInput.keyTyped(' ');
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
 
         assertEquals("Test 1 Message 2", textBox.getMessage());
     }
@@ -170,13 +169,13 @@ class TextBoxInputComponentTest {
         textBox.setNewCharactersOff();
         textBox.acceptInput();
 
-        textBoxInput.touchDown(0,0,0,0);
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
+        textBoxInput.touchDown(0, 0, 0, 0);
 
         assertEquals("Test 1 Message 1", textBox.getMessage());
 
-        textBoxInput.touchDown(0,0,0,0);
-        textBoxInput.touchDown(0,0,0,0);
+        textBoxInput.touchDown(0, 0, 0, 0);
+        textBoxInput.touchDown(0, 0, 0, 0);
 
         assertEquals("Test 1 Message 2", textBox.getMessage());
     }
