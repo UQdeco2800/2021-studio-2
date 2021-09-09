@@ -15,17 +15,17 @@ public class TouchMoveComponent extends TouchComponent {
     /**
      * The direction the character will move in
      */
-    private Vector2 direction;
+    private final Vector2 direction;
 
     /**
      * The distance on the x axis the character will need to move.
      */
-    private float x;
+    private final float x;
 
     /**
      * The distance on the y axis the character will need to move.
      */
-    private float y;
+    private final float y;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -37,16 +37,6 @@ public class TouchMoveComponent extends TouchComponent {
         this.direction = direction;
         this.x = x;
         this.y = y;
-
-    }
-
-    /**
-     * Creates the component by adding the text box so the dialogue can be changed
-     * once the entity has been collided with.
-     */
-    @Override
-    public void create() {
-        super.create();
     }
 
     /**
@@ -61,7 +51,7 @@ public class TouchMoveComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (!this.checkEntities(me, other)) {
+        if (this.checkEntities(me, other)) {
             return;
         }
 

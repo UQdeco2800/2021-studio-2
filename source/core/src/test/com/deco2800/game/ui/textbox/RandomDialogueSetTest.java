@@ -2,8 +2,7 @@ package com.deco2800.game.ui.textbox;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RandomDialogueSetTest {
 
@@ -30,7 +29,7 @@ public class RandomDialogueSetTest {
     @Test
     void getRandomBossDefeatedBeforeTest() {
         Dialogue random = RandomDialogueSet.TEST.getRandomBossDefeatedBefore();
-        assertTrue(random == Dialogue.TEST_1);
+        assertSame(random, Dialogue.TEST_1);
     }
 
     @Test

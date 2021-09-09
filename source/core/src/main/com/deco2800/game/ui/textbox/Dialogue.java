@@ -162,7 +162,7 @@ public enum Dialogue {
             new Message(false, "Test 2 Message 3")
     });
 
-    private Message[] messages;
+    private final Message[] messages;
 
     /**
      * Constructor to create the dialogue enum object, used to take and store the array list passed in.
@@ -212,12 +212,12 @@ class Message {
     /**
      * If the main character is talking mainCharacter is true, else it is false.
      */
-    private boolean mainCharacter;
+    private final boolean mainCharacter;
 
     /**
      * The message that will be displayed by the character.
      */
-    private String message;
+    private final String message;
 
     public Message(boolean mainCharacter, String message) {
         this.mainCharacter = mainCharacter;

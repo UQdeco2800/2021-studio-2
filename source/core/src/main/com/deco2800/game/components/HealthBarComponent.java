@@ -19,7 +19,7 @@ import java.util.Map;
 public class HealthBarComponent extends RenderComponent {
     protected boolean enabled = true;
     private int currentHealth = 100;
-    private float scale;
+    private final float scale;
     private static final Logger logger = LoggerFactory.getLogger(AnimationRenderComponent.class);
     private final GameTime timeSource;
     private final TextureAtlas atlas;
@@ -48,22 +48,21 @@ public class HealthBarComponent extends RenderComponent {
         entity.setScale(scale, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
     }
 
-    public boolean addAnimation(String name, float frameDuration, Animation.PlayMode playMode) {
+    public void addAnimation(String name, float frameDuration, Animation.PlayMode playMode) {
         Array<TextureAtlas.AtlasRegion> regions = atlas.findRegions(name);
         if (regions == null || regions.size == 0) {
             logger.warn("Animation {} not found in texture atlas", name);
-            return false;
+            return;
         } else if (animations.containsKey(name)) {
             logger.warn(
                     "Animation {} already added in texture atlas. Animations should only be added once.",
                     name);
-            return false;
+            return;
         }
 
         Animation<TextureRegion> animation = new Animation<>(frameDuration, regions, playMode);
         animations.put(name, animation);
         logger.debug("Adding animation {}", name);
-        return true;
     }
 
     public boolean removeAnimation(String name) {
@@ -112,7 +111,6 @@ public class HealthBarComponent extends RenderComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-        draw(batch);
         TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
         Vector2 pos = entity.getPosition();
         Vector2 scale = entity.getScale();
@@ -129,7 +127,7 @@ public class HealthBarComponent extends RenderComponent {
     public void update() {
         currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
-        float ratioOfHealth = (float) (currentHealth / MaxHealth);
+        float ratioOfHealth = currentHealth / MaxHealth;
 
     }
 

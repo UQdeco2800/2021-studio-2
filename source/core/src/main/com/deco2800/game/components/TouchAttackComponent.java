@@ -58,7 +58,7 @@ public class TouchAttackComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (!this.checkEntities(me, other)) {
+        if (this.checkEntities(me, other)) {
             return;
         }
 

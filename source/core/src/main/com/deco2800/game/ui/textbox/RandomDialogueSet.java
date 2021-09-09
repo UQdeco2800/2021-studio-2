@@ -95,22 +95,22 @@ public enum RandomDialogueSet {
     /**
      * Set of dialogue to be used if the player has not been used before.
      */
-    private Dialogue[] firstEncounter;
+    private final Dialogue[] firstEncounter;
 
     /**
      * Set of dialogue to be used if the player has defeated by the NPC before.
      */
-    private Dialogue[] defeatedBossBefore;
+    private final Dialogue[] defeatedBossBefore;
 
     /**
      * Set of dialogue to be used if the player has been defeated by the NPC before.
      */
-    private Dialogue[] defeatedPlayerBefore;
+    private final Dialogue[] defeatedPlayerBefore;
 
     /**
      * Sets of dialogue that are within the same area but are not displayed right after each other.
      */
-    private Dialogue[] orderedDialogue;
+    private final Dialogue[] orderedDialogue;
 
     /**
      * Gets a random Dialogue object from the set for first encounters.

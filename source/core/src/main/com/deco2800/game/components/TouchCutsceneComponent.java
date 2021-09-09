@@ -19,8 +19,8 @@ public class TouchCutsceneComponent extends TouchComponent {
 
     private Entity collidedEntity;
     private PlayerActions actions;
-    private RandomDialogueSet dialogueSet;
-    private int type;
+    private final RandomDialogueSet dialogueSet;
+    private final int type;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -46,7 +46,7 @@ public class TouchCutsceneComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (!this.checkEntities(me, other)) {
+        if (this.checkEntities(me, other)) {
             return;
         }
 

@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 public class TouchAttackCutsceneComponent extends TouchComponent {
 
-    private int repeats;
+    private final int repeats;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -22,15 +22,6 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
     public TouchAttackCutsceneComponent(short targetLayer, int repeats) {
         super(targetLayer);
         this.repeats = repeats;
-    }
-
-    /**
-     * Creates the component by adding the text box so the dialogue can be changed
-     * once the entity has been collided with.
-     */
-    @Override
-    public void create() {
-        super.create();
     }
 
     /**
@@ -45,7 +36,7 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (!this.checkEntities(me, other)) {
+        if (this.checkEntities(me, other)) {
             return;
         }
 
