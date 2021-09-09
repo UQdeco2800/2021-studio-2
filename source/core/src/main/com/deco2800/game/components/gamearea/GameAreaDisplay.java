@@ -10,7 +10,6 @@ import com.deco2800.game.ui.UIComponent;
  * Displays the name of the current game area.
  */
 public class GameAreaDisplay extends UIComponent {
-  //private String gameAreaName = "";
     private final String gameAreaName;
     private Label title;
 

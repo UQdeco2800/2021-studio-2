@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("SuspiciousNameCombination")
 public class ForestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
+    private static final int NUM_CRATES = 3;
     private static final int NUM_TREES = 7;
     private static final int NUM_GHOSTS = 2;
     private static final int NUM_ANCHORED_GHOSTS = 1;
@@ -61,12 +62,12 @@ public class ForestGameArea extends GameArea {
             "images/rock.png"
     };
     public static final String[] healthRegenTextures = {
-            "healthRegen/crate_placeholder.png",
-            "healthRegen/healthPotion_placeholder.png"
+            "healthRegen/healthPotion_placeholder.png",
+            "crate/crateHitBreak.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas"
+            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -105,26 +106,11 @@ public class ForestGameArea extends GameArea {
         spawnGhostKing();
         spawnRangedGhosts();
         spawnAnchoredGhosts();
-        spawnCrate();
         spawnCutsceneTrigger();
 
+        spawnCrate();
+
         playMusic();
-    }
-
-    /**
-     * spawns the crate with the potion entity inside.
-     * the crate is placed on top of the potion entity.
-     */
-    private void spawnCrate() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity crate = ObstacleFactory.createCrate();
-        Entity health = ObstacleFactory.createHealthPotion();
-        spawnEntityAt(crate, randomPos, true, true);
-        spawnEntityAt(health, randomPos, true, true);
-
     }
 
     /**
@@ -247,6 +233,24 @@ public class ForestGameArea extends GameArea {
             Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
             spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+        }
+    }
+
+
+    /**
+     * spawns the crate with the potion entity inside.
+     * the crate is placed on top of the potion entity.
+     */
+    public void spawnCrate() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_CRATES; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity crate = ObstacleFactory.createCrate();
+            Entity health = ObstacleFactory.createHealthPotion();
+            spawnEntityAt(crate, randomPos, true, true);
+            spawnEntityAt(health, randomPos, true, false);
         }
     }
 

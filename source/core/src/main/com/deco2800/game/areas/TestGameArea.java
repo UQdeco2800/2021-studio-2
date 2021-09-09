@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 public class TestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(TestGameArea.class);
     private static final int NUM_GHOSTS = 1;
+    private static final int NUM_CRATES = 3;
     private static final int NUM_ANCHORED_GHOSTS = 1;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
@@ -58,11 +59,12 @@ public class TestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
-            "images/rock.png"
+            "images/rock.png",
+            "healthRegen/healthPotion_placeholder.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas"
+            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -95,6 +97,7 @@ public class TestGameArea extends GameArea {
 
         spawnTerrain();
         spawnPlayer();
+
         spawnGhosts();
         spawnCutsceneTrigger();
         spawnGhostKing();
@@ -102,6 +105,8 @@ public class TestGameArea extends GameArea {
         spawnGhostKing(); //use this later to make evil assassins with different sprites
         spawnAnchoredGhosts();
         spawnTraps();
+
+        spawnCrate();
 
         playMusic();
     }
@@ -290,6 +295,24 @@ public class TestGameArea extends GameArea {
     private void spawnCutsceneTrigger() {
         Entity trigger = CutsceneTriggerFactory.createTrigger();
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
+    }
+
+
+    /**
+     * spawns the crate with the potion entity inside.
+     * the crate is placed on top of the potion entity.
+     */
+    public void spawnCrate() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_CRATES; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity crate = ObstacleFactory.createCrate();
+            Entity health = ObstacleFactory.createHealthPotion();
+            spawnEntityAt(crate, randomPos, true, true);
+            spawnEntityAt(health, randomPos, true, false);
+        }
     }
 
     private void playMusic() {

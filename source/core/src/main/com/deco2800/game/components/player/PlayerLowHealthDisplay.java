@@ -16,10 +16,11 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class PlayerLowHealthDisplay extends UIComponent {
     private Image bloodImage;
-    Stack stack;
-    Sound heartBeat;
-    boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
-    long heartID;
+    private Stack stack;
+    private Sound heartBeat;
+    private boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
+    private long heartID;
+    private boolean displayOn = false;
 
     /**
      * Add all actors to the stage here and event listener
@@ -82,8 +83,12 @@ public class PlayerLowHealthDisplay extends UIComponent {
         if (play) {
             playHeartBeat(alpha);
         }
-        bloodImage.setColor(1, 0, 0, alpha); //opacity of image changes depending on hp %
-        stack.setVisible(true);
+        if (!displayOn) {
+            stack.setVisible(true);
+            displayOn = true;
+        }
+        //bloodImage.setColor(1, 1, 1, alpha); //opacity of image changes depending on hp %
+
     }
 
     /**
