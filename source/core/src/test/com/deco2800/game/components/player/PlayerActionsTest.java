@@ -310,4 +310,32 @@ public class PlayerActionsTest {
         assertTrue((1.7678 - keyboardInput.getWalkDirection().x) < 0.001);
         assertTrue((-1.7678 - keyboardInput.getWalkDirection().y) < 0.001);
     }
+
+    @Test
+    void shouldLockMovement() {
+        KeyboardPlayerInputComponent keyboardInput = new KeyboardPlayerInputComponent();
+        keyboardInput.setEntity(new Entity());
+        keyboardInput.lockPlayer();
+        keyboardInput.keyDown(Input.Keys.S);
+
+        assertEquals(0f, keyboardInput.getWalkDirection().x);
+        assertEquals(0f, keyboardInput.getWalkDirection().y);
+    }
+
+    @Test
+    void shouldUnlockMovement() {
+        KeyboardPlayerInputComponent keyboardInput = new KeyboardPlayerInputComponent();
+        keyboardInput.setEntity(new Entity());
+        keyboardInput.lockPlayer();
+        keyboardInput.keyDown(Input.Keys.S);
+
+        assertEquals(0f, keyboardInput.getWalkDirection().x);
+        assertEquals(0f, keyboardInput.getWalkDirection().y);
+
+        keyboardInput.unlockPlayer();
+        keyboardInput.keyDown(Input.Keys.S);
+
+        assertEquals(0f, keyboardInput.getWalkDirection().x);
+        assertEquals(-1f, keyboardInput.getWalkDirection().y);
+    }
 }

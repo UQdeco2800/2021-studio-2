@@ -58,26 +58,19 @@ public class TouchCutsceneComponent extends TouchComponent {
                 .getUIEntity().getComponent(TextBox.class);
         textBox.setClosed();
         textBox.showBars();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                switch (type) {
-                    case FIRST_ENCOUNTER:
-                        textBox.setRandomFirstEncounter(dialogueSet);
-                        break;
-                    case BOSS_DEFEATED_BEFORE:
-                        textBox.setRandomDefeatDialogueSet(dialogueSet);
-                        break;
-                    case PLAYER_DEFEATED_BEFORE:
-                        textBox.setRandomBeatenDialogueSet(dialogueSet);
-                        break;
-                    case ORDERED:
-                        textBox.setOrderedDialogue(dialogueSet);
-                        break;
-                }
-                timer.cancel();
-            }
-        }, 300);
+        switch (type) {
+            case FIRST_ENCOUNTER:
+                textBox.setRandomFirstEncounter(dialogueSet);
+                break;
+            case BOSS_DEFEATED_BEFORE:
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+                break;
+            case PLAYER_DEFEATED_BEFORE:
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
+                break;
+            case ORDERED:
+                textBox.setOrderedDialogue(dialogueSet);
+                break;
+        }
     }
 }
