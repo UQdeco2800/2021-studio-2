@@ -61,7 +61,8 @@ public class ForestGameArea extends GameArea {
             "images/rock.png",
             "images/enemy_health_bar.png",
             "images/enemy_health_border.png",
-            "images/enemy_health_bar_decrease.png"
+            "images/enemy_health_bar_decrease.png",
+            "images/vortex.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
@@ -105,6 +106,7 @@ public class ForestGameArea extends GameArea {
         spawnGhostKing();
         spawnRangedGhosts();
         spawnAnchoredGhosts();
+        spawnBoss();
 
         spawnCutsceneTrigger();
         playMusic();
@@ -206,6 +208,15 @@ public class ForestGameArea extends GameArea {
     private void spawnCutsceneTrigger() {
         Entity trigger = CutsceneTriggerFactory.createTrigger();
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
+    }
+
+    private void spawnBoss() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+        Entity boss = NPCFactory.createBossNPC(player);
+        spawnEntityAt(boss, randomPos, true, true);
     }
 
     private void spawnGhostKing() {

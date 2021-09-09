@@ -251,11 +251,37 @@ public class NPCFactory {
 
     public static Entity createBossNPC(Entity target) {
         Entity boss = createBaseNPCNoAI();
+        GhostRangedConfig config = configs.ghostRanged;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(target, 10, 7f, 10f))
+                        .addTask(new TeleportationTask(target, 2000));
 
+        AnimationRenderComponent animator =
+
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+        boss
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new GhostAnimationController())
+                .addComponent(aiComponent);
+        boss.setAttackRange(5);
+        //ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        boss.addComponent(healthBarComponent);
         //teleportation - despawn the enemy - if enemy health is lower than 50%
         // everytime the enemy get hit, it randomly teleport to a random position on the map.
         // weaknesses - it may teleport beside the character
-        boss.setEntityType("boss");
         return boss;
     }
 
@@ -295,7 +321,7 @@ public class NPCFactory {
                         .addComponent(new PhysicsMovementComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2.5f));
+                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0.5f));
 
         PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
         return npc;

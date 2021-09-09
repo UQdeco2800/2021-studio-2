@@ -108,6 +108,23 @@ public class WeaponFactory {
     }
 
     /**
+     * create the vortex for teleportation
+     * @param angle angle to spin the vortex for transition animate
+     * @return entity vortex
+     */
+    public static Entity createVortex(float angle) {
+        // if the player touch the vortex - will receive the damage (instant death)
+        Entity vortex = createBaseArrow();
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/vortex.png", Texture.class));
+        vortex.addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(100000, 10)); // touch the vortex == instant death
+        Vector2 scale = new Vector2(sprite.getWidth() / 20f, sprite.getHeight() / 20f);
+        vortex.setScale(scale);
+        vortex.setAngle(angle);
+        return vortex;
+    }
+
+    /**
      * Creates a generic Arrow to be used as a base entity by more specific Arrow creation methods.
      *
      * @return entity
