@@ -14,8 +14,6 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 
-import java.util.Random;
-
 /**
  * Factory to create obstacle entities.
  *

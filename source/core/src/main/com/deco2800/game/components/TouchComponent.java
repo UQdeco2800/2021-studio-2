@@ -27,15 +27,9 @@ abstract class TouchComponent extends Component {
     abstract void onCollisionStart(Fixture me, Fixture other);
 
     protected boolean checkEntities(Fixture me, Fixture other) {
-        if (hitboxComponent.getFixture() != me) {
-            // Not triggered by hitbox, ignore
-            return false;
-        }
-
-        if (PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
-            // Doesn't match our target layer, ignore
-            return false;
-        }
-        return true;
+        // Not triggered by hitbox, ignore
+        return (hitboxComponent.getFixture() != me
+                // Doesn't match our target layer, ignore
+                || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits));
     }
 }

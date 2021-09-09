@@ -203,8 +203,8 @@ class TextBoxTest {
 
         String message = textBox.getMessage();
 
-        assertTrue(message == Dialogue.TEST_1.getMessage(0) ||
-                message == Dialogue.TEST_1.getMessage(1));
+        assertTrue(message.equals(Dialogue.TEST_1.getMessage(0)) ||
+                message.equals(Dialogue.TEST_1.getMessage(1)));
     }
 
     @Test

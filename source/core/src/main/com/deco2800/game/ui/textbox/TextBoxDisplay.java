@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
-import com.deco2800.game.utils.BooleanObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,39 +23,61 @@ public class TextBoxDisplay extends UIComponent {
      */
     private TextBox textBox;
 
-    /** The name to be displayed on the text box for the main character. */
+    /**
+     * The name to be displayed on the text box for the main character.
+     */
     private Label mainCharacterName;
 
-    /** The mainCharacterLabel that will be added to the screen to display the message. */
+    /**
+     * The mainCharacterLabel that will be added to the screen to display the message.
+     */
     private Label mainCharacterLabel;
 
-    /** Stores the image that will surround the text message. */
+    /**
+     * Stores the image that will surround the text message.
+     */
     private Image mainCharacterBox;
 
-    /** Stores the main character image that will surround the text message. */
+    /**
+     * Stores the main character image that will surround the text message.
+     */
     private Image mainCharacterImage;
 
-    /** The name to be displayed on the text box for the NPC. */
+    /**
+     * The name to be displayed on the text box for the NPC.
+     */
     private Label enemyName;
 
-    /** The mainCharacterLabel that will be added to the screen to display the message. */
+    /**
+     * The mainCharacterLabel that will be added to the screen to display the message.
+     */
     private Label enemyLabel;
 
-    /** Stores the image that will surround the text message. */
+    /**
+     * Stores the image that will surround the text message.
+     */
     private Image enemyBox;
 
-    /** Stores the enemy character image that will surround the text message. */
+    /**
+     * Stores the enemy character image that will surround the text message.
+     */
     private Image enemyImage;
 
-    /** Bars to indicate a cutscene is taking place. */
+    /**
+     * Bars to indicate a cutscene is taking place.
+     */
     private Image topBar;
     private Image botBar;
 
-    /** If the cutscene is currently opening. */
-    private BooleanObject opening = new BooleanObject(false);
+    /**
+     * If the cutscene is currently opening.
+     */
+    private boolean opening = false;
 
-    /** If the cutscene is currently closing. */
-    private BooleanObject closing = new BooleanObject(false);
+    /**
+     * If the cutscene is currently closing.
+     */
+    private boolean closing = false;
 
     private final float TEXT_BOX_HEIGHT = 400f;
 
@@ -70,13 +91,7 @@ public class TextBoxDisplay extends UIComponent {
 
     private final float CHARACTER_SIZE = 384f;
 
-    private final float MAIN_CHARACTER_X_POS = 100f;
-
     private final float MAIN_CHARACTER_DISPLAY_X = 70f;
-
-    private final float MAIN_CHARACTER_TEXT_X = 180f;
-
-    private final float MAIN_CHARACTER_NAME_X = 550f;
 
     private final float NAME_Y = 325f;
 
@@ -104,6 +119,9 @@ public class TextBoxDisplay extends UIComponent {
      * Adds the mainCharacterLabel actor to the screen which will be constantly updated to display changes.
      */
     private void addActors() {
+        float MAIN_CHARACTER_NAME_X = 550f;
+        float MAIN_CHARACTER_TEXT_X = 180f;
+        float MAIN_CHARACTER_X_POS = 100f;
 
         topBar = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
@@ -153,9 +171,9 @@ public class TextBoxDisplay extends UIComponent {
     @Override
     public void draw(SpriteBatch batch) {
         if (textBox.isOpen()) {
-            if (!opening.getBoolean()) {
-                closing.setFalse();
-                opening.setTrue();
+            if (!opening) {
+                closing = false;
+                opening = true;
                 openBars();
             }
             if (textBox.isMainCharacterShowing()) {
@@ -171,9 +189,9 @@ public class TextBoxDisplay extends UIComponent {
         } else {
             setMainCharacterVisible(false);
             setNPCVisible(false);
-            if (!closing.getBoolean()) {
-                closing.setTrue();
-                opening.setFalse();
+            if (!closing) {
+                closing = true;
+                opening = false;
                 closeBars();
             }
         }
@@ -223,21 +241,26 @@ public class TextBoxDisplay extends UIComponent {
     /**
      * Moves the bars down relative to their original height.
      *
-     * @param bar the image that will change position
+     * @param bar  the image that will change position
      * @param type the boolean type that will be checked to repeat
      */
-    private void moveDown(Image bar, BooleanObject type) {
+    private void moveDown(Image bar, boolean type) {
         float initialHeight = -120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
+<<<<<<< HEAD
         if (bar.getY() > initialHeight - BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() - 6);
+=======
+        if (bar.getY() > initialHeight - BAR_HEIGHT && type) {
+            bar.setY(bar.getY() - 2);
+>>>>>>> ee555b12486439a60324aa2836b0b7aadd131d50
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveDown(bar, type);
+                    moveDown(bar, true);
                     timer.cancel();
                 }
             }, 15);
@@ -247,21 +270,26 @@ public class TextBoxDisplay extends UIComponent {
     /**
      * Moves the bars up relative to their original height.
      *
-     * @param bar the image that will change position
+     * @param bar  the image that will change position
      * @param type the boolean type that will be checked to repeat
      */
-    private void moveUp(Image bar, BooleanObject type) {
-        float initialHeight = - 120;
+    private void moveUp(Image bar, boolean type) {
+        float initialHeight = -120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
+<<<<<<< HEAD
         if (bar.getY() < initialHeight + BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() + 6);
+=======
+        if (bar.getY() < initialHeight + BAR_HEIGHT && type) {
+            bar.setY(bar.getY() + 2);
+>>>>>>> ee555b12486439a60324aa2836b0b7aadd131d50
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveUp(bar, type);
+                    moveUp(bar, false);
                     timer.cancel();
                 }
             }, 15);
@@ -289,11 +317,11 @@ public class TextBoxDisplay extends UIComponent {
             enemyLabel.remove();
         }
 
-        switch(set) {
+        switch (set) {
             case TUTORIAL:
                 enemyName = new Label("PRISONER", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
-                    .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
+                        .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;

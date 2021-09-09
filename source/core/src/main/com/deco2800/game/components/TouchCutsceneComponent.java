@@ -1,19 +1,11 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.Dialogue;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -27,8 +19,8 @@ public class TouchCutsceneComponent extends TouchComponent {
 
     private Entity collidedEntity;
     private PlayerActions actions;
-    private RandomDialogueSet dialogueSet;
-    private int type;
+    private final RandomDialogueSet dialogueSet;
+    private final int type;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -54,7 +46,7 @@ public class TouchCutsceneComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (!this.checkEntities(me, other)) {
+        if (this.checkEntities(me, other)) {
             return;
         }
 

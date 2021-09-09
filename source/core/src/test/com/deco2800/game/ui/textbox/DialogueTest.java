@@ -1,6 +1,7 @@
 package com.deco2800.game.ui.textbox;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DialogueTest {
