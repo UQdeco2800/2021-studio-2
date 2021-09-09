@@ -245,6 +245,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
     /**
      * Sets the last key pressed attribute to the integer that has been passed in.
+     *
      * @param key direction of the attack of the player
      */
     public void setLastKeyPressed(int key) {

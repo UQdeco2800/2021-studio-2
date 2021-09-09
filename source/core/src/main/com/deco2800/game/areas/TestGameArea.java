@@ -27,8 +27,6 @@ import org.slf4j.LoggerFactory;
  */
 public class TestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(TestGameArea.class);
-    private static final int NUM_GHOSTS = 1;
-    private static final int NUM_ANCHORED_GHOSTS = 1;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(6, 15);
     private static final float WALL_WIDTH = 0.1f;
@@ -126,16 +124,16 @@ public class TestGameArea extends GameArea {
         spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true); */
 
         Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(10,5.8f), true, true);
+        spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
 
         Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(2.2f,3.3f), true, true);
+        spawnEntityAt(moveTrigger4, new Vector2(2.2f, 3.3f), true, true);
 
         Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
-        spawnEntityAt(moveTrigger5, new Vector2(6.3f,3.3f), true, true);
+        spawnEntityAt(moveTrigger5, new Vector2(6.3f, 3.3f), true, true);
 
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger6, new Vector2(6.3f,6.5f), true, true);
+        spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
     }
 
     private void spawnTerrain() {

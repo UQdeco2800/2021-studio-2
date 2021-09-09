@@ -153,6 +153,7 @@ public class TextBox extends Component {
 
     /**
      * Returns if the black cutscene bars should be shown or not.
+     *
      * @return true if the bars should be shown, false if not
      */
     public boolean shouldShowBars() {

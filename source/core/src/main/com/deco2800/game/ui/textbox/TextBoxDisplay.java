@@ -172,7 +172,7 @@ public class TextBoxDisplay extends UIComponent {
     @Override
     public void draw(SpriteBatch batch) {
         if (textBox.shouldShowBars()) {
-            if (!opening.getBoolean())   {
+            if (!opening.getBoolean()) {
                 closing.setFalse();
                 opening.setTrue();
                 openBars();
