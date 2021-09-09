@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import com.deco2800.game.utils.BooleanObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -72,12 +73,12 @@ public class TextBoxDisplay extends UIComponent {
     /**
      * If the cutscene is currently opening.
      */
-    private boolean opening = false;
+    private final BooleanObject opening = new BooleanObject(false);
 
     /**
      * If the cutscene is currently closing.
      */
-    private boolean closing = false;
+    private final BooleanObject closing = new BooleanObject(false);
 
     private final float TEXT_BOX_HEIGHT = 400f;
 
@@ -171,9 +172,9 @@ public class TextBoxDisplay extends UIComponent {
     @Override
     public void draw(SpriteBatch batch) {
         if (textBox.isOpen()) {
-            if (!opening) {
-                closing = false;
-                opening = true;
+            if (!opening.getBoolean())   {
+                closing.setFalse();
+                opening.setTrue();
                 openBars();
             }
             if (textBox.isMainCharacterShowing()) {
@@ -189,9 +190,9 @@ public class TextBoxDisplay extends UIComponent {
         } else {
             setMainCharacterVisible(false);
             setNPCVisible(false);
-            if (!closing) {
-                closing = true;
-                opening = false;
+            if (!closing.getBoolean()) {
+                closing.setTrue();
+                opening.setFalse();
                 closeBars();
             }
         }
@@ -244,23 +245,18 @@ public class TextBoxDisplay extends UIComponent {
      * @param bar  the image that will change position
      * @param type the boolean type that will be checked to repeat
      */
-    private void moveDown(Image bar, boolean type) {
+    private void moveDown(Image bar, BooleanObject type) {
         float initialHeight = -120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
-<<<<<<< HEAD
         if (bar.getY() > initialHeight - BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() - 6);
-=======
-        if (bar.getY() > initialHeight - BAR_HEIGHT && type) {
-            bar.setY(bar.getY() - 2);
->>>>>>> ee555b12486439a60324aa2836b0b7aadd131d50
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveDown(bar, true);
+                    moveDown(bar, type);
                     timer.cancel();
                 }
             }, 15);
@@ -273,23 +269,18 @@ public class TextBoxDisplay extends UIComponent {
      * @param bar  the image that will change position
      * @param type the boolean type that will be checked to repeat
      */
-    private void moveUp(Image bar, boolean type) {
+    private void moveUp(Image bar, BooleanObject type) {
         float initialHeight = -120;
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
-<<<<<<< HEAD
         if (bar.getY() < initialHeight + BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() + 6);
-=======
-        if (bar.getY() < initialHeight + BAR_HEIGHT && type) {
-            bar.setY(bar.getY() + 2);
->>>>>>> ee555b12486439a60324aa2836b0b7aadd131d50
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveUp(bar, false);
+                    moveUp(bar, type);
                     timer.cancel();
                 }
             }, 15);
@@ -333,7 +324,11 @@ public class TextBoxDisplay extends UIComponent {
                         .getAsset("images/textBoxDisplay/loki_text_box.png", Texture.class));
                 break;
             case GARMR:
-                enemyName.setText("GARMR");
+                enemyName = new Label("GARMR", skin);
+                enemyImage = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
+                enemyBox = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
         }
         setNPCPosition();
