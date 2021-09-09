@@ -1,16 +1,21 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchHealComponent;
+import com.deco2800.game.components.crate.CrateAnimationController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Factory to create obstacle entities.
@@ -82,19 +87,23 @@ public class ObstacleFactory {
      * @return crate entity
      */
     public static Entity createCrate() {
+
+        AnimationRenderComponent crateAnimator = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("crate/crateHitBreak.atlas", TextureAtlas.class));
+        crateAnimator.addAnimation("hit", 0.05f); //default playback NORMAL
+        crateAnimator.addAnimation("break", 0.05f);
+        crateAnimator.addAnimation("default", 1f);
+        crateAnimator.startAnimation("default");
         Entity crate = new Entity()
-                .addComponent(new TextureRenderComponent("healthRegen/crate_placeholder.png"))
+                .addComponent(crateAnimator)
+                .addComponent(new CrateAnimationController())
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                .addComponent(new CombatStatsComponent(100, 0));
-                //takes damage. now need to dispose crate on death.
-
-                //create animations for the crate when its hit
+                .addComponent(new CombatStatsComponent(30, 0));
 
         crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        crate.getComponent(TextureRenderComponent.class).scaleEntity();
-        crate.scaleHeight(1f);
+        crate.getComponent(AnimationRenderComponent.class).scaleEntity();
         return crate;
     }
 
@@ -109,7 +118,7 @@ public class ObstacleFactory {
                 .addComponent(new CombatStatsComponent(0, 99999)) //used to know how much health to restore
                 //instead of using CombatStatComponent we could change the health given in the TouchHealComponent
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE).setSensor(true))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.NPC).setSensor(true))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
                 //physics components is to detect whether the player has stepped onto the potion entity
