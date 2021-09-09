@@ -18,6 +18,7 @@ import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -79,7 +80,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         if (!poweringUp) {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
-        Random rand = new Random();
+        Random rand = new SecureRandom();
 
         switch (projectileType) {
             case "normalArrow": {
