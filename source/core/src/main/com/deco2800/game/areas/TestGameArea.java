@@ -1,5 +1,6 @@
 package com.deco2800.game.areas;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +15,7 @@ import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -109,23 +111,31 @@ public class TestGameArea extends GameArea {
     }
 
     private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL, 4);
+        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED);
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING, 2);
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+                DialogueSet.BOSS_DEFEATED_BEFORE);
         spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
 
         /*Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
         spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
 
         Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
+        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true); */
 
-        Entity moveTrigger3 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0), 5, 0);
-        spawnEntityAt(moveTrigger3, new Vector2(7,9.2f), true, true);
+        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
+        spawnEntityAt(moveTrigger3, new Vector2(10,5.8f), true, true);
 
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 5);
-        spawnEntityAt(moveTrigger4, new Vector2(6.8f,6), true, true);*/
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+        spawnEntityAt(moveTrigger4, new Vector2(2.2f,3.3f), true, true);
+
+        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
+        spawnEntityAt(moveTrigger5, new Vector2(6.3f,3.3f), true, true);
+
+        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+        spawnEntityAt(moveTrigger6, new Vector2(6.3f,6.5f), true, true);
     }
 
     private void spawnTerrain() {

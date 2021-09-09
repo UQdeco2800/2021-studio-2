@@ -4,8 +4,12 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -20,14 +24,14 @@ public class TouchCutsceneComponent extends TouchComponent {
     private Entity collidedEntity;
     private PlayerActions actions;
     private final RandomDialogueSet dialogueSet;
-    private final int type;
+    private final DialogueSet type;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, int type) {
+    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type) {
         super(targetLayer);
         this.dialogueSet = dialogueSet;
         this.type = type;
@@ -53,19 +57,27 @@ public class TouchCutsceneComponent extends TouchComponent {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
         textBox.setClosed();
-        switch (type) {
-            case 1:
-                textBox.setRandomFirstEncounter(dialogueSet);
-                break;
-            case 2:
-                textBox.setRandomDefeatDialogueSet(dialogueSet);
-                break;
-            case 3:
-                textBox.setRandomBeatenDialogueSet(dialogueSet);
-                break;
-            case 4:
-                textBox.setOrderedDialogue(dialogueSet);
-                break;
-        }
+        textBox.showBars();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                switch (type) {
+                    case FIRST_ENCOUNTER:
+                        textBox.setRandomFirstEncounter(dialogueSet);
+                        break;
+                    case BOSS_DEFEATED_BEFORE:
+                        textBox.setRandomDefeatDialogueSet(dialogueSet);
+                        break;
+                    case PLAYER_DEFEATED_BEFORE:
+                        textBox.setRandomBeatenDialogueSet(dialogueSet);
+                        break;
+                    case ORDERED:
+                        textBox.setOrderedDialogue(dialogueSet);
+                        break;
+                }
+                timer.cancel();
+            }
+        }, 300);
     }
 }

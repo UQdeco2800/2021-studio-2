@@ -171,21 +171,26 @@ public class TextBoxDisplay extends UIComponent {
      */
     @Override
     public void draw(SpriteBatch batch) {
-        if (textBox.isOpen()) {
+        if (textBox.shouldShowBars()) {
             if (!opening.getBoolean())   {
                 closing.setFalse();
                 opening.setTrue();
                 openBars();
             }
-            if (textBox.isMainCharacterShowing()) {
-                setNPCVisible(false);
-                setMainCharacterVisible(true);
-                mainCharacterLabel.setText(textBox.getSubMessage());
+            if (textBox.isOpen()) {
+                if (textBox.isMainCharacterShowing()) {
+                    setNPCVisible(false);
+                    setMainCharacterVisible(true);
+                    mainCharacterLabel.setText(textBox.getSubMessage());
+                } else {
+                    setMainCharacterVisible(false);
+                    setNPCVisible(true);
+                    setEnemyTextBox();
+                    enemyLabel.setText(textBox.getSubMessage());
+                }
             } else {
                 setMainCharacterVisible(false);
-                setNPCVisible(true);
-                setEnemyTextBox();
-                enemyLabel.setText(textBox.getSubMessage());
+                setNPCVisible(false);
             }
         } else {
             setMainCharacterVisible(false);
@@ -194,6 +199,7 @@ public class TextBoxDisplay extends UIComponent {
                 closing.setTrue();
                 opening.setFalse();
                 closeBars();
+
             }
         }
     }

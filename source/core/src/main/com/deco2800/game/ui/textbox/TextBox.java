@@ -74,7 +74,7 @@ public class TextBox extends Component {
     /**
      * Checks if the set of dialogue is ordered or random.
      */
-    private boolean orderedDialogue = false;
+    private boolean showBars = false;
 
     public TextBox() {
         setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
@@ -122,6 +122,7 @@ public class TextBox extends Component {
         isOpen = false;
         message = "";
         generateCharacter = false;
+        hideBars();
         this.index = 0;
     }
 
@@ -132,7 +133,30 @@ public class TextBox extends Component {
         logger.debug("Opening text box");
         isOpen = true;
         generateCharacter = true;
-        this.nextMessage();
+        showBars();
+        nextMessage();
+    }
+
+    /**
+     * Shows the black cutscene bars.
+     */
+    public void showBars() {
+        this.showBars = true;
+    }
+
+    /**
+     * Hides the black cutscene bars.
+     */
+    public void hideBars() {
+        this.showBars = false;
+    }
+
+    /**
+     * Returns if the black cutscene bars should be shown or not.
+     * @return true if the bars should be shown, false if not
+     */
+    public boolean shouldShowBars() {
+        return this.showBars;
     }
 
 
@@ -239,7 +263,6 @@ public class TextBox extends Component {
         this.randomDialogueSet = dialogueSet;
         orderedDialogueIndex = 0;
         setDialogue(randomDialogueSet.getRandomPlayerDefeatedBefore());
-        orderedDialogue = false;
         setOpen();
     }
 
@@ -252,7 +275,6 @@ public class TextBox extends Component {
         this.randomDialogueSet = dialogueSet;
         orderedDialogueIndex = 0;
         setDialogue(randomDialogueSet.getRandomBossDefeatedBefore());
-        orderedDialogue = false;
         setOpen();
     }
 
@@ -265,7 +287,6 @@ public class TextBox extends Component {
         this.randomDialogueSet = dialogueSet;
         orderedDialogueIndex = 0;
         setDialogue(randomDialogueSet.getRandomFirstEncounter());
-        orderedDialogue = false;
         setOpen();
     }
 
@@ -284,11 +305,9 @@ public class TextBox extends Component {
         if (randomDialogueSet.getOrderedDialogueSize() > orderedDialogueIndex) {
             setDialogue(randomDialogueSet.getOrderedDialogue(orderedDialogueIndex));
             orderedDialogueIndex++;
-            orderedDialogue = true;
             setOpen();
         } else {
             orderedDialogueIndex = 0;
-            orderedDialogue = false;
         }
     }
 

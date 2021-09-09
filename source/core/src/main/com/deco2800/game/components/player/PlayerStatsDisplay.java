@@ -142,7 +142,7 @@ public class PlayerStatsDisplay extends UIComponent {
     public void draw(SpriteBatch batch) {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        if (textBox.isOpen()) {
+        if (textBox.shouldShowBars()) {
             table.setVisible(false);
             healthLabel.setVisible(false);
             heartImage.setVisible(false);

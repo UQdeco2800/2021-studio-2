@@ -244,6 +244,14 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     }
 
     /**
+     * Sets the last key pressed attribute to the integer that has been passed in.
+     * @param key direction of the attack of the player
+     */
+    public void setLastKeyPressed(int key) {
+        this.lastKeyPressed = key;
+    }
+
+    /**
      * This method has been created to test that the correct direction is
      * to be walked in.
      *
@@ -255,5 +263,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
 
     public void lockPlayer() {
         this.locked = true;
+    }
+
+    public void unlockPlayer() {
+        this.locked = false;
     }
 } 

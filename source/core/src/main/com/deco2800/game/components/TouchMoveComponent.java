@@ -6,6 +6,8 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
+import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,15 +30,26 @@ public class TouchMoveComponent extends TouchComponent {
     private final float y;
 
     /**
+     * Checks if the component has been triggered before
+     */
+    private boolean triggered = false;
+
+    /**
+     * Used to see if the move component should be repeated or not
+     */
+    private final boolean repeatable;
+
+    /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchMoveComponent(short targetLayer, Vector2 direction, float x, float y) {
+    public TouchMoveComponent(short targetLayer, Vector2 direction, float x, float y, boolean repeatable) {
         super(targetLayer);
         this.direction = direction;
         this.x = x;
         this.y = y;
+        this.repeatable = repeatable;
     }
 
     /**
@@ -51,6 +64,10 @@ public class TouchMoveComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
+        if (triggered && !repeatable) {
+            return;
+        }
+        triggered = true;
         if (this.checkEntities(me, other)) {
             return;
         }
@@ -64,6 +81,10 @@ public class TouchMoveComponent extends TouchComponent {
         }
         actions.stopWalking();
         input.stopWalking();
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        textBox.setClosed();
+        textBox.showBars();
         movePlayer(collidedEntity, actions, input);
     }
 
@@ -79,7 +100,7 @@ public class TouchMoveComponent extends TouchComponent {
         if (direction.x != 0 || direction.y != 0) {
             input.lockPlayer();
             actions.walk(direction);
-            checkPosition(player, actions, position);
+            checkPosition(player, actions, position, input);
         }
     }
 
@@ -90,7 +111,8 @@ public class TouchMoveComponent extends TouchComponent {
      * @param actions  class to change the what the entity is doing
      * @param position start position of the entity
      */
-    private void checkPosition(Entity player, PlayerActions actions, Vector2 position) {
+    private void checkPosition(Entity player, PlayerActions actions, Vector2 position,
+                               KeyboardPlayerInputComponent input) {
         float xDifference = player.getPosition().x - position.x > 0 ?
                 player.getPosition().x - position.x : -1 * (player.getPosition().x - position.x);
 
@@ -101,10 +123,12 @@ public class TouchMoveComponent extends TouchComponent {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    checkPosition(player, actions, position);
+                    checkPosition(player, actions, position, input);
                     timer.cancel();
                 }
             }, 50);
+        } else {
+            input.unlockPlayer();
         }
     }
 }

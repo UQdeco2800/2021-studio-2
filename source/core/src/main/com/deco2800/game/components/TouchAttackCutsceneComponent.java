@@ -6,6 +6,8 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
+import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,14 +16,17 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
 
     private final int repeats;
 
+    private final int lastKeyPressed;
+
     /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchAttackCutsceneComponent(short targetLayer, int repeats) {
+    public TouchAttackCutsceneComponent(short targetLayer, int repeats, int lastKeyPressed) {
         super(targetLayer);
         this.repeats = repeats;
+        this.lastKeyPressed = lastKeyPressed;
     }
 
     /**
@@ -49,6 +54,7 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
         }
         actions.stopWalking();
         input.stopWalking();
+        input.setLastKeyPressed(lastKeyPressed);
         repeatAttacks(input, 0);
     }
 
@@ -63,6 +69,12 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
                     timer.cancel();
                 }
             }, 500);
+        } else {
+            input.unlockPlayer();
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setClosed();
+            textBox.hideBars();
         }
     }
 }
