@@ -251,7 +251,7 @@ public class NPCFactory {
 
     public static Entity createBossNPC(Entity target) {
         Entity boss = createBaseNPCNoAI();
-        GhostRangedConfig config = configs.ghostRanged;
+        GhostKingConfig config = configs.ghostKing;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))

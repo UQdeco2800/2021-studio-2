@@ -75,10 +75,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             teleport();
-            Vector2 minPos =
-                    owner.getEntity().getPosition().cpy().sub(owner.getEntity().getPosition());
-            Vector2 maxPos =
-                    owner.getEntity().getPosition().cpy().add(owner.getEntity().getPosition());
             //owner.getEntity().setPosition(RandomUtils.random(minPos, maxPos));
             //constant++;
         }
@@ -91,6 +87,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         if (!spawn) {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
+        spawn = true;
         Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget());
 
         Vector2 pos = target.getPosition().cpy().sub(owner.getEntity().getPosition());
@@ -112,18 +109,16 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
         Entity vortex2 = WeaponFactory.createVortex(getDirectionOfTarget());
 
-        System.out.println(owner.getEntity().getPosition());
+        //System.out.println(owner.getEntity().getPosition());
         Vector2 minPos =
-                new Vector2(5, 5);
-        Vector2 maxPos = new Vector2(20, 20);
+                new Vector2(0, 0);
+        Vector2 maxPos = new Vector2(10, 10);
         Vector2 pos2 = RandomUtils.random(minPos, maxPos);
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
         owner.getEntity().setPosition(pos2);
         System.out.println(owner.getEntity().getPosition());
-        //spawn = true;
-        //count++;
-        //xScale += 0.1;
-        //yScale += 0.1;
+        spawn = false;
+
     }
 
     /**

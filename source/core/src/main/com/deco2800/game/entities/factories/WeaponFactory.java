@@ -9,6 +9,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
+import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseArrowConfig;
 import com.deco2800.game.entities.configs.FastArrowConfig;
@@ -116,11 +117,17 @@ public class WeaponFactory {
         // if the player touch the vortex - will receive the damage (instant death)
         Entity vortex = createBaseArrow();
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/vortex.png", Texture.class));
-        vortex.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(100000, 10)); // touch the vortex == instant death
-        Vector2 scale = new Vector2(sprite.getWidth() / 20f, sprite.getHeight() / 20f);
-        vortex.setScale(scale);
-        vortex.setAngle(angle);
+        Vector2 scale = new Vector2(sprite.getWidth() / 30f, sprite.getHeight() / 30f);
+        VortexSpawnTask vortexSpawn = new VortexSpawnTask(scale, 2f);
+
+        AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(vortexSpawn);
+        vortex
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(100000, 1000)) // touch the vortex == instant death
+                .addComponent(aiTaskComponent);
+        //vortex.setScale(scale);
+        //vortex.setAngle(angle);
         return vortex;
     }
 
