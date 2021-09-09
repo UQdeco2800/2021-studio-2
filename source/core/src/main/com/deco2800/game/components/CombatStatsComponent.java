@@ -1,5 +1,6 @@
 package com.deco2800.game.components;
 
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,11 +72,11 @@ public class CombatStatsComponent extends Component {
             this.health = health;
         } else {
             this.health = 0;
-            if (getEntity() != null) {
-                getEntity().prepareDispose();
+            if (this.entity != null) {
+                this.entity.prepareDispose();
             }
         }
-        if (entity != null) {
+        if (this.entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
         }
     }
@@ -95,7 +96,7 @@ public class CombatStatsComponent extends Component {
      * @return base attack damage
      */
     public int getBaseAttack() {
-        return baseAttack;
+        return this.baseAttack;
     }
 
     /**
@@ -112,7 +113,21 @@ public class CombatStatsComponent extends Component {
     }
 
     public void hit(CombatStatsComponent attacker) {
+    //check for hit animations
+        // - must have a 'hit' event listener in the *animationController Component
+        if (hasAnimation() && playHitAnimation()) {
+            entity.getEvents().trigger("hit");
+        }
         int newHealth = getHealth() - attacker.getBaseAttack();
         setHealth(newHealth);
+    }
+
+    public boolean playHitAnimation() {
+        return this.entity.getComponent(AnimationRenderComponent.class).hasAnimation("hit");
+    }
+
+    public boolean hasAnimation() {
+        AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
+        return animate != null;
     }
 }
