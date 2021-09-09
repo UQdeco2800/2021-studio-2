@@ -66,7 +66,6 @@ class TouchMoveComponentTest {
         trigger.getEvents().trigger("collisionStart", entityFixture, targetFixture);
 
         verify(textBox).showBars();
-        verify(textBox).setClosed();
     }
 
     @Test

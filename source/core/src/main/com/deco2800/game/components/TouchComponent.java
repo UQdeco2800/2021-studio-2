@@ -36,9 +36,9 @@ abstract class TouchComponent extends Component {
     }
 
     /**
-     * Enables the change in aspect ratio of the screen.
+     * Enables the cutscene bars to appear.
      */
-    protected void showCutsceneBars() {
+    protected void openCutsceneBars() {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
         textBox.showBars();

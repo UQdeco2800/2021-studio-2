@@ -54,6 +54,7 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
         }
         actions.stopWalking();
         input.stopWalking();
+        openCutsceneBars();
         input.setLastKeyPressed(lastKeyPressed);
         repeatAttacks(input, 0);
     }

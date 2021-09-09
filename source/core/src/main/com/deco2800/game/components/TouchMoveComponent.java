@@ -81,7 +81,7 @@ public class TouchMoveComponent extends TouchComponent {
         }
         actions.stopWalking();
         input.stopWalking();
-        showCutsceneBars();
+        openCutsceneBars();
         movePlayer(collidedEntity, actions, input);
     }
 

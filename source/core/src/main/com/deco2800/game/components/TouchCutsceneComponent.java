@@ -56,7 +56,7 @@ public class TouchCutsceneComponent extends TouchComponent {
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        showCutsceneBars();
+        textBox.showBars();
         switch (type) {
             case FIRST_ENCOUNTER:
                 textBox.setRandomFirstEncounter(dialogueSet);
