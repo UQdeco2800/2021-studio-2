@@ -5,8 +5,13 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 
+/**
+ * component to allow entities to give health to entities on collision
+ */
 public class TouchHealComponent extends TouchComponent {
-    private CombatStatsComponent healthCombatStats;
+    /** the percentage of maxHP to restore health by */
+    private float healthPercentage = 0.5f;
+
     /**
      * Create a component which allows Player entity to interact with the Health item and give itself health
      *
@@ -14,12 +19,6 @@ public class TouchHealComponent extends TouchComponent {
      */
     public TouchHealComponent(short targetLayer) {
         super(targetLayer);
-    }
-
-    @Override
-    public void create() {
-        super.create();
-        healthCombatStats = entity.getComponent(CombatStatsComponent.class);
     }
 
     /**
@@ -39,9 +38,12 @@ public class TouchHealComponent extends TouchComponent {
             // Doesn't match our target layer, ignore
             return;
         }
-        //heal the player using event trigger
+
+        //heal the player 10% of max hp
         Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
-        player.getEvents().trigger("heal", healthCombatStats.getBaseAttack());
+        float healthRestore =
+                player.getComponent(CombatStatsComponent.class).getMaxHealth() * healthPercentage;
+        player.getEvents().trigger("heal", (int) healthRestore);
         //dispose health potion after giving player hp
         ((BodyUserData) me.getBody().getUserData()).entity.prepareDispose();
 
