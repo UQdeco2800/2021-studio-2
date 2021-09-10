@@ -38,11 +38,18 @@ import org.slf4j.LoggerFactory;
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
+
     private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
     private static final String[] mainGameTextures = {
             "images/heart.png",
             "lowHealthImages/BloodScreenDarkRepositioned.png",
-            "images/text_box.png"
+            "images/textBoxDisplay/default_text_box.png",
+            "images/textBoxDisplay/main_character_image.png",
+            "images/textBoxDisplay/prisoner_image.png",
+            "images/textBoxDisplay/black_bars.png",
+            "images/textBoxDisplay/prison_text_box.png",
+            "images/textBoxDisplay/loki_image.png",
+            "images/textBoxDisplay/loki_text_box.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
@@ -167,15 +174,15 @@ public class MainGameScreen extends ScreenAdapter {
 
         Entity ui = new Entity();
         ui.addComponent(new InputDecorator(stage, 10))
+                .addComponent(new TextBox())
+                .addComponent(textBoxInput)
+                .addComponent(new TextBoxDisplay())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
                 .addComponent(new Terminal())
                 .addComponent(inputComponent)
-                .addComponent(new TerminalDisplay())
-                .addComponent(new TextBox())
-                .addComponent(textBoxInput)
-                .addComponent(new TextBoxDisplay());
+                .addComponent(new TerminalDisplay());
 
         ServiceLocator.getEntityService().registerUI(ui);
     }
