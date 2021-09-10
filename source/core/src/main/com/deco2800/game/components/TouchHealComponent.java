@@ -39,12 +39,9 @@ public class TouchHealComponent extends TouchComponent {
             // Doesn't match our target layer, ignore
             return;
         }
-
+        //heal the player using event trigger
         Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
-        CombatStatsComponent playerStats = player.getComponent(CombatStatsComponent.class);
-
-        playerStats.addHealth(healthCombatStats.getBaseAttack()); //heal the player based on the potion entity attack
-
+        player.getEvents().trigger("heal", healthCombatStats.getBaseAttack());
         //dispose health potion after giving player hp
         ((BodyUserData) me.getBody().getUserData()).entity.prepareDispose();
 

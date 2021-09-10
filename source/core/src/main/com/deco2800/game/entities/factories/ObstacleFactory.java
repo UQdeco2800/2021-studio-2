@@ -113,12 +113,20 @@ public class ObstacleFactory {
      * @return potion entity
      */
     public static Entity createHealthPotion() {
+        //UNCOMMENT ONLY WHEN POTION FRAMES ARE CREATED AND LOADED IN!!! for now they haven't
+        // been made
+//        AnimationRenderComponent potionAnimator = new AnimationRenderComponent(
+//                ServiceLocator.getResourceService().getAsset("crate/potion.atlas",
+//                        TextureAtlas.class));
+//        potionAnimator.addAnimation("idle");
+//        potionAnimator.startAnimation("idle");
+
         Entity potion = new Entity()
                 .addComponent(new TextureRenderComponent("healthRegen/healthPotion_placeholder.png"))
                 .addComponent(new CombatStatsComponent(0, 99999)) //used to know how much health to restore
                 //instead of using CombatStatComponent we could change the health given in the TouchHealComponent
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.NPC).setSensor(true))
+                .addComponent(new ColliderComponent().setSensor(true))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
                 //physics components is to detect whether the player has stepped onto the potion entity

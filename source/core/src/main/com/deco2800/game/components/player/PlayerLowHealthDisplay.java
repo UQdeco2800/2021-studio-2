@@ -87,7 +87,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
             stack.setVisible(true);
             displayOn = true;
         }
-        //bloodImage.setColor(1, 1, 1, alpha); //opacity of image changes depending on hp %
+        bloodImage.setColor(1, 1, 1, alpha); //opacity of image changes depending on hp %
 
     }
 

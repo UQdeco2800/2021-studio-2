@@ -20,6 +20,11 @@ public class CombatStatsComponent extends Component {
         this.health = health;
         setMaxHealth(health);
         setBaseAttack(baseAttack);
+        //if entities can heal trigger this even
+    }
+
+    public void create() {
+        entity.getEvents().addListener("heal", this::addHealth);
     }
 
     /**
