@@ -126,8 +126,12 @@ public class WeaponFactory {
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(vortexSpawn);
         vortex
+                .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
-                .addComponent(aiTaskComponent);
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                .addComponent(new CombatStatsComponent(1000, 0))
+                .addComponent(aiTaskComponent)
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2f));
         //vortex.setScale(scale);
         vortex.setAngle(angle);
         return vortex;
