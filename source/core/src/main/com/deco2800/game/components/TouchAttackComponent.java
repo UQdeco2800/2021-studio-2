@@ -58,13 +58,7 @@ public class TouchAttackComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (hitboxComponent.getFixture() != me) {
-            //do nothing
-            return;
-        }
-
-        if (PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
-            // Doesn't match our target layer, ignore
+        if (this.checkEntities(me, other)) {
             return;
         }
 
@@ -72,7 +66,7 @@ public class TouchAttackComponent extends TouchComponent {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-            //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
+            //System.out.println((Syst  em.currentTimeMillis() - start) / 1000.0 + " seconds");
             targetStats.hit(combatStats);
             start = System.currentTimeMillis();
         }

@@ -79,7 +79,7 @@ class ZigChaseTaskTest {
         entity.create();
         entity.setPosition(0f, 0f);
 
-        ZigChaseTask zigChaseTask  = new ZigChaseTask(target, 10, 5, 10, 1f);
+        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10, 1f);
         zigChaseTask.create(() -> entity);
 
         // Not currently active, target is too far, should have negative priority

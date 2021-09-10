@@ -35,10 +35,10 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     @Override
     public void update() {
         if (((System.currentTimeMillis() - start) / 1000.0) > 0.5
-                || getDistanceToTarget() < (maxChaseDistance * (2 / 10))) {
-            if (getDistanceToTarget() < (maxChaseDistance * (2 / 10))) {
+                || getDistanceToTarget() < (maxChaseDistance * (2 / 10f))) {
+            if (getDistanceToTarget() < (maxChaseDistance * (2 / 10f))) {
                 movementTask.setTarget(target.getCenterPosition());
-                movementTask.setMoveSpeed(new Vector2(1f * speedMultiplier, 1 * speedMultiplier));
+                movementTask.setMoveSpeed(new Vector2(speedMultiplier, 1 * speedMultiplier));
             } else {
                 movementTask.setMoveSpeed(new Vector2(2f * speedMultiplier, 2f * speedMultiplier));
                 if (zigLeft) {
