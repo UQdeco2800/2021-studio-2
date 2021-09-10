@@ -37,7 +37,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * Update the arrow position on the screen
+     * Update the arrow position on the screen.
      */
     @Override
     public void update() {
