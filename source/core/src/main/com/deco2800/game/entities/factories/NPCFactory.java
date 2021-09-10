@@ -52,7 +52,7 @@ public class NPCFactory {
      * @return entity
      */
     public static Entity createGhost(Entity target) {
-        Entity ghost = createBaseNPC(target);
+        Entity ghost = createBaseNPCNoAI();
         BaseEntityConfig config = configs.ghost;
 
         AnimationRenderComponent animator =
@@ -66,12 +66,13 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ZigChaseTask(target, 11, 4f, 4f, 1f))
+                        .addTask(new ZigChaseTask(target, 11, 4f, 4f))
                         .addTask(new AlertableChaseTask(target, 10, 3f, 4f));
 
         ghost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
+                .addComponent(aiComponent)
                 .addComponent(new GhostAnimationController());
 
         ghost.getComponent(AITaskComponent.class).

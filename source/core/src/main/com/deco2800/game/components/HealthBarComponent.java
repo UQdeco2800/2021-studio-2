@@ -6,24 +6,6 @@ import com.deco2800.game.rendering.RenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 public class HealthBarComponent extends RenderComponent {
-    protected boolean enabled = true;
-    private int currentHealth = 100;
-    private final float scale;
-    private static final Logger logger = LoggerFactory.getLogger(AnimationRenderComponent.class);
-    private final GameTime timeSource;
-    private final TextureAtlas atlas;
-    private final Map<String, Animation<TextureRegion>> animations;
-    private Animation<TextureRegion> currentAnimation;
-    private String currentAnimationName;
-    private float animationPlayTime;
-
-    public HealthBarComponent(TextureAtlas atlas, float scale) {
-        this.atlas = atlas;
-        this.scale = scale;
-        this.animations = new HashMap<>(4);
-        timeSource = ServiceLocator.getTimeSource();
-
-public class HealthBarComponent extends RenderComponent {
     private float ratioOfHealth = 1f;
     private float ratioOfHealthPrevious = 1f;
     private final Sprite health;

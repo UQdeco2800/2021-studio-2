@@ -58,7 +58,7 @@ public class TestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
-            "images/prisoner.png"
+            "images/prisoner.png",
             "images/rock.png",
             "images/enemy_health_bar.png",
             "images/enemy_health_bar.png",

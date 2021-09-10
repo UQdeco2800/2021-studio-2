@@ -7,6 +7,7 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
@@ -58,7 +59,7 @@ public class ForestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
-            "images/prisoner.png"
+            "images/prisoner.png",
             "images/rock.png",
             "images/enemy_health_bar.png",
             "images/enemy_health_border.png",
@@ -204,11 +205,6 @@ public class ForestGameArea extends GameArea {
             Entity ghost = NPCFactory.createRangedGhost(player);
             spawnEntityAt(ghost, randomPos, true, true);
         }
-    }
-
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createTrigger();
-        spawnEntityAt(trigger, TEST_TRIGGER, true, true);
     }
 
     private void spawnBoss() {
