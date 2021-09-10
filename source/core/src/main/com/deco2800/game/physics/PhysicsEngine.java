@@ -55,9 +55,10 @@ public class PhysicsEngine implements Disposable {
     while (accumulator >= PHYSICS_TIMESTEP) {
       world.step(PHYSICS_TIMESTEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
       accumulator -= PHYSICS_TIMESTEP;
+    }
+    if (bodyList.size() != 0) {
       for (int i = 0; i < bodyList.size(); i++) {
         world.destroyBody(bodyList.get(i));
-        bodyList.remove(i);
       }
       bodyList.clear();
     }
@@ -71,6 +72,7 @@ public class PhysicsEngine implements Disposable {
   public void destroyBody(Body body) {
     logger.debug("Destroying physics body {}", body);
     bodyList.add(body);
+    update();
   }
 
   public Joint createJoint(JointDef jointDef) {

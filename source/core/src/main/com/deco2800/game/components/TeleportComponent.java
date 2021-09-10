@@ -58,10 +58,10 @@ public class TeleportComponent extends TouchComponent{
             //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
             //target.setPosition(3f,4f);
             System.out.println("x= " + target.getPosition().x + "  y= " + target.getPosition().y);
-            target.setScale(new Vector2(5,5));
+            //target.setScale(new Vector2(5,5));
             //target.setPosition(new Vector2(15,8));
             //this.player.setPosition(new Vector2(15,8));
-            //this.player.setScale(new Vector2(5,5));
+            this.player.setScale(new Vector2(5,5));
         }
     }
 }
