@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":9,"i3":9};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -104,6 +104,20 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public enum <span class="typeNameLabel">Dialogue</span>
 extends java.lang.Enum&lt;<a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a>&gt;</pre>
+<div class="block">This enum will contain all of the dialogue to be displayed in text boxes and cutscenes.
+ Each Dialogue constant can be added by adding a new attribute under the current list.
+ Each constant is made up of an Array of Messages, each Message will contain a boolean to
+ determine if the main character is talking as well as the message.
+ To add a new set of dialogue, the template will look like:
+ DIALOGUE_NAME(new Message[]{
+ new Message(MAIN_CHARACTER?, MESSAGE1),
+ new Message(MAIN_CHARACTER?, MESSAGE2),
+ new Message(MAIN_CHARACTER?, MESSAGE3),
+ new Message(MAIN_CHARACTER?, MESSAGE4),
+ new Message(MAIN_CHARACTER?, MESSAGE5),
+ }
+ This will allow for the text box to alternate between the characters talking as well as
+ change in the text box graphically.</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -137,18 +151,87 @@ extends java.lang.Enum&lt;<a href="Dialogue.html" title="enum in com.deco2800.ga
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#OPENING">OPENING</a></span></code></th>
-<td class="colLast">
-<div class="block">This is currently being used as a placeholder but the elements in the enum will be used to display
- all of the text that is to be used in a particular sequence, in this case, the opening.</div>
-</td>
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_BEATEN_1">GARMR_BEATEN_1</a></span></code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TEST">TEST</a></span></code></th>
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_BEATEN_2">GARMR_BEATEN_2</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#THE_ROCK">THE_ROCK</a></span></code></th>
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_BEATEN_3">GARMR_BEATEN_3</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_BEATEN_4">GARMR_BEATEN_4</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_DEFEAT_1">GARMR_DEFEAT_1</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_DEFEAT_2">GARMR_DEFEAT_2</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#GARMR_FIRST">GARMR_FIRST</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#LOKI_DEFEAT_1">LOKI_DEFEAT_1</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#LOKI_DEFEAT_2">LOKI_DEFEAT_2</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#LOKI_DEFEAT_3">LOKI_DEFEAT_3</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#LOKI_DEFEAT_4">LOKI_DEFEAT_4</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#LOKI_DEFEAT_5">LOKI_DEFEAT_5</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#LOKI_FIRST">LOKI_FIRST</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TEST_1">TEST_1</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TEST_2">TEST_2</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TUTORIAL_ATTACK">TUTORIAL_ATTACK</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TUTORIAL_DASH">TUTORIAL_DASH</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TUTORIAL_EXIT">TUTORIAL_EXIT</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TUTORIAL_FIRST">TUTORIAL_FIRST</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TUTORIAL_MOVE">TUTORIAL_MOVE</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#TUTORIAL_REPEAT">TUTORIAL_REPEAT</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -182,18 +265,27 @@ extends java.lang.Enum&lt;<a href="Dialogue.html" title="enum in com.deco2800.ga
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isMainCharacter(int)">isMainCharacter</a></span>&#8203;(int&nbsp;index)</code></th>
+<td class="colLast">
+<div class="block">Returns if the main character is speaking at the message index provided.</div>
+</td>
 </tr>
 <tr class="altColor" id="i2">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#size()">size</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the number of different lines in the dialogue.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>static <a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>static <a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
@@ -230,22 +322,128 @@ the order they are declared.</div>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="OPENING">OPENING</a></h3>
-<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">OPENING</span></div>
-<div class="block">This is currently being used as a placeholder but the elements in the enum will be used to display
- all of the text that is to be used in a particular sequence, in this case, the opening.</div>
+<h3><a id="TUTORIAL_FIRST">TUTORIAL_FIRST</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TUTORIAL_FIRST</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="THE_ROCK">THE_ROCK</a></h3>
-<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">THE_ROCK</span></div>
+<h3><a id="TUTORIAL_REPEAT">TUTORIAL_REPEAT</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TUTORIAL_REPEAT</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="TEST">TEST</a></h3>
-<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TEST</span></div>
+<h3><a id="TUTORIAL_MOVE">TUTORIAL_MOVE</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TUTORIAL_MOVE</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="TUTORIAL_DASH">TUTORIAL_DASH</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TUTORIAL_DASH</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="TUTORIAL_ATTACK">TUTORIAL_ATTACK</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TUTORIAL_ATTACK</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="TUTORIAL_EXIT">TUTORIAL_EXIT</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TUTORIAL_EXIT</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="LOKI_FIRST">LOKI_FIRST</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">LOKI_FIRST</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="LOKI_DEFEAT_1">LOKI_DEFEAT_1</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">LOKI_DEFEAT_1</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="LOKI_DEFEAT_2">LOKI_DEFEAT_2</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">LOKI_DEFEAT_2</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="LOKI_DEFEAT_3">LOKI_DEFEAT_3</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">LOKI_DEFEAT_3</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="LOKI_DEFEAT_4">LOKI_DEFEAT_4</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">LOKI_DEFEAT_4</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="LOKI_DEFEAT_5">LOKI_DEFEAT_5</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">LOKI_DEFEAT_5</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_FIRST">GARMR_FIRST</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_FIRST</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_DEFEAT_1">GARMR_DEFEAT_1</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_DEFEAT_1</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_DEFEAT_2">GARMR_DEFEAT_2</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_DEFEAT_2</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_BEATEN_1">GARMR_BEATEN_1</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_BEATEN_1</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_BEATEN_2">GARMR_BEATEN_2</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_BEATEN_2</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_BEATEN_3">GARMR_BEATEN_3</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_BEATEN_3</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="GARMR_BEATEN_4">GARMR_BEATEN_4</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">GARMR_BEATEN_4</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="TEST_1">TEST_1</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TEST_1</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="TEST_2">TEST_2</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></span>&nbsp;<span class="memberName">TEST_2</span></div>
 </section>
 </li>
 </ul>
@@ -304,11 +502,25 @@ not permitted.)</div>
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="isMainCharacter(int)">isMainCharacter</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isMainCharacter</span>&#8203;(<span class="arguments">int&nbsp;index)</span></div>
+<div class="block">Returns if the main character is speaking at the message index provided.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>index</code> - the index of the message to be retrieved</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boolean that is true if the main character is speaking, false otherwise</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="size()">size</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">size</span>()</div>
+<div class="block">Returns the number of different lines in the dialogue.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the number of different lines in the dialogue.</dd>
+<dd>returns the number of messages in the dialogue sequence</dd>
 </dl>
 </section>
 </li>

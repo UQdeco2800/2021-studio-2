@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -162,7 +162,10 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#acceptInput()">acceptInput</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">When walking into an entity that triggers a text box to appear, repeatedly holding down a
+ key would instantly cycle through all of the messages.</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -170,30 +173,50 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i2">
+<td class="colFirst"><code><a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRandomDialogueSet()">getRandomDialogueSet</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubMessage()">getSubMessage</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleEscape()">handleEscape</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Handles the escape key being pressed to close to text box.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hideBars()">hideBars</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Hides the black cutscene bars.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAcceptingInput()">isAcceptingInput</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Checks if the text box is accepting input from the player.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isMainCharacterShowing()">isMainCharacterShowing</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Checks which character will be displaying the text,
+ returns true if the main character is talking, false otherwise</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOpen()">isOpen</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#nextMessage()">nextMessage</a></span>()</code></th>
 <td class="colLast">
@@ -201,33 +224,63 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
  then the text box will be closed.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setClosed()">setClosed</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Closes the terminal and clears the stored message.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDialogue(com.deco2800.game.ui.textbox.Dialogue)">setDialogue</a></span>&#8203;(<a href="Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a>&nbsp;dialogue)</code></th>
 <td class="colLast">
 <div class="block">Sets the dialogue to a certain message depending on cutscene that is to be displayed.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setNewCharactersOff()">setNewCharactersOff</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Prevents the timer from recursively calling the method to generate a new character.</div>
+</td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOpen()">setOpen</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Opens the text box.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i14">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOrderedDialogue(com.deco2800.game.ui.textbox.RandomDialogueSet)">setOrderedDialogue</a></span>&#8203;(<a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</code></th>
+<td class="colLast">
+<div class="block">This method will be called repeatedly to trigger an ordered sequence of dialogue.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i15">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRandomBeatenDialogueSet(com.deco2800.game.ui.textbox.RandomDialogueSet)">setRandomBeatenDialogueSet</a></span>&#8203;(<a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</code></th>
+<td class="colLast">
+<div class="block">Sets the dialogue set to the set of dialogue determined by the NPC that was reached.</div>
+</td>
+</tr>
+<tr class="altColor" id="i16">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRandomDefeatDialogueSet(com.deco2800.game.ui.textbox.RandomDialogueSet)">setRandomDefeatDialogueSet</a></span>&#8203;(<a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</code></th>
+<td class="colLast">
+<div class="block">Sets the dialogue set to the set of dialogue determined by the NPC that was reached.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i17">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRandomFirstEncounter(com.deco2800.game.ui.textbox.RandomDialogueSet)">setRandomFirstEncounter</a></span>&#8203;(<a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</code></th>
+<td class="colLast">
+<div class="block">Sets the dialogue set to the set of dialogue determined by the NPC that was reached.</div>
+</td>
+</tr>
+<tr class="altColor" id="i18">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSkip()">setSkip</a></span>()</code></th>
 <td class="colLast">
@@ -235,14 +288,28 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
  which will display the entire message.</div>
 </td>
 </tr>
-<tr class="altColor" id="i12">
+<tr class="rowColor" id="i19">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSubMessage()">setSubMessage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">The sub message displayed will be updated at a delay of 30ms each character.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i13">
+<tr class="altColor" id="i20">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldShowBars()">shouldShowBars</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns if the black cutscene bars should be shown or not.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i21">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showBars()">showBars</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Shows the black cutscene bars.</div>
+</td>
+</tr>
+<tr class="altColor" id="i22">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toggleIsOpen()">toggleIsOpen</a></span>()</code></th>
 <td class="colLast">
@@ -324,13 +391,6 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setOpen()">setOpen</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setOpen</span>()</div>
-<div class="block">Opens the text box.</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
 <h3><a id="toggleIsOpen()">toggleIsOpen</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">toggleIsOpen</span>()</div>
 <div class="block">Toggles between the text box being open and closed.</div>
@@ -341,6 +401,38 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <h3><a id="setClosed()">setClosed</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setClosed</span>()</div>
 <div class="block">Closes the terminal and clears the stored message.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setOpen()">setOpen</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setOpen</span>()</div>
+<div class="block">Opens the text box.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="showBars()">showBars</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">showBars</span>()</div>
+<div class="block">Shows the black cutscene bars.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="hideBars()">hideBars</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">hideBars</span>()</div>
+<div class="block">Hides the black cutscene bars.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="shouldShowBars()">shouldShowBars</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">shouldShowBars</span>()</div>
+<div class="block">Returns if the black cutscene bars should be shown or not.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the bars should be shown, false if not</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -390,6 +482,9 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 <section class="detail">
 <h3><a id="acceptInput()">acceptInput</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">acceptInput</span>()</div>
+<div class="block">When walking into an entity that triggers a text box to appear, repeatedly holding down a
+ key would instantly cycle through all of the messages. To prevent this, the player needs to
+ press start accepting keyboard input.</div>
 </section>
 </li>
 <li class="blockList">
@@ -405,8 +500,71 @@ extends <a href="../../components/Component.html" title="class in com.deco2800.g
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="setRandomDefeatDialogueSet(com.deco2800.game.ui.textbox.RandomDialogueSet)">setRandomDefeatDialogueSet</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setRandomDefeatDialogueSet</span>&#8203;(<span class="arguments"><a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</span></div>
+<div class="block">Sets the dialogue set to the set of dialogue determined by the NPC that was reached.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dialogueSet</code> - the sequence of strings that are to be displayed in the text box</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setRandomBeatenDialogueSet(com.deco2800.game.ui.textbox.RandomDialogueSet)">setRandomBeatenDialogueSet</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setRandomBeatenDialogueSet</span>&#8203;(<span class="arguments"><a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</span></div>
+<div class="block">Sets the dialogue set to the set of dialogue determined by the NPC that was reached.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dialogueSet</code> - the sequence of strings that are to be displayed in the text box</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setRandomFirstEncounter(com.deco2800.game.ui.textbox.RandomDialogueSet)">setRandomFirstEncounter</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setRandomFirstEncounter</span>&#8203;(<span class="arguments"><a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</span></div>
+<div class="block">Sets the dialogue set to the set of dialogue determined by the NPC that was reached.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dialogueSet</code> - the sequence of strings that are to be displayed in the text box</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setOrderedDialogue(com.deco2800.game.ui.textbox.RandomDialogueSet)">setOrderedDialogue</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setOrderedDialogue</span>&#8203;(<span class="arguments"><a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet)</span></div>
+<div class="block">This method will be called repeatedly to trigger an ordered sequence of dialogue.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dialogueSet</code> - the set of dialogue that dialogue will be retrieved from</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getRandomDialogueSet()">getRandomDialogueSet</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a></span>&nbsp;<span class="memberName">getRandomDialogueSet</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isMainCharacterShowing()">isMainCharacterShowing</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isMainCharacterShowing</span>()</div>
+<div class="block">Checks which character will be displaying the text,
+ returns true if the main character is talking, false otherwise</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boolean to determine who is talking</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="setNewCharactersOff()">setNewCharactersOff</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setNewCharactersOff</span>()</div>
+<div class="block">Prevents the timer from recursively calling the method to generate a new character.</div>
 </section>
 </li>
 </ul>

@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -226,12 +226,24 @@ extends <a href="../../input/InputComponent.html" title="class in com.deco2800.g
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lockPlayer()">lockPlayer</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLastKeyPressed(int)">setLastKeyPressed</a></span>&#8203;(int&nbsp;key)</code></th>
+<td class="colLast">
+<div class="block">Sets the last key pressed attribute to the integer that has been passed in.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopWalking()">stopWalking</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Disables all of the inputs that are currently being pressed.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#touchDown(int,int,int,int)">touchDown</a></span>&#8203;(int&nbsp;screenX,
 int&nbsp;screenY,
@@ -240,6 +252,11 @@ int&nbsp;button)</code></th>
 <td class="colLast">
 <div class="block">Triggers player events on a mouse click.</div>
 </td>
+</tr>
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unlockPlayer()">unlockPlayer</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -386,6 +403,17 @@ int&nbsp;button)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="setLastKeyPressed(int)">setLastKeyPressed</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setLastKeyPressed</span>&#8203;(<span class="arguments">int&nbsp;key)</span></div>
+<div class="block">Sets the last key pressed attribute to the integer that has been passed in.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - direction of the attack of the player</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="getWalkDirection()">getWalkDirection</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></span>&nbsp;<span class="memberName">getWalkDirection</span>()</div>
 <div class="block">This method has been created to test that the correct direction is
@@ -394,6 +422,18 @@ int&nbsp;button)</span></div>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>walk direction.</dd>
 </dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="lockPlayer()">lockPlayer</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">lockPlayer</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="unlockPlayer()">unlockPlayer</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">unlockPlayer</span>()</div>
 </section>
 </li>
 </ul>
