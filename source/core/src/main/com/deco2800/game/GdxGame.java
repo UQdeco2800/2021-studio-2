@@ -27,7 +27,7 @@ public class GdxGame extends Game {
         loadSettings();
 
         // Sets background to light yellow
-        Gdx.gl.glClearColor(248f / 255f, 249 / 255f, 178 / 255f, 1);
+        Gdx.gl.glClearColor(65 / 255f, 62 / 255f, 55 / 255f, 1);
 
         setScreen(ScreenType.MAIN_MENU);
     }

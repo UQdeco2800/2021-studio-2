@@ -1,7 +1,10 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.TextBox;
 
 abstract class TouchComponent extends Component {
 
@@ -24,4 +27,20 @@ abstract class TouchComponent extends Component {
     }
 
     abstract void onCollisionStart(Fixture me, Fixture other);
+
+    protected boolean checkEntities(Fixture me, Fixture other) {
+        // Not triggered by hitbox, ignore
+        return (hitboxComponent.getFixture() != me
+                // Doesn't match our target layer, ignore
+                || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits));
+    }
+
+    /**
+     * Enables the cutscene bars to appear.
+     */
+    protected void openCutsceneBars() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        textBox.showBars();
+    }
 }

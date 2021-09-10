@@ -65,9 +65,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     private float speedMultiplier = 1;
 
     /**
-     * The last direction the player was moving in.
+     * Locks the player from inputting any controls.
      */
-    private Vector2 lastDirection;
+    private boolean locked = false;
 
     /**
      * Stores the last system time since the dash ability was pressed.
@@ -178,11 +178,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         this.up = 0;
         this.speedMultiplier = 1;
         entity.getEvents().trigger("walkStop");
-        if (lastDirection != null) {
-            triggerStandAnimation();
-        } else {
-            entity.getEvents().trigger("stopForward");
-        }
     }
 
     /**
@@ -209,52 +204,15 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      * the player is no longer moving.
      */
     private void triggerWalkEvent() {
-        if (dashing) {
+        if (dashing || locked) {
             return;
         }
         calculateDistance(speedMultiplier);
         if (walkDirection.x == 0 && walkDirection.y == 0) {
             entity.getEvents().trigger("walkStop");
-            if (lastDirection != null) {
-                triggerStandAnimation();
-            } else {
-                entity.getEvents().trigger("stopForward");
-            }
         } else {
             calculateDistance(speedMultiplier);
-            lastDirection = walkDirection.cpy();
-            triggerWalkAnimation();
             entity.getEvents().trigger("walk", walkDirection);
-        }
-    }
-
-    /**
-     * Checks the direction that the player was last facing and changes the animation to match.
-     */
-    private void triggerStandAnimation() {
-        if (lastDirection.y > 0) {
-            entity.getEvents().trigger("stopBackward");
-        } else if (lastDirection.y < 0) {
-            entity.getEvents().trigger("stopForward");
-        } else if (lastDirection.x > 0) {
-            entity.getEvents().trigger("stopRight");
-        } else if (lastDirection.x < 0) {
-            entity.getEvents().trigger("stopLeft");
-        }
-    }
-
-    /**
-     * Checks the direction that the player is moving in and changes the animation to match.
-     */
-    private void triggerWalkAnimation() {
-        if (walkDirection.y > 0) {
-            entity.getEvents().trigger("walkBackward");
-        } else if (walkDirection.y < 0) {
-            entity.getEvents().trigger("walkForward");
-        } else if (walkDirection.x > 0) {
-            entity.getEvents().trigger("walkRight");
-        } else if (walkDirection.x < 0) {
-            entity.getEvents().trigger("walkLeft");
         }
     }
 
@@ -286,6 +244,15 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     }
 
     /**
+     * Sets the last key pressed attribute to the integer that has been passed in.
+     *
+     * @param key direction of the attack of the player
+     */
+    public void setLastKeyPressed(int key) {
+        this.lastKeyPressed = key;
+    }
+
+    /**
      * This method has been created to test that the correct direction is
      * to be walked in.
      *
@@ -293,5 +260,13 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      */
     public Vector2 getWalkDirection() {
         return this.walkDirection;
+    }
+
+    public void lockPlayer() {
+        this.locked = true;
+    }
+
+    public void unlockPlayer() {
+        this.locked = false;
     }
 } 

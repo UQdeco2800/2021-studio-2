@@ -1,14 +1,15 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.Dialogue;
+import com.deco2800.game.ui.textbox.DialogueSet;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -20,13 +21,20 @@ import com.deco2800.game.ui.textbox.TextBox;
  */
 public class TouchCutsceneComponent extends TouchComponent {
 
+    private Entity collidedEntity;
+    private PlayerActions actions;
+    private final RandomDialogueSet dialogueSet;
+    private final DialogueSet type;
+
     /**
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchCutsceneComponent(short targetLayer) {
+    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type) {
         super(targetLayer);
+        this.dialogueSet = dialogueSet;
+        this.type = type;
     }
 
     /**
@@ -42,29 +50,26 @@ public class TouchCutsceneComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (hitboxComponent.getFixture() != me) {
-            // Not triggered by hitbox, ignore
-            return;
-        }
-
-        if (PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
-            // Doesn't match our target layer, ignore
+        if (this.checkEntities(me, other)) {
             return;
         }
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        textBox.setDialogue(Dialogue.THE_ROCK);
-
-        Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
-        PlayerActions actions = player.getComponent(PlayerActions.class);
-        KeyboardPlayerInputComponent input =
-                player.getComponent(KeyboardPlayerInputComponent.class);
-        //Checks if the entity that has collided is the player
-        if (actions == null) {
-            return;
+        textBox.showBars();
+        switch (type) {
+            case FIRST_ENCOUNTER:
+                textBox.setRandomFirstEncounter(dialogueSet);
+                break;
+            case BOSS_DEFEATED_BEFORE:
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+                break;
+            case PLAYER_DEFEATED_BEFORE:
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
+                break;
+            case ORDERED:
+                textBox.setOrderedDialogue(dialogueSet);
+                break;
         }
-        actions.stopWalking();
-        input.stopWalking();
     }
-} 
+}

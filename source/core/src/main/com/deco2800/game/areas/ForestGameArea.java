@@ -7,12 +7,13 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
@@ -28,7 +29,6 @@ public class ForestGameArea extends GameArea {
     private static final int NUM_GHOSTS = 2;
     private static final int NUM_ANCHORED_GHOSTS = 1;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-    private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
     private static final float WALL_WIDTH = 0.1f;
     private static final String[] forestTextures = {
             "images/box_boy_leaf.png",
@@ -58,6 +58,7 @@ public class ForestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
+            "images/prisoner.png"
             "images/rock.png",
             "images/enemy_health_bar.png",
             "images/enemy_health_border.png",
@@ -108,8 +109,8 @@ public class ForestGameArea extends GameArea {
         spawnAnchoredGhosts();
         spawnBoss();
 
-        spawnCutsceneTrigger();
         playMusic();
+        setDialogue();
     }
 
     /**
@@ -218,7 +219,7 @@ public class ForestGameArea extends GameArea {
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, randomPos, true, true);
     }
-
+  
     private void spawnGhostKing() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -283,6 +284,15 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(forestTextureAtlases);
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
+    }
+
+    /**
+     * Sets the dialogue for when the game first loads.
+     */
+    private void setDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
     }
 
 

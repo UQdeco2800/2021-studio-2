@@ -62,6 +62,12 @@ public class NPCFactory {
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+      
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ZigChaseTask(target, 11, 4f, 4f, 1f))
+                        .addTask(new AlertableChaseTask(target, 10, 3f, 4f));
 
         ghost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -259,7 +265,6 @@ public class NPCFactory {
                         .addTask(new TeleportationTask(target, 2000));
 
         AnimationRenderComponent animator =
-
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
