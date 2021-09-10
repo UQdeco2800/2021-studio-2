@@ -24,7 +24,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
 
     private boolean reverse = false;
 
-    private boolean runTask = false;
+    private static float rotateFactor = 1;
 
     public VortexSpawnTask(Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
@@ -41,20 +41,23 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        runTask = false;
         if (reverse) {
             if (owner.getEntity().getScale().x < this.scale.x && owner.getEntity().getScale().y < this.scale.y) {
                 owner.getEntity().setScale(factor.scl(1.03f));
+                owner.getEntity().setAngle(rotateAngle + rotateFactor);
             } else {
                 owner.getEntity().prepareDispose();
             }
         } else {
             if (owner.getEntity().getScale().x > 0.1f && owner.getEntity().getScale().y > 0.1f) {
                 owner.getEntity().setScale(this.scale.scl(0.97f));
+                owner.getEntity().setAngle(rotateAngle + rotateFactor);
             } else {
                 owner.getEntity().prepareDispose();
             }
         }
+
+        rotateFactor++;
 
         super.update();
     }
@@ -66,7 +69,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      * @return int 10 if arrow is moving, -1 if arrow is not
      */
     public int getPriority() {
-        if (desiredScale() || runTask) {
+        if (desiredScale()) {
             // dispose if the entity spawn at desired size
             //owner.getEntity().prepareDispose();
             return (-1);

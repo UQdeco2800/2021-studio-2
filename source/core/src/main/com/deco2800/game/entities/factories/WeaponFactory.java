@@ -129,7 +129,7 @@ public class WeaponFactory {
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(aiTaskComponent);
         //vortex.setScale(scale);
-        //vortex.setAngle(angle);
+        vortex.setAngle(angle);
         return vortex;
     }
 
