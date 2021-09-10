@@ -38,10 +38,9 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     private float healthRatio;
     private int maxHealth;
     private int health = 100;
-    private int constant = 0;
-    private int count = 0;
-    private float xScale = 0.1f;
-    private float yScale = 0.1f;
+
+    protected WaitTask waitTask;
+
 
     /**
      * @param target     The entity to chase.
@@ -64,6 +63,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     @Override
     public void start() {
         lastFired = 0;
+        System.out.println("start");
     }
 
     /**
@@ -71,7 +71,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (canTeleport() || spawn) {
+        if (canTeleport()) {
+            System.out.println("teleport");
             health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             teleport();
@@ -84,40 +85,28 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      * spawns the vortex and teleport the boss
      */
     public void teleport() {
-        if (!spawn) {
+        if (lastFired == 0) {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
         spawn = true;
-        Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget());
+        Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget(), true);
 
         Vector2 pos = target.getPosition().cpy().sub(owner.getEntity().getPosition());
         pos.scl(20);
         pos.add(owner.getEntity().getPosition());
 
-        /*
-        for (int i = 0; i < 20; i++) {
-            vortex.setScale(vortex.getScale().scl(new Vector2(1 + xScale, 1 + yScale)));
-            gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
-            xScale += 0.5;
-            xScale += 0.5;
-            if (i != 19) {
-                vortex.prepareDispose();
-            }
-        }
-         */
+        gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
+        Entity vortex2 = WeaponFactory.createVortex(getDirectionOfTarget(), false);
 
-        gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(getDirectionOfTarget());
 
         //System.out.println(owner.getEntity().getPosition());
         Vector2 minPos =
                 new Vector2(0, 0);
         Vector2 maxPos = new Vector2(10, 10);
         Vector2 pos2 = RandomUtils.random(minPos, maxPos);
-        gameArea.spawnEntityAt(vortex2, pos2, true, true);
         owner.getEntity().setPosition(pos2);
+        gameArea.spawnEntityAt(vortex2, pos2, true, true);
         System.out.println(owner.getEntity().getPosition());
-        spawn = false;
 
     }
 
@@ -129,6 +118,9 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     @Override
     public int getPriority() {
         if (canTeleport() || spawn) {
+            if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 2000) {
+                spawn = false;
+            }
             return 30;
         }
         return -1;
@@ -191,11 +183,21 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     private boolean canTeleport() {
         int currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
         maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
+        /*
+        if (currentHealth < 30
+                && target.getComponent(
+                        CombatStatsComponent.class).getHealth() == target.getComponent(
+                                CombatStatsComponent.class).getMaxHealth()) {
+            owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(maxHealth);
+        }
+
+         */
         if ((float) currentHealth / maxHealth < 0.5f) {
             return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
                     && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange()
                     && currentHealth < health);
         }
+
         return false;
     }
 }

@@ -22,10 +22,18 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
 
     private float rotateAngle;
 
+    private boolean reverse = false;
+
+    private boolean runTask = false;
+
     public VortexSpawnTask(Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
         this.rotateAngle = rotateAngle;
         factor = new Vector2(this.scale.x / 10, this.scale.y / 10);
+    }
+
+    public void flipReverse() {
+        this.reverse = !this.reverse;
     }
 
     /**
@@ -33,10 +41,19 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (owner.getEntity().getScale().x < this.scale.x && owner.getEntity().getScale().y < this.scale.y) {
-            owner.getEntity().setScale(factor.scl(1.01f));
+        runTask = false;
+        if (reverse) {
+            if (owner.getEntity().getScale().x < this.scale.x && owner.getEntity().getScale().y < this.scale.y) {
+                owner.getEntity().setScale(factor.scl(1.03f));
+            } else {
+                owner.getEntity().prepareDispose();
+            }
         } else {
-            owner.getEntity().prepareDispose();
+            if (owner.getEntity().getScale().x > 0.1f && owner.getEntity().getScale().y > 0.1f) {
+                owner.getEntity().setScale(this.scale.scl(0.97f));
+            } else {
+                owner.getEntity().prepareDispose();
+            }
         }
 
         super.update();
@@ -49,7 +66,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      * @return int 10 if arrow is moving, -1 if arrow is not
      */
     public int getPriority() {
-        if (desiredScale()) {
+        if (desiredScale() || runTask) {
             // dispose if the entity spawn at desired size
             //owner.getEntity().prepareDispose();
             return (-1);
@@ -70,7 +87,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
 
     /**
      *
-     * @return
+     * @return boolean true reach desired scale
      */
     private boolean desiredScale() {
         return owner.getEntity().getScale().cpy().dst(this.scale) < 0;
