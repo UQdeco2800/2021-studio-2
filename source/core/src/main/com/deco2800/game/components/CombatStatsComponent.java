@@ -1,5 +1,7 @@
 package com.deco2800.game.components;
 
+import com.badlogic.gdx.physics.box2d.Transform;
+import com.deco2800.game.components.crate.TransformItemComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,21 +120,40 @@ public class CombatStatsComponent extends Component {
     }
 
     public void hit(CombatStatsComponent attacker) {
-    //check for hit animations
-        // - must have a 'hit' event listener in the *animationController Component
-        if (hasAnimation() && playHitAnimation()) {
-            entity.getEvents().trigger("hit");
-        }
+        //check for hit animations
+        checkHitAnimations();
+
         int newHealth = getHealth() - attacker.getBaseAttack();
+        //check for ItemTransformation Components before killing entity
+        checkTransformationComponent(newHealth);
         setHealth(newHealth);
     }
 
-    public boolean playHitAnimation() {
-        return this.entity.getComponent(AnimationRenderComponent.class).hasAnimation("hit");
+    /**
+     * plays hit animation if the entity has one in its animation controller and
+     * sprite atlas file
+     */
+    private void checkHitAnimations() {
+        boolean hasAnimation = this.entity.getComponent(AnimationRenderComponent.class) != null;
+        boolean  hasHitAnimation =
+                this.entity.getComponent(AnimationRenderComponent.class).hasAnimation("hit");
+        if (hasAnimation && hasHitAnimation) {
+            entity.getEvents().trigger("hit");
+        }
     }
 
-    public boolean hasAnimation() {
-        AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
-        return animate != null;
+    /**
+     * if the entity has a Transform Component it will execute its transformation
+     * will only transform the entity if its hp <= 0
+     * @param health the current health of the entity
+     */
+    private void checkTransformationComponent(int health) {
+        if (entity.getComponent(TransformItemComponent.class) != null) {
+            if (health <= 0) {
+                entity.getEvents().trigger("transform");
+            }
+        }
     }
+
+
 }
