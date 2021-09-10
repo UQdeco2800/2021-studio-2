@@ -134,10 +134,8 @@ public class CombatStatsComponent extends Component {
      * sprite atlas file
      */
     private void checkHitAnimations() {
-        boolean hasAnimation = this.entity.getComponent(AnimationRenderComponent.class) != null;
-        boolean  hasHitAnimation =
-                this.entity.getComponent(AnimationRenderComponent.class).hasAnimation("hit");
-        if (hasAnimation && hasHitAnimation) {
+        AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
+        if (animate != null && animate.hasAnimation("hit")) {
             entity.getEvents().trigger("hit");
         }
     }
