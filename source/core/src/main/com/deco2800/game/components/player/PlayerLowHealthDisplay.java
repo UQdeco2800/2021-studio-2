@@ -9,18 +9,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * UI component to display the blooded view when health reaches a certain
  * threshold.
  */
 public class PlayerLowHealthDisplay extends UIComponent {
+    private static final Logger logger = LoggerFactory.getLogger(PlayerLowHealthDisplay.class);
     private Image bloodImage;
     private Stack stack;
     private Sound heartBeat;
-    private boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
+    private boolean heartBeatOn = false; //tracker to prevent duplicate sounds being played
     private long heartID;
-    private boolean displayOn = false;
+    private boolean displayOn = false; //need tracker so logging info isn't spammed
 
     /**
      * Add all actors to the stage here and event listener
@@ -77,13 +80,11 @@ public class PlayerLowHealthDisplay extends UIComponent {
      * This is called when the event "bloodyViewOn" is triggered.
      *
      * @param alpha the opacity to set the bloody view to.
-     * @param play  if true the heart beat sound will play otherwise nothing else will occur
      */
-    public void displayBloodyViewOn(float alpha, boolean play) {
-        if (play) {
-            playHeartBeat(alpha);
-        }
+    public void displayBloodyViewOn(float alpha) {
         if (!displayOn) {
+            playHeartBeat(alpha);
+            logger.info("bloody view on");
             stack.setVisible(true);
             displayOn = true;
         }
@@ -96,8 +97,12 @@ public class PlayerLowHealthDisplay extends UIComponent {
      * this is called when the event "bloodyViewOff" is triggered
      */
     public void displayBloodyViewOff() {
-        stopHeartBeat();
-        stack.setVisible(false);
+        if (displayOn) {
+            logger.info("bloody view off");
+            stopHeartBeat();
+            stack.setVisible(false);
+            displayOn = false;
+        }
     }
 
     /**
@@ -107,9 +112,10 @@ public class PlayerLowHealthDisplay extends UIComponent {
      * @param modify the float value that will modify the speed of the sound
      */
     public void playHeartBeat(float modify) {
-        if (!heartBeatTracker) {
+        if (!heartBeatOn) {
+            logger.info("play heart beat sound successfully");
             heartID = heartBeat.loop();
-            heartBeatTracker = true;
+            heartBeatOn = true;
         }
         float pitch = modify * 2f;
         heartBeat.setPitch(heartID, Math.min(pitch, 1.35f)); //speeds up the sound, capped at 1.35f
@@ -119,8 +125,11 @@ public class PlayerLowHealthDisplay extends UIComponent {
      * stops the playing of heart beat sound and sets the tracker to false
      */
     public void stopHeartBeat() {
-        heartBeat.stop();
-        heartBeatTracker = false;
+        if (heartBeatOn) {
+            logger.info("play heart beat sound successfully");
+            heartBeat.stop();
+            heartBeatOn = false;
+        }
     }
 
     @Override

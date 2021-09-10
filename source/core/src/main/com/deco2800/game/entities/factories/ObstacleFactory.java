@@ -87,13 +87,14 @@ public class ObstacleFactory {
      * @return crate entity
      */
     public static Entity createCrate() {
-
         AnimationRenderComponent crateAnimator = new AnimationRenderComponent(
                 ServiceLocator.getResourceService().getAsset("crate/crateHitBreak.atlas", TextureAtlas.class));
+
         crateAnimator.addAnimation("hit", 0.05f); //default playback NORMAL
         crateAnimator.addAnimation("break", 0.05f);
         crateAnimator.addAnimation("default", 1f);
         crateAnimator.startAnimation("default");
+
         Entity crate = new Entity()
                 .addComponent(crateAnimator)
                 .addComponent(new CrateAnimationController())
@@ -123,13 +124,13 @@ public class ObstacleFactory {
 
         Entity potion = new Entity()
                 .addComponent(new TextureRenderComponent("healthRegen/healthPotion_placeholder.png"))
-                .addComponent(new CombatStatsComponent(0, 99999)) //used to know how much health to restore
-                //instead of using CombatStatComponent we could change the health given in the TouchHealComponent
+                // to restore
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setSensor(true))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
-                //physics components is to detect whether the player has stepped onto the potion entity
+                //touchHeal also contains the amount to heal currently set to 50% of maxHp heals
+                //potion.getComponent(TouchHealComponent.class).setEnabled(false);
 
         potion.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         potion.getComponent(TextureRenderComponent.class).scaleEntity();

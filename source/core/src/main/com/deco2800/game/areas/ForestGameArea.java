@@ -244,7 +244,7 @@ public class ForestGameArea extends GameArea {
             Entity crate = ObstacleFactory.createCrate();
             Entity health = ObstacleFactory.createHealthPotion();
             spawnEntityAt(crate, randomPos, true, true);
-            spawnEntityAt(health, randomPos, true, false);
+            spawnEntityAt(health, randomPos, true, true);
         }
     }
 
