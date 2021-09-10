@@ -56,10 +56,13 @@ public class PhysicsEngine implements Disposable {
       world.step(PHYSICS_TIMESTEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
       accumulator -= PHYSICS_TIMESTEP;
     }
+    /*
     for (int i = 0; i < bodyList.size(); i++) {
       world.destroyBody(bodyList.get(i));
     }
     bodyList.clear();
+
+     */
   }
 
   public Body createBody(BodyDef bodyDef) {
@@ -69,8 +72,8 @@ public class PhysicsEngine implements Disposable {
 
   public void destroyBody(Body body) {
     logger.debug("Destroying physics body {}", body);
-    bodyList.add(body);
-    update();
+    world.destroyBody(body);
+    //bodyList.add(body);
   }
 
   public Joint createJoint(JointDef jointDef) {
