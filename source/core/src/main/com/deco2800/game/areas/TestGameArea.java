@@ -289,8 +289,8 @@ public class TestGameArea extends GameArea {
   }
 
   private void spawnTeleport() {
-    Entity teleport = ObstacleFactory.creatTeleport();
-    GridPoint2 fixedPos = new GridPoint2(10,8);
+    Entity teleport = ObstacleFactory.creatTeleport(player);
+    GridPoint2 fixedPos = new GridPoint2(15,10);
     spawnEntityAt(teleport, fixedPos, true,true);
   }
 
@@ -298,6 +298,7 @@ public class TestGameArea extends GameArea {
     Entity newPlayer = PlayerFactory.createPlayer(game);
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
+    player.setPosition(new Vector2(15, 8));
   }
 
   private void spawnObstacles(){

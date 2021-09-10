@@ -11,6 +11,8 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+
 /**
  * Process game physics using the Box2D library. See the Box2D documentation for examples or use
  * cases.
@@ -28,6 +30,7 @@ public class PhysicsEngine implements Disposable {
   private final SingleHitCallback singleHitCallback = new SingleHitCallback();
   private final AllHitCallback allHitCallback = new AllHitCallback();
   private float accumulator;
+  private ArrayList<Body> bodyList = new ArrayList<>();
 
   public PhysicsEngine() {
     this(new World(GRAVITY, true), ServiceLocator.getTimeSource());
@@ -52,6 +55,11 @@ public class PhysicsEngine implements Disposable {
     while (accumulator >= PHYSICS_TIMESTEP) {
       world.step(PHYSICS_TIMESTEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
       accumulator -= PHYSICS_TIMESTEP;
+      for (int i = 0; i < bodyList.size(); i++) {
+        world.destroyBody(bodyList.get(i));
+        bodyList.remove(i);
+      }
+      bodyList.clear();
     }
   }
 
@@ -62,7 +70,7 @@ public class PhysicsEngine implements Disposable {
 
   public void destroyBody(Body body) {
     logger.debug("Destroying physics body {}", body);
-    world.destroyBody(body);
+    bodyList.add(body);
   }
 
   public Joint createJoint(JointDef jointDef) {
