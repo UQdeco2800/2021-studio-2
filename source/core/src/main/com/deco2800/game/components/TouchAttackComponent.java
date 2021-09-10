@@ -66,7 +66,6 @@ public class TouchAttackComponent extends TouchComponent {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-            //System.out.println((Syst  em.currentTimeMillis() - start) / 1000.0 + " seconds");
             targetStats.hit(combatStats);
             start = System.currentTimeMillis();
         }

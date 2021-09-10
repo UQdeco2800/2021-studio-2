@@ -10,6 +10,8 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+
 /**
  * Core entity class. Entities exist in the game and are updated each frame. All entities have a
  * position and scale, but have no default behaviour. Components should be added to an entity to
@@ -334,6 +336,11 @@ public class Entity {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof Entity && ((Entity) obj).getId() == this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

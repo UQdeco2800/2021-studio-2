@@ -18,6 +18,7 @@ import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -79,6 +80,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         if (!poweringUp) {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
+        Random rand = new SecureRandom();
+
         switch (projectileType) {
             case "normalArrow": {
                 Vector2 relativeLoc = target.getPosition().cpy().sub(owner.getEntity().getPosition());
@@ -87,7 +90,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 Entity arrow = WeaponFactory.createNormalArrow(relativeLoc, getDirectionOfTarget());
                 gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
                 int multiplier = 0;
-                Random rand = new Random();
                 double chance = rand.nextDouble();
                 double multishotChanceTemp = multishotChance;
                 while (multishotChanceTemp >= chance) {
@@ -111,7 +113,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 Entity arrow = WeaponFactory.createTrackingArrow(target, getDirectionOfTarget());
                 gameArea.spawnEntityAt(arrow, owner.getEntity().getPosition().cpy().sub(offset), true, true);
                 int multiplier = 0;
-                Random rand = new Random();
                 double chance = rand.nextDouble();
                 double multishotChanceTemp = multishotChance;
                 while (multishotChanceTemp >= chance) {

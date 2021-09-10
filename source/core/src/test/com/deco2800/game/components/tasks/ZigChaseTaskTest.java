@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(GameExtension.class)
 class ZigChaseTaskTest {
     @BeforeEach
@@ -42,7 +41,7 @@ class ZigChaseTaskTest {
         target.setPosition(3f, 3f);
 
         AITaskComponent ai = new AITaskComponent()
-                .addTask(new ZigChaseTask(target, 10, 5f, 6f, 1f));
+                .addTask(new ZigChaseTask(target, 10, 5f, 6f));
         Entity entity = makePhysicsEntity().addComponent(ai);
         entity.create();
         entity.setPosition(0f, 0f);
@@ -78,8 +77,8 @@ class ZigChaseTaskTest {
         Entity entity = makePhysicsEntity();
         entity.create();
         entity.setPosition(0f, 0f);
-
-        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10, 1f);
+      
+        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10);
         zigChaseTask.create(() -> entity);
 
         // Not currently active, target is too far, should have negative priority

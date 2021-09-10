@@ -9,6 +9,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
+import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.BaseArrowConfig;
 import com.deco2800.game.entities.configs.FastArrowConfig;
@@ -105,6 +106,31 @@ public class WeaponFactory {
 
         shootingSound("fastArrow");
         return normalArrow;
+    }
+
+    /**
+     * create the vortex for teleportation
+     * @param angle angle to spin the vortex for transition animate
+     * @param reverseSpawn downscale the entity
+     * @return entity vortex
+     */
+    public static Entity createVortex(float angle, boolean reverseSpawn) {
+        // if the player touch the vortex - will receive the damage (instant death)
+        Entity vortex = new Entity();
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/vortex.png", Texture.class));
+        Vector2 scale = new Vector2(sprite.getWidth() / 30f, sprite.getHeight() / 30f);
+        VortexSpawnTask vortexSpawn = new VortexSpawnTask(scale, 2f);
+        if (reverseSpawn) {
+            vortexSpawn.flipReverse();
+        }
+        AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(vortexSpawn);
+        vortex
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(aiTaskComponent);
+        //vortex.setScale(scale);
+        vortex.setAngle(angle);
+        return vortex;
     }
 
     /**

@@ -1,20 +1,9 @@
 package com.deco2800.game.components;
-
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderComponent;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class HealthBarComponent extends RenderComponent {
     protected boolean enabled = true;
@@ -33,107 +22,136 @@ public class HealthBarComponent extends RenderComponent {
         this.scale = scale;
         this.animations = new HashMap<>(4);
         timeSource = ServiceLocator.getTimeSource();
+
+public class HealthBarComponent extends RenderComponent {
+    private float ratioOfHealth = 1f;
+    private float ratioOfHealthPrevious = 1f;
+    private final Sprite health;
+    private final Sprite healthBar;
+    private final Sprite healthDecrease;
+    private float heightOfHealth;
+    private float size;
+    private float previousHealth;
+    private float saveHealth;
+    private boolean healthDecreaseCheck;
+    private long start = 0;
+
+    public HealthBarComponent(Sprite health, Sprite healthBar, Sprite healthDecrease) {
+        super();
+        this.health = health;
+        this.healthBar = healthBar;
+        this.healthDecrease = healthDecrease;
+        this.heightOfHealth = 1f;
+        this.size = 1f;
     }
 
-    public HealthBarComponent(TextureAtlas atlas) {
-        this.atlas = atlas;
-        this.scale = 1;
-        this.animations = new HashMap<>(4);
-        timeSource = ServiceLocator.getTimeSource();
+    public HealthBarComponent(Sprite health, Sprite healthBar, Sprite healthDecrease, Float heightOfHealth) {
+        super();
+        this.health = health;
+        this.healthBar = healthBar;
+        this.healthDecrease = healthDecrease;
+        this.heightOfHealth = heightOfHealth;
+        this.size = 1f;
     }
 
-
-    public void setScale(float scale) {
-        TextureRegion defaultTexture = this.atlas.findRegion("default");
-        entity.setScale(scale, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
+    public HealthBarComponent(Sprite health, Sprite healthBar, Sprite healthDecrease, Float heightOfHealth, Float size) {
+        super();
+        this.health = health;
+        this.healthBar = healthBar;
+        this.healthDecrease = healthDecrease;
+        this.heightOfHealth = heightOfHealth;
+        this.size = size;
+    }
+  
+    public void scaleHealth(float xScale) {
+        float width = (entity.getScale().x / health.getWidth()) * size;
+        float height = (entity.getScale().y / health.getHeight()) * (xScale / 2) * size;
+        health.setScale(height, width);
     }
 
-    public void addAnimation(String name, float frameDuration, Animation.PlayMode playMode) {
-        Array<TextureAtlas.AtlasRegion> regions = atlas.findRegions(name);
-        if (regions == null || regions.size == 0) {
-            logger.warn("Animation {} not found in texture atlas", name);
-            return;
-        } else if (animations.containsKey(name)) {
-            logger.warn(
-                    "Animation {} already added in texture atlas. Animations should only be added once.",
-                    name);
-            return;
-        }
-
-        Animation<TextureRegion> animation = new Animation<>(frameDuration, regions, playMode);
-        animations.put(name, animation);
-        logger.debug("Adding animation {}", name);
+    public void scaleHealthBar() {
+        float width = (entity.getScale().x / healthBar.getWidth()) * size;
+        float height = (entity.getScale().y / healthBar.getHeight()) * 0.5f * size;
+        healthBar.setScale(height, width);
     }
 
-    public boolean removeAnimation(String name) {
-        logger.debug("Removing animation {}", name);
-        return animations.remove(name) != null;
+    public void scaleHealthDecrease(float xScale, float xScalePrevious, double ratioHealthDecrease) {
+        float scale = xScale + (xScalePrevious - xScale)* (float)ratioHealthDecrease;
+        float width = (entity.getScale().x / healthBar.getWidth());
+        float height = (entity.getScale().y / health.getHeight()) * (scale / 2);
+        healthDecrease.setScale(height, width);
     }
 
-    public boolean hasAnimation(String name) {
-        return animations.containsKey(name);
-    }
-
-    public void startAnimation(String name) {
-        Animation<TextureRegion> animation = animations.getOrDefault(name, null);
-        if (animation == null) {
-            logger.error(
-                    "Attempted to play unknown animation {}. Ensure animation is added before playback.",
-                    name);
-            return;
-        }
-
-        currentAnimation = animation;
-        currentAnimationName = name;
-        animationPlayTime = 0f;
-        logger.debug("Starting animation {}", name);
-    }
-
-    public String getCurrentAnimation() {
-        return currentAnimationName;
-    }
-
-    public boolean isFinished() {
-        return currentAnimation != null && currentAnimation.isAnimationFinished(animationPlayTime);
-    }
-
-    public boolean stopAnimation() {
-        if (currentAnimation == null) {
-            return false;
-        }
-
-        logger.debug("Stopping animation {}", currentAnimationName);
-        currentAnimation = null;
-        currentAnimationName = null;
-        animationPlayTime = 0f;
-        return true;
-    }
-
-    @Override
-    protected void draw(SpriteBatch batch) {
-        TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
-        Vector2 pos = entity.getPosition();
-        Vector2 scale = entity.getScale();
-        batch.draw(region, pos.x, pos.y, scale.x, scale.y);
-        animationPlayTime += timeSource.getDeltaTime();
+    private static double round (double value, int precision) {
+        int scale = (int) Math.pow(10, precision);
+        return (double) Math.round(value * scale) / scale;
     }
 
     @Override
     public void create() {
-
+        super.create();
+        scaleHealthBar();
+        healthDecreaseCheck = false;
+        start = System.currentTimeMillis();
+        previousHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
     }
 
     @Override
     public void update() {
-        currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
+        float currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
-        float ratioOfHealth = currentHealth / MaxHealth;
+        if(currentHealth != previousHealth) {
+            saveHealth = previousHealth;
+            healthDecreaseCheck = true;
+            ratioOfHealthPrevious = saveHealth / MaxHealth;
+            ratioOfHealthPrevious = (float)round(ratioOfHealthPrevious, 1);
+            start = System.currentTimeMillis();
+
+        }
+        previousHealth = currentHealth;
+
+        ratioOfHealth = currentHealth / MaxHealth;
+        ratioOfHealth = (float)round(ratioOfHealth, 1);
+        if (ratioOfHealth == 0f) {
+            ratioOfHealth = 0.01f;
+        }
 
     }
-
     @Override
     public void dispose() {
         ServiceLocator.getRenderService().unregister(this);
     }
+    @Override
+    protected void draw(SpriteBatch batch) {
+        Vector2 position = entity.getPosition();
+        Vector2 positionCenter = entity.getCenterPosition();
+        float angle = entity.getAngle();
+
+        if (healthBar != null) {
+            healthBar.setRotation(angle);
+            healthBar.setCenter(positionCenter.x, positionCenter.y + heightOfHealth);
+            scaleHealthBar();
+            healthBar.draw(batch);
+        }
+        if(healthDecreaseCheck && healthDecrease != null) {
+            if((System.currentTimeMillis() - start) / 1000 >= 1) {
+                healthDecreaseCheck = false;
+            }else {
+                healthDecrease.setRotation(angle);
+                healthDecrease.setCenter(positionCenter.x, positionCenter.y + heightOfHealth);
+                double ratioOfDecrease = 1 -((System.currentTimeMillis() - start) / 1000.0);
+                scaleHealthDecrease(ratioOfHealth, ratioOfHealthPrevious, ratioOfDecrease);
+                healthDecrease.draw(batch);
+            }
+        }
+
+        if (health != null) {
+            scaleHealth(ratioOfHealth);
+            health.setRotation(angle);
+            health.setCenter(positionCenter.x, positionCenter.y + heightOfHealth);
+            health.draw(batch);
+        }
+    }
 
 }
+
