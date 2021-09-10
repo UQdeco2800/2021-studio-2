@@ -131,7 +131,7 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new CombatStatsComponent(1000, 0))
                 .addComponent(aiTaskComponent)
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2f));
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f));
         //vortex.setScale(scale);
         vortex.setAngle(angle);
         return vortex;
