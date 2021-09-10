@@ -11,20 +11,28 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Move to a given position, finishing when you get close enough. Requires an entity with a
  * PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
  */
 public class VortexSpawnTask extends DefaultTask implements PriorityTask {
-    private Vector2 scale;
+    private final Vector2 scale;
 
-    private Vector2 factor;
+    private final Vector2 factor;
 
-    private float rotateAngle;
+    private final float rotateAngle;
 
     private boolean reverse = false;
 
     private static float rotateFactor = 1;
+
+    private static float offset = 0;
+
+    private long time = 0;
+
+    private boolean max = false;
 
     public VortexSpawnTask(Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
@@ -41,22 +49,38 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (reverse) {
-            if (owner.getEntity().getScale().x < this.scale.x && owner.getEntity().getScale().y < this.scale.y) {
-                owner.getEntity().setScale(factor.scl(1.03f));
-                owner.getEntity().setAngle(rotateAngle + rotateFactor);
-            } else {
-                owner.getEntity().prepareDispose();
-            }
+        if (owner.getEntity().getScale().x > this.scale.x && owner.getEntity().getScale().y > this.scale.y) {
+            owner.getEntity().setScale(this.scale);
+        }
+        if (owner.getEntity().getScale().x < this.scale.x && owner.getEntity().getScale().y < this.scale.y && !max) {
+            owner.getEntity().setScale(factor.scl(1.02f));
+            owner.getEntity().setAngle(rotateAngle + rotateFactor);
+            time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
-            if (owner.getEntity().getScale().x > 0.1f && owner.getEntity().getScale().y > 0.1f) {
-                owner.getEntity().setScale(this.scale.scl(0.97f));
+            max = true;
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 1000
+                    && owner.getEntity().getScale().x > 0.1f
+                    && owner.getEntity().getScale().y > 0.1f) {
+                owner.getEntity().setScale(this.scale.scl(0.98f));
                 owner.getEntity().setAngle(rotateAngle + rotateFactor);
-            } else {
+            } else if (owner.getEntity().getScale().x <= 0.1f
+                    && owner.getEntity().getScale().y <= 0.1f) {
                 owner.getEntity().prepareDispose();
             }
         }
-
+//            else {
+//
+//                owner.getEntity().prepareDispose();
+//            }
+//        else {
+//            if (owner.getEntity().getScale().x > 0.1f && owner.getEntity().getScale().y > 0.1f) {
+//                owner.getEntity().setScale(this.scale.scl(0.99f));
+//                owner.getEntity().setAngle(rotateAngle + rotateFactor);
+//            } else {
+//                owner.getEntity().prepareDispose();
+//            }
+//     }
+        offset += 0.000001f;
         rotateFactor++;
 
         super.update();
@@ -71,21 +95,10 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     public int getPriority() {
         if (desiredScale()) {
             // dispose if the entity spawn at desired size
-            //owner.getEntity().prepareDispose();
             return (-1);
         } else {
             return (10);
         }
-    }
-
-    /**
-     * stop the arrow movement - dispose the arrow
-     */
-    @Override
-    public void stop() {
-        super.stop();
-        //Vortex disappear when the another one is spawn
-        //owner.getEntity().prepareDispose();
     }
 
     /**
