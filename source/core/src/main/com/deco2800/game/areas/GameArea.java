@@ -58,6 +58,7 @@ public abstract class GameArea implements Disposable {
 
     /**
      * get the number of enemy on the map
+     *
      * @return int number of enemy
      */
     public int getNumEnemy() {

@@ -14,6 +14,7 @@ public class LineEntity extends Entity {
 
     /**
      * Creates a line entity
+     *
      * @param TTL time to live in MS
      */
     public LineEntity(long TTL) {

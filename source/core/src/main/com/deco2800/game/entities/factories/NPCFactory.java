@@ -12,11 +12,10 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.*;
-import com.deco2800.game.entities.configs.MeleeEnemyConfig;
 import com.deco2800.game.entities.configs.ElfBossConfig;
-import com.deco2800.game.entities.configs.RangedEnemyConfig;
+import com.deco2800.game.entities.configs.MeleeEnemyConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
+import com.deco2800.game.entities.configs.RangedEnemyConfig;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -39,11 +38,15 @@ import com.deco2800.game.services.ServiceLocator;
  * similar characteristics.
  */
 public class NPCFactory {
-    /** load attribute from config */
+    /**
+     * load attribute from config
+     */
     private static final NPCConfigs configs =
             FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
 
-    /** throw error */
+    /**
+     * throw error
+     */
     private NPCFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
@@ -92,6 +95,7 @@ public class NPCFactory {
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
         return elf;
     }
+
     public static Entity createElfGuard(Entity target) {
         Entity elfKing = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
@@ -216,8 +220,8 @@ public class NPCFactory {
      * It will retreat if the target is approach in certain range
      *
      * @param target entity to chase
+     * @param type   arrow type ("normalArrow", "trackingArrow", "fastArrow")
      * @return entity
-     * @param type arrow type ("normalArrow", "trackingArrow", "fastArrow")
      */
     public static Entity createRangedElf(Entity target, String type, float multishotChance) {
         Entity elf = createBaseNPCNoAI();
@@ -257,6 +261,7 @@ public class NPCFactory {
 
     /**
      * create boss enemy entity
+     *
      * @param target enemy to chase (player)
      * @return boss entity
      */

@@ -29,11 +29,15 @@ import com.deco2800.game.services.ServiceLocator;
  * Factory to create non-playable character weapon entities with predefined components.
  */
 public class WeaponFactory {
-    /** load attribute from weapon json */
+    /**
+     * load attribute from weapon json
+     */
     private static final WeaponConfigs configs =
             FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
 
-    /** throw error */
+    /**
+     * throw error
+     */
     private WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
@@ -53,8 +57,9 @@ public class WeaponFactory {
 
     /**
      * create the normal arrow entity fly toward target
+     *
      * @param targetLoc lock target location
-     * @param angle check for target angle from current shooter position to target
+     * @param angle     check for target angle from current shooter position to target
      * @return entity arrow
      */
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
@@ -82,8 +87,9 @@ public class WeaponFactory {
 
     /**
      * create tracking arrow entity that can change trajectory
+     *
      * @param targetEntity target (player)
-     * @param angle angle from current entity position to target
+     * @param angle        angle from current entity position to target
      * @return entity tracking arrow
      */
     public static Entity createTrackingArrow(Entity targetEntity, float angle) {
@@ -111,8 +117,9 @@ public class WeaponFactory {
     /**
      * create fast arrow - unable to dodge
      * line warning before shoot
+     *
      * @param targetLoc target position
-     * @param angle check for target angle from current shooter position to target
+     * @param angle     check for target angle from current shooter position to target
      * @return fast arrow entity
      */
     public static Entity createFastArrow(Vector2 targetLoc, float angle) {
@@ -170,6 +177,7 @@ public class WeaponFactory {
 
     /**
      * Creates a line entity
+     *
      * @param TTL time to live in MS
      */
     public static LineEntity AimingLine(long TTL) {
