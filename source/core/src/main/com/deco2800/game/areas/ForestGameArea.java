@@ -187,14 +187,9 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-<<<<<<< Updated upstream
-            Entity ghost = NPCFactory.createGhost(player);
             incNum();
-            spawnEntityAt(ghost, randomPos, true, true);
-=======
             Entity elf = NPCFactory.createMeleeElf(player);
             spawnEntityAt(elf, randomPos, true, true);
->>>>>>> Stashed changes
         }
     }
 
@@ -207,11 +202,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-<<<<<<< Updated upstream
-            Entity ghost = NPCFactory.createRangedGhost(player);
             incNum();
-            spawnEntityAt(ghost, randomPos, true, true);
-=======
             Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
             spawnEntityAt(elf, randomPos, true, true);
         }
@@ -228,7 +219,6 @@ public class ForestGameArea extends GameArea {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
             spawnEntityAt(elf, randomPos, true, true);
->>>>>>> Stashed changes
         }
     }
 
@@ -245,26 +235,14 @@ public class ForestGameArea extends GameArea {
         spawnEntityAt(boss, bossPos, true, true);
     }
 
-<<<<<<< Updated upstream
-    /**
-     * spawn the ghost king
-     */
-    private void spawnGhostKing() {
-=======
     private void spawnElfGuard() {
->>>>>>> Stashed changes
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-<<<<<<< Updated upstream
-        Entity ghostKing = NPCFactory.createGhostKing(player);
         incNum();
-        spawnEntityAt(ghostKing, randomPos, true, true);
-=======
         Entity elfKing = NPCFactory.createElfGuard(player);
         spawnEntityAt(elfKing, randomPos, true, true);
->>>>>>> Stashed changes
     }
 
     /**
@@ -276,21 +254,12 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_ANCHORED_ELF; i++) {
             GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-<<<<<<< Updated upstream
-            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3),
-                    basePos.cpy().add(3, 3));
-            Entity anchor = ObstacleFactory.createAnchor();
-            Entity anchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
-            spawnEntityAt(anchor, basePos, true, true);
-            incNum();
-            spawnEntityAt(anchoredGhost, ghostPos, true, true);
-=======
             GridPoint2 elfPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
             Entity anchor = ObstacleFactory.createAnchor();
+            incNum();
             Entity Anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
             spawnEntityAt(Anchoredelf, elfPos, true, true);
->>>>>>> Stashed changes
         }
     }
 
