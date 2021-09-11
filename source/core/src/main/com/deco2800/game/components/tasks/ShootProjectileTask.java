@@ -8,14 +8,17 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
+import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.security.SecureRandom;
@@ -35,11 +38,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private final long cooldownMS;
     private long lastFired;
     private final GameArea gameArea;
-    //Below are currently unused and will be used for future arrows
     private Vector2 tragectoryLocation = null;
     private double multishotChance = 0.00;
     private String projectileType = "normalArrow";
     private boolean poweringUp = false;
+    private LineEntity aimingLine = null;
 
     /**
      * @param target     The entity to chase.
@@ -140,34 +143,76 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (tragectoryLocation == null) {
                     tragectoryLocation = target.getCenterPosition();
                 }
-                float turningAngle = 0.1f;//UserSettings.get().fps;
+                float turningAngle = 20f / UserSettings.get().fps;
 
-                Vector2 relativeLocationTarget = tragectoryLocation.cpy().sub(owner.getEntity().getCenterPosition());
-                Vector2 relativeLocationEntity = target.getCenterPosition().cpy().sub(owner.getEntity().getCenterPosition());
-                if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
-                    physics.raycast(owner.getEntity().getCenterPosition(), tragectoryLocation.scl(30), PhysicsLayer.OBSTACLE, hit);
-                    if (relativeLocationTarget.angleDeg(relativeLocationEntity) > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
-                        //left
-                        relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
-                                .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
-                                .add(owner.getEntity().getCenterPosition());
-                        this.tragectoryLocation = relativeLocationTarget;
+                Vector2 relativeLocationTarget = tragectoryLocation.cpy()
+                        .sub(owner.getEntity().getCenterPosition());
+                Vector2 relativeLocationEntity = target.getCenterPosition().cpy()
+                        .sub(owner.getEntity().getCenterPosition());
+                if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle
+                        && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
+                    //If obstacle is blocking the way
+                    if (physics.raycast(owner.getEntity().getCenterPosition(), tragectoryLocation, PhysicsLayer.OBSTACLE, hit)) {
+                        if (relativeLocationTarget.angleDeg(relativeLocationEntity)
+                                > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
+                            //left
+                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
+                                    .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
+                                    .add(owner.getEntity().getCenterPosition());
+                            this.tragectoryLocation = relativeLocationTarget;
+                        } else {
+                            //right
+                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
+                                    .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
+                                    .add(owner.getEntity().getCenterPosition());
+                            this.tragectoryLocation = relativeLocationTarget;
+                        }
                     } else {
-                        //right
-                        relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
-                                .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
-                                .add(owner.getEntity().getCenterPosition());
-                        this.tragectoryLocation = relativeLocationTarget;
+                        if (relativeLocationTarget.angleDeg(relativeLocationEntity)
+                                > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
+                            //left
+                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
+                                    .setLength(owner.getEntity().getAttackRange())
+                                    .add(owner.getEntity().getCenterPosition());
+                            this.tragectoryLocation = relativeLocationTarget;
+                        } else {
+                            //right
+                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
+                                    .setLength(owner.getEntity().getAttackRange())
+                                    .add(owner.getEntity().getCenterPosition());
+                            this.tragectoryLocation = relativeLocationTarget;
+                        }
                     }
                 } else {
-                    this.tragectoryLocation = target.getCenterPosition();
+                    this.tragectoryLocation = relativeLocationEntity
+                            .setLength(Math.min(owner.getEntity().getAttackRange(), relativeLocationEntity.len()))
+                            .add(owner.getEntity().getCenterPosition());
                 }
                 //Currently only works in debug mode
                 //In the future an aiming line sprite will be drawn
                 showTrajectory(tragectoryLocation);
+                /*if (aimingLine != null && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                    aimingLine.setTarget(target.getCenterPosition(), owner.getEntity().getCenterPosition());
+                } else*/
+                if (aimingLine != null) {
+                    aimingLine.setTarget(tragectoryLocation, owner.getEntity().getCenterPosition());
+                } else {
+                    aimingLine = WeaponFactory.AimingLine();
+                    gameArea.spawnEntityAt(aimingLine, aimingLine.setTarget(tragectoryLocation, owner.getEntity().getCenterPosition()), true, true);
+                }
+                float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;
+                Color newColor = new Color(Color.YELLOW);
+                newColor.a = 0.5f;
+                newColor.g = fade;
+                newColor = new Color(2.0f * fade, 2.0f * (1 - fade), 0f, 0.5f);
+                aimingLine.getComponent(TextureRenderComponent.class).getSprite()
+                        .setColor(newColor);
                 //Draw shot sprite
                 if (!poweringUp) {
-                    Entity arrow = WeaponFactory.createFastArrow(tragectoryLocation, getDirectionOfTarget());
+                    Entity arrow = WeaponFactory.createFastArrow(
+                            tragectoryLocation.cpy().sub(owner.getEntity().getCenterPosition())
+                                    .scl(30).add(owner.getEntity().getCenterPosition())
+                            , getDirectionOfTarget());
                     gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
                     //Check if hit
                     if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
@@ -175,13 +220,15 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         target.getComponent(CombatStatsComponent.class).addHealth(-damage);
                     }
                     tragectoryLocation = null;
+                    aimingLine.dispose();
+                    aimingLine = null;
                 }
                 break;
         }
     }
 
     /**
-     * Show trajectory before shooting
+     * Show trajectory before shooting on debug screen
      */
     public void showTrajectory(Vector2 loc) {
         // If there is an obstacle in the path to the player, not visible.

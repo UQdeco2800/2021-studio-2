@@ -63,7 +63,8 @@ public class ForestGameArea extends GameArea {
             "images/enemy_health_bar.png",
             "images/enemy_health_border.png",
             "images/enemy_health_bar_decrease.png",
-            "images/vortex.png"
+            "images/vortex.png",
+            "images/aiming_line.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
@@ -103,11 +104,11 @@ public class ForestGameArea extends GameArea {
         spawnTerrain();
         spawnTrees();
         spawnPlayer();
-        spawnGhosts();
-        spawnGhostKing();
+        //spawnGhosts();
+        //spawnGhostKing();
         spawnRangedGhosts();
-        spawnAnchoredGhosts();
-        spawnBoss();
+        //spawnAnchoredGhosts();
+        //spawnBoss();
 
         playMusic();
         setDialogue();

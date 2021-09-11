@@ -11,6 +11,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.BaseArrowConfig;
 import com.deco2800.game.entities.configs.FastArrowConfig;
 import com.deco2800.game.entities.configs.TrackingArrowConfig;
@@ -136,6 +137,19 @@ public class WeaponFactory {
         //vortex.setScale(scale);
         vortex.setAngle(angle);
         return vortex;
+    }
+
+    public static LineEntity AimingLine() {
+        LineEntity line = new LineEntity();
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/aiming_line.png", Texture.class));
+        sprite.flip(true, false);
+        sprite.setAlpha(0.5f);
+        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
+        line
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new PhysicsComponent());
+        line.setScale(scale);
+        return line;
     }
 
     /**
