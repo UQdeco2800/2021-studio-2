@@ -1,5 +1,7 @@
 package com.deco2800.game.components;
 
+import com.badlogic.gdx.physics.box2d.Transform;
+import com.deco2800.game.components.crate.TransformItemComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +79,7 @@ public class CombatStatsComponent extends Component {
             this.health = health;
         } else {
             this.health = 0;
+
             if (this.entity != null) {
                 this.entity.prepareDispose();
             }
@@ -117,22 +120,50 @@ public class CombatStatsComponent extends Component {
         }
     }
 
+    /**
+     * called when an entity is attack
+     * if this entity has a transform component or hit animations they will be called.
+     * if combatStatComponent is disabled this method will not do anything.
+     * @param attacker the CombatStatComponent of the attacker
+     */
     public void hit(CombatStatsComponent attacker) {
-    //check for hit animations
-        // - must have a 'hit' event listener in the *animationController Component
-        if (hasAnimation() && playHitAnimation()) {
+        if (this.enabled) {
+            int newHealth = getHealth() - attacker.getBaseAttack();
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformationComponent(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * plays hit animation if the entity has one in its animation controller and
+     * sprite atlas .
+     */
+    private void checkHitAnimations() {
+        AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
+        if (animate != null && animate.hasAnimation("hit")) {
             entity.getEvents().trigger("hit");
         }
-        int newHealth = getHealth() - attacker.getBaseAttack();
-        setHealth(newHealth);
     }
 
-    public boolean playHitAnimation() {
-        return this.entity.getComponent(AnimationRenderComponent.class).hasAnimation("hit");
-    }
-
-    public boolean hasAnimation() {
-        AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
-        return animate != null;
+    /**
+     * if the entity has a Transform Component it will execute its transformation
+     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponet
+     * @param health the current health of the entity
+     * @return true if entity has a TransformComponent otherwise false
+     */
+    private boolean checkTransformationComponent(int health) {
+        if (entity.getComponent(TransformItemComponent.class) != null) {
+            if (health <= 0) {
+                entity.getEvents().trigger("transform");
+                return true;
+            }
+        }
+        return false;
     }
 }

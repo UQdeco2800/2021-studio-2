@@ -63,11 +63,11 @@ public class ForestGameArea extends GameArea {
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
-            "crate/crateHitBreak.png"
+            "crate/crateHitBreakV2.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
+            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreakV2.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -241,10 +241,9 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_CRATES; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity crate = ObstacleFactory.createCrate();
-            Entity health = ObstacleFactory.createHealthPotion();
+            Entity crate = ObstacleFactory.createHealthCrate();
             spawnEntityAt(crate, randomPos, true, true);
-            spawnEntityAt(health, randomPos, true, true);
+            //spawnEntityAt(health, randomPos, true, true);
         }
     }
 
