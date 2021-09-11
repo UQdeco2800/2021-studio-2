@@ -17,13 +17,15 @@ public class TeleportComponent extends TouchComponent{
 
     private Scanner scanner = new Scanner(System.in);
     private long start = 0;
+    private Entity player;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TeleportComponent(short targetLayer) {
+    public TeleportComponent(short targetLayer, Entity player) {
         super(targetLayer);
+        this.player = player;
     }
 
     @Override
@@ -49,14 +51,17 @@ public class TeleportComponent extends TouchComponent{
             return;
         }
 
-
-
-        // Try to attack target.
+        // Try to teleport player
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
             //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
             //target.setPosition(3f,4f);
+            System.out.println("x= " + target.getPosition().x + "  y= " + target.getPosition().y);
+            target.setScale(new Vector2(5,5));
+            //target.setPosition(new Vector2(15,8));
+            //this.player.setPosition(new Vector2(15,8));
+            //this.player.setScale(new Vector2(5,5));
         }
     }
 }
