@@ -1,8 +1,5 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.physics.box2d.Transform;
-import com.deco2800.game.components.crate.TransformItemComponent;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +76,6 @@ public class CombatStatsComponent extends Component {
             this.health = health;
         } else {
             this.health = 0;
-
             if (this.entity != null) {
                 this.entity.prepareDispose();
             }
@@ -134,7 +130,7 @@ public class CombatStatsComponent extends Component {
             //if entity has Transform Component and is about to die we don't want to update hp
             // here since it will dispose. Instead we want to disable this component and perform
             // our transformation.
-            if (!checkTransformationComponent(newHealth)) {
+            if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
             }
         }
@@ -142,25 +138,26 @@ public class CombatStatsComponent extends Component {
 
     /**
      * plays hit animation if the entity has one in its animation controller and
-     * sprite atlas .
+     * atlas file. The event name registered for starting the hit animations must be called
+     * 'hit'. The animation names don't have to be 'hit' though.
      */
     private void checkHitAnimations() {
-        AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
-        if (animate != null && animate.hasAnimation("barrelHit")) {
-            entity.getEvents().trigger("barrelHit");
+        if (entity.getEvents().hasEvent("hit")) {
+            entity.getEvents().trigger("hit");
         }
     }
 
     /**
      * if the entity has a Transform Component it will execute its transformation
-     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponet
+     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponent
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */
-    private boolean checkTransformationComponent(int health) {
-        if (entity.getComponent(TransformItemComponent.class) != null) {
+    private boolean checkTransformation(int health) {
+        //transform is added in TransformEntityComponent
+        if (entity.getEvents().hasEvent("transformEntity")) {
             if (health <= 0) {
-                entity.getEvents().trigger("transform");
+                entity.getEvents().trigger("transformEntity");
                 return true;
             }
         }

@@ -10,7 +10,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
  * to transform into a different kind of entity without disposing it.
  * e.g enemies die and drop items
  */
-public class TransformItemComponent extends TransformEntityComponent {
+public class TransformBarrelComponent extends TransformEntityComponent {
     @Override
     protected void transform() {
         //break animation into a health potion

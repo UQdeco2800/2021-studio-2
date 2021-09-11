@@ -10,12 +10,12 @@ import com.deco2800.game.components.Component;
  * separate entity for that.
  * disposal will occur in a touchComponent, so when the player walks up to pick-up the item
  */
-abstract class TransformEntityComponent extends Component {
+public abstract class TransformEntityComponent extends Component {
     //implement a timer for transformation animation and then player can interact with the entity
 
     public void create() {
         super.create();
-        entity.getEvents().addListener("transform", this::transform);
+        entity.getEvents().addListener("transformEntity", this::transform);
     }
 
     /**

@@ -6,7 +6,8 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchHealComponent;
 import com.deco2800.game.components.crate.CrateAnimationController;
-import com.deco2800.game.components.crate.TransformItemComponent;
+import com.deco2800.game.components.crate.TransformBarrelComponent;
+import com.deco2800.game.components.crate.TransformEntityComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -103,7 +104,7 @@ public class ObstacleFactory {
                 .addComponent(new ColliderComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new CombatStatsComponent(30, 0))
-                .addComponent(new TransformItemComponent())
+                .addComponent(new TransformBarrelComponent())
                 .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
 
         crate.getComponent(TouchHealComponent.class).setEnabled(false);
