@@ -3,9 +3,6 @@ package com.deco2800.game.components.crate;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchHealComponent;
 import com.deco2800.game.physics.components.ColliderComponent;
-import com.deco2800.game.rendering.AnimationRenderComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * allows entities to disable and enable different components depending on what you
@@ -14,7 +11,6 @@ import org.slf4j.LoggerFactory;
  * e.g enemies die and drop items
  */
 public class TransformItemComponent extends TransformEntityComponent {
-    private static final Logger logger = LoggerFactory.getLogger(CombatStatsComponent.class);
     @Override
     protected void transform() {
         //break animation into a health potion
@@ -25,8 +21,9 @@ public class TransformItemComponent extends TransformEntityComponent {
 
     private void configureComponents() {
         entity.getComponent(CombatStatsComponent.class).setEnabled(false);
-        entity.getComponent(TouchHealComponent.class).setEnabled(true); //this component is where
-        // player can pick-up item and disposed
+
+        //this component is where player can pick-up item and disposes it
+        entity.getComponent(TouchHealComponent.class).setEnabled(true);
         entity.getComponent(ColliderComponent.class).setSensor(true);
     }
 }
