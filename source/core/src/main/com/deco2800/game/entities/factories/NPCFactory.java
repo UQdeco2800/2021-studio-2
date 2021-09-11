@@ -73,7 +73,6 @@ public class NPCFactory {
                                 target, 11, 4f, 4f))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f));
-        BaseEntityConfig config = configs.ghost;
         elf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
