@@ -36,6 +36,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     private int maxHealth;
     private int health = 100;
     private Vector2 pos2;
+    private int count = 0;
 
 
     /**
@@ -63,20 +64,41 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
+        if (ServiceLocator.getGameAreaService().getNumEnemy() > 0 && mapBound()) {
+            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            return;
+        }
+        if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
+            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            teleport(new Vector2(2f, 2f));
+            count++;
+        }
         if (canTeleport()) {
             health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             teleport();
         }
-        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 800) {
-            owner.getEntity().setPosition(pos2);
+
+        if (spawn) {
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 800) {
+                owner.getEntity().setPosition(pos2);
+            }
         }
-        health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
 
     }
 
+    public void teleport(Vector2 position) {
+        Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget(), false);
+
+        gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
+        Entity vortex2 = WeaponFactory.createVortex(getDirectionOfTarget(), false);
+
+        gameArea.spawnEntityAt(vortex2, position, true, true);
+        owner.getEntity().setPosition(position);
+    }
+
     /**
-     * spawns the vortex and teleport the boss
+     * spawns the vortex and teleport the boss (random teleport)
      */
     public void teleport() {
         if (lastFired == 0) {
@@ -95,6 +117,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
 
+
     }
 
     /**
@@ -104,6 +127,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public int getPriority() {
+        if ((ServiceLocator.getGameAreaService().getNumEnemy() == 0 && count == 0)
+                || (ServiceLocator.getGameAreaService().getNumEnemy() != 0 && mapBound())) {
+            return 100;
+        }
         if (canTeleport() || spawn) {
             if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 2200) {
                 spawn = false;
@@ -111,6 +138,13 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             return 30;
         }
         return -1;
+    }
+
+    public boolean mapBound() {
+        return (owner.getEntity().getPosition().x < 0
+                && owner.getEntity().getPosition().y < 0)
+                || (owner.getEntity().getPosition().x > 30
+                && owner.getEntity().getPosition().y > 30);
     }
 
     /**

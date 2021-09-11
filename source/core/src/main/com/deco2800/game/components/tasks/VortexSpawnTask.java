@@ -21,8 +21,6 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
 
     private static float rotateFactor = 1;
 
-    private static float offset = 0;
-
     private long time = 0;
 
     private boolean max = false;
@@ -50,37 +48,19 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                 && owner.getEntity().getScale().y < this.scale.y && !max) {
             owner.getEntity().setScale(factor.scl(1.05f));
             owner.getEntity().setAngle(rotateAngle + rotateFactor);
-            /*
-            owner.getEntity().setPosition(
-                    owner.getEntity().getPosition().x - owner.getEntity().getCenterPosition().x,
-                    owner.getEntity().getPosition().y - owner.getEntity().getCenterPosition().y);
-             */
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
             max = true;
+            owner.getEntity().setAngle(rotateAngle + rotateFactor);
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
                 owner.getEntity().setScale(this.scale.scl(0.95f));
-                owner.getEntity().setAngle(rotateAngle + rotateFactor);
             } else if (owner.getEntity().getScale().x <= 0.1f
                     && owner.getEntity().getScale().y <= 0.1f) {
                 owner.getEntity().prepareDispose();
             }
         }
-//            else {
-//
-//                owner.getEntity().prepareDispose();
-//            }
-//        else {
-//            if (owner.getEntity().getScale().x > 0.1f && owner.getEntity().getScale().y > 0.1f) {
-//                owner.getEntity().setScale(this.scale.scl(0.99f));
-//                owner.getEntity().setAngle(rotateAngle + rotateFactor);
-//            } else {
-//                owner.getEntity().prepareDispose();
-//            }
-//     }
-        offset += 0.000001f;
         rotateFactor++;
 
         super.update();
@@ -97,7 +77,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
             // dispose if the entity spawn at desired size
             return (-1);
         } else {
-            return (10);
+            return (15);
         }
     }
 

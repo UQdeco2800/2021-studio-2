@@ -104,7 +104,7 @@ public class ForestGameArea extends GameArea {
         spawnTerrain();
         spawnTrees();
         spawnPlayer();
-        //spawnGhosts();
+        spawnGhosts();
         //spawnGhostKing();
         //spawnRangedGhosts();
         //spawnAnchoredGhosts();
@@ -189,6 +189,7 @@ public class ForestGameArea extends GameArea {
         for (int i = 0; i < NUM_GHOSTS; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity ghost = NPCFactory.createGhost(player);
+            incNum();
             spawnEntityAt(ghost, randomPos, true, true);
         }
     }
@@ -203,6 +204,7 @@ public class ForestGameArea extends GameArea {
         for (int i = 0; i < NUM_GHOSTS; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity ghost = NPCFactory.createRangedGhost(player);
+            incNum();
             spawnEntityAt(ghost, randomPos, true, true);
         }
     }
@@ -212,8 +214,10 @@ public class ForestGameArea extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+        GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
-        spawnEntityAt(boss, randomPos, true, true);
+        spawnEntityAt(boss, bossPos, true, true);
+        System.out.println(boss.getPosition());
     }
 
     private void spawnGhostKing() {
@@ -222,6 +226,7 @@ public class ForestGameArea extends GameArea {
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
         Entity ghostKing = NPCFactory.createGhostKing(player);
+        incNum();
         spawnEntityAt(ghostKing, randomPos, true, true);
     }
 
@@ -238,6 +243,7 @@ public class ForestGameArea extends GameArea {
             Entity anchor = ObstacleFactory.createAnchor();
             Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
+            incNum();
             spawnEntityAt(AnchoredGhost, ghostPos, true, true);
         }
     }
