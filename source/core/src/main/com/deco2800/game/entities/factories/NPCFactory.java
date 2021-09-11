@@ -101,7 +101,7 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService()
-                                .getAsset("images/bossEnemy.atlas", TextureAtlas.class));
+                                .getAsset("images/ghost.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
@@ -281,6 +281,8 @@ public class NPCFactory {
                 .addComponent(aiComponent);
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
+        boss.scaleWidth(2);
+        boss.scaleHeight(2);
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
         Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
@@ -289,7 +291,9 @@ public class NPCFactory {
         //teleportation - despawn the enemy - if enemy health is lower than 50%
         // everytime the enemy get hit, it randomly teleport to a random position on the map.
         // weaknesses - it may teleport beside the character
+
         return boss;
+
     }
 
     /**
