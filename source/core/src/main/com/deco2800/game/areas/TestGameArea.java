@@ -249,9 +249,6 @@ public class TestGameArea extends GameArea {
             Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(obstacles[y][x])));
             GridPoint2 pos = new GridPoint2(x, max.y - y);
 
-            Logger logger = LoggerFactory.getLogger(TestGameArea.class);
-            logger.info(pos.toString());
-
             spawnEntityAt(obstacle, pos, true,false);
           }
         }

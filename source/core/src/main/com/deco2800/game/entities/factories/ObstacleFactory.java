@@ -37,7 +37,7 @@ public class ObstacleFactory {
   }
 
   /**
-   * Creates an obstacle entity with no hitbox
+   * Creates a non-physical entity with no collision
    * @return entity
    */
   public static Entity createObstacle(String tileRef) {
@@ -50,7 +50,7 @@ public class ObstacleFactory {
   }
 
   /**
-   * Creates a trap with collation.
+   * Creates a trap with collision.
    * @return trap
    */
   public static Entity createPhysicalTrap() {
