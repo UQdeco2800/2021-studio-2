@@ -1,28 +1,15 @@
 package com.deco2800.game.components.tasks;
 
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.DefaultMultiTask;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.entities.factories.NPCFactory;
-import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.files.FileLoader;
-import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 
-import java.security.SecureRandom;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -30,21 +17,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
 
+    /** target entity (player) */
     private final Entity target;
-    private final PhysicsEngine physics;
-    private final DebugRenderer debugRenderer;
-    private final RaycastHit hit = new RaycastHit();
+    /** game area */
     private final GameArea gameArea;
+    /** number of time enemy is spawn */
     private static int spawn = 0;
 
     /**
-     * @param target     The entity to chase.
+     * spawn the minion to help the boss attack the target
+     * @param target The entity to chase.
      */
     public SpawnMinionsTask(Entity target) {
         this.target = target;
         this.gameArea = ServiceLocator.getGameAreaService();
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**
@@ -59,28 +45,28 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
         }
     }
 
-
-
     /**
      * Spawns in an arrow according to the classes variables
      */
     public void spawn() {
         Entity ghost = NPCFactory.createGhost(target);
-        //Entity ghost2 = NPCFactory.createRangedGhost(target);
-        //Entity ghost3 = NPCFactory.createGhostKing(target);
         Entity ghost4 = NPCFactory.createRangedGhost(target);
 
         gameArea.spawnEntityAt(ghost, owner.getEntity().getCenterPosition(), true, true);
-        //gameArea.spawnEntityAt(ghost2, owner.getEntity().getCenterPosition(), true, true);
-        //gameArea.spawnEntityAt(ghost3, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(ghost4, owner.getEntity().getCenterPosition(), true, true);
+        /*
+        Entity ghost2 = NPCFactory.createRangedGhost(target);
+        Entity ghost3 = NPCFactory.createGhostKing(target);
+        gameArea.spawnEntityAt(ghost2, owner.getEntity().getCenterPosition(), true, true);
+        gameArea.spawnEntityAt(ghost3, owner.getEntity().getCenterPosition(), true, true);
+        */
 
     }
 
     /**
-     * return the priority of arrow task
+     * return the priority of task
      *
-     * @return highest priority if can shoot, else -1
+     * @return 20 can spawn enemy, else -1
      */
     @Override
     public int getPriority() {
@@ -90,6 +76,10 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
         return -1;
     }
 
+    /**
+     * check if the boss is not inside the bound
+     * @return true if not, false otherwise
+     */
     public boolean mapBound() {
         return owner.getEntity().getPosition().x < 0
                 && owner.getEntity().getPosition().y < 0
@@ -98,9 +88,9 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * check if target can shoot based on given cooldown of the shooting and target is visible
+     * check if the minions can be spawned
      *
-     * @return true if can shoot, false otherwise
+     * @return true if can spawn, false otherwise
      */
     private boolean canSpawn() {
         float maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();

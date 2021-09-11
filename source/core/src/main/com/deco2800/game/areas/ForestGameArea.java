@@ -210,6 +210,9 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
     private void spawnBoss() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -218,9 +221,11 @@ public class ForestGameArea extends GameArea {
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);
-        //System.out.println(boss.getPosition());
     }
 
+    /**
+     * spawn the ghost king
+     */
     private void spawnGhostKing() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -240,12 +245,13 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
             GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3),
+                    basePos.cpy().add(3, 3));
             Entity anchor = ObstacleFactory.createAnchor();
-            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+            Entity anchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
             incNum();
-            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+            spawnEntityAt(anchoredGhost, ghostPos, true, true);
         }
     }
 

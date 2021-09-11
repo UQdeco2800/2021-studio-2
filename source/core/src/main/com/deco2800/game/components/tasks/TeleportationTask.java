@@ -25,27 +25,37 @@ import java.util.concurrent.TimeUnit;
  */
 public class TeleportationTask extends DefaultTask implements PriorityTask {
 
+    /** target entity - player */
     private final Entity target;
+    /** object - physics engine */
     private final PhysicsEngine physics;
+    /** debug mode */
     private final DebugRenderer debugRenderer;
+    /** ray cast on debug mode */
     private final RaycastHit hit = new RaycastHit();
-    private final long cooldownMS;
+    /** cooldown before skill can cast again */
+    private final long cooldown;
+    /** time of the last skill cast */
     private long lastFired;
+    /** get game area */
     private final GameArea gameArea;
+    /** check if the vortex is spawning */
     private boolean spawn = false;
-    private int maxHealth;
+    /** set initial health = 100 */
     private int health = 100;
+    /** random spawning position */
     private Vector2 pos2;
+    /** check if the enemy still outside the map area */
     private int count = 0;
 
 
     /**
      * @param target     The entity to chase.
-     * @param cooldownMS how long to wait in MS before shooting again
+     * @param cooldown how long to wait in MS before casting teleport again
      */
-    public TeleportationTask(Entity target, int cooldownMS) {
+    public TeleportationTask(Entity target, int cooldown) {
         this.target = target;
-        this.cooldownMS = cooldownMS;
+        this.cooldown = cooldown;
         this.gameArea = ServiceLocator.getGameAreaService();
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
@@ -87,6 +97,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
     }
 
+    /**
+     * method overloading - teleport to a given position
+     * @param position position to teleport to
+     */
     public void teleport(Vector2 position) {
         Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget(), false);
 
@@ -123,7 +137,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     /**
      * return the priority of arrow task
      *
-     * @return highest priority if can shoot, else -1
+     * @return highest priority, can teleport, else -1
      */
     @Override
     public int getPriority() {
@@ -140,6 +154,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         return -1;
     }
 
+    /**
+     * check if not inside the boundary of the map
+     * @return true if not inside the map, false otherwise
+     */
     public boolean mapBound() {
         return (owner.getEntity().getPosition().x < 0
                 && owner.getEntity().getPosition().y < 0)
@@ -149,8 +167,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
     /**
      * return the distance of the entity to the target
-     *
-     * @return return the d
+     * @return return the distance to target
      */
     private float getDistanceToTarget() {
         return owner.getEntity().getCenterPosition().dst(target.getPosition());
@@ -203,10 +220,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     private boolean canTeleport() {
         int currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
-        maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
+        int maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
 
         if ((float) currentHealth / maxHealth < 0.5f) {
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
                     && isTargetVisible()
                     && getDistanceToTarget() < owner.getEntity().getAttackRange()) {
                 return currentHealth < health;
