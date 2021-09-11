@@ -2,10 +2,26 @@ package com.deco2800.game.entities;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Creates an entity that represents a line.
  */
 public class LineEntity extends Entity {
+
+    private final long TTL;
+    private final long timeCreated;
+
+    /**
+     * Creates a line entity
+     * @param TTL time to live in MS
+     */
+    public LineEntity(long TTL) {
+        super();
+        this.TTL = TTL;
+        timeCreated = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+    }
+
 
     /**
      * draws a line entity from origin to target
@@ -28,5 +44,8 @@ public class LineEntity extends Entity {
     @Override
     public void update() {
         super.update();
+        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= TTL) {
+            this.dispose();
+        }
     }
 }

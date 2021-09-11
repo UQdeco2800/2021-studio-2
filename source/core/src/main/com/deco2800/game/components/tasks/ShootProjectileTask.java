@@ -159,13 +159,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                             relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
                                     .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
                                     .add(owner.getEntity().getCenterPosition());
-                            this.tragectoryLocation = relativeLocationTarget;
                         } else {
                             //right
                             relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
                                     .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
                                     .add(owner.getEntity().getCenterPosition());
-                            this.tragectoryLocation = relativeLocationTarget;
                         }
                     } else {
                         if (relativeLocationTarget.angleDeg(relativeLocationEntity)
@@ -174,15 +172,14 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                             relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
                                     .setLength(owner.getEntity().getAttackRange())
                                     .add(owner.getEntity().getCenterPosition());
-                            this.tragectoryLocation = relativeLocationTarget;
                         } else {
                             //right
                             relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
                                     .setLength(owner.getEntity().getAttackRange())
                                     .add(owner.getEntity().getCenterPosition());
-                            this.tragectoryLocation = relativeLocationTarget;
                         }
                     }
+                    this.tragectoryLocation = relativeLocationTarget;
                 } else {
                     this.tragectoryLocation = relativeLocationEntity
                             .setLength(Math.min(owner.getEntity().getAttackRange(), relativeLocationEntity.len()))
@@ -197,7 +194,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (aimingLine != null) {
                     aimingLine.setTarget(tragectoryLocation, owner.getEntity().getCenterPosition());
                 } else {
-                    aimingLine = WeaponFactory.AimingLine();
+                    aimingLine = WeaponFactory.AimingLine(cooldownMS);
                     gameArea.spawnEntityAt(aimingLine, aimingLine.setTarget(tragectoryLocation, owner.getEntity().getCenterPosition()), true, true);
                 }
                 float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;

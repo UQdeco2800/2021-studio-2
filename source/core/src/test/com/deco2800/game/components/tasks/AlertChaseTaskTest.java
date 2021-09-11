@@ -72,9 +72,7 @@ class AlertChaseTaskTest {
             ServiceLocator.getPhysicsService().getPhysics().update();
         }
 
-        // ghost king is called so despite the distance, the enemies is chased toward target
         float newDistance2 = alertableEntity.getPosition().dst(target.getPosition());
-        //System.out.println(newDistance - oldDistance);
         // fail because the enemy is not alerted - alert task fail
         assertEquals(newDistance2 - oldDistance, 0);
     }
