@@ -43,7 +43,7 @@ public class TouchHealComponent extends TouchComponent {
             Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
             float healthRestore =
                     player.getComponent(CombatStatsComponent.class).getMaxHealth() * healthPercentage;
-            player.getEvents().trigger("heal", (int) healthRestore);
+            player.getEvents().trigger("healEntity", (int) healthRestore);
             //dispose health potion after giving player hp
             ((BodyUserData) me.getBody().getUserData()).entity.prepareDispose();
         }

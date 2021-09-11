@@ -26,7 +26,7 @@ public class CombatStatsComponent extends Component {
     }
 
     public void create() {
-        entity.getEvents().addListener("heal", this::addHealth);
+        entity.getEvents().addListener("healEntity", this::addHealth);
     }
 
     /**
@@ -146,8 +146,8 @@ public class CombatStatsComponent extends Component {
      */
     private void checkHitAnimations() {
         AnimationRenderComponent animate = this.entity.getComponent(AnimationRenderComponent.class);
-        if (animate != null && animate.hasAnimation("hit")) {
-            entity.getEvents().trigger("hit");
+        if (animate != null && animate.hasAnimation("barrelHit")) {
+            entity.getEvents().trigger("barrelHit");
         }
     }
 

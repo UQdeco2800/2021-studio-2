@@ -91,8 +91,8 @@ public class ObstacleFactory {
                 ServiceLocator.getResourceService().getAsset("crate/crateHitBreakV2.atlas",
                         TextureAtlas.class));
 
-        crateAnimator.addAnimation("hit", 0.05f); //default playback NORMAL
-        crateAnimator.addAnimation("break", 0.01f); //break contains the transform animation
+        crateAnimator.addAnimation("barrelHit", 0.05f); //default playback NORMAL
+        crateAnimator.addAnimation("barrelDeath", 0.01f); //break contains the transform animation
         crateAnimator.addAnimation("default", 1f);
         crateAnimator.startAnimation("default");
 

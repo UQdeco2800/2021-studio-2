@@ -16,17 +16,17 @@ import org.slf4j.LoggerFactory;
 public class TransformItemComponent extends TransformEntityComponent {
     private static final Logger logger = LoggerFactory.getLogger(CombatStatsComponent.class);
     @Override
-    public void transform() {
+    protected void transform() {
         //break animation into a health potion
-        entity.getComponent(AnimationRenderComponent.class).startAnimation("break");
+        entity.getEvents().trigger("barrelDeath");
         //disable the combatStat so that it doesn't get disposed over there
-        disposeOtherComponents();
+        configureComponents();
+    }
+
+    private void configureComponents() {
+        entity.getComponent(CombatStatsComponent.class).setEnabled(false);
         entity.getComponent(TouchHealComponent.class).setEnabled(true); //this component is where
         // player can pick-up item and disposed
         entity.getComponent(ColliderComponent.class).setSensor(true);
-    }
-
-    private void disposeOtherComponents() {
-        entity.getComponent(CombatStatsComponent.class).setEnabled(false);
     }
 }
