@@ -130,7 +130,7 @@ public class WeaponFactory {
         vortex
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new CombatStatsComponent(1000, 0))
                 .addComponent(aiTaskComponent)
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f));

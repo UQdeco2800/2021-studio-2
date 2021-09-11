@@ -12,10 +12,7 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.GhostAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.BaseEntityConfig;
-import com.deco2800.game.entities.configs.GhostKingConfig;
-import com.deco2800.game.entities.configs.GhostRangedConfig;
-import com.deco2800.game.entities.configs.NPCConfigs;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -38,9 +35,11 @@ import com.deco2800.game.services.ServiceLocator;
  * similar characteristics.
  */
 public class NPCFactory {
+    /** load attribute from config */
     private static final NPCConfigs configs =
             FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
 
+    /** throw error */
     private NPCFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
@@ -53,11 +52,11 @@ public class NPCFactory {
      */
     public static Entity createGhost(Entity target) {
         Entity ghost = createBaseNPCNoAI();
-        BaseEntityConfig config = configs.ghost;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/ghost.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -66,8 +65,12 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ZigChaseTask(target, 11, 4f, 4f))
-                        .addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+                        .addTask(new ZigChaseTask(
+                                target, 11, 4f, 4f))
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f));
+
+        BaseEntityConfig config = configs.ghost;
 
         ghost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -75,24 +78,32 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new GhostAnimationController());
 
-        ghost.getComponent(AITaskComponent.class).
-                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-        ghost.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f));
+        ghost.getComponent(AITaskComponent.class).addTask(
+                new AlertableChaseTask(target, 10, 3f, 4f));
+        ghost.getComponent(AITaskComponent.class)
+                .addTask(new ZigChaseTask(target, 11, 3f, 6f));
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
         ghost.addComponent(healthBarComponent);
 
         ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
         return ghost;
     }
 
+    /**
+     * create ghost king entity
+     * @param target entity to chase (player)
+     * @return ghost king entity
+     */
     public static Entity createGhostKing(Entity target) {
         Entity ghostKing = createBaseNPCNoAI();
-        GhostKingConfig config = configs.ghostKing;
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 10, 3f, 4f));
@@ -107,16 +118,22 @@ public class NPCFactory {
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
 
+        GhostKingConfig config = configs.ghostKing;
+
         ghostKing
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController());
         ghostKing.setEntityType("AlertCaller");
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
         ghostKing.addComponent(healthBarComponent);
 
         ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
@@ -134,31 +151,38 @@ public class NPCFactory {
 
     public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSize) {
         Entity anchoredGhost = createBaseNPCNoAI();
-        BaseEntityConfig config = configs.ghost;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
-                        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
+                        .addTask(new AnchoredChaseTask(
+                                target, 3f, 4f, anchor, anchorSize))
                         .addTask(new AnchoredRetreatTask(anchor, anchorSize));
         anchoredGhost.addComponent(aiComponent);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/ghost.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+        BaseEntityConfig config = configs.ghost;
 
         anchoredGhost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
         anchoredGhost.addComponent(healthBarComponent);
 
         anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
@@ -175,33 +199,43 @@ public class NPCFactory {
      * @param anchorSizeY how big the base's area is in the Y axis
      * @return entity
      */
-    public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
+    public static Entity createAnchoredGhost(
+            Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
         Entity anchoredGhost = createBaseNPCNoAI();
-        BaseEntityConfig config = configs.ghost;
         AITaskComponent aiComponent =
                 new AITaskComponent()
-                        .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
-                        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
+                        .addTask(new AnchoredWanderTask(
+                                anchor, anchorSizeX, anchorSizeY, 2f))
+                        .addTask(new AnchoredChaseTask(
+                                target, 3f,
+                                4f, anchor, anchorSizeX, anchorSizeY))
                         .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
         anchoredGhost.addComponent(aiComponent);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/ghost.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+        BaseEntityConfig config = configs.ghost;
 
         anchoredGhost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new GhostAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
         anchoredGhost.addComponent(healthBarComponent);
 
         anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
@@ -217,12 +251,11 @@ public class NPCFactory {
      * @return entity
      */
     public static Entity createRangedGhost(Entity target) {
-        Entity ghost = createBaseNPCNoAI();
-        GhostRangedConfig config = configs.ghostRanged;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new RangedChaseTask(target, 10, 15f, 20f));
+                        .addTask(new RangedChaseTask(
+                                target, 10, 15f, 20f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(0.1);
@@ -235,11 +268,15 @@ public class NPCFactory {
         AnimationRenderComponent animator =
 
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/ghost.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+        Entity ghost = createBaseNPCNoAI();
+        GhostRangedConfig config = configs.ghostRanged;
 
         ghost
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -248,49 +285,65 @@ public class NPCFactory {
                 .addComponent(aiComponent);
         ghost.setAttackRange(5);
         //ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
         ghost.addComponent(healthBarComponent);
         return ghost;
     }
 
+    /**
+     * create boss enemy entity
+     * @param target enemy to chase (player)
+     * @return boss entity
+     */
     public static Entity createBossNPC(Entity target) {
-        Entity boss = createBaseNPCNoAI();
-        GhostKingConfig config = configs.ghostKing;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 7f, 10f))
-                        .addTask(new SpawnMinionsTask(target))
-                        .addTask(new TeleportationTask(target, 2000));
+                        .addTask(new ChaseTask(
+                                target, 10, 7f, 10f));
+
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/bossEnemy.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/bossEnemy.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+
+        aiComponent.addTask(new SpawnMinionsTask(target))
+                .addTask(new TeleportationTask(target, 2000));
+
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
 
+        Entity boss = createBaseNPCNoAI();
+        BossConfig config = configs.bossConfig;
+
         boss
+                .addComponent(aiComponent)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
-                .addComponent(new GhostAnimationController())
-                .addComponent(aiComponent);
+                .addComponent(new GhostAnimationController());
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
         boss.scaleHeight(2);
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
-        //teleportation - despawn the enemy - if enemy health is lower than 50%
-        // everytime the enemy get hit, it randomly teleport to a random position on the map.
-        // weaknesses - it may teleport beside the character
 
         return boss;
 
