@@ -108,6 +108,9 @@ public class TestGameArea extends GameArea {
     spawnAnchoredGhosts();
     spawnObstacles();
 
+    spawnSpikeTraps();
+    spawnLavaTraps();
+
     spawnTraps();
     spawnPTraps();
 
@@ -256,8 +259,38 @@ public class TestGameArea extends GameArea {
     }
   }
 
-  private void spawnLavaTraps() {
+  private void spawnSpikeTraps() {
+    HashMap<String, Float>[] spikeTraps = map.getSpikeObjects();
+    for (HashMap<String, Float> spikeTrap : spikeTraps) {
+      int x = spikeTrap.get("x").intValue();
+      int y = spikeTrap.get("y").intValue();
+      float width = spikeTrap.get("width");
+      float height = spikeTrap.get("height");
 
+      int unitHeight = (int) ((height/32f));
+      spawnEntityAt(
+              ObstacleFactory.createRSPhysicalTrap((width/32f)*0.5f, (height/32f)*0.5f),
+              new GridPoint2(x, map.getDimensions().get("n_tiles_height")- (y + unitHeight)),
+              false,
+              false);
+    }
+  }
+
+  private void spawnLavaTraps() {
+    HashMap<String, Float>[] lavaTraps = map.getLavaObjects();
+    for (HashMap<String, Float> lavaTrap : lavaTraps) {
+      int x = lavaTrap.get("x").intValue();
+      int y = lavaTrap.get("y").intValue();
+      float width = lavaTrap.get("width");
+      float height = lavaTrap.get("height");
+
+      int unitHeight = (int) ((height/32f));
+      spawnEntityAt(
+              ObstacleFactory.createRSNonePhysicalTrap((width/32f)*0.5f, (height/32f)*0.5f),
+              new GridPoint2(x, map.getDimensions().get("n_tiles_height")- (y + unitHeight)),
+              false,
+              false);
+    }
   }
 
 
