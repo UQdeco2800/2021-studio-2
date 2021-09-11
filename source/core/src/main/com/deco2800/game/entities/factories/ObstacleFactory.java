@@ -106,70 +106,11 @@ public class ObstacleFactory {
                 .addComponent(new TransformItemComponent())
                 .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
 
-
         crate.getComponent(TouchHealComponent.class).setEnabled(false);
         crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         crate.getComponent(AnimationRenderComponent.class).scaleEntity();
         return crate;
     }
-
-//    /**
-//     * creates a crate entity that can be destroyed and will have a potion entity inside.
-//     *
-//     * @return crate entity
-//     */
-//    public static Entity createCrate() {
-//        AnimationRenderComponent crateAnimator = new AnimationRenderComponent(
-//                ServiceLocator.getResourceService().getAsset("crate/crateHitBreak.atlas", TextureAtlas.class));
-//
-//        crateAnimator.addAnimation("hit", 0.05f); //default playback NORMAL
-//        crateAnimator.addAnimation("break", 0.05f);
-//        crateAnimator.addAnimation("default", 1f);
-//        crateAnimator.startAnimation("default");
-//
-//        Entity crate = new Entity()
-//                .addComponent(crateAnimator)
-//                .addComponent(new CrateAnimationController())
-//                .addComponent(new PhysicsComponent())
-//                .addComponent(new ColliderComponent())
-//                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-//                .addComponent(new CombatStatsComponent(30, 0));
-//
-//
-//        crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-//        crate.getComponent(AnimationRenderComponent.class).scaleEntity();
-//        return crate;
-//    }
-
-//    /**
-//     * create a potion entity that the player can walk over and gain health.
-//     *
-//     * @return potion entity
-//     */
-////    public static Entity createHealthPotion() {
-////        //UNCOMMENT ONLY WHEN POTION FRAMES ARE CREATED AND LOADED IN!!! for now they haven't
-////        // been made
-//////        AnimationRenderComponent potionAnimator = new AnimationRenderComponent(
-//////                ServiceLocator.getResourceService().getAsset("crate/potion.atlas",
-//////                        TextureAtlas.class));
-//////        potionAnimator.addAnimation("idle");
-//////        potionAnimator.startAnimation("idle");
-////
-////        Entity potion = new Entity()
-////                .addComponent(new TextureRenderComponent("healthRegen/healthPotion_placeholder.png"))
-////                // to restore
-////                .addComponent(new PhysicsComponent())
-////                .addComponent(new ColliderComponent().setSensor(true))
-////                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-////                .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
-////                //touchHeal also contains the amount to heal currently set to 50% of maxHp heals
-////                //potion.getComponent(TouchHealComponent.class).setEnabled(false);
-////
-////        potion.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-////        potion.getComponent(TextureRenderComponent.class).scaleEntity();
-////        potion.scaleHeight(0.4f);
-////        return potion;
-////    }
 
     /**
     * Creates an anchor entity to be referenced by other entities.
