@@ -243,7 +243,6 @@ public class ForestGameArea extends GameArea {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity crate = ObstacleFactory.createHealthCrate();
             spawnEntityAt(crate, randomPos, true, true);
-            //spawnEntityAt(health, randomPos, true, true);
         }
     }
 

@@ -15,19 +15,15 @@ public class CrateAnimationController extends Component {
         super.create();
         crateAnimation = this.entity.getComponent(AnimationRenderComponent.class);
         EventHandler crateHandler = this.entity.getEvents();
-        crateHandler.addListener("hit", this::hitBarrel);
-        crateHandler.addListener("death", this::breakBarrel);
+        crateHandler.addListener("barrelHit", this::hitBarrel);
+        crateHandler.addListener("barrelDeath", this::breakBarrel);
     }
 
     public void hitBarrel() {
-        crateAnimation.startAnimation("hit");
+        crateAnimation.startAnimation("barrelHit");
     }
 
     public void breakBarrel() {
-        crateAnimation.startAnimation("break");
-    }
-
-    public void spawnHealth() {
-
+        crateAnimation.startAnimation("barrelDeath");
     }
 }
