@@ -14,6 +14,7 @@ import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.Vector2Utils;
+import jdk.jshell.spi.ExecutionControl;
 
 /**
  * Melee weapon superclass from which all melee weapons will inherit from.
@@ -103,7 +104,7 @@ public class MeleeWeapon extends Component {
      * in weapon sub-classes.
      */
     public void strongAttack() {
-        // To be implemented in sub-classes
+        // to be implemented in sub-class
     }
 
     /**

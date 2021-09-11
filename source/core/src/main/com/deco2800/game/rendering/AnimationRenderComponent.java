@@ -41,21 +41,25 @@ public class AnimationRenderComponent extends RenderComponent {
   private Animation<TextureRegion> currentAnimation;
   private String currentAnimationName;
   private float animationPlayTime;
+  private float scaleFactor;
 
   /**
    * Create the component for a given texture atlas.
+   *
    * @param atlas libGDX-supported texture atlas containing desired animations
    */
   public AnimationRenderComponent(TextureAtlas atlas) {
     this.atlas = atlas;
     this.animations = new HashMap<>(4);
     timeSource = ServiceLocator.getTimeSource();
+    scaleFactor = 1f;
   }
 
   /**
    * Register an animation from the texture atlas. Will play once when called with startAnimation()
-   * @param name Name of the animation. Must match the name of this animation inside the texture
-   *             atlas.
+   *
+   * @param name          Name of the animation. Must match the name of this animation inside the texture
+   *                      atlas.
    * @param frameDuration How long, in seconds, to show each frame of the animation for when playing
    * @return true if added successfully, false otherwise
    */
@@ -65,10 +69,11 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Register an animation from the texture atlas.
-   * @param name Name of the animation. Must match the name of this animation inside the texture
-   *             atlas.
+   *
+   * @param name          Name of the animation. Must match the name of this animation inside the texture
+   *                      atlas.
    * @param frameDuration How long, in seconds, to show each frame of the animation for when playing
-   * @param playMode How the animation should be played (e.g. looping, backwards)
+   * @param playMode      How the animation should be played (e.g. looping, backwards)
    * @return true if added successfully, false otherwise
    */
   public boolean addAnimation(String name, float frameDuration, PlayMode playMode) {
@@ -78,8 +83,8 @@ public class AnimationRenderComponent extends RenderComponent {
       return false;
     } else if (animations.containsKey(name)) {
       logger.warn(
-          "Animation {} already added in texture atlas. Animations should only be added once.",
-          name);
+              "Animation {} already added in texture atlas. Animations should only be added once.",
+              name);
       return false;
     }
 
@@ -89,7 +94,9 @@ public class AnimationRenderComponent extends RenderComponent {
     return true;
   }
 
-  /** Scale the entity to a width of 1 and a height matching the texture's ratio */
+  /**
+   * Scale the entity to a width of 1 and a height matching the texture's ratio
+   */
   public void scaleEntity() {
     TextureRegion defaultTexture = this.atlas.findRegion("default");
     entity.setScale(1f, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
@@ -97,6 +104,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Scales the entity to the texture's ratio, and also scales up by a factor
+   *
    * @param scaleFactor the factor for the entity to be scaled at.
    */
   public void scaleEntity(float scaleFactor) {
@@ -106,6 +114,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Remove an animation from this animator. This is not required before disposing.
+   *
    * @param name Name of the previously added animation.
    * @return true if removed, false if animation was not found.
    */
@@ -116,6 +125,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Whether the animator has added the given animation.
+   *
    * @param name Name of the added animation.
    * @return true if added, false otherwise.
    */
@@ -125,14 +135,15 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Start playback of an animation. The animation must have been added using addAnimation().
+   *
    * @param name Name of the animation to play.
    */
   public void startAnimation(String name) {
     Animation<TextureRegion> animation = animations.getOrDefault(name, null);
     if (animation == null) {
       logger.error(
-          "Attempted to play unknown animation {}. Ensure animation is added before playback.",
-          name);
+              "Attempted to play unknown animation {}. Ensure animation is added before playback.",
+              name);
       return;
     }
 
@@ -144,6 +155,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Stop the currently running animation. Does nothing if no animation is playing.
+   *
    * @return true if animation was stopped, false if no animation is playing.
    */
   public boolean stopAnimation() {
@@ -160,6 +172,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Get the name of the animation currently being played.
+   *
    * @return current animation name, or null if not playing.
    */
   public String getCurrentAnimation() {
@@ -168,6 +181,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
   /**
    * Has the playing animation finished? This will always be false for looping animations.
+   *
    * @return true if animation was playing and has now finished, false otherwise.
    */
   public boolean isFinished() {
@@ -180,8 +194,18 @@ public class AnimationRenderComponent extends RenderComponent {
       return;
     }
     TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
-    Vector2 pos = entity.getPosition();
-    Vector2 scale = entity.getScale();
+
+    // Get entities scale, multiply by scale factor, and use cpy to avoid bugs.
+    Vector2 scale = entity.getScale().cpy();
+    Vector2 pos = entity.getPosition().cpy();
+
+    // apply scale if one exists
+    if (scaleFactor != 1f) {
+      // Get entities scale, multiply by scale factor, and use cpy to avoid bugs.
+      scale.scl(scaleFactor);
+      pos.add(entity.getScale().cpy().scl(-1f/scaleFactor));
+    }
+
     batch.draw(region, pos.x, pos.y, scale.x, scale.y);
     animationPlayTime += timeSource.getDeltaTime();
   }
@@ -190,5 +214,9 @@ public class AnimationRenderComponent extends RenderComponent {
   public void dispose() {
     atlas.dispose();
     super.dispose();
+  }
+
+  public void setAnimationScale(float scaleFactor) {
+    this.scaleFactor = scaleFactor;
   }
 }

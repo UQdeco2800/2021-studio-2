@@ -62,6 +62,7 @@ public class PlayerFactory {
     animator.addAnimation("down_attack", 0.1f);
     animator.addAnimation("aoe_attack", 0.05f);
     animator.addAnimation("default", 1f, Animation.PlayMode.LOOP);
+    animator.setAnimationScale(2f);
 
     Entity player =
             new Entity()
@@ -83,7 +84,7 @@ public class PlayerFactory {
                     .addComponent(new PlayerLowHealthDisplay());
 
     player.getComponent(ColliderComponent.class).setDensity(1.5f);
-    player.getComponent(AnimationRenderComponent.class).scaleEntity(2f);
+    player.getComponent(AnimationRenderComponent.class).scaleEntity();
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
 
     return player;
