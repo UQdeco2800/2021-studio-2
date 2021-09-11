@@ -64,11 +64,12 @@ public class ForestGameArea extends GameArea {
             "images/enemy_health_border.png",
             "images/enemy_health_bar_decrease.png",
             "images/vortex.png",
-            "images/aiming_line.png"
+            "images/aiming_line.png",
+            "images/boss_enemy.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas"
+            "images/player.atlas", "images/bossEnemy.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -105,9 +106,9 @@ public class ForestGameArea extends GameArea {
         spawnTrees();
         spawnPlayer();
         spawnGhosts();
-        //spawnGhostKing();
-        //spawnRangedGhosts();
-        //spawnAnchoredGhosts();
+        spawnGhostKing();
+        spawnRangedGhosts();
+        spawnAnchoredGhosts();
         spawnBoss();
 
         playMusic();
@@ -217,7 +218,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);
-        System.out.println(boss.getPosition());
+        //System.out.println(boss.getPosition());
     }
 
     private void spawnGhostKing() {
