@@ -108,6 +108,9 @@ public class TestGameArea extends GameArea {
     spawnAnchoredGhosts();
     spawnObstacles();
 
+    spawnSpikeTraps();
+    spawnLavaTraps();
+
     spawnTraps();
     spawnPTraps();
 
@@ -181,29 +184,13 @@ public class TestGameArea extends GameArea {
     spawnEntityAt(
         ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-    //Walls imported from JSON (Not working as intended, leave for sprint 2)
-
-    HashMap<String, Integer>[] walls = map.getWallObjects();
-
-    int X = 0;
-    int Y = 2;
-    int WIDTH = 1;
-    int HEIGHT = 3;
-
-    for (HashMap<String, Integer> wall : walls) {
-      String wallString = wall.values().toString();
-      String wallNoBracket = wallString.substring(1, wallString.length() - 1);
-      String[] wallValues = wallNoBracket.split(", ");
-
-      float xFloat = Float.parseFloat(wallValues[X]);
-      int x = (int) xFloat;
-
-      float yFloat = Float.parseFloat(wallValues[Y]);
-      int y = (int) yFloat;
-
-      float width = Float.parseFloat(wallValues[WIDTH]);
-
-      float height = Float.parseFloat(wallValues[HEIGHT]);
+    //Walls imported from JSON
+    HashMap<String, Float>[] walls = map.getWallObjects();
+    for (HashMap<String, Float> wall : walls) {
+      int x = wall.get("x").intValue();
+      int y = wall.get("y").intValue();
+      float width = wall.get("width");
+      float height = wall.get("height");
 
       int unitHeight = (int) ((height/32f));
       spawnEntityAt(
@@ -212,61 +199,7 @@ public class TestGameArea extends GameArea {
               false,
               false);
     }
-
-
-     
-    /*
-    //Manually placed walls, will be deleted in next sprint
-    //Left Wall
-    spawnEntityAt(ObstacleFactory.createWall(0.5f, 6f),
-            new GridPoint2(3, 7),
-            false,
-            false);
-
-    //Bottom-Left Wall
-    spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
-            new GridPoint2(3, 6),
-            false,
-            false);
-
-    //Bottom-Right Wall
-    spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
-            new GridPoint2(14, 10),
-            false,
-            false);
-
-    //Right Wall
-    spawnEntityAt(ObstacleFactory.createWall(0.5f, 4.5f),
-            new GridPoint2(21, 10),
-            false,
-            false);
-
-    //Top-Right Wall
-    spawnEntityAt(ObstacleFactory.createWall(3.5f, 0.5f),
-            new GridPoint2(14, 19),
-            false,
-            false);
-
-    //Top-Left Wall
-    spawnEntityAt(ObstacleFactory.createWall(5.5f, 0.5f),
-            new GridPoint2(3, 16),
-            false,
-            false);
-
-    //Middle-Top Wall
-    spawnEntityAt(ObstacleFactory.createWall(0.5f, 3f),
-            new GridPoint2(13, 16),
-            false,
-            false);
-
-    //Middle-Bottom Wall
-    spawnEntityAt(ObstacleFactory.createWall(0.5f, 2f),
-            new GridPoint2(14, 7),
-            false,
-            false);
-            */
   }
-  
 
   private void spawnPTraps() {
     GridPoint2 minPos = new GridPoint2(0, 0);
@@ -298,7 +231,7 @@ public class TestGameArea extends GameArea {
     Entity newPlayer = PlayerFactory.createPlayer(game);
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
-    player.setPosition(new Vector2(15, 8));
+    //player.setPosition(new Vector2(15, 8)); TESTING FOR TELEPORT
   }
 
   private void spawnObstacles(){
@@ -323,6 +256,40 @@ public class TestGameArea extends GameArea {
           }
         }
       }
+    }
+  }
+
+  private void spawnSpikeTraps() {
+    HashMap<String, Float>[] spikeTraps = map.getSpikeObjects();
+    for (HashMap<String, Float> spikeTrap : spikeTraps) {
+      int x = spikeTrap.get("x").intValue();
+      int y = spikeTrap.get("y").intValue();
+      float width = spikeTrap.get("width");
+      float height = spikeTrap.get("height");
+
+      int unitHeight = (int) ((height/32f));
+      spawnEntityAt(
+              ObstacleFactory.createRSPhysicalTrap((width/32f)*0.5f, (height/32f)*0.5f),
+              new GridPoint2(x, map.getDimensions().get("n_tiles_height")- (y + unitHeight)),
+              false,
+              false);
+    }
+  }
+
+  private void spawnLavaTraps() {
+    HashMap<String, Float>[] lavaTraps = map.getLavaObjects();
+    for (HashMap<String, Float> lavaTrap : lavaTraps) {
+      int x = lavaTrap.get("x").intValue();
+      int y = lavaTrap.get("y").intValue();
+      float width = lavaTrap.get("width");
+      float height = lavaTrap.get("height");
+
+      int unitHeight = (int) ((height/32f));
+      spawnEntityAt(
+              ObstacleFactory.createRSNonePhysicalTrap((width/32f)*0.5f, (height/32f)*0.5f),
+              new GridPoint2(x, map.getDimensions().get("n_tiles_height")- (y + unitHeight)),
+              false,
+              false);
     }
   }
 
