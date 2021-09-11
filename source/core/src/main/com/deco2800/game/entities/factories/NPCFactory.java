@@ -431,12 +431,9 @@ public class NPCFactory {
      * @param target enemy to chase (player)
      * @return boss entity
      */
-    public static Entity createBossNPC(Entity target) {
-<<<<<<< Updated upstream
-=======
+    public static Entity createBossNPC(Entity target)
         Entity boss = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
->>>>>>> Stashed changes
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -444,26 +441,15 @@ public class NPCFactory {
                                 target, 10, 7f, 10f));
 
 
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-<<<<<<< Updated upstream
-                        ServiceLocator.getResourceService().getAsset(
-                                "images/bossEnemy.atlas", TextureAtlas.class));
-        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
-
         aiComponent.addTask(new SpawnMinionsTask(target))
                 .addTask(new TeleportationTask(target, 2000));
-
-        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-=======
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/bossEnemy.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
->>>>>>> Stashed changes
 
         Entity boss = createBaseNPCNoAI();
         BossConfig config = configs.bossConfig;
@@ -472,12 +458,8 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
-<<<<<<< Updated upstream
-                .addComponent(new GhostAnimationController());
-=======
                 .addComponent(new ElfAnimationController())
                 .addComponent(aiComponent);
->>>>>>> Stashed changes
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);

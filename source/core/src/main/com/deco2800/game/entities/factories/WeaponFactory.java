@@ -169,22 +169,12 @@ public class WeaponFactory {
     }
 
     /**
-<<<<<<< Updated upstream
-     * aiming line to warn the player before the fast arrow is shot
-     * @return line entity
-     */
-    public static LineEntity AimingLine() {
-        LineEntity line = new LineEntity();
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/aiming_line.png", Texture.class));
-=======
      * Creates a line entity
      * @param TTL time to live in MS
      */
     public static LineEntity AimingLine(long TTL) {
         LineEntity line = new LineEntity(TTL);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/aiming_line.png", Texture.class));
->>>>>>> Stashed changes
         sprite.flip(true, false);
         sprite.setAlpha(0.5f);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
