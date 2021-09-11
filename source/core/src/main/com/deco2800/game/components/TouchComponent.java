@@ -6,10 +6,14 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.TextBox;
 
+import java.util.ArrayList;
+
 abstract class TouchComponent extends Component {
 
     protected final short targetLayer;
     protected HitboxComponent hitboxComponent;
+    protected boolean inCollision = false;
+    protected ArrayList<Fixture> collidingFixtures = new ArrayList<>();
 
     /**
      * Create a component which allows entities to interact with each other once they are within the vicinity.
@@ -23,10 +27,24 @@ abstract class TouchComponent extends Component {
     @Override
     public void create() {
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
+        entity.getEvents().addListener("collisionEnd", this::onCollisionEnd);
         hitboxComponent = entity.getComponent(HitboxComponent.class);
+        collidingFixtures.trimToSize();
     }
 
-    abstract void onCollisionStart(Fixture me, Fixture other);
+    void onCollisionStart(Fixture me, Fixture other) {
+        if (!this.checkEntities(me, other)) {
+            inCollision = true;
+            collidingFixtures.add(other);
+        }
+    }
+
+    void onCollisionEnd(Fixture me, Fixture other) {
+        if (!this.checkEntities(me, other)) {
+            inCollision = false;
+            collidingFixtures.remove(other);
+        }
+    }
 
     protected boolean checkEntities(Fixture me, Fixture other) {
         // Not triggered by hitbox, ignore

@@ -77,7 +77,7 @@ class ZigChaseTaskTest {
         Entity entity = makePhysicsEntity();
         entity.create();
         entity.setPosition(0f, 0f);
-      
+
         ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10);
         zigChaseTask.create(() -> entity);
 

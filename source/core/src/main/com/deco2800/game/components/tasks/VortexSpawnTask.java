@@ -1,15 +1,8 @@
 package com.deco2800.game.components.tasks;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.services.ServiceLocator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -109,7 +102,6 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     *
      * @return boolean true reach desired scale
      */
     private boolean desiredScale() {

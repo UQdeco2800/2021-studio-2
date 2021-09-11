@@ -17,7 +17,6 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.RandomUtils;
 
-
 import java.util.concurrent.TimeUnit;
 
 
@@ -40,7 +39,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
 
     /**
-     * @param target The entity to chase.
+     * @param target     The entity to chase.
      * @param cooldownMS how long to wait in MS before shooting again
      */
     public TeleportationTask(Entity target, int cooldownMS) {
@@ -165,6 +164,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      * check if the entity health is less than 50%
      * check if the time on last cast is more than 2 seconds and is target visible and
      * is entity within target attack distance and is entity health decrease
+     *
      * @return true can teleport, false otherwise
      */
     private boolean canTeleport() {

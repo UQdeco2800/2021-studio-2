@@ -110,7 +110,8 @@ public class WeaponFactory {
 
     /**
      * create the vortex for teleportation
-     * @param angle angle to spin the vortex for transition animate
+     *
+     * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex
      */

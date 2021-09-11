@@ -1,4 +1,5 @@
 package com.deco2800.game.components;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -44,7 +45,7 @@ public class HealthBarComponent extends RenderComponent {
         this.heightOfHealth = heightOfHealth;
         this.size = size;
     }
-  
+
     public void scaleHealth(float xScale) {
         float width = (entity.getScale().x / health.getWidth()) * size;
         float height = (entity.getScale().y / health.getHeight()) * (xScale / 2) * size;
@@ -58,13 +59,13 @@ public class HealthBarComponent extends RenderComponent {
     }
 
     public void scaleHealthDecrease(float xScale, float xScalePrevious, double ratioHealthDecrease) {
-        float scale = xScale + (xScalePrevious - xScale)* (float)ratioHealthDecrease;
+        float scale = xScale + (xScalePrevious - xScale) * (float) ratioHealthDecrease;
         float width = (entity.getScale().x / healthBar.getWidth());
         float height = (entity.getScale().y / health.getHeight()) * (scale / 2);
         healthDecrease.setScale(height, width);
     }
 
-    private static double round (double value, int precision) {
+    private static double round(double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (double) Math.round(value * scale) / scale;
     }
@@ -82,27 +83,29 @@ public class HealthBarComponent extends RenderComponent {
     public void update() {
         float currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
-        if(currentHealth != previousHealth) {
+        if (currentHealth != previousHealth) {
             saveHealth = previousHealth;
             healthDecreaseCheck = true;
             ratioOfHealthPrevious = saveHealth / MaxHealth;
-            ratioOfHealthPrevious = (float)round(ratioOfHealthPrevious, 1);
+            ratioOfHealthPrevious = (float) round(ratioOfHealthPrevious, 1);
             start = System.currentTimeMillis();
 
         }
         previousHealth = currentHealth;
 
         ratioOfHealth = currentHealth / MaxHealth;
-        ratioOfHealth = (float)round(ratioOfHealth, 1);
+        ratioOfHealth = (float) round(ratioOfHealth, 1);
         if (ratioOfHealth == 0f) {
             ratioOfHealth = 0.01f;
         }
 
     }
+
     @Override
     public void dispose() {
         ServiceLocator.getRenderService().unregister(this);
     }
+
     @Override
     protected void draw(SpriteBatch batch) {
         Vector2 position = entity.getPosition();
@@ -115,13 +118,13 @@ public class HealthBarComponent extends RenderComponent {
             scaleHealthBar();
             healthBar.draw(batch);
         }
-        if(healthDecreaseCheck && healthDecrease != null) {
-            if((System.currentTimeMillis() - start) / 1000 >= 1) {
+        if (healthDecreaseCheck && healthDecrease != null) {
+            if ((System.currentTimeMillis() - start) / 1000 >= 1) {
                 healthDecreaseCheck = false;
-            }else {
+            } else {
                 healthDecrease.setRotation(angle);
                 healthDecrease.setCenter(positionCenter.x, positionCenter.y + heightOfHealth);
-                double ratioOfDecrease = 1 -((System.currentTimeMillis() - start) / 1000.0);
+                double ratioOfDecrease = 1 - ((System.currentTimeMillis() - start) / 1000.0);
                 scaleHealthDecrease(ratioOfHealth, ratioOfHealthPrevious, ratioOfDecrease);
                 healthDecrease.draw(batch);
             }

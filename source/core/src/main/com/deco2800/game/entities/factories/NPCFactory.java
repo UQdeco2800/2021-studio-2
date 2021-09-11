@@ -62,7 +62,7 @@ public class NPCFactory {
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-      
+
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))

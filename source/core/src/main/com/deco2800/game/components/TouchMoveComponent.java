@@ -6,8 +6,6 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
 import java.util.TimerTask;
