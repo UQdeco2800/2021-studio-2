@@ -25,32 +25,54 @@ import java.util.concurrent.TimeUnit;
  */
 public class TeleportationTask extends DefaultTask implements PriorityTask {
 
-    /** target entity - player */
+    /**
+     * target entity - player
+     */
     private final Entity target;
-    /** object - physics engine */
+    /**
+     * object - physics engine
+     */
     private final PhysicsEngine physics;
-    /** debug mode */
+    /**
+     * debug mode
+     */
     private final DebugRenderer debugRenderer;
-    /** ray cast on debug mode */
+    /**
+     * ray cast on debug mode
+     */
     private final RaycastHit hit = new RaycastHit();
-    /** cooldown before skill can cast again */
+    /**
+     * cooldown before skill can cast again
+     */
     private final long cooldown;
-    /** time of the last skill cast */
+    /**
+     * time of the last skill cast
+     */
     private long lastFired;
-    /** get game area */
+    /**
+     * get game area
+     */
     private final GameArea gameArea;
-    /** check if the vortex is spawning */
+    /**
+     * check if the vortex is spawning
+     */
     private boolean spawn = false;
-    /** set initial health = 100 */
+    /**
+     * set initial health = 100
+     */
     private int health = 100;
-    /** random spawning position */
+    /**
+     * random spawning position
+     */
     private Vector2 pos2;
-    /** check if the enemy still outside the map area */
+    /**
+     * check if the enemy still outside the map area
+     */
     private int count = 0;
 
 
     /**
-     * @param target     The entity to chase.
+     * @param target   The entity to chase.
      * @param cooldown how long to wait in MS before casting teleport again
      */
     public TeleportationTask(Entity target, int cooldown) {
@@ -99,6 +121,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
     /**
      * method overloading - teleport to a given position
+     *
      * @param position position to teleport to
      */
     public void teleport(Vector2 position) {
@@ -156,6 +179,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
     /**
      * check if not inside the boundary of the map
+     *
      * @return true if not inside the map, false otherwise
      */
     public boolean mapBound() {
@@ -167,6 +191,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
     /**
      * return the distance of the entity to the target
+     *
      * @return return the distance to target
      */
     private float getDistanceToTarget() {

@@ -11,25 +11,40 @@ import java.util.concurrent.TimeUnit;
  * PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
  */
 public class VortexSpawnTask extends DefaultTask implements PriorityTask {
-    /** desired scale */
+    /**
+     * desired scale
+     */
     private final Vector2 scale;
-    /** upscale factor */
+    /**
+     * upscale factor
+     */
     private final Vector2 factor;
-    /** angle to rotate */
+    /**
+     * angle to rotate
+     */
     private final float rotateAngle;
-    /** reverse spawn the vortex */
+    /**
+     * reverse spawn the vortex
+     */
     private boolean reverse = false;
-    /** rotate factor */
+    /**
+     * rotate factor
+     */
     private static float rotateFactor = 0;
-    /** time pause when vortex at desired scale - the start down scale */
+    /**
+     * time pause when vortex at desired scale - the start down scale
+     */
     private long time = 0;
-    /** check if vortex is at max scale (desire) */
+    /**
+     * check if vortex is at max scale (desire)
+     */
     private boolean max = false;
 
     /**
      * Spawn the vortex
+     *
      * @param desiredScale upper end of the scale (margin to upscale to)
-     * @param rotateAngle angle to rotate
+     * @param rotateAngle  angle to rotate
      */
     public VortexSpawnTask(Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
@@ -92,6 +107,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
 
     /**
      * check if vortex upscale to desire scale
+     *
      * @return boolean true reach desired scale
      */
     private boolean desiredScale() {

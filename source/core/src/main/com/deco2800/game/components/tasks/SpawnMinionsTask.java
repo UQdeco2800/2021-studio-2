@@ -11,21 +11,27 @@ import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 
-
 /**
  * Spawns an arrow to shoot at a target
  */
 public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
 
-    /** target entity (player) */
+    /**
+     * target entity (player)
+     */
     private final Entity target;
-    /** game area */
+    /**
+     * game area
+     */
     private final GameArea gameArea;
-    /** number of time enemy is spawn */
+    /**
+     * number of time enemy is spawn
+     */
     private static int spawn = 0;
 
     /**
      * spawn the minion to help the boss attack the target
+     *
      * @param target The entity to chase.
      */
     public SpawnMinionsTask(Entity target) {
@@ -46,20 +52,14 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * Spawns in an arrow according to the classes variables
+     * Spawns in enemies according to the classes variables
      */
     public void spawn() {
-        Entity ghost = NPCFactory.createMeleeElf(target);
-        Entity ghost4 = NPCFactory.createRangedElf(target, "normalArrow", 0.1f);
+        Entity elf = NPCFactory.createMeleeElf(target);
+        Entity elf2 = NPCFactory.createRangedElf(target, "normalArrow", 0.15f);
 
-        gameArea.spawnEntityAt(ghost, owner.getEntity().getCenterPosition(), true, true);
-        gameArea.spawnEntityAt(ghost4, owner.getEntity().getCenterPosition(), true, true);
-        /*
-        Entity ghost2 = NPCFactory.createRangedGhost(target);
-        Entity ghost3 = NPCFactory.createGhostKing(target);
-        gameArea.spawnEntityAt(ghost2, owner.getEntity().getCenterPosition(), true, true);
-        gameArea.spawnEntityAt(ghost3, owner.getEntity().getCenterPosition(), true, true);
-        */
+        gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
+        gameArea.spawnEntityAt(elf2, owner.getEntity().getCenterPosition(), true, true);
 
     }
 
@@ -78,6 +78,7 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
 
     /**
      * check if the boss is not inside the bound
+     *
      * @return true if not, false otherwise
      */
     public boolean mapBound() {
