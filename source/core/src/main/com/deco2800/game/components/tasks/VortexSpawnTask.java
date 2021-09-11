@@ -49,19 +49,26 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (owner.getEntity().getScale().x > this.scale.x && owner.getEntity().getScale().y > this.scale.y) {
+        if (owner.getEntity().getScale().x > this.scale.x
+                && owner.getEntity().getScale().y > this.scale.y) {
             owner.getEntity().setScale(this.scale);
         }
-        if (owner.getEntity().getScale().x < this.scale.x && owner.getEntity().getScale().y < this.scale.y && !max) {
-            owner.getEntity().setScale(factor.scl(1.02f));
+        if (owner.getEntity().getScale().x < this.scale.x
+                && owner.getEntity().getScale().y < this.scale.y && !max) {
+            owner.getEntity().setScale(factor.scl(1.05f));
             owner.getEntity().setAngle(rotateAngle + rotateFactor);
+            /*
+            owner.getEntity().setPosition(
+                    owner.getEntity().getPosition().x - owner.getEntity().getCenterPosition().x,
+                    owner.getEntity().getPosition().y - owner.getEntity().getCenterPosition().y);
+             */
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
             max = true;
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 1000
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
-                owner.getEntity().setScale(this.scale.scl(0.98f));
+                owner.getEntity().setScale(this.scale.scl(0.95f));
                 owner.getEntity().setAngle(rotateAngle + rotateFactor);
             } else if (owner.getEntity().getScale().x <= 0.1f
                     && owner.getEntity().getScale().y <= 0.1f) {
