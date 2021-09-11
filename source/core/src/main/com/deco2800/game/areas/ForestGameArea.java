@@ -106,9 +106,9 @@ public class ForestGameArea extends GameArea {
         spawnPlayer();
         //spawnGhosts();
         //spawnGhostKing();
-        spawnRangedGhosts();
+        //spawnRangedGhosts();
         //spawnAnchoredGhosts();
-        //spawnBoss();
+        spawnBoss();
 
         playMusic();
         setDialogue();
