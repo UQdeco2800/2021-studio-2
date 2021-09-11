@@ -49,8 +49,8 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
      * Spawns in an arrow according to the classes variables
      */
     public void spawn() {
-        Entity ghost = NPCFactory.createGhost(target);
-        Entity ghost4 = NPCFactory.createRangedGhost(target);
+        Entity ghost = NPCFactory.createMeleeElf(target);
+        Entity ghost4 = NPCFactory.createRangedElf(target, "normalArrow", 0.1f);
 
         gameArea.spawnEntityAt(ghost, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(ghost4, owner.getEntity().getCenterPosition(), true, true);
