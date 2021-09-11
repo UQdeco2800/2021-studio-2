@@ -64,11 +64,12 @@ public class TestGameArea extends GameArea {
             "images/enemy_health_bar.png",
             "images/enemy_health_border.png",
             "images/enemy_health_bar_decrease.png",
+            "images/boss_enemy.png"
     };
     private static String[] tileTextures = null;
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas"
+            "images/player.atlas", "images/bossEnemy.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
