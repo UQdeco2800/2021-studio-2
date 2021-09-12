@@ -106,7 +106,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 }
                 index++;
             }
-        } else {
+        } else if (projectileType.equals("fireBall")) {
             //Check for fireball but don't make one
             Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
             for (Entity fireball : entities) {
