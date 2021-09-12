@@ -203,7 +203,12 @@ public class AnimationRenderComponent extends RenderComponent {
     if (scaleFactor != 1f) {
       // Get entities scale, multiply by scale factor, and use cpy to avoid bugs.
       scale.scl(scaleFactor);
-      pos.add(entity.getScale().cpy().scl(-1f/scaleFactor));
+      /* Without scaling, the animation center position will be (x/2, y/2).
+      Where x, y are the entities scale. If we scale up by 3, this position
+      becomes (3x/2, 3y/2). We need to readjust the position to (x/2, y/2).
+      We do this by subtracting the difference, which is (x, y) * (scaleFactor - 1) / 2.
+      E.G. (3x/2, 3y/2) - ((x, y) * (3 - 1) / 2) = (x/2, y/2) */
+      pos.sub(entity.getScale().cpy().scl((scaleFactor - 1f) / 2f));
     }
 
     batch.draw(region, pos.x, pos.y, scale.x, scale.y);
@@ -216,6 +221,10 @@ public class AnimationRenderComponent extends RenderComponent {
     super.dispose();
   }
 
+  /**
+   * Increases the animation size by a scalar factor.
+   * @param scaleFactor the size increase of the animation.
+   */
   public void setAnimationScale(float scaleFactor) {
     this.scaleFactor = scaleFactor;
   }
