@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -171,50 +171,67 @@ int&nbsp;baseAttack)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Called when the entity is created and registered.</div>
+</td>
+</tr>
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBaseAttack()">getBaseAttack</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the entity's base attack damage.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHealth()">getHealth</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the entity's health.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMaxHealth()">getMaxHealth</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Return's entity's health maximum</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hit(com.deco2800.game.components.CombatStatsComponent)">hit</a></span>&#8203;(<a href="CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a>&nbsp;attacker)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">called when an entity is attack
+ if this entity has a transform component or hit animations they will be called.</div>
+</td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isDead()">isDead</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if the entity's has 0 health, otherwise false.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBaseAttack(int)">setBaseAttack</a></span>&#8203;(int&nbsp;attack)</code></th>
 <td class="colLast">
 <div class="block">Sets the entity's attack damage.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHealth(int)">setHealth</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
 <div class="block">Sets the entity's health.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMaxHealth(int)">setMaxHealth</a></span>&#8203;(int&nbsp;health)</code></th>
+<td class="colLast">
+<div class="block">to change the max health of the player</div>
 </td>
 </tr>
 </tbody>
@@ -225,7 +242,7 @@ int&nbsp;baseAttack)</code></th>
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
 <!--   -->
-</a><code><a href="Component.html#create()">create</a>, <a href="Component.html#dispose()">dispose</a>, <a href="Component.html#earlyUpdate()">earlyUpdate</a>, <a href="Component.html#getEntity()">getEntity</a>, <a href="Component.html#setEnabled(boolean)">setEnabled</a>, <a href="Component.html#setEntity(com.deco2800.game.entities.Entity)">setEntity</a>, <a href="Component.html#toString()">toString</a>, <a href="Component.html#triggerEarlyUpdate()">triggerEarlyUpdate</a>, <a href="Component.html#triggerUpdate()">triggerUpdate</a>, <a href="Component.html#update()">update</a></code></div>
+</a><code><a href="Component.html#dispose()">dispose</a>, <a href="Component.html#earlyUpdate()">earlyUpdate</a>, <a href="Component.html#getEntity()">getEntity</a>, <a href="Component.html#setEnabled(boolean)">setEnabled</a>, <a href="Component.html#setEntity(com.deco2800.game.entities.Entity)">setEntity</a>, <a href="Component.html#toString()">toString</a>, <a href="Component.html#triggerEarlyUpdate()">triggerEarlyUpdate</a>, <a href="Component.html#triggerUpdate()">triggerUpdate</a>, <a href="Component.html#update()">update</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <a id="methods.inherited.from.class.java.lang.Object">
@@ -263,6 +280,19 @@ int&nbsp;baseAttack)</span></div>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
+<h3><a id="create()">create</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="Component.html#create()">Component</a></code></span></div>
+<div class="block">Called when the entity is created and registered. Initial logic such as calls to GetComponent
+ should be made here, not in the constructor which is called before an entity is finished.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="Component.html#create()">create</a></code>&nbsp;in class&nbsp;<code><a href="Component.html" title="class in com.deco2800.game.components">Component</a></code></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="isDead()">isDead</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.lang.Boolean</span>&nbsp;<span class="memberName">isDead</span>()</div>
 <div class="block">Returns true if the entity's has 0 health, otherwise false.</div>
@@ -280,6 +310,17 @@ int&nbsp;baseAttack)</span></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>entity's health</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setMaxHealth(int)">setMaxHealth</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMaxHealth</span>&#8203;(<span class="arguments">int&nbsp;health)</span></div>
+<div class="block">to change the max health of the player</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>health</code> - the new max health of the player to set</dd>
 </dl>
 </section>
 </li>
@@ -342,6 +383,13 @@ int&nbsp;baseAttack)</span></div>
 <section class="detail">
 <h3><a id="hit(com.deco2800.game.components.CombatStatsComponent)">hit</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">hit</span>&#8203;(<span class="arguments"><a href="CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a>&nbsp;attacker)</span></div>
+<div class="block">called when an entity is attack
+ if this entity has a transform component or hit animations they will be called.
+ if combatStatComponent is disabled this method will not do anything.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>attacker</code> - the CombatStatComponent of the attacker</dd>
+</dl>
 </section>
 </li>
 </ul>

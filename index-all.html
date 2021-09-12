@@ -225,6 +225,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/GameArea.html#areaEntities">areaEntities</a></span> - Variable in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/death/DeathDisplay.html#areaEntities">areaEntities</a></span> - Variable in class com.deco2800.game.components.death.<a href="com/deco2800/game/components/death/DeathDisplay.html" title="class in com.deco2800.game.components.death">DeathDisplay</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/utils/math/Vector2Utils.html#ARROW">ARROW</a></span> - Static variable in class com.deco2800.game.utils.math.<a href="com/deco2800/game/utils/math/Vector2Utils.html" title="class in com.deco2800.game.utils.math">Vector2Utils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/components/npc/ArrowAnimationController.html" title="class in com.deco2800.game.components.npc"><span class="typeNameLink">ArrowAnimationController</span></a> - Class in <a href="com/deco2800/game/components/npc/package-summary.html">com.deco2800.game.components.npc</a></dt>
@@ -310,6 +312,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/PhysicsComponent.AlignY.html#BOTTOM">BOTTOM</a></span> - com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/PhysicsComponent.AlignY.html" title="enum in com.deco2800.game.physics.components">PhysicsComponent.AlignY</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/CrateAnimationController.html#breakBarrel()">breakBarrel()</a></span> - Method in class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/CrateAnimationController.html" title="class in com.deco2800.game.components.crate">CrateAnimationController</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a id="I:C">
 <!--   -->
@@ -372,6 +376,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="com/deco2800/game/areas/terrain/package-summary.html">com.deco2800.game.areas.terrain</a> - package com.deco2800.game.areas.terrain</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/components/package-summary.html">com.deco2800.game.components</a> - package com.deco2800.game.components</dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/components/crate/package-summary.html">com.deco2800.game.components.crate</a> - package com.deco2800.game.components.crate</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/components/death/package-summary.html">com.deco2800.game.components.death</a> - package com.deco2800.game.components.death</dt>
 <dd>&nbsp;</dd>
@@ -467,6 +473,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/services/ServiceLocator.html#copyResourceService()">copyResourceService()</a></span> - Static method in class com.deco2800.game.services.<a href="com/deco2800/game/services/ServiceLocator.html" title="class in com.deco2800.game.services">ServiceLocator</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/components/crate/CrateAnimationController.html" title="class in com.deco2800.game.components.crate"><span class="typeNameLink">CrateAnimationController</span></a> - Class in <a href="com/deco2800/game/components/crate/package-summary.html">com.deco2800.game.components.crate</a></dt>
+<dd>
+<div class="block">Plays animation based on the event listeners when the barrel is interacted with.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/CrateAnimationController.html#%3Cinit%3E()">CrateAnimationController()</a></span> - Constructor for class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/CrateAnimationController.html" title="class in com.deco2800.game.components.crate">CrateAnimationController</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#create()">create()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
 <dd>
 <div class="block">Create the game area, including terrain, static entities (trees), dynamic entities (player)</div>
@@ -479,10 +491,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Create the game area, including terrain, static entities (trees), dynamic entities (player)</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/CombatStatsComponent.html#create()">create()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Component.html#create()">create()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/Component.html" title="class in com.deco2800.game.components">Component</a></dt>
 <dd>
 <div class="block">Called when the entity is created and registered.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/CrateAnimationController.html#create()">create()</a></span> - Method in class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/CrateAnimationController.html" title="class in com.deco2800.game.components.crate">CrateAnimationController</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/TransformEntityComponent.html#create()">create()</a></span> - Method in class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/TransformEntityComponent.html" title="class in com.deco2800.game.components.crate">TransformEntityComponent</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/death/DeathDisplay.html#create()">create()</a></span> - Method in class com.deco2800.game.components.death.<a href="com/deco2800/game/components/death/DeathDisplay.html" title="class in com.deco2800.game.components.death">DeathDisplay</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/gamearea/GameAreaDisplay.html#create()">create()</a></span> - Method in class com.deco2800.game.components.gamearea.<a href="com/deco2800/game/components/gamearea/GameAreaDisplay.html" title="class in com.deco2800.game.components.gamearea">GameAreaDisplay</a></dt>
@@ -637,6 +655,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/NPCFactory.html#createGhostKing(com.deco2800.game.entities.Entity)">createGhostKing(Entity)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/NPCFactory.html" title="class in com.deco2800.game.entities.factories">NPCFactory</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createHealthCrate()">createHealthCrate()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
+<dd>
+<div class="block">creates a crate obstacle that can be destroyed and will transform into a health potion</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsEngine.html#createJoint(com.badlogic.gdx.physics.box2d.JointDef)">createJoint(JointDef)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsEngine.html" title="class in com.deco2800.game.physics">PhysicsEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html#createLokiTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet)">createLokiTrigger(RandomDialogueSet, DialogueSet)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories">CutsceneTriggerFactory</a></dt>
@@ -644,9 +666,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html#createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.badlogic.gdx.math.Vector2,int,int)">createMoveDialogueTrigger(RandomDialogueSet, Vector2, int, int)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories">CutsceneTriggerFactory</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an entity that can trigger a cutscene to start.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html#createMoveTrigger(com.badlogic.gdx.math.Vector2,int,int)">createMoveTrigger(Vector2, int, int)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories">CutsceneTriggerFactory</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an entity that can trigger a cutscene to start.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/WeaponFactory.html#createNormalArrow(com.badlogic.gdx.math.Vector2,float)">createNormalArrow(Vector2, float)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/WeaponFactory.html" title="class in com.deco2800.game.entities.factories">WeaponFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/ObstacleFactory.html#createPhysicalTrap()">createPhysicalTrap()</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/ObstacleFactory.html" title="class in com.deco2800.game.entities.factories">ObstacleFactory</a></dt>
@@ -781,7 +807,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">turn the stack visibility off.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#displayBloodyViewOn(float,boolean)">displayBloodyViewOn(float, boolean)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#displayBloodyViewOn(float)">displayBloodyViewOn(float)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
 <dd>
 <div class="block">Turn the stack visibility on.</div>
 </dd>
@@ -1508,6 +1534,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">determines whether entity has attacked.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/events/EventHandler.html#hasEvent(java.lang.String)">hasEvent(String)</a></span> - Method in class com.deco2800.game.events.<a href="com/deco2800/game/events/EventHandler.html" title="class in com.deco2800.game.events">EventHandler</a></dt>
+<dd>
+<div class="block">checks that the entity has a specified event registered</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/InventoryComponent.html#hasGold(int)">hasGold(int)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/InventoryComponent.html" title="class in com.deco2800.game.components.player">InventoryComponent</a></dt>
 <dd>
 <div class="block">Returns if the player has a certain amount of gold.</div>
@@ -1524,6 +1554,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/HealthBarComponent.html#%3Cinit%3E(com.badlogic.gdx.graphics.g2d.TextureAtlas,float)">HealthBarComponent(TextureAtlas, float)</a></span> - Constructor for class com.deco2800.game.components.<a href="com/deco2800/game/components/HealthBarComponent.html" title="class in com.deco2800.game.components">HealthBarComponent</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#healthRegenTextures">healthRegenTextures</a></span> - Static variable in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/UserSettings.DisplaySettings.html#height">height</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/UserSettings.DisplaySettings.html" title="class in com.deco2800.game.files">UserSettings.DisplaySettings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainComponent.TerrainOrientation.html#HEXAGONAL">HEXAGONAL</a></span> - com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainComponent.TerrainOrientation.html" title="enum in com.deco2800.game.areas.terrain">TerrainComponent.TerrainOrientation</a></dt>
@@ -1535,6 +1567,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/raycast/SingleHitCallback.html#hit">hit</a></span> - Variable in class com.deco2800.game.physics.raycast.<a href="com/deco2800/game/physics/raycast/SingleHitCallback.html" title="class in com.deco2800.game.physics.raycast">SingleHitCallback</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/CombatStatsComponent.html#hit(com.deco2800.game.components.CombatStatsComponent)">hit(CombatStatsComponent)</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a></dt>
+<dd>
+<div class="block">called when an entity is attack
+ if this entity has a transform component or hit animations they will be called.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/CrateAnimationController.html#hitBarrel()">hitBarrel()</a></span> - Method in class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/CrateAnimationController.html" title="class in com.deco2800.game.components.crate">CrateAnimationController</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/physics/components/HitboxComponent.html" title="class in com.deco2800.game.physics.components"><span class="typeNameLink">HitboxComponent</span></a> - Class in <a href="com/deco2800/game/physics/components/package-summary.html">com.deco2800.game.physics.components</a></dt>
 <dd>
@@ -2550,6 +2587,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Set the collider layer, used in collision logic</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/CombatStatsComponent.html#setMaxHealth(int)">setMaxHealth(int)</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a></dt>
+<dd>
+<div class="block">to change the max health of the player</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/PhysicsMovementComponent.html#setMaxSpeed(com.badlogic.gdx.math.Vector2)">setMaxSpeed(Vector2)</a></span> - Method in class com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/PhysicsMovementComponent.html" title="class in com.deco2800.game.physics.components">PhysicsMovementComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/tasks/MovementTask.html#setMoveSpeed(com.badlogic.gdx.math.Vector2)">setMoveSpeed(Vector2)</a></span> - Method in class com.deco2800.game.components.tasks.<a href="com/deco2800/game/components/tasks/MovementTask.html" title="class in com.deco2800.game.components.tasks">MovementTask</a></dt>
@@ -2744,6 +2785,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/utils/SortedIntMap.html#%3Cinit%3E(int)">SortedIntMap(int)</a></span> - Constructor for class com.deco2800.game.utils.<a href="com/deco2800/game/utils/SortedIntMap.html" title="class in com.deco2800.game.utils">SortedIntMap</a></dt>
 <dd>
 <div class="block">Create a sorted intmap with the specified capacity</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/areas/ForestGameArea.html#spawnCrate()">spawnCrate()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/ForestGameArea.html" title="class in com.deco2800.game.areas">ForestGameArea</a></dt>
+<dd>
+<div class="block">spawns the crate with the potion entity inside.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/GameArea.html#spawnEntity(com.deco2800.game.entities.Entity)">spawnEntity(Entity)</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></dt>
 <dd>
@@ -3112,6 +3157,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Iterates over registered input handlers in descending priority and stops as soon as the input is
  processed</div>
 </dd>
+<dt><a href="com/deco2800/game/components/TouchHealComponent.html" title="class in com.deco2800.game.components"><span class="typeNameLink">TouchHealComponent</span></a> - Class in <a href="com/deco2800/game/components/package-summary.html">com.deco2800.game.components</a></dt>
+<dd>
+<div class="block">component to allow entities to give health to entities on collision</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/TouchHealComponent.html#%3Cinit%3E(short)">TouchHealComponent(short)</a></span> - Constructor for class com.deco2800.game.components.<a href="com/deco2800/game/components/TouchHealComponent.html" title="class in com.deco2800.game.components">TouchHealComponent</a></dt>
+<dd>
+<div class="block">Create a component which allows Player entity to interact with the Health item and give itself health</div>
+</dd>
 <dt><a href="com/deco2800/game/input/TouchInputFactory.html" title="class in com.deco2800.game.input"><span class="typeNameLink">TouchInputFactory</span></a> - Class in <a href="com/deco2800/game/input/package-summary.html">com.deco2800.game.input</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/input/TouchInputFactory.html#%3Cinit%3E()">TouchInputFactory()</a></span> - Constructor for class com.deco2800.game.input.<a href="com/deco2800/game/input/TouchInputFactory.html" title="class in com.deco2800.game.input">TouchInputFactory</a></dt>
@@ -3162,6 +3215,28 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Defines the properties stored in arrow config files to be loaded by the Weapon Factory.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/TrackingArrowConfig.html#%3Cinit%3E()">TrackingArrowConfig()</a></span> - Constructor for class com.deco2800.game.entities.configs.<a href="com/deco2800/game/entities/configs/TrackingArrowConfig.html" title="class in com.deco2800.game.entities.configs">TrackingArrowConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/TransformBarrelComponent.html#transform()">transform()</a></span> - Method in class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/TransformBarrelComponent.html" title="class in com.deco2800.game.components.crate">TransformBarrelComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/TransformEntityComponent.html#transform()">transform()</a></span> - Method in class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/TransformEntityComponent.html" title="class in com.deco2800.game.components.crate">TransformEntityComponent</a></dt>
+<dd>
+<div class="block">enabling and disabling of components occur here</div>
+</dd>
+<dt><a href="com/deco2800/game/components/crate/TransformBarrelComponent.html" title="class in com.deco2800.game.components.crate"><span class="typeNameLink">TransformBarrelComponent</span></a> - Class in <a href="com/deco2800/game/components/crate/package-summary.html">com.deco2800.game.components.crate</a></dt>
+<dd>
+<div class="block">allows entities to disable and enable different components depending on what you
+ want to achieve this only works when entities are about to die and you want them
+ to transform into a different kind of entity without disposing it.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/TransformBarrelComponent.html#%3Cinit%3E()">TransformBarrelComponent()</a></span> - Constructor for class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/TransformBarrelComponent.html" title="class in com.deco2800.game.components.crate">TransformBarrelComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/components/crate/TransformEntityComponent.html" title="class in com.deco2800.game.components.crate"><span class="typeNameLink">TransformEntityComponent</span></a> - Class in <a href="com/deco2800/game/components/crate/package-summary.html">com.deco2800.game.components.crate</a></dt>
+<dd>
+<div class="block">abstract class to allow entities to transform into a different entity by
+ disabling/disposing unwanted components and enabling/configure existing components
+ that were added when the entity was created.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/crate/TransformEntityComponent.html#%3Cinit%3E()">TransformEntityComponent()</a></span> - Constructor for class com.deco2800.game.components.crate.<a href="com/deco2800/game/components/crate/TransformEntityComponent.html" title="class in com.deco2800.game.components.crate">TransformEntityComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/events/EventHandler.html#trigger(java.lang.String)">trigger(String)</a></span> - Method in class com.deco2800.game.events.<a href="com/deco2800/game/events/EventHandler.html" title="class in com.deco2800.game.events">EventHandler</a></dt>
 <dd>
