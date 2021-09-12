@@ -32,6 +32,7 @@ public class MainMenuScreen extends ScreenAdapter {
   private final Renderer renderer;
   private static final String[] mainMenuTextures = {"images/Valhalla_title.png", "images/main_menu_background.png"};
   private static final String[] mainMenuAtlas = {"menuBackgroundSprite/menuBackground.atlas"};
+  private AnimationRenderComponent animator;
 
   public MainMenuScreen(GdxGame game) {
     this.game = game;
@@ -74,7 +75,7 @@ public class MainMenuScreen extends ScreenAdapter {
   @Override
   public void dispose() {
     logger.debug("Disposing main menu screen");
-
+    this.animator.stopAnimation();
     renderer.dispose();
     unloadAssets();
     ServiceLocator.getRenderService().dispose();
@@ -95,6 +96,7 @@ public class MainMenuScreen extends ScreenAdapter {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainMenuTextures);
+    resourceService.unloadAssets(mainMenuAtlas);
   }
 
   /**
@@ -104,18 +106,18 @@ public class MainMenuScreen extends ScreenAdapter {
   private void createUI() {
     logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
-    AnimationRenderComponent animator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
+    this.animator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
             "menuBackgroundSprite/menuBackground.atlas", TextureAtlas.class));
-    animator.addAnimation("menu", 1f/10f, Animation.PlayMode.LOOP);
+    this.animator.addAnimation("menu", 0.11f, Animation.PlayMode.LOOP);
     Entity ui = new Entity();
     ui.addComponent(new MainMenuDisplay())
+        .addComponent(animator)
         .addComponent(new InputDecorator(stage, 10))
-        .addComponent(new MainMenuActions(game))
-        .addComponent(animator);
+        .addComponent(new MainMenuActions(game));
     ServiceLocator.getEntityService().register(ui);
     // need to fix scaling
     ui.setScale(20.5f, 12.5f);
     ui.setPosition(-5.5f,-1.5f);
-    animator.startAnimation("menu");
+    this.animator.startAnimation("menu");
   }
 }
