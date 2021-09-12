@@ -172,7 +172,6 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(healthBarRight).height(40f).width(20f);
         //This creates a new row to add actors: table.row();
         //Adds the dash icon to the table: table.add(dash).size(64f).pad(5);
-        deathScreen();
     }
 
     /**
@@ -201,24 +200,6 @@ public class PlayerStatsDisplay extends UIComponent {
         } else {
             //turn off blood view when above low health threshold
             entity.getEvents().trigger("bloodyViewOff");
-        }
-    }
-
-    /**
-     * checks if player is dead if so trigger the death screen.
-     * uses event triggers to turn off the bloody view and display
-     * the death screen.
-     */
-    public void deathScreen() {
-        boolean isDead = entity.getComponent(CombatStatsComponent.class).isDead();
-        if (isDead) {
-            entity.getEvents().trigger("bloodyViewOff");
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            entity.getEvents().trigger("deathScreen");
         }
     }
 
