@@ -39,10 +39,6 @@ public class MainMenuDisplay extends UIComponent {
     stack = new Stack();
     stack.setFillParent(true);
     stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
-//    Image background = new Image(ServiceLocator.getResourceService()
-//            .getAsset("images/main_menu_background.png", Texture.class));
-//    background.setScaling(Scaling.stretch);
-//    stack.add(background);
 
     table = new Table();
     table.setFillParent(true);
@@ -51,6 +47,7 @@ public class MainMenuDisplay extends UIComponent {
 
     Button startForestBtn = new Button(menuButtons, "start");
     Button startTestBtn = new Button(menuButtons, "start");
+    Button startTutorialBtn = new Button(menuButtons, "start");
     Button settingsBtn = new Button(menuButtons, "settings");
     Button exitBtn = new Button(menuButtons, "quit");
 
@@ -74,6 +71,15 @@ public class MainMenuDisplay extends UIComponent {
               }
         });
 
+      startTutorialBtn.addListener(
+              new ChangeListener() {
+                  @Override
+                  public void changed(ChangeEvent changeEvent, Actor actor) {
+                      logger.debug("Start button clicked");
+                      entity.getEvents().trigger("startTest");
+                  }
+              });
+
     settingsBtn.addListener(
         new ChangeListener() {
           @Override
@@ -95,6 +101,8 @@ public class MainMenuDisplay extends UIComponent {
     table.add(startForestBtn).padTop(30f);
     table.row();
     table.add(startTestBtn).padTop(30f);
+    table.row();
+    table.add(startTutorialBtn).padTop(30f);
     table.row();
     table.add(settingsBtn).padTop(30f);
     table.row();
