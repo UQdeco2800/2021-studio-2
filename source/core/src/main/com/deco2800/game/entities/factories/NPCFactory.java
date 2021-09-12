@@ -167,6 +167,9 @@ public class NPCFactory {
         anchoredGhost.addComponent(healthBarComponent);
 
         anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        anchoredGhost.scaleWidth(1);
+        anchoredGhost.scaleHeight(1);
+
         return anchoredGhost;
     }
 
