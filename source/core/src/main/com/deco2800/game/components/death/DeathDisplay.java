@@ -18,10 +18,7 @@ import org.slf4j.LoggerFactory;
 public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
     private final String[] deathScreenTextures = new String[]{
-            "lowHealthImages/testDeath1.png",
-            "lowHealthImages/youdied.png",
-            "lowHealthImages/testDeath1.png",
-            "images/main_menu_background.png"
+            "lowHealthImages/deathBackground.png",
     };
 
 
@@ -41,8 +38,8 @@ public class DeathDisplay extends MainMenuDisplay {
         TextButton restartForestBtn = new TextButton("Restart Forest", skin);
         TextButton restartTestBtn = new TextButton("Restart Test", skin);
         TextButton exitBtn = new TextButton("Exit", skin);
-        Image background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
-                Texture.class));
+        Image background = new Image(ServiceLocator.getResourceService().getAsset(
+                "lowHealthImages/deathBackground.png", Texture.class));
         background.setScaling(Scaling.stretch);
         stack.add(background);
 
@@ -75,11 +72,8 @@ public class DeathDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("exit");
                     }
                 });
-        Image dead = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/youdied.png",
-                Texture.class));
+
         table.clear();
-        table.add(dead);
-        table.row();
         table.add(restartForestBtn).padTop(30f);
         table.row();
         table.add(restartTestBtn).padTop(30f);
