@@ -1,28 +1,24 @@
 package com.deco2800.game.components.death;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
-import com.deco2800.game.entities.Entity;
-//import com.deco2800.game.entities.factories.PlayerDeathFactory;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * UI component for displaying the death screen
  */
 public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
-    protected List<Entity> areaEntities;
     private final String[] deathScreenTextures = new String[]{
             "lowHealthImages/testDeath1.png",
             "lowHealthImages/youdied.png",
@@ -38,7 +34,6 @@ public class DeathDisplay extends MainMenuDisplay {
 
     @Override
     public void create() {
-        areaEntities = new ArrayList<>();
         loadAssets();
         super.create();
     }
@@ -49,13 +44,12 @@ public class DeathDisplay extends MainMenuDisplay {
     @Override
     protected void addActors() {
         super.addActors();
-        TextButton restartForestBtn = new TextButton("Restart Forest", skin);
-        TextButton restartTestBtn = new TextButton("Restart Test", skin);
-        TextButton exitBtn = new TextButton("Exit", skin);
-        Image background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
-                Texture.class));
-        background.setScaling(Scaling.stretch);
-        stack.add(background);
+
+        Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
+
+        Button restartForestBtn = new Button(menuButtons, "start");
+        Button restartTestBtn = new Button(menuButtons, "start");
+        Button exitBtn = new Button(menuButtons, "quit");
 
         // Triggers an event when the button is pressed
         restartForestBtn.addListener(
@@ -89,28 +83,13 @@ public class DeathDisplay extends MainMenuDisplay {
         Image dead = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/youdied.png",
                 Texture.class));
         table.clear();
-        table.add(dead);
+        table.add();
+        table.add(dead).padBottom(200f);
         table.row();
-        table.add(restartForestBtn).padTop(30f);
-        table.row();
-        table.add(restartTestBtn).padTop(30f);
-        table.row();
-        table.add(exitBtn).padTop(30f);
-        table.row();
-
-//        spawnPlayer();
-
+        table.add(restartForestBtn).pad(50f).padTop(120f);
+        table.add(restartTestBtn).pad(50f).padTop(120f);
+        table.add(exitBtn).pad(50f).padTop(120f);
     }
-
-    /**
-     * Spawn player at the terrain, create the player
-     */
-//    private void spawnPlayer() {
-//        Entity newPlayer = PlayerDeathFactory.createPlayer();
-//        newPlayer.setPosition(5f, 5f);
-//        areaEntities.add(newPlayer);
-//        ServiceLocator.getEntityService().register(newPlayer);
-//    }
 
     private void loadAssets() {
         logger.debug("Loading assets");
@@ -132,9 +111,6 @@ public class DeathDisplay extends MainMenuDisplay {
 
     @Override
     public void dispose() {
-        for (Entity entity : areaEntities) {
-            entity.dispose();
-        }
         super.dispose();
         stack.clear();
         this.unloadAssets();

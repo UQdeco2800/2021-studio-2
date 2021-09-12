@@ -78,7 +78,13 @@ public class CombatStatsComponent extends Component {
         } else {
             this.health = 0;
             if (this.entity != null) {
-                this.entity.prepareDispose();
+                if (getEntity() != null) {
+                    if (getEntity().getComponent(KeyboardPlayerInputComponent.class) == null) {
+                        this.entity.prepareDispose();
+                    } else {
+                        getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
+                    }
+                }
             }
         }
         if (this.entity != null) {
