@@ -85,7 +85,7 @@ public class ObstacleFactory {
     /**
      * creates a crate obstacle that can be destroyed and will transform into a health potion
      *
-     * @return the transforming crate to health potion entity
+     * @return the transforming crate health potion entity
      */
     public static Entity createHealthCrate() {
         AnimationRenderComponent crateAnimator = new AnimationRenderComponent(
