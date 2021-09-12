@@ -2,17 +2,12 @@ package com.deco2800.game.components.tasks;
 
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.ai.tasks.TaskRunner;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.TrackingArrowConfig;
@@ -22,8 +17,6 @@ import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
@@ -31,7 +24,6 @@ import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -78,15 +70,16 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * create fireballs when needed
+     *
      * @return true if fireballs are present
      */
     private boolean checkFireBalls() {
         boolean found = false;
         if (projectileType.equals("fireBall") && !owner.getEntity().data.containsKey("fireBalls")) {
             //create fireball list
-            Entity[] entities = new Entity[] {
+            Entity[] entities = new Entity[]{
                     null,
-                    WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0,1)),
+                    WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
                     null
             };
             gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(), true, true);
@@ -122,6 +115,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * gets the next fireball assuming it exists
+     *
      * @return next fireball to cast
      */
     private Entity getNextFireBall() {

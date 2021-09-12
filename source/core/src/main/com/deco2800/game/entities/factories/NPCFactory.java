@@ -12,8 +12,8 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.MeleeEnemyConfig;
 import com.deco2800.game.entities.configs.ElfBossConfig;
+import com.deco2800.game.entities.configs.MeleeEnemyConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.entities.configs.RangedEnemyConfig;
 import com.deco2800.game.files.FileLoader;
@@ -307,10 +307,8 @@ public class NPCFactory {
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
 
         boss
-                .addComponent(aiComponent)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
-
                 .addComponent(new ElfAnimationController())
                 .addComponent(aiComponent);
         boss.setAttackRange(5);
