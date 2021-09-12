@@ -23,7 +23,7 @@ public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
     protected List<Entity> areaEntities;
     private final String[] deathScreenTextures = new String[]{
-            "lowHealthImages/deathBackground.png",
+            "lowHealthImages/youdied.png",
             "images/player.png"
     };
 
@@ -45,13 +45,13 @@ public class DeathDisplay extends MainMenuDisplay {
     @Override
     protected void addActors() {
         super.addActors();
+        Image title = new Image(ServiceLocator.getResourceService().getAsset(
+                "lowHealthImages/youdied.png", Texture.class));
+
         TextButton restartForestBtn = new TextButton("Restart Forest", skin);
         TextButton restartTestBtn = new TextButton("Restart Test", skin);
         TextButton exitBtn = new TextButton("Exit", skin);
-        Image background = new Image(ServiceLocator.getResourceService().getAsset(
-                "lowHealthImages/deathBackground.png", Texture.class));
-        background.setScaling(Scaling.stretch);
-        stack.add(background);
+
 
         // Triggers an event when the button is pressed
         restartForestBtn.addListener(
@@ -83,13 +83,16 @@ public class DeathDisplay extends MainMenuDisplay {
                     }
                 });
 
+
         table.clear();
-        table.add(restartForestBtn).padTop(30f);
+        table.add(title).padTop(-200f);
         table.row();
-        table.add(restartTestBtn).padTop(30f);
+        table.add(restartForestBtn);
         table.row();
-        table.add(exitBtn).padTop(30f);
+        table.add(restartTestBtn).padTop(20f);
         table.row();
+        table.add(exitBtn).padTop(20f);
+
     }
 
     private void loadAssets() {
