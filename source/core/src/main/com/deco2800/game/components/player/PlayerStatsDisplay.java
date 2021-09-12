@@ -191,12 +191,15 @@ public class PlayerStatsDisplay extends UIComponent {
         float currentHealth = entity.getComponent(CombatStatsComponent.class).getHealth();
         float lowHealthThreshold = 0.30f * maxHealth; //change float value to change the threshold
         float alpha = 1.2f - (currentHealth / lowHealthThreshold); //changing opacity of bloody view
-        //boolean play = currentHealth < (maxHealth * 0.30f); //heart beat sound plays at 30% max
-        // health
+        boolean play = currentHealth < (maxHealth * 0.30f); //heart beat sound plays at 30% max health
 
+        if (currentHealth <= 0) {
+            tableFrame.setVisible(false);
+            entity.getEvents().trigger("deathFade");
+        }
         if (currentHealth <= lowHealthThreshold) {
             //call the event trigger for bloodyViewOn when hp reaches below threshold
-            entity.getEvents().trigger("bloodyViewOn", alpha);
+            entity.getEvents().trigger("bloodyViewOn", alpha, play);
         } else {
             //turn off blood view when above low health threshold
             entity.getEvents().trigger("bloodyViewOff");

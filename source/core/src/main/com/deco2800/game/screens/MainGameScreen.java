@@ -1,6 +1,7 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
@@ -101,14 +102,27 @@ public class MainGameScreen extends ScreenAdapter {
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     }
 
+    /**
+     * Runs when the player dies, causes the camera to zoom in.
+     */
     private void isPlayerDead() {
         if (this.gameArea.getPlayer() != null) {
             if (this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
-                game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+                zoomCamera();
             }
         }
     }
 
+    /**
+     * Zooms the camera slightly, this will be called by renderer if the player is dead.
+     */
+    private void zoomCamera() {
+        if (((OrthographicCamera)renderer.getCamera().getCamera()).zoom > 0.4) {
+            ((OrthographicCamera)renderer.getCamera().getCamera()).zoom -= 0.008;
+        } else {
+            game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+        }
+    }
     @Override
     public void render(float delta) {
         physicsEngine.update();
