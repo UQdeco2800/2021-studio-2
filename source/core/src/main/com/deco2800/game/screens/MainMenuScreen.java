@@ -111,7 +111,6 @@ public class MainMenuScreen extends ScreenAdapter {
     ui.addComponent(new MainMenuDisplay())
         .addComponent(new InputDecorator(stage, 10))
         .addComponent(new MainMenuActions(game))
-        .addComponent(new MainMenuActions(game))
         .addComponent(animator);
     ServiceLocator.getEntityService().register(ui);
     // need to fix scaling
