@@ -137,39 +137,39 @@ public class NPCFactory {
 //     * @return entity
 //     */
 //
-//    public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSize) {
-//        Entity anchoredGhost = createBaseNPCNoAI();
-//        BaseEntityConfig config = configs.ghost;
-//        AITaskComponent aiComponent =
-//                new AITaskComponent()
-//                        .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
-//                        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
-//                        .addTask(new AnchoredRetreatTask(anchor, anchorSize));
-//        anchoredGhost.addComponent(aiComponent);
-//
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
-//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-//
-//        anchoredGhost
-//                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-//                .addComponent(animator)
-//                .addComponent(new GhostAnimationController());
-//
-//        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-//        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-//        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-//        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-//        anchoredGhost.addComponent(healthBarComponent);
-//
-//        anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-//        return anchoredGhost;
-//    }
-//
+    public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSize) {
+        Entity anchoredGhost = createBaseNPCNoAI();
+        BaseEntityConfig config = configs.ghost;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
+                        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSize))
+                        .addTask(new AnchoredRetreatTask(anchor, anchorSize));
+        anchoredGhost.addComponent(aiComponent);
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
+        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
+
+        anchoredGhost
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new GhostAnimationController());
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        anchoredGhost.addComponent(healthBarComponent);
+
+        anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        return anchoredGhost;
+    }
+
 //    /**
 //     * Creates a anchored ghost entity.
 //     * Anchor ghost only chase the target if the target approach the anchor point
@@ -192,7 +192,7 @@ public class NPCFactory {
 //
 //        AnimationRenderComponent animator =
 //                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/ghost.atlas", TextureAtlas.class));
+//                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
 //        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
 //        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
 //        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -212,7 +212,7 @@ public class NPCFactory {
 //        anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
 //        return anchoredGhost;
 //    }
-//
+
     /**
      * Creates a ranged ghost entity.
      * Ghost that shoot arrow at target
@@ -292,6 +292,7 @@ public class NPCFactory {
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
         boss.scaleHeight(2);
+
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
         Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));

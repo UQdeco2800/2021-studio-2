@@ -66,11 +66,12 @@ public class ForestGameArea extends GameArea {
             "images/vortex.png",
             "images/aiming_line.png",
             "images/boss_enemy.png",
-            "images/minionEnemy.png"
+            "images/minionEnemy.png",
+            "images/meleeElf.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/bossEnemy.atlas", "images/minionEnemy.atlas"
+            "images/player.atlas", "images/bossEnemy.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -109,7 +110,7 @@ public class ForestGameArea extends GameArea {
         spawnGhosts();
 //        spawnGhostKing();
         spawnRangedGhosts();
-//        spawnAnchoredGhosts();
+        spawnAnchoredGhosts();
         spawnBoss();
 
         playMusic();
@@ -228,22 +229,22 @@ public class ForestGameArea extends GameArea {
 //        spawnEntityAt(ghostKing, randomPos, true, true);
 //    }
 
-//    /**
-//     * Spawn anchored ghost, ghost only move at the certain anchored
-//     */
-//    private void spawnAnchoredGhosts() {
-//        GridPoint2 minPos = new GridPoint2(0, 0);
-//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-//
-//        for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
-//            GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-//            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
-//            Entity anchor = ObstacleFactory.createAnchor();
-//            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
-//            spawnEntityAt(anchor, basePos, true, true);
-//            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
-//        }
-//    }
+    /**
+     * Spawn anchored ghost, ghost only move at the certain anchored
+     */
+    private void spawnAnchoredGhosts() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
+            GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
+            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+            Entity anchor = ObstacleFactory.createAnchor();
+            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+            spawnEntityAt(anchor, basePos, true, true);
+            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+        }
+    }
 
     /**
      * Play the music on the background of the game
