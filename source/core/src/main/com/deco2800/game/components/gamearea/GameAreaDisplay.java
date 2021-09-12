@@ -1,6 +1,7 @@
 package com.deco2800.game.components.gamearea;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.deco2800.game.ui.UIComponent;
@@ -24,6 +25,7 @@ public class GameAreaDisplay extends UIComponent {
 
     private void addActors() {
         title = new Label(this.gameAreaName, skin, "large");
+        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
         //stage.addActor(title);
     }
 

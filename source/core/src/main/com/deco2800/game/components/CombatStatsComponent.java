@@ -12,20 +12,25 @@ public class CombatStatsComponent extends Component {
 
     private static final Logger logger = LoggerFactory.getLogger(CombatStatsComponent.class);
     private int health;
-    private final int maxHealth;
+    private int maxHealth; // if we want to change his max health use the setMaxHeatlh()
     private int baseAttack;
 
     public CombatStatsComponent(int health, int baseAttack) {
-        setHealth(health);
-        maxHealth = getHealth();
+        this.health = health;
+        setMaxHealth(health);
         setBaseAttack(baseAttack);
+        //if entities can heal trigger this even
+    }
+
+    public void create() {
+        entity.getEvents().addListener("healEntity", this::addHealth);
     }
 
     /**
-     * Returns true if the entity's has 0 health, otherwise false.
-     *
-     * @return is player dead
-     */
+    * Returns true if the entity's has 0 health, otherwise false.
+    *
+    * @return is player dead
+    */
     public Boolean isDead() {
         return health == 0;
     }
@@ -37,6 +42,16 @@ public class CombatStatsComponent extends Component {
      */
     public int getHealth() {
         return health;
+    }
+
+
+    /**
+    * to change the max health of the player
+    *
+    * @param health  the new max health of the player to set
+    */
+    public void setMaxHealth(int health) {
+        this.maxHealth = health;
     }
 
     /**
@@ -54,15 +69,18 @@ public class CombatStatsComponent extends Component {
      * @param health health
      */
     public void setHealth(int health) {
-        if (health >= 0) {
+        if (health > maxHealth) {
+            this.health = maxHealth; //cannot get more health than his set max health
+        }
+        else if (health >= 0) {
             this.health = health;
         } else {
             this.health = 0;
-            if (getEntity() != null) {
-                getEntity().prepareDispose();
+            if (this.entity != null) {
+                this.entity.prepareDispose();
             }
         }
-        if (entity != null) {
+        if (this.entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
         }
     }
@@ -82,7 +100,7 @@ public class CombatStatsComponent extends Component {
      * @return base attack damage
      */
     public int getBaseAttack() {
-        return baseAttack;
+        return this.baseAttack;
     }
 
     /**
@@ -98,8 +116,51 @@ public class CombatStatsComponent extends Component {
         }
     }
 
+    /**
+     * called when an entity is attack
+     * if this entity has a transform component or hit animations they will be called.
+     * if combatStatComponent is disabled this method will not do anything.
+     * @param attacker the CombatStatComponent of the attacker
+     */
     public void hit(CombatStatsComponent attacker) {
-        int newHealth = getHealth() - attacker.getBaseAttack();
-        setHealth(newHealth);
+        if (this.enabled) {
+            int newHealth = getHealth() - attacker.getBaseAttack();
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * plays hit animation if the entity has one in its animation controller and
+     * atlas file. The event name registered for starting the hit animations must be called
+     * 'hit'. The animation names don't have to be 'hit' though.
+     */
+    private void checkHitAnimations() {
+        if (entity.getEvents().hasEvent("hit")) {
+            entity.getEvents().trigger("hit");
+        }
+    }
+
+    /**
+     * if the entity has a Transform Component it will execute its transformation
+     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponent
+     * @param health the current health of the entity
+     * @return true if entity has a TransformComponent otherwise false
+     */
+    private boolean checkTransformation(int health) {
+        //transform is added in TransformEntityComponent
+        if (entity.getEvents().hasEvent("transformEntity")) {
+            if (health <= 0) {
+                entity.getEvents().trigger("transformEntity");
+                return true;
+            }
+        }
+        return false;
     }
 }
