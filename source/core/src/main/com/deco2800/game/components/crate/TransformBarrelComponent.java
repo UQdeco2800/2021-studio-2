@@ -6,7 +6,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
 
 /**
  * allows entities to disable and enable different components depending on what you
- * want to achieve -> this only works when entities are about to die and you want them
+ * want to achieve. This only works when entities are about to die and you want them
  * to transform into a different kind of entity without disposing it.
  * e.g enemies die and drop items
  */
