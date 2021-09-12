@@ -70,20 +70,23 @@ public class CombatStatsComponent extends Component {
      * @param health health
      */
     public void setHealth(int health) {
-        if (health >= 0) {
+        if (health > maxHealth) {
+            this.health = maxHealth; //cannot get more health than his set max health
+        }
+        else if (health >= 0) {
             this.health = health;
         } else {
             this.health = 0;
-            if (getEntity() != null) {
-                if (getEntity().getComponent(KeyboardPlayerInputComponent.class) == null) {
-                    getEntity().prepareDispose();
-                }
+            if (this.entity != null) {
+                this.entity.prepareDispose();
             }
         }
-        if (entity != null) {
+        if (this.entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
         }
     }
+
+
     /**
      * Adds to the player's health. The amount added can be negative.
      *
