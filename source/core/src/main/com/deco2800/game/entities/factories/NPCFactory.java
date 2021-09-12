@@ -282,7 +282,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/bossEnemy.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/bossAttack.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
