@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -176,61 +176,76 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#blackScreenSetup()">blackScreenSetup</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Initialises the settings for the death screen to be displayed.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Add all actors to the stage here and event listener</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayBloodyViewOff()">displayBloodyViewOff</a></span>()</code></th>
 <td class="colLast">
 <div class="block">turn the stack visibility off.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayBloodyViewOn(float)">displayBloodyViewOn</a></span>&#8203;(float&nbsp;alpha)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayBloodyViewOn(float,boolean)">displayBloodyViewOn</a></span>&#8203;(float&nbsp;alpha,
+boolean&nbsp;play)</code></th>
 <td class="colLast">
 <div class="block">Turn the stack visibility on.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayDeath()">displayDeath</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Triggered once the entity has died, the screen will slowly fade to black.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
 <td class="colLast">
 <div class="block">dispose all widgets and added images from addActor</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</code></th>
 <td class="colLast">
 <div class="block">Draw the renderable.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loadImages()">loadImages</a></span>()</code></th>
 <td class="colLast">
 <div class="block">retrieves images from service locator to use for the low health UI</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playHeartBeat(float)">playHeartBeat</a></span>&#8203;(float&nbsp;modify)</code></th>
 <td class="colLast">
 <div class="block">plays the heart beat sound only if the tracker is currently false.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stackSetup()">stackSetup</a></span>()</code></th>
 <td class="colLast">
 <div class="block">initialisation of the stack and adding images to layout</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopHeartBeat()">stopHeartBeat</a></span>()</code></th>
 <td class="colLast">
@@ -320,6 +335,13 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="blackScreenSetup()">blackScreenSetup</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">blackScreenSetup</span>()</div>
+<div class="block">Initialises the settings for the death screen to be displayed.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="loadImages()">loadImages</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">loadImages</span>()</div>
 <div class="block">retrieves images from service locator to use for the low health UI</div>
@@ -327,13 +349,15 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="displayBloodyViewOn(float)">displayBloodyViewOn</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOn</span>&#8203;(<span class="arguments">float&nbsp;alpha)</span></div>
+<h3><a id="displayBloodyViewOn(float,boolean)">displayBloodyViewOn</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOn</span>&#8203;(<span class="arguments">float&nbsp;alpha,
+boolean&nbsp;play)</span></div>
 <div class="block">Turn the stack visibility on.
  This is called when the event "bloodyViewOn" is triggered.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>alpha</code> - the opacity to set the bloody view to.</dd>
+<dd><code>play</code> - if true the heart beat sound will play otherwise nothing else will occur</dd>
 </dl>
 </section>
 </li>
@@ -343,6 +367,13 @@ extends <a href="../../ui/UIComponent.html" title="class in com.deco2800.game.ui
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayBloodyViewOff</span>()</div>
 <div class="block">turn the stack visibility off.
  this is called when the event "bloodyViewOff" is triggered</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="displayDeath()">displayDeath</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">displayDeath</span>()</div>
+<div class="block">Triggered once the entity has died, the screen will slowly fade to black.</div>
 </section>
 </li>
 <li class="blockList">

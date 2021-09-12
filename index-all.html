@@ -298,6 +298,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/PhysicsContactListener.html#beginContact(com.badlogic.gdx.physics.box2d.Contact)">beginContact(Contact)</a></span> - Method in class com.deco2800.game.physics.<a href="com/deco2800/game/physics/PhysicsContactListener.html" title="class in com.deco2800.game.physics">PhysicsContactListener</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#blackScreenSetup()">blackScreenSetup()</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
+<dd>
+<div class="block">Initialises the settings for the death screen to be displayed.</div>
+</dd>
 <dt><a href="com/deco2800/game/physics/BodyUserData.html" title="class in com.deco2800.game.physics"><span class="typeNameLink">BodyUserData</span></a> - Class in <a href="com/deco2800/game/physics/package-summary.html">com.deco2800.game.physics</a></dt>
 <dd>
 <div class="block">POJO which contains the custom data attached to each box2D entity.</div>
@@ -488,6 +492,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Create the game area in the world.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/TestGameArea.html#create()">create()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/TestGameArea.html" title="class in com.deco2800.game.areas">TestGameArea</a></dt>
+<dd>
+<div class="block">Create the game area, including terrain, static entities (trees), dynamic entities (player)</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/areas/TutorialGameArea.html#create()">create()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/TutorialGameArea.html" title="class in com.deco2800.game.areas">TutorialGameArea</a></dt>
 <dd>
 <div class="block">Create the game area, including terrain, static entities (trees), dynamic entities (player)</div>
 </dd>
@@ -737,10 +745,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/death/DeathDisplay.html#%3Cinit%3E()">DeathDisplay()</a></span> - Constructor for class com.deco2800.game.components.death.<a href="com/deco2800/game/components/death/DeathDisplay.html" title="class in com.deco2800.game.components.death">DeathDisplay</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerStatsDisplay.html#deathScreen()">deathScreen()</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerStatsDisplay.html" title="class in com.deco2800.game.components.player">PlayerStatsDisplay</a></dt>
-<dd>
-<div class="block">checks if player is dead if so trigger the death screen.</div>
-</dd>
 <dt><a href="com/deco2800/game/screens/DeathScreen.html" title="class in com.deco2800.game.screens"><span class="typeNameLink">DeathScreen</span></a> - Class in <a href="com/deco2800/game/screens/package-summary.html">com.deco2800.game.screens</a></dt>
 <dd>
 <div class="block">Screen containing the death screen UI and functionality components</div>
@@ -807,9 +811,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">turn the stack visibility off.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#displayBloodyViewOn(float)">displayBloodyViewOn(float)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#displayBloodyViewOn(float,boolean)">displayBloodyViewOn(float, boolean)</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
 <dd>
 <div class="block">Turn the stack visibility on.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#displayDeath()">displayDeath()</a></span> - Method in class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
+<dd>
+<div class="block">Triggered once the entity has died, the screen will slowly fade to black.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/UserSettings.Settings.html#displayMode">displayMode</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/UserSettings.Settings.html" title="class in com.deco2800.game.files">UserSettings.Settings</a></dt>
 <dd>&nbsp;</dd>
@@ -832,6 +840,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/TerrainComponent.html#dispose()">dispose()</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/TerrainComponent.html" title="class in com.deco2800.game.areas.terrain">TerrainComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/TestGameArea.html#dispose()">dispose()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/TestGameArea.html" title="class in com.deco2800.game.areas">TestGameArea</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/areas/TutorialGameArea.html#dispose()">dispose()</a></span> - Method in class com.deco2800.game.areas.<a href="com/deco2800/game/areas/TutorialGameArea.html" title="class in com.deco2800.game.areas">TutorialGameArea</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/Component.html#dispose()">dispose()</a></span> - Method in class com.deco2800.game.components.<a href="com/deco2800/game/components/Component.html" title="class in com.deco2800.game.components">Component</a></dt>
 <dd>
@@ -1894,6 +1904,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/GdxGame.ScreenType.html#MAIN_GAME_FOREST">MAIN_GAME_FOREST</a></span> - com.deco2800.game.<a href="com/deco2800/game/GdxGame.ScreenType.html" title="enum in com.deco2800.game">GdxGame.ScreenType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/GdxGame.ScreenType.html#MAIN_GAME_TEST">MAIN_GAME_TEST</a></span> - com.deco2800.game.<a href="com/deco2800/game/GdxGame.ScreenType.html" title="enum in com.deco2800.game">GdxGame.ScreenType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/GdxGame.ScreenType.html#MAIN_GAME_TUTORIAL">MAIN_GAME_TUTORIAL</a></span> - com.deco2800.game.<a href="com/deco2800/game/GdxGame.ScreenType.html" title="enum in com.deco2800.game">GdxGame.ScreenType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/GdxGame.ScreenType.html#MAIN_MENU">MAIN_MENU</a></span> - com.deco2800.game.<a href="com/deco2800/game/GdxGame.ScreenType.html" title="enum in com.deco2800.game">GdxGame.ScreenType</a></dt>
 <dd>&nbsp;</dd>
@@ -3283,6 +3295,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/Dialogue.html#TUTORIAL_MOVE">TUTORIAL_MOVE</a></span> - com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/Dialogue.html#TUTORIAL_REPEAT">TUTORIAL_REPEAT</a></span> - com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/Dialogue.html" title="enum in com.deco2800.game.ui.textbox">Dialogue</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/areas/TutorialGameArea.html" title="class in com.deco2800.game.areas"><span class="typeNameLink">TutorialGameArea</span></a> - Class in <a href="com/deco2800/game/areas/package-summary.html">com.deco2800.game.areas</a></dt>
+<dd>
+<div class="block">Forest area for the demo game with trees, a player, and some enemies.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/areas/TutorialGameArea.html#%3Cinit%3E(com.deco2800.game.areas.terrain.TerrainFactory)">TutorialGameArea(TerrainFactory)</a></span> - Constructor for class com.deco2800.game.areas.<a href="com/deco2800/game/areas/TutorialGameArea.html" title="class in com.deco2800.game.areas">TutorialGameArea</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a id="I:U">
