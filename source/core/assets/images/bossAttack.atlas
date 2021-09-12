@@ -1,0 +1,97 @@
+
+bossAttack.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+floatUp
+  rotate: false
+  xy: 634, 2
+  size: 65, 111
+  orig: 65, 111
+  offset: 0, 0
+  index: 1
+floatUp
+  rotate: false
+  xy: 197, 8
+  size: 89, 105
+  orig: 89, 105
+  offset: 0, 0
+  index: 2
+floatUp
+  rotate: false
+  xy: 2, 8
+  size: 97, 105
+  orig: 97, 105
+  offset: 0, 0
+  index: 3
+floatDown
+  rotate: false
+  xy: 288, 2
+  size: 89, 111
+  orig: 89, 111
+  offset: 0, 0
+  index: 1
+floatDown
+  rotate: false
+  xy: 379, 8
+  size: 89, 105
+  orig: 89, 105
+  offset: 0, 0
+  index: 2
+floatDown
+  rotate: false
+  xy: 101, 8
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 3
+floatLeft
+  rotate: false
+  xy: 834, 3
+  size: 45, 110
+  orig: 45, 110
+  offset: 0, 0
+  index: 1
+floatLeft
+  rotate: false
+  xy: 768, 11
+  size: 64, 102
+  orig: 64, 102
+  offset: 0, 0
+  index: 2
+floatLeft
+  rotate: false
+  xy: 470, 11
+  size: 80, 102
+  orig: 80, 102
+  offset: 0, 0
+  index: 3
+floatRight
+  rotate: false
+  xy: 881, 3
+  size: 45, 110
+  orig: 45, 110
+  offset: 0, 0
+  index: 1
+floatRight
+  rotate: false
+  xy: 701, 11
+  size: 65, 102
+  orig: 65, 102
+  offset: 0, 0
+  index: 2
+floatRight
+  rotate: false
+  xy: 552, 11
+  size: 80, 102
+  orig: 80, 102
+  offset: 0, 0
+  index: 3
+default
+  rotate: false
+  xy: 288, 2
+  size: 89, 111
+  orig: 89, 111
+  offset: 0, 0
+  index: 1
