@@ -120,12 +120,11 @@ public class TouchMoveComponent extends TouchComponent {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    checkPosition(player, actions, position, input);
+                    input.unlockPlayer();
                     timer.cancel();
                 }
-            }, 50);
+            }, 500);
         } else {
-            input.unlockPlayer();
         }
     }
 }
