@@ -15,7 +15,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
 
     public PhysicsComponent physicsComponent;
-
     private Vector2 targetPosition;
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
@@ -76,25 +75,34 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         this.maxSpeed = maxSpeed;
     }
 
-    private void updateDirection(Body body) {
-        Vector2 desiredVelocity = getDirection().scl(maxSpeed);
-        setToVelocity(body, desiredVelocity);
+    public void DirectionAnimation (){
+        // ranged ghosts have ID of 20 and 21 - they change animation based on arrow shooting angle
+        // ideally wouldn't use ID
+        // will need to figure out later how to specify entities are not ranged ghosts using a label of some kind
 
-        //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
-        if (this.getDirection().x > this.getDirection().y) {
-            if (this.getDirection().x < 0) {
-                this.getEntity().getEvents().trigger("LeftStart");
-            } else if (this.getDirection().x > 0) {
-                this.getEntity().getEvents().trigger("RightStart");
+        if (this.getEntity().getId()!=20 && this.getEntity().getId()!=21) {
+            if (this.getDirection().x > this.getDirection().y) {
+                if (this.getDirection().x < 0) {
+                    this.getEntity().getEvents().trigger("LeftStart");
+                }
+                 else {
+                    this.getEntity().getEvents().trigger("RightStart");
+                }
             }
-        } else {
-            if (this.getDirection().y < 0) {
-                this.getEntity().getEvents().trigger("DownStart");
-            } else if (this.getDirection().y > 0) {
-                this.getEntity().getEvents().trigger("UpStart");
+            else{
+                if (this.getDirection().y < 0) {
+                    this.getEntity().getEvents().trigger("DownStart");
+                } else {
+                    this.getEntity().getEvents().trigger("UpStart");
+                }
             }
         }
     }
+    private void updateDirection(Body body) {
+        Vector2 desiredVelocity = getDirection().scl(maxSpeed);
+        setToVelocity(body, desiredVelocity);
+        DirectionAnimation();
+        }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {
         // impulse force = (desired velocity - current velocity) * mass

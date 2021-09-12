@@ -95,7 +95,6 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
         //Arrows disappears when at destination to stop it from looping in the same place
         playArrow();
         owner.getEntity().prepareDispose();
-
     }
 
     /**

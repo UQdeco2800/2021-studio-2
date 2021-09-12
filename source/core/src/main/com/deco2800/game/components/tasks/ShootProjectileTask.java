@@ -30,6 +30,8 @@ import java.util.concurrent.TimeUnit;
  * Spawns an arrow to shoot at a target
  */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
+    public PhysicsMovementComponent physicsMovement;
+
 
     private final Entity target;
     private final PhysicsEngine physics;
@@ -43,6 +45,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private String projectileType = "normalArrow";
     private boolean poweringUp = false;
     private LineEntity aimingLine = null;
+
+    public boolean initshoot=false;
+
 
     /**
      * @param target     The entity to chase.
@@ -76,6 +81,27 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         }
     }
 
+    public void shootanimation(){
+        float targetdir;
+        targetdir=getDirectionOfTarget();
+
+        if (targetdir>0&& targetdir<90){ //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+            System.out.println("targetdir <90: "+targetdir);
+            owner.getEntity().getEvents().trigger("Left_Shoot");
+        }
+        else if (targetdir>90&& targetdir<180){
+            System.out.println("targetdir <180: "+targetdir);
+            owner.getEntity().getEvents().trigger("Down_Shoot");
+        }
+        else if (targetdir>180&& targetdir<270) {
+            System.out.println("targetdir <270: " + targetdir);
+            owner.getEntity().getEvents().trigger("Right_Shoot");
+        }
+        else if (targetdir>270&& targetdir<360){
+            System.out.println("targetdir <360: "+targetdir);
+            owner.getEntity().getEvents().trigger("Up_Shoot");
+        }
+        }
     /**
      * Spawns in an arrow according to the classes variables
      */
@@ -84,6 +110,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
         Random rand = new SecureRandom();
+
+       shootanimation();
 
         switch (projectileType) {
             case "normalArrow": {
