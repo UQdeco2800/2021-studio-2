@@ -1,0 +1,118 @@
+
+meleeElf.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Back_Dagger
+  rotate: false
+  xy: 2, 2
+  size: 53, 105
+  orig: 53, 105
+  offset: 0, 0
+  index: 4
+Back_Dagger
+  rotate: false
+  xy: 112, 2
+  size: 52, 105
+  orig: 52, 105
+  offset: 0, 0
+  index: 3
+Back_Dagger
+  rotate: false
+  xy: 218, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 1
+Back_Dagger
+  rotate: false
+  xy: 269, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 2
+Front_Dagger
+  rotate: false
+  xy: 57, 2
+  size: 53, 105
+  orig: 53, 105
+  offset: 0, 0
+  index: 4
+Front_Dagger
+  rotate: false
+  xy: 166, 2
+  size: 50, 105
+  orig: 50, 105
+  offset: 0, 0
+  index: 3
+Front_Dagger
+  rotate: false
+  xy: 320, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 1
+Front_Dagger
+  rotate: false
+  xy: 371, 2
+  size: 48, 105
+  orig: 48, 105
+  offset: 0, 0
+  index: 2
+Left_Dagger
+  rotate: false
+  xy: 421, 5
+  size: 46, 102
+  orig: 46, 102
+  offset: 0, 0
+  index: 4
+Left_Dagger
+  rotate: false
+  xy: 517, 5
+  size: 42, 102
+  orig: 42, 102
+  offset: 0, 0
+  index: 3
+Left_Dagger
+  rotate: false
+  xy: 605, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 1
+Left_Dagger
+  rotate: false
+  xy: 645, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 2
+Right_Dagger
+  rotate: false
+  xy: 469, 5
+  size: 46, 102
+  orig: 46, 102
+  offset: 0, 0
+  index: 4
+Right_Dagger
+  rotate: false
+  xy: 561, 5
+  size: 42, 102
+  orig: 42, 102
+  offset: 0, 0
+  index: 3
+Right_Dagger
+  rotate: false
+  xy: 685, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 1
+Right_Dagger
+  rotate: false
+  xy: 725, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 2

@@ -1,0 +1,146 @@
+
+assassin.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Back
+  rotate: false
+  xy: 2, 109
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 4
+Back
+  rotate: false
+  xy: 2, 2
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 5
+Back
+  rotate: false
+  xy: 150, 109
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+Back
+  rotate: false
+  xy: 150, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 2
+Back
+  rotate: false
+  xy: 223, 109
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 3
+Front
+  rotate: false
+  xy: 76, 109
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 4
+Front
+  rotate: false
+  xy: 76, 2
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 5
+Front
+  rotate: false
+  xy: 223, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+Front
+  rotate: false
+  xy: 296, 109
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 2
+Front
+  rotate: false
+  xy: 296, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 3
+Left
+  rotate: false
+  xy: 369, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+Left
+  rotate: false
+  xy: 427, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 2
+Left
+  rotate: false
+  xy: 485, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 3
+Left
+  rotate: false
+  xy: 543, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 4
+Left
+  rotate: false
+  xy: 775, 106
+  size: 54, 108
+  orig: 54, 108
+  offset: 0, 0
+  index: 5
+Right
+  rotate: false
+  xy: 659, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 3
+Right
+  rotate: false
+  xy: 717, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 4
+Right
+  rotate: false
+  xy: 831, 106
+  size: 54, 108
+  orig: 54, 108
+  offset: 0, 0
+  index: 5
+Right-2
+  rotate: false
+  xy: 601, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: -1
+Right
+  rotate: false
+  xy: 601, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
