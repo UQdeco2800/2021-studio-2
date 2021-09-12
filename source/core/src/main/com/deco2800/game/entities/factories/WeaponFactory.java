@@ -8,6 +8,7 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
+import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.entities.Entity;
@@ -93,7 +94,7 @@ public class WeaponFactory {
      * @return entity tracking arrow
      */
     public static Entity createTrackingArrow(Entity targetEntity, float angle) {
-        Entity normalArrow = createBaseArrow();
+        Entity trackingArrow = createBaseArrow();
         TrackingArrowConfig config = configs.trackingArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetEntity, new Vector2(config.speedX, config.speedY));
@@ -102,16 +103,50 @@ public class WeaponFactory {
                         .addTask(movementTask);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/arrow_normal.png", Texture.class));
-        normalArrow
+        trackingArrow
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
-        normalArrow.setScale(scale);
-        normalArrow.setAngle(angle);
+        trackingArrow.setScale(scale);
+        trackingArrow.setAngle(angle);
 
         shootingSound("trackingArrow");
-        return normalArrow;
+        return trackingArrow;
+    }
+
+    /**
+     * create tracking arrow entity that can change trajectory
+     *
+     * @param targetEntity target (player)
+     * @param owner        owner to hover at until needed
+     * @return entity tracking arrow
+     */
+    public static Entity createFireBall(Entity targetEntity, Entity owner, Vector2 offset) {
+        Entity fireBall = new Entity();
+        TrackingArrowConfig config = configs.trackingArrow;
+        /*ProjectileMovementTask movementTask = new ProjectileMovementTask(
+                targetEntity, new Vector2(config.speedX, config.speedY));*/
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new EntityHoverTask(owner, 0.1f, 0, offset, new Vector2(1.5f, 1.5f)))
+                        .addTask(new ProjectileMovementTask(targetEntity, new Vector2(config.speedX, config.speedY)));
+        fireBall.data.put("fireBallMovement", false);
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/arrow_normal.png", Texture.class));
+        fireBall
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(aiComponent)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PROJECTILEWEAPON))
+                .addComponent(new PlayerActions())
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
+        fireBall.setScale(scale);
+        shootingSound("fireBall");
+        return fireBall;
     }
 
     /**
