@@ -63,11 +63,11 @@ public class ForestGameArea extends GameArea {
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
-            "crate/crateHitBreakV2.png"
+            "crate/crateHitBreak.png"
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreakV2.atlas"
+            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
