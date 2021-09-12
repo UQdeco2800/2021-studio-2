@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
 import com.deco2800.game.entities.Entity;
-//import com.deco2800.game.entities.factories.PlayerDeathFactory;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -91,20 +90,7 @@ public class DeathDisplay extends MainMenuDisplay {
         table.row();
         table.add(exitBtn).padTop(30f);
         table.row();
-
-//        spawnPlayer();
-
     }
-
-    /**
-     * Spawn player at the terrain, create the player
-     */
-//    private void spawnPlayer() {
-//        Entity newPlayer = PlayerDeathFactory.createPlayer();
-//        newPlayer.setPosition(5f, 5f);
-//        areaEntities.add(newPlayer);
-//        ServiceLocator.getEntityService().register(newPlayer);
-//    }
 
     private void loadAssets() {
         logger.debug("Loading assets");
