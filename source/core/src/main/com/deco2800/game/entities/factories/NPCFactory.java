@@ -290,10 +290,10 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f));
-        /*ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
-        aiComponent.addTask(shootProjectileTask);*/
+        aiComponent.addTask(shootProjectileTask);
 
 
         aiComponent.addTask(new SpawnMinionsTask(target))
