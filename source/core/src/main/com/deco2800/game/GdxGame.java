@@ -75,6 +75,8 @@ public class GdxGame extends Game {
                 return new MainGameScreen(this, "forest");
             case MAIN_GAME_TEST:
                 return new MainGameScreen(this, "test");
+            case MAIN_GAME_TUTORIAL:
+                return new MainGameScreen(this, "tutorial");
             case SETTINGS:
                 return new SettingsScreen(this);
             case DEATHSCREEN:
@@ -85,7 +87,7 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TEST, SETTINGS, DEATHSCREEN
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TEST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
     }
 
     /**
