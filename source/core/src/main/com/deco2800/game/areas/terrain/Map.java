@@ -37,8 +37,8 @@ public class Map {
     public String[] TileRefsArray(){
         String[] s = new String[tileRefs.size()];
 
-        for(int i = 1; i <= tileRefs.size(); i++){
-            s[i-1] = tileRefs.get(String.valueOf(i));
+        for (int i = 1; i <= tileRefs.size(); i++) {
+            s[i - 1] = tileRefs.get(String.valueOf(i));
         }
 
         return s;

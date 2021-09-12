@@ -22,6 +22,7 @@ public class MainMenuActions extends Component {
     entity.getEvents().addListener("startForest", this::onStartForest);
     entity.getEvents().addListener("startTest", this::onStartTest);
     entity.getEvents().addListener("exit", this::onExit);
+    entity.getEvents().addListener("settings", this::onSettings);
   }
 
   /**

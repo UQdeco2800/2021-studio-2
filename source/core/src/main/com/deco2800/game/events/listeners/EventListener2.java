@@ -5,6 +5,5 @@ package com.deco2800.game.events.listeners;
  */
 @FunctionalInterface
 public interface EventListener2<T0, T1> extends EventListener {
-  void handle(T0 arg0, T1 arg1);
+    void handle(T0 arg0, T1 arg1);
 }
-

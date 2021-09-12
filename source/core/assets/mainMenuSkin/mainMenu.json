@@ -1,56 +1,52 @@
 {
-com.badlogic.gdx.graphics.g2d.BitmapFont: {
-	pixel: {
-		file: pixel.fnt
-	}
-}
-com.badlogic.gdx.graphics.Color: {
-	RGBA_0_0_0_255: {
-		r: 0
-		g: 0
-		b: 0
-		a: 1
-	}
-	RGBA_129_129_129_255: {
-		r: 0.50666666
-		g: 0.50666666
-		b: 0.50666666
-		a: 1
-	}
-	RGBA_255_255_255_255: {
-		r: 1
-		g: 1
-		b: 1
-		a: 1
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: {
-		up: 5895d2d1cba9841eabab6077 (2)
-	}
-	start: {
-		up: StartButton
-		down: START_Broken
-		over: START_Highlighted
-	}
-	settings: {
-		up: SettingsButton
-		down: SETTINGS_Broken
-		over: SETTINGS_Highlighted
-	}
-	quit: {
-		up: QuitButton
-		down: QUIT_Broken
-		over: QUIT_Highlighted
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: {
-		font: pixel
-		fontColor: RGBA_255_255_255_255
-		downFontColor: RGBA_129_129_129_255
-		overFontColor: RGBA_0_0_0_255
-		up: 5895d2d1cba9841eabab6077 (2)
-	}
-}
+    BitmapFont: {
+        pixel: {
+            file: pixel.fnt
+        }
+    }
+    Color: {
+        RGBA_0_0_0_255: {
+            r: 0
+            g: 0
+            b: 0
+            a: 1
+        }
+        RGBA_129_129_129_255: {
+            r: 0.50666666
+            g: 0.50666666
+            b: 0.50666666
+            a: 1
+        }
+        RGBA_255_255_255_255: {
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+        }
+    }
+    ButtonStyle: {
+        start: {
+            up: StartButton
+            down: START_Broken
+            over: START_Highlighted
+        }
+        settings: {
+            up: SettingsButton
+            down: SETTINGS_Broken
+            over: SETTINGS_Highlighted
+        }
+        quit: {
+            up: QuitButton
+            down: QUIT_Broken
+            over: QUIT_Highlighted
+        }
+    }
+    TextButtonStyle: {
+        default: {
+            font: pixel
+            fontColor: RGBA_255_255_255_255
+            downFontColor: RGBA_129_129_129_255
+            overFontColor: RGBA_0_0_0_255
+        }
+    }
 }

@@ -1,157 +1,246 @@
-package com.deco2800.game.physics;
+package com.deco2800.game.areas.terrain;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Disposable;
-import com.deco2800.game.physics.raycast.AllHitCallback;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.physics.raycast.SingleHitCallback;
-import com.deco2800.game.services.GameTime;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.IsometricTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.GridPoint2;
+import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
+import com.deco2800.game.components.CameraComponent;
+import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.utils.math.RandomUtils;
+import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 
-/**
- * Process game physics using the Box2D library. See the Box2D documentation for examples or use
- * cases.
- */
-public class PhysicsEngine implements Disposable {
-  private static final Logger logger = LoggerFactory.getLogger(PhysicsEngine.class);
-  private static final float MAX_UPDATE_TIME = 0.25f;
-  private static final float PHYSICS_TIMESTEP = 0.016f;
-  private static final Vector2 GRAVITY = new Vector2(0f, -0f);
-  private static final int VELOCITY_ITERATIONS = 6;
-  private static final int POSITION_ITERATIONS = 2;
+/** Factory for creating game terrains. */
+public class TerrainFactory {
+  public static final GridPoint2 MAP_SIZE = new GridPoint2(30, 30);
+  private static final int TUFT_TILE_COUNT = 30;
+  private static final int ROCK_TILE_COUNT = 30;
 
-  private final World world;
-  private final GameTime timeSource;
-  private final SingleHitCallback singleHitCallback = new SingleHitCallback();
-  private final AllHitCallback allHitCallback = new AllHitCallback();
-  private float accumulator;
-  private ArrayList<Body> bodyList = new ArrayList<>();
+  private final OrthographicCamera camera;
+  private final TerrainOrientation orientation;
 
-  public PhysicsEngine() {
-    this(new World(GRAVITY, true), ServiceLocator.getTimeSource());
+  static Logger logger = LoggerFactory.getLogger(FileLoader.class);
+
+  /**
+   * Create a terrain factory with Orthogonal orientation
+   *
+   * @param cameraComponent Camera to render terrains to. Must be ortographic.
+   */
+  public TerrainFactory(CameraComponent cameraComponent) {
+    this(cameraComponent, TerrainOrientation.ORTHOGONAL);
   }
 
-  public PhysicsEngine(World world, GameTime timeSource) {
-    this.world = world;
-    world.setContactListener(new PhysicsContactListener());
-    this.timeSource = timeSource;
+  /**
+   * Create a terrain factory
+   *
+   * @param cameraComponent Camera to render terrains to. Must be orthographic.
+   * @param orientation orientation to render terrain at
+   */
+  public TerrainFactory(CameraComponent cameraComponent, TerrainOrientation orientation) {
+    this.camera = (OrthographicCamera) cameraComponent.getCamera();
+    this.orientation = orientation;
   }
 
-  public void update() {
-    // Updating physics isn't as easy as triggering an update every frame. Each frame could take a
-    // different amount of time to run, but physics simulations are only stable if computed at a
-    // consistent frame rate! See: https://gafferongames.com/post/fix_your_timestep/
-    float deltaTime = timeSource.getDeltaTime();
-    float maxTime = Math.min(deltaTime, MAX_UPDATE_TIME);
-    accumulator += maxTime;
-
-    // Depending on how much time has passed, we may compute 0 or more physics steps in one go. If
-    // we need to catch up, we'll compute multiple in a row before getting to rendering.
-    while (accumulator >= PHYSICS_TIMESTEP) {
-      world.step(PHYSICS_TIMESTEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-      accumulator -= PHYSICS_TIMESTEP;
+  /**
+   * Create a terrain of the given type, using the orientation of the factory. This can be extended
+   * to add additional game terrains.
+   *
+   * @param terrainType Terrain to create
+   * @return Terrain component which renders the terrain
+   */
+  public TerrainComponent createTerrain(TerrainType terrainType) {
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    switch (terrainType){
+      case FOREST_DEMO:
+        TextureRegion orthoGrass =
+            new TextureRegion(resourceService.getAsset("images/grass_1.png", Texture.class));
+        TextureRegion orthoTuft =
+            new TextureRegion(resourceService.getAsset("images/grass_2.png", Texture.class));
+        TextureRegion orthoRocks =
+            new TextureRegion(resourceService.getAsset("images/grass_3.png", Texture.class));
+        return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
+      case FOREST_DEMO_ISO:
+        TextureRegion isoGrass =
+            new TextureRegion(resourceService.getAsset("images/iso_grass_1.png", Texture.class));
+        TextureRegion isoTuft =
+            new TextureRegion(resourceService.getAsset("images/iso_grass_2.png", Texture.class));
+        TextureRegion isoRocks =
+            new TextureRegion(resourceService.getAsset("images/iso_grass_3.png", Texture.class));
+        return createForestDemoTerrain(1f, isoGrass, isoTuft, isoRocks);
+      case FOREST_DEMO_HEX:
+        TextureRegion hexGrass =
+            new TextureRegion(resourceService.getAsset("images/hex_grass_1.png", Texture.class));
+        TextureRegion hexTuft =
+            new TextureRegion(resourceService.getAsset("images/hex_grass_2.png", Texture.class));
+        TextureRegion hexRocks =
+            new TextureRegion(resourceService.getAsset("images/hex_grass_3.png", Texture.class));
+        return createForestDemoTerrain(1f, hexGrass, hexTuft, hexRocks);
+      
+      default:
+        return null;
     }
-    /*
-    for (int i = 0; i < bodyList.size(); i++) {
-      world.destroyBody(bodyList.get(i));
+  }
+
+  /**
+   * A version of createTerrain that takes a map object as an input to render a specific map
+   * @param terrainType
+   * @param map
+   * @return
+   */
+  public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    switch (terrainType){
+      case TEST:
+        String[] tileRefs = map.TileRefsArray();
+        ArrayList<TextureRegion> textures = new ArrayList<>();
+
+        for (String s:tileRefs){
+          textures.add(new TextureRegion(resourceService.getAsset(s,Texture.class)));
+        }
+
+        return createWorldTerrain(0.5f, textures, map.getMapTiles(), map.getDimensions());
+
+      default:
+        return null;
     }
-    bodyList.clear();
-
-     */
   }
 
-  public Body createBody(BodyDef bodyDef) {
-    logger.debug("Creating physics body {}", bodyDef);
-    return world.createBody(bodyDef);
+  private TerrainComponent createForestDemoTerrain(
+      float tileWorldSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
+    GridPoint2 tilePixelSize = new GridPoint2(grass.getRegionWidth(), grass.getRegionHeight());
+    TiledMap tiledMap = createForestDemoTiles(tilePixelSize, grass, grassTuft, rocks);
+    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
+    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
 
-  public void destroyBody(Body body) {
-    logger.debug("Destroying physics body {}", body);
-    world.destroyBody(body);
-    //bodyList.add(body);
+
+  private TiledMapRenderer createRenderer(TiledMap tiledMap, float tileScale) {
+    switch (orientation) {
+      case ORTHOGONAL:
+        return new OrthogonalTiledMapRenderer(tiledMap, tileScale);
+      case ISOMETRIC:
+        return new IsometricTiledMapRenderer(tiledMap, tileScale);
+      case HEXAGONAL:
+        return new HexagonalTiledMapRenderer(tiledMap, tileScale);
+      default:
+        return null;
+    }
   }
 
-  public Joint createJoint(JointDef jointDef) {
-    logger.debug("Creating physics joint {}", jointDef);
-    return world.createJoint(jointDef);
+  private TiledMap createForestDemoTiles(
+      GridPoint2 tileSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
+    TiledMap tiledMap = new TiledMap();
+    TerrainTile grassTile = new TerrainTile(grass);
+    TerrainTile grassTuftTile = new TerrainTile(grassTuft);
+    TerrainTile rockTile = new TerrainTile(rocks);
+    TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
+    // Create base grass
+    fillTiles(layer, MAP_SIZE, grassTile);
+
+    // Add some grass and rocks
+    fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
+    fillTilesAtRandom(layer, MAP_SIZE, rockTile, ROCK_TILE_COUNT);
+
+    tiledMap.getLayers().add(layer);
+    return tiledMap;
   }
 
-  public void destroyJoint(Joint joint) {
-    logger.debug("Destroying physics joint {}", joint);
-    world.destroyJoint(joint);
+  private TerrainComponent createWorldTerrain(
+          float tileWorldSize, ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions) {
+
+    GridPoint2 tilePixelSize = new GridPoint2(textures.get(1).getRegionWidth(), textures.get(1).getRegionHeight());
+
+    TiledMap tiledMap = createTiles(tilePixelSize, textures, map, dimensions);
+
+    TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
+
+    return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
   }
 
-  public World getWorld() {
-    return world;
+  private TiledMap createTiles(
+          GridPoint2 tileSize, ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
+    TiledMap tiledMap = new TiledMap();
+
+    TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get("n_tiles_width"),
+            dimensions.get("n_tiles_height"), tileSize.x, tileSize.y);
+
+    // Create Tiles
+    ArrayList<TerrainTile> tiles = new ArrayList<>();
+    for (TextureRegion t:textures
+         ) {
+      tiles.add(new TerrainTile(t));
+    }
+
+    // Create the map
+    GridPoint2 mapSize = new GridPoint2(dimensions.get("n_tiles_width"), dimensions.get("n_tiles_height"));
+    //fillTiles(layer, mapSize, tiles.get(0));
+
+    placeTiles(layer, mapSize, tiles, map);
+
+    tiledMap.getLayers().add(layer);
+    return tiledMap;
+  }
+
+  private static void placeTiles(
+          TiledMapTileLayer layer, GridPoint2 mapSize, ArrayList<TerrainTile> tiles, int[][] map) {
+    GridPoint2 min = new GridPoint2(0, 0);
+    GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
+
+    for (int y = min.y; y <= max.y; y++) {
+      for (int x = min.y; x <= max.x; x++){
+        Cell cell = new Cell();
+
+        cell.setTile(tiles.get(map[y][x]-1));
+        layer.setCell(x, max.y - y, cell);
+      }
+    }
+  }
+
+  private static void fillTilesAtRandom(
+      TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int amount) {
+    GridPoint2 min = new GridPoint2(0, 0);
+    GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
+
+    for (int i = 0; i < amount; i++) {
+      GridPoint2 tilePos = RandomUtils.random(min, max);
+      Cell cell = layer.getCell(tilePos.x, tilePos.y);
+      cell.setTile(tile);
+    }
+  }
+
+  private static void fillTiles(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile) {
+    for (int x = 0; x < mapSize.x; x++) {
+      for (int y = 0; y < mapSize.y; y++) {
+        Cell cell = new Cell();
+        cell.setTile(tile);
+        layer.setCell(x, y, cell);
+      }
+    }
   }
 
   /**
-   * Cast a ray in a straight line from one point to another, checking for a collision against any
-   * colliders.
-   *
-   * @param from The starting point of the ray.
-   * @param to The end point of the ray.
-   * @param hit The raycast result will be stored in this class
-   * @return true if a collider was hit, false otherwise.
+   * This enum should contain the different terrains in your game, e.g. forest, cave, home, all with
+   * the same oerientation. But for demonstration purposes, the base code has the same level in 3
+   * different orientations.
    */
-  public boolean raycast(Vector2 from, Vector2 to, RaycastHit hit) {
-    return raycast(from, to, PhysicsLayer.ALL, hit);
-  }
-
-  /**
-   * Cast a ray in a straight line from one point to another, checking for a collision against
-   * colliders in the specified layers.
-   *
-   * @param from The starting point of the ray.
-   * @param to The end point of the ray.
-   * @param hit The hit of the closest collider will be stored in this.
-   * @param layerMask The physics layer mask which specifies layers that can be hit. Other layers
-   *     will be ignored.
-   * @return true if a collider was hit, false otherwise.
-   */
-  public boolean raycast(Vector2 from, Vector2 to, short layerMask, RaycastHit hit) {
-    singleHitCallback.didHit = false;
-    singleHitCallback.layerMask = layerMask;
-    singleHitCallback.hit = hit;
-    world.rayCast(singleHitCallback, from, to);
-    return singleHitCallback.didHit;
-  }
-
-  /**
-   * Cast a ray in a straight line from one point to another, checking for all collision against
-   * colliders in the specified layers.
-   *
-   * @param from The starting point of the ray.
-   * @param to The end point of the ray.
-   * @return All hits made by the ray, unordered. Empty if no hits were made.
-   */
-  public RaycastHit[] raycastAll(Vector2 from, Vector2 to) {
-    return raycastAll(from, to, PhysicsLayer.ALL);
-  }
-
-  /**
-   * Cast a ray in a straight line from one point to another, checking for all collision against
-   * colliders in the specified layers.
-   *
-   * @param from The starting point of the ray.
-   * @param to The end point of the ray.
-   * @param layerMask The physics layer mask which specifies layers that can be hit. Other layers
-   *     will be ignored.
-   * @return All hits made by the ray, unordered. Empty if no hits were made.
-   */
-  public RaycastHit[] raycastAll(Vector2 from, Vector2 to, short layerMask) {
-    allHitCallback.layerMask = layerMask;
-    world.rayCast(allHitCallback, from, to);
-    return allHitCallback.getHitsAndClear();
-  }
-
-  @Override
-  public void dispose() {
-    world.dispose();
+  public enum TerrainType {
+    FOREST_DEMO,
+    FOREST_DEMO_ISO,
+    FOREST_DEMO_HEX,
+    TEST
   }
 }

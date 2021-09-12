@@ -1,0 +1,487 @@
+
+menuBackground.png
+size: 8192, 8192
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+menu
+  rotate: false
+  xy: 2, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 16
+menu
+  rotate: false
+  xy: 2, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 29
+menu
+  rotate: false
+  xy: 1924, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 42
+menu
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 55
+menu
+  rotate: false
+  xy: 1924, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 21
+menu
+  rotate: false
+  xy: 3846, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 34
+menu
+  rotate: false
+  xy: 2, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 60
+menu
+  rotate: false
+  xy: 1924, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 47
+menu
+  rotate: false
+  xy: 3846, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 5
+menu
+  rotate: false
+  xy: 5768, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 13
+menu
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 26
+menu
+  rotate: false
+  xy: 1924, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 52
+menu
+  rotate: false
+  xy: 3846, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 39
+menu
+  rotate: false
+  xy: 5768, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 65
+menu
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 31
+menu
+  rotate: false
+  xy: 1924, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 18
+menu
+  rotate: false
+  xy: 3846, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 2
+menu
+  rotate: false
+  xy: 5768, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 44
+menu
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 57
+menu
+  rotate: false
+  xy: 1924, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 10
+menu
+  rotate: false
+  xy: 3846, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 23
+menu
+  rotate: false
+  xy: 5768, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 36
+menu
+  rotate: false
+  xy: 1924, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 62
+menu
+  rotate: false
+  xy: 3846, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 49
+menu
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 7
+menu
+  rotate: false
+  xy: 3846, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 15
+menu
+  rotate: false
+  xy: 5768, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 28
+menu
+  rotate: false
+  xy: 5768, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 41
+
+menuBackground2.png
+size: 8192, 8192
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+menu
+  rotate: false
+  xy: 2, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 54
+menu
+  rotate: false
+  xy: 2, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 67
+menu
+  rotate: false
+  xy: 1924, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 20
+menu
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 33
+menu
+  rotate: false
+  xy: 1924, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 4
+menu
+  rotate: false
+  xy: 3846, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 46
+menu
+  rotate: false
+  xy: 2, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 59
+menu
+  rotate: false
+  xy: 1924, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 12
+menu
+  rotate: false
+  xy: 3846, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 25
+menu
+  rotate: false
+  xy: 5768, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 51
+menu
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 38
+menu
+  rotate: false
+  xy: 1924, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 64
+menu
+  rotate: false
+  xy: 3846, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 9
+menu
+  rotate: false
+  xy: 5768, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 30
+menu
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 17
+menu
+  rotate: false
+  xy: 1924, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 1
+menu
+  rotate: false
+  xy: 3846, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 43
+menu
+  rotate: false
+  xy: 5768, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 56
+menu
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 22
+menu
+  rotate: false
+  xy: 1924, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 35
+menu
+  rotate: false
+  xy: 3846, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 61
+menu
+  rotate: false
+  xy: 5768, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 48
+menu
+  rotate: false
+  xy: 1924, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 6
+menu
+  rotate: false
+  xy: 3846, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 14
+menu
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 27
+menu
+  rotate: false
+  xy: 3846, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 40
+menu
+  rotate: false
+  xy: 5768, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 53
+menu
+  rotate: false
+  xy: 5768, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 66
+
+menuBackground3.png
+size: 8192, 4096
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+menu
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 32
+menu
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 19
+menu
+  rotate: false
+  xy: 1924, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 3
+menu
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 45
+menu
+  rotate: false
+  xy: 1924, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 58
+menu
+  rotate: false
+  xy: 3846, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 11
+menu
+  rotate: false
+  xy: 1924, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 24
+menu
+  rotate: false
+  xy: 3846, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 50
+menu
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 37
+menu
+  rotate: false
+  xy: 3846, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 63
+menu
+  rotate: false
+  xy: 5768, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: 8

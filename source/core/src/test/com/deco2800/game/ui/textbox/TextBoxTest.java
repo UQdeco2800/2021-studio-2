@@ -12,6 +12,7 @@ class TextBoxTest {
     @Test
     void shouldSetOpenClosed() {
         TextBox textBox = new TextBox();
+        textBox.setNewCharactersOff();
 
         textBox.setClosed();
         assertFalse(textBox.isOpen());
@@ -26,6 +27,7 @@ class TextBoxTest {
     @Test
     void shouldToggleIsOpen() {
         TextBox textBox = new TextBox();
+        textBox.setNewCharactersOff();
 
         textBox.setClosed();
 
@@ -36,14 +38,15 @@ class TextBoxTest {
     }
 
     @Test
-    void shouldOpenOnDialogue() {
+    void shouldNotOpenOnDialogue() {
         TextBox textBox = new TextBox();
 
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
 
-        assertTrue(textBox.isOpen());
+        assertFalse(textBox.isOpen());
     }
 
     @Test
@@ -51,9 +54,10 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
 
-        assertEquals("Message 1", textBox.getMessage());
+        assertEquals("", textBox.getMessage());
     }
 
     @Test
@@ -61,10 +65,11 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
 
-        assertEquals("Message 2", textBox.getMessage());
+        assertEquals("Test 1 Message 1", textBox.getMessage());
     }
 
     @Test
@@ -72,11 +77,12 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
         textBox.nextMessage();
         textBox.nextMessage();
 
-        assertEquals("Message 3", textBox.getMessage());
+        assertEquals("Test 1 Message 2", textBox.getMessage());
     }
 
     @Test
@@ -84,22 +90,10 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
 
         assertEquals("", textBox.getSubMessage());
-    }
-
-    @Test
-    void shouldSkipMessageLoading() {
-        TextBox textBox = new TextBox();
-        textBox.setClosed();
-
-        textBox.setDialogue(Dialogue.TEST);
-        textBox.setNewCharactersOff();
-        textBox.setSkip();
-        textBox.setSubMessage();
-
-        assertEquals("Message 1", textBox.getSubMessage());
     }
 
     @Test
@@ -107,11 +101,13 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setOpen();
         textBox.setNewCharactersOff();
+        textBox.nextMessage();
         textBox.setSubMessage();
 
-        assertEquals("M", textBox.getSubMessage());
+        assertEquals("T", textBox.getSubMessage());
     }
 
     @Test
@@ -119,13 +115,15 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setOpen();
         textBox.setNewCharactersOff();
+        textBox.nextMessage();
         textBox.setSubMessage();
         textBox.setSubMessage();
         textBox.setSubMessage();
 
-        assertEquals("Mes", textBox.getSubMessage());
+        assertEquals("Tes", textBox.getSubMessage());
     }
 
     @Test
@@ -133,8 +131,10 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setOpen();
         textBox.setNewCharactersOff();
+        textBox.nextMessage();
         textBox.setSkip();
         textBox.setSkip();
 
@@ -146,12 +146,161 @@ class TextBoxTest {
         TextBox textBox = new TextBox();
         textBox.setClosed();
 
-        textBox.setDialogue(Dialogue.TEST);
+        textBox.setDialogue(Dialogue.TEST_1);
         textBox.setNewCharactersOff();
         textBox.setSkip();
         textBox.setSubMessage();
         textBox.setClosed();
 
         assertFalse(textBox.isOpen());
+    }
+
+    @Test
+    void shouldHandleEscapeTest() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+        textBox.setDialogue(Dialogue.TEST_1);
+        textBox.setNewCharactersOff();
+        textBox.setOpen();
+        textBox.handleEscape();
+
+        assertFalse(textBox.isOpen());
+    }
+
+    @Test
+    void setRandomFirstEncounterDialogueSetTest() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+
+        String message = textBox.getMessage();
+
+        assertEquals(message, Dialogue.TEST_1.getMessage(0));
+    }
+
+    @Test
+    void setRandomBeatenDialogueSetTest() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setRandomBeatenDialogueSet(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+
+        String message = textBox.getMessage();
+
+        assertEquals(message, Dialogue.TEST_1.getMessage(0));
+    }
+
+    @Test
+    void setRandomDefeatedDialogueSetTest2() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setRandomBeatenDialogueSet(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+
+        String message = textBox.getMessage();
+
+        assertTrue(message.equals(Dialogue.TEST_1.getMessage(0)) ||
+                message.equals(Dialogue.TEST_1.getMessage(1)));
+    }
+
+    @Test
+    void setOrderedDialogueSetTest() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+
+        String message = textBox.getMessage();
+
+        assertEquals(message, Dialogue.TEST_1.getMessage(0));
+    }
+
+    @Test
+    void setOrderedDialogueSetTest2() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+
+        String message = textBox.getMessage();
+
+        assertEquals(message, Dialogue.TEST_2.getMessage(0));
+    }
+
+    @Test
+    void setOrderedDialogueSetTest3() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+        textBox.nextMessage();
+
+        String message = textBox.getMessage();
+
+        assertEquals(message, Dialogue.TEST_1.getMessage(1));
+    }
+
+    @Test
+    void setOrderedDialogueSetTest4() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+        textBox.nextMessage();
+        textBox.nextMessage();
+
+        String message = textBox.getMessage();
+
+        assertEquals(message, Dialogue.TEST_2.getMessage(2));
+    }
+
+    @Test
+    void isMainCharacterShowingTest() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+        textBox.nextMessage();
+        textBox.nextMessage();
+
+        assertTrue(textBox.isMainCharacterShowing());
+    }
+
+    @Test
+    void isMainCharacterShowingTest2() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+        textBox.nextMessage();
+
+        assertFalse(textBox.isMainCharacterShowing());
+    }
+
+    @Test
+    void isMainCharacterShowingTest3() {
+        TextBox textBox = new TextBox();
+        textBox.setClosed();
+
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setOrderedDialogue(RandomDialogueSet.TEST);
+        textBox.setNewCharactersOff();
+        textBox.nextMessage();
+        textBox.nextMessage();
+
+        assertFalse(textBox.isMainCharacterShowing());
     }
 }

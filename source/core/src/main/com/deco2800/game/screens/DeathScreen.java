@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Screen containing the death screen UI and functionality components
- *
+ * <p>
  * Note that this screen is not currently in use and the the death screen is simply displayed as an UI component
  */
 public class DeathScreen extends ScreenAdapter {
