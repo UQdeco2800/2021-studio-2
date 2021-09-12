@@ -57,7 +57,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/minionEnemy.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
         animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -92,6 +92,8 @@ public class NPCFactory {
         ghost.addComponent(healthBarComponent);
 
         ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
+        ghost.scaleWidth(1);
+        ghost.scaleHeight(1);
         return ghost;
     }
 
