@@ -109,7 +109,8 @@ public class CutsceneTriggerFactory {
      * @param y y position that player moves in
      * @return entity that will create the trigger within the map
      */
-    public static Entity createMoveDialogueTrigger(RandomDialogueSet dialogueSet, Vector2 direction, int x, int y) {
+    public static Entity createMoveDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type,
+                                                   Vector2 direction, int x, int y) {
         Entity trigger =
                 new Entity()
                         .addComponent(new PhysicsComponent())
@@ -117,7 +118,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
                                 direction, x, y, false))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, DialogueSet.FIRST_ENCOUNTER));
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(ColliderComponent.class).setSensor(true);
