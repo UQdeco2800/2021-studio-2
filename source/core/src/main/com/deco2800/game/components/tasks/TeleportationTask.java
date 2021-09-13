@@ -133,6 +133,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
             Entity entity = new Entity();
             entity.setPosition(position);
+            entity.setScale(owner.getEntity().getScale());
             Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
 
             gameArea.spawnEntityAt(vortex2, position, true, true);
@@ -173,6 +174,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
         Entity entity = new Entity();
         entity.setPosition(owner.getEntity().getPosition());
+        entity.setScale(owner.getEntity().getScale());
 
         Entity vortex = WeaponFactory.createVortex(entity,
                 getDirectionOfTarget(), false);
@@ -183,7 +185,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
-        gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
+        entity2.setScale(owner.getEntity().getScale());
+        gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
         Entity vortex2 = WeaponFactory.createVortex(entity2, getDirectionOfTarget(), false);
 
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
