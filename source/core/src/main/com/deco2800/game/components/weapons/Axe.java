@@ -17,19 +17,12 @@ public class Axe extends MeleeWeapon {
     /** Sound that plays when axe hits enemy */
     private final Sound impactSound;
 
-    /** AOE / Strong attack size */
-    private final Vector2 strongAttackSize;
-    /** Determines whether the axe has used its strong attack */
-    private boolean hasStrongAttacked;
-
     public Axe(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
         attackSound = ServiceLocator.getResourceService().
                 getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
-        strongAttackSize = new Vector2(2f, 2f); // default size
-        hasStrongAttacked = false;
     }
 
     /**
@@ -43,7 +36,6 @@ public class Axe extends MeleeWeapon {
         if (animator == null) {
             return;
         }
-
         switch (attackDirection) {
             case UP:
                 animator.startAnimation("up_attack");
@@ -61,37 +53,14 @@ public class Axe extends MeleeWeapon {
     }
 
     /**
-     * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
-     * connect with any enemies immediately around the entity.
-     */
-    public void strongAttack() {
-        if (timeAtAttack != 0 || hasStrongAttacked) {
-            return;
-        }
-        hasStrongAttacked = true;
-        super.attack(MeleeWeapon.CENTER);
-        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
-        if (animator == null) {
-            return;
-        }
-        animator.startAnimation("aoe_attack");
-    }
-
-    /**
      * Implements functionality for strong attacks, also plays attack sound
      * during attack frame (for both light and strong).
      * @see MeleeWeapon
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
-            if (hasStrongAttacked) {
-                attackSound.play();
-                weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
-                hasStrongAttacked = false;
-                hasAttacked = false; // strong attack overrides light attack.
-
-            } else if (hasAttacked) {
+        if (timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
+            if (hasAttacked) {
                 attackSound.play();
             }
         }
