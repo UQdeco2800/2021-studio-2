@@ -10,7 +10,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
-import com.deco2800.game.entities.configs.TrackingArrowConfig;
 import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.files.FileLoader;
@@ -49,7 +48,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private boolean poweringUp = false;
     private LineEntity aimingLine = null;
 
-    public boolean initshoot=false;
+    public boolean initshoot = false;
 
 
     /**
@@ -153,23 +152,21 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         checkFireBalls();
     }
 
-    public void shootanimation(){
+    public void shootanimation() {
         float targetdir;
-        targetdir=getDirectionOfTarget();
+        targetdir = getDirectionOfTarget();
 
-        if (targetdir>0&& targetdir<90){ //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+        if (targetdir > 0 && targetdir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
             owner.getEntity().getEvents().trigger("Left_Shoot");
-        }
-        else if (targetdir>90&& targetdir<180){
+        } else if (targetdir > 90 && targetdir < 180) {
             owner.getEntity().getEvents().trigger("Down_Shoot");
-        }
-        else if (targetdir>180&& targetdir<270) {
+        } else if (targetdir > 180 && targetdir < 270) {
             owner.getEntity().getEvents().trigger("Right_Shoot");
-        }
-        else if (targetdir>270&& targetdir<360){
+        } else if (targetdir > 270 && targetdir < 360) {
             owner.getEntity().getEvents().trigger("Up_Shoot");
         }
-        }
+    }
+
     /**
      * Spawns in an arrow according to the classes variables
      */
@@ -179,7 +176,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         }
         Random rand = new SecureRandom();
 
-       shootanimation();
+        shootanimation();
 
         switch (projectileType) {
             case "normalArrow": {
@@ -321,7 +318,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (checkFireBalls()) {
                     //TrackingArrowConfig config = new TrackingArrowConfig();
                     Entity fireBall = getNextFireBall();
-                     if (fireBall != null);
+                    if (fireBall != null) ;
                     {
                         //Change behaviour
                         fireBall.setAngle(getDirectionOfTarget());

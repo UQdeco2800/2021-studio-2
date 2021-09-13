@@ -75,34 +75,33 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         this.maxSpeed = maxSpeed;
     }
 
-    public void DirectionAnimation (){
+    public void DirectionAnimation() {
         // ranged ghosts have ID of 20 and 21 - they change animation based on arrow shooting angle
         // ideally wouldn't use ID
         // will need to figure out later how to specify entities are not ranged ghosts using a label of some kind
         //System.out.println("entity ID: "+this.getEntity().getId());
         //if (this.getEntity().getId()!=20 && this.getEntity().getId()!=21) {
-            if (this.getDirection().x > this.getDirection().y) {
-                if (this.getDirection().x < 0) {
-                    this.getEntity().getEvents().trigger("LeftStart");
-                }
-                 else {
-                    this.getEntity().getEvents().trigger("RightStart");
-                }
+        if (this.getDirection().x > this.getDirection().y) {
+            if (this.getDirection().x < 0) {
+                this.getEntity().getEvents().trigger("LeftStart");
+            } else {
+                this.getEntity().getEvents().trigger("RightStart");
             }
-            else{
-                if (this.getDirection().y < 0) {
-                    this.getEntity().getEvents().trigger("DownStart");
-                } else {
-                    this.getEntity().getEvents().trigger("UpStart");
-                }
+        } else {
+            if (this.getDirection().y < 0) {
+                this.getEntity().getEvents().trigger("DownStart");
+            } else {
+                this.getEntity().getEvents().trigger("UpStart");
             }
+        }
         //}
     }
+
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);
         setToVelocity(body, desiredVelocity);
         DirectionAnimation();
-        }
+    }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {
         // impulse force = (desired velocity - current velocity) * mass

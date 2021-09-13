@@ -35,7 +35,7 @@ public class AITaskComponent extends Component implements TaskRunner {
         logger.debug("{} Adding task {}", this, task);
         priorityTasks.add(task);
         task.create(this);
-        if(task.getClass().equals(DeathPauseTask.class)) {
+        if (task.getClass().equals(DeathPauseTask.class)) {
             indexOfDeathTask = priorityTasks.indexOf(task);
         }
 

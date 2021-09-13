@@ -33,12 +33,13 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("Down_Shoot", this::animateDownShoot);
         entity.getEvents().addListener("Up_Shoot", this::animateUpShoot);
     }
+
     public void setDeath() {
         death = true;
     }
 
     public void animateLeft() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("moveLeft");
         } else {
             animator.startAnimation("leftDeath");
@@ -46,7 +47,7 @@ public class ElfAnimationController extends Component {
     }
 
     public void animateRight() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("moveRight");
         } else {
             animator.startAnimation("rightDeath");
@@ -54,7 +55,7 @@ public class ElfAnimationController extends Component {
     }
 
     public void animateUp() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("moveDown");
         } else {
             animator.startAnimation("frontDeath");
@@ -62,12 +63,13 @@ public class ElfAnimationController extends Component {
     }
 
     public void animateDown() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("moveDown");
         } else {
             animator.startAnimation("frontDeath");
         }
     }
+
     public void animateLeftShoot() {
         animator.startAnimation("Left_Shoot");
     }

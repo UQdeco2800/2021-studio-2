@@ -68,9 +68,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
 
 //        animator.addAnimation("Left_Shoot", 0.1f, Animation.PlayMode.NORMAL);
 //        animator.addAnimation("Right_Shoot", 0.1f, Animation.PlayMode.NORMAL);
@@ -85,7 +85,7 @@ public class NPCFactory {
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
-                                target, 0,100,100,1.5f));
+                                target, 0, 100, 100, 1.5f));
 
         elf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -170,7 +170,7 @@ public class NPCFactory {
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 10, 3f, 4f))
                 .addTask(new DeathPauseTask(
-                        target, 0,100,100,1.5f));
+                        target, 0, 100, 100, 1.5f));
         elfKing.addComponent(aiTaskComponent);
 
         AnimationRenderComponent animator =
@@ -180,9 +180,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
 
 
         elfKing
@@ -219,7 +219,7 @@ public class NPCFactory {
                                 target, 3f, 4f, anchor, anchorSize))
                         .addTask(new AnchoredRetreatTask(anchor, anchorSize))
                         .addTask(new DeathPauseTask(
-                                target, 0,100,100,1.5f));
+                                target, 0, 100, 100, 1.5f));
         anchoredElf.addComponent(aiComponent);
 
         AnimationRenderComponent animator =
@@ -229,9 +229,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
 
 
         anchoredElf
@@ -274,7 +274,7 @@ public class NPCFactory {
                                 4f, anchor, anchorSizeX, anchorSizeY))
                         .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY))
                         .addTask(new DeathPauseTask(
-                                target, 0,100,100,1.5f));
+                                target, 0, 100, 100, 1.5f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -283,9 +283,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -369,7 +369,7 @@ public class NPCFactory {
                         .addTask(new RangedChaseTask(
                                 target, 10, 15f, 20f))
                         .addTask(new DeathPauseTask(
-                                target, 0,100,100,1.5f));
+                                target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType(type);
         shootProjectileTask.setMultishotChance(multishotChance);
@@ -429,7 +429,7 @@ public class NPCFactory {
                         .addTask(new SpawnMinionsTask(target))
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
-                                target, 0,100,100,1.5f));
+                                target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
@@ -467,7 +467,7 @@ public class NPCFactory {
         return boss;
     }
 
-//    /**
+    //    /**
 //     * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
 //     *
 //     * @return entity

@@ -33,7 +33,7 @@ public class GhostAnimationController extends Component {
     }
 
     public void animateLeft() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("floatLeft");
         } else {
 
@@ -42,7 +42,7 @@ public class GhostAnimationController extends Component {
     }
 
     public void animateRight() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("floatRight");
         } else {
             animator.startAnimation("rightDeath");
@@ -50,7 +50,7 @@ public class GhostAnimationController extends Component {
     }
 
     public void animateUp() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("floatUp");
         } else {
             animator.startAnimation("frontDeath");
@@ -58,7 +58,7 @@ public class GhostAnimationController extends Component {
     }
 
     public void animateDown() {
-        if(!death) {
+        if (!death) {
             animator.startAnimation("floatDown");
         } else {
             animator.startAnimation("frontDeath");
