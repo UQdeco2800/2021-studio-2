@@ -227,9 +227,9 @@ public class ForestGameArea extends GameArea {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
             elf.setEntityType("assassin");
+            elf.getEvents().trigger("assassinLeft");
             spawnEntityAt(elf, randomPos, true, true);
             incNum();
-            elf.getEvents().trigger("assassinLeft");
         }
     }
 
