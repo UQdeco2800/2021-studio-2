@@ -9,6 +9,7 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  */
 public class GhostAnimationController extends Component {
     AnimationRenderComponent animator;
+    private boolean death;
 
     /**
      * Create the animation
@@ -19,6 +20,7 @@ public class GhostAnimationController extends Component {
     public void create() {
         super.create();
         animator = this.entity.getComponent(AnimationRenderComponent.class);
+        death = false;
 
         entity.getEvents().addListener("LeftStart", this::animateLeft);
         entity.getEvents().addListener("RightStart", this::animateRight);
@@ -26,19 +28,40 @@ public class GhostAnimationController extends Component {
         entity.getEvents().addListener("DownStart", this::animateDown);
     }
 
+    public void setDeath() {
+        death = true;
+    }
+
     public void animateLeft() {
-        animator.startAnimation("floatLeft");
+        if (!death) {
+            animator.startAnimation("floatLeft");
+        } else {
+
+            animator.startAnimation("leftDeath");
+        }
     }
 
     public void animateRight() {
-        animator.startAnimation("floatRight");
+        if (!death) {
+            animator.startAnimation("floatRight");
+        } else {
+            animator.startAnimation("rightDeath");
+        }
     }
 
     public void animateUp() {
-        animator.startAnimation("floatUp");
+        if (!death) {
+            animator.startAnimation("floatUp");
+        } else {
+            animator.startAnimation("frontDeath");
+        }
     }
 
     public void animateDown() {
-        animator.startAnimation("floatDown");
+        if (!death) {
+            animator.startAnimation("floatDown");
+        } else {
+            animator.startAnimation("frontDeath");
+        }
     }
 }

@@ -128,7 +128,7 @@ public class ObstacleFactory {
                 // or an obstacle based anchor (cant see through)
                 //.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                 //Uncomment below to render in game
-                .addComponent(new TextureRenderComponent("images/ghost_crown.png"));
+                .addComponent(new TextureRenderComponent("images/crown.png"));
         //Stop from moving
         anchor.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         return anchor;

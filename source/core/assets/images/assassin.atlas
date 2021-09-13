@@ -1,0 +1,153 @@
+
+assassin.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+moveUp
+  rotate: false
+  xy: 2, 109
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 4
+moveUp
+  rotate: false
+  xy: 2, 2
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 5
+moveUp
+  rotate: false
+  xy: 150, 109
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+moveUp
+  rotate: false
+  xy: 150, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 2
+moveUp
+  rotate: false
+  xy: 223, 109
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 3
+moveDown
+  rotate: false
+  xy: 76, 109
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 4
+moveDown
+  rotate: false
+  xy: 76, 2
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 5
+moveDown
+  rotate: false
+  xy: 223, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+moveDown
+  rotate: false
+  xy: 296, 109
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 2
+moveDown
+  rotate: false
+  xy: 296, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 3
+moveLeft
+  rotate: false
+  xy: 369, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+moveLeft
+  rotate: false
+  xy: 427, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 2
+moveLeft
+  rotate: false
+  xy: 485, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 3
+moveLeft
+  rotate: false
+  xy: 543, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 4
+moveLeft
+  rotate: false
+  xy: 775, 106
+  size: 54, 108
+  orig: 54, 108
+  offset: 0, 0
+  index: 5
+moveRight
+  rotate: false
+  xy: 659, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 3
+moveRight
+  rotate: false
+  xy: 717, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 4
+moveRight
+  rotate: false
+  xy: 831, 106
+  size: 54, 108
+  orig: 54, 108
+  offset: 0, 0
+  index: 5
+moveRight
+  rotate: false
+  xy: 601, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 601, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+default
+  rotate: false
+  xy: 223, 2
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1

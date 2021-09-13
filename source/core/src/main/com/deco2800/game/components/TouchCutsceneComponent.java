@@ -8,9 +8,6 @@ import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
  *

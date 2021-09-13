@@ -4,18 +4,22 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.deco2800.game.entities.factories.NPCFactory;
+
 
 /**
  * Movement controller for a physics-based entity.
  */
 public class PhysicsMovementComponent extends Component implements MovementController {
     private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
-
+    public NPCFactory npcFactory;
     public PhysicsComponent physicsComponent;
-
     private Vector2 targetPosition;
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
@@ -70,30 +74,35 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     public void setTarget(Vector2 target) {
         logger.trace("Setting target to {}", target);
         this.targetPosition = target;
+        if (this.targetPosition.x<1){
+            //System.out.println("x target position <1");
+        }
     }
 
     public void setMaxSpeed(Vector2 maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
 
-    private void updateDirection(Body body) {
-        Vector2 desiredVelocity = getDirection().scl(maxSpeed);
-        setToVelocity(body, desiredVelocity);
-
-        //if enemy is moving more on the x-axis than it is on the y, change direction using x-axis (left/right)
+    public void DirectionAnimation (){
         if (this.getDirection().x > this.getDirection().y) {
             if (this.getDirection().x < 0) {
                 this.getEntity().getEvents().trigger("LeftStart");
-            } else if (this.getDirection().x > 0) {
+            } else {
                 this.getEntity().getEvents().trigger("RightStart");
             }
         } else {
             if (this.getDirection().y < 0) {
                 this.getEntity().getEvents().trigger("DownStart");
-            } else if (this.getDirection().y > 0) {
+            } else {
                 this.getEntity().getEvents().trigger("UpStart");
             }
         }
+    }
+
+    private void updateDirection(Body body) {
+        Vector2 desiredVelocity = getDirection().scl(maxSpeed);
+        setToVelocity(body, desiredVelocity);
+        DirectionAnimation();
     }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {

@@ -10,9 +10,9 @@ import com.deco2800.game.entities.Entity;
 public class ZigChaseTask extends ChaseTask implements PriorityTask {
 
     private final float maxChaseDistance;
-    private final float speedMultiplier;
     private long start = System.currentTimeMillis();
     private boolean zigLeft = false;
+    private float speedMultiplier;
 
     /**
      * Initialise zig zag chase task - advance movement task
@@ -35,18 +35,21 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (((System.currentTimeMillis() - start) / 1000.0) > 0.5
-                || getDistanceToTarget() < (maxChaseDistance * (2 / 10f))) {
-            if (getDistanceToTarget() < (maxChaseDistance * (2 / 10f))) {
-                movementTask.setTarget(target.getCenterPosition());
-                movementTask.setMoveSpeed(new Vector2(speedMultiplier, 1 * speedMultiplier));
+        if (((System.currentTimeMillis() - start) / 1000f) > 0.5f
+                || getDistanceToTarget() < maxChaseDistance * 3 / 10f) {
+            if (getDistanceToTarget() < maxChaseDistance * 3 / 10f) {
+                movementTask.setTarget(target.getPosition());
+                float speed = 1 * speedMultiplier;
+                movementTask.setMoveSpeed(new Vector2(speed, speed));
             } else {
-                movementTask.setMoveSpeed(new Vector2(2f * speedMultiplier, 2f * speedMultiplier));
+                float speed = 1.5f * speedMultiplier;
+                movementTask.setMoveSpeed(new Vector2(speed, speed));
+                float angle = 45*(getDistanceToTarget()/maxChaseDistance);
                 if (zigLeft) {
-                    movementTask.setTarget(zigLeftRight(-1, 45f * (getDistanceToTarget() / maxChaseDistance)));
+                    movementTask.setTarget(zigLeftRight(-1, angle));
                     zigLeft = false;
                 } else {
-                    movementTask.setTarget(zigLeftRight(1, 45f * (getDistanceToTarget() / maxChaseDistance)));
+                    movementTask.setTarget(zigLeftRight(1 ,angle));
                     zigLeft = true;
                 }
             }

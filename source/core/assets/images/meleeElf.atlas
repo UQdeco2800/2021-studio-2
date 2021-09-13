@@ -1,0 +1,186 @@
+
+meleeElf.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+moveUp
+  rotate: false
+  xy: 2, 2
+  size: 53, 105
+  orig: 53, 105
+  offset: 0, 0
+  index: 4
+moveUp
+  rotate: false
+  xy: 112, 2
+  size: 52, 105
+  orig: 52, 105
+  offset: 0, 0
+  index: 3
+moveUp
+  rotate: false
+  xy: 218, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 1
+moveUp
+  rotate: false
+  xy: 269, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 2
+moveDown
+  rotate: false
+  xy: 57, 2
+  size: 53, 105
+  orig: 53, 105
+  offset: 0, 0
+  index: 4
+moveDown
+  rotate: false
+  xy: 166, 2
+  size: 50, 105
+  orig: 50, 105
+  offset: 0, 0
+  index: 3
+moveDown
+  rotate: false
+  xy: 320, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 1
+moveDown
+  rotate: false
+  xy: 371, 2
+  size: 48, 105
+  orig: 48, 105
+  offset: 0, 0
+  index: 2
+moveLeft
+  rotate: false
+  xy: 421, 5
+  size: 46, 102
+  orig: 46, 102
+  offset: 0, 0
+  index: 4
+moveLeft
+  rotate: false
+  xy: 517, 5
+  size: 42, 102
+  orig: 42, 102
+  offset: 0, 0
+  index: 3
+moveLeft
+  rotate: false
+  xy: 605, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 1
+moveLeft
+  rotate: false
+  xy: 645, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 2
+moveRight
+  rotate: false
+  xy: 469, 5
+  size: 46, 102
+  orig: 46, 102
+  offset: 0, 0
+  index: 4
+moveRight
+  rotate: false
+  xy: 561, 5
+  size: 42, 102
+  orig: 42, 102
+  offset: 0, 0
+  index: 3
+moveRight
+  rotate: false
+  xy: 685, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 1
+moveRight
+  rotate: false
+  xy: 725, 5
+  size: 38, 102
+  orig: 38, 102
+  offset: 0, 0
+  index: 2
+default
+  rotate: false
+  xy: 320, 2
+  size: 49, 105
+  orig: 49, 105
+  offset: 0, 0
+  index: 1
+  
+   
+front_death.png
+size: 128, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frontDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+left_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leftDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+right_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rightDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
