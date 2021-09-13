@@ -1,6 +1,7 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -64,25 +65,7 @@ public class ObstacleFactory {
     return obstacle;
   }
 
-  /**
-   * Creates a trap with collision.
-   * @return trap
-   */
-  public static Entity createPhysicalTrap() {
-    Entity trap = new Entity()
-            .addComponent(new TextureRenderComponent("images/trap.png"))
-            .addComponent(new PhysicsComponent())
-            .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new CombatStatsComponent(1000000, 10))
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-            .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 4));
 
-    trap.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
-    trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-    trap.getComponent(TextureRenderComponent.class).scaleEntity();
-    trap.scaleHeight(0.3f);
-    return trap;
-  }
 
   /**
    * Creates a trap with collision resizable.

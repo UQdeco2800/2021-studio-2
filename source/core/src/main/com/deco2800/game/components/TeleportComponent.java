@@ -19,10 +19,7 @@ public class TeleportComponent extends TouchComponent{
     private long start = 0;
     private Entity player;
 
-    /**
-     * Create a component which attacks entities on collision, without knockback.
-     * @param targetLayer The physics layer of the target's collider.
-     */
+
     public TeleportComponent(short targetLayer, Entity player) {
         super(targetLayer);
         this.player = player;
@@ -43,11 +40,6 @@ public class TeleportComponent extends TouchComponent{
     protected void onCollisionStart(Fixture me, Fixture other) {
         if (hitboxComponent.getFixture() != me) {
             //do nothing
-            return;
-        }
-
-        if (!PhysicsLayer.contains(targetLayer, other.getFilterData().categoryBits)) {
-            // Doesn't match our target layer, ignore
             return;
         }
 

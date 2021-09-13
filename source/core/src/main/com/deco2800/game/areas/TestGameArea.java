@@ -4,12 +4,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
+import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
@@ -19,6 +21,7 @@ import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
+import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,10 +106,8 @@ public class TestGameArea extends GameArea {
     spawnPlayer();
     
     spawnGhosts();
-    spawnCutsceneTrigger();
-    spawnGhostKing();
-    spawnRangedGhosts();
-    spawnGhostKing(); //use this later to make evil assassins with different sprites
+    //spawnCutsceneTrigger();
+
     spawnAnchoredGhosts();
     spawnObstacles();
 
@@ -130,39 +131,17 @@ public class TestGameArea extends GameArea {
    * Spawn anchored ghost, ghost only move at the certain anchored
    */
   private void spawnAnchoredGhosts() {
-    GridPoint2 minPos = new GridPoint2(0, 0);
-    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+      GridPoint2 minPos = new GridPoint2(0, 0);
+      GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-    for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
-      GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-      GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3,3), basePos.cpy().add(3,3));
-      Entity anchor = ObstacleFactory.createAnchor();
-      Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
-      spawnEntityAt(anchor, basePos, true, true);
-      spawnEntityAt(AnchoredGhost, ghostPos, true, true);
-    }
-
-    /**
-     * Create the game area, including terrain, static entities (trees), dynamic entities (player)
-     */
-    @Override
-    public void create() {
-        Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
-        tileTextures = m.TileRefsArray();
-
-        super.create();
-        loadAssets();
-        displayUI();
-
-        spawnTerrain();
-        spawnPlayer();
-        spawnCutsceneTrigger();
-
-        playMusic();
-        setDialogue();
-    }
-    
-
+      for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
+          GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
+          GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+          Entity anchor = ObstacleFactory.createAnchor();
+          Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+          spawnEntityAt(anchor, basePos, true, true);
+          spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+      }
   }
 
   private void spawnTerrain() {
@@ -238,7 +217,7 @@ public class TestGameArea extends GameArea {
   }
 
   private void spawnPlayer() {
-    Entity newPlayer = PlayerFactory.createPlayer(game);
+    Entity newPlayer = PlayerFactory.createPlayer();
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
     //player.setPosition(new Vector2(15, 8)); TESTING FOR TELEPORT
@@ -305,22 +284,17 @@ public class TestGameArea extends GameArea {
 
 
   private void spawnGhosts() {
-    GridPoint2 minPos = new GridPoint2(0, 0);
-    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+      GridPoint2 minPos = new GridPoint2(0, 0);
+      GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-    for (int i = 0; i < NUM_GHOSTS; i++) {
-      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = NPCFactory.createGhost(player);
-      spawnEntityAt(ghost, randomPos, true, true);
-   }
+      for (int i = 0; i < NUM_GHOSTS; i++) {
+          GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+          Entity ghost = NPCFactory.createGhost(player);
+          spawnEntityAt(ghost, randomPos, true, true);
+      }
+  }
 
-
-    private void displayUI() {
-        Entity ui = new Entity();
-        ui.addComponent(new GameAreaDisplay("Map Test"));
-        spawnEntity(ui);
-    }
-
+    /*
     private void spawnCutsceneTrigger() {
         Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
                 DialogueSet.ORDERED);
@@ -330,11 +304,11 @@ public class TestGameArea extends GameArea {
                 DialogueSet.BOSS_DEFEATED_BEFORE);
         spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
 
-        /*Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
+        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
         spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
 
         Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true); */
+        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
 
         Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
         spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
@@ -348,12 +322,8 @@ public class TestGameArea extends GameArea {
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
         spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
     }
-      
-    private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer();
-        spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
-        player = newPlayer;
-    }
+    */
+
 
     private void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
@@ -406,24 +376,5 @@ public class TestGameArea extends GameArea {
         this.unloadAssets();
     }
 
-  }
-
-  private void unloadAssets() {
-    logger.debug("Unloading assets");
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.unloadAssets(forestTextures);
-    resourceService.unloadAssets(tileTextures);
-    resourceService.unloadAssets(forestTextureAtlases);
-    resourceService.unloadAssets(forestSounds);
-    resourceService.unloadAssets(forestMusic);
-    resourceService.unloadAssets(arrowSounds);
-  }
-
-  @Override
-  public void dispose() {
-    super.dispose();
-    ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
-    this.unloadAssets();
-  }
 
 }
