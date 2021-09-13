@@ -1,8 +1,10 @@
 package com.deco2800.game.components.death;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
@@ -23,10 +25,7 @@ public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
     protected List<Entity> areaEntities;
     private final String[] deathScreenTextures = new String[]{
-            "lowHealthImages/testDeath1.png",
             "lowHealthImages/youdied.png",
-            "lowHealthImages/testDeath1.png",
-            "images/main_menu_background.png",
             "images/player.png"
     };
 
@@ -48,13 +47,15 @@ public class DeathDisplay extends MainMenuDisplay {
     @Override
     protected void addActors() {
         super.addActors();
-        TextButton restartForestBtn = new TextButton("Restart Forest", skin);
-        TextButton restartTestBtn = new TextButton("Restart Test", skin);
-        TextButton exitBtn = new TextButton("Exit", skin);
-        Image background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
-                Texture.class));
-        background.setScaling(Scaling.stretch);
-        stack.add(background);
+        Image title = new Image(ServiceLocator.getResourceService().getAsset(
+                "lowHealthImages/youdied.png", Texture.class));
+
+        Skin menuButtons = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json"));
+
+        TextButton restartForestBtn = new TextButton("Restart Forest", menuButtons);
+        TextButton restartTestBtn = new TextButton("Restart Test", menuButtons);
+        TextButton exitBtn = new TextButton("Exit", menuButtons);
+
 
         // Triggers an event when the button is pressed
         restartForestBtn.addListener(
@@ -85,17 +86,17 @@ public class DeathDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("exit");
                     }
                 });
-        Image dead = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/youdied.png",
-                Texture.class));
+
+
         table.clear();
-        table.add(dead);
+        table.add(title).padTop(-250f);
         table.row();
-        table.add(restartForestBtn).padTop(30f);
+        table.add(restartForestBtn);
         table.row();
         table.add(restartTestBtn).padTop(30f);
         table.row();
         table.add(exitBtn).padTop(30f);
-        table.row();
+
     }
 
     private void loadAssets() {

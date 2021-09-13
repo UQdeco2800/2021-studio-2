@@ -89,11 +89,11 @@ public class ObstacleFactory {
      */
     public static Entity createHealthCrate() {
         AnimationRenderComponent crateAnimator = new AnimationRenderComponent(
-                ServiceLocator.getResourceService().getAsset("crate/crateHitBreakV2.atlas",
+                ServiceLocator.getResourceService().getAsset("crate/crateHitBreak.atlas",
                         TextureAtlas.class));
 
-        crateAnimator.addAnimation("barrelHit", 0.05f); //default playback NORMAL
-        crateAnimator.addAnimation("barrelDeath", 0.01f); //break contains the transform animation
+        crateAnimator.addAnimation("barrelHit", 0.06f); //default playback NORMAL
+        crateAnimator.addAnimation("barrelDeath", 0.04f); //break contains the transform animation
         crateAnimator.addAnimation("default", 1f);
         crateAnimator.startAnimation("default");
 
