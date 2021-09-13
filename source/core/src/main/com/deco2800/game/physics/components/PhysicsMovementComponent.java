@@ -79,8 +79,8 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         // ranged ghosts have ID of 20 and 21 - they change animation based on arrow shooting angle
         // ideally wouldn't use ID
         // will need to figure out later how to specify entities are not ranged ghosts using a label of some kind
-
-        if (this.getEntity().getId()!=20 && this.getEntity().getId()!=21) {
+        //System.out.println("entity ID: "+this.getEntity().getId());
+        //if (this.getEntity().getId()!=20 && this.getEntity().getId()!=21) {
             if (this.getDirection().x > this.getDirection().y) {
                 if (this.getDirection().x < 0) {
                     this.getEntity().getEvents().trigger("LeftStart");
@@ -96,7 +96,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                     this.getEntity().getEvents().trigger("UpStart");
                 }
             }
-        }
+        //}
     }
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);

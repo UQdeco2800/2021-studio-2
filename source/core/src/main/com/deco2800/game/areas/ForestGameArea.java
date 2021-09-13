@@ -111,7 +111,6 @@ public class ForestGameArea extends GameArea {
         spawnAssassinElf();
         spawnAnchoredElf();
         spawnBoss();
-
         playMusic();
         setDialogue();
     }
