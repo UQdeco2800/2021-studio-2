@@ -103,8 +103,11 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             owner.getEntity().data.put("createFireBall", true);
+            Vector2 posBefore = owner.getEntity().getPosition();
             teleport(new Vector2(2f, 2f));
-            count++;
+            if (owner.getEntity().getPosition().dst(posBefore) != 0) {
+                count++;
+            }
         }
         if (canTeleport()) {
             health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
@@ -126,15 +129,40 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      * @param position position to teleport to
      */
     public void teleport(Vector2 position) {
+        if (lastFired == 0) {
+            lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+//            Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
+//                    getDirectionOfTarget(), false);
+//            //System.out.println("owner position " + owner.getEntity().getCenterPosition());
+//            gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
+
+            Entity entity = new Entity();
+            entity.setPosition(position);
+            Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
+
+            gameArea.spawnEntityAt(vortex2, position, true, true);
+        }
+
+        /*
         Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
                 getDirectionOfTarget(), false);
         //System.out.println("owner position " + owner.getEntity().getCenterPosition());
         gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(owner.getEntity(), getDirectionOfTarget(), false);
+
+
+
+        Entity entity = new Entity();
+        entity.setPosition(position);
+        Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
 
         gameArea.spawnEntityAt(vortex2, position, true, true);
-        owner.getEntity().setPosition(position);
 
+         */
+
+        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 1000) {
+            owner.getEntity().setPosition(position);
+        }
+        //owner.getEntity().setPosition(position);
     }
 
     /**
@@ -157,11 +185,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
         Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
 
-
-
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
-
-
     }
 
     /**

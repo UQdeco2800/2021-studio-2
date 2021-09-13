@@ -45,6 +45,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {
+                ServiceLocator.getGameAreaService().decNum();
                 owner.getEntity().prepareDispose();
                 status = Status.FINISHED;
             }

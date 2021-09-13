@@ -59,9 +59,6 @@ public class CombatStatsComponent extends Component {
             this.health = health;
         } else {
             this.health = 0;
-            if (getEntity() != null) {
-                ServiceLocator.getGameAreaService().decNum();
-            }
         }
         if (entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
