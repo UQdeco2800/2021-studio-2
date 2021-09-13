@@ -146,6 +146,7 @@ public class WeaponFactory {
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         fireBall.setScale(scale);
         shootingSound("fireBall");
+        //fireBall.getEvents().trigger("idleFireball"); //uncomment this line Haopeng
         return fireBall;
     }
 
@@ -186,13 +187,13 @@ public class WeaponFactory {
      * @param reverseSpawn downscale the entity
      * @return entity vortex
      */
-    public static Entity createVortex(float angle, boolean reverseSpawn) {
+    public static Entity createVortex(Entity ownerRunner, float angle, boolean reverseSpawn) {
         // if the player touch the vortex - will receive the damage (instant death)
         Entity vortex = new Entity();
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/vortex.png", Texture.class));
         Vector2 scale = new Vector2(sprite.getWidth() / 30f, sprite.getHeight() / 30f);
-        VortexSpawnTask vortexSpawn = new VortexSpawnTask(scale, 2f);
+        VortexSpawnTask vortexSpawn = new VortexSpawnTask(ownerRunner, scale, 2f);
         if (reverseSpawn) {
             vortexSpawn.flipReverse();
         }
@@ -201,10 +202,9 @@ public class WeaponFactory {
         vortex
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
-                //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PROJECTILEWEAPON))
                 .addComponent(new CombatStatsComponent(1000, 0))
-                .addComponent(aiTaskComponent)
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0f));
+                .addComponent(aiTaskComponent);
         //vortex.setScale(scale);
         vortex.setAngle(angle);
         return vortex;

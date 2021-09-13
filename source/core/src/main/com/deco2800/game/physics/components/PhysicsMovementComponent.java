@@ -102,12 +102,12 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                         }
                     }}
             }
-          // }
+
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);
         setToVelocity(body, desiredVelocity);
         DirectionAnimation();
-        }
+    }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {
         // impulse force = (desired velocity - current velocity) * mass

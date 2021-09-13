@@ -2,6 +2,7 @@ package com.deco2800.game.components.npc;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.rendering.TextureRenderComponent;
 
 /**
  * This class listens to events relevant to an entity's state and plays the animation when one
@@ -9,6 +10,7 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  */
 public class ElfAnimationController extends Component {
     AnimationRenderComponent animator;
+    private boolean death;
 
     /**
      * Create the animation
@@ -18,6 +20,7 @@ public class ElfAnimationController extends Component {
     @Override
     public void create() {
         super.create();
+        death = false;
         animator = this.entity.getComponent(AnimationRenderComponent.class);
 
         entity.getEvents().addListener("LeftStart", this::animateLeft);
@@ -36,20 +39,47 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("assassinDownShoot", this::animateAssassinDown);
    }
 
+    public void setDeath() {
+        death = true;
+    }
+
     public void animateLeft() {
-        animator.startAnimation("moveLeft");
+        if (!death) {
+            animator.startAnimation("moveLeft");
+        } else {
+            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+
+            animator.startAnimation("leftDeath");
+        }
     }
 
     public void animateRight() {
-        animator.startAnimation("moveRight");
+        if (!death) {
+            animator.startAnimation("moveRight");
+        } else {
+            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+            animator.startAnimation("rightDeath");
+        }
     }
 
     public void animateUp() {
-        animator.startAnimation("moveUp");
+        if (!death) {
+            animator.startAnimation("moveDown");
+        } else {
+            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+
+            animator.startAnimation("frontDeath");
+        }
     }
 
     public void animateDown() {
-        animator.startAnimation("moveDown");
+        if (!death) {
+            animator.startAnimation("moveDown");
+        } else {
+            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+
+            animator.startAnimation("frontDeath");
+        }
     }
 
     public void animateRangerLeft() {

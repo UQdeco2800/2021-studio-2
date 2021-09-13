@@ -1,6 +1,8 @@
 package com.deco2800.game.entities;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.deco2800.game.rendering.TextureRenderComponent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,10 +36,14 @@ public class LineEntity extends Entity {
         Vector2 v1 = origin.cpy();
         Vector2 v2 = target.cpy();
         Vector2 v3 = v2.cpy().sub(v1);
-        this.setAngle(v3.angleDeg());
+        //update position
         Vector2 centerPoint = v3.cpy().setLength(v3.len() / 2).add(v1);
         Vector2 bodyOffset = this.getCenterPosition().cpy().sub(this.getPosition());
         Vector2 position = centerPoint.sub(bodyOffset);
+        //update scale
+        Sprite sprite = this.getComponent(TextureRenderComponent.class).getSprite();
+        setScale(sprite.getWidth() / 40f * v3.len() / 4, sprite.getHeight() / 40f);
+        this.setAngle(v3.angleDeg());
         this.setPosition(position);
         return (position);
     }
@@ -46,7 +52,7 @@ public class LineEntity extends Entity {
     public void update() {
         super.update();
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= TTL) {
-            this.dispose();
+            this.prepareDispose();
         }
     }
 }

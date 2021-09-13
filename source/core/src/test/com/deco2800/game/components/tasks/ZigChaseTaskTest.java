@@ -41,7 +41,7 @@ class ZigChaseTaskTest {
         target.setPosition(3f, 3f);
 
         AITaskComponent ai = new AITaskComponent()
-                .addTask(new ZigChaseTask(target, 10, 5f, 6f));
+                .addTask(new ZigChaseTask(target, 10, 5f, 6f, 3));
         Entity entity = makePhysicsEntity().addComponent(ai);
         entity.create();
         entity.setPosition(0f, 0f);
@@ -78,7 +78,7 @@ class ZigChaseTaskTest {
         entity.create();
         entity.setPosition(0f, 0f);
 
-        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10);
+        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10, 3);
         zigChaseTask.create(() -> entity);
 
         // Not currently active, target is too far, should have negative priority

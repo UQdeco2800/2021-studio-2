@@ -115,6 +115,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     /**
      * Will calculate the move speed based on how far away the hover location is,
      * this prevenets issues with teleportating and dashing enemies
+     *
      * @return how fast to approach the hover location
      */
     private Vector2 calculateMovespeed() {
@@ -125,7 +126,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
         distance.y = Math.abs(distance.y);
         Vector2 moveSpeed = distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len())));
         System.out.println(distance.len());
-        System.out.println(Math.pow(1f + 1/1000f, distance.len()));
+        System.out.println(Math.pow(1f + 1 / 1000f, distance.len()));
         System.out.println(moveSpeedScl * Math.pow(1f + 0.1, distance.len()));
         System.out.println(moveSpeed);
         return (moveSpeed);
