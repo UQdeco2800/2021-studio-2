@@ -76,7 +76,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ZigChaseTask(
-                                target, 11, 4f, 4f))
+                                target, 11, 4f, 4f,1))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -91,7 +91,7 @@ public class NPCFactory {
         elf.getComponent(AITaskComponent.class).
                 addTask(new AlertableChaseTask(target, 10, 3f, 4f));
         elf.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f));
+                addTask(new ZigChaseTask(target, 11, 3f, 6f,1));
 
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
