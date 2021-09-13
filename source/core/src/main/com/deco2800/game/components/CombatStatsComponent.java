@@ -21,6 +21,7 @@ public class CombatStatsComponent extends Component {
         setMaxHealth(health);
         setBaseAttack(baseAttack);
         //if entities can heal trigger this even
+
     }
 
     public void create() {
@@ -73,17 +74,15 @@ public class CombatStatsComponent extends Component {
         if (health > maxHealth) {
             this.health = maxHealth; //cannot get more health than his set max health
         }
-        else if (health >= 0) {
+        else if (health > 0) {
             this.health = health;
         } else {
             this.health = 0;
             if (this.entity != null) {
-                if (getEntity() != null) {
-                    if (getEntity().getComponent(KeyboardPlayerInputComponent.class) == null) {
-                        this.entity.prepareDispose();
-                    } else {
-                        getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
-                    }
+                if (getEntity().getComponent(KeyboardPlayerInputComponent.class) == null) {
+                    this.entity.prepareDispose();
+                } else {
+                    getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
                 }
             }
         }
@@ -161,13 +160,11 @@ public class CombatStatsComponent extends Component {
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */
-    private boolean checkTransformation(int health) {
-        //transform is added in TransformEntityComponent
-        if (entity.getEvents().hasEvent("transformEntity")) {
-            if (health <= 0) {
-                entity.getEvents().trigger("transformEntity");
-                return true;
-            }
+    public boolean checkTransformation(int health) {
+        //'transformEntity' event is added in TransformEntityComponent
+        if (health <= 0 && entity.getEvents().hasEvent("transformEntity")) {
+            entity.getEvents().trigger("transformEntity");
+            return true;
         }
         return false;
     }
