@@ -129,7 +129,7 @@ public class WeaponFactory {
                 targetEntity, new Vector2(config.speedX, config.speedY));*/
         AITaskComponent aiComponent =
                 new AITaskComponent()
-                        .addTask(new EntityHoverTask(owner, 0.1f, 0, offset, new Vector2(1.5f, 1.5f)))
+                        .addTask(new EntityHoverTask(owner, 0.1f, 0, offset, 1.5f))
                         .addTask(new ProjectileMovementTask(targetEntity, new Vector2(config.speedX, config.speedY)));
         fireBall.data.put("fireBallMovement", false);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(

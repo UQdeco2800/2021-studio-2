@@ -14,7 +14,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
 
     private final Vector2 givenOffset;
     private Vector2 calculatedOffset;
-    private Vector2 moveSpeed;
+    private float moveSpeedScl;
 
     /**
      * @param waitTime      How long in seconds to wait between wandering.
@@ -22,10 +22,10 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
      * @param protectRadius - bounds around the object to stay in
      */
     public EntityHoverTask(Entity anchor, float protectRadius,
-                           float waitTime, Vector2 givenOffset, Vector2 moveSpeed) {
+                           float waitTime, Vector2 givenOffset, float moveSpeedScl) {
         super(anchor, protectRadius, waitTime);
         this.givenOffset = givenOffset;
-        this.moveSpeed = moveSpeed;
+        this.moveSpeedScl = moveSpeedScl;
     }
 
     /**
@@ -35,10 +35,10 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
      * @param protectY - bounds around the object to stay in on the y axis
      */
     public EntityHoverTask(Entity anchor, float protectX, float protectY,
-                           float waitTime, Vector2 givenOffset, Vector2 moveSpeed) {
+                           float waitTime, Vector2 givenOffset, float moveSpeedScl) {
         super(anchor, protectX, protectY, waitTime);
         this.givenOffset = givenOffset;
-        this.moveSpeed = moveSpeed;
+        this.moveSpeedScl = moveSpeedScl;
     }
 
     /**
@@ -48,7 +48,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     public void start() {
         super.start();
         calculatedOffset = getRandomOffsetInRange();
-        movementTask.setMoveSpeed(moveSpeed);
+        movementTask.setMoveSpeed(calculateMovespeed());
         movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
     }
 
@@ -65,6 +65,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
             }
         }
         if (currentTask == movementTask) {
+            movementTask.setMoveSpeed(calculateMovespeed());
             movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         }
         currentTask.update();
@@ -109,5 +110,24 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
         }
         //return new Vector2(0,0);
         return RandomUtils.random(min, max);
+    }
+
+    /**
+     * Will calculate the move speed based on how far away the hover location is,
+     * this prevenets issues with teleportating and dashing enemies
+     * @return how fast to approach the hover location
+     */
+    private Vector2 calculateMovespeed() {
+        //Distance to movement location
+        Vector2 distance = owner.getEntity().getPosition().cpy()
+                .sub(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
+        distance.x = Math.abs(distance.x);
+        distance.y = Math.abs(distance.y);
+        Vector2 moveSpeed = distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len())));
+        System.out.println(distance.len());
+        System.out.println(Math.pow(1f + 1/1000f, distance.len()));
+        System.out.println(moveSpeedScl * Math.pow(1f + 0.1, distance.len()));
+        System.out.println(moveSpeed);
+        return (moveSpeed);
     }
 }

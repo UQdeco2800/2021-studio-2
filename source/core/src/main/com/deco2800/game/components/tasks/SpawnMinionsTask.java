@@ -12,7 +12,7 @@ import com.deco2800.game.services.ServiceLocator;
 
 
 /**
- * Spawns an arrow to shoot at a target
+ * Spawns in the boss's minions
  */
 public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
 
@@ -82,6 +82,7 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
      * @return true if not, false otherwise
      */
     public boolean mapBound() {
+        //todo: this isn't always true map can change sizes, wont always be 30x30
         return owner.getEntity().getPosition().x < 0
                 && owner.getEntity().getPosition().y < 0
                 && owner.getEntity().getPosition().x > 30

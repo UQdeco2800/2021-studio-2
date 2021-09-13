@@ -2,17 +2,12 @@ package com.deco2800.game.components.tasks;
 
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.ai.tasks.TaskRunner;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.TrackingArrowConfig;
@@ -22,8 +17,6 @@ import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
@@ -31,7 +24,6 @@ import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -83,41 +75,46 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * create fireballs when needed
+     *
      * @return true if fireballs are present
      */
     private boolean checkFireBalls() {
         boolean found = false;
-        if (projectileType.equals("fireBall") && !owner.getEntity().data.containsKey("fireBalls")) {
-            //create fireball list
-            Entity[] entities = new Entity[] {
-                    null,
-                    WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0,1)),
-                    null
-            };
-            gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(), true, true);
-            owner.getEntity().data.put("fireBalls", entities);
-            lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-            return (true);
-        } else if (projectileType.equals("fireBall") && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
-            //Add new fireball
-            int index = 0;
-            Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
-            for (Entity fireball : entities) {
-                if (!ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
-                    entities[index] = WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(index - 1, 1));
-                    gameArea.spawnEntityAt(entities[index], owner.getEntity().getCenterPosition(), true, true);
-                    lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                    return (true);
-                }
-                index++;
-            }
-        } else if (projectileType.equals("fireBall")) {
-            //Check for fireball but don't make one
-            Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
-            for (Entity fireball : entities) {
-                if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
-                    if (fireball.data.get("fireBallMovement").equals(false)) {
+        //Stops the fireballs from being created until ready.
+        //Specifically so the boss doesnt create them before he teleports
+        if (owner.getEntity().data.get("createFireBall").equals(true)) {
+            if (projectileType.equals("fireBall") && !owner.getEntity().data.containsKey("fireBalls")) {
+                //create fireball list
+                Entity[] entities = new Entity[]{
+                        null,
+                        WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
+                        null
+                };
+                gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(), true, true);
+                owner.getEntity().data.put("fireBalls", entities);
+                lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+                return (true);
+            } else if (projectileType.equals("fireBall") && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
+                //Add new fireball
+                int index = 0;
+                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                for (Entity fireball : entities) {
+                    if (!ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
+                        entities[index] = WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(index - 1, 1));
+                        gameArea.spawnEntityAt(entities[index], owner.getEntity().getCenterPosition(), true, true);
+                        lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
                         return (true);
+                    }
+                    index++;
+                }
+            } else if (projectileType.equals("fireBall")) {
+                //Check for fireball but don't make one
+                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                for (Entity fireball : entities) {
+                    if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
+                        if (fireball.data.get("fireBallMovement").equals(false)) {
+                            return (true);
+                        }
                     }
                 }
             }
@@ -127,6 +124,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * gets the next fireball assuming it exists
+     *
      * @return next fireball to cast
      */
     private Entity getNextFireBall() {
@@ -319,21 +317,23 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 break;
             case "fireBall":
                 if (checkFireBalls()) {
-                    TrackingArrowConfig config = new TrackingArrowConfig();
+                    //TrackingArrowConfig config = new TrackingArrowConfig();
                     Entity fireBall = getNextFireBall();
-                    assert fireBall != null;
-                    //Change behaviour
-                    fireBall.setAngle(getDirectionOfTarget());
-                    fireBall.data.put("fireBallMovement", true);
-                    fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
-                            (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
-                    //Change sprite and animation
-                    /*Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                            "images/arrow_normal.png", Texture.class));
-                    fireBall
-                            .getComponent(TextureRenderComponent.class).dispose();
-                            .addComponent(new TextureRenderComponent(sprite));*/
-                    //Play shooting sound
+                     if (fireBall != null);
+                    {
+                        //Change behaviour
+                        fireBall.setAngle(getDirectionOfTarget());
+                        fireBall.data.put("fireBallMovement", true);
+                        fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
+                                (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
+                        //Change sprite and animation
+                        /*Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                                "images/arrow_normal.png", Texture.class));
+                        fireBall
+                                .getComponent(TextureRenderComponent.class).dispose();
+                                .addComponent(new TextureRenderComponent(sprite));*/
+                        //Play shooting sound
+                    }
                 }
                 break;
         }

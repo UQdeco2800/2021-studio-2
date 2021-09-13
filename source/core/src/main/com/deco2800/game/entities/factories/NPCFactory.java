@@ -12,8 +12,8 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.MeleeEnemyConfig;
 import com.deco2800.game.entities.configs.ElfBossConfig;
+import com.deco2800.game.entities.configs.MeleeEnemyConfig;
 import com.deco2800.game.entities.configs.NPCConfigs;
 import com.deco2800.game.entities.configs.RangedEnemyConfig;
 import com.deco2800.game.files.FileLoader;
@@ -350,6 +350,8 @@ public class NPCFactory {
         shootProjectileTask.setProjectileType(type);
         shootProjectileTask.setMultishotChance(multishotChance);
         aiComponent.addTask(shootProjectileTask);
+        //create fireballs if needed
+        elf.data.put("createFireBall", true);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -399,15 +401,16 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
-                                target, 10, 7f, 10f));
+                                target, 10, 7f, 10f))
+                        .addTask(new SpawnMinionsTask(target))
+                        .addTask(new TeleportationTask(target, 2000));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
+        //Dont create fireballs until ready and on the map
+        boss.data.put("createFireBall", false);
 
-
-        aiComponent.addTask(new SpawnMinionsTask(target))
-                .addTask(new TeleportationTask(target, 2000));
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/bossAttack.atlas", TextureAtlas.class));
@@ -417,10 +420,8 @@ public class NPCFactory {
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
 
         boss
-                .addComponent(aiComponent)
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
-
                 .addComponent(new ElfAnimationController())
                 .addComponent(aiComponent);
         boss.setAttackRange(5);
