@@ -12,14 +12,14 @@ import com.deco2800.game.physics.components.ColliderComponent;
  */
 public class TransformBarrelComponent extends TransformEntityComponent {
     @Override
-    protected void transform() {
+    public void transform() {
         //break animation into a health potion
         entity.getEvents().trigger("barrelDeath");
         //disable the combatStat so that it doesn't get disposed over there
         configureComponents();
     }
 
-    private void configureComponents() {
+    public void configureComponents() {
         entity.getComponent(CombatStatsComponent.class).setEnabled(false);
 
         //this component is where player can pick-up item and disposes it

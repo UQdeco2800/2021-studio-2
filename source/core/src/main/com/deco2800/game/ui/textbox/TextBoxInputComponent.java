@@ -24,6 +24,8 @@ public class TextBoxInputComponent extends InputComponent {
 
     /**
      * Instantiates the InputComponent and stores the TextBox instance within the class.
+     *
+     * @param textBox the textbox
      */
     public TextBoxInputComponent(TextBox textBox) {
         this();
