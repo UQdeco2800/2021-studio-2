@@ -169,9 +169,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
                 owner.getEntity().getEvents().trigger("assassinDownShoot");
             } else if (targetDir > 90 && targetDir < 180) {
-                owner.getEntity().getEvents().trigger("assassinUpShoot");
-            } else if (targetDir > 180 && targetDir < 270) {
                 owner.getEntity().getEvents().trigger("assassinRightShoot");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("assassinUpShoot");
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("assassinLeftShoot");
             }
@@ -180,9 +180,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
                 owner.getEntity().getEvents().trigger("rangedDownShoot");
             } else if (targetDir > 90 && targetDir < 180) {
-                owner.getEntity().getEvents().trigger("rangedUpShoot");
-            } else if (targetDir > 180 && targetDir < 270) {
                 owner.getEntity().getEvents().trigger("rangedRightShoot");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("rangedUpShoot");
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("rangedLeftShoot");
             }
