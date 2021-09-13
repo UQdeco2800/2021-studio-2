@@ -87,12 +87,4 @@ public abstract class GameArea implements Disposable {
         spawnEntity(entity);
     }
 
-    entity.setPosition(entityPos);
-    spawnEntity(entity);
-  }
-  
-  public Entity getPlayer() {
-    return this.player;
-  }
-
 }
