@@ -34,11 +34,11 @@ public class Map {
      * Returns an array of the tile textures locations for easier loading
      * @return
      */
-    public String[] TileRefsArray(){
+    public String[] TileRefsArray() {
         String[] s = new String[tileRefs.size()];
 
-        for(int i = 1; i <= tileRefs.size(); i++){
-            s[i-1] = tileRefs.get(String.valueOf(i));
+        for (int i = 1; i <= tileRefs.size(); i++) {
+            s[i - 1] = tileRefs.get(String.valueOf(i));
         }
 
         return s;

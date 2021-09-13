@@ -21,7 +21,9 @@ public class MainMenuActions extends Component {
   public void create() {
     entity.getEvents().addListener("startForest", this::onStartForest);
     entity.getEvents().addListener("startTest", this::onStartTest);
+    entity.getEvents().addListener("startTutorial", this::onStartTutorial);
     entity.getEvents().addListener("exit", this::onExit);
+    entity.getEvents().addListener("settings", this::onSettings);
   }
 
   /**
@@ -39,6 +41,15 @@ public class MainMenuActions extends Component {
     logger.info("Start game");
     game.setScreen(GdxGame.ScreenType.MAIN_GAME_TEST);
   }
+
+  /**
+   * Swaps to the Test Main Game screen.
+   */
+  private void onStartTutorial() {
+    logger.info("Start game");
+    game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL);
+  }
+
 
   /**
    * Intended for loading a saved game state.

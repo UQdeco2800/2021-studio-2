@@ -5,5 +5,5 @@ package com.deco2800.game.ai.tasks;
  * decide which task to run.
  */
 public interface PriorityTask extends Task {
-  int getPriority();
+    int getPriority();
 }

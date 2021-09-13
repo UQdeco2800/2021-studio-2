@@ -1,24 +1,24 @@
 package com.deco2800.game.areas;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.GridPoint3;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.GdxGame;
+import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
-import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
-import com.deco2800.game.utils.math.RandomUtils;
-import com.deco2800.game.areas.terrain.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +60,9 @@ public class TestGameArea extends GameArea {
           "images/health_frame_right.png",
           "images/hp_icon.png",
           "images/dash_icon.png",
-          "images/rock.png"
+          "images/rock.png",
+          "images/prisoner.png"
+            
   };
   private static String[] tileTextures = null;
   private static final String[] forestTextureAtlases = {
@@ -139,20 +141,28 @@ public class TestGameArea extends GameArea {
       spawnEntityAt(anchor, basePos, true, true);
       spawnEntityAt(AnchoredGhost, ghostPos, true, true);
     }
-  }
 
-  /**
-   * Spawn range ghost on terrain, range ghost can shoot target
-   */
-  private void spawnRangedGhosts() {
-    GridPoint2 minPos = new GridPoint2(0, 0);
-    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    /**
+     * Create the game area, including terrain, static entities (trees), dynamic entities (player)
+     */
+    @Override
+    public void create() {
+        Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
+        tileTextures = m.TileRefsArray();
 
-    for (int i = 0; i < NUM_GHOSTS; i++) {
-      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-      Entity ghost = NPCFactory.createRangedGhost(player);
-      spawnEntityAt(ghost, randomPos, true, true);
+        super.create();
+        loadAssets();
+        displayUI();
+
+        spawnTerrain();
+        spawnPlayer();
+        spawnCutsceneTrigger();
+
+        playMusic();
+        setDialogue();
     }
+    
+
   }
 
   private void spawnTerrain() {
@@ -302,44 +312,100 @@ public class TestGameArea extends GameArea {
       GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
       Entity ghost = NPCFactory.createGhost(player);
       spawnEntityAt(ghost, randomPos, true, true);
+   }
+
+
+    private void displayUI() {
+        Entity ui = new Entity();
+        ui.addComponent(new GameAreaDisplay("Map Test"));
+        spawnEntity(ui);
     }
-  }
 
-  private void spawnGhostKing() {
-    GridPoint2 minPos = new GridPoint2(0, 0);
-    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+    private void spawnCutsceneTrigger() {
+        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED);
+        spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
-    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-    Entity ghostKing = NPCFactory.createGhostKing(player);
-    spawnEntityAt(ghostKing, randomPos, true, true);
-  }
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+                DialogueSet.BOSS_DEFEATED_BEFORE);
+        spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
 
-  private void spawnCutsceneTrigger() {
-    Entity trigger = CutsceneTriggerFactory.createTrigger();
-    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
-  }
+        /*Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
+        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
 
-  private void playMusic() {
-    Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
-    music.setLooping(true);
-    music.setVolume(0.3f);
-    music.play();
-  }
+        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
+        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true); */
 
-  private void loadAssets() {
-    logger.debug("Loading assets");
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.loadTextures(tileTextures);
-    resourceService.loadTextures(forestTextures);
-    resourceService.loadTextureAtlases(forestTextureAtlases);
-    resourceService.loadSounds(forestSounds);
-    resourceService.loadMusic(forestMusic);
-    resourceService.loadSounds(arrowSounds);
+        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
+        spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
 
-    while (!resourceService.loadForMillis(10)) {
-      // This could be upgraded to a loading screen
-      logger.info("Loading... {}%", resourceService.getProgress());
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+        spawnEntityAt(moveTrigger4, new Vector2(2.2f, 3.3f), true, true);
+
+        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
+        spawnEntityAt(moveTrigger5, new Vector2(6.3f, 3.3f), true, true);
+
+        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+        spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
     }
+      
+    private void spawnPlayer() {
+        Entity newPlayer = PlayerFactory.createPlayer();
+        spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
+        player = newPlayer;
+    }
+
+    private void playMusic() {
+        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
+
+    }
+
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(tileTextures);
+        resourceService.loadTextures(forestTextures);
+        resourceService.loadTextureAtlases(forestTextureAtlases);
+        resourceService.loadSounds(forestSounds);
+        resourceService.loadMusic(forestMusic);
+        resourceService.loadSounds(arrowSounds);
+
+        while (resourceService.loadForMillis(10)) {
+            // This could be upgraded to a loading screen
+            logger.info("Loading... {}%", resourceService.getProgress());
+        }
+    }
+
+    private void unloadAssets() {
+        logger.debug("Unloading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(forestTextures);
+        resourceService.unloadAssets(tileTextures);
+        resourceService.unloadAssets(forestTextureAtlases);
+        resourceService.unloadAssets(forestSounds);
+        resourceService.unloadAssets(forestMusic);
+        resourceService.unloadAssets(arrowSounds);
+    }
+
+    /**
+     * Sets the dialogue for when the game first loads.
+     */
+    private void setDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
+        this.unloadAssets();
+    }
+
   }
 
   private void unloadAssets() {
@@ -359,4 +425,5 @@ public class TestGameArea extends GameArea {
     ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
     this.unloadAssets();
   }
+
 }

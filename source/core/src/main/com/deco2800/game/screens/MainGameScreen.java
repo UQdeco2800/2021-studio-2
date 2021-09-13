@@ -1,13 +1,19 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
+import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.areas.TestGameArea;
+import com.deco2800.game.areas.TutorialGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -23,8 +29,6 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
-import com.deco2800.game.components.maingame.MainGameExitDisplay;
-import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.ui.textbox.TextBoxDisplay;
 import org.slf4j.Logger;
@@ -36,133 +40,165 @@ import org.slf4j.LoggerFactory;
  * <p>Details on libGDX screens: https://happycoding.io/tutorials/libgdx/game-screens
  */
 public class MainGameScreen extends ScreenAdapter {
-  private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
-  private static final String[] mainGameTextures = {
-          "images/heart.png",
-          "lowHealthImages/BloodScreenDarkRepositioned.png",
-          "images/text_box.png"
-  };
-  private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
-  private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
-  private final GdxGame game;
-  private final Renderer renderer;
-  private final PhysicsEngine physicsEngine;
 
-  public MainGameScreen(GdxGame game) {
-    this.game = game;
+    private static final Logger logger = LoggerFactory.getLogger(MainGameScreen.class);
+    private static final String[] mainGameTextures = {
+            "images/heart.png",
+            "lowHealthImages/BloodScreenDarkRepositioned.png",
+            "images/textBoxDisplay/default_text_box.png",
+            "images/textBoxDisplay/main_character_image.png",
+            "images/textBoxDisplay/prisoner_image.png",
+            "images/textBoxDisplay/black_bars.png",
+            "images/textBoxDisplay/prison_text_box.png",
+            "images/textBoxDisplay/loki_image.png",
+            "images/textBoxDisplay/loki_text_box.png"
+    };
+    private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
+    private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
+    private final GdxGame game;
+    private final Renderer renderer;
+    private final PhysicsEngine physicsEngine;
+    private GameArea gameArea;
 
-    logger.debug("Initialising main game screen services");
-    ServiceLocator.registerTimeSource(new GameTime());
+    public MainGameScreen(GdxGame game) {
+        this.game = game;
 
-    PhysicsService physicsService = new PhysicsService();
-    ServiceLocator.registerPhysicsService(physicsService);
-    physicsEngine = physicsService.getPhysics();
+        logger.debug("Initialising main game screen services");
+        ServiceLocator.registerTimeSource(new GameTime());
 
-    ServiceLocator.registerInputService(new InputService());
-    ServiceLocator.registerResourceService(new ResourceService());
+        PhysicsService physicsService = new PhysicsService();
+        ServiceLocator.registerPhysicsService(physicsService);
+        physicsEngine = physicsService.getPhysics();
 
-    ServiceLocator.registerEntityService(new EntityService());
-    ServiceLocator.registerRenderService(new RenderService());
+        ServiceLocator.registerInputService(new InputService());
+        ServiceLocator.registerResourceService(new ResourceService());
 
-    renderer = RenderFactory.createRenderer();
-    renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
-    renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
+        ServiceLocator.registerEntityService(new EntityService());
+        ServiceLocator.registerRenderService(new RenderService());
 
-    loadAssets();
-    createUI();
-  }
+        renderer = RenderFactory.createRenderer();
+        ServiceLocator.registerRenderer(renderer);
 
-  public MainGameScreen(GdxGame game, String world) {
-    this(game);
-    logger.debug("Initialising main game screen entities");
-    TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
+        renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
+        renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
-    if (world.equals("forest")) {
-      ForestGameArea gameArea = new ForestGameArea(terrainFactory, game);
-      gameArea.create();
-      renderer.getCamera().setPlayer(gameArea.getPlayer());
-    } else if (world.equals("test")) {
-      TestGameArea gameArea = new TestGameArea(terrainFactory, game);
-      gameArea.create();
-      renderer.getCamera().setPlayer(gameArea.getPlayer());
+        loadAssets();
+        createUI();
     }
-  }
 
-  @Override
-  public void render(float delta) {
-    physicsEngine.update();
-    ServiceLocator.getEntityService().update();
-    renderer.render();
-  }
+    public MainGameScreen(GdxGame game, String world) {
+        this(game);
+        logger.debug("Initialising main game screen entities");
+        TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
 
-  @Override
-  public void resize(int width, int height) {
-    renderer.resize(width, height);
-    logger.trace("Resized renderer: ({} x {})", width, height);
-  }
+        if (world.equals("forest")) {
+            this.gameArea = new ForestGameArea(terrainFactory);
+        } else if (world.equals("test")) {
+            this.gameArea = new TestGameArea(terrainFactory);
+        } else if (world.equals("tutorial")) {
+            this.gameArea = new TutorialGameArea(terrainFactory);
+        }
+        this.gameArea.create();
+        renderer.getCamera().setPlayer(this.gameArea.getPlayer());
+    }
 
-  @Override
-  public void pause() {
-    logger.info("Game paused");
-  }
+    /**
+     * Runs when the player dies, causes the camera to zoom in.
+     */
+    private void isPlayerDead() {
+        if (this.gameArea.getPlayer() != null) {
+            if (this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
+                zoomCamera();
+            }
+        }
+    }
 
-  @Override
-  public void resume() {
-    logger.info("Game resumed");
-  }
+    /**
+     * Zooms the camera slightly, this will be called by renderer if the player is dead.
+     */
+    private void zoomCamera() {
+        if (((OrthographicCamera)renderer.getCamera().getCamera()).zoom > 0.4) {
+            ((OrthographicCamera)renderer.getCamera().getCamera()).zoom -= 0.008;
+        } else {
+            game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+        }
+    }
+    @Override
+    public void render(float delta) {
+        physicsEngine.update();
+        ServiceLocator.getEntityService().update();
+        renderer.render();
+        isPlayerDead();
+    }
 
-  @Override
-  public void dispose() {
-    logger.debug("Disposing main game screen");
+    @Override
+    public void resize(int width, int height) {
+        renderer.resize(width, height);
+        logger.trace("Resized renderer: ({} x {})", width, height);
+    }
 
-    renderer.dispose();
-    unloadAssets();
+    @Override
+    public void pause() {
+        logger.info("Game paused");
+    }
 
-    ServiceLocator.getEntityService().dispose();
-    ServiceLocator.getRenderService().dispose();
-    ServiceLocator.getResourceService().dispose();
+    @Override
+    public void resume() {
+        logger.info("Game resumed");
+    }
 
-    ServiceLocator.clear();
-  }
+    @Override
+    public void dispose() {
+        logger.debug("Disposing main game screen");
 
-  private void loadAssets() {
-    logger.debug("Loading assets");
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.loadTextures(mainGameTextures);
-    resourceService.loadSounds(playerLowHealthSounds);
-    ServiceLocator.getResourceService().loadAll();
-  }
+        renderer.dispose();
+        unloadAssets();
 
-  private void unloadAssets() {
-    logger.debug("Unloading assets");
-    ResourceService resourceService = ServiceLocator.getResourceService();
-    resourceService.unloadAssets(mainGameTextures);
-    resourceService.unloadAssets(playerLowHealthSounds);
-  }
+        ServiceLocator.getEntityService().dispose();
+        ServiceLocator.getRenderService().dispose();
+        ServiceLocator.getResourceService().dispose();
 
-  /**
-   * Creates the main game's ui including components for rendering ui elements to the screen and
-   * capturing and handling ui input.
-   */
-  private void createUI() {
-    logger.debug("Creating ui");
-    Stage stage = ServiceLocator.getRenderService().getStage();
-    InputComponent inputComponent =
-        ServiceLocator.getInputService().getInputFactory().createForTerminal();
-    InputComponent textBoxInput = ServiceLocator.getInputService().getInputFactory().createForTextBox();
+        ServiceLocator.clear();
+    }
 
-    Entity ui = new Entity();
-    ui.addComponent(new InputDecorator(stage, 10))
-        .addComponent(new PerformanceDisplay())
-        .addComponent(new MainGameActions(this.game))
-        .addComponent(new MainGameExitDisplay())
-        .addComponent(new Terminal())
-        .addComponent(inputComponent)
-        .addComponent(new TerminalDisplay())
-        .addComponent(new TextBox())
-        .addComponent(textBoxInput)
-        .addComponent(new TextBoxDisplay());
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(mainGameTextures);
+        resourceService.loadSounds(playerLowHealthSounds);
+        ServiceLocator.getResourceService().loadAll();
+    }
 
-    ServiceLocator.getEntityService().registerUI(ui);
-  }
+    private void unloadAssets() {
+        logger.debug("Unloading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(mainGameTextures);
+        resourceService.unloadAssets(playerLowHealthSounds);
+    }
+
+    /**
+     * Creates the main game's ui including components for rendering ui elements to the screen and
+     * capturing and handling ui input.
+     */
+    private void createUI() {
+        logger.debug("Creating ui");
+        Stage stage = ServiceLocator.getRenderService().getStage();
+        InputComponent inputComponent =
+                ServiceLocator.getInputService().getInputFactory().createForTerminal();
+        InputComponent textBoxInput = ServiceLocator.getInputService().getInputFactory().createForTextBox();
+
+        Entity ui = new Entity();
+        ui.addComponent(new InputDecorator(stage, 10))
+                .addComponent(new TextBox())
+                .addComponent(textBoxInput)
+                .addComponent(new TextBoxDisplay())
+                .addComponent(new PerformanceDisplay())
+                .addComponent(new MainGameActions(this.game))
+                .addComponent(new MainGameExitDisplay())
+                .addComponent(new Terminal())
+                .addComponent(inputComponent)
+                .addComponent(new TerminalDisplay());
+
+        ServiceLocator.getEntityService().registerUI(ui);
+    }
 }

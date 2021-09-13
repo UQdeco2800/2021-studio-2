@@ -5,6 +5,7 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -308,5 +309,33 @@ public class PlayerActionsTest {
 
         assertTrue((1.7678 - keyboardInput.getWalkDirection().x) < 0.001);
         assertTrue((-1.7678 - keyboardInput.getWalkDirection().y) < 0.001);
+    }
+
+    @Test
+    void shouldLockMovement() {
+        KeyboardPlayerInputComponent keyboardInput = new KeyboardPlayerInputComponent();
+        keyboardInput.setEntity(new Entity());
+        keyboardInput.lockPlayer();
+        keyboardInput.keyDown(Input.Keys.S);
+
+        assertEquals(0f, keyboardInput.getWalkDirection().x);
+        assertEquals(0f, keyboardInput.getWalkDirection().y);
+    }
+
+    @Test
+    void shouldUnlockMovement() {
+        KeyboardPlayerInputComponent keyboardInput = new KeyboardPlayerInputComponent();
+        keyboardInput.setEntity(new Entity());
+        keyboardInput.lockPlayer();
+        keyboardInput.keyDown(Input.Keys.S);
+
+        assertEquals(0f, keyboardInput.getWalkDirection().x);
+        assertEquals(0f, keyboardInput.getWalkDirection().y);
+
+        keyboardInput.unlockPlayer();
+        keyboardInput.keyDown(Input.Keys.S);
+
+        assertEquals(0f, keyboardInput.getWalkDirection().x);
+        assertEquals(-1f, keyboardInput.getWalkDirection().y);
     }
 }

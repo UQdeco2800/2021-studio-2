@@ -4,11 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.weapons.Axe;
-import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.player.*;
-import com.deco2800.game.components.death.DeathActions;
-import com.deco2800.game.components.death.DeathDisplay;
+import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.files.FileLoader;
@@ -26,34 +23,39 @@ import com.deco2800.game.services.ServiceLocator;
  * the properties stores in 'PlayerConfig'.
  */
 public class PlayerFactory {
-  private static final PlayerConfig stats =
-          FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+    private static final PlayerConfig stats =
+            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
-  /**
-   * Create a player entity.
-   * @param game instance of the game
-   * @return entity
-   */
-  public static Entity createPlayer(GdxGame game) {
-    InputComponent inputComponent =
-            ServiceLocator.getInputService().getInputFactory().createForPlayer();
+    private PlayerFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
 
-    AnimationRenderComponent animator =
-            new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
+    /**
+     * Create a player entity.
+     *
+     * @return entity
+     */
+    public static Entity createPlayer() {
+        InputComponent inputComponent =
+                ServiceLocator.getInputService().getInputFactory().createForPlayer();
 
-    animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
-    animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
-    animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_backward", 1, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
-    animator.addAnimation("back_axe_attack", 0.1f);
-    animator.addAnimation("front_axe_attack", 0.1f);
-    animator.addAnimation("right_axe_attack", 0.1f);
-    animator.addAnimation("left_axe_attack", 0.1f);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
+
+        animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_backward", 1, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("back_axe_attack", 0.1f);
+        animator.addAnimation("front_axe_attack", 0.1f);
+        animator.addAnimation("right_axe_attack", 0.1f);
+        animator.addAnimation("left_axe_attack", 0.1f);
+
 
     Entity player =
             new Entity()
@@ -81,9 +83,5 @@ public class PlayerFactory {
     player.getComponent(AnimationRenderComponent.class).scaleEntity();
     PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
     return player;
-  }
-
-  private PlayerFactory() {
-    throw new IllegalStateException("Instantiating static util class");
   }
 }
