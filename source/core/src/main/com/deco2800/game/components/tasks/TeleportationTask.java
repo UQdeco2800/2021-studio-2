@@ -102,7 +102,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         }
         if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            owner.getEntity().data.put("createFireBall", true);
             Vector2 posBefore = owner.getEntity().getPosition();
             teleport(new Vector2(2f, 2f));
             if (owner.getEntity().getPosition().dst(posBefore) != 0) {
@@ -131,10 +130,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     public void teleport(Vector2 position) {
         if (lastFired == 0) {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-//            Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
-//                    getDirectionOfTarget(), false);
-//            //System.out.println("owner position " + owner.getEntity().getCenterPosition());
-//            gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
 
             Entity entity = new Entity();
             entity.setPosition(position);
@@ -161,6 +156,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 1000) {
             owner.getEntity().setPosition(position);
+            owner.getEntity().data.put("createFireBall", true);
         }
         //owner.getEntity().setPosition(position);
     }
