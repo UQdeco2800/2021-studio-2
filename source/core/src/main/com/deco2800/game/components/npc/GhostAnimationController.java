@@ -10,7 +10,6 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class GhostAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
-    private boolean animationStop;
 
     /**
      * Create the animation
@@ -22,7 +21,6 @@ public class GhostAnimationController extends Component {
         super.create();
         animator = this.entity.getComponent(AnimationRenderComponent.class);
         death = false;
-        animationStop = false;
 
         entity.getEvents().addListener("LeftStart", this::animateLeft);
         entity.getEvents().addListener("RightStart", this::animateRight);

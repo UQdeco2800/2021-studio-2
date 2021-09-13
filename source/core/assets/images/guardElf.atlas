@@ -122,3 +122,64 @@ default
   orig: 49, 105
   offset: 0, 0
   index: 1
+  
+   
+front_death.png
+size: 128, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frontDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+left_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leftDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+right_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rightDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

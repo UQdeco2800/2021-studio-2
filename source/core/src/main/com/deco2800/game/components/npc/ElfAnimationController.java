@@ -9,6 +9,8 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  */
 public class ElfAnimationController extends Component {
     AnimationRenderComponent animator;
+    private boolean death;
+
 
     /**
      * Create the animation
@@ -18,6 +20,7 @@ public class ElfAnimationController extends Component {
     @Override
     public void create() {
         super.create();
+        death = false;
         animator = this.entity.getComponent(AnimationRenderComponent.class);
 
         entity.getEvents().addListener("LeftStart", this::animateLeft);
@@ -30,23 +33,41 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("Down_Shoot", this::animateDownShoot);
         entity.getEvents().addListener("Up_Shoot", this::animateUpShoot);
     }
+    public void setDeath() {
+        death = true;
+    }
 
     public void animateLeft() {
-        animator.startAnimation("moveLeft");
+        if(!death) {
+            animator.startAnimation("moveLeft");
+        } else {
+            animator.startAnimation("leftDeath");
+        }
     }
 
     public void animateRight() {
-        animator.startAnimation("moveRight");
+        if(!death) {
+            animator.startAnimation("moveRight");
+        } else {
+            animator.startAnimation("rightDeath");
+        }
     }
 
     public void animateUp() {
-        animator.startAnimation("moveUp");
+        if(!death) {
+            animator.startAnimation("moveDown");
+        } else {
+            animator.startAnimation("frontDeath");
+        }
     }
 
     public void animateDown() {
-        animator.startAnimation("moveDown");
+        if(!death) {
+            animator.startAnimation("moveDown");
+        } else {
+            animator.startAnimation("frontDeath");
+        }
     }
-
     public void animateLeftShoot() {
         animator.startAnimation("Left_Shoot");
     }

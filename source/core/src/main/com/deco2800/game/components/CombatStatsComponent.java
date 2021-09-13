@@ -61,7 +61,6 @@ public class CombatStatsComponent extends Component {
             this.health = 0;
             if (getEntity() != null) {
                 ServiceLocator.getGameAreaService().decNum();
-                getEntity().prepareDispose();
             }
         }
         if (entity != null) {

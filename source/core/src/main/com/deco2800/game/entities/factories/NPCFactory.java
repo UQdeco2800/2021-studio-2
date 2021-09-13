@@ -68,6 +68,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
 
 //        animator.addAnimation("Left_Shoot", 0.1f, Animation.PlayMode.NORMAL);
 //        animator.addAnimation("Right_Shoot", 0.1f, Animation.PlayMode.NORMAL);
@@ -80,7 +83,9 @@ public class NPCFactory {
                         .addTask(new ZigChaseTask(
                                 target, 11, 4f, 4f))
                         .addTask(new AlertableChaseTask(
-                                target, 10, 3f, 4f));
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0,100,100,1.5f));
 
         elf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -163,7 +168,9 @@ public class NPCFactory {
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                .addTask(new AlertChaseTask(target, 10, 3f, 4f));
+                .addTask(new AlertChaseTask(target, 10, 3f, 4f))
+                .addTask(new DeathPauseTask(
+                        target, 0,100,100,1.5f));
         elfKing.addComponent(aiTaskComponent);
 
         AnimationRenderComponent animator =
@@ -173,6 +180,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
+
 
         elfKing
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -206,7 +217,9 @@ public class NPCFactory {
                         .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
                         .addTask(new AnchoredChaseTask(
                                 target, 3f, 4f, anchor, anchorSize))
-                        .addTask(new AnchoredRetreatTask(anchor, anchorSize));
+                        .addTask(new AnchoredRetreatTask(anchor, anchorSize))
+                        .addTask(new DeathPauseTask(
+                                target, 0,100,100,1.5f));
         anchoredElf.addComponent(aiComponent);
 
         AnimationRenderComponent animator =
@@ -216,6 +229,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
+
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -255,7 +272,9 @@ public class NPCFactory {
                         .addTask(new AnchoredChaseTask(
                                 target, 3f,
                                 4f, anchor, anchorSizeX, anchorSizeY))
-                        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
+                        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY))
+                        .addTask(new DeathPauseTask(
+                                target, 0,100,100,1.5f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -264,6 +283,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath",1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath",1.5f, Animation.PlayMode.NORMAL);
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -345,7 +367,9 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new RangedChaseTask(
-                                target, 10, 15f, 20f));
+                                target, 10, 15f, 20f))
+                        .addTask(new DeathPauseTask(
+                                target, 0,100,100,1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType(type);
         shootProjectileTask.setMultishotChance(multishotChance);
@@ -403,7 +427,9 @@ public class NPCFactory {
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new SpawnMinionsTask(target))
-                        .addTask(new TeleportationTask(target, 2000));
+                        .addTask(new TeleportationTask(target, 2000))
+                        .addTask(new DeathPauseTask(
+                                target, 0,100,100,1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
