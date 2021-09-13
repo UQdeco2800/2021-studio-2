@@ -68,9 +68,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
 //        animator.addAnimation("Left_Shoot", 0.1f, Animation.PlayMode.NORMAL);
 //        animator.addAnimation("Right_Shoot", 0.1f, Animation.PlayMode.NORMAL);
@@ -180,9 +180,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
 
         elfKing
@@ -229,9 +229,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
 
         anchoredElf
@@ -283,9 +283,9 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 1.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 1.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -385,6 +385,9 @@ public class NPCFactory {
 //        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
 //        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("Left_Shoot", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("Right_Shoot", 0.1f, Animation.PlayMode.NORMAL);
