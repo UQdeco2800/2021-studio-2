@@ -126,13 +126,15 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      * @param position position to teleport to
      */
     public void teleport(Vector2 position) {
-        Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget(), false);
-
+        Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
+                getDirectionOfTarget(), false);
+        //System.out.println("owner position " + owner.getEntity().getCenterPosition());
         gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(getDirectionOfTarget(), false);
+        Entity vortex2 = WeaponFactory.createVortex(owner.getEntity(), getDirectionOfTarget(), false);
 
         gameArea.spawnEntityAt(vortex2, position, true, true);
         owner.getEntity().setPosition(position);
+
     }
 
     /**
@@ -143,15 +145,19 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
         spawn = true;
-        Entity vortex = WeaponFactory.createVortex(getDirectionOfTarget(), false);
-
-        gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(getDirectionOfTarget(), false);
+        Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
+                getDirectionOfTarget(), false);
 
         Vector2 minPos =
                 new Vector2(0, 0);
         Vector2 maxPos = new Vector2(10, 10);
         pos2 = RandomUtils.random(minPos, maxPos);
+        Entity entity = new Entity();
+        entity.setPosition(pos2);
+        gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
+        Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
+
+
 
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
 
@@ -170,7 +176,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             return 100;
         }
         if (canTeleport() || spawn) {
-            if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 2200) {
+            if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 4000) {
                 spawn = false;
             }
             return 30;

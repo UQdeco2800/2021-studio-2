@@ -3,6 +3,7 @@ package com.deco2800.game.components.tasks;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
+import com.deco2800.game.entities.Entity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,16 +41,20 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     private boolean max = false;
 
+    private Entity ownerRunner;
+
+
     /**
      * Spawn the vortex
-     *
+     * @param ownerRunner owner entity.
      * @param desiredScale upper end of the scale (margin to upscale to)
      * @param rotateAngle  angle to rotate
      */
-    public VortexSpawnTask(Vector2 desiredScale, float rotateAngle) {
+    public VortexSpawnTask(Entity ownerRunner, Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
         this.rotateAngle = rotateAngle;
         factor = new Vector2(this.scale.x / 10, this.scale.y / 10);
+        this.ownerRunner = ownerRunner;
     }
 
     /**
@@ -64,14 +69,18 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
+        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+        Vector2 position = ownerRunner.getCenterPosition().sub(bodyOffset);
         if (owner.getEntity().getScale().x > this.scale.x
                 && owner.getEntity().getScale().y > this.scale.y) {
             owner.getEntity().setScale(this.scale);
+            owner.getEntity().setPosition(position);
         }
         if (owner.getEntity().getScale().x < this.scale.x
                 && owner.getEntity().getScale().y < this.scale.y && !max) {
             owner.getEntity().setScale(factor.scl(1.05f));
             owner.getEntity().setAngle(rotateAngle + rotateFactor);
+            owner.getEntity().setPosition(position);
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
             max = true;
@@ -80,6 +89,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
                 owner.getEntity().setScale(this.scale.scl(0.95f));
+                owner.getEntity().setPosition(position);
             } else if (owner.getEntity().getScale().x <= 0.1f
                     && owner.getEntity().getScale().y <= 0.1f) {
                 owner.getEntity().prepareDispose();
