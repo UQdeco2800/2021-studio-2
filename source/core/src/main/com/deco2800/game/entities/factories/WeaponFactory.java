@@ -21,6 +21,8 @@ import com.deco2800.game.entities.configs.TrackingArrowConfig;
 import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.PhysicsUtils;
+import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
@@ -137,29 +139,25 @@ public class WeaponFactory {
         animator.addAnimation("staticFireball",0.1f, Animation.PlayMode.LOOP);
         animator.startAnimation("staticFireball");
 
-        /*ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetEntity, new Vector2(config.speedX, config.speedY));*/
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new EntityHoverTask(owner, 0.1f, 0, offset, 1.5f))
                         .addTask(new ProjectileMovementTask(targetEntity, new Vector2(config.speedX, config.speedY)));
         fireBall.data.put("fireBallMovement", false);
-        //Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                //"images/arrow_normal.png", Texture.class));
+
+        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.PROJECTILEWEAPON);
+
         fireBall
                 .addComponent(animator)
-                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(aiComponent)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new PhysicsMovementComponent())
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PROJECTILEWEAPON))
+                .addComponent(hitbox)
                 .addComponent(new PlayerActions())
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
-        //Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
-        //fireBall.setScale(scale);
         shootingSound("fireBall");
-        //fireBall.getEvents().trigger("idleFireball"); //uncomment this line Haopeng
+        hitbox.setScale(0.8f);
         return fireBall;
     }
 
