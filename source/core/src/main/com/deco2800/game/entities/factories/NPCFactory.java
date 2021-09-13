@@ -391,6 +391,7 @@ public class NPCFactory {
                 healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
         boss.setEntityType("elfBoss");
+        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.4f);
         return boss;
     }
 
