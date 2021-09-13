@@ -102,18 +102,19 @@ public class NPCFactory {
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
         elf.scaleWidth(1);
         elf.scaleHeight(1);
+        PhysicsUtils.setScaledCollider(elf, 0.9f, 0.4f);
         return elf;
     }
 
     public static Entity createElfGuard(Entity target) {
-        Entity elfKing = createBaseNPCNoAI();
+        Entity elfGuard = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 10, 3f, 4f))
                 .addTask(new DeathPauseTask(
                         target, 0, 100, 100, 1.5f));
-        elfKing.addComponent(aiTaskComponent);
+        elfGuard.addComponent(aiTaskComponent);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -127,20 +128,23 @@ public class NPCFactory {
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
 
-        elfKing
+        elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController());
-        elfKing.setEntityType("AlertCaller");
+        elfGuard.setEntityType("AlertCaller");
 
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
         Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
         HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        elfKing.addComponent(healthBarComponent);
+        elfGuard.addComponent(healthBarComponent);
 
-        elfKing.getComponent(AnimationRenderComponent.class).scaleEntity();
-        return elfKing;
+        elfGuard.getComponent(AnimationRenderComponent.class).scaleEntity();
+        elfGuard.scaleWidth(1);
+        elfGuard.scaleHeight(1);
+        PhysicsUtils.setScaledCollider(elfGuard, 0.9f, 0.4f);
+        return elfGuard;
     }
 
     /**
@@ -190,6 +194,7 @@ public class NPCFactory {
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
         anchoredElf.scaleWidth(1);
         anchoredElf.scaleHeight(1);
+        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.4f);
         return anchoredElf;
     }
 
@@ -220,7 +225,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/elf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -246,6 +251,9 @@ public class NPCFactory {
         anchoredElf.addComponent(healthBarComponent);
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
+        anchoredElf.scaleWidth(1);
+        anchoredElf.scaleHeight(1);
+        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.4f);
         return anchoredElf;
     }
 
