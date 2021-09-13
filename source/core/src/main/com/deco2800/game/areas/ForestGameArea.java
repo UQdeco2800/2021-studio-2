@@ -66,14 +66,16 @@ public class ForestGameArea extends GameArea {
             "images/minionEnemy.png",
             "images/meleeElf.png",
             "images/guardElf.png",
-            "images/rangedElf.png"
+            "images/rangedElf.png",
+            "images/fireball/fireballAinmation.png"
+
 
     };
     private static final String[] forestTextureAtlases = {
 
             "images/terrain_iso_grass.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas"
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -109,11 +111,11 @@ public class ForestGameArea extends GameArea {
         spawnTerrain();
         spawnTrees();
         spawnPlayer();
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
+        //spawnMeleeElf();
+        //spawnElfGuard();
+        //spawnRangedElf();
+        //spawnAssassinElf();
+        //spawnAnchoredElf();
         spawnBoss();
         playMusic();
         setDialogue();

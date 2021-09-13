@@ -18,6 +18,7 @@ import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
@@ -359,6 +360,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                             fireBall.data.put("fireBallMovement", true);
                             fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
                                     (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
+                            //add flying animation.
+                            AnimationRenderComponent animator = fireBall.getComponent(AnimationRenderComponent.class);
+                            animator.startAnimation("flying");
                             //Change sprite and animation
                             //fireBall.getEvents().trigger("shootFireball"); //uncomment this line Haopeng
                             //Play shooting sound
