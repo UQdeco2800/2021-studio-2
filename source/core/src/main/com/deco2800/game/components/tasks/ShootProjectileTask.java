@@ -238,7 +238,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (tragectoryLocation == null) {
                     tragectoryLocation = target.getCenterPosition();
                 }
-                float turningAngle = 20f / UserSettings.get().fps;
+                float turningAngle = 30f / UserSettings.get().fps;
 
                 Vector2 relativeLocationTarget = tragectoryLocation.cpy()
                         .sub(owner.getEntity().getCenterPosition());
@@ -247,33 +247,34 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle
                         && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
                     //If obstacle is blocking the way
+                    
+                    
+                    //tragectoryLocation.dst(target.getCenterPosition()) < AOE
+
+                    if (relativeLocationTarget.angleDeg(relativeLocationEntity)
+                            > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
+                        //left
+                        relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle);
+                    } else {
+                        //right
+                        relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle);
+                    }
                     if (physics.raycast(owner.getEntity().getCenterPosition(), tragectoryLocation, PhysicsLayer.OBSTACLE, hit)) {
-                        if (relativeLocationTarget.angleDeg(relativeLocationEntity)
-                                > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
-                            //left
-                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
-                                    .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
-                                    .add(owner.getEntity().getCenterPosition());
+                        if (tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                            //add 0.1f to make sure it still collides
+                            relativeLocationTarget.setLength(Math.min(owner.getEntity().getCenterPosition().dst(hit.point) + 0.1f, relativeLocationEntity.len()));
                         } else {
-                            //right
-                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
-                                    .setLength(owner.getEntity().getCenterPosition().dst(hit.point))
-                                    .add(owner.getEntity().getCenterPosition());
+                            //add 0.1f to make sure it still collides
+                            relativeLocationTarget.setLength(Math.min(owner.getEntity().getCenterPosition().dst(hit.point) + 0.1f, owner.getEntity().getAttackRange()));
                         }
                     } else {
-                        if (relativeLocationTarget.angleDeg(relativeLocationEntity)
-                                > relativeLocationEntity.angleDeg(relativeLocationTarget)) {
-                            //left
-                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), turningAngle)
-                                    .setLength(owner.getEntity().getAttackRange())
-                                    .add(owner.getEntity().getCenterPosition());
+                        if (tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                            relativeLocationTarget.setLength(Math.min(owner.getEntity().getAttackRange(), relativeLocationEntity.len()));
                         } else {
-                            //right
-                            relativeLocationTarget.rotateAroundDeg(new Vector2(0, 0), -turningAngle)
-                                    .setLength(owner.getEntity().getAttackRange())
-                                    .add(owner.getEntity().getCenterPosition());
+                            relativeLocationTarget.setLength(owner.getEntity().getAttackRange());
                         }
                     }
+                    relativeLocationTarget.add(owner.getEntity().getCenterPosition());
                     this.tragectoryLocation = relativeLocationTarget;
                 } else {
                     this.tragectoryLocation = relativeLocationEntity
