@@ -72,11 +72,6 @@ public class NPCFactory {
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
-//        animator.addAnimation("Left_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("Right_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("Up_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("Down_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -104,59 +99,6 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
         elf.addComponent(healthBarComponent);
 
-//<<<<<<< HEAD
-//        ghost.getComponent(AnimationRenderComponent.class).scaleEntity();
-//        ghost.scaleWidth(1);
-//        ghost.scaleHeight(1);
-//        return ghost;
-//    }
-//
-////    public static Entity createGhostKing(Entity target) {
-////        Entity ghostKing = createBaseNPCNoAI();
-////        GhostKingConfig config = configs.ghostKing;
-////        AITaskComponent aiTaskComponent = new AITaskComponent()
-////                .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-////                .addTask(new AlertChaseTask(target, 10, 3f, 4f));
-////        ghostKing.addComponent(aiTaskComponent);
-////
-////        AnimationRenderComponent animator =
-////                new AnimationRenderComponent(
-////                        ServiceLocator.getResourceService()
-////                                .getAsset("images/ghost.atlas", TextureAtlas.class));
-////        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.LOOP);
-////        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.LOOP);
-////        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.LOOP);
-////        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.LOOP);
-////
-////        ghostKing
-////                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-////                .addComponent(animator)
-////                .addComponent(new GhostAnimationController());
-////        ghostKing.setEntityType("AlertCaller");
-////
-////        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-////        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-////        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-////        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-////        ghostKing.addComponent(healthBarComponent);
-////
-////        ghostKing.getComponent(AnimationRenderComponent.class).scaleEntity();
-////        return ghostKing;
-////    }
-////
-////    /**
-////     * Creates an anchored ghost entity.
-////     *
-////     * @param target     entity to chase
-////     * @param anchor     base entity to anchor to
-////     * @param anchorSize how big the base's area
-////     * @return entity
-////     */
-////
-//    public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSize) {
-//        Entity anchoredGhost = createBaseNPCNoAI();
-//        BaseEntityConfig config = configs.ghost;
-//=======
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
         elf.scaleWidth(1);
         elf.scaleHeight(1);
@@ -307,49 +249,6 @@ public class NPCFactory {
         return anchoredElf;
     }
 
-//    /**
-//     * Creates a anchored ghost entity.
-//     * Anchor ghost only chase the target if the target approach the anchor point
-//     *
-//     * @param target      entity to chase
-//     * @param anchor      base entity to anchor to
-//     * @param anchorSizeX how big the base's area is in the X axis
-//     * @param anchorSizeY how big the base's area is in the Y axis
-//     * @return entity
-//     */
-//    public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
-//        Entity anchoredGhost = createBaseNPCNoAI();
-//        BaseEntityConfig config = configs.ghost;
-//        AITaskComponent aiComponent =
-//                new AITaskComponent()
-//                        .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
-//                        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
-//                        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
-//        anchoredGhost.addComponent(aiComponent);
-//
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
-//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-//
-//        anchoredGhost
-//                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-//                .addComponent(animator)
-//                .addComponent(new GhostAnimationController());
-//
-//        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-//        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-//        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-//        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-//        anchoredGhost.addComponent(healthBarComponent);
-//
-//        anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-//        return anchoredGhost;
-//    }
-
     /**
      * Creates a ranged elf entity.
      * elf that shoot arrow at target
@@ -379,11 +278,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-//<<<<<<< HEAD
                         ServiceLocator.getResourceService().getAsset("images/minionEnemy.atlas", TextureAtlas.class));
-//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
@@ -470,11 +365,11 @@ public class NPCFactory {
         return boss;
     }
 
-    //    /**
-//     * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
-//     *
-//     * @return entity
-//     */
+    /**
+     * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
+     *
+     * @return entity
+     */
     private static Entity createBaseNPC(Entity target) {
         AITaskComponent aiComponent =
                 new AITaskComponent()
