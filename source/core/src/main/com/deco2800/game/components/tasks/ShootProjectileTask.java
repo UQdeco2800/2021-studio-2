@@ -224,7 +224,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 }
                 break;
             }
-            case "fastArrow":
+            case "fastArrow": {
                 float AOE = 1f;
                 if (!poweringUp) {
                     poweringUp = true;
@@ -314,7 +314,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     aimingLine = null;
                 }
                 break;
-            case "fireBall":
+            }
+            case "fireBall": {
                 if (checkFireBalls()) {
                     //TrackingArrowConfig config = new TrackingArrowConfig();
                     Entity fireBall = getNextFireBall();
@@ -335,6 +336,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     }
                 }
                 break;
+            }
         }
     }
 
