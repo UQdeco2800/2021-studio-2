@@ -64,12 +64,14 @@ public class ForestGameArea extends GameArea {
             "images/aiming_line.png",
             "images/bossAttack.png",
             "images/minionEnemy.png",
-            "images/meleeElf.png"
+            "images/meleeElf.png",
+            "images/guardElf.png"
     };
     private static final String[] forestTextureAtlases = {
 
             "images/terrain_iso_grass.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas"
+            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
+            "images/guardElf.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
