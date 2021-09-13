@@ -17,6 +17,7 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -64,6 +65,16 @@ public class WeaponFactory {
             .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
 
     return arrow;
+  }
+
+  private static Entity createMjolnir() {
+    Entity mjolnir =
+            new Entity()
+                .addComponent(new PhysicsComponent())
+                    .addComponent(new PhysicsMovementComponent())
+                    .addComponent(new WeaponHitboxComponent())
+                    .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
+    return mjolnir;
   }
 
   private WeaponFactory() {
