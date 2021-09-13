@@ -169,17 +169,22 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
         spawn = true;
-        Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
+
+
+        Entity entity = new Entity();
+        entity.setPosition(owner.getEntity().getPosition());
+
+        Entity vortex = WeaponFactory.createVortex(entity,
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
                 new Vector2(0, 0);
         Vector2 maxPos = new Vector2(10, 10);
         pos2 = RandomUtils.random(minPos, maxPos);
-        Entity entity = new Entity();
-        entity.setPosition(pos2);
+        Entity entity2 = new Entity();
+        entity2.setPosition(pos2);
         gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
+        Entity vortex2 = WeaponFactory.createVortex(entity2, getDirectionOfTarget(), false);
 
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
     }
