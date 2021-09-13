@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("SuspiciousNameCombination")
 public class ForestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
+    private static final int NUM_CRATES = 3;
     private static final int NUM_TREES = 7;
     private static final int NUM_MELEE_ELF = 2;
     private static final int NUM_ANCHORED_ELF = 1;
@@ -71,11 +72,15 @@ public class ForestGameArea extends GameArea {
 
 
     };
+    public static final String[] healthRegenTextures = {
+            "healthRegen/healthPotion_placeholder.png",
+            "crate/crateHitBreak.png"
+    };
     private static final String[] forestTextureAtlases = {
-
-            "images/terrain_iso_grass.atlas", "images/elf.atlas",
+            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
+
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -86,7 +91,6 @@ public class ForestGameArea extends GameArea {
     };
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
-
     private final TerrainFactory terrainFactory;
 
     /**
@@ -111,6 +115,7 @@ public class ForestGameArea extends GameArea {
         spawnTerrain();
         spawnTrees();
         spawnPlayer();
+        spawnCrate();
         spawnMeleeElf();
         spawnElfGuard();
         spawnRangedElf();
@@ -137,7 +142,6 @@ public class ForestGameArea extends GameArea {
         // Background terrain
         terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
         spawnEntity(new Entity().addComponent(terrain));
-
         // Terrain walls
         float tileSize = terrain.getTileSize();
         GridPoint2 tileBounds = terrain.getMapBounds(0);
@@ -277,6 +281,22 @@ public class ForestGameArea extends GameArea {
         }
     }
 
+
+    /**
+     * spawns the crate with the potion entity inside.
+     * the crate is placed on top of the potion entity.
+     */
+    public void spawnCrate() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_CRATES; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity crate = ObstacleFactory.createHealthCrate();
+            spawnEntityAt(crate, randomPos, true, true);
+        }
+    }
+
     /**
      * Play the music on the background of the game
      */
@@ -294,11 +314,11 @@ public class ForestGameArea extends GameArea {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
+          resourceService.loadTextures(healthRegenTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
         resourceService.loadSounds(forestSounds);
         resourceService.loadMusic(forestMusic);
         resourceService.loadSounds(arrowSounds);
-
         while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
@@ -312,6 +332,7 @@ public class ForestGameArea extends GameArea {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(forestTextures);
+        resourceService.unloadAssets(healthRegenTextures);
         resourceService.unloadAssets(forestTextureAtlases);
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
@@ -325,7 +346,6 @@ public class ForestGameArea extends GameArea {
                 .getUIEntity().getComponent(TextBox.class);
         textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
     }
-
 
     /**
      * Dispose the asset (call unloadAssets).

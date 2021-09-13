@@ -1,6 +1,8 @@
 package com.deco2800.game.components.mainmenu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,100 +19,113 @@ import org.slf4j.LoggerFactory;
  * A ui component for displaying the Main menu.
  */
 public class MainMenuDisplay extends UIComponent {
-    private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
-    private static final float Z_INDEX = 2f;
-    protected Stack stack;
-    protected Table table;
+  private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
+  private static final float Z_INDEX = 2f;
+  protected Stack stack;
+  protected Table table;
+  private Pixmap mouseCursor;
 
-    @Override
-    public void create() {
-        super.create();
-        addActors();
-    }
+  @Override
+  public void create() {
+    super.create();
+    addActors();
+  }
 
 
-    protected void addActors() {
-        stack = new Stack();
-        stack.setFillParent(true);
-        stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
-        Image background = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/main_menu_background.png", Texture.class));
-        background.setScaling(Scaling.stretch);
-        stack.add(background);
+  protected void addActors() {
+    mouseCursor = new Pixmap(Gdx.files.internal("images/swordcursor.png"));
+    Gdx.graphics.setCursor(Gdx.graphics.newCursor(mouseCursor, 0, 0));
 
-        table = new Table();
-        table.setFillParent(true);
+    stack = new Stack();
+    stack.setFillParent(true);
+    stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
 
-        Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
+    table = new Table();
+    table.setFillParent(true);
 
-        Button startForestBtn = new Button(menuButtons, "start");
-        Button startTestBtn = new Button(menuButtons, "start");
-        Button settingsBtn = new Button(menuButtons, "settings");
-        Button exitBtn = new Button(menuButtons, "quit");
+    Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
-        // Triggers an event when the button is pressed
-        startForestBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Start button clicked");
-                        entity.getEvents().trigger("startForest");
-                    }
-                });
+    Button startForestBtn = new Button(menuButtons, "start");
+    Button startTestBtn = new Button(menuButtons, "start");
+    Button startTutorialBtn = new Button(menuButtons, "start");
+    Button settingsBtn = new Button(menuButtons, "settings");
+    Button exitBtn = new Button(menuButtons, "quit");
 
-        // Triggers an event when the button is pressed
-        startTestBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Start button clicked");
-                        entity.getEvents().trigger("startTest");
-                    }
-                });
+    // Triggers an event when the button is pressed
+    startForestBtn.addListener(
+        new ChangeListener() {
+          @Override
+          public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Start button clicked");
+            entity.getEvents().trigger("startForest");
+          }
+        });
 
-        settingsBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Settings button clicked");
-                        entity.getEvents().trigger("settings");
-                    }
-                });
+    // Triggers an event when the button is pressed
+      startTestBtn.addListener(
+        new ChangeListener() {
+              @Override
+              public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Start button clicked");
+            entity.getEvents().trigger("startTest");
+              }
+        });
 
-        exitBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
+      startTutorialBtn.addListener(
+              new ChangeListener() {
+                  @Override
+                  public void changed(ChangeEvent changeEvent, Actor actor) {
+                      logger.debug("Start button clicked");
+                      entity.getEvents().trigger("startTutorial");
+                  }
+              });
 
-                        logger.debug("Exit button clicked");
-                        entity.getEvents().trigger("exit");
-                    }
-                });
-        table.add(startForestBtn).padTop(30f);
-        table.row();
-        table.add(startTestBtn).padTop(30f);
-        table.row();
-        table.add(settingsBtn).padTop(30f);
-        table.row();
-        table.add(exitBtn).padTop(30f);
+    settingsBtn.addListener(
+        new ChangeListener() {
+          @Override
+          public void changed(ChangeEvent changeEvent, Actor actor) {
+            logger.debug("Settings button clicked");
+            entity.getEvents().trigger("settings");
+          }
+        });
 
-        stage.addActor(stack);
-        stage.addActor(table);
-    }
+    exitBtn.addListener(
+        new ChangeListener() {
+          @Override
+          public void changed(ChangeEvent changeEvent, Actor actor) {
 
-    @Override
-    public void draw(SpriteBatch batch) {
-        // draw is handled by the stage
-    }
+            logger.debug("Exit button clicked");
+            entity.getEvents().trigger("exit");
+          }
+        });
+    table.add(startForestBtn).padTop(30f);
+    table.row();
+    table.add(startTestBtn).padTop(30f);
+    table.row();
+    table.add(startTutorialBtn).padTop(30f);
+    table.row();
+    table.add(settingsBtn).padTop(30f);
+    table.row();
+    table.add(exitBtn).padTop(30f);
 
-    @Override
-    public float getZIndex() {
-        return Z_INDEX;
-    }
+    stage.addActor(stack);
+    stage.addActor(table);
+  }
 
-    @Override
-    public void dispose() {
-        table.clear();
-        super.dispose();
-    }
+  @Override
+  public void draw(SpriteBatch batch) {
+    // draw is handled by the stage
+  }
+
+  @Override
+  public float getZIndex() {
+    return Z_INDEX;
+  }
+
+  @Override
+  public void dispose() {
+    table.clear();
+    mouseCursor.dispose();
+    super.dispose();
+  }
 }

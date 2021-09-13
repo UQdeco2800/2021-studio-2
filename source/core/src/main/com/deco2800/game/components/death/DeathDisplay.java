@@ -1,32 +1,42 @@
 package com.deco2800.game.components.death;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
+import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * UI component for displaying the death screen
  */
 public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
+    protected List<Entity> areaEntities;
     private final String[] deathScreenTextures = new String[]{
-            "lowHealthImages/testDeath1.png",
             "lowHealthImages/youdied.png",
-            "lowHealthImages/testDeath1.png",
-            "images/main_menu_background.png"
+            "images/player.png"
+    };
+
+    private final String[] deathScreenTextureAtlases = new String[]{
+            "images/player.atlas"
     };
 
 
     @Override
     public void create() {
+        areaEntities = new ArrayList<>();
         loadAssets();
         super.create();
     }
@@ -37,14 +47,15 @@ public class DeathDisplay extends MainMenuDisplay {
     @Override
     protected void addActors() {
         super.addActors();
+        Image title = new Image(ServiceLocator.getResourceService().getAsset(
+                "lowHealthImages/youdied.png", Texture.class));
 
-        TextButton restartForestBtn = new TextButton("Restart Forest", skin);
-        TextButton restartTestBtn = new TextButton("Restart Test", skin);
-        TextButton exitBtn = new TextButton("Exit", skin);
-        Image background = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/testDeath1.png",
-                Texture.class));
-        background.setScaling(Scaling.stretch);
-        stack.add(background);
+        Skin menuButtons = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json"));
+
+        TextButton restartForestBtn = new TextButton("Restart Forest", menuButtons);
+        TextButton restartTestBtn = new TextButton("Restart Test", menuButtons);
+        TextButton exitBtn = new TextButton("Exit", menuButtons);
+
 
         // Triggers an event when the button is pressed
         restartForestBtn.addListener(
@@ -75,23 +86,24 @@ public class DeathDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("exit");
                     }
                 });
-        Image dead = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages/youdied.png",
-                Texture.class));
+
+
         table.clear();
-        table.add(dead);
+        table.add(title).padTop(-250f);
         table.row();
-        table.add(restartForestBtn).padTop(30f);
+        table.add(restartForestBtn);
         table.row();
         table.add(restartTestBtn).padTop(30f);
         table.row();
         table.add(exitBtn).padTop(30f);
-        table.row();
+
     }
 
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         ServiceLocator.getResourceService().loadTextures(deathScreenTextures);
+        ServiceLocator.getResourceService().loadTextureAtlases(deathScreenTextureAtlases);
         while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
@@ -102,10 +114,14 @@ public class DeathDisplay extends MainMenuDisplay {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(deathScreenTextures);
+        resourceService.unloadAssets(deathScreenTextureAtlases);
     }
 
     @Override
     public void dispose() {
+        for (Entity entity : areaEntities) {
+            entity.dispose();
+        }
         super.dispose();
         stack.clear();
         this.unloadAssets();

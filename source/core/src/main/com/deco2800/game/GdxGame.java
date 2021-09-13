@@ -27,7 +27,7 @@ public class GdxGame extends Game {
         loadSettings();
 
         // Sets background to light yellow
-        Gdx.gl.glClearColor(65 / 255f, 62 / 255f, 55 / 255f, 1);
+        Gdx.gl.glClearColor(49 / 255f, 49 / 255f, 49 / 255f, 1);
 
         setScreen(ScreenType.MAIN_MENU);
     }
@@ -75,6 +75,8 @@ public class GdxGame extends Game {
                 return new MainGameScreen(this, "forest");
             case MAIN_GAME_TEST:
                 return new MainGameScreen(this, "test");
+            case MAIN_GAME_TUTORIAL:
+                return new MainGameScreen(this, "tutorial");
             case SETTINGS:
                 return new SettingsScreen(this);
             case DEATHSCREEN:
@@ -85,7 +87,7 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TEST, SETTINGS, DEATHSCREEN
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TEST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
     }
 
     /**

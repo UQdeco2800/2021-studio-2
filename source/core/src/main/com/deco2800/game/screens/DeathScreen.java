@@ -1,6 +1,8 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.death.DeathActions;
@@ -10,6 +12,7 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
@@ -28,6 +31,9 @@ public class DeathScreen extends ScreenAdapter {
 
     private final GdxGame game;
     private final Renderer renderer;
+    private static final String[] deathScreenTextures = {"playerDeath/player_death.png"};
+    private static final String[] deathScreenAtlases = {"playerDeath/player_death.atlas"};
+    private AnimationRenderComponent animator;
 
     public DeathScreen(GdxGame game) {
         this.game = game;
@@ -42,6 +48,7 @@ public class DeathScreen extends ScreenAdapter {
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(5f, 5f);
 
+        loadAssets();
         createUI();
     }
 
@@ -58,11 +65,29 @@ public class DeathScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        logger.debug("Disposing death screen");
         renderer.dispose();
+
+        unloadAssets();
+
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
-
         ServiceLocator.clear();
+    }
+
+    private void loadAssets() {
+        logger.debug("Loading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextureAtlases(deathScreenAtlases);
+        resourceService.loadTextures(deathScreenTextures);
+        ServiceLocator.getResourceService().loadAll();
+    }
+
+    private void unloadAssets() {
+        logger.debug("Unloading assets");
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(deathScreenTextures);
+        resourceService.unloadAssets(deathScreenAtlases);
     }
 
     /**
@@ -72,10 +97,19 @@ public class DeathScreen extends ScreenAdapter {
     private void createUI() {
         logger.debug("Creating ui");
         Stage stage = ServiceLocator.getRenderService().getStage();
+
+        this.animator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
+                "playerDeath/player_death.atlas", TextureAtlas.class));
+        this.animator.addAnimation("death_animation", 0.20f, Animation.PlayMode.NORMAL);
+
         Entity ui = new Entity();
         ui.addComponent(new DeathDisplay())
                 .addComponent(new InputDecorator(stage, 10))
-                .addComponent(new DeathActions(game));
+                .addComponent(new DeathActions(game))
+                .addComponent(animator);
         ServiceLocator.getEntityService().register(ui);
+        ui.setScale(5, 5);
+        ui.setPosition(2.7f,-0.5f);
+        this.animator.startAnimation("death_animation");
     }
 }

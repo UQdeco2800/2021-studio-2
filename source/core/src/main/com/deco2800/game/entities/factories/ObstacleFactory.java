@@ -1,15 +1,22 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.TouchHealComponent;
+import com.deco2800.game.components.crate.CrateAnimationController;
+import com.deco2800.game.components.crate.TransformBarrelComponent;
+import com.deco2800.game.components.crate.TransformEntityComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Factory to create obstacle entities.
@@ -28,11 +35,10 @@ public class ObstacleFactory {
      * @return entity
      */
     public static Entity createTree() {
-        Entity tree =
-                new Entity()
-                        .addComponent(new TextureRenderComponent("images/tree.png"))
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
+        Entity tree = new Entity()
+                .addComponent(new TextureRenderComponent("images/tree.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
 
         tree.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         tree.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -77,24 +83,55 @@ public class ObstacleFactory {
     }
 
     /**
-     * Creates an anchor entity to be referenced by other entities.
+     * creates a crate obstacle that can be destroyed and will transform into a health potion
      *
-     * @return entity to serve as the base's real world location
+     * @return the transforming crate health potion entity
      */
+    public static Entity createHealthCrate() {
+        AnimationRenderComponent crateAnimator = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("crate/crateHitBreak.atlas",
+                        TextureAtlas.class));
+
+        crateAnimator.addAnimation("barrelHit", 0.06f); //default playback NORMAL
+        crateAnimator.addAnimation("barrelDeath", 0.04f); //break contains the transform animation
+        crateAnimator.addAnimation("default", 1f);
+        crateAnimator.startAnimation("default");
+
+        Entity crate = new Entity()
+                .addComponent(crateAnimator)
+                .addComponent(new CrateAnimationController())
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                .addComponent(new CombatStatsComponent(30, 0))
+                .addComponent(new TransformBarrelComponent())
+                .addComponent(new TouchHealComponent(PhysicsLayer.PLAYER));
+
+        crate.getComponent(TouchHealComponent.class).setEnabled(false);
+        crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        crate.getComponent(AnimationRenderComponent.class).scaleEntity();
+        return crate;
+    }
+
+    /**
+    * Creates an anchor entity to be referenced by other entities.
+    *
+    * @return entity to serve as the base's real world location
+    */
     public static Entity createAnchor() {
-        Entity anchor =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        //hitbox allows the anchor to be seen in debug mode but should be removed out of testing.
-                        //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-                        //collision can be used instead to test how the follower reacts to a moving anchor
-                        //.addComponent(new ColliderComponent())
-                        // or an obstacle based anchor (cant see through)
-                        //.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                        //Uncomment below to render in game
-                        .addComponent(new TextureRenderComponent("images/crown.png"));
+        Entity anchor = new Entity()
+                .addComponent(new PhysicsComponent())
+                //hitbox allows the anchor to be seen in debug mode but should be removed out of testing.
+                //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+                //collision can be used instead to test how the follower reacts to a moving anchor
+                //.addComponent(new ColliderComponent())
+                // or an obstacle based anchor (cant see through)
+                //.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                //Uncomment below to render in game
+                .addComponent(new TextureRenderComponent("images/crown.png"));
         //Stop from moving
         anchor.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         return anchor;
     }
 }
+

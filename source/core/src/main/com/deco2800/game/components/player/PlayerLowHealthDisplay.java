@@ -7,8 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.utils.Scaling;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * UI component to display the blooded view when health reaches a certain
@@ -16,9 +20,14 @@ import com.deco2800.game.ui.UIComponent;
  */
 public class PlayerLowHealthDisplay extends UIComponent {
     private Image bloodImage;
+
+    private Image blackScreen;
     Stack stack;
     Sound heartBeat;
     boolean heartBeatTracker = false; //tracker to prevent duplicate sounds being played
+
+    boolean dead = false;
+
     long heartID;
 
     /**
@@ -31,6 +40,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
         addActors();
         entity.getEvents().addListener("bloodyViewOn", this::displayBloodyViewOn);
         entity.getEvents().addListener("bloodyViewOff", this::displayBloodyViewOff);
+        entity.getEvents().addListener("deathFade", this::displayDeath);
     }
 
     /**
@@ -44,9 +54,11 @@ public class PlayerLowHealthDisplay extends UIComponent {
         //setup layout widgets and loading images
         loadImages();
         stackSetup();
+        blackScreenSetup();
 
         //add to stage
         stage.addActor(stack);
+        stage.addActor(blackScreen);
     }
 
     /**
@@ -62,6 +74,18 @@ public class PlayerLowHealthDisplay extends UIComponent {
     }
 
     /**
+     * Initialises the settings for the death screen to be displayed.
+     */
+    public void blackScreenSetup() {
+        blackScreen.setScaling(Scaling.stretch);
+        blackScreen.setVisible(false);
+        blackScreen.setFillParent(true);
+        blackScreen.setSize(1920,1080);
+        blackScreen.setColor(0, 0, 0, 0);
+        blackScreen.setTouchable(Touchable.disabled);
+    }
+
+    /**
      * retrieves images from service locator to use for the low health UI
      */
     public void loadImages() {
@@ -69,6 +93,8 @@ public class PlayerLowHealthDisplay extends UIComponent {
         bloodImage = new Image(ServiceLocator.getResourceService().getAsset("lowHealthImages" +
                 "/BloodScreenDarkRepositioned.png", Texture.class));
         bloodImage.setScaling(Scaling.stretch);
+        blackScreen = new Image(ServiceLocator.getResourceService().getAsset("images/textBoxDisplay" +
+                "/black_bars.png", Texture.class));
     }
 
     /**
@@ -93,6 +119,38 @@ public class PlayerLowHealthDisplay extends UIComponent {
     public void displayBloodyViewOff() {
         stopHeartBeat();
         stack.setVisible(false);
+    }
+
+    /**
+     * Triggered once the entity has died, the screen will slowly fade to black.
+     */
+    public void displayDeath() {
+        if (!dead) {
+            blackScreen.setVisible(true);
+            fadeScreen(0);
+            dead = true;
+        }
+    }
+
+    /**
+     * Causes the screen to fade to black after the player has died. This method is called recursively
+     * at a delay, with the base case being if the screen is already pitch black.
+     * @param opacity the opacity of the screen which tends to 1 (complete black)
+     */
+    private void fadeScreen(float opacity) {
+        if (opacity < 1) {
+            blackScreen.setColor(0, 0, 0, opacity);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    fadeScreen(opacity + 0.05f);
+                    timer.cancel();
+                }
+            }, 30);
+        } else {
+            blackScreen.setColor(0, 0, 0, 1);
+        }
     }
 
     /**
@@ -131,6 +189,6 @@ public class PlayerLowHealthDisplay extends UIComponent {
         super.dispose();
         bloodImage.remove();
         heartBeat.dispose();
-
+        blackScreen.remove();
     }
-} 
+}
