@@ -49,7 +49,7 @@ public class ElfAnimationController extends Component {
                 case "assassin":
                     animator.startAnimation("assassinMoveLeft");
                     break;
-                case "ranger":
+                case "ranged":
                     animator.startAnimation("rangerMoveLeft");
                     break;
                 case "default":
@@ -69,7 +69,7 @@ public class ElfAnimationController extends Component {
                 case "assassin":
                     animator.startAnimation("assassinMoveRight");
                     break;
-                case "ranger":
+                case "ranged":
                     animator.startAnimation("rangerMoveRight");
                     break;
                 case "default":
@@ -88,7 +88,7 @@ public class ElfAnimationController extends Component {
                 case "assassin":
                     animator.startAnimation("assassinMoveUp");
                     break;
-                case "ranger":
+                case "ranged":
                     animator.startAnimation("rangerMoveUp");
                     break;
                 case "default":
@@ -108,7 +108,7 @@ public class ElfAnimationController extends Component {
                 case "assassin":
                     animator.startAnimation("assassinMoveDown");
                     break;
-                case "ranger":
+                case "ranged":
                     animator.startAnimation("rangerMoveDown");
                     break;
                 case "default":
