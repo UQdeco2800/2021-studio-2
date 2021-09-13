@@ -125,10 +125,6 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
         distance.x = Math.abs(distance.x);
         distance.y = Math.abs(distance.y);
         Vector2 moveSpeed = distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len())));
-        System.out.println(distance.len());
-        System.out.println(Math.pow(1f + 1 / 1000f, distance.len()));
-        System.out.println(moveSpeedScl * Math.pow(1f + 0.1, distance.len()));
-        System.out.println(moveSpeed);
         return (moveSpeed);
     }
 }
