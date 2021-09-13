@@ -247,8 +247,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle
                         && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
                     //If obstacle is blocking the way
-                    
-                    
+
+
                     //tragectoryLocation.dst(target.getCenterPosition()) < AOE
 
                     if (relativeLocationTarget.angleDeg(relativeLocationEntity)
@@ -330,11 +330,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
                                 (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
                         //Change sprite and animation
-                        /*Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_normal.png", Texture.class));
-                        fireBall
-                                .getComponent(TextureRenderComponent.class).dispose();
-                                .addComponent(new TextureRenderComponent(sprite));*/
+                        //fireBall.getEvents().trigger("shootFireball"); //uncomment this line Haopeng
                         //Play shooting sound
                     }
                 }

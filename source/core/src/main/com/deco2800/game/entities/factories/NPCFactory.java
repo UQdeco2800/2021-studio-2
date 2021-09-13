@@ -384,7 +384,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 3f, 4f));
         Entity npc = createBaseNPCNoAI()
-                        .addComponent(aiComponent);
+                .addComponent(aiComponent);
 
         PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
         return npc;

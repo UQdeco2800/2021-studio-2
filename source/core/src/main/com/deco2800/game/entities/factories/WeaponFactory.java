@@ -146,6 +146,7 @@ public class WeaponFactory {
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         fireBall.setScale(scale);
         shootingSound("fireBall");
+        //fireBall.getEvents().trigger("idleFireball"); //uncomment this line Haopeng
         return fireBall;
     }
 
