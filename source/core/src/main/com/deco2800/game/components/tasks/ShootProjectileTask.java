@@ -152,9 +152,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         checkFireBalls();
     }
 
+    /**
+     * updates entity animation to shoot in the direction of the target
+     */
     public void shootanimation() {
-        float targetdir;
-        targetdir = getDirectionOfTarget();
+        float targetdir = getDirectionOfTarget();
 
         if (targetdir > 0 && targetdir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
             owner.getEntity().getEvents().trigger("Left_Shoot");
@@ -168,7 +170,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * Spawns in an arrow according to the classes variables
+     * Spawns in a projectile according to the class' variables
      */
     public void shoot() {
         if (!poweringUp) {
