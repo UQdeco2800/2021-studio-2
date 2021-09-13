@@ -143,28 +143,28 @@ Right_Shoot
   orig: 54, 108
   offset: 0, 0
   index: 5
-floatUp
+moveUp
   rotate: false
   xy: 2, 115
   size: 89, 105
   orig: 89, 105
   offset: 0, 0
   index: 1
-floatDown
+moveDown
   rotate: false
   xy: 2, 8
   size: 89, 105
   orig: 89, 105
   offset: 0, 0
   index: 1
-floatLeft
+moveLeft
   rotate: false
   xy: 516, 10
   size: 46, 100
   orig: 46, 100
   offset: 0, 0
   index: 1
-floatRight
+moveRight
   rotate: false
   xy: 564, 10
   size: 46, 100

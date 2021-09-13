@@ -4,10 +4,10 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**
- * This class listens to events relevant to a ghost entity's state and plays the animation when one
+ * This class listens to events relevant to an entity's state and plays the animation when one
  * of the events is triggered.
  */
-public class GhostAnimationController extends Component {
+public class ElfAnimationController extends Component {
     AnimationRenderComponent animator;
 
     /**
@@ -32,19 +32,19 @@ public class GhostAnimationController extends Component {
     }
 
     public void animateLeft() {
-        animator.startAnimation("floatLeft");
+        animator.startAnimation("moveLeft");
     }
 
     public void animateRight() {
-        animator.startAnimation("floatRight");
+        animator.startAnimation("moveRight");
     }
 
     public void animateUp() {
-        animator.startAnimation("floatUp");
+        animator.startAnimation("moveUp");
     }
 
     public void animateDown() {
-        animator.startAnimation("floatDown");
+        animator.startAnimation("moveDown");
     }
 
     public void animateLeftShoot() {

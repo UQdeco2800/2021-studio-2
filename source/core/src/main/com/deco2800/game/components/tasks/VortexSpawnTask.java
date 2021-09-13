@@ -11,34 +11,56 @@ import java.util.concurrent.TimeUnit;
  * PhysicsMovementComponent. Entity will be disposed of after reaching its destination.
  */
 public class VortexSpawnTask extends DefaultTask implements PriorityTask {
+    /**
+     * desired scale
+     */
     private final Vector2 scale;
-
+    /**
+     * upscale factor
+     */
     private final Vector2 factor;
-
+    /**
+     * angle to rotate
+     */
     private final float rotateAngle;
-
+    /**
+     * reverse spawn the vortex
+     */
     private boolean reverse = false;
-
-    private static float rotateFactor = 1;
-
-    private static float offset = 0;
-
+    /**
+     * rotate factor
+     */
+    private static float rotateFactor = 0;
+    /**
+     * time pause when vortex at desired scale - the start down scale
+     */
     private long time = 0;
-
+    /**
+     * check if vortex is at max scale (desire)
+     */
     private boolean max = false;
 
+    /**
+     * Spawn the vortex
+     *
+     * @param desiredScale upper end of the scale (margin to upscale to)
+     * @param rotateAngle  angle to rotate
+     */
     public VortexSpawnTask(Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
         this.rotateAngle = rotateAngle;
         factor = new Vector2(this.scale.x / 10, this.scale.y / 10);
     }
 
+    /**
+     * reverse the upscale and down scale
+     */
     public void flipReverse() {
         this.reverse = !this.reverse;
     }
 
     /**
-     * Update the arrow position on the screen.
+     * Update the vortex position on the screen. Upscale the vortex
      */
     @Override
     public void update() {
@@ -50,47 +72,29 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                 && owner.getEntity().getScale().y < this.scale.y && !max) {
             owner.getEntity().setScale(factor.scl(1.05f));
             owner.getEntity().setAngle(rotateAngle + rotateFactor);
-            /*
-            owner.getEntity().setPosition(
-                    owner.getEntity().getPosition().x - owner.getEntity().getCenterPosition().x,
-                    owner.getEntity().getPosition().y - owner.getEntity().getCenterPosition().y);
-             */
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
             max = true;
+            owner.getEntity().setAngle(rotateAngle + rotateFactor);
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
                 owner.getEntity().setScale(this.scale.scl(0.95f));
-                owner.getEntity().setAngle(rotateAngle + rotateFactor);
             } else if (owner.getEntity().getScale().x <= 0.1f
                     && owner.getEntity().getScale().y <= 0.1f) {
                 owner.getEntity().prepareDispose();
             }
         }
-//            else {
-//
-//                owner.getEntity().prepareDispose();
-//            }
-//        else {
-//            if (owner.getEntity().getScale().x > 0.1f && owner.getEntity().getScale().y > 0.1f) {
-//                owner.getEntity().setScale(this.scale.scl(0.99f));
-//                owner.getEntity().setAngle(rotateAngle + rotateFactor);
-//            } else {
-//                owner.getEntity().prepareDispose();
-//            }
-//     }
-        offset += 0.000001f;
         rotateFactor++;
 
         super.update();
     }
 
     /**
-     * return the priority of the arrow
-     * If arrow is in moving, return 10, else return -1 and dispose the arrow
+     * return the priority of the vortex spawn
+     * If vortex can be spawn, return 10, else return -1
      *
-     * @return int 10 if arrow is moving, -1 if arrow is not
+     * @return int 10 if vortex is not at desired scale, -1 if vortex is at desired scale
      */
     public int getPriority() {
         if (desiredScale()) {
@@ -102,6 +106,8 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     }
 
     /**
+     * check if vortex upscale to desire scale
+     *
      * @return boolean true reach desired scale
      */
     private boolean desiredScale() {

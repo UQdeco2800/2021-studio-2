@@ -10,26 +10,22 @@ import com.deco2800.game.utils.math.RandomUtils;
  * Wander around by moving to a random position within a range of the base anchor. Wait a little
  * bit between movements. Requires an entity with a PhysicsMovementComponent.
  */
-public class AnchoredWanderTask extends WanderTask implements PriorityTask {
+public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask {
 
-    protected final Entity base;
-    protected final float protectRadius;
-    protected final float protectX;
-    protected final float protectY;
+    private final Vector2 givenOffset;
+    private Vector2 calculatedOffset;
+    private Vector2 moveSpeed;
 
     /**
      * @param waitTime      How long in seconds to wait between wandering.
      * @param anchor        - entity to retreat to
      * @param protectRadius - bounds around the object to stay in
      */
-    public AnchoredWanderTask(Entity anchor, float protectRadius, float waitTime) {
-        super(new Vector2(protectRadius, protectRadius), waitTime);
-        this.base = anchor;
-        //times 1.5 as this seems to deliver the best results
-        // when the protect radius is shared with the other anchored tasks
-        this.protectRadius = (float) (protectRadius * 1.5);
-        this.protectX = 0;
-        this.protectY = 0;
+    public EntityHoverTask(Entity anchor, float protectRadius,
+                           float waitTime, Vector2 givenOffset, Vector2 moveSpeed) {
+        super(anchor, protectRadius, waitTime);
+        this.givenOffset = givenOffset;
+        this.moveSpeed = moveSpeed;
     }
 
     /**
@@ -38,12 +34,11 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
      * @param protectX - bounds around the object to stay in on the x axis
      * @param protectY - bounds around the object to stay in on the y axis
      */
-    public AnchoredWanderTask(Entity anchor, float protectX, float protectY, float waitTime) {
-        super(new Vector2(protectX, protectY), waitTime);
-        this.base = anchor;
-        this.protectRadius = 0;
-        this.protectX = (float) (protectX * 1.5);
-        this.protectY = (float) (protectY * 1.5);
+    public EntityHoverTask(Entity anchor, float protectX, float protectY,
+                           float waitTime, Vector2 givenOffset, Vector2 moveSpeed) {
+        super(anchor, protectX, protectY, waitTime);
+        this.givenOffset = givenOffset;
+        this.moveSpeed = moveSpeed;
     }
 
     /**
@@ -52,7 +47,9 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
     @Override
     public void start() {
         super.start();
-        movementTask.setTarget(getRandomPosInRange());
+        calculatedOffset = getRandomOffsetInRange();
+        movementTask.setMoveSpeed(moveSpeed);
+        movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
     }
 
     /**
@@ -66,6 +63,9 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
             } else {
                 startMoving();
             }
+        }
+        if (currentTask == movementTask) {
+            movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         }
         currentTask.update();
     }
@@ -81,22 +81,23 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
      * update task to move task
      */
     private void startMoving() {
-        movementTask.setTarget(getRandomPosInRange());
+        calculatedOffset = getRandomOffsetInRange();
+        movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         swapTask(movementTask);
     }
 
     /**
-     * @return random Vector2 that is in the anchored base
+     * @return random Vector2 offset that the entity will hover at
      */
-    private Vector2 getRandomPosInRange() {
+    private Vector2 getRandomOffsetInRange() {
         Vector2 min;
         Vector2 max;
         if (protectRadius > 0) {
-            min = base.getCenterPosition().cpy().sub(protectRadius, protectRadius);
-            max = base.getCenterPosition().cpy().add(protectRadius, protectRadius);
+            min = new Vector2(-protectRadius, -protectRadius);
+            max = new Vector2(protectRadius, protectRadius);
         } else {
-            min = base.getCenterPosition().cpy().sub(protectX, protectY);
-            max = base.getCenterPosition().cpy().add(protectX, protectY);
+            min = new Vector2(-protectX, -protectY);
+            max = new Vector2(protectX, protectY);
         }
         //Bug: is still possible for the coords to be too big and off the map
         //Below is a temp but bad fix
@@ -106,6 +107,7 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
         if (max.y > TerrainFactory.MAP_SIZE.y) {
             max = new Vector2(max.x, TerrainFactory.MAP_SIZE.y);
         }
-        return new Vector2(Math.abs(RandomUtils.random(min, max).x), Math.abs(RandomUtils.random(min, max).y));
+        //return new Vector2(0,0);
+        return RandomUtils.random(min, max);
     }
 }

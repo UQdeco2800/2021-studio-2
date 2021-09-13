@@ -10,7 +10,10 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Dictionary;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 /**
  * Core entity class. Entities exist in the game and are updated each frame. All entities have a
@@ -43,6 +46,7 @@ public class Entity {
     private float attackRange;
     private String entityType;
     private float angle;
+    public TreeMap<String, Object> data = new TreeMap<>();
 
     public Entity() {
         id = nextId;

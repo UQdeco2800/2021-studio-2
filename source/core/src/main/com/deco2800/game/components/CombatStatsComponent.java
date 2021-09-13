@@ -1,5 +1,6 @@
 package com.deco2800.game.components;
 
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,6 +60,7 @@ public class CombatStatsComponent extends Component {
         } else {
             this.health = 0;
             if (getEntity() != null) {
+                ServiceLocator.getGameAreaService().decNum();
                 getEntity().prepareDispose();
             }
         }

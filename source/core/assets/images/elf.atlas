@@ -1,30 +1,30 @@
-useEnemy64.png
-size: 3600, 1036
+elf.png
+size: 512,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-floatUp
+moveUp
   rotate: false
   xy: 2, 2
   size: 89, 105
   orig: 89, 105
   offset: 0, 0
   index: 0
-floatLeft
+moveLeft
   rotate: false
   xy: 184, 2
   size: 53, 105
   orig: 53, 105
   offset: 0, 0
   index: 0
-floatRight
+moveRight
   rotate: false
   xy: 239, 2
   size: 53, 105
   orig: 53, 105
   offset: 0, 0
   index: 0
-floatDown
+moveDown
    rotate: false
    xy: 93, 2
    size: 89, 105

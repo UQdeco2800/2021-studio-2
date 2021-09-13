@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 abstract class TouchComponent extends Component {
 
-    protected final short targetLayer;
+    protected short targetLayer;
     protected HitboxComponent hitboxComponent;
     protected boolean inCollision = false;
     protected ArrayList<Fixture> collidingFixtures = new ArrayList<>();
@@ -60,5 +60,9 @@ abstract class TouchComponent extends Component {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
         textBox.showBars();
+    }
+
+    public void setTargetLayer(short targetLayer) {
+        this.targetLayer = targetLayer;
     }
 }
