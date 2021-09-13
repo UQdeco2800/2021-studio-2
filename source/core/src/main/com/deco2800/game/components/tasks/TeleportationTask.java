@@ -102,6 +102,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         }
         if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            owner.getEntity().data.put("createFireBall", true);
             teleport(new Vector2(2f, 2f));
             count++;
         }
