@@ -195,13 +195,11 @@ public class AnimationRenderComponent extends RenderComponent {
     }
     TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
 
-    // Get entities scale, multiply by scale factor, and use cpy to avoid bugs.
     Vector2 scale = entity.getScale().cpy();
     Vector2 pos = entity.getPosition().cpy();
 
     // apply scale if one exists
     if (scaleFactor != 1f) {
-      // Get entities scale, multiply by scale factor, and use cpy to avoid bugs.
       scale.scl(scaleFactor);
       /* Without scaling, the animation center position will be (x/2, y/2).
       Where x, y are the entities scale. If we scale up by 3, this position
