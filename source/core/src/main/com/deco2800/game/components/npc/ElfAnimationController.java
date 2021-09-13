@@ -57,9 +57,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-
-            animator.startAnimation("leftDeath");
+            if (entity.getEntityType().equals("melee")) {
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.startAnimation("frontDeath");
+            }
         }
     }
 
@@ -77,8 +78,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-            animator.startAnimation("rightDeath");
+            if (entity.getEntityType().equals("melee")) {
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.startAnimation("frontDeath");
+            }
         }
     }
 
@@ -96,9 +99,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-
-            animator.startAnimation("frontDeath");
+            if (entity.getEntityType().equals("melee")) {
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.startAnimation("frontDeath");
+            }
         }
     }
 
@@ -116,9 +120,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-
-            animator.startAnimation("frontDeath");
+            if (entity.getEntityType().equals("melee")) {
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.startAnimation("frontDeath");
+            }
         }
     }
 
