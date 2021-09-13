@@ -390,6 +390,7 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
+        boss.setEntityType("elfBoss");
         return boss;
     }
 
