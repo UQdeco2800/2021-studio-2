@@ -25,11 +25,16 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("UpStart", this::animateUp);
         entity.getEvents().addListener("DownStart", this::animateDown);
 
-        entity.getEvents().addListener("Left_Shoot", this::animateLeftShoot);
-        entity.getEvents().addListener("Right_Shoot", this::animateRightShoot);
-        entity.getEvents().addListener("Down_Shoot", this::animateDownShoot);
-        entity.getEvents().addListener("Up_Shoot", this::animateUpShoot);
-    }
+        entity.getEvents().addListener("rangedLeftShoot", this::animateRangerLeft);
+        entity.getEvents().addListener("rangedRightShoot", this::animateRangerRight);
+        entity.getEvents().addListener("rangedUpShoot", this::animateRangerUp);
+        entity.getEvents().addListener("rangedDownShoot", this::animateRangerDown);
+
+        entity.getEvents().addListener("assassinLeftShoot", this::animateAssassinLeft);
+        entity.getEvents().addListener("assassinRightShoot", this::animateAssassinRight);
+        entity.getEvents().addListener("assassinUpShoot", this::animateAssassinUp);
+        entity.getEvents().addListener("assassinDownShoot", this::animateAssassinDown);
+   }
 
     public void animateLeft() {
         animator.startAnimation("moveLeft");
@@ -47,20 +52,36 @@ public class ElfAnimationController extends Component {
         animator.startAnimation("moveDown");
     }
 
-    public void animateLeftShoot() {
-        animator.startAnimation("Left_Shoot");
+    public void animateRangerLeft() {
+        animator.startAnimation("rangerLeft");
     }
 
-    public void animateRightShoot() {
-        animator.startAnimation("Right_Shoot");
+    public void animateRangerRight() {
+        animator.startAnimation("rangerRight");
     }
 
-    public void animateDownShoot() {
-        animator.startAnimation("Down_Shoot");
+    public void animateRangerUp() {
+        animator.startAnimation("rangerUp");
     }
 
-    public void animateUpShoot() {
-        animator.startAnimation("Up_Shoot");
+    public void animateRangerDown() {
+        animator.startAnimation("rangerDown");
     }
 
-}
+    public void animateAssassinLeft() {
+        animator.startAnimation("assassinLeft");
+    }
+
+    public void animateAssassinRight() {
+        animator.startAnimation("assassinRight");
+    }
+
+    public void animateAssassinUp() {
+        animator.startAnimation("assassinUp");
+    }
+
+    public void animateAssassinDown() {
+        animator.startAnimation("assassinDown");
+    }
+
+  }

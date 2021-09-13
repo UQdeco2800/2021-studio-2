@@ -155,6 +155,7 @@ public class NPCFactory {
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
         elf.scaleWidth(1);
         elf.scaleHeight(1);
+        elf.setEntityType("melee");
         return elf;
     }
 
@@ -187,6 +188,7 @@ public class NPCFactory {
         elfKing.addComponent(healthBarComponent);
 
         elfKing.getComponent(AnimationRenderComponent.class).scaleEntity();
+        elfKing.setEntityType("melee");
         return elfKing;
     }
 
@@ -231,6 +233,7 @@ public class NPCFactory {
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
         anchoredElf.scaleWidth(1);
         anchoredElf.scaleHeight(1);
+        anchoredElf.setEntityType("melee");
         return anchoredElf;
     }
 
@@ -282,51 +285,9 @@ public class NPCFactory {
         anchoredElf.addComponent(healthBarComponent);
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
+        anchoredElf.setEntityType("melee");
         return anchoredElf;
     }
-
-//    /**
-//     * Creates a anchored ghost entity.
-//     * Anchor ghost only chase the target if the target approach the anchor point
-//     *
-//     * @param target      entity to chase
-//     * @param anchor      base entity to anchor to
-//     * @param anchorSizeX how big the base's area is in the X axis
-//     * @param anchorSizeY how big the base's area is in the Y axis
-//     * @return entity
-//     */
-//    public static Entity createAnchoredGhost(Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
-//        Entity anchoredGhost = createBaseNPCNoAI();
-//        BaseEntityConfig config = configs.ghost;
-//        AITaskComponent aiComponent =
-//                new AITaskComponent()
-//                        .addTask(new AnchoredWanderTask(anchor, anchorSizeX, anchorSizeY, 2f))
-//                        .addTask(new AnchoredChaseTask(target, 3f, 4f, anchor, anchorSizeX, anchorSizeY))
-//                        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY));
-//        anchoredGhost.addComponent(aiComponent);
-//
-//        AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
-//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatDown", 0.1f, Animation.PlayMode.NORMAL);
-//
-//        anchoredGhost
-//                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-//                .addComponent(animator)
-//                .addComponent(new GhostAnimationController());
-//
-//        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-//        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-//        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-//        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-//        anchoredGhost.addComponent(healthBarComponent);
-//
-//        anchoredGhost.getComponent(AnimationRenderComponent.class).scaleEntity();
-//        return anchoredGhost;
-//    }
 
     /**
      * Creates a ranged elf entity.
@@ -355,18 +316,16 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-//<<<<<<< HEAD
-                        ServiceLocator.getResourceService().getAsset("images/minionEnemy.atlas", TextureAtlas.class));
-//        animator.addAnimation("floatLeft", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatRight", 0.1f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("floatUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+                        ServiceLocator.getResourceService().getAsset("images/rangedElf.atlas", TextureAtlas.class));
+        animator.addAnimation("rangerLeft", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("Left_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("Right_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("Up_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("Down_Shoot", 0.1f, Animation.PlayMode.NORMAL);
-
+        animator.addAnimation("assassinLeft", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
         elf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
@@ -384,6 +343,8 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 HealthBar, HealthBarFrame, HealthBarDecrease);
         elf.addComponent(healthBarComponent);
+
+        //elf.setEntityType("ranged");
         return elf;
     }
 

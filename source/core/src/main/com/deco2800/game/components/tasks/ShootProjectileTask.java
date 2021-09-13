@@ -151,23 +151,32 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         checkFireBalls();
     }
 
-    public void shootanimation(){
+    public void shootanimation() {
         float targetdir;
-        targetdir=getDirectionOfTarget();
-
-        if (targetdir>0&& targetdir<90){ //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-            owner.getEntity().getEvents().trigger("Left_Shoot");
+        targetdir = getDirectionOfTarget();
+        if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("assassin")) {
+            if (targetdir > 0 && targetdir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("assassinLeftShoot");
+            } else if (targetdir > 90 && targetdir < 180) {
+                owner.getEntity().getEvents().trigger("assassinDownShoot");
+            } else if (targetdir > 180 && targetdir < 270) {
+                owner.getEntity().getEvents().trigger("assassinRightShoot");
+            } else if (targetdir > 270 && targetdir < 360) {
+                owner.getEntity().getEvents().trigger("assassinUpShoot");
+            }
         }
-        else if (targetdir>90&& targetdir<180){
-            owner.getEntity().getEvents().trigger("Down_Shoot");
-        }
-        else if (targetdir>180&& targetdir<270) {
-            owner.getEntity().getEvents().trigger("Right_Shoot");
-        }
-        else if (targetdir>270&& targetdir<360){
-            owner.getEntity().getEvents().trigger("Up_Shoot");
-        }
-        }
+        else if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("ranged")) {
+            if (targetdir > 0 && targetdir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("rangedLeftShoot");
+            } else if (targetdir > 90 && targetdir < 180) {
+                owner.getEntity().getEvents().trigger("rangedDownShoot");
+            } else if (targetdir > 180 && targetdir < 270) {
+                owner.getEntity().getEvents().trigger("rangedRightShoot");
+            } else if (targetdir > 270 && targetdir < 360) {
+                owner.getEntity().getEvents().trigger("rangedUpShoot");
+            }
+      }
+    }
     /**
      * Spawns in an arrow according to the classes variables
      */

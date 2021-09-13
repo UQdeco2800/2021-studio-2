@@ -65,13 +65,15 @@ public class ForestGameArea extends GameArea {
             "images/bossAttack.png",
             "images/minionEnemy.png",
             "images/meleeElf.png",
-            "images/guardElf.png"
+            "images/guardElf.png",
+            "images/rangedElf.png"
+
     };
     private static final String[] forestTextureAtlases = {
 
             "images/terrain_iso_grass.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas"
+            "images/guardElf.atlas", "images/rangedElf.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -208,8 +210,9 @@ public class ForestGameArea extends GameArea {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
             incNum();
+            elf.setEntityType("ranged");
+            elf.getEvents().trigger("rangerLeft");
             spawnEntityAt(elf, randomPos, true, true);
-            elf.getEvents().trigger("DownStart");
         }
     }
 
@@ -223,8 +226,9 @@ public class ForestGameArea extends GameArea {
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
+            elf.setEntityType("assassin");
+            elf.getEvents().trigger("assassinLeft");
             spawnEntityAt(elf, randomPos, true, true);
-            elf.getEvents().trigger("DownStart");
         }
     }
 
