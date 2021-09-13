@@ -11,7 +11,6 @@ public class ElfAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
 
-
     /**
      * Create the animation
      * add listener on entity with wander and chase task
