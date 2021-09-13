@@ -375,13 +375,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 3f, 4f));
-        Entity npc =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new PhysicsMovementComponent())
-                        .addComponent(new ColliderComponent())
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2.5f))
+        Entity npc = createBaseNPCNoAI()
                         .addComponent(aiComponent);
 
         PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
@@ -395,13 +389,12 @@ public class NPCFactory {
      * @return entity
      */
     private static Entity createBaseNPCNoAI() {
-        Entity npc =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new PhysicsMovementComponent())
-                        .addComponent(new ColliderComponent())
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                        .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0.5f));
+        Entity npc = new Entity()
+                .addComponent(new PhysicsComponent())
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0.5f));
 
         PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
         return npc;
