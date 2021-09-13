@@ -284,9 +284,58 @@ rangerUp
   orig: 71, 105
   offset: 0, 0
   index: 3
-moveDown
+assassinMoveDown
   rotate: false
   xy: 150, 219
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+assassinMoveLeft
+  rotate: false
+  xy: 369, 216
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+assassinMoveRight
+  rotate: false
+  xy: 617, 323
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+assassinMoveUp
+  rotate: false
+  xy: 150, 112
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+rangerMoveLeft
+  rotate: false
+  xy: 369, 216
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+rangerMoveDown
+  rotate: false
+  xy: 149, 5
+  size: 71, 105
+  orig: 71, 105
+  offset: 0, 0
+  index: 1
+rangerMoveRight
+  rotate: false
+  xy: 849, 323
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+rangerMoveUp
+  rotate: false
+  xy: 370, 326
   size: 71, 105
   orig: 71, 105
   offset: 0, 0

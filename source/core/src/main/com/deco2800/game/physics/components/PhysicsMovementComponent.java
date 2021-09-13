@@ -84,24 +84,20 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void DirectionAnimation (){
-        //for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
-            if (entity.getEntityType() != null && this.entity.getEntityType().equals("melee")){
-                    if (this.getDirection().x > this.getDirection().y) {
-                        if (this.getDirection().x < 0) {
-                            this.getEntity().getEvents().trigger("LeftStart");
-                        }
-                        else {
-                            this.getEntity().getEvents().trigger("RightStart");
-                        }
-                    }
-                    else{
-                        if (this.getDirection().y < 0) {
-                            this.getEntity().getEvents().trigger("DownStart");
-                        } else {
-                            this.getEntity().getEvents().trigger("UpStart");
-                        }
-                    }}
+        if (this.getDirection().x > this.getDirection().y) {
+            if (this.getDirection().x < 0) {
+                this.getEntity().getEvents().trigger("LeftStart");
+            } else {
+                this.getEntity().getEvents().trigger("RightStart");
             }
+        } else {
+            if (this.getDirection().y < 0) {
+                this.getEntity().getEvents().trigger("DownStart");
+            } else {
+                this.getEntity().getEvents().trigger("UpStart");
+            }
+        }
+    }
 
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);

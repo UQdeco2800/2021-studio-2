@@ -286,6 +286,7 @@ public class NPCFactory {
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType(type);
         shootProjectileTask.setMultishotChance(multishotChance);
+        shootProjectileTask.setShootAnimationTimeMS(500);
         aiComponent.addTask(shootProjectileTask);
         //create fireballs if needed
         elf.data.put("createFireBall", true);
@@ -293,15 +294,29 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/rangedElf.atlas", TextureAtlas.class));
-        animator.addAnimation("rangerLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("assassinLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
+        if (type.equals("fastArrow")) {
+            elf.setEntityType("assassin");
+            animator.addAnimation("assassinMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinMoveRight", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinMoveUp", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinMoveDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinLeft", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
+        } else {
+            elf.setEntityType("ranged");
+            animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerMoveRight", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerMoveUp", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerMoveDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerLeft", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
+        }
+
         elf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
@@ -319,8 +334,6 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 HealthBar, HealthBarFrame, HealthBarDecrease);
         elf.addComponent(healthBarComponent);
-
-        //elf.setEntityType("ranged");
         return elf;
     }
 

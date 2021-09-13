@@ -45,7 +45,17 @@ public class ElfAnimationController extends Component {
 
     public void animateLeft() {
         if (!death) {
-            animator.startAnimation("moveLeft");
+            switch (entity.getEntityType()) {
+                case "assassin":
+                    animator.startAnimation("assassinMoveLeft");
+                    break;
+                case "ranger":
+                    animator.startAnimation("rangerMoveLeft");
+                    break;
+                case "default":
+                    animator.startAnimation("moveLeft");
+                    break;
+            }
         } else {
             animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
 
@@ -55,7 +65,17 @@ public class ElfAnimationController extends Component {
 
     public void animateRight() {
         if (!death) {
-            animator.startAnimation("moveRight");
+            switch (entity.getEntityType()) {
+                case "assassin":
+                    animator.startAnimation("assassinMoveRight");
+                    break;
+                case "ranger":
+                    animator.startAnimation("rangerMoveRight");
+                    break;
+                case "default":
+                    animator.startAnimation("moveRight");
+                    break;
+            }
         } else {
             animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
             animator.startAnimation("rightDeath");
@@ -64,7 +84,17 @@ public class ElfAnimationController extends Component {
 
     public void animateUp() {
         if (!death) {
-            animator.startAnimation("moveDown");
+            switch (entity.getEntityType()) {
+                case "assassin":
+                    animator.startAnimation("assassinMoveUp");
+                    break;
+                case "ranger":
+                    animator.startAnimation("rangerMoveUp");
+                    break;
+                case "default":
+                    animator.startAnimation("moveUp");
+                    break;
+            }
         } else {
             animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
 
@@ -74,7 +104,17 @@ public class ElfAnimationController extends Component {
 
     public void animateDown() {
         if (!death) {
-            animator.startAnimation("moveDown");
+            switch (entity.getEntityType()) {
+                case "assassin":
+                    animator.startAnimation("assassinMoveDown");
+                    break;
+                case "ranger":
+                    animator.startAnimation("rangerMoveDown");
+                    break;
+                case "default":
+                    animator.startAnimation("moveDown");
+                    break;
+            }
         } else {
             animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
 
