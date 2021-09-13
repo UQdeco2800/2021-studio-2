@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -171,34 +171,43 @@ int&nbsp;baseAttack)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#checkTransformation(int)">checkTransformation</a></span>&#8203;(int&nbsp;health)</code></th>
+<td class="colLast">
+<div class="block">if the entity has a Transform Component it will execute its transformation
+ will only transform the entity if its hp less than or equal to 0 and will disable
+ CombatStatsComponent</div>
+</td>
+</tr>
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the entity is created and registered.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBaseAttack()">getBaseAttack</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the entity's base attack damage.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHealth()">getHealth</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the entity's health.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMaxHealth()">getMaxHealth</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Return's entity's health maximum</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hit(com.deco2800.game.components.CombatStatsComponent)">hit</a></span>&#8203;(<a href="CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a>&nbsp;attacker)</code></th>
 <td class="colLast">
@@ -206,28 +215,28 @@ int&nbsp;baseAttack)</code></th>
  if this entity has a transform component or hit animations they will be called.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isDead()">isDead</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if the entity's has 0 health, otherwise false.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBaseAttack(int)">setBaseAttack</a></span>&#8203;(int&nbsp;attack)</code></th>
 <td class="colLast">
 <div class="block">Sets the entity's attack damage.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHealth(int)">setHealth</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
 <div class="block">Sets the entity's health.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMaxHealth(int)">setMaxHealth</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
@@ -389,6 +398,21 @@ int&nbsp;baseAttack)</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>attacker</code> - the CombatStatComponent of the attacker</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="checkTransformation(int)">checkTransformation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">checkTransformation</span>&#8203;(<span class="arguments">int&nbsp;health)</span></div>
+<div class="block">if the entity has a Transform Component it will execute its transformation
+ will only transform the entity if its hp less than or equal to 0 and will disable
+ CombatStatsComponent</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>health</code> - the current health of the entity</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if entity has a TransformComponent otherwise false</dd>
 </dl>
 </section>
 </li>
