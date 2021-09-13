@@ -52,7 +52,7 @@ public class LineEntity extends Entity {
     public void update() {
         super.update();
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= TTL) {
-            this.dispose();
+            this.prepareDispose();
         }
     }
 }

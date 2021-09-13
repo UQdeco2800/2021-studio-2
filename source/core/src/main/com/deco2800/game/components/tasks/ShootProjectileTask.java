@@ -313,7 +313,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         target.getComponent(CombatStatsComponent.class).addHealth(-damage);
                     }
                     tragectoryLocation = null;
-                    aimingLine.dispose();
+                    aimingLine.prepareDispose();
                     aimingLine = null;
                 }
                 break;
