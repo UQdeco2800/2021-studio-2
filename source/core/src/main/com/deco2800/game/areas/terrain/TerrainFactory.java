@@ -130,16 +130,17 @@ public class TerrainFactory {
 
 
   private TiledMapRenderer createRenderer(TiledMap tiledMap, float tileScale) {
-    switch (orientation) {
-      case ORTHOGONAL:
-        return new OrthogonalTiledMapRenderer(tiledMap, tileScale);
-      case ISOMETRIC:
-        return new IsometricTiledMapRenderer(tiledMap, tileScale);
-      case HEXAGONAL:
-        return new HexagonalTiledMapRenderer(tiledMap, tileScale);
-      default:
-        return null;
-    }
+      switch (orientation) {
+          case ORTHOGONAL:
+              return new OrthogonalTiledMapRenderer(tiledMap, tileScale);
+          case ISOMETRIC:
+              return new IsometricTiledMapRenderer(tiledMap, tileScale);
+          case HEXAGONAL:
+              return new HexagonalTiledMapRenderer(tiledMap, tileScale);
+          default:
+              return null;
+      }
+  }
 
     private static void placeTiles(
             TiledMapTileLayer layer, GridPoint2 mapSize, ArrayList<TerrainTile> tiles, int[][] map) {
@@ -268,17 +269,19 @@ public class TerrainFactory {
     }
 
     private TerrainComponent createWorldTerrain(
-            @SuppressWarnings("SameParameterValue") float tileWorldSize, ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions) {
+            @SuppressWarnings("SameParameterValue") float tileWorldSize, ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions)
+      {
 
-        GridPoint2 tilePixelSize = new GridPoint2(textures.get(1).getRegionWidth(), textures.get(1).getRegionHeight());
+          GridPoint2 tilePixelSize = new GridPoint2(textures.get(1).getRegionWidth(), textures.get(1).getRegionHeight());
 
 
-    // Create Tiles
-    ArrayList<TerrainTile> tiles = new ArrayList<>();
-    for (TextureRegion t:textures
-         ) {
-      tiles.add(new TerrainTile(t));
-    }
+          // Create Tiles
+          ArrayList<TerrainTile> tiles = new ArrayList<>();
+          for (TextureRegion t : textures
+          ) {
+              tiles.add(new TerrainTile(t));
+          }
+      }
 
     private TiledMap createTiles(
             GridPoint2 tileSize, ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
@@ -296,13 +299,14 @@ public class TerrainFactory {
         }
 
 
-    for (int y = min.y; y <= max.y; y++) {
-      for (int x = min.y; x <= max.x; x++){
-        Cell cell = new Cell();
+        for (int y = min.y; y <= max.y; y++) {
+            for (int x = min.y; x <= max.x; x++) {
+                Cell cell = new Cell();
 
-        cell.setTile(tiles.get(map[y][x]-1));
-        layer.setCell(x, max.y - y, cell);
-      }
+                cell.setTile(tiles.get(map[y][x] - 1));
+                layer.setCell(x, max.y - y, cell);
+            }
+        }
     }
 
     /**
