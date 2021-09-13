@@ -683,7 +683,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html#createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.badlogic.gdx.math.Vector2,int,int)">createMoveDialogueTrigger(RandomDialogueSet, Vector2, int, int)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories">CutsceneTriggerFactory</a></dt>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html#createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,com.badlogic.gdx.math.Vector2,int,int)">createMoveDialogueTrigger(RandomDialogueSet, DialogueSet, Vector2, int, int)</a></span> - Static method in class com.deco2800.game.entities.factories.<a href="com/deco2800/game/entities/factories/CutsceneTriggerFactory.html" title="class in com.deco2800.game.entities.factories">CutsceneTriggerFactory</a></dt>
 <dd>
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </dd>
@@ -1076,6 +1076,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/ui/textbox/DialogueSet.html#FIRST_ENCOUNTER">FIRST_ENCOUNTER</a></span> - com.deco2800.game.ui.textbox.<a href="com/deco2800/game/ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#firstBoss">firstBoss</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#firstBossWins">firstBossWins</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/ColliderComponent.html#fixture">fixture</a></span> - Variable in class com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/ColliderComponent.html" title="class in com.deco2800.game.physics.components">ColliderComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/raycast/RaycastHit.html#fixture">fixture</a></span> - Variable in class com.deco2800.game.physics.raycast.<a href="com/deco2800/game/physics/raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a></dt>
@@ -1164,6 +1168,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/GdxGame.html#%3Cinit%3E()">GdxGame()</a></span> - Constructor for class com.deco2800.game.<a href="com/deco2800/game/GdxGame.html" title="class in com.deco2800.game">GdxGame</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/GdxGame.ScreenType.html" title="enum in com.deco2800.game"><span class="typeNameLink">GdxGame.ScreenType</span></a> - Enum in <a href="com/deco2800/game/package-summary.html">com.deco2800.game</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.html#get()">get()</a></span> - Static method in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.html" title="class in com.deco2800.game.files">PlayerSave</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/UserSettings.html#get()">get()</a></span> - Static method in class com.deco2800.game.files.<a href="com/deco2800/game/files/UserSettings.html" title="class in com.deco2800.game.files">UserSettings</a></dt>
 <dd>
@@ -1562,6 +1568,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns if the player has a certain amount of gold.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#hasPlayed">hasPlayed</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/BaseArrowConfig.html#health">health</a></span> - Variable in class com.deco2800.game.entities.configs.<a href="com/deco2800/game/entities/configs/BaseArrowConfig.html" title="class in com.deco2800.game.entities.configs">BaseArrowConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/entities/configs/BaseEntityConfig.html#health">health</a></span> - Variable in class com.deco2800.game.entities.configs.<a href="com/deco2800/game/entities/configs/BaseEntityConfig.html" title="class in com.deco2800.game.entities.configs">BaseEntityConfig</a></dt>
@@ -2222,6 +2230,20 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html#%3Cinit%3E()">PlayerLowHealthDisplay()</a></span> - Constructor for class com.deco2800.game.components.player.<a href="com/deco2800/game/components/player/PlayerLowHealthDisplay.html" title="class in com.deco2800.game.components.player">PlayerLowHealthDisplay</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#playerMaterials">playerMaterials</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/files/PlayerSave.html" title="class in com.deco2800.game.files"><span class="typeNameLink">PlayerSave</span></a> - Class in <a href="com/deco2800/game/files/package-summary.html">com.deco2800.game.files</a></dt>
+<dd>
+<div class="block">Player save information
+  Ways to save and load it</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.html#%3Cinit%3E()">PlayerSave()</a></span> - Constructor for class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.html" title="class in com.deco2800.game.files">PlayerSave</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files"><span class="typeNameLink">PlayerSave.Save</span></a> - Class in <a href="com/deco2800/game/files/package-summary.html">com.deco2800.game.files</a></dt>
+<dd>
+<div class="block">Stores player game progress
+  Values are defaulted to no progress at all</div>
+</dd>
 <dt><a href="com/deco2800/game/components/player/PlayerStatsDisplay.html" title="class in com.deco2800.game.components.player"><span class="typeNameLink">PlayerStatsDisplay</span></a> - Class in <a href="com/deco2800/game/components/player/package-summary.html">com.deco2800.game.components.player</a></dt>
 <dd>
 <div class="block">A ui component for displaying player stats, e.g.</div>
@@ -2469,6 +2491,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">S</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#%3Cinit%3E()">Save()</a></span> - Constructor for class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/physics/components/ColliderComponent.html#scale">scale</a></span> - Variable in class com.deco2800.game.physics.components.<a href="com/deco2800/game/physics/components/ColliderComponent.html" title="class in com.deco2800.game.physics.components">ColliderComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/AnimationRenderComponent.html#scaleEntity()">scaleEntity()</a></span> - Method in class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/AnimationRenderComponent.html" title="class in com.deco2800.game.rendering">AnimationRenderComponent</a></dt>
@@ -2500,6 +2524,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Scrolling up will open the terminal and scrolling down will close the terminal.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#secondBoss">secondBoss</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#secondBossWins">secondBossWins</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/deco2800/game/services/ServiceLocator.html" title="class in com.deco2800.game.services"><span class="typeNameLink">ServiceLocator</span></a> - Class in <a href="com/deco2800/game/services/package-summary.html">com.deco2800.game.services</a></dt>
 <dd>
 <div class="block">A simplified implementation of the Service Locator pattern:
@@ -2509,6 +2537,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Set physics as a box with a given size.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.html#set(com.deco2800.game.files.PlayerSave.Save)">set(PlayerSave.Save)</a></span> - Static method in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.html" title="class in com.deco2800.game.files">PlayerSave</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/files/UserSettings.html#set(com.deco2800.game.files.UserSettings.Settings,boolean)">set(UserSettings.Settings, boolean)</a></span> - Static method in class com.deco2800.game.files.<a href="com/deco2800/game/files/UserSettings.html" title="class in com.deco2800.game.files">UserSettings</a></dt>
 <dd>
 <div class="block">Set the stored user settings</div>
@@ -3087,6 +3117,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/TextureRenderComponent.html#%3Cinit%3E(com.badlogic.gdx.graphics.Texture)">TextureRenderComponent(Texture)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/TextureRenderComponent.html" title="class in com.deco2800.game.rendering">TextureRenderComponent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/rendering/TextureRenderComponent.html#%3Cinit%3E(java.lang.String)">TextureRenderComponent(String)</a></span> - Constructor for class com.deco2800.game.rendering.<a href="com/deco2800/game/rendering/TextureRenderComponent.html" title="class in com.deco2800.game.rendering">TextureRenderComponent</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#thirdBoss">thirdBoss</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/deco2800/game/files/PlayerSave.Save.html#thirdBossWins">thirdBossWins</a></span> - Variable in class com.deco2800.game.files.<a href="com/deco2800/game/files/PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/deco2800/game/areas/terrain/Map.html#TileRefsArray()">TileRefsArray()</a></span> - Method in class com.deco2800.game.areas.terrain.<a href="com/deco2800/game/areas/terrain/Map.html" title="class in com.deco2800.game.areas.terrain">Map</a></dt>
 <dd>&nbsp;</dd>
