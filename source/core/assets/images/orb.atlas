@@ -1,0 +1,69 @@
+
+orb.png
+size: 2048, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+explode
+  rotate: false
+  xy: 2, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+explode
+  rotate: false
+  xy: 132, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+explode
+  rotate: false
+  xy: 262, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+explode
+  rotate: false
+  xy: 392, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+explode
+  rotate: false
+  xy: 522, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+orb
+  rotate: false
+  xy: 652, 4
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+orb
+  rotate: false
+  xy: 782, 4
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+orb
+  rotate: false
+  xy: 912, 4
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+orb
+  rotate: false
+  xy: 1042, 4
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
