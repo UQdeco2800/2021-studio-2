@@ -8,8 +8,8 @@ import com.deco2800.game.entities.Entity;
  */
 public class BodyUserData {
 
-  /**
-   * The entity to which this body is attached
-   */
-  public Entity entity;
+    /**
+     * The entity to which this body is attached
+     */
+    public Entity entity;
 }

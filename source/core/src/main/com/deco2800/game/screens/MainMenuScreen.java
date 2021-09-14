@@ -1,6 +1,10 @@
 package com.deco2800.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.mainmenu.MainMenuActions;
@@ -10,8 +14,10 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -25,11 +31,14 @@ public class MainMenuScreen extends ScreenAdapter {
   private final GdxGame game;
   private final Renderer renderer;
   private static final String[] mainMenuTextures = {"images/Valhalla_title.png", "images/main_menu_background.png"};
+  private static final String[] mainMenuAtlas = {"menuBackgroundSprite/menuBackground.atlas"};
+  private AnimationRenderComponent animator;
 
   public MainMenuScreen(GdxGame game) {
     this.game = game;
 
     logger.debug("Initialising main menu screen services");
+    ServiceLocator.registerTimeSource(new GameTime());
     ServiceLocator.registerInputService(new InputService());
     ServiceLocator.registerResourceService(new ResourceService());
     ServiceLocator.registerEntityService(new EntityService());
@@ -66,7 +75,7 @@ public class MainMenuScreen extends ScreenAdapter {
   @Override
   public void dispose() {
     logger.debug("Disposing main menu screen");
-
+    this.animator.stopAnimation();
     renderer.dispose();
     unloadAssets();
     ServiceLocator.getRenderService().dispose();
@@ -79,6 +88,7 @@ public class MainMenuScreen extends ScreenAdapter {
     logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(mainMenuTextures);
+    resourceService.loadTextureAtlases(mainMenuAtlas);
     ServiceLocator.getResourceService().loadAll();
   }
 
@@ -86,6 +96,7 @@ public class MainMenuScreen extends ScreenAdapter {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(mainMenuTextures);
+    resourceService.unloadAssets(mainMenuAtlas);
   }
 
   /**
@@ -95,10 +106,18 @@ public class MainMenuScreen extends ScreenAdapter {
   private void createUI() {
     logger.debug("Creating ui");
     Stage stage = ServiceLocator.getRenderService().getStage();
+    this.animator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
+            "menuBackgroundSprite/menuBackground.atlas", TextureAtlas.class));
+    this.animator.addAnimation("menu", 0.11f, Animation.PlayMode.LOOP);
     Entity ui = new Entity();
     ui.addComponent(new MainMenuDisplay())
+        .addComponent(animator)
         .addComponent(new InputDecorator(stage, 10))
         .addComponent(new MainMenuActions(game));
     ServiceLocator.getEntityService().register(ui);
+    // need to fix scaling
+    ui.setScale(20.5f, 12.5f);
+    ui.setPosition(-5.5f,-1.5f);
+    this.animator.startAnimation("menu");
   }
 }

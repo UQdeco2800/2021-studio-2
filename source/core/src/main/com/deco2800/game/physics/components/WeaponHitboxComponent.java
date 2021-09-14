@@ -1,6 +1,5 @@
 package com.deco2800.game.physics.components;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -22,11 +21,13 @@ public class WeaponHitboxComponent extends ColliderComponent {
 
     /**
      * Set physics as a box with a given size. Box is centered around the entity.
-     * @param size size of the box, relative to the entity's size.
-     *             NOTE: Pass cpy() to avoid bugs.
+     *
+     * @param size      size of the box, relative to the entity's size.
+     *                  NOTE: Pass cpy() to avoid bugs.
      * @param direction the direction of the hit box, relative to the entity.
      * @return self
      */
+    @SuppressWarnings("UnusedReturnValue")
     public ColliderComponent set(Vector2 size, int direction) {
 
         Vector2 position = new Vector2(0.5f, 0.5f); // center around entity
@@ -66,10 +67,11 @@ public class WeaponHitboxComponent extends ColliderComponent {
     /**
      * Sets the hit box shape, but also allows for resizing. This is called by
      * all setBox methods (defined in ColliderComponent)
+     *
      * @param shape shape, default = bounding box the same size as the entity
-     * @see ColliderComponent
      * @return self
-     * */
+     * @see ColliderComponent
+     */
     @Override
     public ColliderComponent setShape(Shape shape) {
         fixtureDef.shape = shape;
@@ -94,4 +96,4 @@ public class WeaponHitboxComponent extends ColliderComponent {
         physBody.destroyFixture(fixture);
         fixture = null;
     }
-}
+} 

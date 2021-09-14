@@ -21,71 +21,71 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class ChaseTaskTest {
-  @BeforeEach
-  void beforeEach() {
-    // Mock rendering, physics, game time
-    RenderService renderService = new RenderService();
-    renderService.setDebug(mock(DebugRenderer.class));
-    ServiceLocator.registerRenderService(renderService);
-    GameTime gameTime = mock(GameTime.class);
-    when(gameTime.getDeltaTime()).thenReturn(20f / 1000);
-    ServiceLocator.registerTimeSource(gameTime);
-    ServiceLocator.registerPhysicsService(new PhysicsService());
-  }
-
-  @Test
-  void shouldMoveTowardsTarget() {
-    Entity target = new Entity();
-    target.setPosition(2f, 2f);
-
-    AITaskComponent ai = new AITaskComponent().addTask(new ChaseTask(target, 10, 5, 10));
-    Entity entity = makePhysicsEntity().addComponent(ai);
-    entity.create();
-    entity.setPosition(0f, 0f);
-
-    float initialDistance = entity.getPosition().dst(target.getPosition());
-    // Run the game for a few cycles
-    for (int i = 0; i < 3; i++) {
-      entity.earlyUpdate();
-      entity.update();
-      ServiceLocator.getPhysicsService().getPhysics().update();
+    @BeforeEach
+    void beforeEach() {
+        // Mock rendering, physics, game time
+        RenderService renderService = new RenderService();
+        renderService.setDebug(mock(DebugRenderer.class));
+        ServiceLocator.registerRenderService(renderService);
+        GameTime gameTime = mock(GameTime.class);
+        when(gameTime.getDeltaTime()).thenReturn(20f / 1000);
+        ServiceLocator.registerTimeSource(gameTime);
+        ServiceLocator.registerPhysicsService(new PhysicsService());
     }
-    float newDistance = entity.getPosition().dst(target.getPosition());
-    assertTrue(newDistance < initialDistance);
-  }
 
-  @Test
-  void shouldChaseOnlyWhenInDistance() {
-    Entity target = new Entity();
-    target.setPosition(0f, 6f);
+    @Test
+    void shouldMoveTowardsTarget() {
+        Entity target = new Entity();
+        target.setPosition(2f, 2f);
 
-    Entity entity = makePhysicsEntity();
-    entity.create();
-    entity.setPosition(0f, 0f);
+        AITaskComponent ai = new AITaskComponent().addTask(new ChaseTask(target, 10, 5, 10));
+        Entity entity = makePhysicsEntity().addComponent(ai);
+        entity.create();
+        entity.setPosition(0f, 0f);
 
-    ChaseTask chaseTask = new ChaseTask(target, 10, 5, 10);
-    chaseTask.create(() -> entity);
+        float initialDistance = entity.getPosition().dst(target.getPosition());
+        // Run the game for a few cycles
+        for (int i = 0; i < 3; i++) {
+            entity.earlyUpdate();
+            entity.update();
+            ServiceLocator.getPhysicsService().getPhysics().update();
+        }
+        float newDistance = entity.getPosition().dst(target.getPosition());
+        assertTrue(newDistance < initialDistance);
+    }
 
-    // Not currently active, target is too far, should have negative priority
-    assertTrue(chaseTask.getPriority() < 0);
+    @Test
+    void shouldChaseOnlyWhenInDistance() {
+        Entity target = new Entity();
+        target.setPosition(0f, 6f);
 
-    // When in view distance, should give higher priority
-    target.setPosition(0f, 4f);
-    assertEquals(10, chaseTask.getPriority());
+        Entity entity = makePhysicsEntity();
+        entity.create();
+        entity.setPosition(0f, 0f);
 
-    // When active, should chase if within chase distance
-    target.setPosition(0f, 8f);
-    chaseTask.start();
-    assertEquals(10, chaseTask.getPriority());
+        ChaseTask chaseTask = new ChaseTask(target, 10, 5, 10);
+        chaseTask.create(() -> entity);
 
-    // When active, should not chase outside chase distance
-    target.setPosition(0f, 12f);
-    assertTrue(chaseTask.getPriority() < 0);
-  }
+        // Not currently active, target is too far, should have negative priority
+        assertTrue(chaseTask.getPriority() < 0);
 
-  private Entity makePhysicsEntity() {
-    return new Entity()
-        .addComponent(new PhysicsComponent())
-        .addComponent(new PhysicsMovementComponent());
-  }
+        // When in view distance, should give higher priority
+        target.setPosition(0f, 4f);
+        assertEquals(10, chaseTask.getPriority());
+
+        // When active, should chase if within chase distance
+        target.setPosition(0f, 8f);
+        chaseTask.start();
+        assertEquals(10, chaseTask.getPriority());
+
+        // When active, should not chase outside chase distance
+        target.setPosition(0f, 12f);
+        assertTrue(chaseTask.getPriority() < 0);
+    }
+
+    private Entity makePhysicsEntity() {
+        return new Entity()
+                .addComponent(new PhysicsComponent())
+                .addComponent(new PhysicsMovementComponent());
+    }
 }

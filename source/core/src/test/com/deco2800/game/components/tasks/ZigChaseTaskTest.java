@@ -10,7 +10,6 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 
 @ExtendWith(GameExtension.class)
 class ZigChaseTaskTest {
@@ -42,7 +42,7 @@ class ZigChaseTaskTest {
         target.setPosition(3f, 3f);
 
         AITaskComponent ai = new AITaskComponent()
-                .addTask(new ZigChaseTask(target, 10, 5f, 6f));
+                .addTask(new ZigChaseTask(target, 10, 5f, 6f, 1f));
         Entity entity = makePhysicsEntity().addComponent(ai);
         entity.create();
         entity.setPosition(0f, 0f);
@@ -58,16 +58,12 @@ class ZigChaseTaskTest {
             entity.update();
             ServiceLocator.getPhysicsService().getPhysics().update();
             if (initialDistance - entity.getPosition().dst(target.getPosition()) == 0
-                && entity.getPosition().dst(target.getPosition()) > 1f) {
+                    && entity.getPosition().dst(target.getPosition()) > 1f) {
                 // distance > 1 because if less than 1, the entity is approach target
                 count++;
             }
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCompare) > 500) {
-                //System.out.println(initialDistance - entity.getPosition().dst(target.getPosition()));
                 assertTrue(initialDistance - entity.getPosition().dst(target.getPosition()) != 0);
-                initialDistance = entity.getPosition().dst(target.getPosition());
-                // angle of zig zag update every 0.5 seconds.
-                timeCompare = System.nanoTime();
                 break;
             }
         }
@@ -83,7 +79,7 @@ class ZigChaseTaskTest {
         entity.create();
         entity.setPosition(0f, 0f);
 
-        ZigChaseTask zigChaseTask  = new ZigChaseTask(target, 10, 5, 10);
+        ZigChaseTask zigChaseTask = new ZigChaseTask(target, 10, 5, 10, 1f);
         zigChaseTask.create(() -> entity);
 
         // Not currently active, target is too far, should have negative priority

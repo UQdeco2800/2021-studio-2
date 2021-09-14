@@ -1,14 +1,15 @@
 package com.deco2800.game.concurrency;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.deco2800.game.extensions.GameExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * There aren't a lot of tests here since some of the job system's desired behaviour is
@@ -17,19 +18,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @ExtendWith(GameExtension.class)
 class JobSystemTest {
-  @Test
-  void shouldRunTask() throws InterruptedException, ExecutionException, TimeoutException {
-    CompletableFuture<Integer> future = JobSystem.launch(() -> 10);
-    int result = future.get(500, TimeUnit.MILLISECONDS);
+    @Test
+    void shouldRunTask() throws InterruptedException, ExecutionException, TimeoutException {
+        CompletableFuture<Integer> future = JobSystem.launch(() -> 10);
+        int result = future.get(500, TimeUnit.MILLISECONDS);
 
-    assertEquals(10, result);
-  }
+        assertEquals(10, result);
+    }
 
-  @Test
-  void shouldRunBlockingTask() throws InterruptedException, ExecutionException, TimeoutException {
-    CompletableFuture<Integer> future = JobSystem.launchBlocking(() -> 10);
-    int result = future.get(500, TimeUnit.MILLISECONDS);
+    @Test
+    void shouldRunBlockingTask() throws InterruptedException, ExecutionException, TimeoutException {
+        CompletableFuture<Integer> future = JobSystem.launchBlocking(() -> 10);
+        int result = future.get(500, TimeUnit.MILLISECONDS);
 
-    assertEquals(10, result);
-  }
+        assertEquals(10, result);
+    }
 }

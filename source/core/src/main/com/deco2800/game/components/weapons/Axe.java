@@ -12,9 +12,13 @@ import com.deco2800.game.services.ServiceLocator;
  * uses an AOE (area of effect) attack.
  */
 public class Axe extends MeleeWeapon {
-    /** Sound that plays every axe swing */
+    /**
+     * Sound that plays every axe swing
+     */
     private final Sound attackSound;
-    /** Sound that plays when axe hits enemy */
+    /**
+     * Sound that plays when axe hits enemy
+     */
     private final Sound impactSound;
 
     public Axe(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
@@ -27,12 +31,13 @@ public class Axe extends MeleeWeapon {
 
     /**
      * Attacks, but also plays animation.
+     *
      * @see MeleeWeapon
      */
     @Override
     public void attack(int attackDirection) {
         super.attack(attackDirection);
-        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
+        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
         }
@@ -69,6 +74,7 @@ public class Axe extends MeleeWeapon {
 
     /**
      * Plays impact sound if weapon successfully collides with enemy.
+     *
      * @see MeleeWeapon
      */
     @Override

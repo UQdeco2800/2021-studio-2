@@ -1,6 +1,5 @@
 package com.deco2800.game.components.tasks;
 
-import com.badlogic.gdx.Game;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -12,14 +11,11 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.utils.math.Vector2Utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -50,8 +46,6 @@ class AlertChaseTaskTest {
         AITaskComponent aiAlertable = new AITaskComponent().addTask(alertableChaseTask);
         Entity alertableEntity = makePhysicsEntity().addComponent(aiAlertable);
         alertableChaseTask.create(() -> alertableEntity);
-        //entity.create();
-        //alertableEntity.create();;
         alertChaseTask.create(() -> entity);
         entity.setPosition(0f, 0f);
         alertableEntity.setPosition(8f, 8f);
@@ -61,10 +55,6 @@ class AlertChaseTaskTest {
         entityService.register(alertableEntity);
         ServiceLocator.registerEntityService(entityService);
 
-        // Run the game for a few cycles
-
-        long time = System.nanoTime();
-
         float oldDistance = alertableEntity.getPosition().dst(target.getPosition());
 
         for (int i = 0; i < 3; i++) {
@@ -73,7 +63,7 @@ class AlertChaseTaskTest {
         float newDistance1 = alertableEntity.getPosition().dst(target.getPosition());
 
         // target is too far from enemy
-        assertTrue(oldDistance - newDistance1 == 0);
+        assertEquals(oldDistance - newDistance1, 0);
 
         for (int i = 0; i < 3; i++) {
             entity.update();
