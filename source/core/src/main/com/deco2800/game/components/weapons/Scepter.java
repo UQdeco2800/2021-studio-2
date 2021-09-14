@@ -45,10 +45,10 @@ public class Scepter extends MeleeWeapon {
         }
         switch (attackDirection) {
             case UP:
-                animator.startAnimation("back_scepter_attack");
+                animator.startAnimation("up_scepter_attack");
                 break;
             case DOWN:
-                animator.startAnimation("front_scepter_attack");
+                animator.startAnimation("down_scepter_attack");
                 break;
             case LEFT:
                 animator.startAnimation("left_scepter_attack");

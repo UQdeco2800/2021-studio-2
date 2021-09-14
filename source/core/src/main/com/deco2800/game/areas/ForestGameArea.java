@@ -53,6 +53,7 @@ public class ForestGameArea extends GameArea {
             "images/player.png",
             "images/player_axe.png",
             "images/player_hammer.png",
+            "images/player_scepter.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -70,7 +71,7 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
             "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
-            "images/health_bar.atlas", "crate/crateHitBreak.atlas"
+            "images/player_scepter.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
