@@ -24,66 +24,66 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("SuspiciousNameCombination")
 public class ForestGameArea extends GameArea {
-    private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
-    private static final int NUM_CRATES = 3;
-    private static final int NUM_TREES = 7;
-    private static final int NUM_GHOSTS = 2;
-    private static final int NUM_ANCHORED_GHOSTS = 1;
-    private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-    private static final float WALL_WIDTH = 0.1f;
-    private static final String[] forestTextures = {
-            "images/box_boy_leaf.png",
-            "images/tree.png",
-            "images/trap.png",
-            "images/test.png",
-            "images/arrow_normal.png",
-            "images/ghost_king.png",
-            "images/ghost_crown.png",
-            "images/ghost_1.png",
-            "images/grass_1.png",
-            "images/grass_2.png",
-            "images/grass_3.png",
-            "images/hex_grass_1.png",
-            "images/hex_grass_2.png",
-            "images/hex_grass_3.png",
-            "images/iso_grass_1.png",
-            "images/iso_grass_2.png",
-            "images/iso_grass_3.png",
-            "images/mud.png",
-            "images/player.png",
-            "images/player_axe.png",
-            "images/player_hammer.png",
-            "images/player_scepter.png",
-            "images/health_left.png",
-            "images/health_middle.png",
-            "images/health_right.png",
-            "images/health_frame_left.png",
-            "images/health_frame_middle.png",
-            "images/health_frame_right.png",
-            "images/hp_icon.png",
-            "images/dash_icon.png",
-            "images/prisoner.png",
-            "images/blast.png"
-    };
-    public static final String[] healthRegenTextures = {
-            "healthRegen/healthPotion_placeholder.png",
-            "crate/crateHitBreak.png"
-    };
-    private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
-            "images/player_scepter.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
-    };
-    private static final String[] arrowSounds = {
-            "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3"
-    };
-    private static final String[] forestSounds = {
-            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
-    };
-    private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
-    private static final String[] forestMusic = {backgroundMusic};
-    private final TerrainFactory terrainFactory;
+  private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
+  private static final int NUM_CRATES = 3;
+  private static final int NUM_TREES = 7;
+  private static final int NUM_GHOSTS = 2;
+  private static final int NUM_ANCHORED_GHOSTS = 1;
+  private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+  private static final float WALL_WIDTH = 0.1f;
+  private static final String[] forestTextures = {
+          "images/box_boy_leaf.png",
+          "images/tree.png",
+          "images/trap.png",
+          "images/test.png",
+          "images/arrow_normal.png",
+          "images/ghost_king.png",
+          "images/ghost_crown.png",
+          "images/ghost_1.png",
+          "images/grass_1.png",
+          "images/grass_2.png",
+          "images/grass_3.png",
+          "images/hex_grass_1.png",
+          "images/hex_grass_2.png",
+          "images/hex_grass_3.png",
+          "images/iso_grass_1.png",
+          "images/iso_grass_2.png",
+          "images/iso_grass_3.png",
+          "images/mud.png",
+          "images/player.png",
+          "images/player_axe.png",
+          "images/player_hammer.png",
+          "images/player_scepter.png",
+          "images/blast.png",
+          "images/health_left.png",
+          "images/health_middle.png",
+          "images/health_right.png",
+          "images/health_frame_left.png",
+          "images/health_frame_middle.png",
+          "images/health_frame_right.png",
+          "images/hp_icon.png",
+          "images/dash_icon.png",
+          "images/prisoner.png"
+  };
+  public static final String[] healthRegenTextures = {
+          "healthRegen/healthPotion_placeholder.png",
+          "crate/crateHitBreak.png"
+  };
+  private static final String[] forestTextureAtlases = {
+          "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
+          "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
+          "images/player_scepter.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
+  };
+  private static final String[] arrowSounds = {
+          "sounds/arrow_disappear.mp3",
+          "sounds/arrow_shoot.mp3"
+  };
+  private static final String[] forestSounds = {
+          "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
+  };
+  private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
+  private static final String[] forestMusic = {backgroundMusic};
+  private final TerrainFactory terrainFactory;
 
   /**
    * Intialise the forest game

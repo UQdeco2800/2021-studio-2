@@ -109,7 +109,7 @@ public class DeathScreen extends ScreenAdapter {
                 .addComponent(animator);
         ServiceLocator.getEntityService().register(ui);
         ui.setScale(5, 5);
-        ui.setPosition(2.7f,-0.5f);
+        ui.setPosition(2.7f, -0.5f);
         this.animator.startAnimation("death_animation");
     }
 }

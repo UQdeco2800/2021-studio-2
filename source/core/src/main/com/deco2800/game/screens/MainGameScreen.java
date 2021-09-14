@@ -94,7 +94,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("test")) {
-            this.gameArea = new TestGameArea(terrainFactory);
+            this.gameArea = new TestGameArea(terrainFactory, game);
         } else if (world.equals("tutorial")) {
             this.gameArea = new TutorialGameArea(terrainFactory);
         }
@@ -117,12 +117,13 @@ public class MainGameScreen extends ScreenAdapter {
      * Zooms the camera slightly, this will be called by renderer if the player is dead.
      */
     private void zoomCamera() {
-        if (((OrthographicCamera)renderer.getCamera().getCamera()).zoom > 0.4) {
-            ((OrthographicCamera)renderer.getCamera().getCamera()).zoom -= 0.008;
+        if (((OrthographicCamera) renderer.getCamera().getCamera()).zoom > 0.4) {
+            ((OrthographicCamera) renderer.getCamera().getCamera()).zoom -= 0.008;
         } else {
             game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
         }
     }
+
     @Override
     public void render(float delta) {
         physicsEngine.update();

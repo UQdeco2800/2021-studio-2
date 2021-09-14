@@ -13,10 +13,7 @@ import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
-import com.deco2800.game.physics.components.ColliderComponent;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.physics.components.WeaponHitboxComponent;
+import com.deco2800.game.physics.components.*;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -85,33 +82,40 @@ public class PlayerFactory {
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
         animator.setAnimationScale(2f);
 
-        Entity player =
-                new Entity()
-                        .addComponent(animator)
-                        .addComponent(new PlayerAnimationController())
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new ColliderComponent())
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-                        .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                        .addComponent(new PlayerActions())
-                        .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                        .addComponent(new InventoryComponent(stats.gold))
-                        .addComponent(inputComponent)
-                        .addComponent(new PlayerStatsDisplay())
-                        .addComponent(new PlayerLowHealthDisplay());
+        animator.addAnimation("back_axe_attack", 0.1f);
+        animator.addAnimation("front_axe_attack", 0.1f);
+        animator.addAnimation("right_axe_attack", 0.1f);
+        animator.addAnimation("left_axe_attack", 0.1f);
+
+        Entity player = new Entity()
+                .addComponent(animator)
+                .addComponent(new PlayerAnimationController())
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent())
+                .addComponent(new TrapComponent().setLayer(PhysicsLayer.TRAP))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
+                //Remove the below lines when the player uses a separate weapon entity
+                .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new PlayerActions())
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new InventoryComponent(stats.gold))
+                .addComponent(inputComponent)
+                .addComponent(new PlayerStatsDisplay())
+                .addComponent(new PlayerLowHealthDisplay());
 
         // Add equipped weapon.
         if (weapon.equals("Scepter")) {
             player.addComponent(new Scepter(PhysicsLayer.NPC, 10, 50,
-                            new Vector2(0.5f, 1f)));
+                    new Vector2(0.5f, 1f)));
         } else if (weapon.equals("Hammer")) {
             player.addComponent(new Hammer(PhysicsLayer.NPC, 10, 50,
-                            new Vector2(1f, 0.5f)));
+                    new Vector2(1f, 0.5f)));
         } else { // Axe is default
             player.addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
-                            new Vector2(1f, 0.75f)));
+                    new Vector2(1f, 0.75f)));
         }
 
+        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f, 0.4f), new Vector2(0.5f, 0.2f));
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);

@@ -28,10 +28,10 @@ public class CombatStatsComponent extends Component {
     }
 
     /**
-    * Returns true if the entity's has 0 health, otherwise false.
-    *
-    * @return is player dead
-    */
+     * Returns true if the entity's has 0 health, otherwise false.
+     *
+     * @return is player dead
+     */
     public Boolean isDead() {
         return health == 0;
     }
@@ -47,10 +47,10 @@ public class CombatStatsComponent extends Component {
 
 
     /**
-    * to change the max health of the player
-    *
-    * @param health  the new max health of the player to set
-    */
+     * to change the max health of the player
+     *
+     * @param health the new max health of the player to set
+     */
     public void setMaxHealth(int health) {
         this.maxHealth = health;
     }
@@ -72,8 +72,7 @@ public class CombatStatsComponent extends Component {
     public void setHealth(int health) {
         if (health > maxHealth) {
             this.health = maxHealth; //cannot get more health than his set max health
-        }
-        else if (health > 0) {
+        } else if (health > 0) {
             this.health = health;
         } else {
             this.health = 0;
@@ -125,6 +124,7 @@ public class CombatStatsComponent extends Component {
      * called when an entity is attack
      * if this entity has a transform component or hit animations they will be called.
      * if combatStatComponent is disabled this method will not do anything.
+     *
      * @param attacker the CombatStatComponent of the attacker
      */
     public void hit(CombatStatsComponent attacker) {
@@ -191,8 +191,7 @@ public class CombatStatsComponent extends Component {
 
     /**
      * if the entity has a Transform Component it will execute its transformation
-     * will only transform the entity if its hp less than or equal to 0 and will disable
-     * CombatStatsComponent
+     * will only transform the entity if its hp is less than or equal to 0 and will disable CombatStatsComponent
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */
