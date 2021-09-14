@@ -88,7 +88,7 @@ public class TutorialGameArea extends GameArea {
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
+            "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas"
     };
