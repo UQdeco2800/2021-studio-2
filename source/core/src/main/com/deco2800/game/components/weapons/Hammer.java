@@ -63,8 +63,9 @@ public class Hammer extends MeleeWeapon {
     /**
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
+     * @param attackDirection - direction of attack, ignored for the time being.
      */
-    public void strongAttack() {
+    public void strongAttack(int attackDirection) {
         if (timeAtAttack != 0 || hasStrongAttacked) {
             return;
         }

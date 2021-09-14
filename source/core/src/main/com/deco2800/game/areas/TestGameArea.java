@@ -245,7 +245,7 @@ public class TestGameArea extends GameArea {
   }
 
   private void spawnPlayer() {
-    Entity newPlayer = PlayerFactory.createPlayer();
+    Entity newPlayer = PlayerFactory.createPlayer("Scepter");
     spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
     player = newPlayer;
   }

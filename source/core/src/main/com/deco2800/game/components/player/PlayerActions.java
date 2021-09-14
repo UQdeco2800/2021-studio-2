@@ -127,14 +127,7 @@ public class PlayerActions extends Component {
      * @param keycode - the last pressed player key.
      */
     void attack(int keycode) {
-        MeleeWeapon weapon;
-        if (entity.getComponent(Scepter.class) != null) {
-            weapon = entity.getComponent(Scepter.class);
-        } else if (entity.getComponent(Axe.class) != null) {
-            weapon = entity.getComponent(Axe.class);
-        } else {
-            weapon = null;
-        }
+        MeleeWeapon weapon = getEquippedWeapon();
         if (weapon == null) {
             return;
         }
@@ -161,14 +154,7 @@ public class PlayerActions extends Component {
    * Makes player use the strong attack associated with its equipped weapon.
    */
   void strongAttack(int keycode) {
-    MeleeWeapon weapon;
-    if (entity.getComponent(Scepter.class) != null) {
-      weapon = entity.getComponent(Scepter.class);
-    } else if (entity.getComponent(Axe.class) != null) {
-      weapon = entity.getComponent(Axe.class);
-    } else {
-      weapon = null;
-    }
+    MeleeWeapon weapon = getEquippedWeapon();
     if (weapon == null) {
       return;
     }
@@ -196,14 +182,7 @@ public class PlayerActions extends Component {
      * @param coordinates the mouse coordinates of the click
      */
     void mouseAttack(Vector2 coordinates) {
-        MeleeWeapon weapon;
-        if (entity.getComponent(Scepter.class) != null) {
-            weapon = entity.getComponent(Scepter.class);
-        } else if (entity.getComponent(Axe.class) != null) {
-            weapon = entity.getComponent(Axe.class);
-        } else {
-            weapon = null;
-        }
+        MeleeWeapon weapon = getEquippedWeapon();
         if (weapon == null) {
             return;
         }
@@ -242,14 +221,7 @@ public class PlayerActions extends Component {
     }
 
   void mouseStrongAttack(Vector2 coordinates) {
-      MeleeWeapon weapon;
-      if (entity.getComponent(Scepter.class) != null) {
-          weapon = entity.getComponent(Scepter.class);
-      } else if (entity.getComponent(Axe.class) != null) {
-          weapon = entity.getComponent(Axe.class);
-      } else {
-          weapon = null;
-      }
+      MeleeWeapon weapon = getEquippedWeapon();
       if (weapon == null) {
           return;
       }

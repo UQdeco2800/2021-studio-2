@@ -50,6 +50,9 @@ public class TutorialGameArea extends GameArea {
             "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
+            "images/player_axe.png",
+            "images/player_hammer.png",
+            "images/player_scepter.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -64,7 +67,8 @@ public class TutorialGameArea extends GameArea {
     private static String[] tileTextures = null;
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas"
+            "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
+            "images/player_scepter.atlas", "images/health_bar.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -241,7 +245,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer();
+        Entity newPlayer = PlayerFactory.createPlayer("Axe");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
     }
