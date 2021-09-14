@@ -37,6 +37,10 @@ public class TextureRenderComponent extends RenderComponent {
         this.sprite = sprite;
     }
 
+    public Sprite getSprite() {
+        return sprite;
+    }
+
     /**
      * Scale the entity to a width of 1 and a height matching the texture's ratio
      */

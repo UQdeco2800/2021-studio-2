@@ -1,0 +1,19 @@
+front_death.png
+size: 128, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+front death 2
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+front death 3
+  rotate: false
+  xy: 1, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
