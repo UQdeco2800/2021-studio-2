@@ -21,6 +21,7 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
      * @param priority         priority of the task
      * @param viewDistance     max view distance of entity to target
      * @param maxChaseDistance max chase distance of entity to target
+     * @param speedMultiplier  multiplier for the speed value
      */
     public ZigChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance, float speedMultiplier) {
         super(target, priority, viewDistance, maxChaseDistance);

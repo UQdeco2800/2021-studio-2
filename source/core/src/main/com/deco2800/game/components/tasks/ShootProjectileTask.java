@@ -181,6 +181,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * Show trajectory before shooting
+     *
+     * @param loc the location vector
      */
     public void showTrajectory(Vector2 loc) {
         // If there is an obstacle in the path to the player, not visible.
