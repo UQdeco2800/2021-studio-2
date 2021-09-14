@@ -10,6 +10,7 @@ import com.deco2800.game.services.ServiceLocator;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Represents an area in the game, such as a level, indoor area, etc. An area has a terrain and
  * other entities to spawn on that terrain.
@@ -17,10 +18,12 @@ import java.util.List;
  * <p>Support for enabling/disabling game areas could be added by making this a Component instead.
  */
 public abstract class GameArea implements Disposable {
-    protected final List<Entity> areaEntities;
+
     protected TerrainComponent terrain;
+    protected List<Entity> areaEntities;
     protected Entity player;
     public static int numEnemy = 0;
+
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -73,6 +76,7 @@ public abstract class GameArea implements Disposable {
     public Entity getPlayer() {
         return player;
     }
+
 
     /**
      * Spawn entity at its current position
@@ -130,4 +134,5 @@ public abstract class GameArea implements Disposable {
         entity.setPosition(entityPos);
         spawnEntity(entity);
     }
+
 }

@@ -750,46 +750,52 @@
     },
     "wallObjects": [
         {
-            "x": 2,
-            "y": 8,
-            "height": 345,
-            "width": 40
+            "x": 4,
+            "y": 7,
+            "height": 64,
+            "width": 320
         },
         {
-            "x": 3,
-            "y": 5,
-            "height": 105,
-            "width": 380
+            "x": 2,
+            "y": 9,
+            "height": 288,
+            "width": 64
+        },
+        {
+            "x": 4,
+            "y": 18,
+            "height": 64,
+            "width": 320
         },
         {
             "x": 14,
-            "y": 13,
-            "height": 192,
-            "width": 295
+            "y": 14,
+            "height": 128,
+            "width": 64
         },
         {
-            "x": 20,
+            "x": 16,
+            "y": 14,
+            "height": 64,
+            "width": 160
+        },
+        {
+            "x": 21,
+            "y": 6,
+            "height": 256,
+            "width": 64
+        },
+        {
+            "x": 14,
             "y": 4,
-            "height": 317,
-            "width": 76
+            "height": 64,
+            "width": 288
         },
         {
-            "x": 11,
-            "y": 5,
-            "height": 35,
-            "width": 361
-        },
-        {
-            "x": 3,
-            "y": 17,
-            "height": 108,
-            "width": 369
-        },
-        {
-            "x": 24,
-            "y": 24,
-            "height": 30,
-            "width": 20
+            "x": 12,
+            "y": 4,
+            "height": 160,
+            "width": 64
         }
     ]
 }

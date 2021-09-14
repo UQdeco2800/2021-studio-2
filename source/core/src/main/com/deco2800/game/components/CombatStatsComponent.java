@@ -154,9 +154,7 @@ public class CombatStatsComponent extends Component {
 
     /**
      * if the entity has a Transform Component it will execute its transformation
-     * will only transform the entity if its hp less than or equal to 0 and will disable
-     * CombatStatsComponent
-     *
+     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponent
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */

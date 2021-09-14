@@ -1,8 +1,10 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.TeleportComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchHealComponent;
 import com.deco2800.game.components.crate.CrateAnimationController;
@@ -38,12 +40,87 @@ public class ObstacleFactory {
                 .addComponent(new TextureRenderComponent("images/tree.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-
         tree.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         tree.getComponent(TextureRenderComponent.class).scaleEntity();
         tree.scaleHeight(2.5f);
         PhysicsUtils.setScaledCollider(tree, 0.5f, 0.2f);
         return tree;
+    }
+
+
+    /**
+     * Creates a non-physical entity with no collision
+     *
+     * @return entity
+     */
+    public static Entity createObstacle(String tileRef) {
+        Entity obstacle =
+                new Entity()
+                        .addComponent(new TextureRenderComponent(tileRef));
+        obstacle.getComponent(TextureRenderComponent.class).scaleEntity();
+        obstacle.scaleHeight(0.5f);
+        return obstacle;
+    }
+
+
+    /**
+     * Creates a trap with collision resizable.
+     *
+     * @return trap
+     */
+    public static Entity createRSPhysicalTrap(float width, float height) {
+        Entity trap = new Entity()
+                .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 4));
+        trap.setScale(width, height);
+        return trap;
+    }
+
+    /**
+     * Creates a trap with no collision resizable.
+     *
+     * @return trap
+     */
+    public static Entity createRSNonePhysicalTrap(float width, float height) {
+        Entity trap = new Entity()
+                .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
+                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
+        trap.setScale(width, height);
+        return trap;
+    }
+
+    public static Entity createNonePhysicalTrap() {
+        Entity trap = new Entity()
+                .addComponent(new TextureRenderComponent("images/trap.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
+
+        trap.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
+        trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        trap.getComponent(TextureRenderComponent.class).scaleEntity();
+        trap.scaleHeight(0.3f);
+        return trap;
+    }
+
+    public static Entity creatTeleport(Entity player) {
+        Entity teleport = new Entity()
+                .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new TeleportComponent(PhysicsLayer.TRAP, player));
+
+        teleport.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
+        teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        teleport.getComponent(TextureRenderComponent.class).scaleEntity();
+        teleport.scaleHeight(0.3f);
+        return teleport;
     }
 
     /**
