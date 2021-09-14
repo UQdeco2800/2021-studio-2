@@ -60,6 +60,7 @@ public class Axe extends MeleeWeapon {
     /**
      * Implements functionality for strong attacks, also plays attack sound
      * during attack frame (for both light and strong).
+     *
      * @see MeleeWeapon
      */
     @Override

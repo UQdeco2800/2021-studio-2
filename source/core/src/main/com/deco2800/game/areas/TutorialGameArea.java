@@ -77,7 +77,9 @@ public class TutorialGameArea extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png"
+            "images/fireball/fireballAinmation.png",
+            "player_scepter.png",
+            "player_hammer.png"
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -86,9 +88,9 @@ public class TutorialGameArea extends GameArea {
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
-            "images/player_scepter.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
+            "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"

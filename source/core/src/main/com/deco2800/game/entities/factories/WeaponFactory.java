@@ -15,14 +15,19 @@ import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
+import com.deco2800.game.entities.LineEntity;
+import com.deco2800.game.entities.configs.BaseArrowConfig;
+import com.deco2800.game.entities.configs.FastArrowConfig;
+import com.deco2800.game.entities.configs.TrackingArrowConfig;
+import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
@@ -39,13 +44,6 @@ public class WeaponFactory {
             FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
-
-    /**
-     * throw error
-     */
-    private WeaponFactory() {
-        throw new IllegalStateException("Instantiating static util class");
-    }
 
     /**
      * manages the sound to play when constructing the projectile
@@ -88,6 +86,16 @@ public class WeaponFactory {
 
         shootingSound("normalArrow");
         return normalArrow;
+    }
+
+    public static Entity createMjolnir() {
+        Entity mjolnir =
+                new Entity()
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new PhysicsMovementComponent())
+                        .addComponent(new WeaponHitboxComponent())
+                        .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
+        return mjolnir;
     }
 
     /**
@@ -255,6 +263,7 @@ public class WeaponFactory {
 
     /**
      * Makes an energy ball that will move in a straight line and damage enemies
+     *
      * @param target the location that the blast will try and reach
      * @return entity
      */
@@ -274,4 +283,8 @@ public class WeaponFactory {
                 .addComponent(new Blast());
         return blast;
     }
+    public WeaponFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
 }
+

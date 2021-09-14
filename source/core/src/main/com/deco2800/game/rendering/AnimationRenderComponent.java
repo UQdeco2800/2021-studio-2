@@ -185,7 +185,6 @@ public class AnimationRenderComponent extends RenderComponent {
             drawWithScale(batch);
             return;
         }
-
         Vector2 positionCenter = entity.getCenterPosition();
         float angle = entity.getAngle();
         Sprite sprite = new Sprite(currentAnimation.getKeyFrame(animationPlayTime));
@@ -223,6 +222,7 @@ public class AnimationRenderComponent extends RenderComponent {
 
     /**
      * Increases the animation size by a scalar factor.
+     *
      * @param scaleFactor the size increase of the animation.
      */
     public void setAnimationScale(float scaleFactor) {

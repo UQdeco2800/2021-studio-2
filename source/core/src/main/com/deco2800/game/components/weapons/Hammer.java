@@ -11,14 +11,22 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class Hammer extends MeleeWeapon {
 
-    /** Sound that plays every axe swing */
+    /**
+     * Sound that plays every axe swing
+     */
     private final Sound attackSound;
-    /** Sound that plays when axe hits enemy */
+    /**
+     * Sound that plays when axe hits enemy
+     */
     private final Sound impactSound;
 
-    /** AOE / Strong attack size */
+    /**
+     * AOE / Strong attack size
+     */
     private final Vector2 strongAttackSize;
-    /** Determines whether the axe has used its strong attack */
+    /**
+     * Determines whether the axe has used its strong attack
+     */
     private boolean hasStrongAttacked;
 
     public Hammer(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
@@ -34,12 +42,13 @@ public class Hammer extends MeleeWeapon {
 
     /**
      * Attacks, but also plays animation.
+     *
      * @see MeleeWeapon
      */
     @Override
     public void attack(int attackDirection) {
         super.attack(attackDirection);
-        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
+        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
         }
@@ -63,6 +72,7 @@ public class Hammer extends MeleeWeapon {
     /**
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
+     *
      * @param attackDirection - direction of attack, ignored for the time being.
      */
     public void strongAttack(int attackDirection) {
@@ -71,7 +81,7 @@ public class Hammer extends MeleeWeapon {
         }
         hasStrongAttacked = true;
         super.attack(MeleeWeapon.CENTER);
-        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
+        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
         }
@@ -81,6 +91,7 @@ public class Hammer extends MeleeWeapon {
     /**
      * Implements functionality for strong attacks, also plays attack sound
      * during attack frame (for both light and strong).
+     *
      * @see MeleeWeapon
      */
     @Override
@@ -101,6 +112,7 @@ public class Hammer extends MeleeWeapon {
 
     /**
      * Plays impact sound if weapon successfully collides with enemy.
+     *
      * @see MeleeWeapon
      */
     @Override
