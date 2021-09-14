@@ -39,6 +39,7 @@ public class PlayerActions extends Component {
         entity.getEvents().addListener("mouseAttack", this::mouseAttack);
         entity.getEvents().addListener("lockMovement", this::lockMovement);
         entity.getEvents().addListener("dash", this::dash);
+        entity.getEvents().addListener("mouseStrongAttack", this::mouseStrongAttack);
     }
 
     /**
@@ -126,8 +127,17 @@ public class PlayerActions extends Component {
      * @param keycode - the last pressed player key.
      */
     void attack(int keycode) {
-        MeleeWeapon weapon = getEquippedWeapon();
-        // determine direction of attack based on last pressed key
+        MeleeWeapon weapon;
+        if (entity.getComponent(Scepter.class) != null) {
+            weapon = entity.getComponent(Scepter.class);
+        } else if (entity.getComponent(Axe.class) != null) {
+            weapon = entity.getComponent(Axe.class);
+        } else {
+            weapon = null;
+        }
+        if (weapon == null) {
+            return;
+        }
         int attackDirection = 0;
         switch (keycode) {
             case Input.Keys.W:
@@ -147,14 +157,56 @@ public class PlayerActions extends Component {
         lockMovement(weapon.getTotalAttackTime());
     }
 
+  /**
+   * Makes player use the strong attack associated with its equipped weapon.
+   */
+  void strongAttack(int keycode) {
+    MeleeWeapon weapon;
+    if (entity.getComponent(Scepter.class) != null) {
+      weapon = entity.getComponent(Scepter.class);
+    } else if (entity.getComponent(Axe.class) != null) {
+      weapon = entity.getComponent(Axe.class);
+    } else {
+      weapon = null;
+    }
+    if (weapon == null) {
+      return;
+    }
+    int attackDirection = 0;
+    switch (keycode) {
+      case Input.Keys.W:
+        attackDirection = MeleeWeapon.UP;
+        break;
+      case Input.Keys.S:
+        attackDirection = MeleeWeapon.DOWN;
+        break;
+      case Input.Keys.A:
+        attackDirection = MeleeWeapon.LEFT;
+        break;
+      case Input.Keys.D:
+        attackDirection = MeleeWeapon.RIGHT;
+        break;
+    }
+    weapon.strongAttack(attackDirection);
+  }
+
     /**
      * Makes the player attack using a mouse click.
      *
      * @param coordinates the mouse coordinates of the click
      */
     void mouseAttack(Vector2 coordinates) {
-        MeleeWeapon weapon = getEquippedWeapon();
-
+        MeleeWeapon weapon;
+        if (entity.getComponent(Scepter.class) != null) {
+            weapon = entity.getComponent(Scepter.class);
+        } else if (entity.getComponent(Axe.class) != null) {
+            weapon = entity.getComponent(Axe.class);
+        } else {
+            weapon = null;
+        }
+        if (weapon == null) {
+            return;
+        }
         Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
                 coordinates.x - Gdx.graphics.getWidth() / 2f,
                 coordinates.y - Gdx.graphics.getHeight() / 2f
@@ -189,12 +241,23 @@ public class PlayerActions extends Component {
         }
     }
 
-  /**
-   * Makes player use the strong attack associated with its equipped weapon.
-   */
-  void strongAttack() {
-      MeleeWeapon weapon = getEquippedWeapon();
-      weapon.strongAttack();
+  void mouseStrongAttack(Vector2 coordinates) {
+      MeleeWeapon weapon;
+      if (entity.getComponent(Scepter.class) != null) {
+          weapon = entity.getComponent(Scepter.class);
+      } else if (entity.getComponent(Axe.class) != null) {
+          weapon = entity.getComponent(Axe.class);
+      } else {
+          weapon = null;
+      }
+      if (weapon == null) {
+          return;
+      }
+      Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
+              coordinates.x - Gdx.graphics.getWidth() / 2f,
+              coordinates.y - Gdx.graphics.getHeight() / 2f
+      ));
+      weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
       lockMovement(weapon.getTotalAttackTime());
   }
 

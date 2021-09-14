@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.*;
-import com.deco2800.game.components.weapons.Axe;
+import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.entities.Entity;
@@ -86,12 +86,15 @@ public class PlayerFactory {
                         .addComponent(new ColliderComponent())
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                         .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                        .addComponent(new Scepter(PhysicsLayer.NPC, 10, 50,
+                                new Vector2(1f, 0.5f)))
                         //.addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
                         //        new Vector2(1f, 0.75f)))
                         //.addComponent(new Hammer(PhysicsLayer.NPC, 10, 50,
                         //        new Vector2(1f, 0.5f)))
                         .addComponent(new Scepter(PhysicsLayer.NPC, 10, 50,
                                         new Vector2(0.5f, 1f)))
+
 
                         .addComponent(new PlayerActions())
                         .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))

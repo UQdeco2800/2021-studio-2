@@ -62,7 +62,8 @@ public class ForestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
-            "images/prisoner.png"
+            "images/prisoner.png",
+            "images/blast.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -84,229 +85,229 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
 
-    /**
-     * Intialise the forest game
-     *
-     * @param terrainFactory intialise the terrain factory
-     */
-    public ForestGameArea(TerrainFactory terrainFactory) {
-        super();
-        this.terrainFactory = terrainFactory;
+  /**
+   * Intialise the forest game
+   *
+   * @param terrainFactory intialise the terrain factory
+   */
+  public ForestGameArea(TerrainFactory terrainFactory) {
+    super();
+    this.terrainFactory = terrainFactory;
+  }
+
+  /**
+   * Create the game area, including terrain, static entities (trees), dynamic entities (player)
+   */
+  @Override
+  public void create() {
+    super.create();
+    loadAssets();
+    displayUI();
+
+    spawnTerrain();
+    spawnTrees();
+    spawnPlayer();
+    spawnGhosts();
+    spawnGhostKing();
+    spawnRangedGhosts();
+    spawnAnchoredGhosts();
+    spawnCrate();
+
+    playMusic();
+    setDialogue();
+  }
+
+  /**
+   * Display the UI
+   */
+  private void displayUI() {
+    Entity ui = new Entity();
+    ui.addComponent(new GameAreaDisplay("Box Forest"));
+    spawnEntity(ui);
+  }
+
+  /**
+   * Spawn the terrain - spawn map entity on terrain
+   */
+  private void spawnTerrain() {
+    // Background terrain
+    terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
+    spawnEntity(new Entity().addComponent(terrain));
+    // Terrain walls
+    float tileSize = terrain.getTileSize();
+    GridPoint2 tileBounds = terrain.getMapBounds(0);
+    Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
+
+    // Left
+    spawnEntityAt(
+            ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+    // Right
+    spawnEntityAt(
+            ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+            new GridPoint2(tileBounds.x, 0),
+            false,
+            false);
+    // Top
+    spawnEntityAt(
+            ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+            new GridPoint2(0, tileBounds.y),
+            false,
+            false);
+    // Bottom
+    spawnEntityAt(
+            ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+  }
+
+  /**
+   * Spawn tree on terrain
+   */
+  private void spawnTrees() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_TREES; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity tree = ObstacleFactory.createTree();
+      spawnEntityAt(tree, randomPos, true, false);
     }
+  }
 
-    /**
-     * Create the game area, including terrain, static entities (trees), dynamic entities (player)
-     */
-    @Override
-    public void create() {
-        super.create();
-        loadAssets();
-        displayUI();
+  /**
+   * Spawn player at the terrain, create the player
+   */
+  private void spawnPlayer() {
+    Entity newPlayer = PlayerFactory.createPlayer();
+    spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
+    player = newPlayer;
+  }
 
-        spawnTerrain();
-        spawnTrees();
-        spawnPlayer();
-        spawnGhosts();
-        spawnGhostKing();
-        spawnRangedGhosts();
-        spawnAnchoredGhosts();
-        spawnCrate();
+  /**
+   * Randomly spawn ghost on a random position of the terrain, the number of ghost limit to 2
+   */
+  private void spawnGhosts() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        playMusic();
-        setDialogue();
+    for (int i = 0; i < NUM_GHOSTS; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity ghost = NPCFactory.createGhost(player);
+      spawnEntityAt(ghost, randomPos, true, true);
     }
+  }
 
-    /**
-     * Display the UI
-     */
-    private void displayUI() {
-        Entity ui = new Entity();
-        ui.addComponent(new GameAreaDisplay("Box Forest"));
-        spawnEntity(ui);
+  /**
+   * Spawn range ghost on terrain, range ghost can shoot target
+   */
+  private void spawnRangedGhosts() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_GHOSTS; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity ghost = NPCFactory.createRangedGhost(player);
+      spawnEntityAt(ghost, randomPos, true, true);
     }
+  }
 
-    /**
-     * Spawn the terrain - spawn map entity on terrain
-     */
-    private void spawnTerrain() {
-        // Background terrain
-        terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
-        spawnEntity(new Entity().addComponent(terrain));
-        // Terrain walls
-        float tileSize = terrain.getTileSize();
-        GridPoint2 tileBounds = terrain.getMapBounds(0);
-        Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
+  private void spawnGhostKing() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
-        // Top
-        spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
-                new GridPoint2(0, tileBounds.y),
-                false,
-                false);
-        // Bottom
-        spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+    GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+    Entity ghostKing = NPCFactory.createGhostKing(player);
+    spawnEntityAt(ghostKing, randomPos, true, true);
+  }
+
+  /**
+   * Spawn anchored ghost, ghost only move at the certain anchored
+   */
+  private void spawnAnchoredGhosts() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
+      GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
+      GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+      Entity anchor = ObstacleFactory.createAnchor();
+      Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+      spawnEntityAt(anchor, basePos, true, true);
+      spawnEntityAt(AnchoredGhost, ghostPos, true, true);
     }
+  }
 
-    /**
-     * Spawn tree on terrain
-     */
-    private void spawnTrees() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        for (int i = 0; i < NUM_TREES; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity tree = ObstacleFactory.createTree();
-            spawnEntityAt(tree, randomPos, true, false);
-        }
+  /**
+   * spawns the crate with the potion entity inside.
+   * the crate is placed on top of the potion entity.
+   */
+  public void spawnCrate() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_CRATES; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity crate = ObstacleFactory.createHealthCrate();
+      spawnEntityAt(crate, randomPos, true, true);
     }
+  }
 
-    /**
-     * Spawn player at the terrain, create the player
-     */
-    private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer();
-        spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
-        player = newPlayer;
+  /**
+   * Play the music on the background of the game
+   */
+  private void playMusic() {
+    Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
+    music.setLooping(true);
+    music.setVolume(0.3f);
+    music.play();
+  }
+
+  /**
+   * Load the texture from files
+   */
+  private void loadAssets() {
+    logger.debug("Loading assets");
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    resourceService.loadTextures(forestTextures);
+    resourceService.loadTextures(healthRegenTextures);
+    resourceService.loadTextureAtlases(forestTextureAtlases);
+    resourceService.loadSounds(forestSounds);
+    resourceService.loadMusic(forestMusic);
+    resourceService.loadSounds(arrowSounds);
+    while (resourceService.loadForMillis(10)) {
+      // This could be upgraded to a loading screen
+      logger.info("Loading... {}%", resourceService.getProgress());
     }
+  }
 
-    /**
-     * Randomly spawn ghost on a random position of the terrain, the number of ghost limit to 2
-     */
-    private void spawnGhosts() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+  /**
+   * Unload the assets (include image and sound)
+   */
+  private void unloadAssets() {
+    logger.debug("Unloading assets");
+    ResourceService resourceService = ServiceLocator.getResourceService();
+    resourceService.unloadAssets(forestTextures);
+    resourceService.unloadAssets(healthRegenTextures);
+    resourceService.unloadAssets(forestTextureAtlases);
+    resourceService.unloadAssets(forestSounds);
+    resourceService.unloadAssets(forestMusic);
+  }
 
-        for (int i = 0; i < NUM_GHOSTS; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity ghost = NPCFactory.createGhost(player);
-            spawnEntityAt(ghost, randomPos, true, true);
-        }
-    }
+  /**
+   * Sets the dialogue for when the game first loads.
+   */
+  private void setDialogue() {
+    TextBox textBox = ServiceLocator.getEntityService()
+            .getUIEntity().getComponent(TextBox.class);
+    textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+  }
 
-    /**
-     * Spawn range ghost on terrain, range ghost can shoot target
-     */
-    private void spawnRangedGhosts() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < NUM_GHOSTS; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity ghost = NPCFactory.createRangedGhost(player);
-            spawnEntityAt(ghost, randomPos, true, true);
-        }
-    }
-
-    private void spawnGhostKing() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity ghostKing = NPCFactory.createGhostKing(player);
-        spawnEntityAt(ghostKing, randomPos, true, true);
-    }
-
-    /**
-     * Spawn anchored ghost, ghost only move at the certain anchored
-     */
-    private void spawnAnchoredGhosts() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
-            GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
-            Entity anchor = ObstacleFactory.createAnchor();
-            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
-            spawnEntityAt(anchor, basePos, true, true);
-            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
-        }
-    }
-
-
-    /**
-     * spawns the crate with the potion entity inside.
-     * the crate is placed on top of the potion entity.
-     */
-    public void spawnCrate() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < NUM_CRATES; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity crate = ObstacleFactory.createHealthCrate();
-            spawnEntityAt(crate, randomPos, true, true);
-        }
-    }
-
-    /**
-     * Play the music on the background of the game
-     */
-    private void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
-    }
-
-    /**
-     * Load the texture from files
-     */
-    private void loadAssets() {
-        logger.debug("Loading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.loadTextures(forestTextures);
-          resourceService.loadTextures(healthRegenTextures);
-        resourceService.loadTextureAtlases(forestTextureAtlases);
-        resourceService.loadSounds(forestSounds);
-        resourceService.loadMusic(forestMusic);
-        resourceService.loadSounds(arrowSounds);
-        while (resourceService.loadForMillis(10)) {
-            // This could be upgraded to a loading screen
-            logger.info("Loading... {}%", resourceService.getProgress());
-        }
-    }
-
-    /**
-     * Unload the assets (include image and sound)
-     */
-    private void unloadAssets() {
-        logger.debug("Unloading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.unloadAssets(forestTextures);
-        resourceService.unloadAssets(healthRegenTextures);
-        resourceService.unloadAssets(forestTextureAtlases);
-        resourceService.unloadAssets(forestSounds);
-        resourceService.unloadAssets(forestMusic);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
-    }
-
-    /**
-     * Dispose the asset (call unloadAssets).
-     */
-    @Override
-    public void dispose() {
-        super.dispose();
-        ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
-        this.unloadAssets();
-    }
+  /**
+   * Dispose the asset (call unloadAssets).
+   */
+  @Override
+  public void dispose() {
+    super.dispose();
+    ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
+    this.unloadAssets();
+  }
 }

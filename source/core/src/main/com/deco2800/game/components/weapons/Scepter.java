@@ -3,24 +3,30 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.areas.GameArea;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.Vector2Utils;
 
 /**
  * Represents the scepter used by entities. Main difference to its superclass is that
- * Scepter uses scepter-related assets, and also has a strong attack which
- * uses an AOE (area of effect) attack.
+ * scepter uses scepter-related assets, and also has a strong attack which
+ * shoots a projectile.
  */
 public class Scepter extends MeleeWeapon {
-    /** Sound that plays every scepter swing */
+    /** Sound that plays every axe swing */
     private final Sound attackSound;
-    /** Sound that plays when scepter hits enemy */
+    /** Sound that plays when axe hits enemy */
     private final Sound impactSound;
 
     /** AOE / Strong attack size */
     private final Vector2 strongAttackSize;
-    /** Determines whether the scepter has used its strong attack */
+    /** Determines whether the axe has used its strong attack */
     private boolean hasStrongAttacked;
+    private GameArea gameArea;
+    private final float range = 6f;
 
     public Scepter(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
@@ -30,6 +36,7 @@ public class Scepter extends MeleeWeapon {
                 .getAsset("sounds/impact.ogg", Sound.class);
         strongAttackSize = new Vector2(2f, 2f); // default size
         hasStrongAttacked = false;
+        this.gameArea = ServiceLocator.getGameAreaService();
     }
 
     /**
@@ -63,12 +70,25 @@ public class Scepter extends MeleeWeapon {
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
      */
-    public void strongAttack() {
-        if (timeAtAttack != 0 || hasStrongAttacked) {
-            return;
-        }
+    public void strongAttack(int attackDirection) {
         hasStrongAttacked = true;
-        super.attack(MeleeWeapon.CENTER);
+        Vector2 target = entity.getCenterPosition();
+        switch (attackDirection) {
+            case UP:
+                target.y += this.range;
+                break;
+            case DOWN:
+                target.y -= this.range;
+                break;
+            case LEFT:
+                target.x -= this.range;
+                break;
+            case RIGHT:
+                target.x += this.range;
+                break;
+        }
+        Entity blast = WeaponFactory.createBlast(target);
+        gameArea.spawnEntityAt(blast, entity.getCenterPosition(), true, true);
     }
 
     /**
@@ -106,3 +126,6 @@ public class Scepter extends MeleeWeapon {
         return false;
     }
 }
+
+
+

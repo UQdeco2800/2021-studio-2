@@ -114,7 +114,7 @@ public class MeleeWeapon extends Component {
      * The weapon's strong / alternative attack. This is to be implemented
      * in weapon sub-classes.
      */
-    public void strongAttack() {
+    public void strongAttack(int attackDirection) {
         // to be implemented in sub-class
     }
 
