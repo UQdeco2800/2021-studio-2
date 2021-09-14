@@ -31,7 +31,6 @@ import java.util.Map;
  * - other third-party tools, e.g. https://www.codeandweb.com/texturepacker <br>
  */
 public class AnimationRenderComponent extends RenderComponent {
-
     private static final Logger logger = LoggerFactory.getLogger(AnimationRenderComponent.class);
     private final GameTime timeSource;
     private final TextureAtlas atlas;
@@ -40,6 +39,7 @@ public class AnimationRenderComponent extends RenderComponent {
     private String currentAnimationName;
     private float animationPlayTime;
     private float scaleFactor;
+
 
     /**
      * Create the component for a given texture atlas.
@@ -98,16 +98,6 @@ public class AnimationRenderComponent extends RenderComponent {
     public void scaleEntity() {
         TextureRegion defaultTexture = this.atlas.findRegion("default");
         entity.setScale(1f, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
-    }
-
-    /**
-     * Scales the entity to the texture's ratio, and also scales up by a factor
-     *
-     * @param scaleFactor the factor for the entity to be scaled at.
-     */
-    public void scaleEntity(float scaleFactor) {
-        TextureRegion defaultTexture = this.atlas.findRegion("default");
-        entity.setScale(scaleFactor, scaleFactor * (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
     }
 
     /**
@@ -191,6 +181,10 @@ public class AnimationRenderComponent extends RenderComponent {
         if (currentAnimation == null) {
             return;
         }
+        if (scaleFactor != 1f) {
+            drawWithScale(batch);
+            return;
+        }
         Vector2 positionCenter = entity.getCenterPosition();
         float angle = entity.getAngle();
         Sprite sprite = new Sprite(currentAnimation.getKeyFrame(animationPlayTime));
@@ -202,6 +196,30 @@ public class AnimationRenderComponent extends RenderComponent {
         animationPlayTime += timeSource.getDeltaTime();
     }
 
+    protected void drawWithScale(SpriteBatch batch) {
+        if (currentAnimation == null) {
+            return;
+        }
+        TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
+
+        Vector2 scale = entity.getScale().cpy();
+        Vector2 pos = entity.getPosition().cpy();
+
+        // apply scale if one exists
+        if (scaleFactor != 1f) {
+            scale.scl(scaleFactor);
+            /* Without scaling, the animation center position will be (x/2, y/2).
+            Where x, y are the entities scale. If we scale up by 3, this position
+            becomes (3x/2, 3y/2). We need to readjust the position to (x/2, y/2).
+            We do this by subtracting the difference, which is (x, y) * (scaleFactor - 1) / 2.
+            E.G. (3x/2, 3y/2) - ((x, y) * (3 - 1) / 2) = (x/2, y/2) */
+            pos.sub(entity.getScale().cpy().scl((scaleFactor - 1f) / 2f));
+        }
+
+        batch.draw(region, pos.x, pos.y, scale.x, scale.y);
+        animationPlayTime += timeSource.getDeltaTime();
+    }
+
     /**
      * Increases the animation size by a scalar factor.
      *
@@ -209,11 +227,5 @@ public class AnimationRenderComponent extends RenderComponent {
      */
     public void setAnimationScale(float scaleFactor) {
         this.scaleFactor = scaleFactor;
-    }
-
-    @Override
-    public void dispose() {
-        atlas.dispose();
-        super.dispose();
     }
 }

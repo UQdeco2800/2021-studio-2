@@ -12,10 +12,10 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
+import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
-import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.BaseArrowConfig;
 import com.deco2800.game.entities.configs.FastArrowConfig;
@@ -83,6 +83,7 @@ public class WeaponFactory {
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         normalArrow.setScale(scale);
         normalArrow.setAngle(angle);
+
         shootingSound("normalArrow");
         return normalArrow;
     }
@@ -282,8 +283,8 @@ public class WeaponFactory {
                 .addComponent(new Blast());
         return blast;
     }
-
     public WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
 }
+

@@ -173,7 +173,7 @@ public class TutorialGameArea extends GameArea {
         Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
         spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
 
-        
+
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
 
         spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
@@ -369,7 +369,6 @@ public class TutorialGameArea extends GameArea {
     private void spawnBoss() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
@@ -410,26 +409,19 @@ public class TutorialGameArea extends GameArea {
         Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
                 DialogueSet.ORDERED);
         spawnEntityAt(trigger, TEST_TRIGGER, true, true);
-
         Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
                 DialogueSet.BOSS_DEFEATED_BEFORE);
         spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
-
         Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
         spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
-
         Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
         spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
-
         Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
         spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
-
         Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
         spawnEntityAt(moveTrigger4, new Vector2(2.2f, 3.3f), true, true);
-
         Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
         spawnEntityAt(moveTrigger5, new Vector2(6.3f, 3.3f), true, true);
-
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
         spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
     }
