@@ -12,8 +12,11 @@ public class PhysicsLayer {
     public static final short MELEEWEAPON = (1 << 4);
     public static final short PROJECTILEWEAPON = (1 << 5);
     public static final short IDLEPROJECTILEWEAPON = (1 << 6);
+    public static final short TRAP = (1 << 7);
+    public static final short TELEPORT = (1 << 8);
 
     public static final short ALL = ~0;
+
 
     private PhysicsLayer() {
         throw new IllegalStateException("Instantiating static util class");

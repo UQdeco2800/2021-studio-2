@@ -75,7 +75,7 @@ public class MainMenuDisplay extends UIComponent {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
                         logger.debug("Start button clicked");
-                        entity.getEvents().trigger("startTutorial");
+                        entity.getEvents().trigger("startTest");
                     }
                 });
 
