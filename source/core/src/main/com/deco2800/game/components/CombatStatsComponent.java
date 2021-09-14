@@ -1,6 +1,7 @@
 package com.deco2800.game.components;
 
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +80,10 @@ public class CombatStatsComponent extends Component {
             if (this.entity != null) {
                 if (getEntity().getComponent(KeyboardPlayerInputComponent.class) != null) {
                     getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
+                    // Deliberately chose this because other entities that have animations may have death animations
+                    // it is not possible for a class with no component to animate their death.
+                } else if (this.entity.getComponent(AnimationRenderComponent.class) == null){
+                    this.entity.prepareDispose();
                 }
             }
         }

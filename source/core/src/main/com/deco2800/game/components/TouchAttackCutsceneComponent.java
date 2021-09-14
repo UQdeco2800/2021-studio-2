@@ -68,6 +68,7 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
      * @param count number of attacks that will be performed
      */
     private void repeatAttacks(KeyboardPlayerInputComponent input, int count) {
+        input.setLastKeyPressed(lastKeyPressed);
         input.keyDown(Input.Keys.SPACE);
         if (count < repeats) {
             Timer timer = new Timer();

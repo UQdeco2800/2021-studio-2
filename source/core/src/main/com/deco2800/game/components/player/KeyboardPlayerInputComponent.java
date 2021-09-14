@@ -126,7 +126,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
                     @Override
                     public void run() {
                         dashing = false;
-                        triggerWalkEvent();
+                        if (!locked) {
+                            triggerWalkEvent();
+                        }
                         timer.cancel();
                     }
                 }, 150);
@@ -192,6 +194,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (locked) {
+            return false;
+        }
         switch (button) {
             case Input.Buttons.LEFT:
                 entity.getEvents().trigger("mouseAttack", new Vector2(screenX, screenY));
@@ -226,8 +231,10 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      * call a movement at a certain speed.
      */
     private void triggerDashEvent() {
-        calculateDistance(DASH_MULTIPLIER);
-        entity.getEvents().trigger("walk", walkDirection);
+        if (!locked) {
+            calculateDistance(DASH_MULTIPLIER);
+            entity.getEvents().trigger("walk", walkDirection);
+        }
     }
 
     /**

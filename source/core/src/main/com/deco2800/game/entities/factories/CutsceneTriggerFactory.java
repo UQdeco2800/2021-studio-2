@@ -1,11 +1,10 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.TouchAttackCutsceneComponent;
-import com.deco2800.game.components.TouchCutsceneComponent;
-import com.deco2800.game.components.TouchMoveComponent;
+import com.deco2800.game.components.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -13,6 +12,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
+import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 
@@ -85,6 +85,11 @@ public class CutsceneTriggerFactory {
      * @return entity that will create the trigger within the map
      */
     public static Entity createAttackTrigger(int repeats, int lastKeyPressed) {
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+
         Entity trigger =
                 new Entity()
                         .addComponent(new TextureRenderComponent("images/textBoxDisplay/loki_image.png"))
@@ -92,7 +97,8 @@ public class CutsceneTriggerFactory {
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchAttackCutsceneComponent(PhysicsLayer.PLAYER, repeats, lastKeyPressed))
-                        .addComponent(new CombatStatsComponent(20, 0));
+                        .addComponent(new CombatStatsComponent(50, 0))
+                        .addComponent(healthBarComponent);
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
