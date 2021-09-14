@@ -76,7 +76,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ZigChaseTask(
-                                target, 11, 4f, 4f,1))
+                                target, 11, 4f, 4f, 1))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -91,7 +91,7 @@ public class NPCFactory {
         elf.getComponent(AITaskComponent.class).
                 addTask(new AlertableChaseTask(target, 10, 3f, 4f));
         elf.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f,1));
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
@@ -100,10 +100,9 @@ public class NPCFactory {
         elf.addComponent(healthBarComponent);
 
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        elf.scaleWidth(1);
-        elf.scaleHeight(1);
+        elf.setScale(0.6f, 1f);
         elf.setEntityType("melee");
-        PhysicsUtils.setScaledCollider(elf, 0.9f, 0.4f);
+        PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
         return elf;
     }
 
@@ -142,10 +141,9 @@ public class NPCFactory {
         elfGuard.addComponent(healthBarComponent);
 
         elfGuard.getComponent(AnimationRenderComponent.class).scaleEntity();
-        elfGuard.scaleWidth(1);
-        elfGuard.scaleHeight(1);
-        PhysicsUtils.setScaledCollider(elfGuard, 0.9f, 0.4f);
+        elfGuard.setScale(0.6f, 1f);
         elfGuard.setEntityType("melee");
+        PhysicsUtils.setScaledCollider(elfGuard, 0.9f, 0.2f);
         return elfGuard;
     }
 
@@ -194,10 +192,9 @@ public class NPCFactory {
         anchoredElf.addComponent(healthBarComponent);
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        anchoredElf.scaleWidth(1);
-        anchoredElf.scaleHeight(1);
+        anchoredElf.setScale(0.6f, 1f);
         anchoredElf.setEntityType("melee");
-        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.4f); //Fleur: merge conflict - wasn't in my head but doubt I would have consciously deleted this
+        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
         return anchoredElf;
     }
 
@@ -257,9 +254,8 @@ public class NPCFactory {
 
         anchoredElf.setEntityType("melee");
 
-        anchoredElf.scaleWidth(1);
-        anchoredElf.scaleHeight(1);
-        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.4f);
+        anchoredElf.setScale(0.6f, 1f);
+        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
         return anchoredElf;
     }
 
@@ -334,6 +330,9 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 HealthBar, HealthBarFrame, HealthBarDecrease);
         elf.addComponent(healthBarComponent);
+
+        elf.setScale(0.8f, 1f);
+        PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
         return elf;
     }
 
@@ -391,7 +390,8 @@ public class NPCFactory {
                 healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
         boss.setEntityType("elfBoss");
-        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.4f);
+        boss.setScale(0.8f * 2, 1f * 2);
+        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
     }
 
@@ -405,11 +405,8 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 3f, 4f));
-        Entity npc = createBaseNPCNoAI()
+        return createBaseNPCNoAI()
                 .addComponent(aiComponent);
-
-        PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
-        return npc;
     }
 
     /**
@@ -426,7 +423,7 @@ public class NPCFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 0.5f));
 
-        PhysicsUtils.setScaledCollider(npc, 0.9f, 0.4f);
+        PhysicsUtils.setScaledCollider(npc, 0.9f, 0.2f);
         return npc;
     }
 }

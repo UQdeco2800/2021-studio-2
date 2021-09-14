@@ -3,8 +3,11 @@ package com.deco2800.game.components.tasks;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
+import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -42,6 +45,10 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             owner.getEntity().getComponent(ElfAnimationController.class).setDeath();
             this.declareEnd = false;
             owner.getEntity().getComponent(HealthBarComponent.class).dispose();
+            //owner.getEntity().getComponent(PhysicsComponent.class).dispose();
+            owner.getEntity().getComponent(ColliderComponent.class).dispose();
+            owner.getEntity().getComponent(HitboxComponent.class).dispose();
+            owner.getEntity().getComponent(TouchAttackComponent.class).dispose();
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {

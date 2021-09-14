@@ -13,6 +13,7 @@ public class HealthBarComponent extends RenderComponent {
     private final Sprite healthBar;
     private final Sprite healthDecrease;
     private float heightOfHealth;
+    private float xSize = 0.8f;
     private float size;
     private float previousHealth;
     private float saveHealth;
@@ -47,20 +48,20 @@ public class HealthBarComponent extends RenderComponent {
     }
 
     public void scaleHealth(float xScale) {
-        float width = (entity.getScale().x / health.getWidth()) * size;
+        float width = (xSize / health.getWidth()) * size;
         float height = (entity.getScale().y / health.getHeight()) * (xScale / 2) * size;
         health.setScale(height, width);
     }
 
     public void scaleHealthBar() {
-        float width = (entity.getScale().x / healthBar.getWidth()) * size;
+        float width = (xSize / healthBar.getWidth()) * size;
         float height = (entity.getScale().y / healthBar.getHeight()) * 0.5f * size;
         healthBar.setScale(height, width);
     }
 
     public void scaleHealthDecrease(float xScale, float xScalePrevious, double ratioHealthDecrease) {
         float scale = xScale + (xScalePrevious - xScale) * (float) ratioHealthDecrease;
-        float width = (entity.getScale().x / healthBar.getWidth());
+        float width = (xSize / healthBar.getWidth());
         float height = (entity.getScale().y / health.getHeight()) * (scale / 2);
         healthDecrease.setScale(height, width);
     }
@@ -139,4 +140,3 @@ public class HealthBarComponent extends RenderComponent {
     }
 
 }
-

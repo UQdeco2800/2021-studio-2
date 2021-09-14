@@ -15,12 +15,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
 public class TouchHealComponentTest {
     Entity entity;
     Entity health;
+
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerEntityService(new EntityService());
@@ -45,7 +46,7 @@ public class TouchHealComponentTest {
         entity.getComponent(CombatStatsComponent.class).setHealth(10);
         assertEquals(10, entity.getComponent(CombatStatsComponent.class).getHealth());
 
-        health.getEvents().trigger("collisionStart", health2  , player );
+        health.getEvents().trigger("collisionStart", health2, player);
         assertEquals(100, entity.getComponent(CombatStatsComponent.class).getHealth(), "player " +
                 "should've gotten health back");
     }

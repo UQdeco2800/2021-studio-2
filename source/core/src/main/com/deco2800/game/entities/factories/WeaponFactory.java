@@ -21,7 +21,6 @@ import com.deco2800.game.entities.configs.TrackingArrowConfig;
 import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
@@ -135,8 +134,8 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/fireball/fireballAinmation.atlas", TextureAtlas.class));
-        animator.addAnimation("flying",0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("staticFireball",0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
         animator.startAnimation("staticFireball");
 
         AITaskComponent aiComponent =

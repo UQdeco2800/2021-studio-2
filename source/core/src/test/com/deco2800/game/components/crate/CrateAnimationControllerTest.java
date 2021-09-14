@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
@@ -19,6 +20,7 @@ public class CrateAnimationControllerTest {
     @Mock
     CrateAnimationController animate;
     Entity entity;
+
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerEntityService(new EntityService());

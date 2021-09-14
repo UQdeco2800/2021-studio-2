@@ -64,13 +64,10 @@ public class ForestGameArea extends GameArea {
             "images/vortex.png",
             "images/aiming_line.png",
             "images/bossAttack.png",
-            "images/minionEnemy.png",
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png"
-
-
+            "images/fireball/fireballAinmation.png",
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -78,9 +75,8 @@ public class ForestGameArea extends GameArea {
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
+            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
-
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -314,7 +310,7 @@ public class ForestGameArea extends GameArea {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
-          resourceService.loadTextures(healthRegenTextures);
+        resourceService.loadTextures(healthRegenTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
         resourceService.loadSounds(forestSounds);
         resourceService.loadMusic(forestMusic);

@@ -44,12 +44,12 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
             } else {
                 float speed = 1.5f * speedMultiplier;
                 movementTask.setMoveSpeed(new Vector2(speed, speed));
-                float angle = 45*(getDistanceToTarget()/maxChaseDistance);
+                float angle = 45 * (getDistanceToTarget() / maxChaseDistance);
                 if (zigLeft) {
                     movementTask.setTarget(zigLeftRight(-1, angle));
                     zigLeft = false;
                 } else {
-                    movementTask.setTarget(zigLeftRight(1 ,angle));
+                    movementTask.setTarget(zigLeftRight(1, angle));
                     zigLeft = true;
                 }
             }

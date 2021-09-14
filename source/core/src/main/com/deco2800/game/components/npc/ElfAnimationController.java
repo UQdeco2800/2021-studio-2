@@ -2,7 +2,6 @@ package com.deco2800.game.components.npc;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
-import com.deco2800.game.rendering.TextureRenderComponent;
 
 /**
  * This class listens to events relevant to an entity's state and plays the animation when one
@@ -37,7 +36,7 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("assassinRightShoot", this::animateAssassinRight);
         entity.getEvents().addListener("assassinUpShoot", this::animateAssassinUp);
         entity.getEvents().addListener("assassinDownShoot", this::animateAssassinDown);
-   }
+    }
 
     public void setDeath() {
         death = true;
@@ -59,7 +58,7 @@ public class ElfAnimationController extends Component {
         } else {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("frontDeath");
+                animator.startAnimation("leftDeath");
             }
         }
     }
@@ -80,7 +79,7 @@ public class ElfAnimationController extends Component {
         } else {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("frontDeath");
+                animator.startAnimation("rightDeath");
             }
         }
     }
@@ -159,4 +158,4 @@ public class ElfAnimationController extends Component {
         animator.startAnimation("assassinDown");
     }
 
-  }
+}

@@ -46,7 +46,8 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
 
     /**
      * Spawn the vortex
-     * @param ownerRunner owner entity.
+     *
+     * @param ownerRunner  owner entity.
      * @param desiredScale upper end of the scale (margin to upscale to)
      * @param rotateAngle  angle to rotate
      */
