@@ -128,20 +128,25 @@ public class WeaponFactory {
                 .addComponent(new TouchAttackComponent((short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER), 1f));
     }
 
+    /**
+     * Makes an energy ball that will move in a straight line and damage enemies
+     * @param target the location that the blast will try and reach
+     * @return entity
+     */
     public static Entity createBlast(Vector2 target) {
-    float speed = 8f;
-    Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/blast.png", Texture.class));
-    PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
-    movingComponent.setMoving(true);
-    movingComponent.setTarget(target);
-    movingComponent.setMaxSpeed(new Vector2(speed, speed));
-    Entity blast = new Entity()
-        .addComponent(new TextureRenderComponent(sprite))
-        .addComponent(new PhysicsComponent())
-        .addComponent(movingComponent)
-        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-        .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-        .addComponent(new Blast());
+        float speed = 8f;
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/blast.png", Texture.class));
+        PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
+        movingComponent.setMoving(true);
+        movingComponent.setTarget(target);
+        movingComponent.setMaxSpeed(new Vector2(speed, speed));
+        Entity blast = new Entity()
+            .addComponent(new TextureRenderComponent(sprite))
+            .addComponent(new PhysicsComponent())
+            .addComponent(movingComponent)
+            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+            .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+            .addComponent(new Blast());
     return blast;
   }
 

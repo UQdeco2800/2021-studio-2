@@ -8,7 +8,6 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.utils.math.Vector2Utils;
 
 /**
  * Represents the scepter used by entities. Main difference to its superclass is that
