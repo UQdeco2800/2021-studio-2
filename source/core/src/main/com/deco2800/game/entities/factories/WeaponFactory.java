@@ -13,12 +13,10 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
+import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
-import com.deco2800.game.entities.configs.BaseArrowConfig;
-import com.deco2800.game.entities.configs.FastArrowConfig;
-import com.deco2800.game.entities.configs.TrackingArrowConfig;
-import com.deco2800.game.entities.configs.WeaponConfigs;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.ColliderComponent;
@@ -39,6 +37,8 @@ public class WeaponFactory {
      */
     private static final WeaponConfigs configs =
             FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
+    private static final PlayerConfig stats =
+            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
     /**
      * throw error
@@ -251,5 +251,27 @@ public class WeaponFactory {
                 .addComponent(new PlayerActions())
                 .addComponent(new TouchAttackComponent((short) (
                         PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER), 1f));
+    }
+
+    /**
+     * Makes an energy ball that will move in a straight line and damage enemies
+     * @param target the location that the blast will try and reach
+     * @return entity
+     */
+    public static Entity createBlast(Vector2 target) {
+        float speed = 8f;
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/blast.png", Texture.class));
+        PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
+        movingComponent.setMoving(true);
+        movingComponent.setTarget(target);
+        movingComponent.setMaxSpeed(new Vector2(speed, speed));
+        Entity blast = new Entity()
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new PhysicsComponent())
+                .addComponent(movingComponent)
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new Blast());
+        return blast;
     }
 }

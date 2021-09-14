@@ -21,7 +21,6 @@ public class CombatStatsComponent extends Component {
         setMaxHealth(health);
         setBaseAttack(baseAttack);
         //if entities can heal trigger this even
-
     }
 
     public void create() {
@@ -88,7 +87,6 @@ public class CombatStatsComponent extends Component {
         }
     }
 
-
     /**
      * Adds to the player's health. The amount added can be negative.
      *
@@ -130,6 +128,43 @@ public class CombatStatsComponent extends Component {
     public void hit(CombatStatsComponent attacker) {
         if (this.enabled) {
             int newHealth = getHealth() - attacker.getBaseAttack();
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * Entity receives a hit, but also adds a weapon attack.
+     * @param attacker the attacking entity with the weapon
+     * @param weaponAttackPower the weapon damage.
+     */
+    public void hit(CombatStatsComponent attacker, int weaponAttackPower) {
+        if (this.enabled) {
+            int newHealth = getHealth() - attacker.getBaseAttack() - weaponAttackPower;
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * Hits purely by weapon attack, ignoring base combat stats of attacking entity.
+     * @param weaponAttackPower the weapon damage
+     */
+    public void weaponHit(int weaponAttackPower) {
+        if (this.enabled) {
+            int newHealth = getHealth() - weaponAttackPower;
             //check for hit animations
             checkHitAnimations();
             //if entity has Transform Component and is about to die we don't want to update hp

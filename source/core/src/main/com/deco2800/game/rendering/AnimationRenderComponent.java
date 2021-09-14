@@ -38,6 +38,8 @@ public class AnimationRenderComponent extends RenderComponent {
     private Animation<TextureRegion> currentAnimation;
     private String currentAnimationName;
     private float animationPlayTime;
+    private float scaleFactor;
+
 
     /**
      * Create the component for a given texture atlas.
@@ -48,6 +50,7 @@ public class AnimationRenderComponent extends RenderComponent {
         this.atlas = atlas;
         this.animations = new HashMap<>(4);
         timeSource = ServiceLocator.getTimeSource();
+        scaleFactor = 1f;
     }
 
     /**
@@ -178,6 +181,10 @@ public class AnimationRenderComponent extends RenderComponent {
         if (currentAnimation == null) {
             return;
         }
+        if (scaleFactor != 1f) {
+            drawWithScale(batch);
+            return;
+        }
 
         Vector2 positionCenter = entity.getCenterPosition();
         float angle = entity.getAngle();
@@ -188,5 +195,37 @@ public class AnimationRenderComponent extends RenderComponent {
         sprite.setCenter(positionCenter.x, positionCenter.y);
         sprite.draw(batch);
         animationPlayTime += timeSource.getDeltaTime();
+    }
+
+    protected void drawWithScale(SpriteBatch batch) {
+        if (currentAnimation == null) {
+            return;
+        }
+        TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
+
+        Vector2 scale = entity.getScale().cpy();
+        Vector2 pos = entity.getPosition().cpy();
+
+        // apply scale if one exists
+        if (scaleFactor != 1f) {
+            scale.scl(scaleFactor);
+            /* Without scaling, the animation center position will be (x/2, y/2).
+            Where x, y are the entities scale. If we scale up by 3, this position
+            becomes (3x/2, 3y/2). We need to readjust the position to (x/2, y/2).
+            We do this by subtracting the difference, which is (x, y) * (scaleFactor - 1) / 2.
+            E.G. (3x/2, 3y/2) - ((x, y) * (3 - 1) / 2) = (x/2, y/2) */
+            pos.sub(entity.getScale().cpy().scl((scaleFactor - 1f) / 2f));
+        }
+
+        batch.draw(region, pos.x, pos.y, scale.x, scale.y);
+        animationPlayTime += timeSource.getDeltaTime();
+    }
+
+    /**
+     * Increases the animation size by a scalar factor.
+     * @param scaleFactor the size increase of the animation.
+     */
+    public void setAnimationScale(float scaleFactor) {
+        this.scaleFactor = scaleFactor;
     }
 }

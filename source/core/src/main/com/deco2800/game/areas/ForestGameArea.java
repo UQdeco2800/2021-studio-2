@@ -48,6 +48,10 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
+            "images/player_axe.png",
+            "images/player_hammer.png",
+            "images/player_scepter.png",
+            "images/blast.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -75,7 +79,8 @@ public class ForestGameArea extends GameArea {
     };
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
+            "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
+            "images/player_scepter.atlas","images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
     };
     private static final String[] arrowSounds = {
@@ -181,7 +186,7 @@ public class ForestGameArea extends GameArea {
      * Spawn player at the terrain, create the player
      */
     private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer();
+        Entity newPlayer = PlayerFactory.createPlayer("Scepter");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
     }
@@ -241,7 +246,6 @@ public class ForestGameArea extends GameArea {
     private void spawnBoss() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);

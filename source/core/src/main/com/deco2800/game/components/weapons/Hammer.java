@@ -7,54 +7,75 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
- * Represents the axe used by entities. Main difference to its superclass is that
- * Axe uses axe-related assets, and also has a strong attack which
- * uses an AOE (area of effect) attack.
+ * Hammer: Similar to Axe but implements AOE lightning attack functionality.
  */
-public class Axe extends MeleeWeapon {
-    /**
-     * Sound that plays every axe swing
-     */
+public class Hammer extends MeleeWeapon {
+
+    /** Sound that plays every axe swing */
     private final Sound attackSound;
-    /**
-     * Sound that plays when axe hits enemy
-     */
+    /** Sound that plays when axe hits enemy */
     private final Sound impactSound;
 
-    public Axe(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
+    /** AOE / Strong attack size */
+    private final Vector2 strongAttackSize;
+    /** Determines whether the axe has used its strong attack */
+    private boolean hasStrongAttacked;
+
+    public Hammer(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
+
         super(targetLayer, attackPower, knockback, weaponSize);
         attackSound = ServiceLocator.getResourceService().
                 getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
+        strongAttackSize = new Vector2(2f, 2f); // default size
+        hasStrongAttacked = false;
     }
 
     /**
      * Attacks, but also plays animation.
-     *
      * @see MeleeWeapon
      */
     @Override
     public void attack(int attackDirection) {
         super.attack(attackDirection);
-        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
+        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
         }
+
         switch (attackDirection) {
             case UP:
-                animator.startAnimation("up_attack");
+                animator.startAnimation("up_hammer_attack");
                 break;
             case DOWN:
-                animator.startAnimation("down_attack");
+                animator.startAnimation("down_hammer_attack");
                 break;
             case LEFT:
-                animator.startAnimation("left_attack");
+                animator.startAnimation("left_hammer_attack");
                 break;
             case RIGHT:
-                animator.startAnimation("right_attack");
+                animator.startAnimation("right_hammer_attack");
                 break;
         }
+    }
+
+    /**
+     * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
+     * connect with any enemies immediately around the entity.
+     * @param attackDirection - direction of attack, ignored for the time being.
+     */
+    public void strongAttack(int attackDirection) {
+        if (timeAtAttack != 0 || hasStrongAttacked) {
+            return;
+        }
+        hasStrongAttacked = true;
+        super.attack(MeleeWeapon.CENTER);
+        AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
+        if (animator == null) {
+            return;
+        }
+        animator.startAnimation("hammer_aoe");
     }
 
     /**
@@ -65,7 +86,13 @@ public class Axe extends MeleeWeapon {
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
         if (timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
-            if (hasAttacked) {
+            if (hasStrongAttacked) {
+                attackSound.play();
+                weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
+                hasStrongAttacked = false;
+                hasAttacked = false; // strong attack overrides light attack.
+
+            } else if (hasAttacked) {
                 attackSound.play();
             }
         }
@@ -74,7 +101,6 @@ public class Axe extends MeleeWeapon {
 
     /**
      * Plays impact sound if weapon successfully collides with enemy.
-     *
      * @see MeleeWeapon
      */
     @Override
