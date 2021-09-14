@@ -20,8 +20,9 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
 
     /**
      * Create a component which attacks entities on collision, without knockback.
-     * @param targetLayer The physics layer of the target's collider.
-     * @param repeats the number of repeated attacks
+     *
+     * @param targetLayer    The physics layer of the target's collider.
+     * @param repeats        the number of repeated attacks
      * @param lastKeyPressed the key direction the player will attack in
      */
     public TouchAttackCutsceneComponent(short targetLayer, int repeats, int lastKeyPressed) {
