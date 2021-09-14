@@ -26,97 +26,98 @@ import org.slf4j.LoggerFactory;
  * Forest area for the demo game with trees, a player, and some enemies.
  */
 public class TestGameArea extends GameArea {
-  private static final Logger logger = LoggerFactory.getLogger(TestGameArea.class);
-  private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(6, 15);
-  private static final float WALL_WIDTH = 0.1f;
-  private static final String[] forestTextures = {
-          "images/box_boy_leaf.png",
-          "images/tree.png",
-          "images/trap.png",
-          "images/test.png",
-          "images/arrow_normal.png",
-          "images/ghost_king.png",
-          "images/ghost_crown.png",
-          "images/ghost_1.png",
-          "images/grass_1.png",
-          "images/grass_2.png",
-          "images/grass_3.png",
-          "images/hex_grass_1.png",
-          "images/hex_grass_2.png",
-          "images/hex_grass_3.png",
-          "images/iso_grass_1.png",
-          "images/iso_grass_2.png",
-          "images/iso_grass_3.png",
-          "images/mud.png",
-          "images/player.png",
-          "images/health_left.png",
-          "images/health_middle.png",
-          "images/health_right.png",
-          "images/health_frame_left.png",
-          "images/health_frame_middle.png",
-          "images/health_frame_right.png",
-          "images/hp_icon.png",
-          "images/dash_icon.png",
-          "images/prisoner.png",
-          "images/blast.png"
-  };
-  private static String[] tileTextures = null;
-  private static final String[] forestTextureAtlases = {
-          "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-          "images/player.atlas", "images/health_bar.atlas"
-  };
-  private static final String[] forestSounds = {
-          "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
-  };
-  private static final String[] arrowSounds = {
-          "sounds/arrow_disappear.mp3",
-          "sounds/arrow_shoot.mp3"
-  };
-  private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
-  private static final String[] forestMusic = {backgroundMusic};
+    private static final Logger logger = LoggerFactory.getLogger(TestGameArea.class);
+    private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
+    private static final GridPoint2 TEST_TRIGGER = new GridPoint2(6, 15);
+    private static final float WALL_WIDTH = 0.1f;
+    private static final String[] forestTextures = {
+            "images/box_boy_leaf.png",
+            "images/tree.png",
+            "images/trap.png",
+            "images/test.png",
+            "images/arrow_normal.png",
+            "images/ghost_king.png",
+            "images/ghost_crown.png",
+            "images/ghost_1.png",
+            "images/grass_1.png",
+            "images/grass_2.png",
+            "images/grass_3.png",
+            "images/hex_grass_1.png",
+            "images/hex_grass_2.png",
+            "images/hex_grass_3.png",
+            "images/iso_grass_1.png",
+            "images/iso_grass_2.png",
+            "images/iso_grass_3.png",
+            "images/mud.png",
+            "images/player.png",
+            "images/player_axe.png",
+            "images/health_left.png",
+            "images/health_middle.png",
+            "images/health_right.png",
+            "images/health_frame_left.png",
+            "images/health_frame_middle.png",
+            "images/health_frame_right.png",
+            "images/hp_icon.png",
+            "images/dash_icon.png",
+            "images/prisoner.png",
+            "images/blast.png"
+    };
+    private static String[] tileTextures = null;
+    private static final String[] forestTextureAtlases = {
+            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
+            "images/player.atlas", "images/player_axe.atlas", "images/health_bar.atlas"
+    };
+    private static final String[] forestSounds = {
+            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
+    };
+    private static final String[] arrowSounds = {
+            "sounds/arrow_disappear.mp3",
+            "sounds/arrow_shoot.mp3"
+    };
+    private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
+    private static final String[] forestMusic = {backgroundMusic};
 
-  private final TerrainFactory terrainFactory;
+    private final TerrainFactory terrainFactory;
 
-  public TestGameArea(TerrainFactory terrainFactory) {
-    super();
-    this.terrainFactory = terrainFactory;
-  }
+    public TestGameArea(TerrainFactory terrainFactory) {
+        super();
+        this.terrainFactory = terrainFactory;
+    }
 
-  /**
-   * Create the game area, including terrain, static entities (trees), dynamic entities (player)
-   */
-  @Override
-  public void create() {
-    Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
-    tileTextures = m.TileRefsArray();
+    /**
+     * Create the game area, including terrain, static entities (trees), dynamic entities (player)
+     */
+    @Override
+    public void create() {
+        Map m = FileLoader.readClass(Map.class, "maps/test_map.json");
+        tileTextures = m.TileRefsArray();
 
-    super.create();
-    loadAssets();
-    displayUI();
+        super.create();
+        loadAssets();
+        displayUI();
 
-    spawnTerrain();
-    spawnPlayer();
-    spawnCutsceneTrigger();
+        spawnTerrain();
+        spawnPlayer();
+        spawnCutsceneTrigger();
 
-    playMusic();
-    setDialogue();
-  }
+        playMusic();
+        setDialogue();
+    }
 
-  private void displayUI() {
-    Entity ui = new Entity();
-    ui.addComponent(new GameAreaDisplay("Map Test"));
-    spawnEntity(ui);
-  }
+    private void displayUI() {
+        Entity ui = new Entity();
+        ui.addComponent(new GameAreaDisplay("Map Test"));
+        spawnEntity(ui);
+    }
 
-  private void spawnCutsceneTrigger() {
-    Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-            DialogueSet.ORDERED);
-    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
+    private void spawnCutsceneTrigger() {
+        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED);
+        spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
-    Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-            DialogueSet.BOSS_DEFEATED_BEFORE);
-    spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+                DialogueSet.BOSS_DEFEATED_BEFORE);
+        spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
 
         /*Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
         spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);

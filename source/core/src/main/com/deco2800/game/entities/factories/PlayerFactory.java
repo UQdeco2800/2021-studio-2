@@ -46,14 +46,14 @@ public class PlayerFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/player.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));
 
         animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
-        animator.addAnimation("walk_forward", 0.13f, Animation.PlayMode.LOOP);
-        animator.addAnimation("walk_backward", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_down", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("walk_up", 0.13f, Animation.PlayMode.LOOP);
         animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("default_backward", 1, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("left_attack", 0.1f);
@@ -61,7 +61,6 @@ public class PlayerFactory {
         animator.addAnimation("up_attack", 0.1f);
         animator.addAnimation("down_attack", 0.1f);
         animator.addAnimation("aoe_attack", 0.05f);
-        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
         animator.setAnimationScale(2f);
 
         Entity player =
