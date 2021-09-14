@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.weapons.Axe;
+import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.physics.components.PhysicsComponent;
@@ -110,6 +111,15 @@ public class PlayerActions extends Component {
         }
     }
 
+    MeleeWeapon getEquippedWeapon() {
+        MeleeWeapon weapon = entity.getComponent(Axe.class);
+        if (weapon == null) {
+            weapon = entity.getComponent(Hammer.class);
+        } if (weapon == null) {
+            weapon = entity.getComponent(Scepter.class);
+        }
+        return weapon;
+    }
 
     /**
      * Makes the player attack. Player currently only uses an axe.
@@ -232,23 +242,23 @@ public class PlayerActions extends Component {
     }
 
   void mouseStrongAttack(Vector2 coordinates) {
-    MeleeWeapon weapon;
-    if (entity.getComponent(Scepter.class) != null) {
-      weapon = entity.getComponent(Scepter.class);
-    } else if (entity.getComponent(Axe.class) != null) {
-      weapon = entity.getComponent(Axe.class);
-    } else {
-      weapon = null;
-    }
-    if (weapon == null) {
-      return;
-    }
-    Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
-            coordinates.x - Gdx.graphics.getWidth() / 2f,
-            coordinates.y - Gdx.graphics.getHeight() / 2f
-    ));
-    weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
-    lockMovement(weapon.getTotalAttackTime());
+      MeleeWeapon weapon;
+      if (entity.getComponent(Scepter.class) != null) {
+          weapon = entity.getComponent(Scepter.class);
+      } else if (entity.getComponent(Axe.class) != null) {
+          weapon = entity.getComponent(Axe.class);
+      } else {
+          weapon = null;
+      }
+      if (weapon == null) {
+          return;
+      }
+      Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
+              coordinates.x - Gdx.graphics.getWidth() / 2f,
+              coordinates.y - Gdx.graphics.getHeight() / 2f
+      ));
+      weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
+      lockMovement(weapon.getTotalAttackTime());
   }
 
     /**

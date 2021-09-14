@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.*;
-import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.weapons.Scepter;
+import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.files.FileLoader;
@@ -46,7 +46,9 @@ public class PlayerFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));
+                        // ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/player_hammer.atlas", TextureAtlas.class));
+                        // ServiceLocator.getResourceService().getAsset("images/player_sceptor.atlas", TextureAtlas.class));
 
         animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("walk_down", 0.13f, Animation.PlayMode.LOOP);
@@ -56,11 +58,18 @@ public class PlayerFactory {
         animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
+        // Axe Animations (DEFAULT)
         animator.addAnimation("left_attack", 0.1f);
         animator.addAnimation("right_attack", 0.1f);
         animator.addAnimation("up_attack", 0.1f);
         animator.addAnimation("down_attack", 0.1f);
-        animator.addAnimation("aoe_attack", 0.05f);
+        // Hammer/Mjolnir Animations
+        animator.addAnimation("hammer_aoe", 0.1f);
+        animator.addAnimation("left_hammer_attack", 0.1f);
+        animator.addAnimation("right_hammer_attack", 0.1f);
+        animator.addAnimation("up_hammer_attack", 0.1f);
+        animator.addAnimation("down_hammer_attack", 0.1f);
+
         animator.setAnimationScale(2f);
 
         Entity player =
@@ -73,6 +82,10 @@ public class PlayerFactory {
                         .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                         .addComponent(new Scepter(PhysicsLayer.NPC, 10, 50,
                                 new Vector2(1f, 0.5f)))
+                        //.addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
+                        //        new Vector2(1f, 0.5f)))
+                        //.addComponent(new Hammer(PhysicsLayer.NPC, 10, 50,
+                                //new Vector2(1f, 0.5f)))
 
                         .addComponent(new PlayerActions())
                         .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
