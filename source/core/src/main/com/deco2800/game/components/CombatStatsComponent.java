@@ -143,7 +143,8 @@ public class CombatStatsComponent extends Component {
 
     /**
      * Entity receives a hit, but also adds a weapon attack.
-     * @param attacker the attacking entity with the weapon
+     *
+     * @param attacker          the attacking entity with the weapon
      * @param weaponAttackPower the weapon damage.
      */
     public void hit(CombatStatsComponent attacker, int weaponAttackPower) {
@@ -162,6 +163,7 @@ public class CombatStatsComponent extends Component {
 
     /**
      * Hits purely by weapon attack, ignoring base combat stats of attacking entity.
+     *
      * @param weaponAttackPower the weapon damage
      */
     public void weaponHit(int weaponAttackPower) {
@@ -192,6 +194,7 @@ public class CombatStatsComponent extends Component {
     /**
      * if the entity has a Transform Component it will execute its transformation
      * will only transform the entity if its hp is less than or equal to 0 and will disable CombatStatsComponent
+     *
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */

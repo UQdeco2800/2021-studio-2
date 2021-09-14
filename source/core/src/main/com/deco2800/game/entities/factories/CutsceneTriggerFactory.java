@@ -81,7 +81,7 @@ public class CutsceneTriggerFactory {
      * Creates an entity that can trigger a cutscene to start.
      *
      * @param lastKeyPressed the last key direction the player will attack in
-     * @param repeats the amount to repeat
+     * @param repeats        the amount to repeat
      * @return entity that will create the trigger within the map
      */
     public static Entity createAttackTrigger(int repeats, int lastKeyPressed) {

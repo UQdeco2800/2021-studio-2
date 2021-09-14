@@ -7,9 +7,6 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class TouchMoveComponent extends TouchComponent {
 
     /**

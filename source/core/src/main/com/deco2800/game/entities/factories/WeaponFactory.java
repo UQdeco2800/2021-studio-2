@@ -8,17 +8,16 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
+import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.BaseArrowConfig;
-import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.components.tasks.ProjectileMovementTask;
-import com.deco2800.game.entities.configs.FastArrowConfig;
-import com.deco2800.game.entities.configs.TrackingArrowConfig;
-import com.deco2800.game.entities.configs.WeaponConfigs;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.*;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -27,10 +26,10 @@ import com.deco2800.game.services.ServiceLocator;
  * Factory to create non-playable character weapon entities with predefined components.
  */
 public class WeaponFactory {
-  private static final WeaponConfigs configs =
-      FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
-  private static final PlayerConfig stats =
-          FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+    private static final WeaponConfigs configs =
+            FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
+    private static final PlayerConfig stats =
+            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
     /**
      * manages the sound to play when constructing the projectile
@@ -67,7 +66,7 @@ public class WeaponFactory {
     public static Entity createMjolnir() {
         Entity mjolnir =
                 new Entity()
-                    .addComponent(new PhysicsComponent())
+                        .addComponent(new PhysicsComponent())
                         .addComponent(new PhysicsMovementComponent())
                         .addComponent(new WeaponHitboxComponent())
                         .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
@@ -130,6 +129,7 @@ public class WeaponFactory {
 
     /**
      * Makes an energy ball that will move in a straight line and damage enemies
+     *
      * @param target the location that the blast will try and reach
      * @return entity
      */
@@ -141,16 +141,16 @@ public class WeaponFactory {
         movingComponent.setTarget(target);
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
         Entity blast = new Entity()
-            .addComponent(new TextureRenderComponent(sprite))
-            .addComponent(new PhysicsComponent())
-            .addComponent(movingComponent)
-            .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-            .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-            .addComponent(new Blast());
-    return blast;
-  }
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new PhysicsComponent())
+                .addComponent(movingComponent)
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new Blast());
+        return blast;
+    }
 
-  public WeaponFactory() {
-    throw new IllegalStateException("Instantiating static util class");
-  }
+    public WeaponFactory() {
+        throw new IllegalStateException("Instantiating static util class");
+    }
 }

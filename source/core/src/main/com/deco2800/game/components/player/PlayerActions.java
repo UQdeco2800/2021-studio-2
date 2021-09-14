@@ -115,7 +115,8 @@ public class PlayerActions extends Component {
         MeleeWeapon weapon = entity.getComponent(Axe.class);
         if (weapon == null) {
             weapon = entity.getComponent(Hammer.class);
-        } if (weapon == null) {
+        }
+        if (weapon == null) {
             weapon = entity.getComponent(Scepter.class);
         }
         return weapon;
@@ -150,31 +151,31 @@ public class PlayerActions extends Component {
         lockMovement(weapon.getTotalAttackTime());
     }
 
-  /**
-   * Makes player use the strong attack associated with its equipped weapon.
-   */
-  void strongAttack(int keycode) {
-    MeleeWeapon weapon = getEquippedWeapon();
-    if (weapon == null) {
-      return;
+    /**
+     * Makes player use the strong attack associated with its equipped weapon.
+     */
+    void strongAttack(int keycode) {
+        MeleeWeapon weapon = getEquippedWeapon();
+        if (weapon == null) {
+            return;
+        }
+        int attackDirection = 0;
+        switch (keycode) {
+            case Input.Keys.W:
+                attackDirection = MeleeWeapon.UP;
+                break;
+            case Input.Keys.S:
+                attackDirection = MeleeWeapon.DOWN;
+                break;
+            case Input.Keys.A:
+                attackDirection = MeleeWeapon.LEFT;
+                break;
+            case Input.Keys.D:
+                attackDirection = MeleeWeapon.RIGHT;
+                break;
+        }
+        weapon.strongAttack(attackDirection);
     }
-    int attackDirection = 0;
-    switch (keycode) {
-      case Input.Keys.W:
-        attackDirection = MeleeWeapon.UP;
-        break;
-      case Input.Keys.S:
-        attackDirection = MeleeWeapon.DOWN;
-        break;
-      case Input.Keys.A:
-        attackDirection = MeleeWeapon.LEFT;
-        break;
-      case Input.Keys.D:
-        attackDirection = MeleeWeapon.RIGHT;
-        break;
-    }
-    weapon.strongAttack(attackDirection);
-  }
 
     /**
      * Makes the player attack using a mouse click.
@@ -220,18 +221,18 @@ public class PlayerActions extends Component {
         }
     }
 
-  void mouseStrongAttack(Vector2 coordinates) {
-      MeleeWeapon weapon = getEquippedWeapon();
-      if (weapon == null) {
-          return;
-      }
-      Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
-              coordinates.x - Gdx.graphics.getWidth() / 2f,
-              coordinates.y - Gdx.graphics.getHeight() / 2f
-      ));
-      weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
-      lockMovement(weapon.getTotalAttackTime());
-  }
+    void mouseStrongAttack(Vector2 coordinates) {
+        MeleeWeapon weapon = getEquippedWeapon();
+        if (weapon == null) {
+            return;
+        }
+        Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
+                coordinates.x - Gdx.graphics.getWidth() / 2f,
+                coordinates.y - Gdx.graphics.getHeight() / 2f
+        ));
+        weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
+        lockMovement(weapon.getTotalAttackTime());
+    }
 
     /**
      * Checks the direction that the player is moving in and changes the animation to match.

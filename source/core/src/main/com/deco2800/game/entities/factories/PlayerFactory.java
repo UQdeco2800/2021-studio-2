@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.*;
-import com.deco2800.game.components.weapons.*;
+import com.deco2800.game.components.weapons.Axe;
+import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
@@ -61,7 +62,7 @@ public class PlayerFactory {
             animator.addAnimation("up_hammer_attack", 0.1f);
             animator.addAnimation("down_hammer_attack", 0.1f);
 
-        // Axe (default)
+            // Axe (default)
         } else {
             animator = new AnimationRenderComponent(
                     ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));

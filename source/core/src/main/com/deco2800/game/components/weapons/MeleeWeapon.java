@@ -26,7 +26,9 @@ public class MeleeWeapon extends Component {
      */
     protected boolean hasAttacked;
 
-    /** Time when the entity last attacked, 0 if entity is not attacking. */
+    /**
+     * Time when the entity last attacked, 0 if entity is not attacking.
+     */
     protected long timeAtAttack;
 
     /**
@@ -47,11 +49,15 @@ public class MeleeWeapon extends Component {
      */
     protected CombatStatsComponent combatStats;
 
-    /** Weapon attack width and range in terms of x and y, relative to entity size */
+    /**
+     * Weapon attack width and range in terms of x and y, relative to entity size
+     */
     protected Vector2 weaponSize;
-    /** Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
-    entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
-    it simultaneously. */
+    /**
+     * Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
+     * entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
+     * it simultaneously.
+     */
     protected WeaponHitboxComponent weaponHitbox;
 
     /**
@@ -127,7 +133,7 @@ public class MeleeWeapon extends Component {
     protected void triggerAttackStage(long timeSinceAttack) {
         // Set hit box during attack frame (2nd frame).
         if (hasAttacked && timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
-            weaponHitbox.set(weaponSize.cpy(),  attackDirection);
+            weaponHitbox.set(weaponSize.cpy(), attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
             // Destroy hit box as soon as attack frame ends (3rd frame).
         } else if (timeSinceAttack >= 3 * frameDuration) {
