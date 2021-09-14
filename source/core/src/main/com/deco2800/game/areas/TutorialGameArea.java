@@ -30,22 +30,19 @@ import java.util.HashMap;
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
  */
-public class TestGameArea extends GameArea {
-    private static final Logger logger = LoggerFactory.getLogger(TestGameArea.class);
-    private static final int NUM_GHOSTS = 1;
-    private static final int NUM_ANCHORED_GHOSTS = 1;
+public class TutorialGameArea extends GameArea {
+    private static final Logger logger = LoggerFactory.getLogger(TutorialGameArea.class);
+    private static final int NUM_MELEE_ELF = 2;
+    private static final int NUM_ANCHORED_ELF = 1;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(20, 370);
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
     private static final float WALL_WIDTH = 0.1f;
     private static final String[] forestTextures = {
-            "images/box_boy_leaf.png",
             "images/tree.png",
             "images/trap.png",
             "images/test.png",
             "images/arrow_normal.png",
-            "images/ghost_king.png",
-            "images/ghost_crown.png",
-            "images/ghost_1.png",
+            "images/crown.png",
             "images/grass_1.png",
             "images/grass_2.png",
             "images/grass_3.png",
@@ -65,14 +62,28 @@ public class TestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
+            "images/prisoner.png",
             "images/rock.png",
-            "images/prisoner.png"
-
+            "images/enemy_health_bar.png",
+            "images/enemy_health_border.png",
+            "images/enemy_health_bar_decrease.png",
+            "images/vortex.png",
+            "images/aiming_line.png",
+            "images/bossAttack.png",
+            "images/meleeElf.png",
+            "images/guardElf.png",
+            "images/rangedElf.png",
+            "images/fireball/fireballAinmation.png"
     };
     private static String[] tileTextures = null;
+    public static final String[] healthRegenTextures = {
+            "healthRegen/healthPotion_placeholder.png",
+            "crate/crateHitBreak.png"
+    };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas"
+            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
+            "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -88,7 +99,7 @@ public class TestGameArea extends GameArea {
     private final GdxGame game;
     private static Map map;
 
-    public TestGameArea(TerrainFactory terrainFactory, GdxGame game) {
+    public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game) {
         super();
         this.game = game;
         this.terrainFactory = terrainFactory;
@@ -110,6 +121,14 @@ public class TestGameArea extends GameArea {
         spawnPlayer();
 
         spawnCutsceneTrigger();
+
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
+        spawnBoss();
+
         spawnObstacles();
 
         spawnSpikeTraps();
@@ -127,6 +146,31 @@ public class TestGameArea extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Map Test"));
         spawnEntity(ui);
+    }
+
+    private void spawnCutsceneTrigger() {
+        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED);
+        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
+
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+                DialogueSet.BOSS_DEFEATED_BEFORE);
+
+        spawnEntityAt(trigger3, new Vector2(21f, 176.5f), true, true);
+
+        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
+        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
+
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
+        spawnEntityAt(moveTrigger4, new Vector2(14.1f, 180.7f), true, true);
+
+        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
+        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
+
+        
+        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+
+        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
     private void spawnTerrain() {
@@ -264,28 +308,126 @@ public class TestGameArea extends GameArea {
         }
     }
 
+    /**
+     * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
+     */
+    private void spawnMeleeElf() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeElf(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn range elf on terrain, range elf can shoot target
+     */
+    private void spawnRangedElf() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
+            incNum();
+            elf.setEntityType("ranged");
+            elf.getEvents().trigger("rangerLeft");
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn Assassin on terrain, range can shoot from far away with high damage
+     */
+    private void spawnAssassinElf() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
+            elf.setEntityType("assassin");
+            elf.getEvents().trigger("assassinLeft");
+            spawnEntityAt(elf, randomPos, true, true);
+            incNum();
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    private void spawnBoss() {
+        /*GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
+        GridPoint2 bossPos = new GridPoint2(100, 100);
+        Entity boss = NPCFactory.createBossNPC(player);
+        spawnEntityAt(boss, bossPos, true, true);
+    }
+
+    private void spawnElfGuard() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+        Entity elfKing = NPCFactory.createElfGuard(player);
+        incNum();
+        spawnEntityAt(elfKing, randomPos, true, true);
+    }
+
+    /**
+     * Spawn anchored elf, elf only move at the certain anchored
+     */
+    private void spawnAnchoredElf() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_ANCHORED_ELF; i++) {
+            GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
+
+            GridPoint2 elfPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+            Entity anchor = ObstacleFactory.createAnchor();
+            Entity Anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
+            spawnEntityAt(anchor, basePos, true, true);
+            incNum();
+            spawnEntityAt(Anchoredelf, elfPos, true, true);
+        }
+    }
+
+    /*
     private void spawnCutsceneTrigger() {
         Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
                 DialogueSet.ORDERED);
-        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
+        spawnEntityAt(trigger, TEST_TRIGGER, true, true);
 
         Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
                 DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(21f, 176.5f), true, true);
+        spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
+
+        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
+        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
+
+        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
+        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
 
         Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
+        spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
 
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(14.1f, 180.7f), true, true);
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+        spawnEntityAt(moveTrigger4, new Vector2(2.2f, 3.3f), true, true);
 
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
-        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
+        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
+        spawnEntityAt(moveTrigger5, new Vector2(6.3f, 3.3f), true, true);
 
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
+        spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
     }
+    */
 
 
     private void playMusic() {
@@ -300,6 +442,7 @@ public class TestGameArea extends GameArea {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(tileTextures);
+        resourceService.loadTextures(healthRegenTextures);
         resourceService.loadTextures(forestTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
         resourceService.loadSounds(forestSounds);
@@ -317,6 +460,7 @@ public class TestGameArea extends GameArea {
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.unloadAssets(forestTextures);
         resourceService.unloadAssets(tileTextures);
+        resourceService.unloadAssets(healthRegenTextures);
         resourceService.unloadAssets(forestTextureAtlases);
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
