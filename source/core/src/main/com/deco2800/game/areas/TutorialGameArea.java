@@ -31,14 +31,10 @@ public class TutorialGameArea extends GameArea {
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(6, 15);
     private static final float WALL_WIDTH = 0.1f;
     private static final String[] forestTextures = {
-            "images/box_boy_leaf.png",
             "images/tree.png",
             "images/trap.png",
             "images/test.png",
-            "images/arrow_normal.png",
-            "images/ghost_king.png",
-            "images/ghost_crown.png",
-            "images/ghost_1.png",
+            "images/crown.png",
             "images/grass_1.png",
             "images/grass_2.png",
             "images/grass_3.png",
@@ -62,7 +58,7 @@ public class TutorialGameArea extends GameArea {
     };
     private static String[] tileTextures = null;
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
+            "images/terrain_iso_grass.atlas",
             "images/player.atlas", "images/health_bar.atlas"
     };
     private static final String[] forestSounds = {
