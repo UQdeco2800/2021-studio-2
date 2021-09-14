@@ -69,10 +69,7 @@ public class ForestGameArea extends GameArea {
             "images/guardElf.png",
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
-            "images/rangedFixed.png",
             "images/bossFixed.png"
-
-
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -81,9 +78,7 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas", "images/bossFixed.atlas"
-
-
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/bossFixed.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
