@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <section class="description">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="Axe.html" title="class in com.deco2800.game.components.weapons">Axe</a></code></dd>
+<dd><code><a href="Axe.html" title="class in com.deco2800.game.components.weapons">Axe</a></code>, <code><a href="Hammer.html" title="class in com.deco2800.game.components.weapons">Hammer</a></code>, <code><a href="Scepter.html" title="class in com.deco2800.game.components.weapons">Scepter</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">MeleeWeapon</span>
@@ -189,9 +189,30 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#timeAtAttack">timeAtAttack</a></span></code></th>
+<td class="colLast">
+<div class="block">Time when the entity last attacked, 0 if entity is not attacking.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#UP">UP</a></span></code></th>
 <td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="../../physics/components/WeaponHitboxComponent.html" title="class in com.deco2800.game.physics.components">WeaponHitboxComponent</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#weaponHitbox">weaponHitbox</a></span></code></th>
+<td class="colLast">
+<div class="block">Hit box used by this melee weapon.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#weaponSize">weaponSize</a></span></code></th>
+<td class="colLast">
+<div class="block">Weapon attack width and range in terms of x and y, relative to entity size</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -287,13 +308,20 @@ float&nbsp;knockback,
 </td>
 </tr>
 <tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#strongAttack(int)">strongAttack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
+<td class="colLast">
+<div class="block">The weapon's strong / alternative attack.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#triggerAttackStage(long)">triggerAttackStage</a></span>&#8203;(long&nbsp;timeSinceAttack)</code></th>
 <td class="colLast">
 <div class="block">Used by update() to sync weapon hit box with animation.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -343,6 +371,13 @@ float&nbsp;knockback,
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="timeAtAttack">timeAtAttack</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">long</span>&nbsp;<span class="memberName">timeAtAttack</span></div>
+<div class="block">Time when the entity last attacked, 0 if entity is not attacking.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="attackPower">attackPower</a></h3>
 <div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">attackPower</span></div>
 <div class="block">Weapon Damage</div>
@@ -367,6 +402,22 @@ float&nbsp;knockback,
 <h3><a id="combatStats">combatStats</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="../CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a></span>&nbsp;<span class="memberName">combatStats</span></div>
 <div class="block">Base stats of owner entity</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="weaponSize">weaponSize</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></span>&nbsp;<span class="memberName">weaponSize</span></div>
+<div class="block">Weapon attack width and range in terms of x and y, relative to entity size</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="weaponHitbox">weaponHitbox</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="../../physics/components/WeaponHitboxComponent.html" title="class in com.deco2800.game.physics.components">WeaponHitboxComponent</a></span>&nbsp;<span class="memberName">weaponHitbox</span></div>
+<div class="block">Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
+    entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
+    it simultaneously.</div>
 </section>
 </li>
 <li class="blockList">
@@ -484,6 +535,14 @@ float&nbsp;knockback,
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>attackDirection</code> - direction of attack (see above for defined constants).</dd>
 </dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="strongAttack(int)">strongAttack</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">strongAttack</span>&#8203;(<span class="arguments">int&nbsp;attackDirection)</span></div>
+<div class="block">The weapon's strong / alternative attack. This is to be implemented
+ in weapon sub-classes.</div>
 </section>
 </li>
 <li class="blockList">

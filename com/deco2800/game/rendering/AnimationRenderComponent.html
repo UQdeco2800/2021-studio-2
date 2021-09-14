@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -207,48 +207,60 @@ float&nbsp;frameDuration,
 </td>
 </tr>
 <tr class="rowColor" id="i3">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#drawWithScale(com.badlogic.gdx.graphics.g2d.SpriteBatch)">drawWithScale</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentAnimation()">getCurrentAnimation</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the name of the animation currently being played.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasAnimation(java.lang.String)">hasAnimation</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Whether the animator has added the given animation.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isFinished()">isFinished</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Has the playing animation finished? This will always be false for looping animations.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAnimation(java.lang.String)">removeAnimation</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Remove an animation from this animator.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleEntity()">scaleEntity</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Scale the entity to a width of 1 and a height matching the texture's ratio</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAnimationScale(float)">setAnimationScale</a></span>&#8203;(float&nbsp;scaleFactor)</code></th>
+<td class="colLast">
+<div class="block">Increases the animation size by a scalar factor.</div>
+</td>
+</tr>
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startAnimation(java.lang.String)">startAnimation</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Start playback of an animation.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopAnimation()">stopAnimation</a></span>()</code></th>
 <td class="colLast">
@@ -430,6 +442,23 @@ float&nbsp;frameDuration,
 <dd><code><a href="RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></code>&nbsp;in class&nbsp;<code><a href="RenderComponent.html" title="class in com.deco2800.game.rendering">RenderComponent</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>batch</code> - Batch to render to.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="drawWithScale(com.badlogic.gdx.graphics.g2d.SpriteBatch)">drawWithScale</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">drawWithScale</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setAnimationScale(float)">setAnimationScale</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAnimationScale</span>&#8203;(<span class="arguments">float&nbsp;scaleFactor)</span></div>
+<div class="block">Increases the animation size by a scalar factor.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>scaleFactor</code> - the size increase of the animation.</dd>
 </dl>
 </section>
 </li>

@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -186,16 +186,6 @@ extends <a href="../../input/InputComponent.html" title="class in com.deco2800.g
 <div class="block">Triggers player events on specific keycodes.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#touchDown(int,int,int,int)">touchDown</a></span>&#8203;(int&nbsp;screenX,
-int&nbsp;screenY,
-int&nbsp;pointer,
-int&nbsp;button)</code></th>
-<td class="colLast">
-<div class="block">Triggers the player attack.</div>
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -204,7 +194,7 @@ int&nbsp;button)</code></th>
 <h3>Methods inherited from class&nbsp;com.deco2800.game.input.<a href="../../input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.input.InputComponent">
 <!--   -->
-</a><code><a href="../../input/InputComponent.html#create()">create</a>, <a href="../../input/InputComponent.html#dispose()">dispose</a>, <a href="../../input/InputComponent.html#fling(float,float,int)">fling</a>, <a href="../../input/InputComponent.html#getPriority()">getPriority</a>, <a href="../../input/InputComponent.html#keyTyped(char)">keyTyped</a>, <a href="../../input/InputComponent.html#longPress(float,float)">longPress</a>, <a href="../../input/InputComponent.html#mouseMoved(int,int)">mouseMoved</a>, <a href="../../input/InputComponent.html#pan(float,float,float,float)">pan</a>, <a href="../../input/InputComponent.html#panStop(float,float,int,int)">panStop</a>, <a href="../../input/InputComponent.html#pinch(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">pinch</a>, <a href="../../input/InputComponent.html#pinchStop()">pinchStop</a>, <a href="../../input/InputComponent.html#pinchStopHandled()">pinchStopHandled</a>, <a href="../../input/InputComponent.html#scrolled(float,float)">scrolled</a>, <a href="../../input/InputComponent.html#setPriority(int)">setPriority</a>, <a href="../../input/InputComponent.html#tap(float,float,int,int)">tap</a>, <a href="../../input/InputComponent.html#touchDown(float,float,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDragged(int,int,int)">touchDragged</a>, <a href="../../input/InputComponent.html#touchUp(int,int,int,int)">touchUp</a>, <a href="../../input/InputComponent.html#zoom(float,float)">zoom</a></code></div>
+</a><code><a href="../../input/InputComponent.html#create()">create</a>, <a href="../../input/InputComponent.html#dispose()">dispose</a>, <a href="../../input/InputComponent.html#fling(float,float,int)">fling</a>, <a href="../../input/InputComponent.html#getPriority()">getPriority</a>, <a href="../../input/InputComponent.html#keyTyped(char)">keyTyped</a>, <a href="../../input/InputComponent.html#longPress(float,float)">longPress</a>, <a href="../../input/InputComponent.html#mouseMoved(int,int)">mouseMoved</a>, <a href="../../input/InputComponent.html#pan(float,float,float,float)">pan</a>, <a href="../../input/InputComponent.html#panStop(float,float,int,int)">panStop</a>, <a href="../../input/InputComponent.html#pinch(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">pinch</a>, <a href="../../input/InputComponent.html#pinchStop()">pinchStop</a>, <a href="../../input/InputComponent.html#pinchStopHandled()">pinchStopHandled</a>, <a href="../../input/InputComponent.html#scrolled(float,float)">scrolled</a>, <a href="../../input/InputComponent.html#setPriority(int)">setPriority</a>, <a href="../../input/InputComponent.html#tap(float,float,int,int)">tap</a>, <a href="../../input/InputComponent.html#touchDown(float,float,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDown(int,int,int,int)">touchDown</a>, <a href="../../input/InputComponent.html#touchDragged(int,int,int)">touchDragged</a>, <a href="../../input/InputComponent.html#touchUp(int,int,int,int)">touchUp</a>, <a href="../../input/InputComponent.html#zoom(float,float)">zoom</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="../Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
@@ -275,26 +265,6 @@ int&nbsp;button)</code></th>
 <dd>whether the input was processed</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true#keyUp(int)" title="class or interface in com.badlogic.gdx" class="externalLink"><code>InputProcessor.keyUp(int)</code></a></dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="touchDown(int,int,int,int)">touchDown</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">touchDown</span>&#8203;(<span class="arguments">int&nbsp;screenX,
-int&nbsp;screenY,
-int&nbsp;pointer,
-int&nbsp;button)</span></div>
-<div class="block">Triggers the player attack.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true#touchDown(int,int,int,int)" title="class or interface in com.badlogic.gdx" class="externalLink">touchDown</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">InputProcessor</a></code></dd>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../input/InputComponent.html#touchDown(int,int,int,int)">touchDown</a></code>&nbsp;in class&nbsp;<code><a href="../../input/InputComponent.html" title="class in com.deco2800.game.input">InputComponent</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>whether the input was processed</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/InputProcessor.html?is-external=true#touchDown(int,int,int,int)" title="class or interface in com.badlogic.gdx" class="externalLink"><code>InputProcessor.touchDown(int, int, int, int)</code></a></dd>
 </dl>
 </section>
 </li>

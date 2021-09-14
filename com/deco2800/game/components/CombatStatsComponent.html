@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -215,31 +215,46 @@ int&nbsp;baseAttack)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i7">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hit(com.deco2800.game.components.CombatStatsComponent,int)">hit</a></span>&#8203;(<a href="CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a>&nbsp;attacker,
+int&nbsp;weaponAttackPower)</code></th>
+<td class="colLast">
+<div class="block">Entity receives a hit, but also adds a weapon attack.</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isDead()">isDead</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns true if the entity's has 0 health, otherwise false.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setBaseAttack(int)">setBaseAttack</a></span>&#8203;(int&nbsp;attack)</code></th>
 <td class="colLast">
 <div class="block">Sets the entity's attack damage.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHealth(int)">setHealth</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
 <div class="block">Sets the entity's health.</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMaxHealth(int)">setMaxHealth</a></span>&#8203;(int&nbsp;health)</code></th>
 <td class="colLast">
 <div class="block">to change the max health of the player</div>
+</td>
+</tr>
+<tr class="altColor" id="i12">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#weaponHit(int)">weaponHit</a></span>&#8203;(int&nbsp;weaponAttackPower)</code></th>
+<td class="colLast">
+<div class="block">Hits purely by weapon attack, ignoring base combat stats of attacking entity.</div>
 </td>
 </tr>
 </tbody>
@@ -397,6 +412,30 @@ int&nbsp;baseAttack)</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>attacker</code> - the CombatStatComponent of the attacker</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="hit(com.deco2800.game.components.CombatStatsComponent,int)">hit</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">hit</span>&#8203;(<span class="arguments"><a href="CombatStatsComponent.html" title="class in com.deco2800.game.components">CombatStatsComponent</a>&nbsp;attacker,
+int&nbsp;weaponAttackPower)</span></div>
+<div class="block">Entity receives a hit, but also adds a weapon attack.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>attacker</code> - the attacking entity with the weapon</dd>
+<dd><code>weaponAttackPower</code> - the weapon damage.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="weaponHit(int)">weaponHit</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">weaponHit</span>&#8203;(<span class="arguments">int&nbsp;weaponAttackPower)</span></div>
+<div class="block">Hits purely by weapon attack, ignoring base combat stats of attacking entity.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>weaponAttackPower</code> - the weapon damage</dd>
 </dl>
 </section>
 </li>
