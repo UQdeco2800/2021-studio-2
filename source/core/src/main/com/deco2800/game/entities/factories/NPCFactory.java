@@ -364,7 +364,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/bossFixed.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/bossAttack.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
