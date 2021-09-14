@@ -76,7 +76,7 @@ public class Blast extends Component {
             return false;
         }
 
-        if (!PhysicsLayer.contains(this.targetLayer, other.getFilterData().categoryBits)) {
+        if (PhysicsLayer.notContains(this.targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
             return false;
         }

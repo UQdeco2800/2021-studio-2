@@ -5,30 +5,31 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
-import com.deco2800.game.utils.math.GridPoint2Utils;
-import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.components.gamearea.GameAreaDisplay;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
+import com.deco2800.game.utils.math.GridPoint2Utils;
+import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
-
-/** Forest area for the demo game with trees, a player, and some enemies. */
+/**
+ * Forest area for the demo game with trees, a player, and some enemies.
+ */
+@SuppressWarnings("SuspiciousNameCombination")
 public class ForestGameArea extends GameArea {
   private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
+  private static final int NUM_CRATES = 3;
   private static final int NUM_TREES = 7;
   private static final int NUM_GHOSTS = 2;
   private static final int NUM_ANCHORED_GHOSTS = 1;
-  private static final int NUM_TRAP = 4;
   private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-  private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
   private static final float WALL_WIDTH = 0.1f;
   private static final String[] forestTextures = {
           "images/box_boy_leaf.png",
@@ -58,12 +59,16 @@ public class ForestGameArea extends GameArea {
           "images/health_frame_right.png",
           "images/hp_icon.png",
           "images/dash_icon.png",
-          "images/rock.png",
-          "images/orb.png",
+          "images/prisoner.png",
           "images/blast.png"
+  };
+  public static final String[] healthRegenTextures = {
+          "healthRegen/healthPotion_placeholder.png",
+          "crate/crateHitBreak.png"
   };
   private static final String[] forestTextureAtlases = {
           "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
+          "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
   };
   private static final String[] arrowSounds = {
           "sounds/arrow_disappear.mp3",
@@ -74,11 +79,11 @@ public class ForestGameArea extends GameArea {
   };
   private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
   private static final String[] forestMusic = {backgroundMusic};
-
   private final TerrainFactory terrainFactory;
 
   /**
    * Intialise the forest game
+   *
    * @param terrainFactory intialise the terrain factory
    */
   public ForestGameArea(TerrainFactory terrainFactory) {
@@ -86,7 +91,9 @@ public class ForestGameArea extends GameArea {
     this.terrainFactory = terrainFactory;
   }
 
-  /** Create the game area, including terrain, static entities (trees), dynamic entities (player) */
+  /**
+   * Create the game area, including terrain, static entities (trees), dynamic entities (player)
+   */
   @Override
   public void create() {
     super.create();
@@ -97,15 +104,13 @@ public class ForestGameArea extends GameArea {
     spawnTrees();
     spawnPlayer();
     spawnGhosts();
-    spawnCutsceneTrigger();
     spawnGhostKing();
     spawnRangedGhosts();
-    spawnGhostKing(); //use this later to make evil assassins with different sprites
     spawnAnchoredGhosts();
-    spawnTraps();
-    
-    spawnCutsceneTrigger();
+    spawnCrate();
+
     playMusic();
+    setDialogue();
   }
 
   /**
@@ -124,7 +129,6 @@ public class ForestGameArea extends GameArea {
     // Background terrain
     terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
     spawnEntity(new Entity().addComponent(terrain));
-
     // Terrain walls
     float tileSize = terrain.getTileSize();
     GridPoint2 tileBounds = terrain.getMapBounds(0);
@@ -132,22 +136,22 @@ public class ForestGameArea extends GameArea {
 
     // Left
     spawnEntityAt(
-        ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+            ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
     // Right
     spawnEntityAt(
-        ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-        new GridPoint2(tileBounds.x, 0),
-        false,
-        false);
+            ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+            new GridPoint2(tileBounds.x, 0),
+            false,
+            false);
     // Top
     spawnEntityAt(
-        ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
-        new GridPoint2(0, tileBounds.y),
-        false,
-        false);
+            ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+            new GridPoint2(0, tileBounds.y),
+            false,
+            false);
     // Bottom
     spawnEntityAt(
-        ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+            ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
   }
 
   /**
@@ -164,19 +168,8 @@ public class ForestGameArea extends GameArea {
     }
   }
 
-  private void spawnTraps() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        GridPoint2 fixedPos = new GridPoint2(15,15);
-        Entity trap = ObstacleFactory.createPhysicalTrap();
-        spawnEntityAt(trap, fixedPos, true, true);
-  }
-
   /**
    * Spawn player at the terrain, create the player
-   * @return newPlayer intialise player entity and spawn the player on the terrain
    */
   private void spawnPlayer() {
     Entity newPlayer = PlayerFactory.createPlayer();
@@ -212,11 +205,6 @@ public class ForestGameArea extends GameArea {
     }
   }
 
-  private void spawnCutsceneTrigger() {
-    Entity trigger = CutsceneTriggerFactory.createTrigger();
-    spawnEntityAt(trigger, TEST_TRIGGER, true, true);
-  }
-
   private void spawnGhostKing() {
     GridPoint2 minPos = new GridPoint2(0, 0);
     GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
@@ -235,11 +223,27 @@ public class ForestGameArea extends GameArea {
 
     for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
       GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-      GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3,3), basePos.cpy().add(3,3));
+      GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
       Entity anchor = ObstacleFactory.createAnchor();
       Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
       spawnEntityAt(anchor, basePos, true, true);
       spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+    }
+  }
+
+
+  /**
+   * spawns the crate with the potion entity inside.
+   * the crate is placed on top of the potion entity.
+   */
+  public void spawnCrate() {
+    GridPoint2 minPos = new GridPoint2(0, 0);
+    GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+    for (int i = 0; i < NUM_CRATES; i++) {
+      GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+      Entity crate = ObstacleFactory.createHealthCrate();
+      spawnEntityAt(crate, randomPos, true, true);
     }
   }
 
@@ -260,12 +264,12 @@ public class ForestGameArea extends GameArea {
     logger.debug("Loading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.loadTextures(forestTextures);
+    resourceService.loadTextures(healthRegenTextures);
     resourceService.loadTextureAtlases(forestTextureAtlases);
     resourceService.loadSounds(forestSounds);
     resourceService.loadMusic(forestMusic);
     resourceService.loadSounds(arrowSounds);
-
-    while (!resourceService.loadForMillis(10)) {
+    while (resourceService.loadForMillis(10)) {
       // This could be upgraded to a loading screen
       logger.info("Loading... {}%", resourceService.getProgress());
     }
@@ -278,11 +282,20 @@ public class ForestGameArea extends GameArea {
     logger.debug("Unloading assets");
     ResourceService resourceService = ServiceLocator.getResourceService();
     resourceService.unloadAssets(forestTextures);
+    resourceService.unloadAssets(healthRegenTextures);
     resourceService.unloadAssets(forestTextureAtlases);
     resourceService.unloadAssets(forestSounds);
     resourceService.unloadAssets(forestMusic);
   }
 
+  /**
+   * Sets the dialogue for when the game first loads.
+   */
+  private void setDialogue() {
+    TextBox textBox = ServiceLocator.getEntityService()
+            .getUIEntity().getComponent(TextBox.class);
+    textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+  }
 
   /**
    * Dispose the asset (call unloadAssets).
