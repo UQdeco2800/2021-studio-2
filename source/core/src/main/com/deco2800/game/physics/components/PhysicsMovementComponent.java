@@ -81,7 +81,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void DirectionAnimation() {
-        if (this.getDirection().x > this.getDirection().y) {
+        if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
             if (this.getDirection().x < 0) {
                 this.getEntity().getEvents().trigger("LeftStart");
             } else {
