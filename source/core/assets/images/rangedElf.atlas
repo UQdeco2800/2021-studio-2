@@ -1,9 +1,22 @@
-
 rangedElf.png
 size: 1024, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+assassinDown
+  rotate: false
+  xy: 2, 326
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 4
+assassinDown
+  rotate: false
+  xy: 2, 219
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 5
 assassinDown
   rotate: false
   xy: 150, 219
@@ -25,20 +38,6 @@ assassinDown
   orig: 71, 105
   offset: 0, 0
   index: 3
-assassinDown
-  rotate: false
-  xy: 2, 326
-  size: 72, 105
-  orig: 72, 105
-  offset: 0, 0
-  index: 4
-assassinDown
-  rotate: false
-  xy: 2, 219
-  size: 72, 105
-  orig: 72, 105
-  offset: 0, 0
-  index: 5
 assassinLeft
   rotate: false
   xy: 369, 216
@@ -48,65 +47,79 @@ assassinLeft
   index: 1
 assassinLeft
   rotate: false
-  xy: 443, 323
+  xy: 369, 216
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
   index: 2
+assassinLeft
+  rotate: false
+  xy: 443, 323
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 3
 assassinLeft
   rotate: false
   xy: 501, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
-  index: 3
-assassinLeft
-  rotate: false
-  xy: 559, 323
-  size: 56, 108
-  orig: 56, 108
-  offset: 0, 0
   index: 4
 assassinLeft
   rotate: false
-  xy: 369, 106
+  xy: 485, 213
   size: 54, 108
   orig: 54, 108
   offset: 0, 0
   index: 5
 assassinRight
   rotate: false
-  xy: 617, 323
+  xy: 559, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
   index: 1
 assassinRight
   rotate: false
-  xy: 617, 323
+  xy: 559, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
   index: 2
 assassinRight
   rotate: false
-  xy: 675, 323
+  xy: 617, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
   index: 3
 assassinRight
   rotate: false
-  xy: 733, 323
+  xy: 675, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
   index: 4
 assassinRight
   rotate: false
-  xy: 427, 213
+  xy: 541, 213
   size: 54, 108
   orig: 54, 108
+  offset: 0, 0
+  index: 5
+assassinUp
+  rotate: false
+  xy: 76, 326
+  size: 72, 105
+  orig: 72, 105
+  offset: 0, 0
+  index: 4
+assassinUp
+  rotate: false
+  xy: 2, 112
+  size: 72, 105
+  orig: 72, 105
   offset: 0, 0
   index: 5
 assassinUp
@@ -130,48 +143,6 @@ assassinUp
   orig: 71, 105
   offset: 0, 0
   index: 3
-assassinUp
-  rotate: false
-  xy: 76, 326
-  size: 72, 105
-  orig: 72, 105
-  offset: 0, 0
-  index: 4
-assassinUp
-  rotate: false
-  xy: 2, 112
-  size: 72, 105
-  orig: 72, 105
-  offset: 0, 0
-  index: 5
-rangerLeft
-  rotate: false
-  xy: 369, 216
-  size: 56, 108
-  orig: 56, 108
-  offset: 0, 0
-  index: 1
-rangerLeft
-  rotate: false
-  xy: 501, 323
-  size: 56, 108
-  orig: 56, 108
-  offset: 0, 0
-  index: 3
-rangerLeft
-  rotate: false
-  xy: 559, 323
-  size: 56, 108
-  orig: 56, 108
-  offset: 0, 0
-  index: 4
-rangerLeft
-  rotate: false
-  xy: 369, 106
-  size: 54, 108
-  orig: 54, 108
-  offset: 0, 0
-  index: 5
 rangerDown
   rotate: false
   xy: 76, 219
@@ -209,42 +180,70 @@ rangerDown
   index: 3
 rangerLeft
   rotate: false
+  xy: 733, 323
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
+rangerLeft
+  rotate: false
   xy: 791, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
   index: 2
-rangerRight
+rangerLeft
   rotate: false
   xy: 849, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
-  index: 1
-rangerRight
+  index: 3
+rangerLeft
   rotate: false
   xy: 907, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
-  index: 2
+  index: 4
+rangerLeft
+  rotate: false
+  xy: 597, 213
+  size: 54, 108
+  orig: 54, 108
+  offset: 0, 0
+  index: 5
 rangerRight
   rotate: false
   xy: 965, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
-  index: 3
+  index: 1
 rangerRight
   rotate: false
   xy: 295, 2
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
+  index: 2
+rangerRight
+  rotate: false
+  xy: 369, 106
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 3
+rangerRight
+  rotate: false
+  xy: 427, 213
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
   index: 4
 rangerRight
   rotate: false
-  xy: 483, 213
+  xy: 653, 213
   size: 54, 108
   orig: 54, 108
   offset: 0, 0
@@ -300,7 +299,7 @@ assassinMoveLeft
   index: 1
 assassinMoveRight
   rotate: false
-  xy: 617, 323
+  xy: 559, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
@@ -312,13 +311,6 @@ assassinMoveUp
   orig: 71, 105
   offset: 0, 0
   index: 1
-rangerMoveLeft
-  rotate: false
-  xy: 369, 216
-  size: 56, 108
-  orig: 56, 108
-  offset: 0, 0
-  index: 1
 rangerMoveDown
   rotate: false
   xy: 149, 5
@@ -326,9 +318,16 @@ rangerMoveDown
   orig: 71, 105
   offset: 0, 0
   index: 1
+rangerMoveLeft
+  rotate: false
+  xy: 733, 323
+  size: 56, 108
+  orig: 56, 108
+  offset: 0, 0
+  index: 1
 rangerMoveRight
   rotate: false
-  xy: 849, 323
+  xy: 965, 323
   size: 56, 108
   orig: 56, 108
   offset: 0, 0
@@ -342,8 +341,8 @@ rangerMoveUp
   index: 1
 default
   rotate: false
-  xy: 150, 219
+  xy: 223, 112
   size: 71, 105
   orig: 71, 105
   offset: 0, 0
-  index: 1
+  index: 2
