@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.weapons.Axe;
+import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.components.weapons.MeleeWeapon;
+import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.Vector2Utils;
@@ -108,6 +110,15 @@ public class PlayerActions extends Component {
         }
     }
 
+    MeleeWeapon getEquippedWeapon() {
+        MeleeWeapon weapon = entity.getComponent(Axe.class);
+        if (weapon == null) {
+            weapon = entity.getComponent(Hammer.class);
+        } if (weapon == null) {
+            weapon = entity.getComponent(Scepter.class);
+        }
+        return weapon;
+    }
 
     /**
      * Makes the player attack. Player currently only uses an axe.
@@ -115,10 +126,7 @@ public class PlayerActions extends Component {
      * @param keycode - the last pressed player key.
      */
     void attack(int keycode) {
-        MeleeWeapon weapon = entity.getComponent(Axe.class);
-        if (weapon == null) {
-            return;
-        }
+        MeleeWeapon weapon = getEquippedWeapon();
         // determine direction of attack based on last pressed key
         int attackDirection = 0;
         switch (keycode) {
@@ -145,10 +153,8 @@ public class PlayerActions extends Component {
      * @param coordinates the mouse coordinates of the click
      */
     void mouseAttack(Vector2 coordinates) {
-        MeleeWeapon weapon = entity.getComponent(Axe.class);
-        if (weapon == null) {
-            return;
-        }
+        MeleeWeapon weapon = getEquippedWeapon();
+
         Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
                 coordinates.x - Gdx.graphics.getWidth() / 2f,
                 coordinates.y - Gdx.graphics.getHeight() / 2f
@@ -187,11 +193,9 @@ public class PlayerActions extends Component {
    * Makes player use the strong attack associated with its equipped weapon.
    */
   void strongAttack() {
-      MeleeWeapon weapon = entity.getComponent(Axe.class);
-      if (weapon == null) {
-          return;
-      }
+      MeleeWeapon weapon = getEquippedWeapon();
       weapon.strongAttack();
+      lockMovement(weapon.getTotalAttackTime());
   }
 
     /**

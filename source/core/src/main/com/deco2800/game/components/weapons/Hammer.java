@@ -46,16 +46,16 @@ public class Hammer extends MeleeWeapon {
 
         switch (attackDirection) {
             case UP:
-                animator.startAnimation("up_attack");
+                animator.startAnimation("up_hammer_attack");
                 break;
             case DOWN:
-                animator.startAnimation("down_attack");
+                animator.startAnimation("down_hammer_attack");
                 break;
             case LEFT:
-                animator.startAnimation("left_attack");
+                animator.startAnimation("left_hammer_attack");
                 break;
             case RIGHT:
-                animator.startAnimation("right_attack");
+                animator.startAnimation("right_hammer_attack");
                 break;
         }
     }
@@ -74,7 +74,7 @@ public class Hammer extends MeleeWeapon {
         if (animator == null) {
             return;
         }
-        animator.startAnimation("aoe_attack");
+        animator.startAnimation("hammer_aoe");
     }
 
     /**
