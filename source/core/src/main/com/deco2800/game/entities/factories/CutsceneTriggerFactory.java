@@ -92,7 +92,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchAttackCutsceneComponent(PhysicsLayer.PLAYER, repeats, lastKeyPressed))
-                        .addComponent(new CombatStatsComponent(20, 0));
+                        .addComponent(new CombatStatsComponent(10, 0));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
