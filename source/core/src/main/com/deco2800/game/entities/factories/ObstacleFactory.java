@@ -133,4 +133,3 @@ public class ObstacleFactory {
         return anchor;
     }
 }
-

@@ -139,4 +139,3 @@ public class HealthBarComponent extends RenderComponent {
     }
 
 }
-
