@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.death.DeathActions;
-import com.deco2800.game.components.death.DeathDisplay;
 import com.deco2800.game.components.player.*;
 import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.entities.Entity;
@@ -75,7 +73,7 @@ public class PlayerFactory {
                 .addComponent(new PlayerStatsDisplay())
                 .addComponent(new PlayerLowHealthDisplay());
 
-        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f,0.4f),new Vector2(0.5f,0.2f));
+        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f, 0.4f), new Vector2(0.5f, 0.2f));
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);

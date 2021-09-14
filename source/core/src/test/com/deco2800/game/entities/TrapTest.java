@@ -3,14 +3,10 @@ package com.deco2800.game.entities;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +33,7 @@ public class TrapTest {
 
         assertEquals(0, target.getComponent(CombatStatsComponent.class).getHealth());
     }
+
     @Test
     void shouldNotAttackMonster() {
         short targetLayer = (1 << 3);

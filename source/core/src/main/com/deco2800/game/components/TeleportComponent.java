@@ -1,18 +1,13 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
 
 import java.util.Scanner;
 
-public class TeleportComponent extends TouchComponent{
+public class TeleportComponent extends TouchComponent {
     private CombatStatsComponent combatStats;
 
     private Scanner scanner = new Scanner(System.in);
@@ -33,7 +28,8 @@ public class TeleportComponent extends TouchComponent{
 
     /**
      * action apply when the hitbox component collide
-     * @param me the owner of the hitbox
+     *
+     * @param me    the owner of the hitbox
      * @param other the target of the hitbox
      */
     @Override
@@ -50,7 +46,7 @@ public class TeleportComponent extends TouchComponent{
             //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
             //target.setPosition(3f,4f);
             System.out.println("x= " + target.getPosition().x + "  y= " + target.getPosition().y);
-            target.setScale(new Vector2(5,5));
+            target.setScale(new Vector2(5, 5));
             //target.setPosition(new Vector2(15,8));
             //this.player.setPosition(new Vector2(15,8));
             //this.player.setScale(new Vector2(5,5));

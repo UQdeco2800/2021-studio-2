@@ -31,7 +31,7 @@ public class CutsceneTriggerFactory {
      * Creates an entity that can trigger a cutscene to start.
      *
      * @param dialogueSet the dialogue set the entity will trigger
-     * @param type the type of selection of dialogue
+     * @param type        the type of selection of dialogue
      * @return entity that will create the trigger within the map
      */
     public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type) {
@@ -56,7 +56,7 @@ public class CutsceneTriggerFactory {
      * Creates an entity that can trigger a cutscene to start.
      *
      * @param dialogueSet the dialogue set the entity will trigger
-     * @param type the type of selection of dialogue
+     * @param type        the type of selection of dialogue
      * @return entity that will create the trigger within the map
      */
     public static Entity createLokiTrigger(RandomDialogueSet dialogueSet, DialogueSet type) {
@@ -104,9 +104,9 @@ public class CutsceneTriggerFactory {
      * Creates an entity that can trigger a cutscene to start.
      *
      * @param dialogueSet the dialogue set the entity will trigger
-     * @param direction direction to move the player
-     * @param x x position that player moves in
-     * @param y y position that player moves in
+     * @param direction   direction to move the player
+     * @param x           x position that player moves in
+     * @param y           y position that player moves in
      * @return entity that will create the trigger within the map
      */
     public static Entity createMoveDialogueTrigger(RandomDialogueSet dialogueSet, Vector2 direction, int x, int y) {
@@ -130,8 +130,8 @@ public class CutsceneTriggerFactory {
      * Creates an entity that can trigger a cutscene to start.
      *
      * @param direction direction to move the player
-     * @param x x position that player moves in
-     * @param y y position that player moves in
+     * @param x         x position that player moves in
+     * @param y         y position that player moves in
      * @return entity that will create the trigger within the map
      */
     public static Entity createMoveTrigger(Vector2 direction, int x, int y) {

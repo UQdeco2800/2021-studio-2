@@ -19,9 +19,9 @@ import java.util.List;
  */
 public abstract class GameArea implements Disposable {
 
-  protected TerrainComponent terrain;
-  protected List<Entity> areaEntities;
-  protected Entity player;
+    protected TerrainComponent terrain;
+    protected List<Entity> areaEntities;
+    protected Entity player;
 
 
     protected GameArea() {

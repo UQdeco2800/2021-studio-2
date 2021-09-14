@@ -159,6 +159,7 @@ public class EventHandler {
 
     /**
      * checks that the entity has a specified event registered
+     *
      * @param eventName the name of the event that we want to search for
      * @return true if this entity has this specific event registered otherwise false
      */

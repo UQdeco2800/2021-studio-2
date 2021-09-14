@@ -14,17 +14,18 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.files.FileLoader;
-import com.deco2800.game.utils.math.RandomUtils;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 
-/** Factory for creating game terrains. */
+/**
+ * Factory for creating game terrains.
+ */
 public class TerrainFactory {
     public static final GridPoint2 MAP_SIZE = new GridPoint2(30, 30);
     private static final int TUFT_TILE_COUNT = 30;
@@ -48,7 +49,7 @@ public class TerrainFactory {
      * Create a terrain factory
      *
      * @param cameraComponent Camera to render terrains to. Must be orthographic.
-     * @param orientation orientation to render terrain at
+     * @param orientation     orientation to render terrain at
      */
     public TerrainFactory(CameraComponent cameraComponent, TerrainOrientation orientation) {
         this.camera = (OrthographicCamera) cameraComponent.getCamera();
@@ -64,7 +65,7 @@ public class TerrainFactory {
      */
     public TerrainComponent createTerrain(TerrainType terrainType) {
         ResourceService resourceService = ServiceLocator.getResourceService();
-        switch (terrainType){
+        switch (terrainType) {
             case FOREST_DEMO:
                 TextureRegion orthoGrass =
                         new TextureRegion(resourceService.getAsset("images/grass_1.png", Texture.class));
@@ -97,19 +98,20 @@ public class TerrainFactory {
 
     /**
      * A version of createTerrain that takes a map object as an input to render a specific map
+     *
      * @param terrainType
      * @param map
      * @return
      */
     public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();
-        switch (terrainType){
+        switch (terrainType) {
             case TEST:
                 String[] tileRefs = map.TileRefsArray();
                 ArrayList<TextureRegion> textures = new ArrayList<>();
 
-                for (String s:tileRefs){
-                    textures.add(new TextureRegion(resourceService.getAsset(s,Texture.class)));
+                for (String s : tileRefs) {
+                    textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
                 }
 
                 return createWorldTerrain(0.5f, textures, map.getMapTiles(), map.getDimensions());
@@ -180,7 +182,7 @@ public class TerrainFactory {
 
         // Create Tiles
         ArrayList<TerrainTile> tiles = new ArrayList<>();
-        for (TextureRegion t:textures
+        for (TextureRegion t : textures
         ) {
             tiles.add(new TerrainTile(t));
         }
@@ -201,10 +203,10 @@ public class TerrainFactory {
         GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
 
         for (int y = min.y; y <= max.y; y++) {
-            for (int x = min.y; x <= max.x; x++){
+            for (int x = min.y; x <= max.x; x++) {
                 Cell cell = new Cell();
 
-                cell.setTile(tiles.get(map[y][x]-1));
+                cell.setTile(tiles.get(map[y][x] - 1));
                 layer.setCell(x, max.y - y, cell);
             }
         }
