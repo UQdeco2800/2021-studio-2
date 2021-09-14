@@ -118,15 +118,5 @@ public class TouchMoveComponent extends TouchComponent {
 
         float yDifference = player.getPosition().y - position.y > 0 ?
                 player.getPosition().y - position.y : -1 * (player.getPosition().y - position.y);
-        if (xDifference <= x && yDifference <= y) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    input.unlockPlayer();
-                    timer.cancel();
-                }
-            }, 500);
-        }
     }
 }
