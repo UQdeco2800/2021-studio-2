@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -62,7 +62,7 @@ loadScripts(document, 'script');</script>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -115,30 +115,11 @@ extends <a href="../rendering/RenderComponent.html" title="class in com.deco2800
 <!--   -->
 </a>
 <h2>Field Summary</h2>
-<div class="memberSummary">
-<table>
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
-<thead>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colSecond" scope="col">Field</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><code>protected boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enabled">enabled</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="inheritedList">
 <h3>Fields inherited from class&nbsp;com.deco2800.game.components.<a href="Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.components.Component">
 <!--   -->
-</a><code><a href="Component.html#entity">entity</a></code></div>
+</a><code><a href="Component.html#enabled">enabled</a>, <a href="Component.html#entity">entity</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -158,12 +139,24 @@ extends <a href="../rendering/RenderComponent.html" title="class in com.deco2800
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.graphics.g2d.TextureAtlas)">HealthBarComponent</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">TextureAtlas</a>&nbsp;atlas)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite)">HealthBarComponent</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;health,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthBar,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthDecrease)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.graphics.g2d.TextureAtlas,float)">HealthBarComponent</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">TextureAtlas</a>&nbsp;atlas,
-float&nbsp;scale)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,java.lang.Float)">HealthBarComponent</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;health,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthBar,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthDecrease,
+java.lang.Float&nbsp;heightOfHealth)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,java.lang.Float,java.lang.Float)">HealthBarComponent</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;health,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthBar,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthDecrease,
+java.lang.Float&nbsp;heightOfHealth,
+java.lang.Float&nbsp;size)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -191,68 +184,43 @@ float&nbsp;scale)</code></th>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addAnimation(java.lang.String,float,com.badlogic.gdx.graphics.g2d.Animation.PlayMode)">addAnimation</a></span>&#8203;(java.lang.String&nbsp;name,
-float&nbsp;frameDuration,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Animation.PlayMode.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Animation.PlayMode</a>&nbsp;playMode)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor" id="i1">
-<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the entity is created and registered.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the component is disposed.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</code></th>
 <td class="colLast">
 <div class="block">Draw the renderable.</div>
 </td>
 </tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleHealth(float)">scaleHealth</a></span>&#8203;(float&nbsp;xScale)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentAnimation()">getCurrentAnimation</a></span>()</code></th>
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleHealthBar()">scaleHealthBar</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i5">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasAnimation(java.lang.String)">hasAnimation</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scaleHealthDecrease(float,float,double)">scaleHealthDecrease</a></span>&#8203;(float&nbsp;xScale,
+float&nbsp;xScalePrevious,
+double&nbsp;ratioHealthDecrease)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i6">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isFinished()">isFinished</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor" id="i7">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeAnimation(java.lang.String)">removeAnimation</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor" id="i8">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setScale(float)">setScale</a></span>&#8203;(float&nbsp;scale)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor" id="i9">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#startAnimation(java.lang.String)">startAnimation</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor" id="i10">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopAnimation()">stopAnimation</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -284,22 +252,6 @@ float&nbsp;frameDuration,
 </section>
 <section class="details">
 <ul class="blockList">
-<!-- ============ FIELD DETAIL =========== -->
-<li class="blockList">
-<section class="fieldDetails"><a id="field.detail">
-<!--   -->
-</a>
-<h2>Field Details</h2>
-<ul class="blockList">
-<li class="blockList">
-<section class="detail">
-<h3><a id="enabled">enabled</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">enabled</span></div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li class="blockList">
 <section class="constructorDetails"><a id="constructor.detail">
@@ -309,15 +261,29 @@ float&nbsp;frameDuration,
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(com.badlogic.gdx.graphics.g2d.TextureAtlas,float)">HealthBarComponent</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">HealthBarComponent</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">TextureAtlas</a>&nbsp;atlas,
-float&nbsp;scale)</span></div>
+<h3><a id="&lt;init&gt;(com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite)">HealthBarComponent</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">HealthBarComponent</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;health,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthBar,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthDecrease)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;(com.badlogic.gdx.graphics.g2d.TextureAtlas)">HealthBarComponent</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">HealthBarComponent</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">TextureAtlas</a>&nbsp;atlas)</span></div>
+<h3><a id="&lt;init&gt;(com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,java.lang.Float)">HealthBarComponent</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">HealthBarComponent</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;health,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthBar,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthDecrease,
+java.lang.Float&nbsp;heightOfHealth)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="&lt;init&gt;(com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,com.badlogic.gdx.graphics.g2d.Sprite,java.lang.Float,java.lang.Float)">HealthBarComponent</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">HealthBarComponent</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;health,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthBar,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Sprite.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Sprite</a>&nbsp;healthDecrease,
+java.lang.Float&nbsp;heightOfHealth,
+java.lang.Float&nbsp;size)</span></div>
 </section>
 </li>
 </ul>
@@ -332,66 +298,22 @@ float&nbsp;scale)</span></div>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="setScale(float)">setScale</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setScale</span>&#8203;(<span class="arguments">float&nbsp;scale)</span></div>
+<h3><a id="scaleHealth(float)">scaleHealth</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">scaleHealth</span>&#8203;(<span class="arguments">float&nbsp;xScale)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="addAnimation(java.lang.String,float,com.badlogic.gdx.graphics.g2d.Animation.PlayMode)">addAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">addAnimation</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name,
-float&nbsp;frameDuration,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/Animation.PlayMode.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">Animation.PlayMode</a>&nbsp;playMode)</span></div>
+<h3><a id="scaleHealthBar()">scaleHealthBar</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">scaleHealthBar</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="removeAnimation(java.lang.String)">removeAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">removeAnimation</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name)</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="hasAnimation(java.lang.String)">hasAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">hasAnimation</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name)</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="startAnimation(java.lang.String)">startAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">startAnimation</span>&#8203;(<span class="arguments">java.lang.String&nbsp;name)</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="getCurrentAnimation()">getCurrentAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.lang.String</span>&nbsp;<span class="memberName">getCurrentAnimation</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="isFinished()">isFinished</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isFinished</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="stopAnimation()">stopAnimation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">stopAnimation</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">draw</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</span></div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../rendering/RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">RenderComponent</a></code></span></div>
-<div class="block">Draw the renderable. Should be called only by the renderer, not manually.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../rendering/RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></code>&nbsp;in class&nbsp;<code><a href="../rendering/RenderComponent.html" title="class in com.deco2800.game.rendering">RenderComponent</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>batch</code> - Batch to render to.</dd>
-</dl>
+<h3><a id="scaleHealthDecrease(float,float,double)">scaleHealthDecrease</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">scaleHealthDecrease</span>&#8203;(<span class="arguments">float&nbsp;xScale,
+float&nbsp;xScalePrevious,
+double&nbsp;ratioHealthDecrease)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -434,6 +356,20 @@ float&nbsp;frameDuration,
 </dl>
 </section>
 </li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">draw</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../rendering/RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">RenderComponent</a></code></span></div>
+<div class="block">Draw the renderable. Should be called only by the renderer, not manually.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../rendering/RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></code>&nbsp;in class&nbsp;<code><a href="../rendering/RenderComponent.html" title="class in com.deco2800.game.rendering">RenderComponent</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>batch</code> - Batch to render to.</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -473,7 +409,7 @@ float&nbsp;frameDuration,
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

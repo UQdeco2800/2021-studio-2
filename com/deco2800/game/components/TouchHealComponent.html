@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -122,8 +122,18 @@ extends <a href="Component.html" title="class in com.deco2800.game.components">C
 </thead>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><code>protected java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#collidingFixtures">collidingFixtures</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="../physics/components/HitboxComponent.html" title="class in com.deco2800.game.physics.components">HitboxComponent</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hitboxComponent">hitboxComponent</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#inCollision">inCollision</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -206,6 +216,11 @@ extends <a href="Component.html" title="class in com.deco2800.game.components">C
 <div class="block">Enables the cutscene bars to appear.</div>
 </td>
 </tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTargetLayer(short)">setTargetLayer</a></span>&#8203;(short&nbsp;targetLayer)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -236,13 +251,25 @@ extends <a href="Component.html" title="class in com.deco2800.game.components">C
 <li class="blockList">
 <section class="detail">
 <h3><a id="targetLayer">targetLayer</a></h3>
-<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType">short</span>&nbsp;<span class="memberName">targetLayer</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">short</span>&nbsp;<span class="memberName">targetLayer</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="hitboxComponent">hitboxComponent</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="../physics/components/HitboxComponent.html" title="class in com.deco2800.game.physics.components">HitboxComponent</a></span>&nbsp;<span class="memberName">hitboxComponent</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="inCollision">inCollision</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">inCollision</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="collidingFixtures">collidingFixtures</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">java.util.ArrayList&lt;<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a>&gt;</span>&nbsp;<span class="memberName">collidingFixtures</span></div>
 </section>
 </li>
 </ul>
@@ -301,6 +328,12 @@ extends <a href="Component.html" title="class in com.deco2800.game.components">C
 <h3><a id="openCutsceneBars()">openCutsceneBars</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">openCutsceneBars</span>()</div>
 <div class="block">Enables the cutscene bars to appear.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setTargetLayer(short)">setTargetLayer</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setTargetLayer</span>&#8203;(<span class="arguments">short&nbsp;targetLayer)</span></div>
 </section>
 </li>
 </ul>

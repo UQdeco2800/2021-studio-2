@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -121,22 +121,54 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFastArrow(com.badlogic.gdx.math.Vector2,float)">createFastArrow</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
-float&nbsp;angle)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>static <a href="../LineEntity.html" title="class in com.deco2800.game.entities">LineEntity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#AimingLine(long)">AimingLine</a></span>&#8203;(long&nbsp;TTL)</code></th>
+<td class="colLast">
+<div class="block">Creates a line entity</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createNormalArrow(com.badlogic.gdx.math.Vector2,float)">createNormalArrow</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFastArrow(com.badlogic.gdx.math.Vector2,float)">createFastArrow</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
 float&nbsp;angle)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">create fast arrow - unable to dodge
+ line warning before shoot</div>
+</td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFireBall(com.deco2800.game.entities.Entity,com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2)">createFireBall</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
+<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;owner,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;offset)</code></th>
+<td class="colLast">
+<div class="block">create tracking arrow entity that can change trajectory</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createNormalArrow(com.badlogic.gdx.math.Vector2,float)">createNormalArrow</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
+float&nbsp;angle)</code></th>
+<td class="colLast">
+<div class="block">create the normal arrow entity fly toward target</div>
+</td>
+</tr>
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createTrackingArrow(com.deco2800.game.entities.Entity,float)">createTrackingArrow</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
 float&nbsp;angle)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">create tracking arrow entity that can change trajectory</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createVortex(com.deco2800.game.entities.Entity,float,boolean)">createVortex</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;ownerRunner,
+float&nbsp;angle,
+boolean&nbsp;reverseSpawn)</code></th>
+<td class="colLast">
+<div class="block">create the vortex for teleportation</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -165,6 +197,14 @@ float&nbsp;angle)</code></th>
 <h3><a id="createNormalArrow(com.badlogic.gdx.math.Vector2,float)">createNormalArrow</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createNormalArrow</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
 float&nbsp;angle)</span></div>
+<div class="block">create the normal arrow entity fly toward target</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>targetLoc</code> - lock target location</dd>
+<dd><code>angle</code> - check for target angle from current shooter position to target</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity arrow</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -172,6 +212,30 @@ float&nbsp;angle)</span></div>
 <h3><a id="createTrackingArrow(com.deco2800.game.entities.Entity,float)">createTrackingArrow</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createTrackingArrow</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
 float&nbsp;angle)</span></div>
+<div class="block">create tracking arrow entity that can change trajectory</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>targetEntity</code> - target (player)</dd>
+<dd><code>angle</code> - angle from current entity position to target</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity tracking arrow</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createFireBall(com.deco2800.game.entities.Entity,com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2)">createFireBall</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createFireBall</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
+<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;owner,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;offset)</span></div>
+<div class="block">create tracking arrow entity that can change trajectory</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>targetEntity</code> - target (player)</dd>
+<dd><code>owner</code> - owner to hover at until needed</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity tracking arrow</dd>
+</dl>
 </section>
 </li>
 <li class="blockList">
@@ -179,6 +243,42 @@ float&nbsp;angle)</span></div>
 <h3><a id="createFastArrow(com.badlogic.gdx.math.Vector2,float)">createFastArrow</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createFastArrow</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
 float&nbsp;angle)</span></div>
+<div class="block">create fast arrow - unable to dodge
+ line warning before shoot</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>targetLoc</code> - target position</dd>
+<dd><code>angle</code> - check for target angle from current shooter position to target</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>fast arrow entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createVortex(com.deco2800.game.entities.Entity,float,boolean)">createVortex</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createVortex</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;ownerRunner,
+float&nbsp;angle,
+boolean&nbsp;reverseSpawn)</span></div>
+<div class="block">create the vortex for teleportation</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>angle</code> - angle to spin the vortex for transition animate</dd>
+<dd><code>reverseSpawn</code> - downscale the entity</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity vortex</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="AimingLine(long)">AimingLine</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../LineEntity.html" title="class in com.deco2800.game.entities">LineEntity</a></span>&nbsp;<span class="memberName">AimingLine</span>&#8203;(<span class="arguments">long&nbsp;TTL)</span></div>
+<div class="block">Creates a line entity</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>TTL</code> - time to live in MS</dd>
+</dl>
 </section>
 </li>
 </ul>
