@@ -1,0 +1,100 @@
+elf.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+moveUp
+  rotate: false
+  xy: 2, 2
+  size: 89, 105
+  orig: 89, 105
+  offset: 0, 0
+  index: 0
+moveLeft
+  rotate: false
+  xy: 184, 2
+  size: 53, 105
+  orig: 53, 105
+  offset: 0, 0
+  index: 0
+moveRight
+  rotate: false
+  xy: 239, 2
+  size: 53, 105
+  orig: 53, 105
+  offset: 0, 0
+  index: 0
+moveDown
+   rotate: false
+   xy: 93, 2
+   size: 89, 105
+   orig: 89, 105
+   offset: 0, 0
+   index: 0
+default
+  rotate: false
+  xy: 32, 0
+  size: 128, 128
+  orig: 400, 518
+  offset: 0, 0
+  index: 0
+ 
+front_death.png
+size: 128, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frontDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+left_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leftDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+right_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rightDeath
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

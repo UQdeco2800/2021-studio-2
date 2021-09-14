@@ -1,14 +1,13 @@
 {
-    "ghost": {
+    "elfMelee": {
         "health": 40,
         "baseAttack": 30
     },
-    "ghostKing": {
+    "elfBoss": {
         "health": 100,
-        "baseAttack": 60,
-        "spookyFactor": 7
+        "baseAttack": 60
     },
-    "ghostRanged": {
+    "elfRanged": {
         "health": 40,
         "baseAttack": 0
     }

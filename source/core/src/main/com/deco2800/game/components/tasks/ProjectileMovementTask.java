@@ -77,12 +77,24 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
      * @return int 10 if arrow is moving, -1 if arrow is not
      */
     public int getPriority() {
-        if (stoppedMoving()) {
-            //Arrows disappears when at destination to stop it from looping in the same place
-            owner.getEntity().prepareDispose();
-            return (-1);
+        if (!owner.getEntity().data.containsKey("fireBallMovement")) {
+            if (stoppedMoving()) {
+                //Arrows disappears when at destination to stop it from looping in the same place
+                owner.getEntity().prepareDispose();
+                return (-1);
+            } else {
+                return (10);
+            }
         } else {
-            return (10);
+            //fireball priority based off entity data
+            if (owner.getEntity().data.get("fireBallMovement").equals(false)) {
+                return (-1);
+            } else if (stoppedMoving()) {
+                owner.getEntity().prepareDispose();
+                return (-1);
+            } else {
+                return (10);
+            }
         }
     }
 
@@ -95,7 +107,6 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
         //Arrows disappears when at destination to stop it from looping in the same place
         playArrow();
         owner.getEntity().prepareDispose();
-
     }
 
     /**

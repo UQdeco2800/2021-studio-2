@@ -37,9 +37,8 @@ public class TextureRenderComponent extends RenderComponent {
         this.sprite = sprite;
     }
 
-    public TextureRenderComponent(Sprite sprite, float v) {
-        this.texture = null;
-        this.sprite = sprite;
+    public Sprite getSprite() {
+        return sprite;
     }
 
     /**

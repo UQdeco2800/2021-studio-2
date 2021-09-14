@@ -1,0 +1,19 @@
+right_death.png
+size: 132, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+right death 2
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+right death 3
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

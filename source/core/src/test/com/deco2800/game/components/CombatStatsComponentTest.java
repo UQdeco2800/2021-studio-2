@@ -62,26 +62,6 @@ class CombatStatsComponentTest {
     }
 
     @Test
-    void disposeOnSetHealthNegativeHp() {
-        //dispose of the entity when setting hp to a negative number hp
-        Entity spy = spy(entity);
-        spy.addComponent(combat);
-        spy.create();
-        combat.setHealth(-99);
-        verify(spy).prepareDispose();
-    }
-
-    @Test
-    void disposeOnSetHealthExactly0Hp() {
-        //dispose of the entity when it first reaches exactly 0 hp
-        Entity spy = spy(entity);
-        spy.addComponent(combat);
-        spy.create();
-        combat.setHealth(0);
-        verify(spy).prepareDispose();
-    }
-
-    @Test
     void NotdisposeOnSetHealth0Hp() {
         //since it has a 'transformEntity' event, entity will not dispose in CSC
         CombatStatsComponent combatSpy = spy(combat);
