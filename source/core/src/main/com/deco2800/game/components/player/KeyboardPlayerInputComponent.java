@@ -1,5 +1,6 @@
 package com.deco2800.game.components.player;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
@@ -86,8 +87,8 @@ public class KeyboardPlayerInputComponent extends InputComponent {
       case Keys.SPACE:
         entity.getEvents().trigger("attack", lastKeyPressed);
         return true;
-      case Keys.Q:
-        entity.getEvents().trigger("strongAttack");
+      case Keys.ALT_LEFT:
+        entity.getEvents().trigger("strongAttack", lastKeyPressed);
         return true;
       case Keys.SHIFT_LEFT:
         this.speedMultiplier = 1.4f;
@@ -172,10 +173,13 @@ public class KeyboardPlayerInputComponent extends InputComponent {
    */
   @Override
   public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-    if (button == Buttons.LEFT) { // Attack using left mouse button
-      entity.getEvents().trigger("mouseAttack",
-              new Vector2(screenX, screenY));
-      return true;
+    switch (button) {
+      case Input.Buttons.LEFT:
+        entity.getEvents().trigger("mouseAttack", new Vector2(screenX, screenY));
+        return true;
+      case Input.Buttons.RIGHT:
+        entity.getEvents().trigger("mouseStrongAttack", new Vector2(screenX, screenY));
+        return true;
     }
     // other mouse buttons go here (TBD).
     return false;

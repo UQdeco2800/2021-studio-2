@@ -60,7 +60,8 @@ public class TestGameArea extends GameArea {
           "images/health_frame_right.png",
           "images/hp_icon.png",
           "images/dash_icon.png",
-          "images/rock.png"
+          "images/rock.png",
+          "images/blast.png"
   };
   private static String[] tileTextures = null;
   private static final String[] forestTextureAtlases = {
