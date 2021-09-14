@@ -70,6 +70,7 @@ public class ForestGameArea extends GameArea {
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
             "images/rangedFixed.png",
+            "images/bossFixed.png"
 
 
     };
@@ -80,7 +81,7 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas", "images/bossFixed.atlas"
 
     };
     private static final String[] arrowSounds = {
