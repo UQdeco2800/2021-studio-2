@@ -46,7 +46,6 @@ public class MainMenuDisplay extends UIComponent {
 
         Button startForestBtn = new Button(menuButtons, "start");
         Button startTestBtn = new Button(menuButtons, "start");
-        Button startTutorialBtn = new Button(menuButtons, "start");
         Button settingsBtn = new Button(menuButtons, "settings");
         Button exitBtn = new Button(menuButtons, "quit");
 
@@ -62,15 +61,6 @@ public class MainMenuDisplay extends UIComponent {
 
         // Triggers an event when the button is pressed
         startTestBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Start button clicked");
-                        entity.getEvents().trigger("startTest");
-                    }
-                });
-
-        startTutorialBtn.addListener(
                 new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -100,8 +90,6 @@ public class MainMenuDisplay extends UIComponent {
         table.add(startForestBtn).padTop(30f);
         table.row();
         table.add(startTestBtn).padTop(30f);
-        table.row();
-        table.add(startTutorialBtn).padTop(30f);
         table.row();
         table.add(settingsBtn).padTop(30f);
         table.row();
