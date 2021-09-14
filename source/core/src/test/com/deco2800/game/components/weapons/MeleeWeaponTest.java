@@ -40,6 +40,14 @@ class MeleeWeaponTest {
     }
 
     @Test
+    void shouldStrongAttack() {
+        short targetLayer = (1 << 3);
+        Entity entity = createAttacker(targetLayer);
+        // check that this doesn't throw exceptions
+        entity.getComponent(MeleeWeapon.class).strongAttack();
+    }
+
+    @Test
     void shouldCreateWeaponHitbox() {
         short targetLayer = (1 << 3);
         Entity entity = createAttacker(targetLayer);
