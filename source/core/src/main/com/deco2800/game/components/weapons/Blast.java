@@ -3,25 +3,20 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.ai.tasks.Task;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.tasks.MovementTask;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.*;
-import com.deco2800.game.rendering.AnimationRenderComponent;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.rmi.MarshalledObject;
-
+/**
+ * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
+ */
 public class Blast extends Component {
     private Vector2 start;
     private final float distance = 6f;
@@ -36,11 +31,16 @@ public class Blast extends Component {
     private final long gameTime;
     protected Vector2 target;
 
-
+    /**
+     * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
+     */
     public Blast() {
         this.gameTime = ServiceLocator.getTimeSource().getTime();
     }
 
+    /**
+     * Starts variables and listeners
+     */
     @Override
     public void create() {
         super.create();
@@ -51,10 +51,11 @@ public class Blast extends Component {
         this.knockback = 100;
         this.targetLayer = PhysicsLayer.NPC;
         this.combatStats = entity.getComponent(CombatStatsComponent.class);
-        //AnimationRenderComponent animator =  entity.getComponent(AnimationRenderComponent.class);
-        //animator.startAnimation("orb");
     }
 
+    /**
+     * Destroys the blast if it's at the end of its lifespan
+     */
     @Override
     public void update() {
         super.update();
@@ -69,6 +70,11 @@ public class Blast extends Component {
         }
     }
 
+    /**
+     * @param me
+     * @param other
+     * @return if successful collision
+     */
     protected boolean onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {
