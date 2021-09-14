@@ -7,7 +7,6 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchHealComponent;
 import com.deco2800.game.components.crate.CrateAnimationController;
 import com.deco2800.game.components.crate.TransformBarrelComponent;
-import com.deco2800.game.components.crate.TransformEntityComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -114,10 +113,10 @@ public class ObstacleFactory {
     }
 
     /**
-    * Creates an anchor entity to be referenced by other entities.
-    *
-    * @return entity to serve as the base's real world location
-    */
+     * Creates an anchor entity to be referenced by other entities.
+     *
+     * @return entity to serve as the base's real world location
+     */
     public static Entity createAnchor() {
         Entity anchor = new Entity()
                 .addComponent(new PhysicsComponent())

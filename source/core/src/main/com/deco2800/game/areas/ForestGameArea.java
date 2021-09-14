@@ -314,7 +314,7 @@ public class ForestGameArea extends GameArea {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
-          resourceService.loadTextures(healthRegenTextures);
+        resourceService.loadTextures(healthRegenTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
         resourceService.loadSounds(forestSounds);
         resourceService.loadMusic(forestMusic);

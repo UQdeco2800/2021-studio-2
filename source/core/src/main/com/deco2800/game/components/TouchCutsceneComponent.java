@@ -28,7 +28,7 @@ public class TouchCutsceneComponent extends TouchComponent {
      *
      * @param targetLayer The physics layer of the target's collider.
      * @param dialogueSet The set of dialogue which a dialogue will be chosen from to display
-     * @param type The type of randomness for the selection of dialogue
+     * @param type        The type of randomness for the selection of dialogue
      */
     public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type) {
         super(targetLayer);

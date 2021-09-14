@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.utils.Scaling;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 
@@ -80,7 +79,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
         blackScreen.setScaling(Scaling.stretch);
         blackScreen.setVisible(false);
         blackScreen.setFillParent(true);
-        blackScreen.setSize(1920,1080);
+        blackScreen.setSize(1920, 1080);
         blackScreen.setColor(0, 0, 0, 0);
         blackScreen.setTouchable(Touchable.disabled);
     }
@@ -135,6 +134,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
     /**
      * Causes the screen to fade to black after the player has died. This method is called recursively
      * at a delay, with the base case being if the screen is already pitch black.
+     *
      * @param opacity the opacity of the screen which tends to 1 (complete black)
      */
     private void fadeScreen(float opacity) {

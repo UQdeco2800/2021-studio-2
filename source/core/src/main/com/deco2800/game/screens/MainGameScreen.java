@@ -117,12 +117,13 @@ public class MainGameScreen extends ScreenAdapter {
      * Zooms the camera slightly, this will be called by renderer if the player is dead.
      */
     private void zoomCamera() {
-        if (((OrthographicCamera)renderer.getCamera().getCamera()).zoom > 0.4) {
-            ((OrthographicCamera)renderer.getCamera().getCamera()).zoom -= 0.008;
+        if (((OrthographicCamera) renderer.getCamera().getCamera()).zoom > 0.4) {
+            ((OrthographicCamera) renderer.getCamera().getCamera()).zoom -= 0.008;
         } else {
             game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
         }
     }
+
     @Override
     public void render(float delta) {
         physicsEngine.update();

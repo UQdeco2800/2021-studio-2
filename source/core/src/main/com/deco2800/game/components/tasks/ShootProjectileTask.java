@@ -69,6 +69,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * set how long to pause and play animation after firing
+     *
      * @param shootAnimationTimeMS time in MS to pause when shooting
      */
     public void setShootAnimationTimeMS(long shootAnimationTimeMS) {
@@ -176,8 +177,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("assassinLeftShoot");
             }
-        }
-        else if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("ranged")) {
+        } else if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("ranged")) {
             if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
                 owner.getEntity().getEvents().trigger("rangedDownShoot");
             } else if (targetDir > 90 && targetDir < 180) {
@@ -187,7 +187,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("rangedLeftShoot");
             }
-      }
+        }
     }
 
     /**

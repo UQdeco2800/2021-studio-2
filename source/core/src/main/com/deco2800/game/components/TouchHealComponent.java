@@ -21,7 +21,8 @@ public class TouchHealComponent extends TouchComponent {
     /**
      * On collision with the potion entity the player will gain health based on the
      * potion entities base attack
-     * @param me potion entity
+     *
+     * @param me    potion entity
      * @param other player entity
      */
     @Override

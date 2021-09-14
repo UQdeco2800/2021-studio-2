@@ -41,10 +41,10 @@ public class TouchMoveComponent extends TouchComponent {
      * Create a component which attacks entities on collision, without knockback.
      *
      * @param targetLayer The physics layer of the target's collider.
-     * @param direction direction the player will attack in
-     * @param x the x position for the player to move
-     * @param y the y position for the player to move
-     * @param repeatable if the trigger can be repeated
+     * @param direction   direction the player will attack in
+     * @param x           the x position for the player to move
+     * @param y           the y position for the player to move
+     * @param repeatable  if the trigger can be repeated
      */
     public TouchMoveComponent(short targetLayer, Vector2 direction, float x, float y, boolean repeatable) {
         super(targetLayer);
@@ -93,7 +93,7 @@ public class TouchMoveComponent extends TouchComponent {
      *
      * @param player  the entity that will be moved
      * @param actions the actions of the entity moving
-     * @param input the input controller of the player
+     * @param input   the input controller of the player
      */
     private void movePlayer(Entity player, PlayerActions actions, KeyboardPlayerInputComponent input) {
         Vector2 position = player.getPosition();

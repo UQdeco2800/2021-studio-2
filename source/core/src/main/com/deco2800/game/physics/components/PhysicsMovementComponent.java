@@ -4,13 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.deco2800.game.entities.factories.NPCFactory;
 
 
 /**
@@ -74,7 +71,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     public void setTarget(Vector2 target) {
         logger.trace("Setting target to {}", target);
         this.targetPosition = target;
-        if (this.targetPosition.x<1){
+        if (this.targetPosition.x < 1) {
             //System.out.println("x target position <1");
         }
     }
@@ -83,7 +80,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         this.maxSpeed = maxSpeed;
     }
 
-    public void DirectionAnimation (){
+    public void DirectionAnimation() {
         if (this.getDirection().x > this.getDirection().y) {
             if (this.getDirection().x < 0) {
                 this.getEntity().getEvents().trigger("LeftStart");
