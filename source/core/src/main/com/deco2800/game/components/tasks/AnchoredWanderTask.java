@@ -12,10 +12,10 @@ import com.deco2800.game.utils.math.RandomUtils;
  */
 public class AnchoredWanderTask extends WanderTask implements PriorityTask {
 
-    private final Entity base;
-    private final float protectRadius;
-    private final float protectX;
-    private final float protectY;
+    protected final Entity base;
+    protected final float protectRadius;
+    protected final float protectX;
+    protected final float protectY;
 
     /**
      * @param waitTime      How long in seconds to wait between wandering.

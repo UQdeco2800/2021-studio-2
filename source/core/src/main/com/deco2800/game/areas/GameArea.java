@@ -22,6 +22,7 @@ public abstract class GameArea implements Disposable {
     protected TerrainComponent terrain;
     protected List<Entity> areaEntities;
     protected Entity player;
+    public static int numEnemy = 0;
 
 
     protected GameArea() {
@@ -42,6 +43,29 @@ public abstract class GameArea implements Disposable {
         for (Entity entity : areaEntities) {
             entity.dispose();
         }
+    }
+
+    /**
+     * increase number of enemy on the map (keep track) - when the enemy is create and spawn
+     */
+    public void incNum() {
+        numEnemy++;
+    }
+
+    /**
+     * decrease number of enemy on the map (keep track) - when the enemy died
+     */
+    public void decNum() {
+        numEnemy--;
+    }
+
+    /**
+     * get the number of enemy on the map
+     *
+     * @return int number of enemy
+     */
+    public int getNumEnemy() {
+        return numEnemy;
     }
 
     /**

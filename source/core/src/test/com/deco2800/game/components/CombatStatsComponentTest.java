@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockitoAnnotations;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -17,6 +18,7 @@ class CombatStatsComponentTest {
 
     CombatStatsComponent combat;
     Entity entity;
+
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerEntityService(new EntityService());
@@ -60,26 +62,6 @@ class CombatStatsComponentTest {
     }
 
     @Test
-    void disposeOnSetHealthNegativeHp() {
-        //dispose of the entity when setting hp to a negative number hp
-        Entity spy = spy(entity);
-        spy.addComponent(combat);
-        spy.create();
-        combat.setHealth(-99);
-        verify(spy).prepareDispose();
-    }
-
-    @Test
-    void disposeOnSetHealthExactly0Hp() {
-        //dispose of the entity when it first reaches exactly 0 hp
-        Entity spy = spy(entity);
-        spy.addComponent(combat);
-        spy.create();
-        combat.setHealth(0);
-        verify(spy).prepareDispose();
-    }
-
-    @Test
     void NotdisposeOnSetHealth0Hp() {
         //since it has a 'transformEntity' event, entity will not dispose in CSC
         CombatStatsComponent combatSpy = spy(combat);
@@ -92,7 +74,7 @@ class CombatStatsComponentTest {
         entitySpy.create();
 
         //make sure that the entity is left with <= 0 hp
-        combatSpy.hit(new CombatStatsComponent(100,99999));
+        combatSpy.hit(new CombatStatsComponent(100, 99999));
 
         //make sure that prepareDispose is never called since we have a 'transformEntity' event
         verify(entitySpy, never()).prepareDispose();
@@ -113,7 +95,7 @@ class CombatStatsComponentTest {
         assertEquals(100, combat.getHealth());
 
         combat.setHealth(150);
-        assertEquals( 100, combat.getHealth(), "health cannot go over the max Health");
+        assertEquals(100, combat.getHealth(), "health cannot go over the max Health");
 
         combat.setHealth(-50);
         assertEquals(0, combat.getHealth(), "health cannot be negative");

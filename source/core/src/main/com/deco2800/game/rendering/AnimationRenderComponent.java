@@ -1,11 +1,8 @@
 package com.deco2800.game.rendering;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.services.GameTime;
@@ -34,7 +31,6 @@ import java.util.Map;
  * - other third-party tools, e.g. https://www.codeandweb.com/texturepacker <br>
  */
 public class AnimationRenderComponent extends RenderComponent {
-
     private static final Logger logger = LoggerFactory.getLogger(AnimationRenderComponent.class);
     private final GameTime timeSource;
     private final TextureAtlas atlas;
@@ -43,6 +39,7 @@ public class AnimationRenderComponent extends RenderComponent {
     private String currentAnimationName;
     private float animationPlayTime;
     private float scaleFactor;
+
 
     /**
      * Create the component for a given texture atlas.
@@ -101,16 +98,6 @@ public class AnimationRenderComponent extends RenderComponent {
     public void scaleEntity() {
         TextureRegion defaultTexture = this.atlas.findRegion("default");
         entity.setScale(1f, (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
-    }
-
-    /**
-     * Scales the entity to the texture's ratio, and also scales up by a factor
-     *
-     * @param scaleFactor the factor for the entity to be scaled at.
-     */
-    public void scaleEntity(float scaleFactor) {
-        TextureRegion defaultTexture = this.atlas.findRegion("default");
-        entity.setScale(scaleFactor, scaleFactor * (float) defaultTexture.getRegionHeight() / defaultTexture.getRegionWidth());
     }
 
     /**
@@ -194,6 +181,26 @@ public class AnimationRenderComponent extends RenderComponent {
         if (currentAnimation == null) {
             return;
         }
+        if (scaleFactor != 1f) {
+            drawWithScale(batch);
+            return;
+        }
+
+        Vector2 positionCenter = entity.getCenterPosition();
+        float angle = entity.getAngle();
+        Sprite sprite = new Sprite(currentAnimation.getKeyFrame(animationPlayTime));
+        sprite.setScale(entity.getScale().x / sprite.getWidth(),
+                entity.getScale().y / sprite.getHeight());
+        sprite.setRotation(angle);
+        sprite.setCenter(positionCenter.x, positionCenter.y);
+        sprite.draw(batch);
+        animationPlayTime += timeSource.getDeltaTime();
+    }
+
+    protected void drawWithScale(SpriteBatch batch) {
+        if (currentAnimation == null) {
+            return;
+        }
         TextureRegion region = currentAnimation.getKeyFrame(animationPlayTime);
 
         Vector2 scale = entity.getScale().cpy();
@@ -220,11 +227,5 @@ public class AnimationRenderComponent extends RenderComponent {
      */
     public void setAnimationScale(float scaleFactor) {
         this.scaleFactor = scaleFactor;
-    }
-
-    @Override
-    public void dispose() {
-        atlas.dispose();
-        super.dispose();
     }
 }
