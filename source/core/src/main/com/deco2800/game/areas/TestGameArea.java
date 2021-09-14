@@ -50,6 +50,7 @@ public class TestGameArea extends GameArea {
             "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
+            "images/player_axe.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -63,7 +64,7 @@ public class TestGameArea extends GameArea {
     private static String[] tileTextures = null;
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas"
+            "images/player.atlas", "images/player_axe.atlas", "images/health_bar.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
