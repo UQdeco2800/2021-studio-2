@@ -83,6 +83,7 @@ public class ForestGameArea extends GameArea {
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas", "images/bossFixed.atlas"
 
+
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",

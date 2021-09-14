@@ -23,6 +23,7 @@ public class TouchAttackComponent extends TouchComponent {
     private float knockbackForce = 0f;
     private CombatStatsComponent combatStats;
     private long start = 0;
+    private boolean disable = false;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -55,11 +56,19 @@ public class TouchAttackComponent extends TouchComponent {
      */
     @Override
     public void update() {
+        if (disable) {
+            return;
+        }
         if (inCollision) {
             for (Fixture fixture : collidingFixtures) {
                 applyContinuousDamage(hitboxComponent.getFixture(), fixture);
             }
         }
+    }
+
+    @Override
+    public void dispose() {
+        disable = true;
     }
 
     /**
@@ -70,6 +79,9 @@ public class TouchAttackComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
+        if (disable) {
+            return;
+        }
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;
@@ -102,6 +114,9 @@ public class TouchAttackComponent extends TouchComponent {
      * @param other the target of the hitbox
      */
     protected void applyContinuousDamage(Fixture me, Fixture other) {
+        if (disable) {
+            return;
+        }
         if (this.checkEntities(me, other)) {
             return;
         }
@@ -135,6 +150,9 @@ public class TouchAttackComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionEnd(Fixture me, Fixture other) {
+        if (disable) {
+            return;
+        }
         super.onCollisionEnd(me, other);
         if (this.checkEntities(me, other)) {
             return;
