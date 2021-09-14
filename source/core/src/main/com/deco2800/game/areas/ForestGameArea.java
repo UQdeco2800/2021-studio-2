@@ -48,6 +48,9 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
+            "images/player_axe.png",
+            "images/player_hammer.png",
+            "images/player_scepter.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -68,7 +71,9 @@ public class ForestGameArea extends GameArea {
             "images/guardElf.png",
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
+            "images/blast.png"
     };
+
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
             "crate/crateHitBreak.png"
@@ -76,7 +81,9 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas"
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+                    "images/player_axe.atlas", "images/player_hammer.atlas",
+            "images/player_scepter.atlas", "images/health_bar.atlas", "crate/crateHitBreak.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -89,25 +96,24 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
 
-    /**
-     * Intialise the forest game
-     *
-     * @param terrainFactory intialise the terrain factory
-     */
-    public ForestGameArea(TerrainFactory terrainFactory) {
-        super();
-        this.terrainFactory = terrainFactory;
-    }
+  /**
+   * Intialise the forest game
+   *
+   * @param terrainFactory intialise the terrain factory
+   */
+  public ForestGameArea(TerrainFactory terrainFactory) {
+    super();
+    this.terrainFactory = terrainFactory;
+  }
 
-    /**
-     * Create the game area, including terrain, static entities (trees), dynamic entities (player)
-     */
-    @Override
-    public void create() {
+      /**
+       * Create the game area, including terrain, static entities (trees), dynamic entities (player)
+       */
+      @Override
+      public void create() {
         super.create();
         loadAssets();
         displayUI();
-
         spawnTerrain();
         spawnTrees();
         spawnPlayer();
@@ -120,7 +126,7 @@ public class ForestGameArea extends GameArea {
         spawnBoss();
         playMusic();
         setDialogue();
-    }
+      }
 
     /**
      * Display the UI
@@ -241,7 +247,6 @@ public class ForestGameArea extends GameArea {
     private void spawnBoss() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);

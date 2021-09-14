@@ -57,6 +57,9 @@ public class TestGameArea extends GameArea {
             "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
+            "images/player_axe.png",
+            "images/player_hammer.png",
+            "images/player_scepter.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -65,14 +68,16 @@ public class TestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
-            "images/rock.png",
-            "images/prisoner.png"
-
+            "images/prisoner.png",
+            "images/prisoner.png",
+            "images/blast.png"
     };
     private static String[] tileTextures = null;
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas"
+            "images/player.atlas", "images/player_axe.atlas", "images/player_hammer.atlas",
+            "images/player_scepter.atlas", "images/health_bar.atlas"
+
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -127,6 +132,31 @@ public class TestGameArea extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Map Test"));
         spawnEntity(ui);
+    }
+
+    private void spawnCutsceneTrigger() {
+        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED);
+        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
+
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+                DialogueSet.BOSS_DEFEATED_BEFORE);
+
+        spawnEntityAt(trigger3, new Vector2(21f, 176.5f), true, true);
+
+        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
+        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
+
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
+        spawnEntityAt(moveTrigger4, new Vector2(14.1f, 180.7f), true, true);
+
+        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
+        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
+
+
+        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+
+        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
     private void spawnTerrain() {
@@ -264,30 +294,6 @@ public class TestGameArea extends GameArea {
         }
     }
 
-
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED);
-        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
-
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-                DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(21f, 176.5f), true, true);
-
-        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
-
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(14.1f, 180.7f), true, true);
-
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
-        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
-
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
-    }
-
-
     private void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
         music.setLooping(true);
@@ -338,6 +344,4 @@ public class TestGameArea extends GameArea {
         ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
         this.unloadAssets();
     }
-
-
 }

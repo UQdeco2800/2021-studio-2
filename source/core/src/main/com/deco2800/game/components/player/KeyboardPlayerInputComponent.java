@@ -1,5 +1,7 @@
 package com.deco2800.game.components.player;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -109,6 +111,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             case Keys.SPACE:
                 entity.getEvents().trigger("attack", lastKeyPressed);
                 return true;
+            case Keys.Q:
+                entity.getEvents().trigger("strongAttack", lastKeyPressed);
+                return true;
             case Keys.SHIFT_LEFT:
                 this.speedMultiplier = 1.4f;
                 triggerWalkEvent();
@@ -128,7 +133,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
                     }
                 }, 150);
                 return true;
-
             default:
                 return false;
         }
@@ -180,24 +184,24 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         entity.getEvents().trigger("walkStop");
     }
 
-    /**
-     * Triggers player events on a mouse click. Direction is determined by
-     * mouse click coordinates (screenX, screenY).
-     *
-     * @return whether the mouse input was processed.
-     * @see InputProcessor#touchDown(int, int, int, int)
-     */
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (button == Buttons.LEFT) { // Attack using left mouse button
-            entity.getEvents().trigger("mouseAttack",
-                    new Vector2(screenX, screenY));
-            return true;
-        }
-        // other mouse buttons go here (TBD).
-        return false;
-    }
 
+   /** Triggers player events on a mouse click. Direction is determined by
+   * mouse click coordinates (screenX, screenY).
+   * @return whether the mouse input was processed.
+   * @see InputProcessor#touchDown(int, int, int, int)
+   */
+  @Override
+  public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+      switch (button) {
+          case Input.Buttons.LEFT:
+              entity.getEvents().trigger("mouseAttack", new Vector2(screenX, screenY));
+              return true;
+          case Input.Buttons.RIGHT:
+              entity.getEvents().trigger("mouseStrongAttack", new Vector2(screenX, screenY));
+              return true;
+      }
+      return false;
+  }
     /**
      * Triggers the walk event for the player character. The method will handle
      * diagonal movement to ensure that walk speed is consistent and check if

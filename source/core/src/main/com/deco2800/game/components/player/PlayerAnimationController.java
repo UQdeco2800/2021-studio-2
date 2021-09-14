@@ -29,7 +29,7 @@ public class PlayerAnimationController extends Component {
      * Once triggered, it changes the animation of the sprite to walk forward.
      */
     void animateForwardWalk() {
-        animator.startAnimation("walk_forward");
+        animator.startAnimation("walk_down");
     }
 
     /**
@@ -50,7 +50,7 @@ public class PlayerAnimationController extends Component {
      * Once triggered, it changes the animation of the sprite to walk backwards.
      */
     void animateBackwardWalk() {
-        animator.startAnimation("walk_backward");
+        animator.startAnimation("walk_up");
     }
 
     /**

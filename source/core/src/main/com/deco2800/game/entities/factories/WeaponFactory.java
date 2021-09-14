@@ -13,9 +13,11 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
+import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.BaseArrowConfig;
+import com.deco2800.game.entities.configs.PlayerConfig;
 import com.deco2800.game.entities.configs.FastArrowConfig;
 import com.deco2800.game.entities.configs.TrackingArrowConfig;
 import com.deco2800.game.entities.configs.WeaponConfigs;
@@ -26,6 +28,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
+import com.deco2800.game.physics.components.*;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -34,11 +37,6 @@ import com.deco2800.game.services.ServiceLocator;
  * Factory to create non-playable character weapon entities with predefined components.
  */
 public class WeaponFactory {
-    /**
-     * load attribute from weapon json
-     */
-    private static final WeaponConfigs configs =
-            FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
 
     /**
      * throw error
@@ -46,6 +44,10 @@ public class WeaponFactory {
     private WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
+  private static final WeaponConfigs configs =
+      FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
+  private static final PlayerConfig stats =
+          FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
     /**
      * manages the sound to play when constructing the projectile
@@ -85,9 +87,18 @@ public class WeaponFactory {
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         normalArrow.setScale(scale);
         normalArrow.setAngle(angle);
-
         shootingSound("normalArrow");
         return normalArrow;
+    }
+
+    public static Entity createMjolnir() {
+        Entity mjolnir =
+                new Entity()
+                    .addComponent(new PhysicsComponent())
+                        .addComponent(new PhysicsMovementComponent())
+                        .addComponent(new WeaponHitboxComponent())
+                        .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
+        return mjolnir;
     }
 
     /**
@@ -252,4 +263,21 @@ public class WeaponFactory {
                 .addComponent(new TouchAttackComponent((short) (
                         PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER), 1f));
     }
-}
+
+    public static Entity createBlast(Vector2 target) {
+    float speed = 8f;
+    Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset("images/blast.png", Texture.class));
+    PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
+    movingComponent.setMoving(true);
+    movingComponent.setTarget(target);
+    movingComponent.setMaxSpeed(new Vector2(speed, speed));
+    Entity blast = new Entity()
+        .addComponent(new TextureRenderComponent(sprite))
+        .addComponent(new PhysicsComponent())
+        .addComponent(movingComponent)
+        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+        .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+        .addComponent(new Blast());
+    return blast;
+  }
+  }
