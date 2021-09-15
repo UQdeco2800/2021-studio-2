@@ -86,6 +86,12 @@ public class TouchAttackComponent extends TouchComponent {
         if (this.checkEntities(me, other)) {
             return;
         }
+        Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
+        if (myEntity.data.containsKey("dealDamage")) {
+            if (!((boolean) myEntity.data.get("dealDamage"))) {
+                return;
+            }
+        }
 
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         // Apply Initial knockback
@@ -120,7 +126,12 @@ public class TouchAttackComponent extends TouchComponent {
         if (this.checkEntities(me, other)) {
             return;
         }
-
+        Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
+        if (myEntity.data.containsKey("dealDamage")) {
+            if (!((boolean) myEntity.data.get("dealDamage"))) {
+                return;
+            }
+        }
 
         // Try to attack target.
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
@@ -140,49 +151,6 @@ public class TouchAttackComponent extends TouchComponent {
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
                 targetBody.setLinearVelocity(targetBody.getLinearVelocity().clamp(-knockbackForce * 10, knockbackForce * 10));
             }
-        }
-    }
-
-    /**
-     * action apply when the hitbox components stop colliding
-     *
-     * @param me    the owner of the hitbox
-     * @param other the target of the hitbox
-     */
-    @Override
-    protected void onCollisionEnd(Fixture me, Fixture other) {
-        if (disable) {
-            return;
-        }
-        super.onCollisionEnd(me, other);
-        if (this.checkEntities(me, other)) {
-            return;
-        }
-
-        // Try to attack target.
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
-        CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-            targetStats.hit(combatStats);
-            start = System.currentTimeMillis();
-        }
-
-        // Apply knockback
-        //Maybe this should be called during collision as sometimes hitboxes can overlap without onCollision being called in time
-        PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-            if (physicsComponent != null) {
-                Body targetBody = physicsComponent.getBody();
-                Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-                Vector2 impulse = direction.setLength(knockbackForce);
-                targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
-            }
-        }
-
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
-            //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
         }
     }
 }
