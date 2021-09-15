@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
+import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.ElfBossConfig;
@@ -374,11 +376,13 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
-                .addComponent(aiComponent);
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
         boss.scaleHeight(2);
+        boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));
