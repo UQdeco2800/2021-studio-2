@@ -114,7 +114,7 @@ public class ObstacleFactory {
                 .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TeleportComponent(PhysicsLayer.TRAP, player));
+                .addComponent(new TeleportComponent(PhysicsLayer.TRAP, player));  // pass the bollen here
 
         teleport.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
         teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

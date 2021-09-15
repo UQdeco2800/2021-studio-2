@@ -13,6 +13,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -58,9 +59,12 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
     private GameArea gameArea;
+    private static boolean gameChange = false;
+    private final TerrainFactory terrainFactory;
 
     public MainGameScreen(GdxGame game) {
         this.game = game;
+
 
         logger.debug("Initialising main game screen services");
         ServiceLocator.registerTimeSource(new GameTime());
@@ -81,6 +85,7 @@ public class MainGameScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
         renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
+        terrainFactory = new TerrainFactory(renderer.getCamera());
         loadAssets();
         createUI();
     }
@@ -88,7 +93,7 @@ public class MainGameScreen extends ScreenAdapter {
     public MainGameScreen(GdxGame game, String world) {
         this(game);
         logger.debug("Initialising main game screen entities");
-        TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
+
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
@@ -121,12 +126,29 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    public static void levelChange() {
+        gameChange = true;
+    }
     @Override
     public void render(float delta) {
+        if (gameChange) {
+            randerNew();
+        }
         physicsEngine.update();
         ServiceLocator.getEntityService().update();
         renderer.render();
         isPlayerDead();
+    }
+
+    public void randerNew() {
+        gameArea.getPlayer().getEvents().trigger("dispose");
+        gameArea.dispose();
+
+        //generate new level
+        gameArea = new ForestGameArea(terrainFactory);
+        gameArea.create();
+
+        gameChange = false;
     }
 
     @Override
