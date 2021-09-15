@@ -86,11 +86,11 @@ public class TouchAttackComponent extends TouchComponent {
         if (this.checkEntities(me, other)) {
             return;
         }
-        Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-        if (myEntity.data.containsKey("dealDamage")) {
-            if (!((boolean) myEntity.data.get("dealDamage"))) {
-                return;
-            }
+
+        //Dissolve arrow attacks after hits
+        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
+            //Remove later on to make arrows stick into walls and more
+            getEntity().prepareDispose();
         }
 
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
@@ -98,17 +98,17 @@ public class TouchAttackComponent extends TouchComponent {
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
             if (physicsComponent != null) {
+                Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
+                if (myEntity.data.containsKey("dealDamage")) {
+                    if (!((boolean) myEntity.data.get("dealDamage"))) {
+                        return;
+                    }
+                }
                 Body targetBody = physicsComponent.getBody();
                 Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
                 Vector2 impulse = direction.setLength(knockbackForce);
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
             }
-        }
-
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
-            //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
         }
         applyContinuousDamage(me, other);
     }
@@ -126,19 +126,23 @@ public class TouchAttackComponent extends TouchComponent {
         if (this.checkEntities(me, other)) {
             return;
         }
-        Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-        if (myEntity.data.containsKey("dealDamage")) {
-            if (!((boolean) myEntity.data.get("dealDamage"))) {
-                return;
-            }
-        }
 
         // Try to attack target.
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-            targetStats.hit(combatStats);
-            start = System.currentTimeMillis();
+
+        if (targetStats != null) {
+            Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
+            if (myEntity.data.containsKey("dealDamage")) {
+                if (!((boolean) myEntity.data.get("dealDamage"))) {
+                    return;
+                }
+            }
+
+            if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
+                targetStats.hit(combatStats);
+                start = System.currentTimeMillis();
+            }
         }
 
         // Apply continuous knockback
