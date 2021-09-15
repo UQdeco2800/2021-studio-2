@@ -118,12 +118,14 @@ public class TextBox extends Component {
      * Closes the terminal and clears the stored message.
      */
     public void setClosed() {
-        logger.debug("Closing text box");
-        isOpen = false;
-        message = "";
-        generateCharacter = false;
-        hideBars();
-        this.index = 0;
+        if (isOpen) {
+            logger.debug("Closing text box");
+            message = "";
+            generateCharacter = false;
+            hideBars();
+            isOpen = false;
+            this.index = 0;
+        }
     }
 
     /**
