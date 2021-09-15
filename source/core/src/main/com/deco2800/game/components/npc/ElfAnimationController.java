@@ -59,6 +59,8 @@ public class ElfAnimationController extends Component {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("leftDeath");
+            } else if (entity.getEntityType().equals("elfBoss")) {
+                animator.startAnimation("leftBossDeath");
             }
         }
     }
@@ -80,6 +82,8 @@ public class ElfAnimationController extends Component {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("rightDeath");
+            } else if (entity.getEntityType().equals("elfBoss")) {
+                animator.startAnimation("rightBossDeath");
             }
         }
     }
@@ -101,6 +105,8 @@ public class ElfAnimationController extends Component {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("frontDeath");
+            } else if (entity.getEntityType().equals("elfBoss")) {
+                animator.startAnimation("frontBossDeath");
             }
         }
     }
@@ -122,6 +128,8 @@ public class ElfAnimationController extends Component {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("frontDeath");
+            } else if (entity.getEntityType().equals("elfBoss")) {
+                animator.startAnimation("backBossDeath");
             }
         }
     }
