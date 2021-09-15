@@ -371,6 +371,11 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
