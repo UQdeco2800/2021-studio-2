@@ -210,7 +210,7 @@ public class PlayerActions extends Component {
     /**
      * Triggers the animation to be played when the player gets hit.
      */
-    private void hitAnimation() {
+    public void hitAnimation() {
         if (lastDirection.y > 0) {
             entity.getEvents().trigger("damagedUp");
         } else if (lastDirection.y < 0) {
@@ -225,7 +225,7 @@ public class PlayerActions extends Component {
     /**
      * Checks the direction that the player was last facing and changes the animation to match.
      */
-    private void triggerStandAnimation() {
+    void triggerStandAnimation() {
         if (lastDirection.y > 0) {
             entity.getEvents().trigger("stopBackward");
         } else if (lastDirection.y < 0) {
@@ -253,7 +253,7 @@ public class PlayerActions extends Component {
     /**
      * Checks the direction that the player is moving in and changes the animation to match.
      */
-    private void triggerWalkAnimation() {
+    void triggerWalkAnimation() {
         if (walkDirection.y > 0) {
             entity.getEvents().trigger("walkBackward");
         } else if (walkDirection.y < 0) {
