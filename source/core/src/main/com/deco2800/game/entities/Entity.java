@@ -242,6 +242,13 @@ public class Entity {
         for (Component component : createdComponents) {
             component.dispose();
         }
+        if (data.containsKey("fireBalls")) {
+            for (Entity fireBall : (Entity[]) data.get("fireBalls")) {
+                if (fireBall != null) {
+                    fireBall.dispose();
+                }
+            }
+        }
         ServiceLocator.getEntityService().unregister(this);
     }
 
