@@ -40,6 +40,7 @@ public class PlayerActions extends Component {
         entity.getEvents().addListener("lockMovement", this::lockMovement);
         entity.getEvents().addListener("dash", this::dash);
         entity.getEvents().addListener("mouseStrongAttack", this::mouseStrongAttack);
+        entity.getEvents().addListener("hit", this::hitAnimation);
     }
 
     /**
@@ -204,6 +205,21 @@ public class PlayerActions extends Component {
         timeSinceStopped = ServiceLocator.getTimeSource().getTime();
         lockDuration = duration;
         moving = false;
+    }
+
+    /**
+     * Triggers the animation to be played when the player gets hit.
+     */
+    private void hitAnimation() {
+        if (lastDirection.y > 0) {
+            entity.getEvents().trigger("damagedUp");
+        } else if (lastDirection.y < 0) {
+            entity.getEvents().trigger("damagedDown");
+        } else if (lastDirection.x > 0) {
+            entity.getEvents().trigger("damagedRight");
+        } else if (lastDirection.x < 0) {
+            entity.getEvents().trigger("damagedLeft");
+        }
     }
 
     /**

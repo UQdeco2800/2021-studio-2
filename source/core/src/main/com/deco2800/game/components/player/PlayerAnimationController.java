@@ -22,6 +22,10 @@ public class PlayerAnimationController extends Component {
         entity.getEvents().addListener("stopRight", this::stopRightWalk);
         entity.getEvents().addListener("stopLeft", this::stopLeftWalk);
         entity.getEvents().addListener("stopBackward", this::stopBackwardWalk);
+        entity.getEvents().addListener("damagedUp", this::damagedUp);
+        entity.getEvents().addListener("damagedDown", this::damagedDown);
+        entity.getEvents().addListener("damagedLeft", this::damagedLeft);
+        entity.getEvents().addListener("damagedRight", this::damagedRight);
         stopForwardWalk();
     }
 
@@ -79,5 +83,33 @@ public class PlayerAnimationController extends Component {
      */
     void stopRightWalk() {
         animator.startAnimation("default_right");
+    }
+
+    /**
+     * Once triggered, it changes the animation of the sprite to the damaged frame facing up.
+     */
+    void damagedUp() {
+        animator.startAnimation("damaged_up");
+    }
+
+    /**
+     * Once triggered, it changes the animation of the sprite to the damaged frame facing down.
+     */
+    void damagedDown() {
+        animator.startAnimation("damaged_down");
+    }
+
+    /**
+     * Once triggered, it changes the animation of the sprite to the damaged frame facing left.
+     */
+    void damagedLeft() {
+        animator.startAnimation("damaged_left");
+    }
+
+    /**
+     * Once triggered, it changes the animation of the sprite to the damaged frame facing right.
+     */
+    void damagedRight() {
+        animator.startAnimation("damaged_right");
     }
 }

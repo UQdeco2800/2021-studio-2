@@ -78,9 +78,13 @@ public class PlayerFactory {
         animator.addAnimation("walk_up", 0.13f, Animation.PlayMode.LOOP);
         animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_up", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_right", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_up", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_down", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_left", 0.3f, Animation.PlayMode.NORMAL);
         animator.setAnimationScale(2f);
 
         Entity player = new Entity()
