@@ -70,9 +70,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -177,9 +178,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
 
         anchoredElf

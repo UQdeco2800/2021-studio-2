@@ -57,7 +57,8 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                        animator.getEntity().getScale().y);
                 animator.startAnimation("leftDeath");
             } else {
                 animator.startAnimation("leftBossDeath");
@@ -80,7 +81,8 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                        animator.getEntity().getScale().y);
                 animator.startAnimation("rightDeath");
             } else {
                 animator.startAnimation("rightBossDeath");
@@ -103,7 +105,8 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                        animator.getEntity().getScale().y);
                 animator.startAnimation("frontDeath");
             } else {
                 animator.startAnimation("frontBossDeath");
@@ -126,7 +129,8 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
+                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                        animator.getEntity().getScale().y);
                 animator.startAnimation("backDeath");
             } else {
                 animator.startAnimation("backBossDeath");
