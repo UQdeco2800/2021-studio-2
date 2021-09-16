@@ -104,7 +104,7 @@ public class ElfAnimationController extends Component {
         } else {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("frontDeath");
+                animator.startAnimation("upDeath");
             } else if (entity.getEntityType().equals("elfBoss")) {
                 animator.startAnimation("frontBossDeath");
             }
@@ -127,7 +127,7 @@ public class ElfAnimationController extends Component {
         } else {
             if (entity.getEntityType().equals("melee")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("frontDeath");
+                animator.startAnimation("backDeath");
             } else if (entity.getEntityType().equals("elfBoss")) {
                 animator.startAnimation("backBossDeath");
             }
