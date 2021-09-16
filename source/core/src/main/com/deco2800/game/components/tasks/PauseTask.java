@@ -18,7 +18,7 @@ public class PauseTask extends DefaultTask implements PriorityTask {
      * Checks if the game is paused and the priority will change depending on this. If the
      * game is paused, this task will have the highest priority and will stop the enemy from moving.
      *
-     * @return priority integer
+     * @return integer relating to the priority of the task, higher integer means higher priority
      */
     @Override
     public int getPriority() {
@@ -28,12 +28,5 @@ public class PauseTask extends DefaultTask implements PriorityTask {
         } else {
             return -1;
         }
-    }
-
-    /**
-     * Update the wait task
-     */
-    @Override
-    public void update() {
     }
 }

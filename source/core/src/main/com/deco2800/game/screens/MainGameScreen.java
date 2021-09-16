@@ -26,6 +26,7 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.CutsceneScreen;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.ui.textbox.TextBox;
@@ -190,6 +191,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new TextBox())
                 .addComponent(textBoxInput)
                 .addComponent(new TextBoxDisplay())
+                .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())

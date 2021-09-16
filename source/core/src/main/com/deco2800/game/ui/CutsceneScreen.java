@@ -36,18 +36,19 @@ public class CutsceneScreen extends UIComponent {
     /**
      * If the cutscene is currently opening.
      */
-    private final BooleanObject opening = new BooleanObject(false);
+    private boolean opening = false;
 
     /**
      * If the cutscene is currently closing.
      */
-    private final BooleanObject closing = new BooleanObject(false);
+    private boolean closing = false;
 
     @Override
     public void create() {
         super.create();
         textBox = entity.getComponent(TextBox.class);
         addActors();
+        openScreenInstant();
     }
 
     /**
@@ -57,7 +58,7 @@ public class CutsceneScreen extends UIComponent {
         blackScreen = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
         blackScreen.setWidth(ServiceLocator.getRenderService().getStage().getWidth());
-        blackScreen.setHeight(ServiceLocator.getRenderService().getStage().getHeight());
+        blackScreen.setHeight(ServiceLocator.getRenderService().getStage().getHeight() * 2f);
         blackScreen.setY(ServiceLocator.getRenderService().getStage().getHeight());
 
         stage.addActor(blackScreen);
@@ -78,58 +79,68 @@ public class CutsceneScreen extends UIComponent {
     }
 
     /**
-     * Displays the message to the screen if the text box is open, the sub message will be
-     * displayed.
+     * Checks if the black screen should be rendered into the game.
      *
      * @param batch Batch to render to.
      */
     @Override
     public void draw(SpriteBatch batch) {
         if (open) {
-            if (!opening.getBoolean()) {
-                closing.setFalse();
-                opening.setTrue();
+            if (!opening) {
+                closing = false;
+                opening = true;
                 openScreen();
             }
         } else {
-            if (!closing.getBoolean()) {
-                closing.setTrue();
-                opening.setFalse();
+            if (!closing) {
+                closing = true;
+                opening = false;
                 closeScreen();
             }
         }
     }
 
     /**
-     * Makes the bars fade into the screen.
+     * Shows the black screen.
      */
     private void openScreen() {
-        moveDown(blackScreen, opening);
+        moveDown();
     }
 
     /**
-     * Makes the bars fade out of the screen.
+     * Removes the black screen.
      */
     private void closeScreen() {
-        moveUp(blackScreen, closing);
+        moveUp();
     }
 
     /**
-     * Moves the bars down relative to their original height.
-     *
-     * @param bar  the image that will change position
-     * @param type the boolean type that will be checked to repeat
+     * Shows the black screen with no fade in time.
      */
-    private void moveDown(Image bar, BooleanObject type) {
-        float initialHeight = -ServiceLocator.getRenderService().getStage().getHeight();
-        if (bar.getY() > initialHeight - ServiceLocator.getRenderService().getStage().getHeight()
-                && type.getBoolean()) {
-            bar.setY(bar.getY() - 6);
+    private void openScreenInstant() {
+        blackScreen.setY(0);
+    }
+
+    /**
+     * Removes the black screen with no fade out time.
+     */
+    private void closeScreenInstant() {
+        blackScreen.setY(ServiceLocator.getRenderService().getStage().getHeight());
+    }
+
+    /**
+     * Moves the screens down relative to their original height.
+     */
+    private void moveDown() {
+        float initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
+        if (blackScreen.getY() > initialHeight - ServiceLocator.getRenderService().getStage().getHeight()
+                && opening) {
+            blackScreen.setY(blackScreen.getY() - 10);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveDown(bar, type);
+                    moveDown();
                     timer.cancel();
                 }
             }, 15);
@@ -137,21 +148,17 @@ public class CutsceneScreen extends UIComponent {
     }
 
     /**
-     * Moves the bars up relative to their original height.
-     *
-     * @param bar  the image that will change position
-     * @param type the boolean type that will be checked to repeat
+     * Moves the screens up relative to their original height.
      */
-    private void moveUp(Image bar, BooleanObject type) {
-        float initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
-        if (bar.getY() < initialHeight + ServiceLocator.getRenderService().getStage().getHeight()
-                && type.getBoolean()) {
-            bar.setY(bar.getY() + 6);
+    private void moveUp() {
+        if (blackScreen.getY() < ServiceLocator.getRenderService().getStage().getHeight()
+                && closing) {
+            blackScreen.setY(blackScreen.getY() + 10);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    moveUp(bar, type);
+                    moveUp();
                     timer.cancel();
                 }
             }, 15);
