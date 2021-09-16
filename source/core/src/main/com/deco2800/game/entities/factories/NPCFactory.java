@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
-import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
