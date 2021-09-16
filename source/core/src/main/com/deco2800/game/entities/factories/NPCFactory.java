@@ -313,6 +313,11 @@ public class NPCFactory {
             animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+
         }
 
         elf

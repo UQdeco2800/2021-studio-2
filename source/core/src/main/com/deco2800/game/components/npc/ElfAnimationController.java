@@ -56,10 +56,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
+            if (!entity.getEntityType().equals("elfBoss")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("leftDeath");
-            } else if (entity.getEntityType().equals("elfBoss")) {
+            } else {
                 animator.startAnimation("leftBossDeath");
             }
         }
@@ -79,10 +79,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
+            if (!entity.getEntityType().equals("elfBoss")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("rightDeath");
-            } else if (entity.getEntityType().equals("elfBoss")) {
+            } else {
                 animator.startAnimation("rightBossDeath");
             }
         }
@@ -102,10 +102,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
+            if (!entity.getEntityType().equals("elfBoss")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("upDeath");
-            } else if (entity.getEntityType().equals("elfBoss")) {
+                animator.startAnimation("frontDeath");
+            } else {
                 animator.startAnimation("frontBossDeath");
             }
         }
@@ -125,10 +125,10 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
+            if (!entity.getEntityType().equals("elfBoss")) {
                 animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
                 animator.startAnimation("backDeath");
-            } else if (entity.getEntityType().equals("elfBoss")) {
+            } else {
                 animator.startAnimation("backBossDeath");
             }
         }
