@@ -13,6 +13,9 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.pause.PauseInputComponent;
+import com.deco2800.game.components.pause.PauseMenuActions;
+import com.deco2800.game.components.pause.PauseMenuDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -193,6 +196,9 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
+                .addComponent(new PauseMenuActions(game))
+                .addComponent(new PauseMenuDisplay())
+                .addComponent(new PauseInputComponent())
                 .addComponent(new Terminal())
                 .addComponent(inputComponent)
                 .addComponent(new TerminalDisplay());
