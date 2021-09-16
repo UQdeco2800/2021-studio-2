@@ -36,6 +36,8 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("assassinRightShoot", this::animateAssassinRight);
         entity.getEvents().addListener("assassinUpShoot", this::animateAssassinUp);
         entity.getEvents().addListener("assassinDownShoot", this::animateAssassinDown);
+
+        animateDown();
     }
 
     public void setDeath() {

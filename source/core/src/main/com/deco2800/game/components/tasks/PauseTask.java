@@ -2,6 +2,8 @@ package com.deco2800.game.components.tasks;
 
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
+import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Task that does nothing other than waiting for a given time. Status is Finished
@@ -20,12 +22,12 @@ public class PauseTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public int getPriority() {
-//        if (game.isPaused()) {
-//            return 15;
-//        } else {
-//            return -1;
-//        }
-        return -1;
+        GameTime timeSource = ServiceLocator.getTimeSource();
+        if (true) {
+            return 25;
+        } else {
+            return -1;
+        }
     }
 
     /**

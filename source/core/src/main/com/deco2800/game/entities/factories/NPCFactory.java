@@ -74,6 +74,7 @@ public class NPCFactory {
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ZigChaseTask(
                                 target, 11, 4f, 4f, 1))
@@ -110,6 +111,7 @@ public class NPCFactory {
         Entity elfGuard = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(new PauseTask())
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 10, 3f, 4f))
                 .addTask(new DeathPauseTask(
@@ -160,6 +162,7 @@ public class NPCFactory {
         MeleeEnemyConfig config = configs.elfMelee;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
                         .addTask(new AnchoredChaseTask(
                                 target, 3f, 4f, anchor, anchorSize))
@@ -214,6 +217,7 @@ public class NPCFactory {
         MeleeEnemyConfig config = configs.elfMelee;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new AnchoredWanderTask(
                                 anchor, anchorSizeX, anchorSizeY, 2f))
                         .addTask(new AnchoredChaseTask(
@@ -274,6 +278,7 @@ public class NPCFactory {
         RangedEnemyConfig config = configs.elfRanged;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 15f, 20f))
@@ -348,6 +353,7 @@ public class NPCFactory {
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
