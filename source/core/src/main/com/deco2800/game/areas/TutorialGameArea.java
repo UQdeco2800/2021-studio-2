@@ -247,13 +247,14 @@ public class TutorialGameArea extends GameArea {
         Entity teleport = ObstacleFactory.creatTeleport(player);
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
+        //boss= 1;
     }
 
     private void spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
-        //player.setPosition(new Vector2(15, 8)); TESTING FOR TELEPORT
+        player.setPosition(new Vector2(15, 8)); //TESTING FOR TELEPORT
     }
 
     private void spawnObstacles() {

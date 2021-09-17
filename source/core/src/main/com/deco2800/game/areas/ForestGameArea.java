@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
@@ -127,6 +128,8 @@ public class ForestGameArea extends GameArea {
         spawnBoss();
         playMusic();
         setDialogue();
+
+        player.getComponent(CombatStatsComponent.class).setHealth(100);
     }
 
     /**
