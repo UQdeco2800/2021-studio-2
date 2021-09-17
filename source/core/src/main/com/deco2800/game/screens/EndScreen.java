@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.GdxGame;
+import com.deco2800.game.components.endGame.EndScreenActions;
+import com.deco2800.game.components.endGame.EndScreenAnimationController;
+import com.deco2800.game.components.endGame.EndScreenDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -97,7 +100,11 @@ public class EndScreen extends ScreenAdapter {
         //use a Timer.Schedule
 
 
-        Entity endUi = new Entity();
+        Entity endUi = new Entity()
+                .addComponent(new EndScreenAnimationController())
+                .addComponent(new EndScreenActions(this.game))
+                .addComponent(new EndScreenDisplay());
+
         //addComponents
         //AnimationController
         //EndGameDisplay
