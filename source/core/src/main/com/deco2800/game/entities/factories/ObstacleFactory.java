@@ -109,12 +109,12 @@ public class ObstacleFactory {
         return trap;
     }
 
-    public static Entity creatTeleport(Entity player) {
+    public static Entity creatTeleport() {
         Entity teleport = new Entity()
                 .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TeleportComponent(PhysicsLayer.TRAP, player));  // pass the bollen here
+                .addComponent(new TeleportComponent(PhysicsLayer.TRAP));  // pass the bollen here
 
         teleport.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
         teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

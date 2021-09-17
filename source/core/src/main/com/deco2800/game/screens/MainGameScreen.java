@@ -160,6 +160,11 @@ public class MainGameScreen extends ScreenAdapter {
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
                 gameChange = false;
+            } else if (gameArea.getLevel() == 0){
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);
+                gameChange = false;
             }
         } else {
             physicsEngine.update();

@@ -13,12 +13,10 @@ public class TeleportComponent extends TouchComponent {
 
     private Scanner scanner = new Scanner(System.in);
     private long start = 0;
-    private Entity player;
     private boolean boss;
 
-    public TeleportComponent(short targetLayer, Entity player) {
+    public TeleportComponent(short targetLayer) {
         super(targetLayer);
-        this.player = player;
 
         boss = true;
     }

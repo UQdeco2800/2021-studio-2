@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.ArrayList;
@@ -65,6 +66,15 @@ public abstract class GameArea implements Disposable {
      */
     public void decNum() {
         numEnemy--;
+        System.out.println("\n\n\n\n" + numEnemy + "\n\n\n\n");
+        if (getLevel() == 0) {
+            if (numEnemy == 0) {
+                Entity teleport = ObstacleFactory.creatTeleport();
+                GridPoint2 fixedPos = new GridPoint2(15, 10);
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+            }
+        }
+
     }
 
     /**
