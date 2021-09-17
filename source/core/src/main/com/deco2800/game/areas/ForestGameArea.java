@@ -96,6 +96,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
+    private int playerHealth = 300;
 
     /**
      * Intialise the forest game
@@ -105,6 +106,15 @@ public class ForestGameArea extends GameArea {
     public ForestGameArea(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
+    }
+
+    /**
+     Use for teleport, track the current playerHealth
+     */
+    public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
+        super();
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
     }
 
     /**
@@ -129,7 +139,7 @@ public class ForestGameArea extends GameArea {
         playMusic();
         setDialogue();
 
-        player.getComponent(CombatStatsComponent.class).setHealth(100);
+        player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
 
     /**

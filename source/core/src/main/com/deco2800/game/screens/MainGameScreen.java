@@ -94,7 +94,6 @@ public class MainGameScreen extends ScreenAdapter {
         this(game);
         logger.debug("Initialising main game screen entities");
 
-
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
@@ -103,6 +102,23 @@ public class MainGameScreen extends ScreenAdapter {
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     }
+
+    /**
+        Use for teleport, track the current player health
+     */
+    public MainGameScreen(GdxGame game, String world, int currentHealth) {
+        this(game);
+        logger.debug("Initialising main game screen entities");
+
+        if (world.equals("forest")) {
+            this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
+        } else if (world.equals("tutorial")) {
+            this.gameArea = new TutorialGameArea(terrainFactory, game);
+        }
+        this.gameArea.create();
+        renderer.getCamera().setPlayer(this.gameArea.getPlayer());
+    }
+
 
     /**
      * Runs when the player dies, causes the camera to zoom in.
@@ -126,22 +142,31 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     Use for teleport, get the leve change
+     */
     public static void levelChange() {
         gameChange = true;
     }
+
+    /**
+     render map or new map if teleport trigger
+     */
     @Override
     public void render(float delta) {
         if (gameChange) {
-            System.out.println("\n\n\n\n\n\n\n\n\n"+ gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth()+"\n\n\n\n\n\n\n\n\n\n\n");
-            game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST);
-            gameChange = false;
+            if (gameArea.getLevel() == 1) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
+                gameChange = false;
+            }
         } else {
             physicsEngine.update();
             ServiceLocator.getEntityService().update();
             renderer.render();
             isPlayerDead();
         }
-
     }
 
     @Override

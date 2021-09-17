@@ -47,6 +47,13 @@ public abstract class GameArea implements Disposable {
     }
 
     /**
+     Use for teleport, track the current map player in
+     */
+    public int getLevel() {
+        return 0;
+    }
+
+    /**
      * increase number of enemy on the map (keep track) - when the enemy is create and spawn
      */
     public void incNum() {

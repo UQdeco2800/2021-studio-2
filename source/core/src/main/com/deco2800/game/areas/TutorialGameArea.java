@@ -315,6 +315,14 @@ public class TutorialGameArea extends GameArea {
     }
 
     /**
+     Use for teleport, track the current map player in
+     */
+    @Override
+    public int getLevel() {
+        return 1;
+    }
+
+    /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
     private void spawnMeleeElf() {
