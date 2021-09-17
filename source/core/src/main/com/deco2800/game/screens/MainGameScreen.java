@@ -132,23 +132,16 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (gameChange) {
-            randerNew();
+            System.out.println("\n\n\n\n\n\n\n\n\n"+ gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth()+"\n\n\n\n\n\n\n\n\n\n\n");
+            game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST);
+            gameChange = false;
+        } else {
+            physicsEngine.update();
+            ServiceLocator.getEntityService().update();
+            renderer.render();
+            isPlayerDead();
         }
-        physicsEngine.update();
-        ServiceLocator.getEntityService().update();
-        renderer.render();
-        isPlayerDead();
-    }
 
-    public void randerNew() {
-        gameArea.getPlayer().getEvents().trigger("dispose");
-        gameArea.dispose();
-
-        //generate new level
-        gameArea = new ForestGameArea(terrainFactory);
-        gameArea.create();
-
-        gameChange = false;
     }
 
     @Override

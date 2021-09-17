@@ -47,12 +47,9 @@ public class TeleportComponent extends TouchComponent {
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (boss) {
             if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
-                //System.out.println((System.currentTimeMillis() - start) / 1000.0 + " seconds");
-                //target.setPosition(3f,4f);
+                //System.out.println("here");
+                //target.getComponent(CombatStatsComponent.class).setHealth(50);
                 MainGameScreen.levelChange();
-                //target.setPosition(new Vector2(15,8));
-                //this.player.setPosition(new Vector2(15,8));
-                //this.player.setScale(new Vector2(5,5));
             }
         }
     }
