@@ -65,6 +65,15 @@ public class CutsceneScreen extends UIComponent {
     }
 
     /**
+     * Checks if the cutscene screen when the player is teleporting between areas is being displayed.
+     *
+     * @return if the black screen is open
+     */
+    public boolean isOpen() {
+        return this.open;
+    }
+
+    /**
      * Sets the black screen to be open.
      */
     public void setOpen() {
