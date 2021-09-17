@@ -11,6 +11,9 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class PauseTask extends DefaultTask implements PriorityTask {
 
+    /**
+     * Constructor for the Pause Task to prevent the NPC from moving and attacking.
+     */
     public PauseTask() {
     }
 
@@ -23,7 +26,7 @@ public class PauseTask extends DefaultTask implements PriorityTask {
     @Override
     public int getPriority() {
         GameTime timeSource = ServiceLocator.getTimeSource();
-        if (true) {
+        if (timeSource.isPaused()) {
             return 25;
         } else {
             return -1;
