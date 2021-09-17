@@ -16,25 +16,40 @@ public class Map {
     private HashMap<String, Float>[] spikeObjects;
     private HashMap<String, Float>[] lavaObjects;
 
-    public HashMap<String,Integer> getDimensions(){ return dimensions; }
+    public HashMap<String, Integer> getDimensions() {
+        return dimensions;
+    }
 
-    public int[][] getMapTiles(){ return mapTilePlacement; }
+    public int[][] getMapTiles() {
+        return mapTilePlacement;
+    }
 
-    public HashMap<String,String> getTileRefs(){ return tileRefs; }
+    public HashMap<String, String> getTileRefs() {
+        return tileRefs;
+    }
 
-    public HashMap<String, Float>[] getWallObjects(){ return wallObjects; }
+    public HashMap<String, Float>[] getWallObjects() {
+        return wallObjects;
+    }
 
-    public int[][] getTransObstacles(){return transObstacles;}
+    public int[][] getTransObstacles() {
+        return transObstacles;
+    }
 
-    public HashMap<String, Float>[] getSpikeObjects() { return spikeObjects; }
+    public HashMap<String, Float>[] getSpikeObjects() {
+        return spikeObjects;
+    }
 
-    public HashMap<String, Float>[] getLavaObjects() { return lavaObjects; }
+    public HashMap<String, Float>[] getLavaObjects() {
+        return lavaObjects;
+    }
 
     /**
      * Returns an array of the tile textures locations for easier loading
+     *
      * @return
      */
-    public String[] TileRefsArray(){
+    public String[] TileRefsArray() {
         String[] s = new String[tileRefs.size()];
 
         for (int i = 1; i <= tileRefs.size(); i++) {

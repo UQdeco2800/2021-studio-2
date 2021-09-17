@@ -21,7 +21,7 @@ public abstract class TransformEntityComponent extends Component {
     /**
      * enabling and disabling of components occur here
      */
-    protected abstract void transform();
+    public abstract void transform();
 
     //add other methods in the subclasses if you need further functionality
 }

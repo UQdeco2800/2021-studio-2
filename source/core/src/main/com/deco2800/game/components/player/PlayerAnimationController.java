@@ -4,7 +4,7 @@ import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**
- * This class listens to events relevant to a ghost entity's state and plays the animation when one
+ * This class listens to events relevant to an entity's state and plays the animation when one
  * of the events is triggered.
  */
 public class PlayerAnimationController extends Component {
@@ -29,7 +29,7 @@ public class PlayerAnimationController extends Component {
      * Once triggered, it changes the animation of the sprite to walk forward.
      */
     void animateForwardWalk() {
-        animator.startAnimation("walk_forward");
+        animator.startAnimation("walk_down");
     }
 
     /**
@@ -50,7 +50,7 @@ public class PlayerAnimationController extends Component {
      * Once triggered, it changes the animation of the sprite to walk backwards.
      */
     void animateBackwardWalk() {
-        animator.startAnimation("walk_backward");
+        animator.startAnimation("walk_up");
     }
 
     /**

@@ -172,7 +172,6 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(healthBarRight).height(40f).width(20f);
         //This creates a new row to add actors: table.row();
         //Adds the dash icon to the table: table.add(dash).size(64f).pad(5);
-        deathScreen();
     }
 
     /**
@@ -192,33 +191,18 @@ public class PlayerStatsDisplay extends UIComponent {
         float currentHealth = entity.getComponent(CombatStatsComponent.class).getHealth();
         float lowHealthThreshold = 0.30f * maxHealth; //change float value to change the threshold
         float alpha = 1.2f - (currentHealth / lowHealthThreshold); //changing opacity of bloody view
-        //boolean play = currentHealth < (maxHealth * 0.30f); //heart beat sound plays at 30% max
-        // health
+        boolean play = currentHealth < (maxHealth * 0.30f); //heart beat sound plays at 30% max health
 
+        if (currentHealth <= 0) {
+            tableFrame.setVisible(false);
+            entity.getEvents().trigger("deathFade");
+        }
         if (currentHealth <= lowHealthThreshold) {
             //call the event trigger for bloodyViewOn when hp reaches below threshold
-            entity.getEvents().trigger("bloodyViewOn", alpha);
+            entity.getEvents().trigger("bloodyViewOn", alpha, play);
         } else {
             //turn off blood view when above low health threshold
             entity.getEvents().trigger("bloodyViewOff");
-        }
-    }
-
-    /**
-     * checks if player is dead if so trigger the death screen.
-     * uses event triggers to turn off the bloody view and display
-     * the death screen.
-     */
-    public void deathScreen() {
-        boolean isDead = entity.getComponent(CombatStatsComponent.class).isDead();
-        if (isDead) {
-            entity.getEvents().trigger("bloodyViewOff");
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            entity.getEvents().trigger("deathScreen");
         }
     }
 

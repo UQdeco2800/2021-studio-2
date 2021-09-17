@@ -1,0 +1,40 @@
+vortex.png
+size: 3200, 1036
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+teleport
+  rotate: false
+  xy: 0, 0
+  size: 75, 91
+  orig: 0, 0
+  offset: 0, 0
+  index: 0
+appear
+   rotate: false
+   xy: 93, 2
+   size: 89, 105
+   orig: 89, 105
+   offset: 0, 0
+   index: 0
+appear
+   rotate: false
+   xy: 93, 2
+   size: 89, 105
+   orig: 89, 105
+   offset: 0, 0
+   index: 0
+appear
+   rotate: false
+   xy: 93, 2
+   size: 89, 105
+   orig: 89, 105
+   offset: 0, 0
+   index: 0
+default
+  rotate: false
+  xy: 30, 0
+  size: 128, 128
+  orig: 400, 518
+  offset: 0, 0
+  index: 0

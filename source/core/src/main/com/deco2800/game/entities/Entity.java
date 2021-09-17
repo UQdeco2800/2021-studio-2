@@ -10,6 +10,9 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+import java.util.TreeMap;
+
 /**
  * Core entity class. Entities exist in the game and are updated each frame. All entities have a
  * position and scale, but have no default behaviour. Components should be added to an entity to
@@ -41,6 +44,7 @@ public class Entity {
     private float attackRange;
     private String entityType;
     private float angle;
+    public TreeMap<String, Object> data = new TreeMap<>();
 
     public Entity() {
         id = nextId;
@@ -334,6 +338,11 @@ public class Entity {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof Entity && ((Entity) obj).getId() == this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

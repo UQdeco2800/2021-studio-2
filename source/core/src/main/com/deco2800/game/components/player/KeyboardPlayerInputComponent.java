@@ -1,6 +1,6 @@
 package com.deco2800.game.components.player;
 
-import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
@@ -109,6 +109,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             case Keys.SPACE:
                 entity.getEvents().trigger("attack", lastKeyPressed);
                 return true;
+            case Keys.Q:
+                entity.getEvents().trigger("strongAttack", lastKeyPressed);
+                return true;
             case Keys.SHIFT_LEFT:
                 this.speedMultiplier = 1.4f;
                 triggerWalkEvent();
@@ -123,12 +126,13 @@ public class KeyboardPlayerInputComponent extends InputComponent {
                     @Override
                     public void run() {
                         dashing = false;
-                        triggerWalkEvent();
+                        if (!locked) {
+                            triggerWalkEvent();
+                        }
                         timer.cancel();
                     }
                 }, 150);
                 return true;
-
             default:
                 return false;
         }
@@ -180,6 +184,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         entity.getEvents().trigger("walkStop");
     }
 
+
     /**
      * Triggers player events on a mouse click. Direction is determined by
      * mouse click coordinates (screenX, screenY).
@@ -189,12 +194,17 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (button == Buttons.LEFT) { // Attack using left mouse button
-            entity.getEvents().trigger("mouseAttack",
-                    new Vector2(screenX, screenY));
-            return true;
+        if (locked) {
+            return false;
         }
-        // other mouse buttons go here (TBD).
+        switch (button) {
+            case Input.Buttons.LEFT:
+                entity.getEvents().trigger("mouseAttack", new Vector2(screenX, screenY));
+                return true;
+            case Input.Buttons.RIGHT:
+                entity.getEvents().trigger("mouseStrongAttack", new Vector2(screenX, screenY));
+                return true;
+        }
         return false;
     }
 
@@ -221,8 +231,10 @@ public class KeyboardPlayerInputComponent extends InputComponent {
      * call a movement at a certain speed.
      */
     private void triggerDashEvent() {
-        calculateDistance(DASH_MULTIPLIER);
-        entity.getEvents().trigger("walk", walkDirection);
+        if (!locked) {
+            calculateDistance(DASH_MULTIPLIER);
+            entity.getEvents().trigger("walk", walkDirection);
+        }
     }
 
     /**

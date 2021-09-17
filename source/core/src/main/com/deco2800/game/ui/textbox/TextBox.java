@@ -303,13 +303,12 @@ public class TextBox extends Component {
             orderedDialogueIndex = 0;
         }
         // Checks to see if the last message has been already read.
-        if (randomDialogueSet.getOrderedDialogueSize() > orderedDialogueIndex) {
-            setDialogue(randomDialogueSet.getOrderedDialogue(orderedDialogueIndex));
-            orderedDialogueIndex++;
-            setOpen();
-        } else {
+        if (randomDialogueSet.getOrderedDialogueSize() <= orderedDialogueIndex) {
             orderedDialogueIndex = 0;
         }
+        setDialogue(randomDialogueSet.getOrderedDialogue(orderedDialogueIndex));
+        orderedDialogueIndex++;
+        setOpen();
     }
 
     public RandomDialogueSet getRandomDialogueSet() {

@@ -32,7 +32,7 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
     }
 
     /**
-     * Add listener to melee ghost to detect event where ghost king (AlertCaller) trigger "alert"
+     * Add listener to this alertable entity to detect event when the AlertCaller triggers "alert"
      *
      * @return 10 if alerted (always see the target), default otherwise
      */

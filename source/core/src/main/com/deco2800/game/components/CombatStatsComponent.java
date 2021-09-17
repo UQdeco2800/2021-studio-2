@@ -1,5 +1,7 @@
 package com.deco2800.game.components;
 
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +29,10 @@ public class CombatStatsComponent extends Component {
     }
 
     /**
-    * Returns true if the entity's has 0 health, otherwise false.
-    *
-    * @return is player dead
-    */
+     * Returns true if the entity's has 0 health, otherwise false.
+     *
+     * @return is player dead
+     */
     public Boolean isDead() {
         return health == 0;
     }
@@ -46,10 +48,10 @@ public class CombatStatsComponent extends Component {
 
 
     /**
-    * to change the max health of the player
-    *
-    * @param health  the new max health of the player to set
-    */
+     * to change the max health of the player
+     *
+     * @param health the new max health of the player to set
+     */
     public void setMaxHealth(int health) {
         this.maxHealth = health;
     }
@@ -71,13 +73,18 @@ public class CombatStatsComponent extends Component {
     public void setHealth(int health) {
         if (health > maxHealth) {
             this.health = maxHealth; //cannot get more health than his set max health
-        }
-        else if (health >= 0) {
+        } else if (health > 0) {
             this.health = health;
         } else {
             this.health = 0;
             if (this.entity != null) {
-                this.entity.prepareDispose();
+                if (getEntity().getComponent(KeyboardPlayerInputComponent.class) != null) {
+                    getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
+                    // Deliberately chose this because other entities that have animations may have death animations
+                    // it is not possible for a class with no component to animate their death.
+                } else if (this.entity.getComponent(AnimationRenderComponent.class) == null){
+                    this.entity.prepareDispose();
+                }
             }
         }
         if (this.entity != null) {
@@ -120,11 +127,51 @@ public class CombatStatsComponent extends Component {
      * called when an entity is attack
      * if this entity has a transform component or hit animations they will be called.
      * if combatStatComponent is disabled this method will not do anything.
+     *
      * @param attacker the CombatStatComponent of the attacker
      */
     public void hit(CombatStatsComponent attacker) {
         if (this.enabled) {
             int newHealth = getHealth() - attacker.getBaseAttack();
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * Entity receives a hit, but also adds a weapon attack.
+     *
+     * @param attacker          the attacking entity with the weapon
+     * @param weaponAttackPower the weapon damage.
+     */
+    public void hit(CombatStatsComponent attacker, int weaponAttackPower) {
+        if (this.enabled) {
+            int newHealth = getHealth() - attacker.getBaseAttack() - weaponAttackPower;
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * Hits purely by weapon attack, ignoring base combat stats of attacking entity.
+     *
+     * @param weaponAttackPower the weapon damage
+     */
+    public void weaponHit(int weaponAttackPower) {
+        if (this.enabled) {
+            int newHealth = getHealth() - weaponAttackPower;
             //check for hit animations
             checkHitAnimations();
             //if entity has Transform Component and is about to die we don't want to update hp
@@ -149,17 +196,16 @@ public class CombatStatsComponent extends Component {
 
     /**
      * if the entity has a Transform Component it will execute its transformation
-     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponent
+     * will only transform the entity if its hp is less than or equal to 0 and will disable CombatStatsComponent
+     *
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */
-    private boolean checkTransformation(int health) {
-        //transform is added in TransformEntityComponent
-        if (entity.getEvents().hasEvent("transformEntity")) {
-            if (health <= 0) {
-                entity.getEvents().trigger("transformEntity");
-                return true;
-            }
+    public boolean checkTransformation(int health) {
+        //'transformEntity' event is added in TransformEntityComponent
+        if (health <= 0 && entity.getEvents().hasEvent("transformEntity")) {
+            entity.getEvents().trigger("transformEntity");
+            return true;
         }
         return false;
     }

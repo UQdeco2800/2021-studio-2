@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.TerrainComponent;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -19,9 +20,11 @@ import java.util.List;
  */
 public abstract class GameArea implements Disposable {
 
-    protected final List<Entity> areaEntities;
     protected TerrainComponent terrain;
+    protected List<Entity> areaEntities;
     protected Entity player;
+    public static int numEnemy = 0;
+
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -44,6 +47,29 @@ public abstract class GameArea implements Disposable {
     }
 
     /**
+     * increase number of enemy on the map (keep track) - when the enemy is create and spawn
+     */
+    public void incNum() {
+        numEnemy++;
+    }
+
+    /**
+     * decrease number of enemy on the map (keep track) - when the enemy died
+     */
+    public void decNum() {
+        numEnemy--;
+    }
+
+    /**
+     * get the number of enemy on the map
+     *
+     * @return int number of enemy
+     */
+    public int getNumEnemy() {
+        return numEnemy;
+    }
+
+    /**
      * Returns the player entity that is created.
      *
      * @return player entity - main character being controlled
@@ -51,6 +77,7 @@ public abstract class GameArea implements Disposable {
     public Entity getPlayer() {
         return player;
     }
+
 
     /**
      * Spawn entity at its current position
@@ -86,14 +113,6 @@ public abstract class GameArea implements Disposable {
         spawnEntity(entity);
     }
 
-    entity.setPosition(entityPos);
-    spawnEntity(entity);
-  }
-  
-  public Entity getPlayer() {
-    return this.player;
-  }
-
     /**
      * Spawn entity on a given tile. Requires the terrain to be set first.
      *
@@ -116,4 +135,5 @@ public abstract class GameArea implements Disposable {
         entity.setPosition(entityPos);
         spawnEntity(entity);
     }
+
 }

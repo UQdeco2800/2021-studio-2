@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
@@ -60,7 +59,7 @@ class TouchAttackCutsceneComponentTest {
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
         trigger.getEvents().trigger("collisionStart", entityFixture, targetFixture);
 
-        verify(inputComponent).stopWalking();
+        verify(actions).stopWalking();
         verify(inputComponent).stopWalking();
     }
 
@@ -76,21 +75,6 @@ class TouchAttackCutsceneComponentTest {
         trigger.getEvents().trigger("collisionStart", entityFixture, targetFixture);
 
         verify(inputComponent, never()).stopWalking();
-        verify(inputComponent, never()).stopWalking();
-    }
-
-    @Test
-    void shouldSetLastKeyPressed() {
-        short targetLayer = (1 << 3);
-        short triggerLayer = (1 << 3);
-        Entity trigger = createTrigger(triggerLayer);
-        Entity target = createTarget(targetLayer);
-
-        Fixture entityFixture = trigger.getComponent(HitboxComponent.class).getFixture();
-        Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
-        trigger.getEvents().trigger("collisionStart", entityFixture, targetFixture);
-
-        verify(inputComponent).setLastKeyPressed('W');
     }
 
     @Test

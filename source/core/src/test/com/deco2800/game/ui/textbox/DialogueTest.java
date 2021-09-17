@@ -41,4 +41,3 @@ public class DialogueTest {
         assertEquals(3, Dialogue.TEST_2.size());
     }
 }
-

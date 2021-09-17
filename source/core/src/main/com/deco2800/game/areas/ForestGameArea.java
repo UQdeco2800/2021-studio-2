@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
@@ -27,19 +28,16 @@ public class ForestGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     private static final int NUM_CRATES = 3;
     private static final int NUM_TREES = 7;
-    private static final int NUM_GHOSTS = 2;
-    private static final int NUM_ANCHORED_GHOSTS = 1;
+    private static final int NUM_MELEE_ELF = 2;
+    private static final int NUM_ANCHORED_ELF = 1;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
     private static final float WALL_WIDTH = 0.1f;
     private static final String[] forestTextures = {
-            "images/box_boy_leaf.png",
             "images/tree.png",
             "images/trap.png",
             "images/test.png",
             "images/arrow_normal.png",
-            "images/ghost_king.png",
-            "images/ghost_crown.png",
-            "images/ghost_1.png",
+            "images/crown.png",
             "images/grass_1.png",
             "images/grass_2.png",
             "images/grass_3.png",
@@ -51,6 +49,10 @@ public class ForestGameArea extends GameArea {
             "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
+            "images/player_axe.png",
+            "images/player_hammer.png",
+            "images/player_scepter.png",
+            "images/blast.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -59,15 +61,30 @@ public class ForestGameArea extends GameArea {
             "images/health_frame_right.png",
             "images/hp_icon.png",
             "images/dash_icon.png",
-            "images/prisoner.png"
+            "images/prisoner.png",
+            "images/rock.png",
+            "images/enemy_health_bar.png",
+            "images/enemy_health_border.png",
+            "images/enemy_health_bar_decrease.png",
+            "images/vortex.png",
+            "images/aiming_line.png",
+            "images/bossAttack.png",
+            "images/meleeElf.png",
+            "images/guardElf.png",
+            "images/rangedElf.png",
+            "images/fireball/fireballAinmation.png",
+            "player_scepter.png",
+            "player_hammer.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
-            "crate/crateHitBreakV2.png"
+            "crate/crateHitBreak.png"
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "images/ghost.atlas", "images/ghostKing.atlas",
-            "images/player.atlas", "images/health_bar.atlas", "crate/crateHitBreakV2.atlas"
+            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
+            "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -102,14 +119,17 @@ public class ForestGameArea extends GameArea {
         spawnTerrain();
         spawnTrees();
         spawnPlayer();
-        spawnGhosts();
-        spawnGhostKing();
-        spawnRangedGhosts();
-        spawnAnchoredGhosts();
         spawnCrate();
-
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
+        spawnBoss();
         playMusic();
         setDialogue();
+
+        player.getComponent(CombatStatsComponent.class).setHealth(100);
     }
 
     /**
@@ -171,62 +191,98 @@ public class ForestGameArea extends GameArea {
      * Spawn player at the terrain, create the player
      */
     private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer();
+        Entity newPlayer = PlayerFactory.createPlayer("Scepter");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
     }
 
     /**
-     * Randomly spawn ghost on a random position of the terrain, the number of ghost limit to 2
+     * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
-    private void spawnGhosts() {
+    private void spawnMeleeElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        for (int i = 0; i < NUM_GHOSTS; i++) {
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity ghost = NPCFactory.createGhost(player);
-            spawnEntityAt(ghost, randomPos, true, true);
+            Entity elf = NPCFactory.createMeleeElf(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
         }
     }
 
     /**
-     * Spawn range ghost on terrain, range ghost can shoot target
+     * Spawn range elf on terrain, range elf can shoot target
      */
-    private void spawnRangedGhosts() {
+    private void spawnRangedElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        for (int i = 0; i < NUM_GHOSTS; i++) {
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity ghost = NPCFactory.createRangedGhost(player);
-            spawnEntityAt(ghost, randomPos, true, true);
+            Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
+            incNum();
+            elf.setEntityType("ranged");
+            elf.getEvents().trigger("rangerLeft");
+            spawnEntityAt(elf, randomPos, true, true);
         }
     }
 
-    private void spawnGhostKing() {
+    /**
+     * Spawn Assassin on terrain, range can shoot from far away with high damage
+     */
+    private void spawnAssassinElf() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
+            elf.setEntityType("assassin");
+            elf.getEvents().trigger("assassinLeft");
+            spawnEntityAt(elf, randomPos, true, true);
+            incNum();
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    private void spawnBoss() {
+        /*GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
+        GridPoint2 bossPos = new GridPoint2(100, 100);
+        Entity boss = NPCFactory.createBossNPC(player);
+        spawnEntityAt(boss, bossPos, true, true);
+    }
+
+    private void spawnElfGuard() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity ghostKing = NPCFactory.createGhostKing(player);
-        spawnEntityAt(ghostKing, randomPos, true, true);
+        Entity elfKing = NPCFactory.createElfGuard(player);
+        incNum();
+        spawnEntityAt(elfKing, randomPos, true, true);
     }
 
     /**
-     * Spawn anchored ghost, ghost only move at the certain anchored
+     * Spawn anchored elf, elf only move at the certain anchored
      */
-    private void spawnAnchoredGhosts() {
+    private void spawnAnchoredElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
+        for (int i = 0; i < NUM_ANCHORED_ELF; i++) {
             GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+
+            GridPoint2 elfPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
             Entity anchor = ObstacleFactory.createAnchor();
-            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+            Entity Anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
-            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+            incNum();
+            spawnEntityAt(Anchoredelf, elfPos, true, true);
         }
     }
 
@@ -263,7 +319,7 @@ public class ForestGameArea extends GameArea {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
-          resourceService.loadTextures(healthRegenTextures);
+        resourceService.loadTextures(healthRegenTextures);
         resourceService.loadTextureAtlases(forestTextureAtlases);
         resourceService.loadSounds(forestSounds);
         resourceService.loadMusic(forestMusic);
