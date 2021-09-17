@@ -5,8 +5,13 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.screens.MainGameScreen;
+import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.CutsceneScreen;
+import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TeleportComponent extends TouchComponent {
     private CombatStatsComponent combatStats;
@@ -49,7 +54,16 @@ public class TeleportComponent extends TouchComponent {
             if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
                 //System.out.println("here");
                 //target.getComponent(CombatStatsComponent.class).setHealth(50);
-                MainGameScreen.levelChange();
+                CutsceneScreen screen = ServiceLocator.getEntityService()
+                        .getUIEntity().getComponent(CutsceneScreen.class);
+                screen.setOpen();
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        MainGameScreen.levelChange();
+                    }
+                }, 1000);
             }
         }
     }

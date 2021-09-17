@@ -130,6 +130,7 @@ public class MainGameScreen extends ScreenAdapter {
     public static void levelChange() {
         gameChange = true;
     }
+
     @Override
     public void render(float delta) {
         if (gameChange) {

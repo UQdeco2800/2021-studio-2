@@ -135,7 +135,7 @@ public class CutsceneScreen extends UIComponent {
         float initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         if (blackScreen.getY() > initialHeight - ServiceLocator.getRenderService().getStage().getHeight()
                 && opening) {
-            blackScreen.setY(blackScreen.getY() - 10);
+            blackScreen.setY(blackScreen.getY() - 15);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -153,7 +153,7 @@ public class CutsceneScreen extends UIComponent {
     private void moveUp() {
         if (blackScreen.getY() < ServiceLocator.getRenderService().getStage().getHeight()
                 && closing) {
-            blackScreen.setY(blackScreen.getY() + 10);
+            blackScreen.setY(blackScreen.getY() + 15);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
