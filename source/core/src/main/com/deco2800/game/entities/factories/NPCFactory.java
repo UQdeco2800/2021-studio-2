@@ -305,6 +305,10 @@ public class NPCFactory {
             animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinLeftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinRightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinFrontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinBackDeath", 0.2f, Animation.PlayMode.NORMAL);
         } else {
             elf.setEntityType("ranged");
             animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
