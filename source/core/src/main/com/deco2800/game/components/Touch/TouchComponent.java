@@ -1,6 +1,7 @@
-package com.deco2800.game.components;
+package com.deco2800.game.components.Touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.components.Component;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
