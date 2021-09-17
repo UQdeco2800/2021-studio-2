@@ -58,6 +58,9 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
         Entity elf = NPCFactory.createMeleeElf(target);
         Entity elf2 = NPCFactory.createRangedElf(target, "normalArrow", 0.15f);
 
+        ServiceLocator.getGameAreaService().incNum();
+        ServiceLocator.getGameAreaService().incNum();
+
         gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(elf2, owner.getEntity().getCenterPosition(), true, true);
 
