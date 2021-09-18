@@ -106,6 +106,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             teleport(new Vector2(2f, 2f));
             if (owner.getEntity().getPosition().dst(posBefore) != 0) {
                 count++;
+                ServiceLocator.getGameAreaService().incNum();
             }
         }
         if (canTeleport()) {

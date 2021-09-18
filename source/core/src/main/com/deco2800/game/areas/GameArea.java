@@ -24,7 +24,7 @@ public abstract class GameArea implements Disposable {
     protected TerrainComponent terrain;
     protected List<Entity> areaEntities;
     protected Entity player;
-    public static int numEnemy = 0;
+    protected int numEnemy = 0;
 
 
     protected GameArea() {
