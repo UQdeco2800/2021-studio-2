@@ -67,18 +67,20 @@ public abstract class GameArea implements Disposable {
      */
     public void decNum() {
         numEnemy--;
-        System.out.println("\n\n\n\n" + numEnemy + "\n\n\n\n");
-        if (getLevel() == 0) {
-            if (numEnemy == 0) {
-                Entity teleport = ObstacleFactory.creatTeleport();
-                GridPoint2 fixedPos = new GridPoint2(15, 10);
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-            }
-        }
-
     }
 
+    /**
+     * increase the number of boss
+     */
+    public void incBossNum() {
+        numBoss++;
+    }
+
+    /**
+     * decrease number of boss - spawn the teleport portal to another map
+     */
     public void decBossNum() {
+        numBoss--;
         if (getLevel() == 0) {
             if (numBoss == 0) {
                 Entity teleport = ObstacleFactory.creatTeleport();
