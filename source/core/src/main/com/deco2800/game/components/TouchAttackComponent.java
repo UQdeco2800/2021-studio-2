@@ -87,11 +87,6 @@ public class TouchAttackComponent extends TouchComponent {
             return;
         }
 
-        if (!PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
-            // Doesn't match our target layer, ignore
-            return;
-        }
-
         //Dissolve arrow attacks after hits
         if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
             //Remove later on to make arrows stick into walls and more
