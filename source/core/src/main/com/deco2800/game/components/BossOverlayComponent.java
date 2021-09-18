@@ -107,11 +107,11 @@ public class BossOverlayComponent extends UIComponent {
         tableFrame.top().right();
         tableFrame.setFillParent(true);
         frameLeft = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/health_frame_left.png", Texture.class));
+                .getAsset("images/boss_health_left.png", Texture.class));
         frameMiddle = new Image(ServiceLocator.getResourceService()
-                .getAsset("images/health_frame_middle.png", Texture.class));
+                .getAsset("images/boss_health_middle.png", Texture.class));
         frameRight = new Image(ServiceLocator.getResourceService().
-                getAsset("images/health_frame_right.png", Texture.class));
+                getAsset("images/boss_health_right.png", Texture.class));
         tableFrame.padRight(100f).padTop(36.5f);
         tableFrame.add(frameLeft).height(40f).width(20f);
         tableFrame.add(frameMiddle).height(40f).width(maxHealth * lengthMultiplier);

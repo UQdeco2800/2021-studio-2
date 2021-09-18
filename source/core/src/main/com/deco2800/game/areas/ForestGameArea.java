@@ -75,7 +75,10 @@ public class ForestGameArea extends GameArea {
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
             "player_hammer.png",
-            "Assets/gametile-127.png"
+            "Assets/gametile-127.png",
+            "images/boss_health_middle.png",
+            "images/boss_health_left.png",
+            "images/boss_health_right.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",

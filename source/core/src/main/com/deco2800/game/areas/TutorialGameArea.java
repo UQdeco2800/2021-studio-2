@@ -79,7 +79,10 @@ public class TutorialGameArea extends GameArea {
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
-            "player_hammer.png"
+            "player_hammer.png",
+            "images/boss_health_middle.png",
+            "images/boss_health_left.png",
+            "images/boss_health_right.png"
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
