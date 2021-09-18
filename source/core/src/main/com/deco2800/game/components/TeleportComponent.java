@@ -32,10 +32,6 @@ public class TeleportComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        super.onCollisionStart(me, other);
-        if (this.checkEntities(me, other)) {
-            return;
-        }
 
         if (!PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
