@@ -3,6 +3,8 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -86,6 +88,11 @@ public class Hammer extends MeleeWeapon {
             return;
         }
         animator.startAnimation("hammer_aoe");
+        rangedAttack(attackDirection);
+    }
+
+    public void rangedAttack(int attackDirection) {
+
     }
 
     /**
