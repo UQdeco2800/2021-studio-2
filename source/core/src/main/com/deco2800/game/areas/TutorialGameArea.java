@@ -228,20 +228,12 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnPTraps() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
         GridPoint2 fixedPos = new GridPoint2(15, 15);
         Entity trap = ObstacleFactory.createPhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
     }
 
     private void spawnTraps() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
         GridPoint2 fixedPos = new GridPoint2(8, 8);
         Entity trap = ObstacleFactory.createNonePhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
