@@ -25,6 +25,7 @@ public abstract class GameArea implements Disposable {
     protected List<Entity> areaEntities;
     protected Entity player;
     protected int numEnemy = 0;
+    protected int numBoss = 0;
 
 
     protected GameArea() {
@@ -75,6 +76,16 @@ public abstract class GameArea implements Disposable {
             }
         }
 
+    }
+
+    public void decBossNum() {
+        if (getLevel() == 0) {
+            if (numBoss == 0) {
+                Entity teleport = ObstacleFactory.creatTeleport();
+                GridPoint2 fixedPos = new GridPoint2(15, 10);
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+            }
+        }
     }
 
     /**
