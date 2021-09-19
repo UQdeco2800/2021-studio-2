@@ -122,7 +122,6 @@ public class DeathDisplay extends MainMenuDisplay {
             entity.dispose();
         }
         super.dispose();
-        stack.clear();
         this.unloadAssets();
     }
 }
