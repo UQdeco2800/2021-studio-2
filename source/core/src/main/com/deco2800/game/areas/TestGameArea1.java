@@ -10,6 +10,7 @@ import com.deco2800.game.areas.TutorialGameArea;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
@@ -85,11 +86,19 @@ public class TestGameArea1 extends GameArea {
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
     private static Map map;
+    private int playerHealth;
 
     public TestGameArea1(TerrainFactory terrainFactory, GdxGame game) {
         super();
         this.game = game;
         this.terrainFactory = terrainFactory;
+    }
+
+    public TestGameArea1(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
+        super();
+        this.game = game;
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
     }
 
     @Override
@@ -105,6 +114,7 @@ public class TestGameArea1 extends GameArea {
         spawnPlayer();
 
         spawnTeleport();
+        player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
 
     private void displayUI() {
@@ -175,7 +185,7 @@ public class TestGameArea1 extends GameArea {
 
     @Override
     public int getLevel() {
-        return 1;
+        return 2;
     }
 
     private void loadAssets() {
