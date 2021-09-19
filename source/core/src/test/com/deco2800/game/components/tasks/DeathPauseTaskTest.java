@@ -44,13 +44,19 @@ class DeathPauseTaskTest {
     @Test
     void getPriority() {
         Entity taskRunner = new Entity();
+        taskRunner.addComponent(new CombatStatsComponent(100, 10));
 
         DeathPauseTask deathPauseTask = new DeathPauseTask(taskRunner, 0, 100, 100, 1.5f);
 
         deathPauseTask.create(() -> taskRunner);
 
-        //always 0 - only run if the entity die
+        //only run if the entity die
         assertEquals(0, deathPauseTask.getPriority());
+
+        //the entity die
+        taskRunner.getComponent(CombatStatsComponent.class).setHealth(0);
+        assertEquals(100, deathPauseTask.getPriority());
+
     }
 
 }
