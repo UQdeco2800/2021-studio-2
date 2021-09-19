@@ -4,98 +4,98 @@ size: 2048, 1024
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-b1
+brokenArrow
   rotate: false
   xy: 809, 2
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b2
+brokenArrow
   rotate: false
   xy: 271, 2
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b3
+brokenArrow
   rotate: false
   xy: 2, 271
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b4
+brokenArrow
   rotate: false
   xy: 540, 2
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b5
+brokenArrow
   rotate: false
   xy: 271, 271
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b6
+brokenArrow
   rotate: false
   xy: 1078, 271
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b7
+brokenArrow
   rotate: false
   xy: 540, 271
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b8
+brokenArrow
   rotate: false
   xy: 271, 540
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-b9
+brokenArrow
   rotate: false
   xy: 809, 271
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-c10
+brokenArrow
   rotate: false
   xy: 809, 540
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-c11
+brokenArrow
   rotate: false
   xy: 2, 2
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-c12
+brokenArrow
   rotate: false
   xy: 1078, 540
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-c13
+brokenArrow
   rotate: false
   xy: 540, 540
   size: 267, 267
   orig: 267, 267
   offset: 0, 0
   index: -1
-c14
+brokenArrow
   rotate: false
   xy: 2, 540
   size: 267, 267

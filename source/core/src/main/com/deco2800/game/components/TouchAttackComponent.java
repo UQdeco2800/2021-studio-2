@@ -3,11 +3,14 @@ package com.deco2800.game.components;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 
 
 /**
@@ -88,9 +91,13 @@ public class TouchAttackComponent extends TouchComponent {
         }
 
         //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
+        if (getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.PROJECTILEWEAPON) {
             //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
+//            getEntity().prepareDispose();
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
+            getEntity().getEvents().trigger("brokenArrow");
         }
 
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;

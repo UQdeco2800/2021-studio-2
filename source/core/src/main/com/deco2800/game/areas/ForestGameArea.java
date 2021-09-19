@@ -87,8 +87,8 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -100,7 +100,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
-    private int playerHealth = 3000;
+    private int playerHealth = 300;
 
     /**
      * Intialise the forest game
@@ -131,7 +131,7 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        //spawnTrees();
+        spawnTrees();
         spawnPlayer();
         spawnCrate();
         spawnMeleeElf();
