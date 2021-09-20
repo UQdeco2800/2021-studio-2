@@ -104,6 +104,10 @@ public class PhysicsEngine implements Disposable {
      * @return true if a collider was hit, false otherwise.
      */
     public boolean raycast(Vector2 from, Vector2 to, short layerMask, RaycastHit hit) {
+        //Stops an error when raycast len == 0 by returning there is no hit
+        if (from.cpy().sub(to).len() == 0) {
+            return false;
+        }
         singleHitCallback.didHit = false;
         singleHitCallback.layerMask = layerMask;
         singleHitCallback.hit = hit;
