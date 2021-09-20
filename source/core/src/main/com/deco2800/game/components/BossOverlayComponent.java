@@ -13,7 +13,7 @@ public class BossOverlayComponent extends UIComponent {
     /**
      * Health Bar length Multiplier
      */
-    private float lengthMultiplier= 5;
+    private float lengthMultiplier = 5;
 
     /**
      * has the boss spawned
@@ -89,7 +89,7 @@ public class BossOverlayComponent extends UIComponent {
         healthText.top().right();
         healthText.setFillParent(true);
         healthText.setZIndex(10);
-        healthText.padRight((maxHealth * lengthMultiplier)/2 + (8 * bossName.length())).padTop(40f);
+        healthText.padRight((maxHealth * lengthMultiplier) / 2 + (8 * bossName.length())).padTop(40f);
 
         healthLabel = new Label(bossName, skin, "health");
         healthText.add(healthLabel);
@@ -133,7 +133,7 @@ public class BossOverlayComponent extends UIComponent {
         healthLabel.setText(bossName);
         table.reset();
         createTable();
-        if(!entity.getComponent(CombatStatsComponent.class).isDead()) {
+        if (!entity.getComponent(CombatStatsComponent.class).isDead()) {
             table.add(healthBarLeft).height(40f).width(20f);
             table.add(healthBarMiddle).height(40f).width(health * lengthMultiplier);
             table.add(healthBarRight).height(40f).width(20f);
@@ -170,7 +170,7 @@ public class BossOverlayComponent extends UIComponent {
                 .getUIEntity().getComponent(TextBox.class);
 
 
-        if (textBox.shouldShowBars() || ! hasEnemySpawned()) {
+        if (textBox.shouldShowBars() || !hasEnemySpawned()) {
             table.setVisible(false);
             healthLabel.setVisible(false);
             tableFrame.setVisible(false);

@@ -13,7 +13,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
-import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -104,7 +103,7 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-        Use for teleport, track the current player health
+     * Use for teleport, track the current player health
      */
     public MainGameScreen(GdxGame game, String world, int currentHealth) {
         this(game);
@@ -143,14 +142,14 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-     Use for teleport, get the leve change
+     * Use for teleport, get the leve change
      */
     public static void levelChange() {
         gameChange = true;
     }
 
     /**
-     render map or new map if teleport trigger
+     * render map or new map if teleport trigger
      */
     @Override
     public void render(float delta) {
@@ -160,7 +159,7 @@ public class MainGameScreen extends ScreenAdapter {
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 0){
+            } else if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);

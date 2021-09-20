@@ -113,7 +113,7 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     Use for teleport, track the current playerHealth
+     * Use for teleport, track the current playerHealth
      */
     public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -150,6 +150,7 @@ public class ForestGameArea extends GameArea {
     public int getLevel() {
         return 0;
     }
+
     /**
      * Display the UI
      */

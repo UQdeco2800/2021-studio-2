@@ -1,4 +1,5 @@
 package com.deco2800.game.components.npc;
+
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 

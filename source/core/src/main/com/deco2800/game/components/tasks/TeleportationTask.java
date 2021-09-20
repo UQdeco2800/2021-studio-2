@@ -1,7 +1,6 @@
 package com.deco2800.game.components.tasks;
 
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
@@ -10,7 +9,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
@@ -136,7 +134,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             entity.setPosition(position);
             entity.setScale(owner.getEntity().getScale());
             Entity vortex2 = WeaponFactory.createVortexExit(entity, getDirectionOfTarget(), false);
-
 
 
             gameArea.spawnEntityAt(vortex2, position, true, true);

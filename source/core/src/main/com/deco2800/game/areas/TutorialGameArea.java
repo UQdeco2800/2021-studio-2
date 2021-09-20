@@ -310,7 +310,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     @Override
     public int getLevel() {

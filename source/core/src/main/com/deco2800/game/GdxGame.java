@@ -56,7 +56,7 @@ public class GdxGame extends Game {
     }
 
     /**
-     Use for teleport, track the current player health
+     * Use for teleport, track the current player health
      */
     public void setScreen(ScreenType screenType, int currentHealth) {
         logger.info("Setting game screen to {}", screenType);
@@ -97,7 +97,7 @@ public class GdxGame extends Game {
     }
 
     /**
-     Use for teleport, track the current player health
+     * Use for teleport, track the current player health
      */
     private Screen newScreen(ScreenType screenType, int currentHealth) {
         switch (screenType) {

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -21,23 +20,14 @@ import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.components.tasks.WeaponDisposeTask;
 import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.entities.LineEntity;
-import com.deco2800.game.entities.configs.BaseArrowConfig;
-import com.deco2800.game.entities.configs.FastArrowConfig;
-import com.deco2800.game.entities.configs.TrackingArrowConfig;
-import com.deco2800.game.entities.configs.WeaponConfigs;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.ColliderComponent;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.physics.components.WeaponHitboxComponent;
+import com.deco2800.game.physics.components.*;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import net.dermetfan.gdx.physics.box2d.PositionController;
 
 
 /**
@@ -271,7 +261,7 @@ public class WeaponFactory {
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(vortexSpawn);
         CircleShape circle = new CircleShape();
-        circle.setRadius(scale.x/4);
+        circle.setRadius(scale.x / 4);
         circle.setPosition(circle.getPosition().add(scale.cpy().scl(0.5f)));
         vortex
                 .addComponent(new PhysicsComponent())
@@ -372,6 +362,7 @@ public class WeaponFactory {
                 .addComponent(new Blast());
         return blast;
     }
+
     public WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }

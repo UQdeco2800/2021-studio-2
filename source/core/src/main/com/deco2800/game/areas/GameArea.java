@@ -48,7 +48,7 @@ public abstract class GameArea implements Disposable {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     public int getLevel() {
         return 0;

@@ -318,6 +318,7 @@ public class Entity {
 
     /**
      * teleports the entity if they aren't already going somewhere
+     *
      * @param teleportLoc target location
      */
     public void teleport(Vector2 teleportLoc) {
