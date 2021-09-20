@@ -83,6 +83,12 @@ public class TouchAttackComponent extends TouchComponent {
         if (disable) {
             return;
         }
+
+        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+
+        if (getEntity().canSeeEntity(target)) {
+            return;
+        }
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;
@@ -100,7 +106,7 @@ public class TouchAttackComponent extends TouchComponent {
             getEntity().getEvents().trigger("brokenArrow");
         }
 
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+
 
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
