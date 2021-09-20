@@ -24,7 +24,6 @@ public class TouchTeleportComponent extends TouchComponent {
 
     @Override
     void onCollisionStart(Fixture me, Fixture other) {
-        //System.out.println(111);
         if (!this.checkEntities(me, other)) {
             return;
         }
@@ -37,11 +36,8 @@ public class TouchTeleportComponent extends TouchComponent {
             //Not a target
             return;
         }
-        //System.out.println(21332);
         if (this.getEntity().data.containsKey("teleportTarget")) {
             if ((boolean) this.getEntity().data.get("teleportTarget")) {
-                System.out.println(target.getEntityType());
-                System.out.println(878787);
                 target.teleport((Vector2) this.getEntity().data.get("teleportLoc"));
                 //Set this to only let the target travel once
                 //this.getEntity().data.put("teleportTarget", false);
