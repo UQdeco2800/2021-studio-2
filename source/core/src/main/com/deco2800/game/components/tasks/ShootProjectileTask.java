@@ -470,30 +470,12 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * check if target is block by any object
+     * Check if there are any object between the entity and the target
      *
-     * @return true if it not block, false otherwise
+     * @return true if no object, false otherwise
      */
     private boolean isTargetVisible() {
-        Vector2 from = owner.getEntity().getCenterPosition();
-        Vector2 to = target.getCenterPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
-            return false;
-        }
-        Vector2 from2 = owner.getEntity().getPosition();
-        Vector2 to2 = target.getPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from2, to2, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
-            return false;
-        }
-        //to.add(owner.getEntity().getCenterPosition().sub(owner.getEntity().getPosition()));
-        debugRenderer.drawLine(from, to);
-        return true;
+        return owner.getEntity().canSeeEntity(target);
     }
 
     /**

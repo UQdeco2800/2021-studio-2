@@ -1,11 +1,16 @@
 package com.deco2800.game.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.ComponentType;
 import com.deco2800.game.events.EventHandler;
+import com.deco2800.game.physics.PhysicsEngine;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.raycast.RaycastHit;
+import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +52,8 @@ public class Entity {
     public TreeMap<String, Object> data = new TreeMap<>();
     private boolean teleport = false;
     private Vector2 teleportLoc;
+    private final PhysicsEngine physics = ServiceLocator.getPhysicsService().getPhysics();
+    private final DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
 
     public Entity() {
         id = nextId;
@@ -318,6 +325,59 @@ public class Entity {
             teleport = true;
             this.teleportLoc = teleportLoc;
         }
+    }
+
+    /**
+     * Check if there are any object between the entity and the target entity
+     *
+     * @return true if no object, false otherwise
+     */
+    public boolean canSeeEntity(Entity target) {
+        RaycastHit hit = new RaycastHit();
+        Vector2 from = getCenterPosition();
+        Vector2 to = target.getCenterPosition();
+
+        // If there is an obstacle in the path to the player, not visible.
+        if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
+            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
+            return false;
+        }
+        Vector2 from2 = getPosition();
+
+        // If there is an obstacle in the path to the player, not visible.
+        if (physics.raycast(from2, target.getPosition(), PhysicsLayer.OBSTACLE, hit)) {
+            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
+            return false;
+        }
+
+        debugRenderer.drawLine(from, to, Color.BLUE, 1);
+        return true;
+    }
+
+    /**
+     * Check if there are any object between the entity and the target location
+     *
+     * @return true if no object, false otherwise
+     */
+    public boolean canSeeTarget(Vector2 target) {
+        RaycastHit hit = new RaycastHit();
+        Vector2 from = getCenterPosition();
+
+        // If there is an obstacle in the path to the player, not visible.
+        if (physics.raycast(from, target, PhysicsLayer.OBSTACLE, hit)) {
+            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
+            return false;
+        }
+        Vector2 from2 = getPosition();
+
+        // If there is an obstacle in the path to the player, not visible.
+        if (physics.raycast(from2, target, PhysicsLayer.OBSTACLE, hit)) {
+            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
+            return false;
+        }
+
+        debugRenderer.drawLine(from, target, Color.BLUE, 1);
+        return true;
     }
 
     /**

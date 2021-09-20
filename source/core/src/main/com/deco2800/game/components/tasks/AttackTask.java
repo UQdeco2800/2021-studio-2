@@ -151,30 +151,16 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         return -1;
     }
 
+    /**
+     * Check if there are any object between the entity and the target
+     *
+     * @return true if no object, false otherwise
+     */
     private boolean isTargetVisible() {
-        Vector2 from = owner.getEntity().getCenterPosition();
-        Vector2 to;
         if (target != null) {
-            to = target.getCenterPosition();
+            return owner.getEntity().canSeeEntity(target);
         } else {
-            to = targetLoc;
+            return owner.getEntity().canSeeTarget(targetLoc);
         }
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
-            return false;
-        }
-
-        if (target != null) {
-            Vector2 from2 = owner.getEntity().getPosition();
-            Vector2 to2 = target.getPosition();
-            // If there is an obstacle in the path to the player, not visible.
-            if (physics.raycast(from2, to2, PhysicsLayer.OBSTACLE, hit)) {
-                debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
-                return false;
-            }
-        }
-        debugRenderer.drawLine(from, to, Color.BLUE, 1);
-        return true;
     }
 }
