@@ -51,13 +51,14 @@ public class ColliderComponent extends Component {
 
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
         fixture = physBody.createFixture(fixtureDef);
-        entity.getEvents().addListener("collisionStart", this::onCollisionStart);
     }
 
     @Override
     public void update() {
         if (lastAngle != entity.getAngle()) {
-            fixtureDef.shape = makeBoundingBox();
+            if (fixtureDef.shape.getType() != Shape.Type.Circle) {
+                fixtureDef.shape = makeBoundingBox();
+            }
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
             physBody.destroyFixture(fixture);
             fixture = physBody.createFixture(fixtureDef);
@@ -252,20 +253,5 @@ public class ColliderComponent extends Component {
         lastAngle = entity.getAngle();
         bbox.setAsBox(center.x, center.y, center, (float) Math.toRadians(lastAngle));
         return bbox;
-    }
-
-    private void onCollisionStart(Fixture me, Fixture other) {
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
-        if (getLayer() == PhysicsLayer.TELEPORT) {
-            ////target.teleport();
-            if (this.getEntity().data.containsKey("teleportPlayer")) {
-                if ((boolean) this.getEntity().data.get("teleportPlayer")) {
-                    if (target.getEntityType().equals("player")) {
-                        target.teleport((Vector2) this.getEntity().data.get("teleportLoc"));
-                        this.getEntity().data.put("teleportPlayer", false);
-                    }
-                }
-            }
-        }
     }
 }

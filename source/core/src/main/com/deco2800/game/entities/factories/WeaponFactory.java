@@ -6,9 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.EntityHoverTask;
@@ -187,7 +191,7 @@ public class WeaponFactory {
                                 new Vector2(config.speedX, config.speedY), 0.8f));
         fireBall.data.put("fireBallMovement", false);
 
-        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.PROJECTILEWEAPON);
+        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON);
 
         fireBall
                 .addComponent(animator)
@@ -198,7 +202,7 @@ public class WeaponFactory {
                 .addComponent(new PhysicsMovementComponent())
                 .addComponent(hitbox)
                 .addComponent(new PlayerActions())
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 1f));
+                .addComponent(new TouchAttackComponent(PhysicsLayer.NONE, 1f));
         shootingSound("fireBall");
         hitbox.setScale(0.8f);
         return fireBall;
@@ -255,8 +259,42 @@ public class WeaponFactory {
      * @param reverseSpawn downscale the entity
      * @return entity vortex
      */
-    public static Entity createVortex(Entity ownerRunner, float angle, boolean reverseSpawn) {
-        // if the player touch the vortex - will receive the damage (instant death)
+    public static Entity createVortexEnter(Entity ownerRunner, float angle, boolean reverseSpawn) {
+        Entity vortex = new Entity();
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/vortex.png", Texture.class));
+        Vector2 scale = new Vector2(sprite.getWidth() / 30f, sprite.getHeight() / 30f);
+        VortexSpawnTask vortexSpawn = new VortexSpawnTask(ownerRunner, scale, 2f);
+        if (reverseSpawn) {
+            vortexSpawn.flipReverse();
+        }
+        AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(vortexSpawn);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(scale.x/4);
+        circle.setPosition(circle.getPosition().add(scale.cpy().scl(0.5f)));
+        vortex
+                .addComponent(new PhysicsComponent())
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.TELEPORT)
+                        .setShape(circle).setRestitution(0))
+                .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER, PhysicsLayer.TELEPORT))
+                .addComponent(aiTaskComponent);
+        //vortex.setScale(scale);
+        vortex.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+        vortex.setAngle(angle);
+        vortex.data.put("teleportID", 1);
+        return vortex;
+    }
+
+    /**
+     * create the vortex for teleportation
+     *
+     * @param angle        angle to spin the vortex for transition animate
+     * @param reverseSpawn downscale the entity
+     * @return entity vortex
+     */
+    public static Entity createVortexExit(Entity ownerRunner, float angle, boolean reverseSpawn) {
         Entity vortex = new Entity();
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/vortex.png", Texture.class));
@@ -270,10 +308,10 @@ public class WeaponFactory {
         vortex
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.TELEPORT))
                 .addComponent(aiTaskComponent);
         //vortex.setScale(scale);
         vortex.setAngle(angle);
+        vortex.data.put("teleportID", 2);
         return vortex;
     }
 

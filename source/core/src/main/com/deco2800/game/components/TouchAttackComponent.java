@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
@@ -92,7 +93,10 @@ public class TouchAttackComponent extends TouchComponent {
 
         //Dissolve arrow attacks after hits
         if (getEntity().getComponent(HitboxComponent.class).getLayer()
-                == PhysicsLayer.PROJECTILEWEAPON) {
+                == PhysicsLayer.PROJECTILEWEAPON
+                || getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.IDLEPROJECTILEWEAPON) {
+
             //Remove later on to make arrows stick into walls and more
             getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);

@@ -135,9 +135,9 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             Entity entity = new Entity();
             entity.setPosition(position);
             entity.setScale(owner.getEntity().getScale());
-            Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
+            Entity vortex2 = WeaponFactory.createVortexExit(entity, getDirectionOfTarget(), false);
 
-            vortex2.data.put("teleportID", 0);
+
 
             gameArea.spawnEntityAt(vortex2, position, true, true);
         }
@@ -180,7 +180,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         entity.setScale(owner.getEntity().getScale());
 
         //todo: This doesn't need random entity positions to work, just set a vector
-        Entity vortex = WeaponFactory.createVortex(entity,
+        Entity vortex = WeaponFactory.createVortexEnter(entity,
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
@@ -192,10 +192,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         entity2.setPosition(pos2);
         entity2.setScale(owner.getEntity().getScale());
         gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(entity2, getDirectionOfTarget(), false);
+        Entity vortex2 = WeaponFactory.createVortexExit(entity2, getDirectionOfTarget(), false);
 
-        vortex.data.put("teleportID", 1);
-        vortex2.data.put("teleportID", 2);
         vortex.data.put("teleportLoc", pos2);
 
         gameArea.spawnEntityAt(vortex2, pos2, true, true);

@@ -91,7 +91,7 @@ class ColliderComponentTest {
         ColliderComponent component = new ColliderComponent();
         entity.addComponent(component);
 
-        Shape shape = new CircleShape();
+        CircleShape shape = new CircleShape();
         component.setShape(shape);
         entity.create();
         assertEquals(shape.getType(), component.getFixture().getShape().getType());

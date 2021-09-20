@@ -31,7 +31,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     /**
      * rotate factor
      */
-    private static float rotateFactor = 0;
+    private float rotateFactor = 0;
     /**
      * time pause when vortex at desired scale - the start down scale
      */
@@ -85,13 +85,26 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
             max = true;
+            //Let target teleport
             if (owner.getEntity().data.containsKey("teleportID")
                     && (int) owner.getEntity().data.get("teleportID") == 1) {
-                owner.getEntity().data.putIfAbsent("teleportPlayer", true);
+                if (!owner.getEntity().data.containsKey("teleportTarget")) {
+                    //Add body offset
+                    /*System.out.println(((Vector2) owner.getEntity().data.get("teleportLoc")));
+                    System.out.println(bodyOffset);
+                    owner.getEntity().data.put("teleportLoc",
+                            ((Vector2) owner.getEntity().data.get("teleportLoc")).add(bodyOffset));*/
+                    owner.getEntity().data.put("teleportTarget", true);
+                }
             }
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 10000
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
+                //Stop target teleporting
+                if (owner.getEntity().data.containsKey("teleportID")
+                        && (int) owner.getEntity().data.get("teleportID") == 1) {
+                    owner.getEntity().data.put("teleportTarget", false);
+                }
                 owner.getEntity().setScale(this.scale.scl(0.95f));
                 owner.getEntity().setPosition(position);
             } else if (owner.getEntity().getScale().x <= 0.1f

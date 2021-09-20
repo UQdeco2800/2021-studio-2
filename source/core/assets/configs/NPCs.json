@@ -5,7 +5,7 @@
     },
     "elfBoss": {
         "health": 100,
-        "baseAttack": 60
+        "baseAttack": 0
     },
     "elfRanged": {
         "health": 40,
