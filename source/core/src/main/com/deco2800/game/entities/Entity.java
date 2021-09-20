@@ -52,8 +52,8 @@ public class Entity {
     public TreeMap<String, Object> data = new TreeMap<>();
     private boolean teleport = false;
     private Vector2 teleportLoc;
-    private final PhysicsEngine physics = ServiceLocator.getPhysicsService().getPhysics();
-    private final DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
+    private PhysicsEngine physics;
+    private DebugRenderer debugRenderer;
 
     public Entity() {
         id = nextId;
@@ -334,6 +334,8 @@ public class Entity {
      * @return true if no object, false otherwise
      */
     public boolean canSeeEntity(Entity target) {
+        physics = ServiceLocator.getPhysicsService().getPhysics();
+        debugRenderer = ServiceLocator.getRenderService().getDebug();
         RaycastHit hit = new RaycastHit();
         Vector2 from = getCenterPosition();
         Vector2 to = target.getCenterPosition();
@@ -361,6 +363,8 @@ public class Entity {
      * @return true if no object, false otherwise
      */
     public boolean canSeeTarget(Vector2 target) {
+        physics = ServiceLocator.getPhysicsService().getPhysics();
+        debugRenderer = ServiceLocator.getRenderService().getDebug();
         RaycastHit hit = new RaycastHit();
         Vector2 from = getCenterPosition();
 
