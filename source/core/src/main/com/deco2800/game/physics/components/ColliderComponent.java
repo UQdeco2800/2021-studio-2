@@ -3,6 +3,8 @@ package com.deco2800.game.physics.components;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsComponent.AlignX;
 import com.deco2800.game.physics.components.PhysicsComponent.AlignY;
@@ -49,6 +51,7 @@ public class ColliderComponent extends Component {
 
         Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
         fixture = physBody.createFixture(fixtureDef);
+        entity.getEvents().addListener("collisionStart", this::onCollisionStart);
     }
 
     @Override
@@ -249,5 +252,20 @@ public class ColliderComponent extends Component {
         lastAngle = entity.getAngle();
         bbox.setAsBox(center.x, center.y, center, (float) Math.toRadians(lastAngle));
         return bbox;
+    }
+
+    private void onCollisionStart(Fixture me, Fixture other) {
+        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+        if (getLayer() == PhysicsLayer.TELEPORT) {
+            ////target.teleport();
+            if (this.getEntity().data.containsKey("teleportPlayer")) {
+                if ((boolean) this.getEntity().data.get("teleportPlayer")) {
+                    if (target.getEntityType().equals("player")) {
+                        target.teleport((Vector2) this.getEntity().data.get("teleportLoc"));
+                        this.getEntity().data.put("teleportPlayer", false);
+                    }
+                }
+            }
+        }
     }
 }

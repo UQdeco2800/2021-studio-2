@@ -129,7 +129,7 @@ public class ObstacleFactory {
     }
 
 
-    public static Entity creatTeleport() {
+    public static Entity createTeleport() {
 
         Entity teleport = new Entity()
                 .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))

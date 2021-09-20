@@ -33,6 +33,7 @@ import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 
 
 /**
@@ -269,8 +270,7 @@ public class WeaponFactory {
         vortex
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PROJECTILEWEAPON))
-                .addComponent(new CombatStatsComponent(1000, 0))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.TELEPORT))
                 .addComponent(aiTaskComponent);
         //vortex.setScale(scale);
         vortex.setAngle(angle);

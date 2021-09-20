@@ -45,6 +45,8 @@ public class Entity {
     private String entityType = "";
     private float angle;
     public TreeMap<String, Object> data = new TreeMap<>();
+    private boolean teleport = false;
+    private Vector2 teleportLoc;
 
     public Entity() {
         id = nextId;
@@ -299,7 +301,17 @@ public class Entity {
             //todo: add a death animation then dispose
             //remove attack abilities and related components first
             dispose();
+            return;
         }
+        if (teleport) {
+            setPosition(teleportLoc);
+            teleport = false;
+        }
+    }
+
+    public void teleport(Vector2 teleportLoc) {
+        teleport = true;
+        this.teleportLoc = teleportLoc;
     }
 
     /**

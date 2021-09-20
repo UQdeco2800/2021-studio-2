@@ -72,6 +72,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     public void update() {
         Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
         Vector2 position = ownerRunner.getCenterPosition().sub(bodyOffset);
+        owner.getEntity().setAngle(rotateAngle + rotateFactor);
         if (owner.getEntity().getScale().x > this.scale.x
                 && owner.getEntity().getScale().y > this.scale.y) {
             owner.getEntity().setScale(this.scale);
@@ -80,13 +81,15 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
         if (owner.getEntity().getScale().x < this.scale.x
                 && owner.getEntity().getScale().y < this.scale.y && !max) {
             owner.getEntity().setScale(factor.scl(1.05f));
-            owner.getEntity().setAngle(rotateAngle + rotateFactor);
             owner.getEntity().setPosition(position);
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
             max = true;
-            owner.getEntity().setAngle(rotateAngle + rotateFactor);
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
+            if (owner.getEntity().data.containsKey("teleportID")
+                    && (int) owner.getEntity().data.get("teleportID") == 1) {
+                owner.getEntity().data.putIfAbsent("teleportPlayer", true);
+            }
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 10000
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
                 owner.getEntity().setScale(this.scale.scl(0.95f));

@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.TerrainComponent;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
@@ -83,7 +82,7 @@ public abstract class GameArea implements Disposable {
         numBoss--;
         if (getLevel() == 0) {
             if (numBoss == 0) {
-                Entity teleport = ObstacleFactory.creatTeleport();
+                Entity teleport = ObstacleFactory.createTeleport();
                 GridPoint2 fixedPos = new GridPoint2(15, 10);
                 this.spawnEntityAt(teleport, fixedPos, true, true);
             }
