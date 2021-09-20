@@ -103,7 +103,9 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                 //Stop target teleporting
                 if (owner.getEntity().data.containsKey("teleportID")
                         && (int) owner.getEntity().data.get("teleportID") == 1) {
-                    owner.getEntity().data.put("teleportTarget", false);
+                    if ((boolean) owner.getEntity().data.get("teleportTarget")) {
+                        owner.getEntity().data.put("teleportTarget", false);
+                    }
                 }
                 owner.getEntity().setScale(this.scale.scl(0.95f));
                 owner.getEntity().setPosition(position);
