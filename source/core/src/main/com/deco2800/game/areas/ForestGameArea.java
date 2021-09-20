@@ -134,11 +134,11 @@ public class ForestGameArea extends GameArea {
         spawnTrees();
         spawnPlayer();
         spawnCrate();
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
+//        spawnMeleeElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
         spawnBoss();
         playMusic();
         setDialogue();
