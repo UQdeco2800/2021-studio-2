@@ -1,0 +1,202 @@
+
+meleeAnimationsTextured.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+attackDown
+  rotate: false
+  xy: 2, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+attackDown
+  rotate: false
+  xy: 2, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+attackDown
+  rotate: false
+  xy: 74, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+attackUp
+  rotate: false
+  xy: 74, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+attackUp
+  rotate: false
+  xy: 146, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+attackUp
+  rotate: false
+  xy: 146, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+attackLeft
+  rotate: false
+  xy: 218, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+attackLeft
+  rotate: false
+  xy: 218, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+attackLeft
+  rotate: false
+  xy: 290, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+attackRight
+  rotate: false
+  xy: 290, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+attackRight
+  rotate: false
+  xy: 362, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+moveDown
+  rotate: false
+  xy: 362, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+moveDown
+  rotate: false
+  xy: 434, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+moveDown
+  rotate: false
+  xy: 434, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+moveLeft
+  rotate: false
+  xy: 506, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+moveLeft
+  rotate: false
+  xy: 506, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+moveLeft
+  rotate: false
+  xy: 578, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+moveRight
+  rotate: false
+  xy: 578, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+moveRight
+  rotate: false
+  xy: 650, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+moveRight
+  rotate: false
+  xy: 650, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+moveUp
+  rotate: false
+  xy: 722, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+moveUp
+  rotate: false
+  xy: 722, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 2
+moveUp
+  rotate: false
+  xy: 794, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 3
+stunBack
+  rotate: false
+  xy: 794, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+stunFront
+  rotate: false
+  xy: 866, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+stunLeft
+  rotate: false
+  xy: 866, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+stunRight
+  rotate: false
+  xy: 938, 114
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1
+default
+  rotate: false
+  xy: 362, 2
+  size: 70, 110
+  orig: 70, 110
+  offset: 0, 0
+  index: 1

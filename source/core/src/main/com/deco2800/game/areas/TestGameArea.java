@@ -109,10 +109,10 @@ public class TestGameArea extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnGhosts();
+        //spawnGhosts();
         //spawnCutsceneTrigger();
 
-        spawnAnchoredGhosts();
+        //spawnAnchoredGhosts();
         spawnObstacles();
 
         spawnSpikeTraps();
@@ -134,19 +134,19 @@ public class TestGameArea extends GameArea {
     /**
      * Spawn anchored ghost, ghost only move at the certain anchored
      */
-    private void spawnAnchoredGhosts() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
-            GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
-            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
-            Entity anchor = ObstacleFactory.createAnchor();
-            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
-            spawnEntityAt(anchor, basePos, true, true);
-            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
-        }
-    }
+//    private void spawnAnchoredGhosts() {
+//        GridPoint2 minPos = new GridPoint2(0, 0);
+//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//        for (int i = 0; i < NUM_ANCHORED_GHOSTS; i++) {
+//            GridPoint2 basePos = RandomUtils.random(minPos, maxPos);
+//            GridPoint2 ghostPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
+//            Entity anchor = ObstacleFactory.createAnchor();
+//            Entity AnchoredGhost = NPCFactory.createAnchoredGhost(player, anchor, 3f);
+//            spawnEntityAt(anchor, basePos, true, true);
+//            spawnEntityAt(AnchoredGhost, ghostPos, true, true);
+//        }
+//    }
 
     private void spawnTerrain() {
         // Background terrain
@@ -284,16 +284,16 @@ public class TestGameArea extends GameArea {
     }
 
 
-    private void spawnGhosts() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < NUM_GHOSTS; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity ghost = NPCFactory.createGhost(player);
-            spawnEntityAt(ghost, randomPos, true, true);
-        }
-    }
+//    private void spawnGhosts() {
+//        GridPoint2 minPos = new GridPoint2(0, 0);
+//        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+//
+//        for (int i = 0; i < NUM_GHOSTS; i++) {
+//            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+//            Entity ghost = NPCFactory.createGhost(player);
+//            spawnEntityAt(ghost, randomPos, true, true);
+//        }
+//    }
 
     /*
     private void spawnCutsceneTrigger() {

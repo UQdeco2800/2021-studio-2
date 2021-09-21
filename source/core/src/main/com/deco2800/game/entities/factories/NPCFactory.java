@@ -63,7 +63,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeAnimationsTextured.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -72,6 +72,11 @@ public class NPCFactory {
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
 
+        animator.addAnimation("attackDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackLeft", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackUp", 0.1f, Animation.PlayMode.LOOP);
+
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -79,6 +84,8 @@ public class NPCFactory {
                                 target, 11, 4f, 4f, 1))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
+                        .addTask(new MeleeChaseTask(
+                                target, 10, 15f, 20f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
@@ -103,6 +110,8 @@ public class NPCFactory {
         elf.setScale(0.6f, 1f);
         elf.setEntityType("melee");
         PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
+
+        elf.setAttackRange(6);
         return elf;
     }
 

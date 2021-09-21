@@ -27,6 +27,11 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("UpStart", this::animateUp);
         entity.getEvents().addListener("DownStart", this::animateDown);
 
+        entity.getEvents().addListener("attackLeft", this::animateLeftAttack);
+        entity.getEvents().addListener("attackRight", this::animateRightAttack);
+        entity.getEvents().addListener("attackUp", this::animateUpAttack);
+        entity.getEvents().addListener("attackDown", this::animateDownAttack);
+
         entity.getEvents().addListener("rangedLeftShoot", this::animateRangerLeft);
         entity.getEvents().addListener("rangedRightShoot", this::animateRangerRight);
         entity.getEvents().addListener("rangedUpShoot", this::animateRangerUp);
@@ -168,6 +173,19 @@ public class ElfAnimationController extends Component {
 
     public void animateAssassinDown() {
         animator.startAnimation("assassinDown");
+    }
+
+    public void animateLeftAttack() {
+        animator.startAnimation("attackLeft");
+    }
+    public void animateRightAttack() {
+        animator.startAnimation("attackRight");
+    }
+    public void animateUpAttack() {
+        animator.startAnimation("attackUp");
+    }
+    public void animateDownAttack() {
+        animator.startAnimation("attackDown");
     }
 
 }

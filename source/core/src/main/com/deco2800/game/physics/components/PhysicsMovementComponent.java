@@ -21,6 +21,13 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
 
+    public boolean animateAttack;
+    public boolean leftStart;
+    public boolean rightStart;
+    public boolean upStart;
+    public boolean downStart;
+
+
     @Override
     public void create() {
         physicsComponent = entity.getComponent(PhysicsComponent.class);
@@ -81,17 +88,63 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void DirectionAnimation() {
-        if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
-            if (this.getDirection().x < 0) {
-                this.getEntity().getEvents().trigger("LeftStart");
+        if (animateAttack==true) {
+            System.out.println("if attack animate animateAttack"+animateAttack);
+            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
+                if (this.getDirection().x < 0) {
+                    if (leftStart == false) {
+                        this.getEntity().getEvents().trigger("attackLeft");
+                        //System.out.println("LeftAttack");
+                        leftStart = true;
+                    }
+                    rightStart = false;
+                    upStart = false;
+                    downStart = false;
+                } else {
+                    if (rightStart == false) {
+                        this.getEntity().getEvents().trigger("attackRight");
+                        //System.out.println("RightAttack");
+                        rightStart = true;
+                    }
+                    leftStart = false;
+                    upStart = false;
+                    downStart = false;
+                }
             } else {
-                this.getEntity().getEvents().trigger("RightStart");
+                if (this.getDirection().y < 0) {
+                    if (downStart == false) {
+                        this.getEntity().getEvents().trigger("attackDown");
+                        //System.out.println("DownAttack");
+                        downStart = true;
+                    }
+                    leftStart = false;
+                    upStart = false;
+                    rightStart = false;
+                } else {
+                    if (upStart == false) {
+                        this.getEntity().getEvents().trigger("attackUp");
+                        //System.out.println("UpAttack");
+                        upStart = true;
+                    }
+                    leftStart = false;
+                    downStart = false;
+                    rightStart = false;
+                }
             }
-        } else {
-            if (this.getDirection().y < 0) {
-                this.getEntity().getEvents().trigger("DownStart");
+        }
+        else{
+            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
+                if (this.getDirection().x < 0) {
+                    this.getEntity().getEvents().trigger("LeftStart");
+                } else {
+                    this.getEntity().getEvents().trigger("RightStart");
+                }
             } else {
-                this.getEntity().getEvents().trigger("UpStart");
+                if (this.getDirection().y < 0) {
+                    this.getEntity().getEvents().trigger("DownStart");
+                } else {
+                    this.getEntity().getEvents().trigger("UpStart");
+                }
             }
         }
     }
@@ -111,5 +164,14 @@ public class PhysicsMovementComponent extends Component implements MovementContr
 
     public Vector2 getDirection() {
         return targetPosition.cpy().sub(entity.getPosition()).nor();
+    }
+
+    public void setAnimateAttack() {
+        animateAttack = true;
+    }
+
+    public void stopAnimateAttack() {
+        System.out.println("stopAnimateAttack, set to false");
+        animateAttack = false;
     }
 }
