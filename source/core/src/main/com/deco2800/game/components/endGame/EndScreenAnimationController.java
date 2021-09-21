@@ -11,13 +11,13 @@ public class EndScreenAnimationController extends Component {
         super.create();
         endAnimation = this.entity.getComponent(AnimationRenderComponent.class);
         addEvents();
-
     }
 
     public void addEvents() {
         EventHandler crateHandler = this.entity.getEvents();
         crateHandler.addListener("advanceFrame", this::advanceFrame);
         crateHandler.addListener("startEndScreen", this::startFrame);
+        crateHandler.addListener("endFrame", this::endFrame);
     }
 
     /**
@@ -32,5 +32,9 @@ public class EndScreenAnimationController extends Component {
 
     public void startFrame() {
         endAnimation.startAnimation("startFrame");
+    }
+
+    public void endFrame() {
+        endAnimation.startAnimation("ending");
     }
 }

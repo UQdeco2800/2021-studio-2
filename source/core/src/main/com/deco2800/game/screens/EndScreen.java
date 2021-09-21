@@ -11,6 +11,7 @@ import com.deco2800.game.components.endGame.EndScreenDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
+import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
@@ -26,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class EndScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(EndScreen.class);
 
-    private static final String[] endScreenTextures = {};
+    private static final String[] endScreenTextures = {"end/huh.png"};
     private static final String[] endScreenAtlas = {};
     private final GdxGame game;
     private final Renderer renderer;
@@ -90,28 +91,33 @@ public class EndScreen extends ScreenAdapter {
 
     public void createUI() {
         logger.debug("Creating ui for end game screen");
-        //Stage stage = ServiceLocator.getRenderService().getStage(); //if i use keyboard inputs
+        Stage stage = ServiceLocator.getRenderService().getStage(); //if i use keyboard inputs
 //        this.endAnimator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
 //                "end/endScreen.atlas", TextureAtlas.class));
-        //addAnimation names
+
+        //add Animation frame name "startFrame","frame{#}", "ending",
+
         //start the first frame and loop until keyboard input -> do this feature last -> play it
         // all until the last frame.
         //link the last frame to the looping frame.
         //use a Timer.Schedule
 
-
         Entity endUi = new Entity()
                 .addComponent(new EndScreenAnimationController())
                 .addComponent(new EndScreenActions(this.game))
-                .addComponent(new EndScreenDisplay());
+                .addComponent(new EndScreenDisplay())
+                .addComponent(new InputDecorator(stage, 10));
 
+
+
+        //make the Display put to the background -> only bring it out when on the last frame
         //addComponents
-        //AnimationController
-        //EndGameDisplay
-        //EndGameActions -> similar to MainMenuActions
         //change frames based on player keyboard input
 
         ServiceLocator.getEntityService().register(endUi);
+
+        //position UI entity here
+        //Start first frame
     }
 
 }

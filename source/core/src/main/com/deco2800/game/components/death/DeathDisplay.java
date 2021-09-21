@@ -8,21 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.deco2800.game.components.mainmenu.MainMenuDisplay;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * UI component for displaying the death screen
  */
 public class DeathDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(DeathDisplay.class);
-    protected List<Entity> areaEntities;
     private final String[] deathScreenTextures = new String[]{
             "lowHealthImages/youdied.png",
             "images/player.png"
@@ -35,8 +30,7 @@ public class DeathDisplay extends MainMenuDisplay {
 
     @Override
     public void create() {
-        areaEntities = new ArrayList<>();
-        loadAssets();
+//        loadAssets();
         super.create();
     }
 
@@ -53,7 +47,7 @@ public class DeathDisplay extends MainMenuDisplay {
 
         TextButton restartForestBtn = new TextButton("Restart Forest", menuButtons);
         TextButton restartTutorialBtn = new TextButton("Restart Tutorial", menuButtons);
-        TextButton exitBtn = new TextButton("Exit", menuButtons);
+        TextButton exitBtn = new TextButton("Exit MainMenu", menuButtons);
 
 
         // Triggers an event when the button is pressed
@@ -82,7 +76,7 @@ public class DeathDisplay extends MainMenuDisplay {
                     public void changed(ChangeEvent changeEvent, Actor actor) {
 
                         logger.debug("Exit button clicked");
-                        entity.getEvents().trigger("exit");
+                        entity.getEvents().trigger("mainMenu");
                     }
                 });
 
@@ -95,7 +89,6 @@ public class DeathDisplay extends MainMenuDisplay {
         table.add(restartTutorialBtn).padTop(30f);
         table.row();
         table.add(exitBtn).padTop(30f);
-
     }
 
     private void loadAssets() {
@@ -118,9 +111,6 @@ public class DeathDisplay extends MainMenuDisplay {
 
     @Override
     public void dispose() {
-        for (Entity entity : areaEntities) {
-            entity.dispose();
-        }
         super.dispose();
         this.unloadAssets();
     }
