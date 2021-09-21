@@ -73,7 +73,8 @@ public class ForestGameArea extends GameArea {
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
-            "player_hammer.png"
+            "player_hammer.png",
+            "portal.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -83,7 +84,7 @@ public class ForestGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "end/portal.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -127,6 +128,8 @@ public class ForestGameArea extends GameArea {
         spawnBoss();
         playMusic();
         setDialogue();
+        spawnWin();
+
     }
 
     /**
@@ -296,6 +299,17 @@ public class ForestGameArea extends GameArea {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity crate = ObstacleFactory.createHealthCrate();
             spawnEntityAt(crate, randomPos, true, true);
+        }
+    }
+
+    public void spawnWin() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 1; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity win = ObstacleFactory.winCondition();
+            spawnEntityAt(win, randomPos, true, true);
         }
     }
 

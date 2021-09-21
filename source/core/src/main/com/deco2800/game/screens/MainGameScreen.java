@@ -16,6 +16,7 @@ import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.pause.PauseInputComponent;
 import com.deco2800.game.components.pause.PauseMenuActions;
 import com.deco2800.game.components.pause.PauseMenuDisplay;
+import com.deco2800.game.components.player.PlayerWin;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -130,7 +131,15 @@ public class MainGameScreen extends ScreenAdapter {
         ServiceLocator.getEntityService().update();
         renderer.render();
         isPlayerDead();
+        playerWin();
     }
+
+    private void playerWin() {
+        if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+        }
+    }
+
 
     @Override
     public void resize(int width, int height) {

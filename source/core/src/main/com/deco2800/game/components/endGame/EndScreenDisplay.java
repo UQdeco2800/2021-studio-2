@@ -49,7 +49,7 @@ public class EndScreenDisplay extends UIComponent {
         //Skin menuButtons = new Skin(Gdx.files.internal(".json"));
         //TextButton exitBtn = new TextButton("Descend Valhalla", menuButtons);
         Skin endButton = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json")); //NEEDTO MAKE OWN SKIN FILE
-        TextButton exitBtn = new TextButton("Return To Valhalla", endButton);
+        TextButton exitBtn = new TextButton("GGEZ GGEZ GGEZ GO NEXT", endButton);
         exitBtn.addListener(
                 new ChangeListener() {
                     @Override
@@ -59,7 +59,6 @@ public class EndScreenDisplay extends UIComponent {
                         entity.getEvents().trigger("mainMenu");
                     }
                 });
-
         stack.setFillParent(true);
         stack.setTouchable(Touchable.disabled);
         stack.add(endBackground);
@@ -67,7 +66,6 @@ public class EndScreenDisplay extends UIComponent {
         stage.addActor(stack);
         stage.addActor(table);
         //stage.addActor(table);
-
     }
 
     private void displayButtons() {

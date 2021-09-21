@@ -76,13 +76,15 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
+            case END_SCREEN:
+                return new EndScreen(this);
             default:
                 return null;
         }
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, END_SCREEN
     }
 
     /**
