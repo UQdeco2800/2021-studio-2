@@ -135,18 +135,44 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         else{
             if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
                 if (this.getDirection().x < 0) {
-                    this.getEntity().getEvents().trigger("LeftStart");
+                    if (leftStart == false) {
+                        this.getEntity().getEvents().trigger("LeftStart");
+                        leftStart=true;
+                    }
+                    rightStart = false;
+                    upStart = false;
+                    downStart = false;
                 } else {
-                    this.getEntity().getEvents().trigger("RightStart");
+                    if (rightStart==false){
+                        this.getEntity().getEvents().trigger("RightStart");
+                        rightStart=true;
+                    }
+                    leftStart = false;
+                    upStart = false;
+                    downStart = false;
                 }
             } else {
                 if (this.getDirection().y < 0) {
-                    this.getEntity().getEvents().trigger("DownStart");
+                    if (downStart==false) {
+                        this.getEntity().getEvents().trigger("DownStart");
+                        downStart=true;
+                    }
+                    leftStart = false;
+                    upStart = false;
+                    rightStart = false;
                 } else {
-                    this.getEntity().getEvents().trigger("UpStart");
+                    if (upStart==false) {
+                        this.getEntity().getEvents().trigger("UpStart");
+                        upStart=true;
+                    }
+
                 }
+                leftStart = false;
+                downStart = false;
+                rightStart = false;
             }
         }
+        System.out.println("this.getDirection().x"+this.getDirection().x+"this.getDirection().y"+this.getDirection().y);
     }
 
     private void updateDirection(Body body) {
