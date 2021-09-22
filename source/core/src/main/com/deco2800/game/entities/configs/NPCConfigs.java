@@ -5,6 +5,7 @@ package com.deco2800.game.entities.configs;
  */
 public class NPCConfigs {
     public MeleeEnemyConfig elfMelee = new MeleeEnemyConfig();
+    public MeleeVikingConfig vikingMelee = new MeleeVikingConfig();
     public ElfBossConfig elfBoss = new ElfBossConfig();
     public RangedEnemyConfig elfRanged = new RangedEnemyConfig();
 }

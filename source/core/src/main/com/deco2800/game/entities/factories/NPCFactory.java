@@ -13,10 +13,7 @@ import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.ElfBossConfig;
-import com.deco2800.game.entities.configs.MeleeEnemyConfig;
-import com.deco2800.game.entities.configs.NPCConfigs;
-import com.deco2800.game.entities.configs.RangedEnemyConfig;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -412,6 +409,56 @@ public class NPCFactory {
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
+    }
+
+    public static Entity createMeleeViking(Entity target) {
+        Entity viking = createBaseNPCNoAI();
+        MeleeVikingConfig config = configs.vikingMelee;
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
+        animator.addAnimation("default", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ZigChaseTask(
+                                target, 11, 4f, 4f, 1))
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+
+        viking
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new ElfAnimationController());
+
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        viking.addComponent(healthBarComponent);
+
+        viking.getComponent(AnimationRenderComponent.class).scaleEntity();
+        viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
+        //viking.setScale(1f, 1f);
+        viking.setEntityType("melee");
+        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        return viking;
     }
 
     /**
