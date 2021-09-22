@@ -12,16 +12,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
     public void create() {
         super.create();
         table.clear();
-        entity.getEvents().addListener("togglePause", this::togglePauseGame);
     }
 
-    public void togglePauseGame() {
-        GameTime timeSource = ServiceLocator.getTimeSource();
 
-        if (!timeSource.isPaused()) {
-            timeSource.pause();
-        } else {
-            timeSource.unpause();
-        }
-    }
 }
