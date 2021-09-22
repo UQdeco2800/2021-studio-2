@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="200" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="553">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="200" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="554">
  <editorsettings>
   <export target="lvl_one.json" format="json"/>
  </editorsettings>
@@ -590,6 +590,9 @@
   <object id="546" x="1728" y="2304" width="32" height="32"/>
   <object id="547" x="1760" y="2176" width="32" height="32"/>
   <object id="548" x="1952" y="2144" width="64" height="32"/>
+ </objectgroup>
+ <objectgroup id="14" name="bossBounds">
+  <object id="553" x="3904" y="3008" width="512" height="448"/>
  </objectgroup>
  <objectgroup id="8" name="spikeObjects"/>
  <objectgroup id="7" name="lavaObjects"/>
