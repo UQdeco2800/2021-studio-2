@@ -86,9 +86,9 @@ public class TouchAttackComponent extends TouchComponent {
 
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
 
-        if (!getEntity().canSeeEntity(target)) {
+        /*if (!getEntity().canSeeEntity(target)) {
             return;
-        }
+        }*/
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;

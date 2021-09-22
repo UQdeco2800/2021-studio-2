@@ -52,9 +52,9 @@ abstract class TouchComponent extends Component {
 
     void onCollisionStart(Fixture me, Fixture other) {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
-        if (!getEntity().canSeeEntity(target)) {
+        /*if (!getEntity().canSeeEntity(target)) {
             return;
-        }
+        }*/
         if (!this.checkEntities(me, other)) {
             inCollision = true;
             collidingFixtures.add(other);
