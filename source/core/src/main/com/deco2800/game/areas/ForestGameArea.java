@@ -74,7 +74,11 @@ public class ForestGameArea extends GameArea {
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
-            "player_hammer.png"
+            "player_hammer.png",
+            "Assets/gametile-127.png",
+            "images/boss_health_middle.png",
+            "images/boss_health_left.png",
+            "images/boss_health_right.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -96,6 +100,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
+    private int playerHealth = 3000;
 
     /**
      * Intialise the forest game
@@ -108,6 +113,15 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
+     Use for teleport, track the current playerHealth
+     */
+    public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
+        super();
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
+    }
+
+    /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     @Override
@@ -117,7 +131,7 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        spawnTrees();
+        //spawnTrees();
         spawnPlayer();
         spawnCrate();
         spawnMeleeElf();
@@ -129,9 +143,13 @@ public class ForestGameArea extends GameArea {
         playMusic();
         setDialogue();
 
-        player.getComponent(CombatStatsComponent.class).setHealth(100);
+        player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
 
+    @Override
+    public int getLevel() {
+        return 0;
+    }
     /**
      * Display the UI
      */

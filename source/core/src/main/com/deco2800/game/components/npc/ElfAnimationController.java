@@ -58,9 +58,21 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("leftDeath");
+            if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
+                if (entity.getEntityType().equals("assassin")) {
+                    animator.startAnimation("assassinLeftDeath");
+                } else {
+                    animator.startAnimation("leftDeath");
+                }
+            } else {
+                animator.startAnimation("leftBossDeath");
             }
         }
     }
@@ -79,9 +91,21 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("rightDeath");
+            if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
+                if (entity.getEntityType().equals("assassin")) {
+                    animator.startAnimation("assassinRightDeath");
+                } else {
+                    animator.startAnimation("rightDeath");
+                }
+            } else {
+                animator.startAnimation("rightBossDeath");
             }
         }
     }
@@ -100,9 +124,21 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("frontDeath");
+            if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
+                if (entity.getEntityType().equals("assassin")) {
+                    animator.startAnimation("assassinFrontDeath");
+                } else {
+                    animator.startAnimation("frontDeath");
+                }
+            } else {
+                animator.startAnimation("frontBossDeath");
             }
         }
     }
@@ -121,9 +157,21 @@ public class ElfAnimationController extends Component {
                     break;
             }
         } else {
-            if (entity.getEntityType().equals("melee")) {
-                animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f, animator.getEntity().getScale().y);
-                animator.startAnimation("frontDeath");
+            if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
+                if (entity.getEntityType().equals("assassin")) {
+                    animator.startAnimation("assassinBackDeath");
+                } else {
+                    animator.startAnimation("backDeath");
+                }
+            } else {
+                animator.startAnimation("backBossDeath");
             }
         }
     }

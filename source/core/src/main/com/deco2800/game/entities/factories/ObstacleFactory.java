@@ -102,25 +102,10 @@ public class ObstacleFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
 
-        trap.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
         trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trap.getComponent(TextureRenderComponent.class).scaleEntity();
         trap.scaleHeight(0.3f);
         return trap;
-    }
-
-    public static Entity creatTeleport(Entity player) {
-        Entity teleport = new Entity()
-                .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TeleportComponent(PhysicsLayer.TRAP, player));  // pass the bollen here
-
-        teleport.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
-        teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        teleport.getComponent(TextureRenderComponent.class).scaleEntity();
-        teleport.scaleHeight(0.3f);
-        return teleport;
     }
 
     /**
@@ -135,13 +120,30 @@ public class ObstacleFactory {
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new CombatStatsComponent(1000000, 1))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2));
+                .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 1));
 
         trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trap.getComponent(TextureRenderComponent.class).scaleEntity();
         trap.scaleHeight(0.3f);
         return trap;
     }
+
+
+    public static Entity creatTeleport() {
+
+        Entity teleport = new Entity()
+                .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new TeleportComponent(PhysicsLayer.TRAP));
+
+        teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        teleport.getComponent(TextureRenderComponent.class).scaleEntity();
+        teleport.scaleHeight(0.3f);
+        return teleport;
+    }
+
 
     /**
      * Creates an invisible physics wall.

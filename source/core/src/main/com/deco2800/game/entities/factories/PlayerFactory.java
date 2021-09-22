@@ -120,6 +120,7 @@ public class PlayerFactory {
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
         //player.setScale(new Vector2().scl(2));
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
+        player.setEntityType("player");
         return player;
     }
 }

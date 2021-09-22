@@ -8,6 +8,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
@@ -79,7 +80,10 @@ public class TutorialGameArea extends GameArea {
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
-            "player_hammer.png"
+            "player_hammer.png",
+            "images/boss_health_middle.png",
+            "images/boss_health_left.png",
+            "images/boss_health_right.png"
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -105,11 +109,19 @@ public class TutorialGameArea extends GameArea {
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
     private static Map map;
+    private int playerHealth = 300;
 
     public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game) {
         super();
         this.game = game;
         this.terrainFactory = terrainFactory;
+    }
+
+    public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
+        super();
+        this.game = game;
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
     }
 
     /**
@@ -146,6 +158,7 @@ public class TutorialGameArea extends GameArea {
 
         playMusic();
         spawnTeleport();
+        player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
     private void displayUI() {
@@ -224,27 +237,19 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnPTraps() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
         GridPoint2 fixedPos = new GridPoint2(15, 15);
         Entity trap = ObstacleFactory.createPhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
     }
 
     private void spawnTraps() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
         GridPoint2 fixedPos = new GridPoint2(8, 8);
         Entity trap = ObstacleFactory.createNonePhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
     }
 
     private void spawnTeleport() {
-        Entity teleport = ObstacleFactory.creatTeleport(player);
+        Entity teleport = ObstacleFactory.creatTeleport();
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
         //boss= 1;
@@ -311,6 +316,14 @@ public class TutorialGameArea extends GameArea {
                     false,
                     false);
         }
+    }
+
+    /**
+     Use for teleport, track the current map player in
+     */
+    @Override
+    public int getLevel() {
+        return 1;
     }
 
     /**
