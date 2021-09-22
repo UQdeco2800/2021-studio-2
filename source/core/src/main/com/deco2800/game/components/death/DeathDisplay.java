@@ -30,7 +30,7 @@ public class DeathDisplay extends MainMenuDisplay {
 
     @Override
     public void create() {
-//        loadAssets();
+        loadAssets();
         super.create();
     }
 
