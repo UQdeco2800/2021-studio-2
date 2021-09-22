@@ -84,16 +84,19 @@ public class TouchAttackComponent extends TouchComponent {
             return;
         }
 
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
-
-        /*if (!getEntity().canSeeEntity(target)) {
-            return;
-        }*/
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;
         }
 
+        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+        if (target.getComponent(HitboxComponent.class)
+                != null
+                && target.getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.OBSTACLE
+                && !getEntity().canSeeEntity(target)) {
+            return;
+        }
         //Dissolve arrow attacks after hits
         if (getEntity().getComponent(HitboxComponent.class).getLayer()
                 == PhysicsLayer.PROJECTILEWEAPON
