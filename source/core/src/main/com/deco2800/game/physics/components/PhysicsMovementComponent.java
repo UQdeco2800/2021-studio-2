@@ -21,11 +21,15 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
 
+
+
     public boolean animateAttack;
     public boolean leftStart;
     public boolean rightStart;
     public boolean upStart;
     public boolean downStart;
+    public boolean animateStun;
+
 
 
     @Override
@@ -88,13 +92,97 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void DirectionAnimation() {
-        if (animateAttack==true) {
-            System.out.println("if attack animate animateAttack"+animateAttack);
+        if (animateStun==false) {
+            if (animateAttack == true) {
+                System.out.println("if attack animate animateAttack" + animateAttack);
+                if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
+                    if (this.getDirection().x < 0) {
+                        if (leftStart == false) {
+                            this.getEntity().getEvents().trigger("attackLeft");
+                            //System.out.println("LeftAttack");
+                            leftStart = true;
+                        }
+                        rightStart = false;
+                        upStart = false;
+                        downStart = false;
+                    } else {
+                        if (rightStart == false) {
+                            this.getEntity().getEvents().trigger("attackRight");
+                            //System.out.println("RightAttack");
+                            rightStart = true;
+                        }
+                        leftStart = false;
+                        upStart = false;
+                        downStart = false;
+                    }
+                } else {
+                    if (this.getDirection().y < 0) {
+                        if (downStart == false) {
+                            this.getEntity().getEvents().trigger("attackDown");
+                            //System.out.println("DownAttack");
+                            downStart = true;
+                        }
+                        leftStart = false;
+                        upStart = false;
+                        rightStart = false;
+                    } else {
+                        if (upStart == false) {
+                            this.getEntity().getEvents().trigger("attackUp");
+                            //System.out.println("UpAttack");
+                            upStart = true;
+                        }
+                        leftStart = false;
+                        downStart = false;
+                        rightStart = false;
+                    }
+                }
+            } else {
+                if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
+                    if (this.getDirection().x < 0) {
+                        if (leftStart == false) {
+                            this.getEntity().getEvents().trigger("LeftStart");
+                            leftStart = true;
+                        }
+                        rightStart = false;
+                        upStart = false;
+                        downStart = false;
+                    } else {
+                        if (rightStart == false) {
+                            this.getEntity().getEvents().trigger("RightStart");
+                            rightStart = true;
+                        }
+                        leftStart = false;
+                        upStart = false;
+                        downStart = false;
+                    }
+                } else {
+                    if (this.getDirection().y < 0) {
+                        if (downStart == false) {
+                            this.getEntity().getEvents().trigger("DownStart");
+                            downStart = true;
+                        }
+                        leftStart = false;
+                        upStart = false;
+                        rightStart = false;
+                    } else {
+                        if (upStart == false) {
+                            this.getEntity().getEvents().trigger("UpStart");
+                            upStart = true;
+                        }
+
+                    }
+                    leftStart = false;
+                    downStart = false;
+                    rightStart = false;
+                }
+            }
+            //System.out.println("this.getDirection().x" + this.getDirection().x + "this.getDirection().y" + this.getDirection().y);
+        }
+        else{
             if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
                 if (this.getDirection().x < 0) {
                     if (leftStart == false) {
-                        this.getEntity().getEvents().trigger("attackLeft");
-                        //System.out.println("LeftAttack");
+                        this.getEntity().getEvents().trigger("stunLeft");
                         leftStart = true;
                     }
                     rightStart = false;
@@ -102,7 +190,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                     downStart = false;
                 } else {
                     if (rightStart == false) {
-                        this.getEntity().getEvents().trigger("attackRight");
+                        this.getEntity().getEvents().trigger("stunRight");
                         //System.out.println("RightAttack");
                         rightStart = true;
                     }
@@ -113,7 +201,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
             } else {
                 if (this.getDirection().y < 0) {
                     if (downStart == false) {
-                        this.getEntity().getEvents().trigger("attackDown");
+                        this.getEntity().getEvents().trigger("stunDown");
                         //System.out.println("DownAttack");
                         downStart = true;
                     }
@@ -122,7 +210,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                     rightStart = false;
                 } else {
                     if (upStart == false) {
-                        this.getEntity().getEvents().trigger("attackUp");
+                        this.getEntity().getEvents().trigger("stunUp");
                         //System.out.println("UpAttack");
                         upStart = true;
                     }
@@ -130,50 +218,13 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                     downStart = false;
                     rightStart = false;
                 }
+                animateStun=false;
             }
-        }
-        else{
-            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
-                if (this.getDirection().x < 0) {
-                    if (leftStart == false) {
-                        this.getEntity().getEvents().trigger("LeftStart");
-                        leftStart=true;
-                    }
-                    rightStart = false;
-                    upStart = false;
-                    downStart = false;
-                } else {
-                    if (rightStart==false){
-                        this.getEntity().getEvents().trigger("RightStart");
-                        rightStart=true;
-                    }
-                    leftStart = false;
-                    upStart = false;
-                    downStart = false;
-                }
-            } else {
-                if (this.getDirection().y < 0) {
-                    if (downStart==false) {
-                        this.getEntity().getEvents().trigger("DownStart");
-                        downStart=true;
-                    }
-                    leftStart = false;
-                    upStart = false;
-                    rightStart = false;
-                } else {
-                    if (upStart==false) {
-                        this.getEntity().getEvents().trigger("UpStart");
-                        upStart=true;
-                    }
 
-                }
-                leftStart = false;
-                downStart = false;
-                rightStart = false;
-            }
+            this.getEntity().getEvents().trigger("stunLeft");
+
         }
-        System.out.println("this.getDirection().x"+this.getDirection().x+"this.getDirection().y"+this.getDirection().y);
-    }
+        }
 
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);
@@ -197,7 +248,12 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void stopAnimateAttack() {
-        System.out.println("stopAnimateAttack, set to false");
+        //System.out.println("stopAnimateAttack, set to false");
         animateAttack = false;
     }
+
+    public void setStun (){
+        animateStun=true;
+    }
+
 }

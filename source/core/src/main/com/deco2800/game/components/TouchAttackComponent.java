@@ -8,6 +8,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 
 
 /**
@@ -97,6 +98,12 @@ public class TouchAttackComponent extends TouchComponent {
                 Vector2 impulse = direction.setLength(knockbackForce);
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
             }
+        }
+
+        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC){
+            System.out.println("player collision");
+            this.getEntity().getComponent(PhysicsMovementComponent.class).setStun();
+
         }
 
         //Dissolve arrow attacks after hits
