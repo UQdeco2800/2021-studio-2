@@ -5,6 +5,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
@@ -32,9 +33,6 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
             owner.getEntity().getComponent(HitboxComponent.class).dispose();
-            if (!owner.getEntity().getEntityType().equals("fireBall")) {
-                owner.getEntity().getComponent(TextureRenderComponent.class).dispose();
-            }
             this.declareEnd = false;
         } else {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);

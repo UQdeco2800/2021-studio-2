@@ -10,12 +10,13 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class ProjectileAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
+    private boolean animateCall;
 
     @Override
     public void create() {
         super.create();
         death = false;
-
+        animateCall = false;
         animator = this.entity.getComponent(AnimationRenderComponent.class);
         entity.getEvents().addListener("brokenArrow", this::broken);
     }
@@ -23,8 +24,6 @@ public class ProjectileAnimationController extends Component {
 
     public void broken() {
         if (!entity.getEntityType().equals("fireBall")) {
-            animator.getEntity().setScale(animator.getEntity().getScale().x * 1.5f,
-                    animator.getEntity().getScale().y * 5f);
             animator.startAnimation("brokenArrow");
         } else {
             animator.startAnimation("hit");

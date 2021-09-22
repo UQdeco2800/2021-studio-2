@@ -76,7 +76,7 @@ public class WeaponFactory {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/arrow_normal.png", Texture.class));
         normalArrow
-                .addComponent(new TextureRenderComponent(sprite))
+                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
@@ -88,7 +88,11 @@ public class WeaponFactory {
                         ServiceLocator.getResourceService().getAsset(
                                 "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
         animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", (float) (2 / 35), Animation.PlayMode.LOOP);
+        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+
+        normalArrow.setScale(normalArrow.getScale().x * 1.5f,
+                normalArrow.getScale().y * 5f);
+        animator.startAnimation("arrow");
 
         normalArrow.addComponent(animator);
         normalArrow.addComponent(new ProjectileAnimationController());
@@ -128,7 +132,7 @@ public class WeaponFactory {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/arrow_normal.png", Texture.class));
         trackingArrow
-                .addComponent(new TextureRenderComponent(sprite))
+                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
@@ -140,7 +144,12 @@ public class WeaponFactory {
                         ServiceLocator.getResourceService().getAsset(
                                 "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
         animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", (float) (2 / 35), Animation.PlayMode.LOOP);
+        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+
+        trackingArrow.setScale(trackingArrow.getScale().x * 1.5f,
+                trackingArrow.getScale().y * 5f);
+
+        animator.startAnimation("arrow");
 
         trackingArrow.addComponent(animator);
         trackingArrow.addComponent(new ProjectileAnimationController());
@@ -220,7 +229,7 @@ public class WeaponFactory {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/arrow_normal.png", Texture.class));
         normalArrow
-                .addComponent(new TextureRenderComponent(sprite))
+                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, 0))
                 //damage applied when shooting, arrow is decoration
                 .addComponent(aiComponent);
@@ -233,7 +242,11 @@ public class WeaponFactory {
                         ServiceLocator.getResourceService().getAsset(
                                 "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
         animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", (float) (2 / 35), Animation.PlayMode.LOOP);
+        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+
+        normalArrow.setScale(normalArrow.getScale().x * 1.5f,
+                normalArrow.getScale().y * 5f);
+        animator.startAnimation("arrow");
 
         normalArrow.addComponent(animator);
         normalArrow.addComponent(new ProjectileAnimationController());
