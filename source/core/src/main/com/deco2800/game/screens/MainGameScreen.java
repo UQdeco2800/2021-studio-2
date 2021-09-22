@@ -114,7 +114,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
         } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game);
+            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
         } else if (world.equals("test1")) {
             this.gameArea = new TestGameArea1(terrainFactory, game, currentHealth);
         }
@@ -163,7 +163,12 @@ public class MainGameScreen extends ScreenAdapter {
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 0){
+            } else if (gameArea.getLevel() == 0) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.TEST1, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 2) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);

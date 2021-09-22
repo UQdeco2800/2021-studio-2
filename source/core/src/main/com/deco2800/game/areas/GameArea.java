@@ -81,12 +81,10 @@ public abstract class GameArea implements Disposable {
      */
     public void decBossNum() {
         numBoss--;
-        if (getLevel() == 0) {
-            if (numBoss == 0) {
-                Entity teleport = ObstacleFactory.creatTeleport();
-                GridPoint2 fixedPos = new GridPoint2(15, 10);
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-            }
+        if (numBoss == 0) {
+            Entity teleport = ObstacleFactory.creatTeleport();
+            GridPoint2 fixedPos = new GridPoint2(15, 10);
+            this.spawnEntityAt(teleport, fixedPos, true, true);
         }
     }
 

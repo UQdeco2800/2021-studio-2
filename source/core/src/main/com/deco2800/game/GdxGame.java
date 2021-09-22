@@ -107,7 +107,7 @@ public class GdxGame extends Game {
             case MAIN_GAME_FOREST:
                 return new MainGameScreen(this, "forest", currentHealth);
             case MAIN_GAME_TUTORIAL:
-                return new MainGameScreen(this, "tutorial");
+                return new MainGameScreen(this, "tutorial", currentHealth);
             case SETTINGS:
                 return new SettingsScreen(this);
             case DEATHSCREEN:
