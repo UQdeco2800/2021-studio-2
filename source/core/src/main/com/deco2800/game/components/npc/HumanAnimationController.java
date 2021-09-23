@@ -11,6 +11,14 @@ public class HumanAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
 
+    private boolean up = false;
+
+    private boolean down = false;
+
+    private boolean left = false;
+
+    private boolean right = false;
+
     /**
      * Create the animation
      * add listener on entity with wander and chase task
@@ -32,6 +40,11 @@ public class HumanAnimationController extends Component {
         entity.getEvents().addListener("attackUp", this::animateAttackUp);
         entity.getEvents().addListener("attackDown", this::animateAttackDown);
 
+        entity.getEvents().addListener("attackLeft", this::animateAttackLeft);
+        entity.getEvents().addListener("attackRight", this::animateAttackRight);
+        entity.getEvents().addListener("attackUp", this::animateAttackUp);
+        entity.getEvents().addListener("attackDown", this::animateAttackDown);
+
         animateDown();
     }
 
@@ -41,7 +54,10 @@ public class HumanAnimationController extends Component {
 
     public void animateLeft() {
         if (!death) {
-            animator.startAnimation("attackLeft");
+            if (!left) {
+                animator.startAnimation("moveLeft");
+                left = true;
+            }
         } else {
             animator.startAnimation("deathLeft");
         }
@@ -49,7 +65,10 @@ public class HumanAnimationController extends Component {
 
     public void animateRight() {
         if (!death) {
-            animator.startAnimation("attackRight");
+            if (!right) {
+                animator.startAnimation("moveRight");
+                right = true;
+            }
         } else {
             animator.startAnimation("deathRight");
         }
@@ -57,7 +76,10 @@ public class HumanAnimationController extends Component {
 
     public void animateUp() {
         if (!death) {
-            animator.startAnimation("attackUp");
+            if (!up) {
+                animator.startAnimation("moveUp");
+                up = true;
+            }
         } else {
             animator.startAnimation("deathUp");
         }
@@ -65,25 +87,32 @@ public class HumanAnimationController extends Component {
 
     public void animateDown() {
         if (!death) {
-            animator.startAnimation("attackDown");
+            if (!down) {
+                animator.startAnimation("moveDown");
+                down = true;
+            }
         } else {
             animator.startAnimation("deathDown");
         }
     }
 
     public void animateAttackLeft() {
-        animator.startAnimation("moveLeft");
+        left = false;
+        animator.startAnimation("attackLeft");
     }
 
     public void animateAttackRight() {
-        animator.startAnimation("moveRight");
+        right = false;
+        animator.startAnimation("attackRight");
     }
 
     public void animateAttackUp() {
-        animator.startAnimation("moveUp");
+        up = false;
+        animator.startAnimation("attackUp");
     }
 
     public void animateAttackDown() {
-        animator.startAnimation("moveDown");
+        down = false;
+        animator.startAnimation("attackDown");
     }
 }

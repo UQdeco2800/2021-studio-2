@@ -137,8 +137,8 @@ public class ForestGameArea extends GameArea {
         spawnCrate();
 //        spawnMeleeElf();
 //        spawnElfGuard();
-        spawnRangedElf();
-//        spawnOutdoorArcher();
+//        spawnRangedElf();
+        spawnOutdoorArcher();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
         spawnBoss();
@@ -255,7 +255,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 5; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity archer = NPCFactory.createOutdoorArcher(player, 0.2f);
             incNum();
