@@ -60,6 +60,9 @@ public class ElfAnimationController extends Component {
                 if (entity.getEntityType().equals("melee")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
+                } else if (entity.getEntityType().equals("viking")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x,
+                            animator.getEntity().getScale().y);
                 } else {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
                             animator.getEntity().getScale().y);
@@ -92,6 +95,9 @@ public class ElfAnimationController extends Component {
             if (!entity.getEntityType().equals("elfBoss")) {
                 if (entity.getEntityType().equals("melee")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else if (entity.getEntityType().equals("viking")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x,
                             animator.getEntity().getScale().y);
                 } else {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
@@ -126,6 +132,9 @@ public class ElfAnimationController extends Component {
                 if (entity.getEntityType().equals("melee")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
+                } else if (entity.getEntityType().equals("viking")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x,
+                            animator.getEntity().getScale().y);
                 } else {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
                             animator.getEntity().getScale().y);
@@ -158,6 +167,9 @@ public class ElfAnimationController extends Component {
             if (!entity.getEntityType().equals("elfBoss")) {
                 if (entity.getEntityType().equals("melee")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else if (entity.getEntityType().equals("viking")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x,
                             animator.getEntity().getScale().y);
                 } else {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
