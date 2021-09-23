@@ -78,17 +78,18 @@ public class ForestGameArea extends GameArea {
             "Assets/gametile-127.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/outdoorArcher.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
             "crate/crateHitBreak.png"
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
+            "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas",
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -134,11 +135,12 @@ public class ForestGameArea extends GameArea {
         //spawnTrees();
         spawnPlayer();
         spawnCrate();
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
+//        spawnMeleeElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+        spawnOutdoorArcher();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
         spawnBoss();
         playMusic();
         setDialogue();
@@ -243,6 +245,22 @@ public class ForestGameArea extends GameArea {
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangerLeft");
             spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn range elf on terrain, range elf can shoot target
+     */
+    private void spawnOutdoorArcher() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity archer = NPCFactory.createOutdoorArcher(player, 0.2f);
+            incNum();
+            archer.getEvents().trigger("rangerLeft");
+            spawnEntityAt(archer, randomPos, true, true);
         }
     }
 

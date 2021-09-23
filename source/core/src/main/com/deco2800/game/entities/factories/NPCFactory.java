@@ -11,6 +11,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
+import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
@@ -419,6 +420,78 @@ public class NPCFactory {
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
+    }
+
+    /**
+     * Creates a ranged elf entity.
+     * elf that shoot arrow at target
+     * It will retreat if the target is approach in certain range
+     *
+     * @param target entity to chase
+     * @return entity
+     */
+    public static Entity createOutdoorArcher(Entity target, float multishotChance) {
+        Entity archer = createBaseNPCNoAI();
+        RangedEnemyConfig config = configs.elfRanged;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new PauseTask())
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 15f, 20f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        shootProjectileTask.setProjectileType("normalArrow");
+        shootProjectileTask.setMultishotChance(multishotChance);
+        shootProjectileTask.setShootAnimationTimeMS(500);
+        aiComponent.addTask(shootProjectileTask);
+        //create fireballs if needed
+        archer.data.put("createFireBall", true);
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/outdoorArcher.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackLeft", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("deathDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathLeft", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathRight", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathUp", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDefault", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDefault", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("upDefault", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("downDefault", 0.1f, Animation.PlayMode.NORMAL);
+
+        archer
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new HumanAnimationController())
+                .addComponent(aiComponent);
+
+        archer.setAttackRange(5);
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                HealthBar, HealthBarFrame, HealthBarDecrease);
+        archer.addComponent(healthBarComponent);
+
+        archer.setScale(1f, 1f);
+        PhysicsUtils.setScaledCollider(archer, 0.6f, 0.2f);
+        return archer;
     }
 
     /**
