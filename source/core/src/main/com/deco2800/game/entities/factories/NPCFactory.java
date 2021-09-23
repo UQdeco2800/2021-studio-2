@@ -11,6 +11,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
+import com.deco2800.game.components.npc.VikingAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
@@ -419,14 +420,18 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveRight", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveDown", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackDown", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackUp", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackleft", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackRight", 0.2f, Animation.PlayMode.NORMAL);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -442,7 +447,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
-                .addComponent(new ElfAnimationController());
+                .addComponent(new VikingAnimationController());
 
         viking.getComponent(AITaskComponent.class).
                 addTask(new AlertableChaseTask(target, 10, 3f, 4f));

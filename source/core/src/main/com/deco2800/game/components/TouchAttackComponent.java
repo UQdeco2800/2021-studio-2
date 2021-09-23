@@ -157,6 +157,18 @@ public class TouchAttackComponent extends TouchComponent {
 
             if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
                 targetStats.hit(combatStats);
+                if(entity.getEntityType().equals("viking")) {
+                    Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+                    if (direction.angleDeg() < 90) {
+                        entity.getEvents().trigger("attackLeft");
+                    } else if (direction.angleDeg() > 90 && direction.angleDeg() < 180) {
+                        entity.getEvents().trigger("attackDown");
+                    } else if (direction.angleDeg() > 180 && direction.angleDeg() < 270) {
+                        entity.getEvents().trigger("attackRight");
+                    } else {
+                        entity.getEvents().trigger("attackUp");
+                    }
+                }
                 start = System.currentTimeMillis();
             }
         }
