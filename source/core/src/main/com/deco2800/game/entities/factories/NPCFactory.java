@@ -459,10 +459,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackLeft", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackRight", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackUp", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackDown", 0.3f, Animation.PlayMode.NORMAL);
         animator.addAnimation("deathDown", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("deathLeft", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("deathRight", 0.5f, Animation.PlayMode.NORMAL);

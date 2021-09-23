@@ -72,18 +72,18 @@ public class HumanAnimationController extends Component {
     }
 
     public void animateAttackLeft() {
-        animator.startAnimation("attackLeft");
+        animator.startAnimation("moveLeft");
     }
 
     public void animateAttackRight() {
-        animator.startAnimation("attackRight");
+        animator.startAnimation("moveRight");
     }
 
     public void animateAttackUp() {
-        animator.startAnimation("attackUp");
+        animator.startAnimation("moveUp");
     }
 
     public void animateAttackDown() {
-        animator.startAnimation("attackDown");
+        animator.startAnimation("moveDown");
     }
 }

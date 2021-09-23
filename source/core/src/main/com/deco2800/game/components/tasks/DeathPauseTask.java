@@ -63,7 +63,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                 } else {
                     ServiceLocator.getGameAreaService().decNum();
                 }
-                owner.getEntity().prepareDispose();
+                //owner.getEntity().prepareDispose();
                 status = Status.FINISHED;
             }
         }

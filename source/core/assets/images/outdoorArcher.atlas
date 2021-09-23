@@ -115,56 +115,56 @@ attackUp
   orig: 128, 128
   offset: 0, 0
   index: 1
-deathBack
+deathUp
   rotate: false
   xy: 2, 522
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
-deathBack
+deathUp
   rotate: false
   xy: 522, 782
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-deathBack
+deathUp
   rotate: false
   xy: 392, 392
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
-deathBack
+deathUp
   rotate: false
   xy: 782, 392
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-deathFront
+deathDown
   rotate: false
   xy: 392, 522
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-deathFront
+deathDown
   rotate: false
   xy: 132, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
-deathFront
+deathDown
   rotate: false
   xy: 392, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-deathFront
+deathDown
   rotate: false
   xy: 522, 2
   size: 128, 128
