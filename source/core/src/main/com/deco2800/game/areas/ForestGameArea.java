@@ -79,7 +79,8 @@ public class ForestGameArea extends GameArea {
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
-            "images/outdoorArcher.png"
+            "images/outdoorArcher.png",
+            "images/outdoorWarrior.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -89,7 +90,7 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorWarrior.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -139,6 +140,7 @@ public class ForestGameArea extends GameArea {
 //        spawnElfGuard();
 //        spawnRangedElf();
         spawnOutdoorArcher();
+        spawnOutdoorWarrior();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
         spawnBoss();
@@ -249,7 +251,7 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Spawn range elf on terrain, range elf can shoot target
+     * Spawn ranged archers on terrain, the archer can shoot arrows
      */
     private void spawnOutdoorArcher() {
         GridPoint2 minPos = new GridPoint2(0, 0);
@@ -261,6 +263,21 @@ public class ForestGameArea extends GameArea {
             incNum();
             archer.getEvents().trigger("rangerLeft");
             spawnEntityAt(archer, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Randomly spawn elf on a random position of the terrain, the number of archer limit to 2
+     */
+    private void spawnOutdoorWarrior() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < 15; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createOutdoorWarrior(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
         }
     }
 

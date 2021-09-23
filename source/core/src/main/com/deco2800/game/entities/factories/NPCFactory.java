@@ -495,6 +495,70 @@ public class NPCFactory {
     }
 
     /**
+     * Creates a melee elf entity.
+     *
+     * @param target entity to chase
+     * @return entity
+     */
+    public static Entity createOutdoorWarrior(Entity target) {
+        Entity warrior = createBaseNPCNoAI();
+        MeleeEnemyConfig config = configs.elfMelee;
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/outdoorWarrior.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathDown", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathLeft", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathRight", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("deathUp", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultLeft", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultDown", 0.1f, Animation.PlayMode.NORMAL);
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new PauseTask())
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ZigChaseTask(
+                                target, 11, 4f, 4f, 1))
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+
+        warrior
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new HumanAnimationController());
+
+        warrior.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        warrior.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        warrior.addComponent(healthBarComponent);
+
+        warrior.getComponent(AnimationRenderComponent.class).scaleEntity();
+        warrior.setScale(1f, 1f);
+        warrior.setEntityType("melee");
+        PhysicsUtils.setScaledCollider(warrior, 0.6f, 0.2f);
+        return warrior;
+    }
+
+    /**
      * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
      *
      * @return entity
