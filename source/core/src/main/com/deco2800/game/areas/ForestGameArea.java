@@ -102,7 +102,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
-    private int playerHealth = 300;
+    private int playerHealth = 30000;
 
     /**
      * Intialise the forest game
@@ -136,11 +136,11 @@ public class ForestGameArea extends GameArea {
         spawnTrees();
         spawnPlayer();
         spawnCrate();
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
         spawnVikingMelee();
 
         spawnBoss();

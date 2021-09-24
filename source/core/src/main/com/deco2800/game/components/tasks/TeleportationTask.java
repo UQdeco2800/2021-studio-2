@@ -208,7 +208,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             return 100;
         }
         if (canTeleport() || spawn) {
-            if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 4000) {
+            if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 2000) {
                 spawn = false;
             }
             return 30;
