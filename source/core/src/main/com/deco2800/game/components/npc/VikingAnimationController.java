@@ -46,7 +46,6 @@ public class VikingAnimationController extends Component {
             if (!attack) {
                 animator.startAnimation("moveLeft");
             } else {
-                System.out.println((System.currentTimeMillis() - this.start) / 1000.0);
                 if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
                     attack = false;
                 }
@@ -63,7 +62,6 @@ public class VikingAnimationController extends Component {
                 animator.startAnimation("moveRight");
 
             } else {
-                System.out.println((System.currentTimeMillis() - this.start) / 1000.0);
                 if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
                     attack = false;
                 }
@@ -78,7 +76,6 @@ public class VikingAnimationController extends Component {
             if(!attack) {
                 animator.startAnimation("moveUp");
             } else {
-                System.out.println((System.currentTimeMillis() - this.start) / 1000.0);
                 if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
                     attack = false;
                 }
@@ -93,7 +90,6 @@ public class VikingAnimationController extends Component {
             if(!attack) {
                 animator.startAnimation("moveDown");
             } else {
-                System.out.println((System.currentTimeMillis() - this.start) / 1000.0);
                 if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
                     attack = false;
                 }
@@ -104,28 +100,21 @@ public class VikingAnimationController extends Component {
     }
 
     public void animateAttackDown() {
-        System.out.println("bruh");
         animator.startAnimation("EnemyAttackDown");
         attack = true;
         this.start = System.currentTimeMillis();
     }
     public void animateAttackUp() {
-        System.out.println("bruh");
-
         animator.startAnimation("EnemyAttackUp");
         attack = true;
         this.start = System.currentTimeMillis();
     }
     public void animateAttackLeft() {
-        System.out.println("bruh");
-
         animator.startAnimation("EnemyAttackLeft");
         attack = true;
         this.start = System.currentTimeMillis();
     }
     public void animateAttackRight() {
-        System.out.println("bruh");
-
         animator.startAnimation("EnemyAttackRight");
         attack = true;
         this.start = System.currentTimeMillis();
