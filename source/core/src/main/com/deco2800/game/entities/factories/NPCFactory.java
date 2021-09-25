@@ -420,18 +420,18 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackDown", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackUp", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackLeft", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackRight", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()

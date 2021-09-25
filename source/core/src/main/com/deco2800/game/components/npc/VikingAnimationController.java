@@ -12,6 +12,10 @@ public class VikingAnimationController extends Component {
     private boolean death;
     private boolean attack;
     private long start;
+    private boolean left = false;
+    private boolean up = false;
+    private boolean down = false;
+    private boolean right = false;
 
     /**
      * Create the animation
@@ -43,12 +47,12 @@ public class VikingAnimationController extends Component {
 
     public void animateLeft() {
         if (!death) {
-            if (!attack) {
+            if (!attack && !left) {
                 animator.startAnimation("moveLeft");
-            } else {
-                if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
-                    attack = false;
-                }
+                enableWalk();
+                left = true;
+            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
+                attack = false;
             }
         } else {
             animator.startAnimation("leftDeath");
@@ -58,13 +62,12 @@ public class VikingAnimationController extends Component {
 
     public void animateRight() {
         if (!death) {
-            if (!attack) {
+            if (!attack && !right) {
                 animator.startAnimation("moveRight");
-
-            } else {
-                if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
-                    attack = false;
-                }
+                enableWalk();
+                right = true;
+            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
+                attack = false;
             }
         } else {
             animator.startAnimation("rightDeath");
@@ -73,12 +76,12 @@ public class VikingAnimationController extends Component {
 
     public void animateUp() {
         if (!death) {
-            if(!attack) {
+            if(!attack && !up) {
                 animator.startAnimation("moveUp");
-            } else {
-                if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
+                enableWalk();
+                up = true;
+            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
                     attack = false;
-                }
             }
         } else {
             animator.startAnimation("frontDeath");
@@ -87,12 +90,12 @@ public class VikingAnimationController extends Component {
 
     public void animateDown() {
         if (!death) {
-            if(!attack) {
+            if(!attack && !down) {
                 animator.startAnimation("moveDown");
-            } else {
-                if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
+                enableWalk();
+                down = true;
+            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.6) {
                     attack = false;
-                }
             }
         } else {
             animator.startAnimation("backDeath");
@@ -120,4 +123,10 @@ public class VikingAnimationController extends Component {
         this.start = System.currentTimeMillis();
     }
 
+    private void enableWalk() {
+        up = false;
+        down = false;
+        right = false;
+        left = false;
+    }
 }
