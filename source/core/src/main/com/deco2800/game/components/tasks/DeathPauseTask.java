@@ -4,6 +4,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.npc.ArcherAnimationController;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.VikingAnimationController;
 import com.deco2800.game.entities.Entity;
@@ -43,8 +44,11 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
 
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
+            System.out.println(owner.getEntity().getEntityType());
             if (owner.getEntity().getEntityType().equals("viking")) {
                 owner.getEntity().getComponent(VikingAnimationController.class).setDeath();
+            } else if (owner.getEntity().getEntityType().equals("archer")) {
+                owner.getEntity().getComponent(ArcherAnimationController.class).setDeath();
             } else {
                 owner.getEntity().getComponent(ElfAnimationController.class).setDeath();
             }

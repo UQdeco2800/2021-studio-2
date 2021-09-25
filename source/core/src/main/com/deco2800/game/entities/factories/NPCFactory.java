@@ -10,6 +10,7 @@ import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.npc.ArcherAnimationController;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.VikingAnimationController;
 import com.deco2800.game.components.tasks.*;
@@ -522,6 +523,74 @@ public class NPCFactory {
         viking.setEntityType("viking");
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
+    }
+
+    /**
+     * Creates a ranged elf entity.
+     * elf that shoot arrow at target
+     * It will retreat if the target is approach in certain range
+     *
+     * @param target entity to chase
+     * @return entity
+     */
+    public static Entity createOutdoorArcher(Entity target, float multishotChance) {
+        Entity archer = createBaseNPCNoAI();
+        RangedEnemyConfig config = configs.elfRanged;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 15f, 20f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        shootProjectileTask.setProjectileType("normalArrow");
+        shootProjectileTask.setMultishotChance(multishotChance);
+        shootProjectileTask.setShootAnimationTimeMS(500);
+        aiComponent.addTask(shootProjectileTask);
+        //create fireballs if needed
+        archer.data.put("createFireBall", true);
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/outdoorArcher.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackDown", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("attackRight", 0.05f, Animation.PlayMode.NORMAL);
+
+        archer
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new ArcherAnimationController())
+                .addComponent(aiComponent);
+
+        archer.setAttackRange(5);
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                HealthBar, HealthBarFrame, HealthBarDecrease);
+        archer.addComponent(healthBarComponent);
+        archer.setEntityType("archer");
+
+        PhysicsUtils.setScaledCollider(archer, 0.6f, 0.2f);
+        return archer;
     }
 
     /**

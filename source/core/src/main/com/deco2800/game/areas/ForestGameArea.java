@@ -80,7 +80,8 @@ public class ForestGameArea extends GameArea {
             "images/boss_health_left.png",
             "images/boss_health_right.png",
             "images/viking.png",
-            "images/hellViking.png"
+            "images/hellViking.png",
+            "images/outdoorArcher.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -91,7 +92,7 @@ public class ForestGameArea extends GameArea {
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
-            "images/viking.atlas", "images/hellViking.atlas"
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -144,6 +145,7 @@ public class ForestGameArea extends GameArea {
 //        spawnAnchoredElf();
         spawnVikingMelee();
         spawnHellVikingMelee();
+        spawnOutdoorArcher();
 
         spawnBoss();
         playMusic();
@@ -263,6 +265,21 @@ public class ForestGameArea extends GameArea {
             Entity elf = NPCFactory.createMeleeHellViking(player);
             incNum();
             spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn range elf on terrain, range elf can shoot target
+     */
+    private void spawnOutdoorArcher() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity archer = NPCFactory.createOutdoorArcher(player, 0.1f);
+            incNum();
+            spawnEntityAt(archer, randomPos, true, true);
         }
     }
 

@@ -9,9 +9,9 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  */
 public class ArcherAnimationController extends Component {
     AnimationRenderComponent animator;
-    private boolean death;
-    private boolean attack;
-    private long start;
+    private boolean death = false;
+    private boolean attack = false;
+    private long start = System.currentTimeMillis();
     private boolean left = false;
     private boolean up = false;
     private boolean down = false;
@@ -102,25 +102,25 @@ public class ArcherAnimationController extends Component {
     }
 
     public void animateAttackDown() {
-        animator.startAnimation("EnemyAttackDown");
+        animator.startAnimation("attackDown");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
     }
     public void animateAttackUp() {
-        animator.startAnimation("EnemyAttackUp");
+        animator.startAnimation("attackUp");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
     }
     public void animateAttackLeft() {
-        animator.startAnimation("EnemyAttackLeft");
+        animator.startAnimation("attackLeft");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
     }
     public void animateAttackRight() {
-        animator.startAnimation("EnemyAttackRight");
+        animator.startAnimation("attackRight");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
