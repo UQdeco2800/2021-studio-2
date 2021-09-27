@@ -4,34 +4,62 @@ size: 2048, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-damaged_backward
+damaged_up
   rotate: false
   xy: 1172, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: -1
-damaged_forward
+  index: 0
+damaged_up
+  rotate: false
+  xy: 522, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+damaged_down
   rotate: false
   xy: 652, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: -1
+  index: 0
+damaged_down
+  rotate: false
+  xy: 262, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 damaged_left
   rotate: false
   xy: 522, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: -1
+  index: 0
+damaged_left
+  rotate: false
+  xy: 522, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 damaged_right
   rotate: false
   xy: 392, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: -1
+  index: 0
+damaged_right
+  rotate: false
+  xy: 1432, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 default
   rotate: false
   xy: 262, 132
@@ -277,7 +305,7 @@ walk_up
   orig: 128, 128
   offset: 0, 0
   index: 0
-default_backward
+default_up
   rotate: false
   xy: 522, 262
   size: 128, 128

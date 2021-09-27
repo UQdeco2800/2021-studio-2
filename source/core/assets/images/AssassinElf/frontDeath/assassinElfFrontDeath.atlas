@@ -1,0 +1,40 @@
+assassinElfFrontDeath.png
+size: 512, 128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frontDeath0
+  rotate: false
+  xy: 0, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: -1
+frontDeath1
+  rotate: false
+  xy: 94, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: -1
+frontDeath2
+  rotate: false
+  xy: 188, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: -1
+frontDeath3
+  rotate: false
+  xy: 282, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: -1
+frontDeath4
+  rotate: false
+  xy: 376, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: -1

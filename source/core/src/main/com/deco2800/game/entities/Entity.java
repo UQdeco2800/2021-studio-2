@@ -42,7 +42,7 @@ public class Entity {
     private Array<Component> createdComponents;
     private boolean disposeYourself = false;
     private float attackRange;
-    private String entityType;
+    private String entityType = "";
     private float angle;
     public TreeMap<String, Object> data = new TreeMap<>();
 
@@ -241,6 +241,13 @@ public class Entity {
     public void dispose() {
         for (Component component : createdComponents) {
             component.dispose();
+        }
+        if (data.containsKey("fireBalls")) {
+            for (Entity fireBall : (Entity[]) data.get("fireBalls")) {
+                if (fireBall != null) {
+                    fireBall.dispose();
+                }
+            }
         }
         ServiceLocator.getEntityService().unregister(this);
     }

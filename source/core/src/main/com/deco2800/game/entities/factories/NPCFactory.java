@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
+import com.deco2800.game.components.player.PlayerStatsDisplay;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.ElfBossConfig;
@@ -68,12 +70,14 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ZigChaseTask(
                                 target, 11, 4f, 4f, 1))
@@ -110,6 +114,7 @@ public class NPCFactory {
         Entity elfGuard = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(new PauseTask())
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 10, 3f, 4f))
                 .addTask(new DeathPauseTask(
@@ -123,10 +128,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -160,6 +165,7 @@ public class NPCFactory {
         MeleeEnemyConfig config = configs.elfMelee;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
                         .addTask(new AnchoredChaseTask(
                                 target, 3f, 4f, anchor, anchorSize))
@@ -175,9 +181,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
 
         anchoredElf
@@ -214,6 +221,7 @@ public class NPCFactory {
         MeleeEnemyConfig config = configs.elfMelee;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new AnchoredWanderTask(
                                 anchor, anchorSizeX, anchorSizeY, 2f))
                         .addTask(new AnchoredChaseTask(
@@ -274,6 +282,7 @@ public class NPCFactory {
         RangedEnemyConfig config = configs.elfRanged;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 15f, 20f))
@@ -301,6 +310,10 @@ public class NPCFactory {
             animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinLeftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinRightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinFrontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinBackDeath", 0.2f, Animation.PlayMode.NORMAL);
         } else {
             elf.setEntityType("ranged");
             animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
@@ -311,6 +324,11 @@ public class NPCFactory {
             animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+
         }
 
         elf
@@ -348,6 +366,7 @@ public class NPCFactory {
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiComponent =
                 new AITaskComponent()
+                        .addTask(new PauseTask())
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
@@ -369,16 +388,23 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
-                .addComponent(aiComponent);
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
         boss.scaleHeight(2);
+        boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));

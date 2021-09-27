@@ -107,11 +107,15 @@ public class KeyboardPlayerInputComponent extends InputComponent {
                 triggerWalkEvent();
                 return true;
             case Keys.SPACE:
-                entity.getEvents().trigger("attack", lastKeyPressed);
-                return true;
+                if (!locked) {
+                    entity.getEvents().trigger("attack", lastKeyPressed);
+                    return true;
+                }
             case Keys.Q:
-                entity.getEvents().trigger("strongAttack", lastKeyPressed);
-                return true;
+                if (!locked) {
+                    entity.getEvents().trigger("strongAttack", lastKeyPressed);
+                    return true;
+                }
             case Keys.SHIFT_LEFT:
                 this.speedMultiplier = 1.4f;
                 triggerWalkEvent();

@@ -342,6 +342,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
                             int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
                             target.getComponent(CombatStatsComponent.class).addHealth(-damage);
+                        } else {
+                            arrow.data.put("dealDamage", false);
                         }
                         tragectoryLocation = null;
                         aimingLine.prepareDispose();

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.CutsceneScreen;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.ui.textbox.TextBox;
 
@@ -142,7 +143,9 @@ public class PlayerStatsDisplay extends UIComponent {
     public void draw(SpriteBatch batch) {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        if (textBox.shouldShowBars()) {
+        CutsceneScreen cutsceneScreen = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(CutsceneScreen.class);
+        if (textBox.shouldShowBars() || cutsceneScreen.isOpen()) {
             table.setVisible(false);
             healthLabel.setVisible(false);
             heartImage.setVisible(false);

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ public abstract class GameArea implements Disposable {
     protected TerrainComponent terrain;
     protected List<Entity> areaEntities;
     protected Entity player;
-    public static int numEnemy = 0;
+    protected int numEnemy = 0;
+    protected int numBoss = 0;
 
 
     protected GameArea() {
@@ -65,6 +67,25 @@ public abstract class GameArea implements Disposable {
      */
     public void decNum() {
         numEnemy--;
+    }
+
+    /**
+     * increase the number of boss
+     */
+    public void incBossNum() {
+        numBoss++;
+    }
+
+    /**
+     * decrease number of boss - spawn the teleport portal to another map
+     */
+    public void decBossNum() {
+        numBoss--;
+        if (numBoss == 0) {
+            Entity teleport = ObstacleFactory.creatTeleport();
+            GridPoint2 fixedPos = new GridPoint2(15, 10);
+            this.spawnEntityAt(teleport, fixedPos, true, true);
+        }
     }
 
     /**
