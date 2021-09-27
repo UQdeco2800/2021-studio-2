@@ -430,7 +430,7 @@ public class NPCFactory {
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackDown", 0.2f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackUp", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackleft", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackLeft", 0.2f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackRight", 0.2f, Animation.PlayMode.NORMAL);
 
         AITaskComponent aiComponent =
