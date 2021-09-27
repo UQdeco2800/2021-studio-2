@@ -17,8 +17,10 @@ import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.deco2800.game.files.PlayerSave;
 
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
@@ -387,6 +389,19 @@ public class ForestGameArea extends GameArea {
      * Load the texture from files
      */
     private void loadAssets() {
+
+        // load save
+        PlayerSave.Save pSave = PlayerSave.load();
+        // update save
+        // pSave.lokiWins += 1;
+        // save save
+        PlayerSave.write(pSave);
+
+
+
+
+
+
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
@@ -418,9 +433,26 @@ public class ForestGameArea extends GameArea {
      * Sets the dialogue for when the game first loads.
      */
     private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+        PlayerSave.Save pSave = PlayerSave.load();
+
+
+        if(pSave.lokiEnc < 1 || pSave.lokiEnc >= 4){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+
+            pSave.lokiEnc += 1;
+
+        }else if(pSave.lokiEnc >= 1 && pSave.lokiEnc < 3){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.GARMR);
+
+            pSave.lokiEnc += 1;
+        }
+
+        PlayerSave.write(pSave);
+
     }
 
     /**
