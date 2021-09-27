@@ -64,6 +64,7 @@ public class ElfAnimationController extends Component {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
                             animator.getEntity().getScale().y);
                 }
+
                 if (entity.getEntityType().equals("assassin")) {
                     animator.startAnimation("assassinLeftDeath");
                 } else {
@@ -98,9 +99,11 @@ public class ElfAnimationController extends Component {
                             animator.getEntity().getScale().y);
                 }
                 if (entity.getEntityType().equals("assassin")) {
-                    animator.startAnimation("assassinRightDeath");
+                    //animator.startAnimation("assassinRightDeath");
+                    animator.startAnimation("assassinLeftDeath");
                 } else {
-                    animator.startAnimation("rightDeath");
+                    //animator.startAnimation("rightDeath");
+                    animator.startAnimation("leftDeath");
                 }
             } else {
                 animator.startAnimation("rightBossDeath");
@@ -131,9 +134,11 @@ public class ElfAnimationController extends Component {
                             animator.getEntity().getScale().y);
                 }
                 if (entity.getEntityType().equals("assassin")) {
-                    animator.startAnimation("assassinFrontDeath");
+                    animator.startAnimation("assassinLeftDeath");
+                    //animator.startAnimation("assassinFrontDeath");
                 } else {
-                    animator.startAnimation("frontDeath");
+                    //animator.startAnimation("frontDeath");
+                    animator.startAnimation("leftDeath");
                 }
             } else {
                 animator.startAnimation("frontBossDeath");
@@ -164,9 +169,11 @@ public class ElfAnimationController extends Component {
                             animator.getEntity().getScale().y);
                 }
                 if (entity.getEntityType().equals("assassin")) {
-                    animator.startAnimation("assassinBackDeath");
+                    //animator.startAnimation("assassinBackDeath");
+                    animator.startAnimation("assassinLeftDeath");
                 } else {
-                    animator.startAnimation("backDeath");
+                    //animator.startAnimation("backDeath");
+                    animator.startAnimation("leftDeath");
                 }
             } else {
                 animator.startAnimation("backBossDeath");
