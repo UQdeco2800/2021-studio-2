@@ -3,8 +3,6 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -103,7 +101,7 @@ public class Hammer extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
             if (hasStrongAttacked) {
                 attackSound.play();
                 weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);

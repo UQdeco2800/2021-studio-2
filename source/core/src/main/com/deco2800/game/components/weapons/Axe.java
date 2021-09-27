@@ -65,7 +65,7 @@ public class Axe extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
             if (hasAttacked) {
                 attackSound.play();
             }

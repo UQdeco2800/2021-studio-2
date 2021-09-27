@@ -1,7 +1,6 @@
 package com.deco2800.game.components.weapons;
 
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -61,7 +60,7 @@ class AxeTest {
         Entity entity = createAttacker(targetLayer);
 
         Axe weapon = entity.getComponent(Axe.class); // arbitrary
-        weapon.setFrameDuration(100L);
+        weapon.setAttackFrameDuration(100L);
         weapon.attack(MeleeWeapon.UP);
         weapon.triggerAttackStage(150L); // attack frame
 
@@ -86,7 +85,7 @@ class AxeTest {
         short targetLayer = (1 << 3);
         Axe weapon = (new Axe(targetLayer,
                 0, 0, new Vector2(0f, 0f)));
-        weapon.setFrameDuration(200L);
+        weapon.setAttackFrameDuration(200L);
         // assumes 3 frames in attack
         assertEquals(200L * 4, weapon.getTotalAttackTime());
     }

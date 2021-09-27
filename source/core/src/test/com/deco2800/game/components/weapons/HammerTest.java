@@ -63,7 +63,7 @@ class HammerTest {
         Entity entity = createAttacker(targetLayer);
 
         Hammer weapon = entity.getComponent(Hammer.class); // arbitrary
-        weapon.setFrameDuration(100L);
+        weapon.setAttackFrameDuration(100L);
         weapon.attack(MeleeWeapon.UP);
         weapon.triggerAttackStage(150L); // attack frame
 
@@ -88,7 +88,7 @@ class HammerTest {
         short targetLayer = (1 << 3);
         Hammer weapon = (new Hammer(targetLayer,
                 0, 0, new Vector2(0f, 0f)));
-        weapon.setFrameDuration(200L);
+        weapon.setAttackFrameDuration(200L);
         // assumes 3 frames in attack
         assertEquals(200L * 4, weapon.getTotalAttackTime());
     }

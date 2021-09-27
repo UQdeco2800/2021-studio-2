@@ -107,7 +107,7 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 2 * attackFrameDuration) {
             if (hasStrongAttacked) {
                 attackSound.play();
                 weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
