@@ -31,11 +31,10 @@ import java.util.HashMap;
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
  */
-public class TutorialGameArea extends GameArea {
-    private static final Logger logger = LoggerFactory.getLogger(TutorialGameArea.class);
+public class GameArea0 extends GameArea {
+    private static final Logger logger = LoggerFactory.getLogger(GameArea0.class);
     private static final int NUM_MELEE_ELF = 2;
     private static final int NUM_ANCHORED_ELF = 1;
-    private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(20, 370);
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
     private static final float WALL_WIDTH = 0.1f;
     private static final String[] forestTextures = {
@@ -111,13 +110,13 @@ public class TutorialGameArea extends GameArea {
     private static Map map;
     private int playerHealth = 300;
 
-    public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game) {
+    public GameArea0(TerrainFactory terrainFactory, GdxGame game) {
         super();
         this.game = game;
         this.terrainFactory = terrainFactory;
     }
 
-    public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
+    public GameArea0(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
         super();
         this.game = game;
         this.terrainFactory = terrainFactory;
@@ -129,7 +128,7 @@ public class TutorialGameArea extends GameArea {
      */
     @Override
     public void create() {
-        map = FileLoader.readClass(Map.class, "maps/MapObjects.json");
+        map = FileLoader.readClass(Map.class, "maps/lvl_1.json");
         tileTextures = map.TileRefsArray();
 
         super.create();
@@ -139,8 +138,6 @@ public class TutorialGameArea extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnCutsceneTrigger();
-
         spawnMeleeElf();
         spawnElfGuard();
         spawnRangedElf();
@@ -149,6 +146,7 @@ public class TutorialGameArea extends GameArea {
         spawnBoss();
 
         spawnObstacles();
+        spawnLights();
 
         spawnSpikeTraps();
         spawnLavaTraps();
@@ -163,31 +161,8 @@ public class TutorialGameArea extends GameArea {
 
     private void displayUI() {
         Entity ui = new Entity();
-        ui.addComponent(new GameAreaDisplay("Map Test"));
+        ui.addComponent(new GameAreaDisplay("Level 1"));
         spawnEntity(ui);
-    }
-
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED);
-        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
-
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-                DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
-
-        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
-
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
-
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
-        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
-
-
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
     private void spawnTerrain() {
@@ -257,9 +232,11 @@ public class TutorialGameArea extends GameArea {
 
     private void spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
-        spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
+        HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
+        int height = map.getDimensions().get("n_tiles_height");
+        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
+                true, true);
         player = newPlayer;
-        //player.setPosition(new Vector2(15, 8)); //TESTING FOR TELEPORT
     }
 
     private void spawnObstacles() {
@@ -275,6 +252,28 @@ public class TutorialGameArea extends GameArea {
                     if (obstacles[y][x] != 0) {
 
                         Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(obstacles[y][x])));
+                        GridPoint2 pos = new GridPoint2(x, max.y - y);
+
+                        spawnEntityAt(obstacle, pos, true, false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void spawnLights() {
+        int[][] lights = map.getLightTiles();
+        HashMap<String, String> tileRefs = map.getTileRefs();
+        if (lights != null) {
+            GridPoint2 min = new GridPoint2(0, 0);
+            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
+                    map.getDimensions().get("n_tiles_height") - 1);
+
+            for (int y = min.y; y <= max.y; y++) {
+                for (int x = min.y; x <= max.x; x++) {
+                    if (lights[y][x] != 0) {
+
+                        Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(lights[y][x])));
                         GridPoint2 pos = new GridPoint2(x, max.y - y);
 
                         spawnEntityAt(obstacle, pos, true, false);
@@ -415,30 +414,6 @@ public class TutorialGameArea extends GameArea {
             spawnEntityAt(Anchoredelf, elfPos, true, true);
         }
     }
-
-    /*
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED);
-        spawnEntityAt(trigger, TEST_TRIGGER, true, true);
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-                DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
-        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
-        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
-        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
-        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(2.2f, 3.3f), true, true);
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
-        spawnEntityAt(moveTrigger5, new Vector2(6.3f, 3.3f), true, true);
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
-    }
-    */
-
 
     private void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
