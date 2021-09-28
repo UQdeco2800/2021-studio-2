@@ -109,18 +109,23 @@ public class PlayerFactory {
                 .addComponent(new PlayerLowHealthDisplay());
 
         // Add equipped weapon.
-        if (weapon.equals("Scepter")) {
-            player.addComponent(new Scepter(PhysicsLayer.NPC, 10, 50,
-                    new Vector2(0.5f, 1f)));
-        } else if (weapon.equals("Hammer")) {
-            player.addComponent(new Hammer(PhysicsLayer.NPC, 10, 50,
-                    new Vector2(1f, 0.5f)));
-        } else if (weapon.equals("Longsword")) {
-            player.addComponent(new Longsword(PhysicsLayer.NPC, 10, 50,
-                    new Vector2(1f, 0.5f)));
-        } else { // Axe is default
-            player.addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
-                    new Vector2(1f, 0.75f)));
+        switch (weapon) {
+            case "Scepter":
+                player.addComponent(new Scepter(PhysicsLayer.NPC, 3, 20,
+                        new Vector2(0.5f, 1f)));
+                break;
+            case "Hammer":
+                player.addComponent(new Hammer(PhysicsLayer.NPC, 5, 25,
+                        new Vector2(1f, 0.5f)));
+                break;
+            case "Longsword":
+                player.addComponent(new Longsword(PhysicsLayer.NPC, 10, 50,
+                        new Vector2(1f, 0.75f)));
+                break;
+            default:  // Axe is default
+                player.addComponent(new Axe(PhysicsLayer.NPC, 7, 25,
+                        new Vector2(1f, 0.75f)));
+                break;
         }
 
         player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f, 0.4f), new Vector2(0.5f, 0.2f));

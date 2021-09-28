@@ -22,7 +22,7 @@ public class MeleeWeapon extends Component {
      */
     protected long attackFrameDuration;
 
-    /** num of light attack frames in animation */
+    /** number of light attack frames in animation */
     protected int numOfAttackFrames;
 
     /** the index of the frame where the attack lands */
