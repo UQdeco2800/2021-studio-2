@@ -1,0 +1,188 @@
+
+player_longsword.png
+size: 2048, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+damaged_backward
+  rotate: false
+  xy: 1046, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+damaged_forward
+  rotate: false
+  xy: 656, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+damaged_left
+  rotate: false
+  xy: 526, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+damaged_right
+  rotate: false
+  xy: 396, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+default
+  rotate: false
+  xy: 396, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+longsword_down
+  rotate: false
+  xy: 396, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+default_left
+  rotate: false
+  xy: 134, 266
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: -1
+longsword_down
+  rotate: false
+  xy: 134, 4
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+longsword_down
+  rotate: false
+  xy: 786, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+longsword_down
+  rotate: false
+  xy: 1176, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+longsword_left
+  rotate: false
+  xy: 2, 266
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: 2
+longsword_left
+  rotate: false
+  xy: 2, 134
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: 4
+longsword_left
+  rotate: false
+  xy: 2, 2
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: 1
+longsword_left
+  rotate: false
+  xy: 2, 2
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: 0
+longsword_left
+  rotate: false
+  xy: 134, 134
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: 3
+longsword_right
+  rotate: false
+  xy: 266, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+longsword_right
+  rotate: false
+  xy: 526, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+longsword_right
+  rotate: false
+  xy: 786, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+longsword_right
+  rotate: false
+  xy: 1046, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+default_right
+  rotate: false
+  xy: 1046, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+longsword_right
+  rotate: false
+  xy: 1176, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+longsword_up
+  rotate: false
+  xy: 266, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+longsword_up
+  rotate: false
+  xy: 656, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+default_backward
+  rotate: false
+  xy: 656, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+longsword_up
+  rotate: false
+  xy: 916, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 23
+longsword_up
+  rotate: false
+  xy: 916, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2

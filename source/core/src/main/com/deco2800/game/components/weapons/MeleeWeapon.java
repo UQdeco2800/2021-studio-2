@@ -84,7 +84,8 @@ public class MeleeWeapon extends Component {
         this.knockback = knockback;
         this.weaponSize = weaponSize;
         timeAtAttack = 0L;
-        attackFrameDuration = 100L; // default frame duration is set at 100 milliseconds.
+        // default attack frame infomration
+        setAttackFrames(100L, 3, 1);
         hasAttacked = false;
     }
 

@@ -32,7 +32,7 @@ public class PlayerFactory {
         throw new IllegalStateException("Instantiating static util class");
     }
 
-    /**
+    /**`
      * Create a player entity.
      *
      * @return entity
@@ -62,6 +62,15 @@ public class PlayerFactory {
             animator.addAnimation("up_hammer_attack", 0.1f);
             animator.addAnimation("down_hammer_attack", 0.1f);
 
+        } else if (weapon.equals("Longsword")) {
+            animator = new AnimationRenderComponent(
+                    ServiceLocator.getResourceService().getAsset("images/player_longsword.atlas", TextureAtlas.class));
+            // Hammer/Mjolnir Animations
+            animator.addAnimation("longsword_left", 0.1f);
+            animator.addAnimation("longsword_right", 0.1f);
+            animator.addAnimation("longsword_up", 0.1f);
+            animator.addAnimation("longsword_down", 0.1f);
+
             // Axe (default)
         } else {
             animator = new AnimationRenderComponent(
@@ -90,7 +99,6 @@ public class PlayerFactory {
                 .addComponent(new ColliderComponent())
                 .addComponent(new TrapComponent().setLayer(PhysicsLayer.TRAP))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
-                //Remove the below lines when the player uses a separate weapon entity
                 .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new PlayerActions())
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))

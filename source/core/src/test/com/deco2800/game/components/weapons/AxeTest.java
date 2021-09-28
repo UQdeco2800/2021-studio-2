@@ -85,9 +85,9 @@ class AxeTest {
         short targetLayer = (1 << 3);
         Axe weapon = (new Axe(targetLayer,
                 0, 0, new Vector2(0f, 0f)));
-        weapon.setAttackFrameDuration(200L);
+        weapon.setAttackFrames(100L, 3, 1);
         // assumes 3 frames in attack
-        assertEquals(200L * 4, weapon.getTotalAttackTime());
+        assertEquals(100L * 3, weapon.getTotalAttackTime());
     }
 
     @Test
@@ -132,6 +132,7 @@ class AxeTest {
                         .addComponent(new CombatStatsComponent(0, 10))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new HitboxComponent());
+        entity.getComponent(Axe.class).setAttackFrames(100L, 3, 1);
         entity.create();
         return entity;
     }
