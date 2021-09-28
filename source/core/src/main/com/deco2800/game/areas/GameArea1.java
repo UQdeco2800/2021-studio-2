@@ -147,6 +147,7 @@ public class GameArea1 extends GameArea {
         spawnBoss();
 
         spawnObstacles();
+        spawnLights();
 
         spawnSpikeTraps();
         spawnLavaTraps();
@@ -252,6 +253,28 @@ public class GameArea1 extends GameArea {
                     if (obstacles[y][x] != 0) {
 
                         Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(obstacles[y][x])));
+                        GridPoint2 pos = new GridPoint2(x, max.y - y);
+
+                        spawnEntityAt(obstacle, pos, true, false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void spawnLights() {
+        int[][] lights = map.getLightTiles();
+        HashMap<String, String> tileRefs = map.getTileRefs();
+        if (lights != null) {
+            GridPoint2 min = new GridPoint2(0, 0);
+            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
+                    map.getDimensions().get("n_tiles_height") - 1);
+
+            for (int y = min.y; y <= max.y; y++) {
+                for (int x = min.y; x <= max.x; x++) {
+                    if (lights[y][x] != 0) {
+
+                        Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(lights[y][x])));
                         GridPoint2 pos = new GridPoint2(x, max.y - y);
 
                         spawnEntityAt(obstacle, pos, true, false);
