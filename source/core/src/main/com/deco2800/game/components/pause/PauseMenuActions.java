@@ -26,6 +26,7 @@ public class PauseMenuActions extends MainMenuActions {
         } else {
             timeSource.unpause();
         }
+        entity.getEvents().trigger("toggleMenu");
     }
 
 }
