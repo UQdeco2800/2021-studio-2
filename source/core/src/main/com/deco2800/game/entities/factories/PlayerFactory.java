@@ -7,6 +7,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.*;
 import com.deco2800.game.components.weapons.Axe;
 import com.deco2800.game.components.weapons.Hammer;
+import com.deco2800.game.components.weapons.Longsword;
 import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
@@ -113,6 +114,9 @@ public class PlayerFactory {
                     new Vector2(0.5f, 1f)));
         } else if (weapon.equals("Hammer")) {
             player.addComponent(new Hammer(PhysicsLayer.NPC, 10, 50,
+                    new Vector2(1f, 0.5f)));
+        } else if (weapon.equals("Longsword")) {
+            player.addComponent(new Longsword(PhysicsLayer.NPC, 10, 50,
                     new Vector2(1f, 0.5f)));
         } else { // Axe is default
             player.addComponent(new Axe(PhysicsLayer.NPC, 10, 50,
