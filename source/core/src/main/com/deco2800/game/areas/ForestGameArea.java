@@ -82,7 +82,8 @@ public class ForestGameArea extends GameArea {
             "images/viking.png",
             "images/hellViking.png",
             "images/outdoorArcher.png",
-            "images/asgardWarrior.png"
+            "images/asgardWarrior.png",
+            "images/lokiBoss.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -93,7 +94,8 @@ public class ForestGameArea extends GameArea {
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
-            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas"
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/lokiBoss.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -144,12 +146,13 @@ public class ForestGameArea extends GameArea {
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
-        spawnVikingMelee();
-        spawnHellVikingMelee();
+//        spawnVikingMelee();
+//        spawnHellVikingMelee();
         spawnAsgardWarriorMelee();
         spawnOutdoorArcher();
+        spawnLokiBoss();
 
-        spawnBoss();
+//        spawnBoss();
         playMusic();
         setDialogue();
 
@@ -298,6 +301,18 @@ public class ForestGameArea extends GameArea {
             incNum();
             spawnEntityAt(archer, randomPos, true, true);
         }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    private void spawnLokiBoss() {
+        /*GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
+        GridPoint2 bossPos = new GridPoint2(100, 100);
+        Entity boss = NPCFactory.createLokiBossNPC(player);
+        spawnEntityAt(boss, bossPos, true, true);
     }
 
     /**

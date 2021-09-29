@@ -644,6 +644,121 @@ public class NPCFactory {
     }
 
     /**
+     * create Loki boss enemy entity
+     *
+     * @param target enemy to chase (player)
+     * @return boss entity
+     */
+    public static Entity createLokiBossNPC(Entity target) {
+
+        Entity boss = createBaseNPCNoAI();
+        ElfBossConfig config = configs.elfBoss;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(
+                                target, 10, 7f, 10f))
+                        .addTask(new SpawnDecoysTask(target))
+                        .addTask(new TeleportationTask(target, 2000))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        shootProjectileTask.setProjectileType("fireBall");
+        shootProjectileTask.setMultishotChance(0);
+        aiComponent.addTask(shootProjectileTask);
+        //Dont create fireballs until ready and on the map
+        boss.data.put("createFireBall", false);
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator = setHumanAnimations(animator);
+
+        boss
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new HumanAnimationController())
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
+        boss.setAttackRange(5);
+        boss.getComponent(AnimationRenderComponent.class).scaleEntity();
+        boss.getComponent(BossOverlayComponent.class).nameBoss("Loki    ");
+
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
+        boss.addComponent(healthBarComponent);
+        boss.setEntityType("human");
+        boss.setScale(0.8f * 2, 1f * 2);
+        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+        return boss;
+    }
+
+    /**
+     * create Loki boss decoys enemy entity
+     *
+     * @param target enemy to chase (player)
+     * @return boss entity
+     */
+    public static Entity createLokiDecoy(Entity target) {
+
+        Entity boss = createBaseNPCNoAI();
+        ElfBossConfig config = configs.elfBoss;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(
+                                target, 10, 7f, 10f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        shootProjectileTask.setProjectileType("fireBall");
+        shootProjectileTask.setMultishotChance(0);
+        aiComponent.addTask(shootProjectileTask);
+        //Dont create fireballs until ready and on the map
+        boss.data.put("createFireBall", false);
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator = setHumanAnimations(animator);
+
+        boss
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new HumanAnimationController())
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
+        boss.setAttackRange(5);
+        boss.getComponent(AnimationRenderComponent.class).scaleEntity();
+
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
+        boss.addComponent(healthBarComponent);
+        boss.setEntityType("human");
+        boss.setScale(0.8f * 2, 1f * 2);
+        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+        return boss;
+    }
+
+    /**
      * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
      *
      * @return entity
