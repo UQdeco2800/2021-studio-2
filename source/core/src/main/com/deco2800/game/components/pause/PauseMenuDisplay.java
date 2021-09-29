@@ -83,7 +83,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                     public void changed(ChangeEvent changeEvent, Actor actor) {
 
                         logger.debug("Main Menu button clicked");
-                        entity.getEvents().trigger("maineMenu");
+                        entity.getEvents().trigger("mainMenu");
                     }
                 });
         exitBtn.addListener(
