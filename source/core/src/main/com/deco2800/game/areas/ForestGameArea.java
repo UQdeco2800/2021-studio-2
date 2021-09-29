@@ -390,18 +390,6 @@ public class ForestGameArea extends GameArea {
      */
     private void loadAssets() {
 
-        // load save
-        PlayerSave.Save pSave = PlayerSave.load();
-        // update save
-        // pSave.lokiWins += 1;
-        // save save
-        PlayerSave.write(pSave);
-
-
-
-
-
-
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
@@ -436,7 +424,7 @@ public class ForestGameArea extends GameArea {
         PlayerSave.Save pSave = PlayerSave.load();
 
 
-        if(pSave.lokiEnc < 1 || pSave.lokiEnc >= 4){
+        if(pSave.lokiEnc < 2 || pSave.lokiEnc >= 4){
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);

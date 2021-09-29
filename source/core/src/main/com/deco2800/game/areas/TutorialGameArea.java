@@ -451,6 +451,14 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void loadAssets() {
+
+        logger.info("Resetting Save File");
+        PlayerSave.Save pSave = PlayerSave.initial();
+        PlayerSave.write(pSave);
+
+
+
+
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(tileTextures);
@@ -485,6 +493,7 @@ public class TutorialGameArea extends GameArea {
     private void setDialogue() {
         PlayerSave.Save pSave = PlayerSave.load();
 
+
         if(pSave.hasPlayed == false){
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
@@ -494,7 +503,6 @@ public class TutorialGameArea extends GameArea {
         }
 
         PlayerSave.write(pSave);
-
     }
 
     @Override
