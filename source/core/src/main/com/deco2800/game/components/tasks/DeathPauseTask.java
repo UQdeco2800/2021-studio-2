@@ -5,7 +5,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
-import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
@@ -45,9 +44,6 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             this.start = System.currentTimeMillis();
             if (owner.getEntity().getComponent(ElfAnimationController.class) != null) {
                 owner.getEntity().getComponent(ElfAnimationController.class).setDeath();
-            }
-            if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
-                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
             }
             this.declareEnd = false;
             owner.getEntity().getComponent(HealthBarComponent.class).dispose();
