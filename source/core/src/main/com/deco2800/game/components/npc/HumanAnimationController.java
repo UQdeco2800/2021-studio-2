@@ -7,7 +7,7 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  * This class listens to events relevant to an entity's state and plays the animation when one
  * of the events is triggered.
  */
-public class VikingAnimationController extends Component {
+public class HumanAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
     private boolean attack;

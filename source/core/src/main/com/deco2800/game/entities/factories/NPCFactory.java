@@ -10,9 +10,8 @@ import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.npc.ArcherAnimationController;
 import com.deco2800.game.components.npc.ElfAnimationController;
-import com.deco2800.game.components.npc.VikingAnimationController;
+import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
@@ -427,7 +426,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
 
-        animator = setMeleeAnimations(animator);
+        animator = setHumanAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -443,7 +442,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
-                .addComponent(new VikingAnimationController());
+                .addComponent(new HumanAnimationController());
 
         viking.getComponent(AITaskComponent.class).
                 addTask(new AlertableChaseTask(target, 10, 3f, 4f));
@@ -471,13 +470,13 @@ public class NPCFactory {
      */
     public static Entity createMeleeHellViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
-        MeleeVikingConfig config = configs.vikingMelee;
+        MeleeHellWarriorConfig config = configs.hellWarriorMelee;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/hellViking.atlas", TextureAtlas.class));
 
-        animator = setMeleeAnimations(animator);
+        animator = setHumanAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -493,7 +492,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
-                .addComponent(new VikingAnimationController());
+                .addComponent(new HumanAnimationController());
 
         viking.getComponent(AITaskComponent.class).
                 addTask(new AlertableChaseTask(target, 10, 3f, 4f));
@@ -521,13 +520,13 @@ public class NPCFactory {
      */
     public static Entity createMeleeAsgardViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
-        MeleeVikingConfig config = configs.vikingMelee;
+        MeleeAsgardWarriorConfig config = configs.asgardWarriorMelee;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/asgardWarrior.atlas", TextureAtlas.class));
 
-        animator = setMeleeAnimations(animator);
+        animator = setHumanAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -543,7 +542,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
-                .addComponent(new VikingAnimationController());
+                .addComponent(new HumanAnimationController());
 
         viking.getComponent(AITaskComponent.class).
                 addTask(new AlertableChaseTask(target, 10, 3f, 4f));
@@ -569,7 +568,7 @@ public class NPCFactory {
      * @param animator the animation component of the entity
      * @returnthe animation component of the entity
      */
-    private static AnimationRenderComponent setMeleeAnimations(AnimationRenderComponent animator) {
+    private static AnimationRenderComponent setHumanAnimations(AnimationRenderComponent animator) {
 
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
@@ -620,24 +619,12 @@ public class NPCFactory {
 
         animator.setAnimationScale(2f);
 
-        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("attackDown", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("attackUp", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("attackLeft", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("attackRight", 0.05f, Animation.PlayMode.NORMAL);
+        animator = setHumanAnimations(animator);
 
         archer
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
-                .addComponent(new ArcherAnimationController())
+                .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent);
 
         archer.setAttackRange(5);

@@ -4,112 +4,112 @@ size: 2048, 1024
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-attackDown
+EnemyAttackDown
   rotate: false
   xy: 262, 782
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
-attackDown
+EnemyAttackDown
   rotate: false
   xy: 392, 652
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-attackDown
+EnemyAttackDown
   rotate: false
   xy: 262, 262
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
-attackDown
+EnemyAttackDown
   rotate: false
   xy: 392, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-attackLeft
+EnemyAttackLeft
   rotate: false
   xy: 652, 782
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-attackLeft
+EnemyAttackLeft
   rotate: false
   xy: 522, 392
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
-attackLeft
+EnemyAttackLeft
   rotate: false
   xy: 522, 262
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-attackLeft
+EnemyAttackLeft
   rotate: false
   xy: 1042, 522
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
-attackRight
+EnemyAttackRight
   rotate: false
   xy: 2, 392
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
-attackRight
+EnemyAttackRight
   rotate: false
   xy: 652, 652
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-attackRight
+EnemyAttackRight
   rotate: false
   xy: 652, 392
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
-attackRight
+EnemyAttackRight
   rotate: false
   xy: 1042, 652
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-attackUp
+EnemyAttackUp
   rotate: false
   xy: 2, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
-attackUp
+EnemyAttackUp
   rotate: false
   xy: 652, 522
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-attackUp
+EnemyAttackUp
   rotate: false
   xy: 912, 522
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
-attackUp
+EnemyAttackUp
   rotate: false
   xy: 1172, 652
   size: 128, 128
