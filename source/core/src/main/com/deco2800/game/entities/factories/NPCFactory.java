@@ -413,6 +413,12 @@ public class NPCFactory {
         return boss;
     }
 
+    /**
+     * Creates a melee viking which will be used for the outdoor map.
+     *
+     * @param target the entity that the NPC will chase and attack
+     * @return the enemy entity
+     */
     public static Entity createMeleeViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
         MeleeVikingConfig config = configs.vikingMelee;
@@ -420,19 +426,8 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
-        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
+
+        animator = setMeleeAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -463,12 +458,17 @@ public class NPCFactory {
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
-        //viking.setScale(1f, 1f);
         viking.setEntityType("viking");
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
     }
 
+    /**
+     * Creates a melee viking which will be used for the Hell map.
+     *
+     * @param target the entity that the NPC will chase and attack
+     * @return the enemy entity
+     */
     public static Entity createMeleeHellViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
         MeleeVikingConfig config = configs.vikingMelee;
@@ -476,19 +476,8 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/hellViking.atlas", TextureAtlas.class));
-        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
+
+        animator = setMeleeAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -519,10 +508,84 @@ public class NPCFactory {
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
-        //viking.setScale(1f, 1f);
         viking.setEntityType("viking");
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
+    }
+
+    /**
+     * Creates a melee viking which will be used for the Asgard map.
+     *
+     * @param target the entity that the NPC will chase and attack
+     * @return the enemy entity
+     */
+    public static Entity createMeleeAsgardViking(Entity target) {
+        Entity viking = createBaseNPCNoAI();
+        MeleeVikingConfig config = configs.vikingMelee;
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/asgardWarrior.atlas", TextureAtlas.class));
+
+        animator = setMeleeAnimations(animator);
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ZigChaseTask(
+                                target, 11, 4f, 4f, 1))
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+
+        viking
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new VikingAnimationController());
+
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        viking.addComponent(healthBarComponent);
+
+        viking.getComponent(AnimationRenderComponent.class).scaleEntity();
+        viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
+        viking.setEntityType("viking");
+        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        return viking;
+    }
+
+    /**
+     * Sets the required animations for a melee enemy
+     *
+     * @param animator the animation component of the entity
+     * @returnthe animation component of the entity
+     */
+    private static AnimationRenderComponent setMeleeAnimations(AnimationRenderComponent animator) {
+
+        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
+
+        return animator;
     }
 
     /**

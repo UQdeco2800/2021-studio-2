@@ -81,7 +81,8 @@ public class ForestGameArea extends GameArea {
             "images/boss_health_right.png",
             "images/viking.png",
             "images/hellViking.png",
-            "images/outdoorArcher.png"
+            "images/outdoorArcher.png",
+            "images/asgardWarrior.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -92,7 +93,7 @@ public class ForestGameArea extends GameArea {
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
-            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas"
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -145,6 +146,7 @@ public class ForestGameArea extends GameArea {
 //        spawnAnchoredElf();
         spawnVikingMelee();
         spawnHellVikingMelee();
+        spawnAsgardWarriorMelee();
         spawnOutdoorArcher();
 
         spawnBoss();
@@ -239,7 +241,7 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
+     * Randomly spawn viing on a random position of the terrain, the number of vikings limit to 2
      */
     private void spawnVikingMelee() {
         GridPoint2 minPos = new GridPoint2(0, 0);
@@ -254,7 +256,7 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
+     * Randomly spawn viking on a random position of the terrain, the number of vikings limit to 2
      */
     private void spawnHellVikingMelee() {
         GridPoint2 minPos = new GridPoint2(0, 0);
@@ -269,7 +271,22 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Spawn range elf on terrain, range elf can shoot target
+     * Randomly spawn warrior on a random position of the terrain, the number of warriors limit to 2
+     */
+    private void spawnAsgardWarriorMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeAsgardViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn range archer on terrain, ranged archers can shoot target
      */
     private void spawnOutdoorArcher() {
         GridPoint2 minPos = new GridPoint2(0, 0);
