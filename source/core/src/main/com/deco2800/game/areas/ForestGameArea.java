@@ -140,14 +140,11 @@ public class ForestGameArea extends GameArea {
         //spawnTrees();
         spawnPlayer();
         spawnCrate();
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-        spawnOutdoorArcher();
-        spawnOutdoorWarrior();
-        spawnHellWarrior();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
         spawnBoss();
         playMusic();
         setDialogue();
@@ -251,52 +248,6 @@ public class ForestGameArea extends GameArea {
             incNum();
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangerLeft");
-            spawnEntityAt(elf, randomPos, true, true);
-        }
-    }
-
-    /**
-     * Spawn ranged archers on terrain, the archer can shoot arrows
-     */
-    private void spawnOutdoorArcher() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity archer = NPCFactory.createOutdoorArcher(player, 0.2f);
-            incNum();
-            archer.getEvents().trigger("rangerLeft");
-            spawnEntityAt(archer, randomPos, true, true);
-        }
-    }
-
-    /**
-     * Randomly spawn elf on a random position of the terrain, the number of archer limit to 2
-     */
-    private void spawnOutdoorWarrior() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createOutdoorWarrior(player);
-            incNum();
-            spawnEntityAt(elf, randomPos, true, true);
-        }
-    }
-
-    /**
-     * Randomly spawn elf on a random position of the terrain, the number of archer limit to 2
-     */
-    private void spawnHellWarrior() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 5; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createHellWarrior(player);
-            incNum();
             spawnEntityAt(elf, randomPos, true, true);
         }
     }
