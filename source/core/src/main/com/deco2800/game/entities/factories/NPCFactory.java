@@ -12,10 +12,7 @@ import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.ElfBossConfig;
-import com.deco2800.game.entities.configs.MeleeEnemyConfig;
-import com.deco2800.game.entities.configs.NPCConfigs;
-import com.deco2800.game.entities.configs.RangedEnemyConfig;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -393,6 +390,73 @@ public class NPCFactory {
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
+    }
+
+    public static Entity createOdin(Entity target) {
+        Entity odin = createBaseNPCNoAI();
+        OdinBossConfig config = configs.odinBoss;
+
+//--------THE AI COMPONENT WHERE IT DOES THE ATTACK AND SUMMONING AND WHEN IT DIES SPAWN PORTAL-----
+//        AITaskComponent aiComponent =
+//                new AITaskComponent()
+//                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+//                        .addTask(new ChaseTask(
+//                                target, 10, 7f, 10f))
+//                        .addTask(new SpawnMinionsTask(target))
+//                        .addTask(new DeathPauseTask(
+//                                target, 0, 100, 100, 1.5f));
+
+        
+// ---------------------DO I WANT ODIN TO SHOOT FANCY PROJECTILES???-------------------------------
+//        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+//        shootProjectileTask.setProjectileType("fireBall");
+//        shootProjectileTask.setMultishotChance(0);
+//        aiComponent.addTask(shootProjectileTask);
+//        //Dont create fireballs until ready and on the map
+//        odin.data.put("createFireBall", false);
+
+
+ // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------------
+//        AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService().getAsset("odin/odin.atlas",
+//                                TextureAtlas.class));
+//        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+
+
+  //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
+        odin.addComponent(new CombatStatsComponent(config.health, config.attack));
+//            .addComponent(animator)
+//            .addComponent(new ElfAnimationController())
+//            .addComponent(aiComponent);
+
+ // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------------
+//        odin.setAttackRange(5);
+//        odin.getComponent(AnimationRenderComponent.class).scaleEntity();
+//        odin.scaleWidth(2);  //MORE SCALLING HERE AND AT THE BOTTOM???
+//        odin.scaleHeight(2);
+//
+//
+//-------------------ITS MASSIVE HEALTH BAR ON TOP OF ITS HEAD-------------------------------------
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
+        odin.addComponent(healthBarComponent);
+//--------------------------------------------------------------------------------------------------
+
+// ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
+        odin.setEntityType("odinBoss"); //MAYBE NO USE? use for AI tasks
+        odin.setScale(0.8f * 2, 1f * 2); //Entity SCALING
+        PhysicsUtils.setScaledCollider(odin, 0.9f, 0.2f); //COLLIDER HIT BOX SCALER?
+        return odin;
     }
 
     /**
