@@ -7,4 +7,5 @@ public class NPCConfigs {
     public MeleeEnemyConfig elfMelee = new MeleeEnemyConfig();
     public ElfBossConfig elfBoss = new ElfBossConfig();
     public RangedEnemyConfig elfRanged = new RangedEnemyConfig();
+    public OdinBossConfig odinBoss = new OdinBossConfig();
 }
