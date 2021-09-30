@@ -118,9 +118,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
 
     private void resizeMenu() {
 
-        menuBackground.setSize(stage.getWidth() / 3, stage.getHeight() / 3);
-        menuBackground.setPosition(stage.getWidth() / 2 - menuBackground.getWidth() / 2,
-                stage.getHeight() / 2);
+        stack.setPosition(stage.getWidth() / 2 , stage.getHeight() / 2 , Align.center);
     }
 
     private void toggleMenu() {
@@ -141,7 +139,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
     @Override
     public void draw(SpriteBatch batch) {
         // do the resizing here
-        //resizeMenu();
+        resizeMenu();
     }
 
     @Override
