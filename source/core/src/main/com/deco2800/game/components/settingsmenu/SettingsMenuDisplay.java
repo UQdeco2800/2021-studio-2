@@ -3,6 +3,7 @@ package com.deco2800.game.components.settingsmenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -13,6 +14,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.files.UserSettings.DisplaySettings;
+import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.StringDecorator;
@@ -47,6 +49,11 @@ public class SettingsMenuDisplay extends UIComponent {
     }
 
     private void addActors() {
+
+        Image background = new Image(ServiceLocator.getResourceService().getAsset(
+                "images/BackgroundSettings.png", Texture.class));
+        background.setFillParent(true);
+
         Label title = new Label("Settings", skin, "title");
         Table settingsTable = makeSettingsTable();
         Table menuBtns = makeMenuBtns();
@@ -62,6 +69,7 @@ public class SettingsMenuDisplay extends UIComponent {
         rootTable.row();
         rootTable.add(menuBtns).fillX();
 
+        stage.addActor(background);
         stage.addActor(rootTable);
     }
 
