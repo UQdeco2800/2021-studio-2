@@ -96,7 +96,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                     }
                 });
 
-        pauseTable.add(contBtn);
+        pauseTable.add(contBtn).padTop(100f);
         pauseTable.row();
         pauseTable.add(restartForestBtn).padTop(30f);
         pauseTable.row();
@@ -110,7 +110,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
         stack.add(pauseTable);
 
 
-        stack.setSize(400f, 400f);
+        stack.setSize(400f, 600f);
         stack.setPosition(stage.getWidth() / 2 , stage.getHeight() / 2 , Align.center);
         stack.setVisible(false);
         stage.addActor(stack);
