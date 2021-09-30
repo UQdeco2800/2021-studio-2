@@ -39,13 +39,13 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                 Texture.class));
         pauseTable = new Table();
 
-        Skin menuButtons = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json"));
+        Skin menuButtons = new Skin(Gdx.files.internal("pauseMenuSkin/pause.json"));
 
-        TextButton contBtn = new TextButton("Continue", menuButtons);
-        TextButton restartForestBtn = new TextButton("Restart Forest", menuButtons);
-        TextButton restartTutorialBtn = new TextButton("Restart Tutorial", menuButtons);
-        TextButton mainMenuBtn = new TextButton("Exit to Main Menu", menuButtons);
-        TextButton exitBtn = new TextButton("Exit to Desktop", menuButtons);
+        TextButton contBtn = new TextButton("Resume", menuButtons);
+        TextButton restartForestBtn = new TextButton("Restart", menuButtons);
+        //TextButton restartTutorialBtn = new TextButton("Restart Tutorial", menuButtons);
+        TextButton mainMenuBtn = new TextButton("Exit", menuButtons);
+        //TextButton exitBtn = new TextButton("Exit to Desktop", menuButtons);
 
 
         // Triggers an event when the button is pressed
@@ -67,16 +67,6 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("startForest");
                     }
                 });
-        // Triggers an event when the button is pressed
-        restartTutorialBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Start button clicked");
-                        //Needs to check which one it is in
-                        entity.getEvents().trigger("startTutorial");
-                    }
-                });
         mainMenuBtn.addListener(
                 new ChangeListener() {
                     @Override
@@ -86,25 +76,35 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("mainMenu");
                     }
                 });
-        exitBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
+//        restartTutorialBtn.addListener(
+//                new ChangeListener() {
+//                    @Override
+//                    public void changed(ChangeEvent changeEvent, Actor actor) {
+//                        logger.debug("Start button clicked");
+//                        //Needs to check which one it is in
+//                        entity.getEvents().trigger("startTutorial");
+//                    }
+//                });
+//
+//        exitBtn.addListener(
+//                new ChangeListener() {
+//                    @Override
+//                    public void changed(ChangeEvent changeEvent, Actor actor) {
+//
+//                        logger.debug("Exit button clicked");
+//                        entity.getEvents().trigger("exit");
+//                    }
+//                });
 
-                        logger.debug("Exit button clicked");
-                        entity.getEvents().trigger("exit");
-                    }
-                });
-
-        pauseTable.add(contBtn).padTop(100f);
+        pauseTable.add(contBtn).padTop(150f);
         pauseTable.row();
         pauseTable.add(restartForestBtn).padTop(30f);
         pauseTable.row();
-        pauseTable.add(restartTutorialBtn).padTop(30f);
-        pauseTable.row();
         pauseTable.add(mainMenuBtn).padTop(30f);
-        pauseTable.row();
-        pauseTable.add(exitBtn).padTop(30f);
+//        pauseTable.row();
+//        pauseTable.add(restartTutorialBtn).padTop(30f);
+//        pauseTable.row();
+//        pauseTable.add(exitBtn).padTop(30f);
 
         stack.add(menuBackground);
         stack.add(pauseTable);
