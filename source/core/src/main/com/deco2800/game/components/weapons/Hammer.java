@@ -90,7 +90,7 @@ public class Hammer extends MeleeWeapon {
     }
 
     public void rangedAttack(int attackDirection) {
-
+        
     }
 
     /**

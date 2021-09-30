@@ -53,7 +53,7 @@ public class Longsword extends MeleeWeapon {
                 break;
         }
     }
-    
+
     /**
      * Implements functionality for strong attacks, also plays attack sound
      * during attack frame (for both light and strong).
