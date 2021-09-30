@@ -361,7 +361,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new SpawnMinionsTask(target))
+                        .addTask(new SpawnMinionsAndExplosionTask(target))
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));

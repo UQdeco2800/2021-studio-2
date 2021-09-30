@@ -7,6 +7,7 @@ import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
+import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -14,7 +15,7 @@ import com.deco2800.game.services.ServiceLocator;
 /**
  * Spawns in the boss's minions
  */
-public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
+public class SpawnMinionsAndExplosionTask extends DefaultTask implements PriorityTask {
 
     /**
      * target entity (player)
@@ -27,14 +28,14 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
     /**
      * number of time enemy is spawn
      */
-    private static int spawn = 0;
+    private int spawn = 0;
 
     /**
      * spawn the minion to help the boss attack the target
      *
      * @param target The entity to chase.
      */
-    public SpawnMinionsTask(Entity target) {
+    public SpawnMinionsAndExplosionTask(Entity target) {
         this.target = target;
         this.gameArea = ServiceLocator.getGameAreaService();
     }
@@ -57,12 +58,14 @@ public class SpawnMinionsTask extends DefaultTask implements PriorityTask {
     public void spawn() {
         Entity elf = NPCFactory.createMeleeElf(target);
         Entity elf2 = NPCFactory.createRangedElf(target, "normalArrow", 0.15f);
+        Entity explosion = WeaponFactory.createExplosion(owner.getEntity());
 
         ServiceLocator.getGameAreaService().incNum();
         ServiceLocator.getGameAreaService().incNum();
 
         gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(elf2, owner.getEntity().getCenterPosition(), true, true);
+        gameArea.spawnEntityAt(explosion, owner.getEntity().getCenterPosition(), true, true);
 
     }
 

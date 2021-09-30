@@ -1,6 +1,7 @@
 package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,14 +11,12 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.ExplosionTouchComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.tasks.EntityHoverTask;
-import com.deco2800.game.components.tasks.ProjectileMovementTask;
-import com.deco2800.game.components.tasks.VortexSpawnTask;
-import com.deco2800.game.components.tasks.WeaponDisposeTask;
+import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
@@ -316,6 +315,35 @@ public class WeaponFactory {
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 2);
         return vortex;
+    }
+
+    /**
+     * Create the explosion for Elf Boss
+     *
+     * @return Explosion entity
+     */
+    public static Entity createExplosion(Entity ownerRunner) {
+        Entity explosion = new Entity();
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/vortex.png", Texture.class));
+        sprite.setColor(Color.RED);
+        Vector2 scale = new Vector2(sprite.getWidth() / 30f, sprite.getHeight() / 30f);
+        ExplosionSpawnTask vortexSpawn = new ExplosionSpawnTask(ownerRunner, scale);
+        AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(vortexSpawn);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(scale.x / 4);
+        circle.setPosition(circle.getPosition().add(scale.cpy().scl(0.5f)));
+        explosion
+                .addComponent(new PhysicsComponent())
+                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.EXPLOSION)
+                        .setShape(circle).setRestitution(0)
+                        .setSensor(true))
+                .addComponent(new ExplosionTouchComponent(PhysicsLayer.PLAYER, PhysicsLayer.EXPLOSION, 2f))
+                .addComponent(aiTaskComponent);
+        explosion.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+        return explosion;
     }
 
     /**
