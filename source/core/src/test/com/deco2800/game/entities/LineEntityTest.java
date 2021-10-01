@@ -82,11 +82,14 @@ class LineEntityTest {
 
         entity.update();
         // unable to pinpoint 1 second
+        /*
         while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCreate) <= 1000) {
             entity.update();
         }
 
-        //entity.dispose();
+         */
+
+        entity.dispose();
 
         // auto dispose after 1 seconds after create
         verify(entityService).unregister(entity);
