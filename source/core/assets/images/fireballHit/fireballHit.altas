@@ -1,0 +1,27 @@
+
+fireballHit.png
+size: 1024, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+hit1
+  rotate: false
+  xy: 540, 2
+  size: 267, 267
+  orig: 267, 267
+  offset: 0, 0
+  index: -1
+hit2
+  rotate: false
+  xy: 271, 2
+  size: 267, 267
+  orig: 267, 267
+  offset: 0, 0
+  index: -1
+hit3
+  rotate: false
+  xy: 2, 2
+  size: 267, 267
+  orig: 267, 267
+  offset: 0, 0
+  index: -1

@@ -42,7 +42,9 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
 
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
-            owner.getEntity().getComponent(ElfAnimationController.class).setDeath();
+            if (owner.getEntity().getComponent(ElfAnimationController.class) != null) {
+                owner.getEntity().getComponent(ElfAnimationController.class).setDeath();
+            }
             this.declareEnd = false;
             owner.getEntity().getComponent(HealthBarComponent.class).dispose();
             //owner.getEntity().getComponent(PhysicsComponent.class).dispose();
@@ -52,8 +54,12 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {
-                ServiceLocator.getGameAreaService().decNum();
-                owner.getEntity().prepareDispose();
+                if (owner.getEntity().getEntityType().equals("elfBoss")) {
+                    ServiceLocator.getGameAreaService().decBossNum();
+                } else {
+                    ServiceLocator.getGameAreaService().decNum();
+                }
+                //owner.getEntity().prepareDispose();
                 status = Status.FINISHED;
             }
         }

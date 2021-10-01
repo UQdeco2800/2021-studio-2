@@ -1,0 +1,40 @@
+guardElfBackDeath.png
+size: 512, 128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back_death
+  rotate: false
+  xy: 0, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 0
+back_death
+  rotate: false
+  xy: 94, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+back_death
+  rotate: false
+  xy: 188, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+back_death
+  rotate: false
+  xy: 282, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+back_death
+  rotate: false
+  xy: 376, 0
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 4

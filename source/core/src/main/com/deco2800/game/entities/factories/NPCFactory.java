@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
@@ -68,9 +69,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -123,10 +125,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -175,9 +177,10 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
 
         anchoredElf
@@ -301,6 +304,10 @@ public class NPCFactory {
             animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinLeftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinRightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinFrontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinBackDeath", 0.2f, Animation.PlayMode.NORMAL);
         } else {
             elf.setEntityType("ranged");
             animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
@@ -311,6 +318,11 @@ public class NPCFactory {
             animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+
         }
 
         elf
@@ -369,16 +381,23 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
-                .addComponent(aiComponent);
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
         boss.scaleHeight(2);
+        boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));

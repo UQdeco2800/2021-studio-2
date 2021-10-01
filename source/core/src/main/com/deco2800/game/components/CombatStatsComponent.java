@@ -1,5 +1,6 @@
 package com.deco2800.game.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
@@ -89,6 +90,7 @@ public class CombatStatsComponent extends Component {
         }
         if (this.entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
+            entity.getEvents().trigger("updateBossHealth", this.health);
         }
     }
 

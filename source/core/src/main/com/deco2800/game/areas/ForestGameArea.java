@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
@@ -16,8 +17,10 @@ import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.deco2800.game.files.PlayerSave;
 
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
@@ -73,17 +76,25 @@ public class ForestGameArea extends GameArea {
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
-            "player_hammer.png"
+            "player_hammer.png",
+            "Assets/gametile-127.png",
+            "images/boss_health_middle.png",
+            "images/boss_health_left.png",
+            "images/boss_health_right.png",
+            "images/outdoorArcher.png",
+            "images/outdoorWarrior.png",
+            "images/hellWarrior.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
             "crate/crateHitBreak.png"
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
+            "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorWarrior.atlas",
+            "images/hellWarrior.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -95,6 +106,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
+    private int playerHealth = 3000;
 
     /**
      * Intialise the forest game
@@ -107,6 +119,15 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
+     Use for teleport, track the current playerHealth
+     */
+    public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
+        super();
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
+    }
+
+    /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     @Override
@@ -116,7 +137,7 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        spawnTrees();
+        //spawnTrees();
         spawnPlayer();
         spawnCrate();
         spawnMeleeElf();
@@ -127,8 +148,14 @@ public class ForestGameArea extends GameArea {
         spawnBoss();
         playMusic();
         setDialogue();
+
+        player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
 
+    @Override
+    public int getLevel() {
+        return 0;
+    }
     /**
      * Display the UI
      */
@@ -313,6 +340,7 @@ public class ForestGameArea extends GameArea {
      * Load the texture from files
      */
     private void loadAssets() {
+
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
@@ -344,9 +372,26 @@ public class ForestGameArea extends GameArea {
      * Sets the dialogue for when the game first loads.
      */
     private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+        PlayerSave.Save pSave = PlayerSave.load();
+
+
+        if(pSave.lokiEnc < 2 || pSave.lokiEnc >= 4){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+
+            pSave.lokiEnc += 1;
+
+        }else if(pSave.lokiEnc >= 1 && pSave.lokiEnc < 3){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.GARMR);
+
+            pSave.lokiEnc += 1;
+        }
+
+        PlayerSave.write(pSave);
+
     }
 
     /**

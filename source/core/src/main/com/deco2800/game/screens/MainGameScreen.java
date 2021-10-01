@@ -7,12 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.GameArea;
+import com.deco2800.game.areas.TestGameArea1;
 import com.deco2800.game.areas.TutorialGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -26,6 +28,7 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.CutsceneScreen;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.ui.textbox.TextBox;
@@ -58,9 +61,12 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
     private GameArea gameArea;
+    private static boolean gameChange = false;
+    private final TerrainFactory terrainFactory;
 
     public MainGameScreen(GdxGame game) {
         this.game = game;
+
 
         logger.debug("Initialising main game screen services");
         ServiceLocator.registerTimeSource(new GameTime());
@@ -81,6 +87,7 @@ public class MainGameScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
         renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
+        terrainFactory = new TerrainFactory(renderer.getCamera());
         loadAssets();
         createUI();
     }
@@ -88,7 +95,6 @@ public class MainGameScreen extends ScreenAdapter {
     public MainGameScreen(GdxGame game, String world) {
         this(game);
         logger.debug("Initialising main game screen entities");
-        TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
@@ -98,6 +104,25 @@ public class MainGameScreen extends ScreenAdapter {
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     }
+
+    /**
+        Use for teleport, track the current player health
+     */
+    public MainGameScreen(GdxGame game, String world, int currentHealth) {
+        this(game);
+        logger.debug("Initialising main game screen entities");
+
+        if (world.equals("forest")) {
+            this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
+        } else if (world.equals("tutorial")) {
+            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
+        } else if (world.equals("test1")) {
+            this.gameArea = new TestGameArea1(terrainFactory, game, currentHealth);
+        }
+        this.gameArea.create();
+        renderer.getCamera().setPlayer(this.gameArea.getPlayer());
+    }
+
 
     /**
      * Runs when the player dies, causes the camera to zoom in.
@@ -121,12 +146,41 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     Use for teleport, get the leve change
+     */
+    public static void levelChange() {
+        gameChange = true;
+    }
+
+    /**
+     render map or new map if teleport trigger
+     */
     @Override
     public void render(float delta) {
-        physicsEngine.update();
-        ServiceLocator.getEntityService().update();
-        renderer.render();
-        isPlayerDead();
+        if (gameChange) {
+            if (gameArea.getLevel() == 1) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 0) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.TEST1, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 2) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);
+                gameChange = false;
+            }
+        } else {
+            physicsEngine.update();
+            ServiceLocator.getEntityService().update();
+            renderer.render();
+            isPlayerDead();
+        }
     }
 
     @Override
@@ -190,6 +244,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new TextBox())
                 .addComponent(textBoxInput)
                 .addComponent(new TextBoxDisplay())
+                .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
