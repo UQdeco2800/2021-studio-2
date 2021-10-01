@@ -9,9 +9,12 @@ import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -64,7 +67,8 @@ class LineEntityTest {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/aiming_line.png", Texture.class));
         LineEntity entity = new LineEntity(1000);
-        long timeCreate = System.currentTimeMillis();
+
+        long timeCreate = System.nanoTime();
         entity.addComponent(new TextureRenderComponent(sprite));
 
         Vector2 v1 = new Vector2(0f, 0f);
@@ -76,9 +80,12 @@ class LineEntityTest {
         EntityService entityService = mock(EntityService.class);
         ServiceLocator.registerEntityService(entityService);
 
-        while (System.currentTimeMillis() - timeCreate <= 1000) {
+        entity.update();
+        // unable to pinpoint 1 second
+        while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCreate) <= 1000) {
             entity.update();
         }
+
         //entity.dispose();
 
         // auto dispose after 1 seconds after create
