@@ -1,0 +1,69 @@
+
+odin.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+DownAttack
+  rotate: false
+  xy: 2, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+LeftAttack
+  rotate: false
+  xy: 2, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+RightAttack
+  rotate: false
+  xy: 644, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+UpAttack
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 644, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+Default
+  rotate: false
+  xy: 1286, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
