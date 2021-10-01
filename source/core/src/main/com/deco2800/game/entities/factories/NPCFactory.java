@@ -426,7 +426,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
 
-        animator = setHumanAnimations(animator);
+        setHumanAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -476,7 +476,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/hellViking.atlas", TextureAtlas.class));
 
-        animator = setHumanAnimations(animator);
+        setHumanAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -526,7 +526,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/asgardWarrior.atlas", TextureAtlas.class));
 
-        animator = setHumanAnimations(animator);
+        setHumanAnimations(animator);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -566,7 +566,7 @@ public class NPCFactory {
      * Sets the required animations for a melee enemy
      *
      * @param animator the animation component of the entity
-     * @returnthe animation component of the entity
+     * @return the animation component of the entity
      */
     private static AnimationRenderComponent setHumanAnimations(AnimationRenderComponent animator) {
 
@@ -619,7 +619,7 @@ public class NPCFactory {
 
         animator.setAnimationScale(2f);
 
-        animator = setHumanAnimations(animator);
+        setHumanAnimations(animator);
 
         archer
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -675,7 +675,7 @@ public class NPCFactory {
 
         animator.setAnimationScale(1f);
 
-        animator = setHumanAnimations(animator);
+        setHumanAnimations(animator);
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -732,7 +732,7 @@ public class NPCFactory {
 
         animator.setAnimationScale(1f);
 
-        animator = setHumanAnimations(animator);
+        setHumanAnimations(animator);
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
