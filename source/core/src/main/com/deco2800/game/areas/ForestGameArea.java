@@ -146,8 +146,8 @@ public class ForestGameArea extends GameArea {
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
-//        spawnVikingMelee();
-//        spawnHellVikingMelee();
+        spawnVikingMelee();
+        spawnHellVikingMelee();
         spawnAsgardWarriorMelee();
         spawnOutdoorArcher();
         spawnLokiBoss();

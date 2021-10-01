@@ -1,6 +1,7 @@
 package com.deco2800.game.components.tasks;
 
 
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
@@ -55,10 +56,25 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
      * Spawns in enemies according to the classes variables
      */
     public void spawn() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             Entity elf = NPCFactory.createLokiDecoy(target);
             ServiceLocator.getGameAreaService().incNum();
-            gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
+            Vector2 spawnPosition = owner.getEntity().getCenterPosition();
+            switch (i % 4) {
+                case 0:
+                    spawnPosition.add(new Vector2(-1,1));
+                    break;
+                case 1:
+                    spawnPosition.add(new Vector2(1, 1));
+                    break;
+                case 2:
+                    spawnPosition.add(new Vector2(-1, -1));
+                    break;
+                case 3:
+                    spawnPosition.add(new Vector2(1, -1));
+                    break;
+            }
+            gameArea.spawnEntityAt(elf, spawnPosition, true, true);
         }
     }
 

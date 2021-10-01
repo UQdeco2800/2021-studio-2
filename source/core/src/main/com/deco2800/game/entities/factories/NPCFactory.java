@@ -481,8 +481,8 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ZigChaseTask(
-                                target, 11, 4f, 4f, 1))
+                        .addTask(new ChaseTask(
+                                target, 11, 4f, 4f, new Vector2(2f, 2f)))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -531,8 +531,8 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ZigChaseTask(
-                                target, 11, 4f, 4f, 1))
+                        .addTask(new ChaseTask(
+                                target, 11, 4f, 4f, new Vector2(1.5f, 1.5f)))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -608,7 +608,7 @@ public class NPCFactory {
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(multishotChance);
-        shootProjectileTask.setShootAnimationTimeMS(500);
+        shootProjectileTask.setShootAnimationTimeMS(200);
         aiComponent.addTask(shootProjectileTask);
         //create fireballs if needed
         archer.data.put("createFireBall", true);
@@ -658,11 +658,11 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new SpawnDecoysTask(target))
                         .addTask(new TeleportationTask(target, 2000))
+                        .addTask(new SpawnDecoysTask(target))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
-        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 1000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
@@ -673,7 +673,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
 
-        animator.setAnimationScale(2f);
+        animator.setAnimationScale(1f);
 
         animator = setHumanAnimations(animator);
 
@@ -719,7 +719,7 @@ public class NPCFactory {
                                 target, 10, 7f, 10f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
-        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 1000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
@@ -730,7 +730,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
 
-        animator.setAnimationScale(2f);
+        animator.setAnimationScale(1f);
 
         animator = setHumanAnimations(animator);
 
