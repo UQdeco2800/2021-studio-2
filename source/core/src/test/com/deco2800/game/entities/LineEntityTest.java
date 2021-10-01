@@ -76,7 +76,7 @@ class LineEntityTest {
         EntityService entityService = mock(EntityService.class);
         ServiceLocator.registerEntityService(entityService);
 
-        while (System.currentTimeMillis() - timeCreate < 1000) {
+        while (System.currentTimeMillis() - timeCreate <= 1000) {
             entity.update();
         }
         //entity.dispose();
