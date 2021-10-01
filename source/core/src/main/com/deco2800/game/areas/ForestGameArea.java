@@ -74,7 +74,8 @@ public class ForestGameArea extends GameArea {
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
             "player_hammer.png",
-            "portal.png"
+            "portal.png",
+            "Odin/odin.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -84,7 +85,8 @@ public class ForestGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "end/portal.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "end/portal.atlas",
+            "Odin/odin.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -121,15 +123,15 @@ public class ForestGameArea extends GameArea {
         spawnPlayer();
         spawnCrate();
         spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
         spawnBoss();
         playMusic();
         setDialogue();
         spawnWin();
-
+        spawnOdin();
     }
 
     /**
@@ -194,6 +196,11 @@ public class ForestGameArea extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Scepter");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
+    }
+
+    private void spawnOdin() {
+        Entity odin = NPCFactory.createOdin(player);
+        spawnEntityAt(odin, new GridPoint2(20, 20), true, true);
     }
 
     /**
