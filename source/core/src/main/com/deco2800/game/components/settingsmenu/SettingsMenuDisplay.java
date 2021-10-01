@@ -104,6 +104,12 @@ public class SettingsMenuDisplay extends UIComponent {
         displayModeSelect.setItems(getDisplayModes(selectedMonitor));
         displayModeSelect.setSelected(getActiveMode(displayModeSelect.getItems()));
 
+
+
+        //create reset game button
+        Label resetLabel = new Label("Reset progress:", settingsSkin);
+        Button resetBtn = new Button(settingsSkin, "reset");
+
         // Position Components on table
         Table table = new Table();
 
@@ -137,6 +143,14 @@ public class SettingsMenuDisplay extends UIComponent {
                     uiScaleValue.setText(String.format("%.2fx", value));
                     return true;
                 });
+
+        table.row().padTop(10f);
+        table.add(resetLabel).right().padRight(15f);
+        table.add(resetBtn).left();
+        // Events on push
+
+//        resetBtn.addListener((Event event) -> {
+//                    });
 
         return table;
     }

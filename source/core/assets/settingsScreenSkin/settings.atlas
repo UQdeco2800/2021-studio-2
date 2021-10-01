@@ -4,6 +4,20 @@ size: 1024, 1024
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
+243043484_879489939641417_8050408554820556031_n
+  rotate: false
+  xy: 1, 289
+  size: 177, 31
+  orig: 177, 31
+  offset: 0, 0
+  index: -1
+243643435_868297157153172_1050889079716488289_n
+  rotate: false
+  xy: 1, 256
+  size: 177, 31
+  orig: 177, 31
+  offset: 0, 0
+  index: -1
 ApplyB
   rotate: false
   xy: 1, 388
@@ -20,14 +34,14 @@ ApplyW
   index: -1
 ButtonOff
   rotate: false
-  xy: 108, 270
+  xy: 108, 204
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 ButtonOn
   rotate: false
-  xy: 1, 218
+  xy: 1, 152
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
@@ -48,7 +62,7 @@ ExitW
   index: -1
 FPSBox
   rotate: false
-  xy: 1, 270
+  xy: 1, 204
   size: 105, 50
   split: 14, 14, 10, 10
   orig: 105, 50
