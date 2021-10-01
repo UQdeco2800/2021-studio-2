@@ -47,6 +47,7 @@ public class Hammer extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
+        if (timeAtAttack != 0 || hasAttacked || hasStrongAttacked) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
@@ -90,7 +91,7 @@ public class Hammer extends MeleeWeapon {
     }
 
     public void rangedAttack(int attackDirection) {
-        
+
     }
 
     /**

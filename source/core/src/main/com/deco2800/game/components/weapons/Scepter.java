@@ -53,6 +53,7 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
+        if (timeAtAttack != 0 || hasAttacked) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {

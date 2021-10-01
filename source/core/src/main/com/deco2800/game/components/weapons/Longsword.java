@@ -19,7 +19,6 @@ public class Longsword extends MeleeWeapon {
 
     public Longsword(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
-
         attackSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
@@ -33,6 +32,7 @@ public class Longsword extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
+        if (timeAtAttack != 0 || hasAttacked) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
