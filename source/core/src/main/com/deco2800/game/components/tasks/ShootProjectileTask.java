@@ -187,6 +187,16 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("rangedLeftShoot");
             }
+        } else {
+            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("attackDown");
+            } else if (targetDir > 90 && targetDir < 180) {
+                owner.getEntity().getEvents().trigger("attackRight");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("attackUp");
+            } else if (targetDir > 270 && targetDir < 360) {
+                owner.getEntity().getEvents().trigger("attackLeft");
+            }
         }
     }
 
@@ -342,6 +352,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
                             int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
                             target.getComponent(CombatStatsComponent.class).addHealth(-damage);
+                        } else {
+                            arrow.data.put("dealDamage", false);
                         }
                         tragectoryLocation = null;
                         aimingLine.prepareDispose();

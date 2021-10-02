@@ -1,6 +1,7 @@
 package com.deco2800.game.ui.textbox;
 
 import com.deco2800.game.components.Component;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,12 +119,14 @@ public class TextBox extends Component {
      * Closes the terminal and clears the stored message.
      */
     public void setClosed() {
-        logger.debug("Closing text box");
-        isOpen = false;
-        message = "";
-        generateCharacter = false;
-        hideBars();
-        this.index = 0;
+        if (isOpen) {
+            logger.debug("Closing text box");
+            message = "";
+            generateCharacter = false;
+            hideBars();
+            isOpen = false;
+            this.index = 0;
+        }
     }
 
     /**
@@ -142,6 +145,7 @@ public class TextBox extends Component {
      */
     public void showBars() {
         this.showBars = true;
+        ServiceLocator.getTimeSource().pause();
     }
 
     /**
@@ -149,6 +153,7 @@ public class TextBox extends Component {
      */
     public void hideBars() {
         this.showBars = false;
+        ServiceLocator.getTimeSource().unpause();
     }
 
     /**

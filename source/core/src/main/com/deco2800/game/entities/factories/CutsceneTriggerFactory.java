@@ -157,7 +157,7 @@ public class CutsceneTriggerFactory {
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(ColliderComponent.class).setSensor(true);
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(0.1f);
+        trigger.scaleHeight(0.5f);
         return trigger;
     }
 }

@@ -47,9 +47,9 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
             return;
         }
 
-        Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
-        PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
-        KeyboardPlayerInputComponent input = collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
+        Entity entity = ((BodyUserData) other.getBody().getUserData()).entity;
+        PlayerActions actions = entity.getComponent(PlayerActions.class);
+        KeyboardPlayerInputComponent input = entity.getComponent(KeyboardPlayerInputComponent.class);
         //Checks if the entity that has collided is the player
         if (actions == null) {
             return;
@@ -58,7 +58,7 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
         input.stopWalking();
         openCutsceneBars();
         input.setLastKeyPressed(lastKeyPressed);
-        repeatAttacks(input, 0);
+        repeatAttacks(input, entity, 0);
     }
 
     /**
@@ -67,15 +67,15 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
      * @param input KeyboardInputComponent use to control the main player
      * @param count number of attacks that will be performed
      */
-    private void repeatAttacks(KeyboardPlayerInputComponent input, int count) {
+    private void repeatAttacks(KeyboardPlayerInputComponent input, Entity player, int count) {
         input.setLastKeyPressed(lastKeyPressed);
-        input.keyDown(Input.Keys.SPACE);
+        player.getEvents().trigger("attack", lastKeyPressed);
         if (count < repeats) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    repeatAttacks(input, count + 1);
+                    repeatAttacks(input, player, count + 1);
                     timer.cancel();
                 }
             }, 500);
