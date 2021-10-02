@@ -84,8 +84,8 @@ public class MeleeWeapon extends Component {
         this.knockback = knockback;
         this.weaponSize = weaponSize;
         timeAtAttack = 0L;
-        // default attack frame infomration
-        setAttackFrames(100L, 3, 1);
+        // default attack frame information
+        setAttackFrames(100L, 3, 2);
         hasAttacked = false;
     }
 
@@ -141,11 +141,11 @@ public class MeleeWeapon extends Component {
     protected void triggerAttackStage(long timeSinceAttack) {
         // Set hit box during attack frame
         if (hasAttacked && timeSinceAttack > (attackFrameDuration * attackFrameIndex)
-                && timeSinceAttack < (attackFrameIndex + 1) * attackFrameDuration) {
+                && timeSinceAttack < attackFrameIndex * attackFrameDuration) {
             weaponHitbox.set(weaponSize.cpy(), attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
             // Destroy hit box as soon as attack frame ends.
-        } else if (timeSinceAttack >= (attackFrameIndex + 1) * attackFrameDuration) {
+        } else if (timeSinceAttack >= attackFrameIndex * attackFrameDuration) {
             timeAtAttack = 0;
             weaponHitbox.destroy();
         }

@@ -283,6 +283,29 @@ public class WeaponFactory {
                 .addComponent(new Blast());
         return blast;
     }
+
+    /**
+     * Makes an energy ball that will move in a straight line and damage enemies
+     *
+     * @param target the location that the blast will try and reach
+     * @return entity
+     */
+    public static Entity createMjolnir(Vector2 target) {
+        float speed = 8f;
+
+        PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
+        movingComponent.setMoving(true);
+        movingComponent.setTarget(target);
+        movingComponent.setMaxSpeed(new Vector2(speed, speed));
+        Entity mjolnir = new Entity()
+                //.addComponent(new AnimationRenderComponent())
+                .addComponent(new PhysicsComponent())
+                .addComponent(movingComponent)
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new Blast());
+        return mjolnir;
+    }
     public WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }

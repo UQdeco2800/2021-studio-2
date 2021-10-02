@@ -30,7 +30,7 @@ public class Axe extends MeleeWeapon {
                 .getAsset("sounds/impact.ogg", Sound.class);
     }
 
-    // Special constructor for player.
+    // Special constructor for player (just uses default values).
     public Axe() {
         super(PhysicsLayer.NPC, 3, 25, new Vector2(1f, 0.5f));
         attackSound = ServiceLocator.getResourceService().

@@ -29,6 +29,8 @@ public class Hammer extends MeleeWeapon {
      */
     private boolean hasStrongAttacked;
 
+    private boolean isEquipped;
+
     public Hammer(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
 
         super(targetLayer, attackPower, knockback, weaponSize);
@@ -38,6 +40,7 @@ public class Hammer extends MeleeWeapon {
                 .getAsset("sounds/impact.ogg", Sound.class);
         strongAttackSize = new Vector2(2f, 2f); // default size
         hasStrongAttacked = false;
+        isEquipped = true;
     }
 
     /**
@@ -47,7 +50,8 @@ public class Hammer extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
-        if (timeAtAttack != 0 || hasAttacked || hasStrongAttacked) return;
+        if (timeAtAttack != 0 || hasAttacked
+                || hasStrongAttacked || !isEquipped) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
@@ -77,7 +81,7 @@ public class Hammer extends MeleeWeapon {
      * @param attackDirection - direction of attack, ignored for the time being.
      */
     public void strongAttack(int attackDirection) {
-        if (timeAtAttack != 0 || hasStrongAttacked) {
+        if (timeAtAttack != 0 || hasStrongAttacked || !isEquipped) {
             return;
         }
         hasStrongAttacked = true;
@@ -87,12 +91,16 @@ public class Hammer extends MeleeWeapon {
             return;
         }
         animator.startAnimation("hammer_aoe");
-        rangedAttack(attackDirection);
     }
 
     public void rangedAttack(int attackDirection) {
-
+        isEquipped = false;
     }
+
+    public boolean isEquipped() {
+        return this.isEquipped;
+    }
+
 
     /**
      * Implements functionality for strong attacks, also plays attack sound
