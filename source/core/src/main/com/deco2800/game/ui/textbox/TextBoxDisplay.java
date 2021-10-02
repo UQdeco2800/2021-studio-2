@@ -322,15 +322,17 @@ public class TextBoxDisplay extends UIComponent {
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
-            case LOKI_OPENING:
+            case LOKI_INTRODUCTION:
+            case LOKI_ENCOUNTER:
                 enemyName = new Label("    LOKI", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/loki_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/loki_text_box.png", Texture.class));
                 break;
-            case GARMR:
-                enemyName = new Label("GARMR", skin);
+            case ELF_ENCOUNTER:
+            case ELF_INTRODUCTION:
+                enemyName = new Label("     Elf", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
