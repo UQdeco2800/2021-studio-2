@@ -2,7 +2,6 @@ package com.deco2800.game.components.weapons;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
@@ -28,10 +27,7 @@ public class Scepter extends MeleeWeapon {
      * AOE / Strong attack size
      */
     private final Vector2 strongAttackSize;
-    /**
-     * Determines whether the axe has used its strong attack
-     */
-    private boolean hasStrongAttacked;
+
     private GameArea gameArea;
     private final float range = 6f;
 
@@ -42,7 +38,6 @@ public class Scepter extends MeleeWeapon {
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
         strongAttackSize = new Vector2(2f, 2f); // default size
-        hasStrongAttacked = false;
         this.gameArea = ServiceLocator.getGameAreaService();
     }
 
@@ -78,8 +73,9 @@ public class Scepter extends MeleeWeapon {
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
      */
-    public void strongAttack(int attackDirection) {
-        hasStrongAttacked = true;
+    @Override
+    public void rangedAttack(int attackDirection) {
+        super.rangedAttack(attackDirection);
         Vector2 target = entity.getCenterPosition();
         switch (attackDirection) {
             case UP:
@@ -99,43 +95,8 @@ public class Scepter extends MeleeWeapon {
         gameArea.spawnEntityAt(blast, entity.getCenterPosition(), true, true);
     }
 
-    /**
-     * Implements functionality for strong attacks, also plays attack sound
-     * during attack frame (for both light and strong).
-     *
-     * @see MeleeWeapon
-     */
     @Override
-    protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
-            if (hasStrongAttacked) {
-                attackSound.play();
-                weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
-                hasStrongAttacked = false;
-                hasAttacked = false; // strong attack overrides light attack.
-
-            } else if (hasAttacked) {
-                attackSound.play();
-            }
-        }
-        super.triggerAttackStage(timeSinceAttack);
-    }
-
-    /**
-     * Plays impact sound if weapon successfully collides with enemy.
-     *
-     * @see MeleeWeapon
-     */
-    @Override
-    protected boolean onCollisionStart(Fixture me, Fixture other) {
-        // if weapon collides with enemy, play impact sound
-        if (super.onCollisionStart(me, other)) {
-            impactSound.play();
-            return true;
-        }
-        return false;
+    public void aoeAttack() {
+        return; // Scepter has no aeo attack
     }
 }
-
-
-

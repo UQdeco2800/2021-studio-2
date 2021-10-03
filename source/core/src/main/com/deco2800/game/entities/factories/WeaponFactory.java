@@ -13,7 +13,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
-import com.deco2800.game.components.weapons.Blast;
+import com.deco2800.game.components.weapons.projectiles.BlastController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.entities.LineEntity;
@@ -280,7 +280,7 @@ public class WeaponFactory {
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new Blast());
+                .addComponent(new BlastController());
         return blast;
     }
     public WeaponFactory() {

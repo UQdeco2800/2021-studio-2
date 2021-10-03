@@ -16,7 +16,7 @@ import com.deco2800.game.services.ServiceLocator;
  * Melee weapon superclass from which all melee weapons will inherit from.
  * Enables entities to attack using a weapon.
  */
-public abstract class Weapon extends Component {
+public class MeleeWeapon extends Component {
     /**
      * animation frame duration measured in milliseconds
      */
@@ -80,8 +80,8 @@ public abstract class Weapon extends Component {
     public static final int LEFT = 3;
     public static final int RIGHT = 4;
 
-    public Weapon(short targetLayer, int attackPower, float knockback,
-                  Vector2 weaponSize) {
+    public MeleeWeapon(short targetLayer, int attackPower, float knockback,
+                       Vector2 weaponSize) {
         this.targetLayer = targetLayer;
         this.attackPower = attackPower;
         this.knockback = knockback;

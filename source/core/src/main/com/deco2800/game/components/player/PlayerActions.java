@@ -35,11 +35,13 @@ public class PlayerActions extends Component {
         entity.getEvents().addListener("walk", this::walk);
         entity.getEvents().addListener("walkStop", this::stopWalking);
         entity.getEvents().addListener("attack", this::attack);
-        entity.getEvents().addListener("strongAttack", this::strongAttack);
+        entity.getEvents().addListener("aoeAttack", this::aoeAttack);
+        entity.getEvents().addListener("rangedAttack", this::rangedAttack);
         entity.getEvents().addListener("mouseAttack", this::mouseAttack);
+        entity.getEvents().addListener("mouseRangedAttack", this::mouseRangedAttack);
         entity.getEvents().addListener("lockMovement", this::lockMovement);
         entity.getEvents().addListener("dash", this::dash);
-        entity.getEvents().addListener("mouseStrongAttack", this::mouseStrongAttack);
+
     }
 
     /**
@@ -152,9 +154,9 @@ public class PlayerActions extends Component {
     }
 
     /**
-     * Makes player use the strong attack associated with its equipped weapon.
+     * Makes player use the ranged attack associated with its equipped weapon.
      */
-    void strongAttack(int keycode) {
+    void rangedAttack(int keycode) {
         MeleeWeapon weapon = getEquippedWeapon();
         if (weapon == null) {
             return;
@@ -174,7 +176,18 @@ public class PlayerActions extends Component {
                 attackDirection = MeleeWeapon.RIGHT;
                 break;
         }
-        weapon.strongAttack(attackDirection);
+        weapon.rangedAttack(attackDirection);
+    }
+
+    /**
+     * Makes player use the AOE attack associated with its equipped weapon.
+     */
+    void aoeAttack() {
+        MeleeWeapon weapon = getEquippedWeapon();
+        if (weapon == null) {
+            return;
+        }
+        weapon.aoeAttack();
     }
 
     /**
@@ -221,7 +234,7 @@ public class PlayerActions extends Component {
         }
     }
 
-    void mouseStrongAttack(Vector2 coordinates) {
+    void mouseRangedAttack(Vector2 coordinates) {
         MeleeWeapon weapon = getEquippedWeapon();
         if (weapon == null) {
             return;
@@ -230,7 +243,7 @@ public class PlayerActions extends Component {
                 coordinates.x - Gdx.graphics.getWidth() / 2f,
                 coordinates.y - Gdx.graphics.getHeight() / 2f
         ));
-        weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
+        weapon.rangedAttack(Vector2Utils.toWeaponDirection(attackDirection));
         lockMovement(weapon.getTotalAttackTime());
     }
 

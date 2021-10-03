@@ -3,8 +3,6 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -74,10 +72,8 @@ public class Hammer extends MeleeWeapon {
     /**
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
-     *
-     * @param attackDirection - direction of attack, ignored for the time being.
      */
-    public void strongAttack(int attackDirection) {
+    public void aoeAttack() {
         if (timeAtAttack != 0 || hasStrongAttacked) {
             return;
         }
@@ -88,7 +84,6 @@ public class Hammer extends MeleeWeapon {
             return;
         }
         animator.startAnimation("hammer_aoe");
-        rangedAttack(attackDirection);
     }
 
     public void rangedAttack(int attackDirection) {

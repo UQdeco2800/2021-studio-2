@@ -57,6 +57,16 @@ public class Axe extends MeleeWeapon {
         }
     }
 
+    @Override
+    public void rangedAttack(int attackDirection) {
+        return; // Axe has no ranged attack
+    }
+
+    @Override
+    public void aoeAttack() {
+        return; // Axe has not AOE attack
+    }
+
     /**
      * Implements functionality for strong attacks, also plays attack sound
      * during attack frame (for both light and strong).
