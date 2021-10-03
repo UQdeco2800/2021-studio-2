@@ -1,6 +1,11 @@
 package com.deco2800.game.ai.tasks;
 
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
+
+import com.deco2800.game.components.tasks.DeathPauseTask;
+import com.deco2800.game.services.GameTime;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,15 +47,23 @@ public class AITaskComponent extends Component implements TaskRunner {
      */
     @Override
     public void update() {
-        PriorityTask desiredtask = getHighestPriorityTask();
-        if (desiredtask == null || desiredtask.getPriority() < 0) {
-            return;
-        }
+        // only update tasks if game is not paused
+        if (!ServiceLocator.getTimeSource().isPaused()) {
+            PriorityTask desiredtask = getHighestPriorityTask();
+            if (desiredtask == null || desiredtask.getPriority() < 0) {
+                return;
+            }
+            if (desiredtask != currentTask) {
+                changeTask(desiredtask);
+            }
+            try {
+                if (getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+                }
+            } catch (NullPointerException E) {
 
-        if (desiredtask != currentTask) {
-            changeTask(desiredtask);
+            }
+            currentTask.update();
         }
-        currentTask.update();
     }
 
     /**

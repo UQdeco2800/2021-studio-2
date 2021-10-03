@@ -5,10 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.deco2800.game.areas.TestGameArea1;
 import com.deco2800.game.files.UserSettings;
-import com.deco2800.game.screens.DeathScreen;
-import com.deco2800.game.screens.MainGameScreen;
-import com.deco2800.game.screens.MainMenuScreen;
-import com.deco2800.game.screens.SettingsScreen;
+import com.deco2800.game.screens.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,6 +89,8 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
+            case END_SCREEN:
+                return new EndScreen(this);
             default:
                 return null;
         }
@@ -120,7 +119,7 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, TEST1, TEST2
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, TEST1, TEST2, END_SCREEN
     }
 
     /**

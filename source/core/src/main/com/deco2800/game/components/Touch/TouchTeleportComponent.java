@@ -1,4 +1,4 @@
-package com.deco2800.game.components;
+package com.deco2800.game.components.Touch;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;

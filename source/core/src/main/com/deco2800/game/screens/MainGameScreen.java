@@ -11,6 +11,10 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.pause.PauseInputComponent;
+import com.deco2800.game.components.pause.PauseMenuActions;
+import com.deco2800.game.components.pause.PauseMenuDisplay;
+import com.deco2800.game.components.player.PlayerWin;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -109,7 +113,7 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         if (world.equals("forest")) {
-            this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
+            this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
             this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
         } else if (world.equals("test1")) {
@@ -176,8 +180,16 @@ public class MainGameScreen extends ScreenAdapter {
             ServiceLocator.getEntityService().update();
             renderer.render();
             isPlayerDead();
+            playerWin();
         }
     }
+
+    private void playerWin() {
+        if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+        }
+    }
+
 
     @Override
     public void resize(int width, int height) {
@@ -244,6 +256,9 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
+                .addComponent(new PauseMenuActions(game))
+                .addComponent(new PauseMenuDisplay())
+                .addComponent(new PauseInputComponent())
                 .addComponent(new Terminal())
                 .addComponent(inputComponent)
                 .addComponent(new TerminalDisplay());

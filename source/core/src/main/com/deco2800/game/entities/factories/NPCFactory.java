@@ -9,7 +9,7 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
-import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.tasks.*;

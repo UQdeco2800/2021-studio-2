@@ -101,7 +101,8 @@ public class PlayerFactory {
                 .addComponent(new InventoryComponent(stats.gold))
                 .addComponent(inputComponent)
                 .addComponent(new PlayerStatsDisplay())
-                .addComponent(new PlayerLowHealthDisplay());
+                .addComponent(new PlayerLowHealthDisplay())
+                .addComponent(new PlayerWin());
 
         // Add equipped weapon.
         if (weapon.equals("Scepter")) {
