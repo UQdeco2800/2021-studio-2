@@ -8,6 +8,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
@@ -15,6 +16,7 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
@@ -82,7 +84,8 @@ public class TutorialGameArea extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/outdoorArcher.png"
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -93,7 +96,7 @@ public class TutorialGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas",  "images/outdoorArcher.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -108,11 +111,19 @@ public class TutorialGameArea extends GameArea {
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
     private static Map map;
+    private int playerHealth = 300;
 
     public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game) {
         super();
         this.game = game;
         this.terrainFactory = terrainFactory;
+    }
+
+    public TutorialGameArea(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
+        super();
+        this.game = game;
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
     }
 
     /**
@@ -149,6 +160,7 @@ public class TutorialGameArea extends GameArea {
 
         playMusic();
         spawnTeleport();
+        player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
     private void displayUI() {
@@ -170,14 +182,13 @@ public class TutorialGameArea extends GameArea {
         spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
 
         Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(14.1f, 180.7f), true, true);
+        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
 
         Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
         spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
 
 
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-
         spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
@@ -440,6 +451,14 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void loadAssets() {
+
+        logger.info("Resetting Save File");
+        PlayerSave.Save pSave = PlayerSave.initial();
+        PlayerSave.write(pSave);
+
+
+
+
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(tileTextures);
@@ -472,9 +491,18 @@ public class TutorialGameArea extends GameArea {
      * Sets the dialogue for when the game first loads.
      */
     private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+        PlayerSave.Save pSave = PlayerSave.load();
+
+
+        if(pSave.hasPlayed == false){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+
+            pSave.hasPlayed = true;
+        }
+
+        PlayerSave.write(pSave);
     }
 
     @Override

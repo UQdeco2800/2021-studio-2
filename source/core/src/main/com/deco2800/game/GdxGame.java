@@ -3,6 +3,7 @@ package com.deco2800.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.deco2800.game.areas.TestGameArea1;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.DeathScreen;
 import com.deco2800.game.screens.MainGameScreen;
@@ -106,18 +107,20 @@ public class GdxGame extends Game {
             case MAIN_GAME_FOREST:
                 return new MainGameScreen(this, "forest", currentHealth);
             case MAIN_GAME_TUTORIAL:
-                return new MainGameScreen(this, "tutorial");
+                return new MainGameScreen(this, "tutorial", currentHealth);
             case SETTINGS:
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
+            case TEST1:
+                return new MainGameScreen(this, "test1", currentHealth);
             default:
                 return null;
         }
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, TEST1, TEST2
     }
 
     /**
