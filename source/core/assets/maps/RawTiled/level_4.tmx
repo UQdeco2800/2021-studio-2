@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="180" height="180" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="555">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="180" height="180" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="576">
  <editorsettings>
-  <export target="lvl_one.json" format="json"/>
+  <export target="lvl_4.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Level_One_Tiles" tilewidth="32" tileheight="32" tilecount="576" columns="24">
   <image source="../../Tileset/tileset.png" trans="00ff0a" width="768" height="768"/>
@@ -558,6 +558,25 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="15" name="healthCrateObjects">
+  <object id="555" x="1696" y="4384"/>
+  <object id="556" x="2656" y="3328"/>
+  <object id="557" x="2336" y="3328"/>
+  <object id="560" x="1184" y="2816"/>
+  <object id="561" x="1088" y="2976"/>
+  <object id="562" x="1536" y="2784"/>
+  <object id="563" x="896" y="3840"/>
+  <object id="564" x="2048" y="2240"/>
+  <object id="565" x="2400" y="2432"/>
+  <object id="566" x="3776" y="2592"/>
+  <object id="567" x="3808" y="3168"/>
+  <object id="568" x="3648" y="1984"/>
+  <object id="569" x="3040" y="1568"/>
+  <object id="570" x="3232" y="1984"/>
+  <object id="573" x="3264" y="1440"/>
+  <object id="574" x="3872" y="1632"/>
+  <object id="575" x="1152" y="1632"/>
+ </objectgroup>
  <objectgroup id="11" name="teleportObjects">
   <object id="551" x="3616" y="1344" width="64" height="64"/>
  </objectgroup>
@@ -567,7 +586,7 @@
  <objectgroup id="14" name="bossBounds">
   <object id="554" x="3296" y="1312" width="512" height="640"/>
  </objectgroup>
- <objectgroup id="2" name="wallObjects" visible="0">
+ <objectgroup id="2" name="wallObjects">
   <object id="429" x="3264" y="3680" width="64" height="1376"/>
   <object id="430" x="3328" y="3648" width="1280" height="32"/>
   <object id="431" x="4576" y="1024" width="32" height="2624"/>
@@ -579,7 +598,7 @@
   <object id="438" x="608" y="3584" width="32" height="1536"/>
   <object id="439" x="640" y="5056" width="2688" height="64"/>
  </objectgroup>
- <objectgroup id="8" name="spikeObjects" visible="0"/>
+ <objectgroup id="8" name="spikeObjects"/>
  <objectgroup id="7" name="lavaObjects">
   <object id="427" x="2496" y="3872" width="2112" height="448"/>
   <object id="440" x="2752" y="3328" width="1856" height="544"/>

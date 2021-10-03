@@ -155,6 +155,8 @@ public class GameArea2 extends GameArea {
         spawnTraps();
         spawnPTraps();
 
+        spawnHealthCrateObject();
+
         playMusic();
         spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
@@ -164,6 +166,20 @@ public class GameArea2 extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Level 3"));
         spawnEntity(ui);
+    }
+
+    private void spawnHealthCrateObject() {
+        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     private void spawnTerrain() {

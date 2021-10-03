@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="150" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="554">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="150" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="568">
  <editorsettings>
-  <export target="lvl_one.json" format="json"/>
+  <export target="lvl_3.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Level_One_Tiles" tilewidth="32" tileheight="32" tilecount="576" columns="24">
   <image source="../../Tileset/tileset.png" trans="00ff0a" width="768" height="768"/>
@@ -160,6 +160,21 @@
 451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451,451
 </data>
  </layer>
+ <objectgroup id="15" name="healthCrateObjects">
+  <object id="554" x="1984" y="2560"/>
+  <object id="555" x="2144" y="2560"/>
+  <object id="556" x="1536" y="2208"/>
+  <object id="558" x="1728" y="1728"/>
+  <object id="559" x="2208" y="1408"/>
+  <object id="560" x="3168" y="1920"/>
+  <object id="561" x="3008" y="2560"/>
+  <object id="562" x="3008" y="2816"/>
+  <object id="563" x="3360" y="2848"/>
+  <object id="564" x="2752" y="3008"/>
+  <object id="565" x="2720" y="2432"/>
+  <object id="566" x="3424" y="2368"/>
+  <object id="567" x="3584" y="3104"/>
+ </objectgroup>
  <layer id="5" name="TransTiles" width="150" height="150">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -477,7 +492,7 @@
  <objectgroup id="11" name="teleportObjects">
   <object id="551" x="3392" y="2688" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="2" name="wallObjects" visible="0">
+ <objectgroup id="2" name="wallObjects">
   <object id="240" x="2528" y="1536" width="32" height="64"/>
   <object id="241" x="2528" y="1408" width="32" height="64"/>
   <object id="242" x="2144" y="1408" width="32" height="64"/>
@@ -539,8 +554,8 @@
   <object id="520" x="2112" y="2624" width="32" height="32"/>
   <object id="521" x="2208" y="2624" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="8" name="spikeObjects" visible="0"/>
- <objectgroup id="7" name="lavaObjects" visible="0">
+ <objectgroup id="8" name="spikeObjects"/>
+ <objectgroup id="7" name="lavaObjects">
   <object id="260" x="3328" y="2560" width="64" height="64"/>
   <object id="261" x="3296" y="2624" width="96" height="32"/>
   <object id="262" x="3328" y="2656" width="32" height="32"/>

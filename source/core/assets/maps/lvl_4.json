@@ -99287,5 +99287,109 @@
             "height": 160,
             "width": 800
         }
+    ],
+    "healthCrateObjects": [
+        {
+            "x": 53,
+            "y": 137,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 83,
+            "y": 104,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 73,
+            "y": 104,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 37,
+            "y": 88,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 34,
+            "y": 93,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 48,
+            "y": 87,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 28,
+            "y": 120,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 64,
+            "y": 70,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 75,
+            "y": 76,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 118,
+            "y": 81,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 119,
+            "y": 99,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 114,
+            "y": 62,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 95,
+            "y": 49,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 101,
+            "y": 62,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 102,
+            "y": 45,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 121,
+            "y": 51,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 36,
+            "y": 51,
+            "height": 0,
+            "width": 0
+        }
     ]
 }

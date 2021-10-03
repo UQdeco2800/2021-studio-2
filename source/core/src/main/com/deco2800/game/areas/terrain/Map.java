@@ -19,6 +19,11 @@ public class Map {
     private HashMap<String, Float>[] initTeleportObjects;
     private int[][] LightTiles;
     private HashMap<String, Float>[] bossBounds;
+    private HashMap<String, Float>[] healthCrateObjects;
+
+    public HashMap<String, Float>[] getHealthCrateObjects() {
+        return healthCrateObjects;
+    }
 
     public HashMap<String, Integer> getDimensions() {
         return dimensions;
