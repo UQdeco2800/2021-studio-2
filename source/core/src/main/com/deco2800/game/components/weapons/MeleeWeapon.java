@@ -16,7 +16,7 @@ import com.deco2800.game.services.ServiceLocator;
  * Melee weapon superclass from which all melee weapons will inherit from.
  * Enables entities to attack using a weapon.
  */
-public class MeleeWeapon extends Component {
+public abstract class Weapon extends Component {
     /**
      * animation frame duration measured in milliseconds
      */
@@ -24,12 +24,22 @@ public class MeleeWeapon extends Component {
     /**
      * determines whether entity has attacked.
      */
-    protected boolean hasAttacked;
+    protected boolean hasAttacked = false;
+    /**
+     * Determines whether the axe has used its ranged attack
+     */
+    protected boolean hasRangedAttacked = false;
+    /**
+     * Determines whether the axe has used its ranged attack
+     */
+    protected boolean hasAOEAttacked = false;
 
     /**
      * Time when the entity last attacked, 0 if entity is not attacking.
      */
     protected long timeAtAttack;
+    protected long timeAtRangedAttack;
+    protected long timeAtAOEAttack;
 
     /**
      * Weapon Damage
@@ -70,8 +80,8 @@ public class MeleeWeapon extends Component {
     public static final int LEFT = 3;
     public static final int RIGHT = 4;
 
-    public MeleeWeapon(short targetLayer, int attackPower, float knockback,
-                       Vector2 weaponSize) {
+    public Weapon(short targetLayer, int attackPower, float knockback,
+                  Vector2 weaponSize) {
         this.targetLayer = targetLayer;
         this.attackPower = attackPower;
         this.knockback = knockback;
@@ -117,11 +127,23 @@ public class MeleeWeapon extends Component {
     }
 
     /**
-     * The weapon's strong / alternative attack. This is to be implemented
+     * The weapon's ranged attack. This is to be implemented
      * in weapon sub-classes.
      */
-    public void strongAttack(int attackDirection) {
-        // to be implemented in sub-class
+    public void rangedAttack(int attackDirection) {
+        if (timeAtRangedAttack != 0 || hasRangedAttacked) return;
+        timeAtRangedAttack = ServiceLocator.getTimeSource().getTime();
+        hasRangedAttacked = true;
+    }
+
+    /**
+     * The weapon's AEO (area of effect) attack. This is to be implemented
+     * in weapon sub-classes.
+     */
+    public void aoeAttack() {
+        if (timeAtAOEAttack != 0 || hasAOEAttacked) return;
+        timeAtAOEAttack = ServiceLocator.getTimeSource().getTime();
+        hasAOEAttacked = true;
     }
 
     /**
