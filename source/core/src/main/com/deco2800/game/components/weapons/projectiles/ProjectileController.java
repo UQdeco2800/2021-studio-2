@@ -1,4 +1,4 @@
-package com.deco2800.game.components.weapons;
+package com.deco2800.game.components.weapons.projectiles;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -18,24 +18,18 @@ import org.slf4j.LoggerFactory;
 /**
  * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
  */
-public class Blast extends Component {
-    private Vector2 start;
-    private final float distance = 6f;
-    private HitboxComponent hitbox;
-    private int attackPower;
-    private int knockback;
-    private short targetLayer;
+public abstract class ProjectileController extends Component {
+    protected BlastStats stats;
+    protected HitboxComponent hitbox;
+    protected short targetLayer;
     protected CombatStatsComponent combatStats;
-
-    private static final Logger logger = LoggerFactory.getLogger(MovementTask.class);
-
-    private final long gameTime;
+    protected final long gameTime;
     protected Vector2 target;
 
     /**
      * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
      */
-    public Blast() {
+    public ProjectileController() {
         this.gameTime = ServiceLocator.getTimeSource().getTime();
     }
 
@@ -45,11 +39,8 @@ public class Blast extends Component {
     @Override
     public void create() {
         super.create();
-        this.start = entity.getCenterPosition();
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         this.hitbox = entity.getComponent(HitboxComponent.class);
-        this.attackPower = 50;
-        this.knockback = 100;
         this.targetLayer = PhysicsLayer.NPC;
         this.combatStats = entity.getComponent(CombatStatsComponent.class);
     }
@@ -60,13 +51,7 @@ public class Blast extends Component {
     @Override
     public void update() {
         super.update();
-        Vector2 position = entity.getCenterPosition();
-        if (Math.abs(position.x - start.x) > distance || Math.abs(position.y - start.y) > distance) {
-            //AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
-            //animator.startAnimation("explode");
-            entity.prepareDispose();
-        }
-        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > 1000L) {
+        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > this.stats.projectileLifespan) {
             entity.prepareDispose();
         }
     }
@@ -94,21 +79,26 @@ public class Blast extends Component {
         if (targetStats != null) {
             // add entity's base attack to attack, if they exist.
             if (hitbox == null) {
-                targetStats.weaponHit(attackPower);
+                targetStats.weaponHit(this.stats.attackPower);
             } else {
-                targetStats.hit(combatStats, attackPower);
+                targetStats.hit(combatStats, this.stats.attackPower);
             }
         }
 
         // Apply knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if (physicsComponent != null && knockback > 0f) {
+        if (physicsComponent != null && this.stats.knockback > 0f) {
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-            Vector2 impulse = direction.setLength(knockback);
+            Vector2 impulse = direction.setLength(this.stats.knockback);
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
-        entity.prepareDispose();
+        this.onHit();
         return true; // successfully collided with target.
     }
+
+    /**
+     * Abstract function that reacts to a collision with enemies, varies depending on weapon
+     */
+    protected abstract void onHit();
 }

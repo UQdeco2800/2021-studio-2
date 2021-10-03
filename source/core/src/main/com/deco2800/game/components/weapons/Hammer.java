@@ -3,6 +3,7 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -54,8 +55,7 @@ public class Hammer extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
-        if (timeAtAttack != 0 || hasAttacked
-                || hasStrongAttacked) return;
+        if (isAttacking()) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
@@ -81,12 +81,10 @@ public class Hammer extends MeleeWeapon {
     /**
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
-     *
-     * @param attackDirection - direction of attack, ignored for the time being.
      */
     @Override
-    public void strongAttack(int attackDirection) {
-        if (timeAtAttack != 0 || hasStrongAttacked) {
+    public void aoeAttack() {
+        if (isAttacking()) {
             return;
         }
         hasStrongAttacked = true;
@@ -100,7 +98,7 @@ public class Hammer extends MeleeWeapon {
 
     @Override
     public void rangedAttack(int attackDirection) {
-        if (hasRangeAttacked) {
+        if (isAttacking()) {
             projectile.recall();
             return;
         }
@@ -130,12 +128,17 @@ public class Hammer extends MeleeWeapon {
     }
 
     public void destroyProjectile() {
+        projectile.getEntity().prepareDispose();
         projectile = null;
         hasRangeAttacked = false;
     }
 
     public boolean isEquipped() {
-        return hasRangeAttacked;
+        return !hasRangeAttacked;
+    }
+
+    private boolean isAttacking() {
+        return timeAtAttack != 0 || hasAttacked || hasStrongAttacked || hasRangeAttacked;
     }
 
     /**

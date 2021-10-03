@@ -47,14 +47,6 @@ class AxeTest {
     }
 
     @Test
-    void shouldStrongAttack() {
-        short targetLayer = (1 << 3);
-        Entity entity = createAttacker(targetLayer);
-        // check that this doesn't throw exceptions
-        entity.getComponent(Axe.class).strongAttack(1);
-    }
-
-    @Test
     void shouldCreateWeaponHitbox() {
         short targetLayer = (1 << 3);
         Entity entity = createAttacker(targetLayer);

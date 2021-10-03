@@ -1,12 +1,11 @@
-package com.deco2800.game.components.weapons;
+package com.deco2800.game.components.weapons.projectiles;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Component;
-import com.deco2800.game.components.tasks.MovementTask;
+import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -14,13 +13,11 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.ServiceLocator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Component that is the main controller of the projectile entity.
  */
-public class HammerProjectile extends Component {
+public class HammerProjectile extends ProjectileController {
 
     /** Sound that plays when hammer hits enemy */
     private final Sound impactSound;
@@ -73,8 +70,6 @@ public class HammerProjectile extends Component {
      */
     @Override
     public void create() {
-        super.create();
-
         this.start = entity.getPosition();
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         this.hitbox = entity.getComponent(HitboxComponent.class);
@@ -82,12 +77,8 @@ public class HammerProjectile extends Component {
         this.combatStats = entity.getComponent(CombatStatsComponent.class);
     }
 
-    /**
-     * Destroys the blast if it's at the end of its lifespan
-     */
     @Override
     public void update() {
-        super.update();
         triggerAttackStage();
     }
 
@@ -99,7 +90,7 @@ public class HammerProjectile extends Component {
         Vector2 position = entity.getPosition();
 
         if (this.status == THROWING) {
-            float distance = 6f;
+            float distance = 6f; // default distance
             // Check if projectile has reached target, or has timed out (2 seconds)
             if ((Math.abs(position.x - start.x) > distance || Math.abs(position.y - start.y) > distance) ||
                     (ServiceLocator.getTimeSource().getTime() - gameTime) > 2000L) {
@@ -108,7 +99,7 @@ public class HammerProjectile extends Component {
                 movingComponent.setMoving(false);
                 hitbox.setEnabled(false);
             }
-        // Do nothing if static (changed by recall function
+        // Do nothing if static (changed by recall function)
         } else if (this.status == RECALLING) {
             // Update target as being position of owner entity.
             movingComponent.setTarget(owner.getEntity().getPosition());
@@ -118,7 +109,6 @@ public class HammerProjectile extends Component {
             if (distance < 0.25f ||
                     (ServiceLocator.getTimeSource().getTime() - gameTime) > 1000L) {
                 owner.destroyProjectile();
-                entity.prepareDispose();
             }
         }
     }
@@ -156,7 +146,6 @@ public class HammerProjectile extends Component {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (targetStats != null) {
-            impactSound.play();
             // add entity's base attack to attack, if they exist.
             if (combatStats == null) {
                 targetStats.weaponHit(attackPower);
@@ -174,5 +163,10 @@ public class HammerProjectile extends Component {
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         return true; // successfully collided with target.
+    }
+
+    @Override
+    protected void onHit() {
+        impactSound.play();
     }
 }

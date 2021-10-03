@@ -13,9 +13,9 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
-import com.deco2800.game.components.weapons.Blast;
 import com.deco2800.game.components.weapons.Hammer;
-import com.deco2800.game.components.weapons.HammerProjectile;
+import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
+import com.deco2800.game.components.weapons.projectiles.BlastController;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.entities.LineEntity;
@@ -276,14 +276,13 @@ public class WeaponFactory {
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
-        Entity blast = new Entity()
+        return new Entity()
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new Blast());
-        return blast;
+                .addComponent(new BlastController());
     }
 
     /**
@@ -301,7 +300,7 @@ public class WeaponFactory {
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
-        Entity mjolnir = new Entity()
+        return new Entity()
                 //.addComponent(new AnimationRenderComponent())
                 .addComponent(new TextureRenderComponent("images/hammer.png"))
                 .addComponent(new PhysicsComponent())
@@ -309,7 +308,6 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(new HammerProjectile(targetLayer, owner));
-        return mjolnir;
     }
     public WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");

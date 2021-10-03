@@ -37,6 +37,8 @@ public class MeleeWeapon extends Component {
      * Time when the entity last attacked, 0 if entity is not attacking.
      */
     protected long timeAtAttack;
+    protected long timeAtRangedAttack;
+    protected long timeAtAOEAttack;
 
     /**
      * Weapon Damage
@@ -125,19 +127,18 @@ public class MeleeWeapon extends Component {
     }
 
     /**
-     * The weapon's strong / alternative attack. This is to be implemented
-     * in weapon sub-classes.
-     */
-    public void strongAttack(int attackDirection) {
-        // to be implemented in sub-class
-    }
-
-    /**
-     * The weapon's strong / alternative attack. This is to be implemented
+     * The weapon's ranged attack. This is to be implemented
      * in weapon sub-classes.
      */
     public void rangedAttack(int attackDirection) {
-        // to be implemented in sub-class
+        // To be implemented in sub-classes
+    }
+
+    /**
+     * The weapon's AEO (area of effect) attack.
+     */
+    public void aoeAttack() {
+        // To be implemented in sub-classes
     }
 
     /**
@@ -171,7 +172,7 @@ public class MeleeWeapon extends Component {
 
     /**
      * Sets all frame information, which determines when an attack lands,
-     * and how long the attack is.
+     * and how long the attack lasts.
      * @param frameDuration how long each attack animation frame takes in milliseconds
      * @param numOfFrames number of frames in the attack animation
      * @param attackIndex the index of the frame where the attack lands. Attack lasts for

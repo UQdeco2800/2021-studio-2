@@ -32,12 +32,12 @@ public class PlayerActions extends Component {
         entity.getEvents().addListener("walk", this::walk);
         entity.getEvents().addListener("walkStop", this::stopWalking);
         entity.getEvents().addListener("attack", this::attack);
-        entity.getEvents().addListener("strongAttack", this::strongAttack);
-        entity.getEvents().addListener("mouseAttack", this::mouseAttack);
+        entity.getEvents().addListener("aoeAttack", this::aoeAttack);
         entity.getEvents().addListener("rangedAttack", this::rangedAttack);
+        entity.getEvents().addListener("mouseAttack", this::mouseAttack);
+        entity.getEvents().addListener("mouseRangedAttack", this::mouseRangedAttack);
         entity.getEvents().addListener("lockMovement", this::lockMovement);
         entity.getEvents().addListener("dash", this::dash);
-        entity.getEvents().addListener("mouseStrongAttack", this::mouseStrongAttack);
     }
 
     /**
@@ -109,7 +109,11 @@ public class PlayerActions extends Component {
         }
     }
 
-    MeleeWeapon getEquippedWeapon() {
+    /**
+     * Gets the players currently equipped weapon.
+     * @return the currently equipped melee weapon.
+     */
+    public MeleeWeapon getEquippedWeapon() {
         MeleeWeapon weapon = entity.getComponent(Axe.class);
         if (weapon == null) {
             weapon = entity.getComponent(Hammer.class);
@@ -123,6 +127,11 @@ public class PlayerActions extends Component {
         return weapon;
     }
 
+    /**
+     * Gets an attack direction based on an input key.
+     * @param keycode keycode of the player input
+     * @return MeleeWeapon.direction of the attack.
+     */
     int getAttackDirection(int keycode) {
         switch (keycode) {
             case Input.Keys.W:
@@ -154,18 +163,6 @@ public class PlayerActions extends Component {
     }
 
     /**
-     * Makes player use the strong attack associated with its equipped weapon.
-     */
-    void strongAttack(int keycode) {
-        MeleeWeapon weapon = getEquippedWeapon();
-        if (weapon == null) {
-            return;
-        }
-        int attackDirection = getAttackDirection(keycode);
-        weapon.strongAttack(attackDirection);
-    }
-
-    /**
      * Makes player use the ranged attack associated with its equipped weapon.
      */
     void rangedAttack(int keycode) {
@@ -175,6 +172,17 @@ public class PlayerActions extends Component {
         }
         int attackDirection = getAttackDirection(keycode);
         weapon.rangedAttack(attackDirection);
+    }
+
+    /**
+     * Makes player use the AOE attack associated with its equipped weapon.
+     */
+    void aoeAttack() {
+        MeleeWeapon weapon = getEquippedWeapon();
+        if (weapon == null) {
+            return;
+        }
+        weapon.aoeAttack();
     }
 
     /**
@@ -192,6 +200,24 @@ public class PlayerActions extends Component {
                 coordinates.y - Gdx.graphics.getHeight() / 2f
         ));
         weapon.attack(Vector2Utils.toWeaponDirection(attackDirection));
+        lockMovement(weapon.getTotalAttackTime());
+    }
+
+    /**
+     * Makes the player use a ranged attack using a mouse click.
+     *
+     * @param coordinates the mouse coordinates of the click
+     */
+    void mouseRangedAttack(Vector2 coordinates) {
+        MeleeWeapon weapon = getEquippedWeapon();
+        if (weapon == null) {
+            return;
+        }
+        Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
+                coordinates.x - Gdx.graphics.getWidth() / 2f,
+                coordinates.y - Gdx.graphics.getHeight() / 2f
+        ));
+        weapon.rangedAttack(Vector2Utils.toWeaponDirection(attackDirection));
         lockMovement(weapon.getTotalAttackTime());
     }
 
@@ -219,19 +245,6 @@ public class PlayerActions extends Component {
         } else if (lastDirection.x < 0) {
             entity.getEvents().trigger("stopLeft");
         }
-    }
-
-    void mouseStrongAttack(Vector2 coordinates) {
-        MeleeWeapon weapon = getEquippedWeapon();
-        if (weapon == null) {
-            return;
-        }
-        Vector2 attackDirection = Vector2Utils.toDirection(new Vector2(
-                coordinates.x - Gdx.graphics.getWidth() / 2f,
-                coordinates.y - Gdx.graphics.getHeight() / 2f
-        ));
-        weapon.strongAttack(Vector2Utils.toWeaponDirection(attackDirection));
-        lockMovement(weapon.getTotalAttackTime());
     }
 
     /**
