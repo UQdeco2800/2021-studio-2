@@ -287,9 +287,11 @@ public class WeaponFactory {
     }
 
     /**
-     * Makes an energy ball that will move in a straight line and damage enemies
-     *
+     * Makes a hammer projectile that will move towards a target, and then
+     * back to the owner entity, when called.
      * @param target the location that the blast will try and reach
+     * @param targetLayer the physics layer mjolnir can damage
+     * @param owner - the hammer weapon component that controls the projectile.
      * @return entity
      */
     public static Entity createMjolnir(short targetLayer, Vector2 target, Hammer owner) {
@@ -306,7 +308,7 @@ public class WeaponFactory {
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new HammerProjectile(targetLayer).setOwner(owner));
+                .addComponent(new HammerProjectile(targetLayer, owner));
         return mjolnir;
     }
     public WeaponFactory() {

@@ -125,6 +125,7 @@ public class Hammer extends MeleeWeapon {
         this.projectile = rangedMjolnir.getComponent(HammerProjectile.class);
         ServiceLocator.getGameAreaService().spawnEntityAt(
                 rangedMjolnir, entity.getPosition(), true, true);
+        attackSound.play();
         hasRangeAttacked = true;
     }
 
