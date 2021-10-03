@@ -81,39 +81,20 @@ public class TouchMoveComponent extends TouchComponent {
         actions.stopWalking();
         input.stopWalking();
         openCutsceneBars();
-        movePlayer(collidedEntity, actions, input);
+        movePlayer(actions, input);
     }
 
     /**
      * Moves the character in the direction specified in the constructor,
      * the character is the entity that will be moved and changing the actions of that entity.
      *
-     * @param player  the entity that will be moved
      * @param actions the actions of the entity moving
      * @param input   the input controller of the player
      */
-    private void movePlayer(Entity player, PlayerActions actions, KeyboardPlayerInputComponent input) {
-        Vector2 position = player.getPosition();
+    private void movePlayer(PlayerActions actions, KeyboardPlayerInputComponent input) {
         if (direction.x != 0 || direction.y != 0) {
             input.lockPlayer();
             actions.walk(direction);
-            checkPosition(player, actions, position, input);
         }
-    }
-
-    /**
-     * Repeatedly checks if the player has moved in the correct direction.
-     *
-     * @param player   the entity to be moved
-     * @param actions  class to change the what the entity is doing
-     * @param position start position of the entity
-     */
-    private void checkPosition(Entity player, PlayerActions actions, Vector2 position,
-                               KeyboardPlayerInputComponent input) {
-        float xDifference = player.getPosition().x - position.x > 0 ?
-                player.getPosition().x - position.x : -1 * (player.getPosition().x - position.x);
-
-        float yDifference = player.getPosition().y - position.y > 0 ?
-                player.getPosition().y - position.y : -1 * (player.getPosition().y - position.y);
     }
 }

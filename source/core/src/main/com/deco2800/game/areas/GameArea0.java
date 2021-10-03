@@ -154,6 +154,8 @@ public class GameArea0 extends GameArea {
         spawnTraps();
         spawnPTraps();
 
+        spawnCutsceneTrigger();
+
         playMusic();
         spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
@@ -163,6 +165,30 @@ public class GameArea0 extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Level 1"));
         spawnEntity(ui);
+    }
+
+    private void spawnCutsceneTrigger() {
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
+        spawnEntityAt(moveTrigger4, new Vector2(17.3f, 66f), true, true);
+//        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
+//                DialogueSet.ORDERED);
+//        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
+//
+//        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+//                DialogueSet.BOSS_DEFEATED_BEFORE);
+//        spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
+//
+//        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
+//        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
+//
+//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
+//        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
+//
+//        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
+//        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
+//
+//        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+//        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
     private void spawnTerrain() {
@@ -236,6 +262,8 @@ public class GameArea0 extends GameArea {
         int height = map.getDimensions().get("n_tiles_height");
         spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
                 true, true);
+        System.out.println(spawn.get("x").intValue());
+        System.out.println(spawn.get("y").intValue());
         player = newPlayer;
     }
 
