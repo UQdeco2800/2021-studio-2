@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.areas.ForestGameArea;
-import com.deco2800.game.areas.GameArea;
-import com.deco2800.game.areas.TestGameArea1;
-import com.deco2800.game.areas.TutorialGameArea;
+import com.deco2800.game.areas.*;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
@@ -99,7 +96,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game);
+            this.gameArea = new GameArea0(terrainFactory, game);
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
