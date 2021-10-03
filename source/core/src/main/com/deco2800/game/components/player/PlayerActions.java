@@ -34,6 +34,7 @@ public class PlayerActions extends Component {
         entity.getEvents().addListener("attack", this::attack);
         entity.getEvents().addListener("strongAttack", this::strongAttack);
         entity.getEvents().addListener("mouseAttack", this::mouseAttack);
+        entity.getEvents().addListener("rangedAttack", this::rangedAttack);
         entity.getEvents().addListener("lockMovement", this::lockMovement);
         entity.getEvents().addListener("dash", this::dash);
         entity.getEvents().addListener("mouseStrongAttack", this::mouseStrongAttack);
@@ -122,6 +123,21 @@ public class PlayerActions extends Component {
         return weapon;
     }
 
+    int getAttackDirection(int keycode) {
+        switch (keycode) {
+            case Input.Keys.W:
+                return MeleeWeapon.UP;
+            case Input.Keys.S:
+                return MeleeWeapon.DOWN;
+            case Input.Keys.A:
+                return MeleeWeapon.LEFT;
+            case Input.Keys.D:
+                return MeleeWeapon.RIGHT;
+            default:
+                return MeleeWeapon.CENTER;
+        }
+    }
+
     /**
      * Makes the player attack. Player currently only uses an axe.
      *
@@ -132,21 +148,7 @@ public class PlayerActions extends Component {
         if (weapon == null) {
             return;
         }
-        int attackDirection = 0;
-        switch (keycode) {
-            case Input.Keys.W:
-                attackDirection = MeleeWeapon.UP;
-                break;
-            case Input.Keys.S:
-                attackDirection = MeleeWeapon.DOWN;
-                break;
-            case Input.Keys.A:
-                attackDirection = MeleeWeapon.LEFT;
-                break;
-            case Input.Keys.D:
-                attackDirection = MeleeWeapon.RIGHT;
-                break;
-        }
+        int attackDirection = getAttackDirection(keycode);
         weapon.attack(attackDirection);
         lockMovement(weapon.getTotalAttackTime());
     }
@@ -159,22 +161,20 @@ public class PlayerActions extends Component {
         if (weapon == null) {
             return;
         }
-        int attackDirection = 0;
-        switch (keycode) {
-            case Input.Keys.W:
-                attackDirection = MeleeWeapon.UP;
-                break;
-            case Input.Keys.S:
-                attackDirection = MeleeWeapon.DOWN;
-                break;
-            case Input.Keys.A:
-                attackDirection = MeleeWeapon.LEFT;
-                break;
-            case Input.Keys.D:
-                attackDirection = MeleeWeapon.RIGHT;
-                break;
-        }
+        int attackDirection = getAttackDirection(keycode);
         weapon.strongAttack(attackDirection);
+    }
+
+    /**
+     * Makes player use the ranged attack associated with its equipped weapon.
+     */
+    void rangedAttack(int keycode) {
+        MeleeWeapon weapon = getEquippedWeapon();
+        if (weapon == null) {
+            return;
+        }
+        int attackDirection = getAttackDirection(keycode);
+        weapon.rangedAttack(attackDirection);
     }
 
     /**

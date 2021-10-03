@@ -47,10 +47,6 @@ public class Hammer extends MeleeWeapon {
         hasRangeAttacked = false;
     }
 
-    public void create(){
-        super.create();
-    }
-
     /**
      * Attacks, but also plays animation.
      *
@@ -88,9 +84,9 @@ public class Hammer extends MeleeWeapon {
      *
      * @param attackDirection - direction of attack, ignored for the time being.
      */
+    @Override
     public void strongAttack(int attackDirection) {
         if (timeAtAttack != 0 || hasStrongAttacked) {
-            System.out.println("BOIJREOIERJFIERF");
             return;
         }
         hasStrongAttacked = true;
@@ -100,9 +96,9 @@ public class Hammer extends MeleeWeapon {
             return;
         }
         animator.startAnimation("hammer_aoe");
-        rangedAttack(attackDirection);
     }
 
+    @Override
     public void rangedAttack(int attackDirection) {
         if (hasRangeAttacked) {
             projectile.recall();
@@ -124,8 +120,7 @@ public class Hammer extends MeleeWeapon {
                 target.x += range;
                 break;
         }
-        // determine whether entity has ranged attacked yet.
-
+        // Spawn projectile
         Entity rangedMjolnir = WeaponFactory.createMjolnir(this.targetLayer, target, this);
         this.projectile = rangedMjolnir.getComponent(HammerProjectile.class);
         ServiceLocator.getGameAreaService().spawnEntityAt(
@@ -150,7 +145,8 @@ public class Hammer extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
+        if (timeSinceAttack > attackFrameDuration * attackFrameIndex &&
+                timeSinceAttack <= (attackFrameIndex + 1) * attackFrameDuration) {
             if (hasStrongAttacked) {
                 attackSound.play();
                 weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);

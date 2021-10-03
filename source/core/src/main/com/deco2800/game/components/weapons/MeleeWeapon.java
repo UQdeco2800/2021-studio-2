@@ -85,7 +85,7 @@ public class MeleeWeapon extends Component {
         this.weaponSize = weaponSize;
         timeAtAttack = 0L;
         // default attack frame information
-        setAttackFrames(100L, 3, 2);
+        setAttackFrames(100L, 3, 1);
         hasAttacked = false;
     }
 
@@ -133,6 +133,14 @@ public class MeleeWeapon extends Component {
     }
 
     /**
+     * The weapon's strong / alternative attack. This is to be implemented
+     * in weapon sub-classes.
+     */
+    public void rangedAttack(int attackDirection) {
+        // to be implemented in sub-class
+    }
+
+    /**
      * Used by update() to sync weapon hit box with animation.
      *
      * @param timeSinceAttack the time elapsed since the entity last attacked
@@ -140,12 +148,13 @@ public class MeleeWeapon extends Component {
      */
     protected void triggerAttackStage(long timeSinceAttack) {
         // Set hit box during attack frame
-        if (hasAttacked && timeSinceAttack > (attackFrameDuration * attackFrameIndex)
-                && timeSinceAttack < attackFrameIndex * attackFrameDuration) {
+        if (hasAttacked && timeSinceAttack > attackFrameIndex * attackFrameDuration &&
+                timeSinceAttack < (attackFrameIndex + 1) * attackFrameDuration) {
+
             weaponHitbox.set(weaponSize.cpy(), attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
             // Destroy hit box as soon as attack frame ends.
-        } else if (timeSinceAttack >= attackFrameIndex * attackFrameDuration) {
+        } else if (timeSinceAttack >= (attackFrameIndex + 1) * attackFrameDuration) {
             timeAtAttack = 0;
             weaponHitbox.destroy();
         }

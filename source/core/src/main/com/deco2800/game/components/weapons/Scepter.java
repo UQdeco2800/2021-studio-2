@@ -79,7 +79,7 @@ public class Scepter extends MeleeWeapon {
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
      */
-    public void strongAttack(int attackDirection) {
+    public void rangedAttack(int attackDirection) {
         hasStrongAttacked = true;
         Vector2 target = entity.getCenterPosition();
         switch (attackDirection) {

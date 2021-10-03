@@ -72,6 +72,10 @@ public class HammerProjectile extends Component {
         triggerAttackStage();
     }
 
+    /**
+     * Sets direction and velocity of projectile depending on current stage of
+     * projectile.
+     */
     public void triggerAttackStage() {
         Vector2 position = entity.getPosition();
         if (this.status == THROWING) {
@@ -95,6 +99,9 @@ public class HammerProjectile extends Component {
         }
     }
 
+    /**
+     * Sets
+     */
     public void recall() {
         System.out.println("recalling!");
         movingComponent.setMoving(true);

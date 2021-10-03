@@ -112,6 +112,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             case Keys.Q:
                 entity.getEvents().trigger("strongAttack", lastKeyPressed);
                 return true;
+            case Keys.ALT_LEFT:
+                entity.getEvents().trigger("rangedAttack", lastKeyPressed);
+                return true;
             case Keys.SHIFT_LEFT:
                 this.speedMultiplier = 1.4f;
                 triggerWalkEvent();
