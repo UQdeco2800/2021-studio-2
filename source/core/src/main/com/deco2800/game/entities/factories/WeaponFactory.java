@@ -14,6 +14,8 @@ import com.deco2800.game.components.tasks.EntityHoverTask;
 import com.deco2800.game.components.tasks.ProjectileMovementTask;
 import com.deco2800.game.components.tasks.VortexSpawnTask;
 import com.deco2800.game.components.weapons.Blast;
+import com.deco2800.game.components.weapons.Hammer;
+import com.deco2800.game.components.weapons.HammerProjectile;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.entities.LineEntity;
@@ -290,8 +292,8 @@ public class WeaponFactory {
      * @param target the location that the blast will try and reach
      * @return entity
      */
-    public static Entity createMjolnir(Vector2 target) {
-        float speed = 8f;
+    public static Entity createMjolnir(short targetLayer, Vector2 target, Hammer owner) {
+        float speed = 10f;
 
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
@@ -299,11 +301,12 @@ public class WeaponFactory {
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
         Entity mjolnir = new Entity()
                 //.addComponent(new AnimationRenderComponent())
+                .addComponent(new TextureRenderComponent("images/hammer.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new Blast());
+                .addComponent(new HammerProjectile(targetLayer).setOwner(owner));
         return mjolnir;
     }
     public WeaponFactory() {

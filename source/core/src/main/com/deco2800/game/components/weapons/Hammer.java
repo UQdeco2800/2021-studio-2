@@ -3,6 +3,8 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -29,7 +31,9 @@ public class Hammer extends MeleeWeapon {
      */
     private boolean hasStrongAttacked;
 
-    private boolean isEquipped;
+    private boolean hasRangeAttacked;
+
+    private HammerProjectile projectile;
 
     public Hammer(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
 
@@ -40,7 +44,11 @@ public class Hammer extends MeleeWeapon {
                 .getAsset("sounds/impact.ogg", Sound.class);
         strongAttackSize = new Vector2(2f, 2f); // default size
         hasStrongAttacked = false;
-        isEquipped = true;
+        hasRangeAttacked = false;
+    }
+
+    public void create(){
+        super.create();
     }
 
     /**
@@ -51,7 +59,7 @@ public class Hammer extends MeleeWeapon {
     @Override
     public void attack(int attackDirection) {
         if (timeAtAttack != 0 || hasAttacked
-                || hasStrongAttacked || !isEquipped) return;
+                || hasStrongAttacked) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
@@ -81,7 +89,8 @@ public class Hammer extends MeleeWeapon {
      * @param attackDirection - direction of attack, ignored for the time being.
      */
     public void strongAttack(int attackDirection) {
-        if (timeAtAttack != 0 || hasStrongAttacked || !isEquipped) {
+        if (timeAtAttack != 0 || hasStrongAttacked) {
+            System.out.println("BOIJREOIERJFIERF");
             return;
         }
         hasStrongAttacked = true;
@@ -91,16 +100,47 @@ public class Hammer extends MeleeWeapon {
             return;
         }
         animator.startAnimation("hammer_aoe");
+        rangedAttack(attackDirection);
     }
 
     public void rangedAttack(int attackDirection) {
-        isEquipped = false;
+        if (hasRangeAttacked) {
+            projectile.recall();
+            return;
+        }
+        Vector2 target = entity.getPosition();
+        float range = 6f;
+        switch (attackDirection) {
+            case UP:
+                target.y += range;
+                break;
+            case DOWN:
+                target.y -= range;
+                break;
+            case LEFT:
+                target.x -= range;
+                break;
+            case RIGHT:
+                target.x += range;
+                break;
+        }
+        // determine whether entity has ranged attacked yet.
+
+        Entity rangedMjolnir = WeaponFactory.createMjolnir(this.targetLayer, target, this);
+        this.projectile = rangedMjolnir.getComponent(HammerProjectile.class);
+        ServiceLocator.getGameAreaService().spawnEntityAt(
+                rangedMjolnir, entity.getPosition(), true, true);
+        hasRangeAttacked = true;
+    }
+
+    public void destroyProjectile() {
+        projectile = null;
+        hasRangeAttacked = false;
     }
 
     public boolean isEquipped() {
-        return this.isEquipped;
+        return hasRangeAttacked;
     }
-
 
     /**
      * Implements functionality for strong attacks, also plays attack sound
