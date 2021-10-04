@@ -379,10 +379,10 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/bossFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))

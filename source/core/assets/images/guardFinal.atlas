@@ -116,3 +116,10 @@ stunRight
   orig: 94, 110
   offset: 0, 0
   index: -1
+default
+  rotate: false
+  xy: 2, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1

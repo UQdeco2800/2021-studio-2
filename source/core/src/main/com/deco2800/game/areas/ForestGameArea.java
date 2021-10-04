@@ -74,7 +74,9 @@ public class ForestGameArea extends GameArea {
             "images/meleeAnimationsTextured.png",
             "images/meleeFinal.png",
             "images/assassinFinal.png",
-            "images/guardFinal.png"
+            "images/guardFinal.png",
+            "images/rangedAllFinal.png",
+            "images/bossFinal.png"
 
 
     };
@@ -86,7 +88,7 @@ public class ForestGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas", "images/bossFixed.atlas", "images/meleeAnimationsTextured.atlas",
-            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas"
+            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas"
 
 
     };
@@ -124,12 +126,12 @@ public class ForestGameArea extends GameArea {
         spawnTrees();
         spawnPlayer();
         spawnCrate();
-        spawnMeleeElf();
-        spawnElfGuard();
+//        spawnMeleeElf();
+//        spawnElfGuard();
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
-//        spawnBoss();
+        spawnBoss();
 //        playMusic();
         setDialogue();
     }
