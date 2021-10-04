@@ -57,17 +57,52 @@ public class NPCFactory {
      * @param target entity to chase
      * @return entity
      */
+
+//    public static void MeleeAnimations(){
+//       AnimationRenderComponent animator =
+//                new AnimationRenderComponent(
+//                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
+//
+//        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+//
+//        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+//        //BACK DEATH??
+//
+//        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+//
+//        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+//
+//        createMeleeElf().elf
+//        addComponent(animator);
+//
+//    }
     public static Entity createMeleeElf(Entity target) {
         Entity elf = createBaseNPCNoAI();
         MeleeEnemyConfig config = configs.elfMelee;
+//        //AnimationRenderComponent animator =MeleeAnimations();
+//        MeleeAnimations();
+
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
+
         animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
@@ -137,6 +172,12 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+
+        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.LOOP);
@@ -146,6 +187,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController());
+
         elfGuard.setEntityType("AlertCaller");
 
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
@@ -185,13 +227,24 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+
+        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+
+        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
 
 
         anchoredElf
@@ -240,13 +293,24 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+
+        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+
+        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -305,26 +369,48 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/rangedAllFinal.atlas", TextureAtlas.class));
 
+
+
+
+
         if (type.equals("fastArrow")) {
             elf.setEntityType("assassin");
-            animator.addAnimation("assassinMoveLeft", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinMoveRight", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinMoveUp", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinMoveDown", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinLeft", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.LOOP);
-            animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("assassinMoveLeft", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("assassinMoveRight", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("assassinMoveUp", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("assassinMoveDown", 0.1f, Animation.PlayMode.LOOP);
+
+            animator.addAnimation("assassinLeft", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinRight", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinUp", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinDown", 0.5f, Animation.PlayMode.LOOP);
+
+            animator.addAnimation("assassinStunLeft", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinStunRight", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinStunUp", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinStunDown", 0.5f, Animation.PlayMode.NORMAL);
+
+
         } else {
             elf.setEntityType("ranged");
-            animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerMoveRight", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerMoveUp", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerMoveDown", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerLeft", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerRight", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerUp", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rangerDown", 0.1f, Animation.PlayMode.NORMAL);
+//            animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("rangerMoveRight", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("rangerMoveUp", 0.1f, Animation.PlayMode.LOOP);
+//            animator.addAnimation("rangerMoveDown", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangerLeft", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangerRight", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangerUp", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangerDown", 0.5f, Animation.PlayMode.LOOP);
+
+            animator.addAnimation("rangerStunLeft", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerStunRight", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerStunUp", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rangerStunDown", 0.5f, Animation.PlayMode.NORMAL);
+
+//            animator.addAnimation("rangerstunLeft", 0.5f, Animation.PlayMode.NORMAL);
+//            animator.addAnimation("rangerstunRight", 0.5f, Animation.PlayMode.NORMAL);
+//            animator.addAnimation("rangerstunUp", 0.5f, Animation.PlayMode.NORMAL);
+//            animator.addAnimation("rangerstunDown", 0.5f, Animation.PlayMode.NORMAL);
         }
 
         elf
@@ -367,6 +453,8 @@ public class NPCFactory {
                                 target, 10, 7f, 10f))
                         .addTask(new SpawnMinionsTask(target))
                         .addTask(new TeleportationTask(target, 2000))
+                        .addTask(new MeleeChaseTask(
+                                target, 10, 15f, 20f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
@@ -383,6 +471,16 @@ public class NPCFactory {
         animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+
+        animator.addAnimation("attackLeft", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackRight", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackUp", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackDown", 0.5f, Animation.PlayMode.LOOP);
+
+        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
 
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))

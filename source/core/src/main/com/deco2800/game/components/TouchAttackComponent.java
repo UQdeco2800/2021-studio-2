@@ -101,7 +101,7 @@ public class TouchAttackComponent extends TouchComponent {
         }
 
         if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC){
-            System.out.println("player collision");
+            //System.out.println("player collision");
             this.getEntity().getComponent(PhysicsMovementComponent.class).setStun();
 
         }

@@ -87,28 +87,28 @@ assassinUp
   orig: 94, 110
   offset: 0, 0
   index: 3
-assassinstunBack
+assassinStunUp
   rotate: false
   xy: 290, 226
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-assassinstunFront
+assassinStunDown
   rotate: false
   xy: 386, 338
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-assassinstunLeft
+assassinStunLeft
   rotate: false
   xy: 194, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-assassinstunRight
+assassinStunRight
   rotate: false
   xy: 290, 114
   size: 94, 110
@@ -199,34 +199,34 @@ rangerUp
   orig: 94, 110
   offset: 0, 0
   index: 3
-rangerstunBack
+rangerStunUp
   rotate: false
   xy: 674, 226
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
-rangerstunFront
+  index: 1
+rangerStunDown
   rotate: false
   xy: 770, 338
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
-rangerstunLeft
+  index: 1
+rangerStunLeft
   rotate: false
   xy: 578, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
-rangerstunRight
+  index: 1
+rangerStunRight
   rotate: false
   xy: 674, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
+  index: 1
 default
   rotate: false
   xy: 386, 226

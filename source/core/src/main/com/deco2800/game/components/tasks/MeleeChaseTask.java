@@ -54,12 +54,14 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
             this.owner.getEntity().getEvents().trigger("wanderStart");
             //System.out.println(super.getDistanceToTarget() + "<" + owner.getEntity().getAttackRange());
             this.owner.getEntity().getComponent(PhysicsMovementComponent.class).setAnimateAttack();
+            //System.out.println("setAnimateAttack()");
 
         } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
             //this.owner.getEntity().getEvents().trigger("fleeStart");
             //System.out.println(super.getDistanceToTarget() + ">" + owner.getEntity().getAttackRange());
             this.owner.getEntity().getEvents().trigger("chaseStart");
             this.owner.getEntity().getComponent(PhysicsMovementComponent.class).stopAnimateAttack();
+            //System.out.println("stopAnimateAttack()");
         }
     }
 

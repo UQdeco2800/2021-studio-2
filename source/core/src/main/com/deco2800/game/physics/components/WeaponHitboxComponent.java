@@ -2,9 +2,12 @@ package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Shape;
+import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.utils.math.Vector2Utils;
+import com.deco2800.game.physics.PhysicsLayer;
 
 /**
  * Represents the hit box used by weapons.
@@ -19,6 +22,14 @@ public class WeaponHitboxComponent extends ColliderComponent {
         // Weapon hit boxes aren't set by default.
     }
 
+//    protected void onCollisionStart(Fixture me, Fixture other) {
+//        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC){
+//            System.out.println("player collision");
+//            //this.getEntity().getComponent(PhysicsMovementComponent.class).setStun();
+//
+//        }
+
+    //}
     /**
      * Set physics as a box with a given size. Box is centered around the entity.
      *
@@ -27,6 +38,8 @@ public class WeaponHitboxComponent extends ColliderComponent {
      * @param direction the direction of the hit box, relative to the entity.
      * @return self
      */
+
+
     @SuppressWarnings("UnusedReturnValue")
     public ColliderComponent set(Vector2 size, int direction) {
 
