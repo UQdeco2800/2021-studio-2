@@ -225,6 +225,10 @@ public class NPCFactory {
                         .addTask(new AnchoredChaseTask(
                                 target, 3f, 4f, anchor, anchorSize))
                         .addTask(new AnchoredRetreatTask(anchor, anchorSize))
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new MeleeChaseTask(
+                                target, 10, 15f, 20f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         anchoredElf.addComponent(aiComponent);
@@ -268,6 +272,7 @@ public class NPCFactory {
         anchoredElf.setScale(0.6f, 1f);
         anchoredElf.setEntityType("melee");
         PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
+        anchoredElf.setAttackRange(6);
         return anchoredElf;
     }
 

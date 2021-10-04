@@ -80,7 +80,7 @@ public class ForestGameArea extends GameArea {
             "images/assassinFinal.png",
             "images/guardFinal.png",
             "images/rangedAllFinal.png",
-            "images/bossFinal.png"
+            "images/bossFinal.png",
             "player_scepter.png",
             "player_hammer.png",
             "Assets/gametile-127.png",
