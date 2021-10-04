@@ -54,7 +54,9 @@ public class ColliderComponent extends Component {
     @Override
     public void update() {
         if (lastAngle != entity.getAngle()) {
-            fixtureDef.shape = makeBoundingBox();
+            if (fixtureDef.shape.getType() != Shape.Type.Circle) {
+                fixtureDef.shape = makeBoundingBox();
+            }
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
             physBody.destroyFixture(fixture);
             fixture = physBody.createFixture(fixtureDef);

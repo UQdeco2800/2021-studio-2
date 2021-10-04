@@ -85,7 +85,12 @@ public class ForestGameArea extends GameArea {
             "images/boss_health_right.png",
             "images/outdoorArcher.png",
             "images/outdoorWarrior.png",
-            "images/hellWarrior.png"
+            "images/hellWarrior.png",
+            "images/viking.png",
+            "images/hellViking.png",
+            "images/outdoorArcher.png",
+            "images/asgardWarrior.png",
+            "images/lokiBoss.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -97,7 +102,11 @@ public class ForestGameArea extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "end/portal.atlas", "Odin/odin.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorWarrior.atlas",
-            "images/hellWarrior.atlas"
+            "images/hellWarrior.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/lokiBoss.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -109,7 +118,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
-    private int playerHealth = 3000;
+    private int playerHealth = 300;
 
     /**
      * Intialise the forest game
@@ -122,7 +131,7 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     Use for teleport, track the current playerHealth
+     * Use for teleport, track the current playerHealth
      */
     public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -140,7 +149,7 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        //spawnTrees();
+        spawnTrees();
         spawnPlayer();
         spawnCrate();
 //        spawnMeleeElf();
@@ -149,10 +158,17 @@ public class ForestGameArea extends GameArea {
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
         spawnBoss();
+        spawnVikingMelee();
+        spawnHellVikingMelee();
+        spawnAsgardWarriorMelee();
+        spawnOutdoorArcher();
+        spawnLokiBoss();
+
         playMusic();
         setDialogue();
         spawnWin();
         spawnOdin();
+
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
 
     }
@@ -161,6 +177,7 @@ public class ForestGameArea extends GameArea {
     public int getLevel() {
         return 0;
     }
+
     /**
      * Display the UI
      */
@@ -243,6 +260,78 @@ public class ForestGameArea extends GameArea {
             incNum();
             spawnEntityAt(elf, randomPos, true, true);
         }
+    }
+
+    /**
+     * Randomly spawn viing on a random position of the terrain, the number of vikings limit to 2
+     */
+    private void spawnVikingMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Randomly spawn viking on a random position of the terrain, the number of vikings limit to 2
+     */
+    private void spawnHellVikingMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeHellViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Randomly spawn warrior on a random position of the terrain, the number of warriors limit to 2
+     */
+    private void spawnAsgardWarriorMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeAsgardViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn range archer on terrain, ranged archers can shoot target
+     */
+    private void spawnOutdoorArcher() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity archer = NPCFactory.createOutdoorArcher(player, 0.1f);
+            incNum();
+            spawnEntityAt(archer, randomPos, true, true);
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    private void spawnLokiBoss() {
+        /*GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
+        GridPoint2 bossPos = new GridPoint2(100, 100);
+        Entity boss = NPCFactory.createLokiBossNPC(player);
+        spawnEntityAt(boss, bossPos, true, true);
     }
 
     /**

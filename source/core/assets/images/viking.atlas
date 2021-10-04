@@ -1,426 +1,355 @@
-
-outdoorArcher.png
-size: 2048, 1024
+viking.png
+size: 1024, 1024
 format: RGBA8888
-filter: Nearest, Nearest
+filter: Linear,Linear
 repeat: none
-EnemyAttackDown
-  rotate: false
-  xy: 262, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-EnemyAttackDown
-  rotate: false
-  xy: 392, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackDown
-  rotate: false
-  xy: 262, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-EnemyAttackDown
-  rotate: false
-  xy: 392, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-EnemyAttackLeft
-  rotate: false
-  xy: 652, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-EnemyAttackLeft
-  rotate: false
-  xy: 522, 392
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-EnemyAttackLeft
-  rotate: false
-  xy: 522, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackLeft
-  rotate: false
-  xy: 1042, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-EnemyAttackRight
-  rotate: false
-  xy: 2, 392
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-EnemyAttackRight
-  rotate: false
-  xy: 652, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-EnemyAttackRight
-  rotate: false
-  xy: 652, 392
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-EnemyAttackRight
-  rotate: false
-  xy: 1042, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackUp
-  rotate: false
-  xy: 2, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-EnemyAttackUp
-  rotate: false
-  xy: 652, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-EnemyAttackUp
-  rotate: false
-  xy: 912, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-EnemyAttackUp
-  rotate: false
-  xy: 1172, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-backDeath
-  rotate: false
-  xy: 2, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-backDeath
-  rotate: false
-  xy: 522, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-backDeath
-  rotate: false
-  xy: 392, 392
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-backDeath
-  rotate: false
-  xy: 782, 392
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-frontDeath
-  rotate: false
-  xy: 392, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-frontDeath
-  rotate: false
-  xy: 132, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-frontDeath
-  rotate: false
-  xy: 392, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-frontDeath
-  rotate: false
-  xy: 522, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-leftDeath
-  rotate: false
-  xy: 132, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-leftDeath
-  rotate: false
-  xy: 782, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-leftDeath
-  rotate: false
-  xy: 782, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-leftDeath
-  rotate: false
-  xy: 1172, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-leftDefault
-  rotate: false
-  xy: 392, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-moveLeft
-  rotate: false
-  xy: 392, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-moveLeft
-  rotate: false
-  xy: 392, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-moveDown
-  rotate: false
-  xy: 2, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-moveDown
-  rotate: false
-  xy: 262, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
 default
   rotate: false
-  xy: 262, 652
+  xy: 896, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+backDeath  
+rotate: false
+  xy: 0, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 128, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 256, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 384, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 512, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 640, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 768, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 896, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 0, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 128, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 256, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 384, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 512, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 640, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 768, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 896, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 0, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 128, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 256, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 384, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 512, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 640, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 768, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 896, 256
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 0, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 128, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 256, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 384, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 512, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 640, 384
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 768, 384
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 moveDown
   rotate: false
-  xy: 132, 262
+  xy: 896, 384
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 6
+  index: -1
 moveDown
   rotate: false
-  xy: 2, 2
+  xy: 0, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
+  index: -1
 moveDown
   rotate: false
-  xy: 782, 652
+  xy: 128, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 5
+  index: -1
 moveDown
   rotate: false
-  xy: 912, 652
+  xy: 256, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
+  index: -1
+moveDown
+  rotate: false
+  xy: 384, 512
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 512, 512
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 640, 512
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 moveLeft
   rotate: false
-  xy: 132, 392
+  xy: 768, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 5
+  index: -1
 moveLeft
   rotate: false
-  xy: 522, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-moveLeft
-  rotate: false
-  xy: 522, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 6
-moveLeft
-  rotate: false
-  xy: 782, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-moveRight
-  rotate: false
-  xy: 2, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 6
-moveRight
-  rotate: false
-  xy: 262, 392
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-moveRight
-  rotate: false
-  xy: 262, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 5
-moveRight
-  rotate: false
-  xy: 262, 2
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-moveRight
-  rotate: false
-  xy: 652, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-moveUp
-  rotate: false
-  xy: 132, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 6
-moveUp
-  rotate: false
-  xy: 262, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-moveUp
-  rotate: false
-  xy: 522, 522
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 5
-moveUp
-  rotate: false
-  xy: 392, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-moveUp
-  rotate: false
-  xy: 652, 262
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-rightDeath
-  rotate: false
-  xy: 2, 652
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-rightDeath
-  rotate: false
-  xy: 132, 132
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-rightDeath
-  rotate: false
-  xy: 912, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-rightDeath
-  rotate: false
-  xy: 1042, 782
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-rightDefault
-  rotate: false
-  xy: 132, 782
+  xy: 896, 512
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 moveRight
   rotate: false
-  xy: 132, 782
+  xy: 0, 640
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-upDefault
+  index: -1
+moveRight
   rotate: false
-  xy: 912, 392
+  xy: 128, 640
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 256, 640
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 moveUp
   rotate: false
-  xy: 912, 392
+  xy: 384, 640
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
+  index: -1
+moveUp
+  rotate: false
+  xy: 512, 640
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 640, 640
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 768, 640
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 896, 640
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 0, 768
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
