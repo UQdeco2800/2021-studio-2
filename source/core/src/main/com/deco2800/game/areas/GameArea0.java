@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 /**
- * Forest area for the demo game with trees, a player, and some enemies.
+ * Dungeon Level with an Elf Mage as the boss
  */
 public class GameArea0 extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(GameArea0.class);
@@ -175,26 +175,26 @@ public class GameArea0 extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
+        // Left Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
+        // Right Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
                 new GridPoint2(tileBounds.x, 0),
                 false,
                 false);
-        // Top
+        // Top Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
                 new GridPoint2(0, tileBounds.y),
                 false,
                 false);
-        // Bottom
+        // Bottom Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-        //Walls imported from JSON
+        //Imported Map Walls
         HashMap<String, Float>[] walls = map.getWallObjects();
         for (HashMap<String, Float> wall : walls) {
             int x = wall.get("x").intValue();

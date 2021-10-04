@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 /**
- * Forest area for the demo game with trees, a player, and some enemies.
+ * Smaller room based level
  */
 public class GameArea4 extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(GameArea4.class);
@@ -195,7 +195,7 @@ public class GameArea4 extends GameArea {
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-        //Walls imported from JSON
+        //Imported Map Walls
         HashMap<String, Float>[] walls = map.getWallObjects();
         for (HashMap<String, Float> wall : walls) {
             int x = wall.get("x").intValue();
