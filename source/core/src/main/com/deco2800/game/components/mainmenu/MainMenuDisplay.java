@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 public class MainMenuDisplay extends UIComponent {
     private static final Logger logger = LoggerFactory.getLogger(MainMenuDisplay.class);
     private static final float Z_INDEX = 2f;
-    protected Stack stack;
     protected Table table;
     private Pixmap mouseCursor;
 
@@ -35,9 +34,6 @@ public class MainMenuDisplay extends UIComponent {
         mouseCursor = new Pixmap(Gdx.files.internal("images/swordcursor.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(mouseCursor, 0, 0));
 
-        stack = new Stack();
-        stack.setFillParent(true);
-        stack.setTouchable(Touchable.disabled); //disable touch inputs so its clickthrough
 
         table = new Table();
         table.setFillParent(true);
@@ -93,7 +89,6 @@ public class MainMenuDisplay extends UIComponent {
         table.row();
         table.add(exitBtn).padTop(30f);
 
-        stage.addActor(stack);
         stage.addActor(table);
     }
 

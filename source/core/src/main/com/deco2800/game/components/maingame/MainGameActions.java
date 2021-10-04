@@ -19,7 +19,7 @@ public class MainGameActions extends Component {
 
     @Override
     public void create() {
-        entity.getEvents().addListener("exit", this::onExit);
+        entity.getEvents().addListener("exitGameScreen", this::onExit);
     }
 
     /**

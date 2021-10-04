@@ -1,0 +1,42 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	prstart: {
+		file: prstart.fnt
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	RGBA_0_0_0_255: {
+		r: 0
+		g: 0
+		b: 0
+		a: 1
+	}
+	RGBA_200_200_200_255: {
+		r: 0.78431374
+		g: 0.78431374
+		b: 0.78431374
+		a: 1
+	}
+	RGBA_255_255_255_255: {
+		r: 1
+		g: 1
+		b: 1
+		a: 1
+	}
+	RGBA_55_54_54_255: {
+		r: 0.21666665
+		g: 0.21233332
+		b: 0.21233332
+		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+		font: prstart
+		fontColor: RGBA_0_0_0_255
+		downFontColor: RGBA_255_255_255_255
+		overFontColor: RGBA_55_54_54_255
+		up: 242708800_395361705487237_3927263406891731984_n (1)
+	}
+}
+}

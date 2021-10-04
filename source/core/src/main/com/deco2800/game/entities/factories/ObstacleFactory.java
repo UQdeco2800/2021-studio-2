@@ -1,12 +1,14 @@
 package com.deco2800.game.entities.factories;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.TeleportComponent;
-import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.TouchHealComponent;
+import com.deco2800.game.components.Touch.TeleportComponent;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.Touch.TouchHealComponent;
+import com.deco2800.game.components.Touch.TouchWin;
 import com.deco2800.game.components.crate.CrateAnimationController;
 import com.deco2800.game.components.crate.TransformBarrelComponent;
 import com.deco2800.game.entities.Entity;
@@ -18,6 +20,7 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 
 /**
  * Factory to create obstacle entities.
@@ -102,25 +105,10 @@ public class ObstacleFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
 
-        trap.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
         trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trap.getComponent(TextureRenderComponent.class).scaleEntity();
         trap.scaleHeight(0.3f);
         return trap;
-    }
-
-    public static Entity creatTeleport(Entity player) {
-        Entity teleport = new Entity()
-                .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TeleportComponent(PhysicsLayer.TRAP, player));
-
-        teleport.getComponent(HitboxComponent.class).setAsBox(new Vector2(0.33f, 0.33f), new Vector2(0.15f, 0.15f));
-        teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        teleport.getComponent(TextureRenderComponent.class).scaleEntity();
-        teleport.scaleHeight(0.3f);
-        return teleport;
     }
 
     /**
@@ -135,13 +123,30 @@ public class ObstacleFactory {
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new CombatStatsComponent(1000000, 1))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER, 2));
+                .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 1));
 
         trap.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trap.getComponent(TextureRenderComponent.class).scaleEntity();
         trap.scaleHeight(0.3f);
         return trap;
     }
+
+
+    public static Entity createTeleport() {
+
+        Entity teleport = new Entity()
+                .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new TeleportComponent(PhysicsLayer.TRAP));
+
+        teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        teleport.getComponent(TextureRenderComponent.class).scaleEntity();
+        teleport.scaleHeight(0.3f);
+        return teleport;
+    }
+
 
     /**
      * Creates an invisible physics wall.
@@ -187,6 +192,32 @@ public class ObstacleFactory {
         crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         crate.getComponent(AnimationRenderComponent.class).scaleEntity();
         return crate;
+    }
+
+    public static Entity winCondition() {
+        AnimationRenderComponent win2 = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("end/portal.atlas",
+                        TextureAtlas.class));
+        win2.addAnimation("spawn", 0.2f, Animation.PlayMode.NORMAL);
+        win2.addAnimation("rotate", 0.3f, Animation.PlayMode.LOOP);
+        win2.setAnimationScale(3f);
+        win2.startAnimation("spawn");
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                win2.startAnimation("rotate");
+            }
+        }, 1f);
+
+
+        Entity win = new Entity()
+                .addComponent(win2)
+                .addComponent(new TouchWin(PhysicsLayer.PLAYER))
+                .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent().setSensor(true))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
+        win.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        return win;
     }
 
     /**

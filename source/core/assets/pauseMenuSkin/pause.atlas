@@ -1,0 +1,21 @@
+
+pause.png
+size: 512, 512
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+242708800_395361705487237_3927263406891731984_n (1)
+  rotate: false
+  xy: 1, 365
+  size: 150, 58
+  split: 24, 24, 29, 28
+  orig: 150, 58
+  offset: 0, 0
+  index: -1
+prstart
+  rotate: false
+  xy: 1, 425
+  size: 505, 79
+  orig: 505, 79
+  offset: 0, 0
+  index: -1

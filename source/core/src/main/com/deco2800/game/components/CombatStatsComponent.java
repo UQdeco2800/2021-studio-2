@@ -1,5 +1,6 @@
 package com.deco2800.game.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
@@ -82,13 +83,14 @@ public class CombatStatsComponent extends Component {
                     getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
                     // Deliberately chose this because other entities that have animations may have death animations
                     // it is not possible for a class with no component to animate their death.
-                } else if (this.entity.getComponent(AnimationRenderComponent.class) == null){
+                } else if (this.entity.getComponent(AnimationRenderComponent.class) == null) {
                     this.entity.prepareDispose();
                 }
             }
         }
         if (this.entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
+            entity.getEvents().trigger("updateBossHealth", this.health);
         }
     }
 

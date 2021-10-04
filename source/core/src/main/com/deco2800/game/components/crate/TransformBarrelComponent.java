@@ -1,7 +1,7 @@
 package com.deco2800.game.components.crate;
 
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.TouchHealComponent;
+import com.deco2800.game.components.Touch.TouchHealComponent;
 import com.deco2800.game.physics.components.ColliderComponent;
 
 /**

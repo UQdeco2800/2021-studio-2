@@ -3,11 +3,9 @@ package com.deco2800.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.deco2800.game.areas.TestGameArea1;
 import com.deco2800.game.files.UserSettings;
-import com.deco2800.game.screens.DeathScreen;
-import com.deco2800.game.screens.MainGameScreen;
-import com.deco2800.game.screens.MainMenuScreen;
-import com.deco2800.game.screens.SettingsScreen;
+import com.deco2800.game.screens.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +53,18 @@ public class GdxGame extends Game {
         setScreen(newScreen(screenType));
     }
 
+    /**
+     * Use for teleport, track the current player health
+     */
+    public void setScreen(ScreenType screenType, int currentHealth) {
+        logger.info("Setting game screen to {}", screenType);
+        Screen currentScreen = getScreen();
+        if (currentScreen != null) {
+            currentScreen.dispose();
+        }
+        setScreen(newScreen(screenType, currentHealth));
+    }
+
     @Override
     public void dispose() {
         logger.debug("Disposing of current screen");
@@ -79,13 +89,37 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
+            case END_SCREEN:
+                return new EndScreen(this);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Use for teleport, track the current player health
+     */
+    private Screen newScreen(ScreenType screenType, int currentHealth) {
+        switch (screenType) {
+            case MAIN_MENU:
+                return new MainMenuScreen(this);
+            case MAIN_GAME_FOREST:
+                return new MainGameScreen(this, "forest", currentHealth);
+            case MAIN_GAME_TUTORIAL:
+                return new MainGameScreen(this, "tutorial", currentHealth);
+            case SETTINGS:
+                return new SettingsScreen(this);
+            case DEATHSCREEN:
+                return new DeathScreen(this);
+            case TEST1:
+                return new MainGameScreen(this, "test1", currentHealth);
             default:
                 return null;
         }
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, TEST1, TEST2, END_SCREEN
     }
 
     /**

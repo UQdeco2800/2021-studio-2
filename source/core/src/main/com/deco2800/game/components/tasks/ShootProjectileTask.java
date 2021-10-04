@@ -7,7 +7,7 @@ import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.TouchAttackComponent;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.WeaponConfigs;
@@ -16,6 +16,7 @@ import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -187,6 +188,16 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("rangedLeftShoot");
             }
+        } else {
+            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("attackDown");
+            } else if (targetDir > 90 && targetDir < 180) {
+                owner.getEntity().getEvents().trigger("attackRight");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("attackUp");
+            } else if (targetDir > 270 && targetDir < 360) {
+                owner.getEntity().getEvents().trigger("attackLeft");
+            }
         }
     }
 
@@ -342,6 +353,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
                             int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
                             target.getComponent(CombatStatsComponent.class).addHealth(-damage);
+                        } else {
+                            arrow.data.put("dealDamage", false);
                         }
                         tragectoryLocation = null;
                         aimingLine.prepareDispose();
@@ -357,15 +370,13 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         if (fireBall != null) {
                             //Change behaviour
                             fireBall.setAngle(getDirectionOfTarget());
+                            fireBall.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PROJECTILEWEAPON);
                             fireBall.data.put("fireBallMovement", true);
                             fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
                                     (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
                             //add flying animation.
                             AnimationRenderComponent animator = fireBall.getComponent(AnimationRenderComponent.class);
                             animator.startAnimation("flying");
-                            //Change sprite and animation
-                            //fireBall.getEvents().trigger("shootFireball"); //uncomment this line Haopeng
-                            //Play shooting sound
                         }
                         shootAnimation();
                     }
@@ -469,30 +480,12 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * check if target is block by any object
+     * Check if there are any object between the entity and the target
      *
-     * @return true if it not block, false otherwise
+     * @return true if no object, false otherwise
      */
     private boolean isTargetVisible() {
-        Vector2 from = owner.getEntity().getCenterPosition();
-        Vector2 to = target.getCenterPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
-            return false;
-        }
-        Vector2 from2 = owner.getEntity().getPosition();
-        Vector2 to2 = target.getPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from2, to2, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
-            return false;
-        }
-        //to.add(owner.getEntity().getCenterPosition().sub(owner.getEntity().getPosition()));
-        debugRenderer.drawLine(from, to);
-        return true;
+        return owner.getEntity().canSeeEntity(target);
     }
 
     /**

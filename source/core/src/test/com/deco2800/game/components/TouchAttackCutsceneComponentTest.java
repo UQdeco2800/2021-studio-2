@@ -2,6 +2,7 @@ package com.deco2800.game.components;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.components.Touch.TouchAttackCutsceneComponent;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
@@ -91,21 +92,6 @@ class TouchAttackCutsceneComponentTest {
         verify(inputComponent, never()).setLastKeyPressed('W');
     }
 
-
-    @Test
-    void shouldForceAttack() {
-        short targetLayer = (1 << 3);
-        short triggerLayer = (1 << 3);
-        Entity trigger = createTrigger(triggerLayer);
-        Entity target = createTarget(targetLayer);
-
-        Fixture entityFixture = trigger.getComponent(HitboxComponent.class).getFixture();
-        Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
-        trigger.getEvents().trigger("collisionStart", entityFixture, targetFixture);
-
-        verify(inputComponent).keyDown(Input.Keys.SPACE);
-    }
-
     @Test
     void shouldNotForceAttack() {
         short targetLayer = (1 << 3);
@@ -128,6 +114,7 @@ class TouchAttackCutsceneComponentTest {
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchAttackCutsceneComponent(triggerLayer, 1, 'W'))
                         .addComponent(new CombatStatsComponent(20, 0));
+
         entity.create();
         return entity;
     }

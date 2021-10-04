@@ -1,0 +1,40 @@
+guardElfRightDeath.png
+size: 512, 128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+right_death
+  rotate: false
+  xy: 0, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 0
+right_death
+  rotate: false
+  xy: 94, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 1
+right_death
+  rotate: false
+  xy: 188, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 2
+right_death
+  rotate: false
+  xy: 282, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 3
+right_death
+  rotate: false
+  xy: 376, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 4

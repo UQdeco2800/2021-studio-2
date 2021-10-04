@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
@@ -16,8 +17,10 @@ import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
+import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.deco2800.game.files.PlayerSave;
 
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
@@ -76,18 +79,33 @@ public class ForestGameArea extends GameArea {
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
             "player_hammer.png",
-            "player_axe.png"
+            "player_axe.png",
+            "portal.png",
+            "Odin/odin.png",
+            "Assets/gametile-127.png",
+            "images/boss_health_middle.png",
+            "images/boss_health_left.png",
+            "images/boss_health_right.png",
+            "images/viking.png",
+            "images/hellViking.png",
+            "images/outdoorArcher.png",
+            "images/asgardWarrior.png",
+            "images/lokiBoss.png",
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
             "crate/crateHitBreak.png"
     };
     private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
+            "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/player_longsword.atlas",
-            "images/hammer_projectile.atlas"
+            "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
+            "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/lokiBoss.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -99,6 +117,7 @@ public class ForestGameArea extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
+    private int playerHealth = 300;
 
     /**
      * Intialise the forest game
@@ -111,6 +130,15 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
+     * Use for teleport, track the current playerHealth
+     */
+    public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
+        super();
+        this.terrainFactory = terrainFactory;
+        this.playerHealth = currentHealth;
+    }
+
+    /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     @Override
@@ -120,17 +148,31 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        spawnTrees();
+        //spawnTrees();
         spawnPlayer();
         spawnCrate();
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
+//        spawnMeleeElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnBoss();
+        spawnVikingMelee();
+        spawnHellVikingMelee();
+        spawnAsgardWarriorMelee();
+        spawnOutdoorArcher();
+        spawnLoki();
+
         playMusic();
         setDialogue();
+        spawnOdin();
+
+        player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
+    }
+
+    @Override
+    public int getLevel() {
+        return 0;
     }
 
     /**
@@ -197,6 +239,11 @@ public class ForestGameArea extends GameArea {
         player = newPlayer;
     }
 
+    private void spawnOdin() {
+        Entity odin = NPCFactory.createOdin(player);
+        spawnEntityAt(odin, new GridPoint2(20, 20), true, true);
+    }
+
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
@@ -210,6 +257,77 @@ public class ForestGameArea extends GameArea {
             incNum();
             spawnEntityAt(elf, randomPos, true, true);
         }
+    }
+
+    /**
+     * Randomly spawn viing on a random position of the terrain, the number of vikings limit to 2
+     */
+    private void spawnVikingMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Randomly spawn viking on a random position of the terrain, the number of vikings limit to 2
+     */
+    private void spawnHellVikingMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeHellViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Randomly spawn warrior on a random position of the terrain, the number of warriors limit to 2
+     */
+    private void spawnAsgardWarriorMelee() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity elf = NPCFactory.createMeleeAsgardViking(player);
+            incNum();
+            spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+
+    /**
+     * Spawn range archer on terrain, ranged archers can shoot target
+     */
+    private void spawnOutdoorArcher() {
+        GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+
+        for (int i = 0; i < NUM_MELEE_ELF; i++) {
+            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
+            Entity archer = NPCFactory.createOutdoorArcher(player, 0.1f);
+            incNum();
+            spawnEntityAt(archer, randomPos, true, true);
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    private void spawnLoki() {
+        /*GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
+        Entity boss = NPCFactory.createLoki(player);
+        spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
     }
 
     /**
@@ -317,6 +435,7 @@ public class ForestGameArea extends GameArea {
      * Load the texture from files
      */
     private void loadAssets() {
+
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(forestTextures);
@@ -348,9 +467,26 @@ public class ForestGameArea extends GameArea {
      * Sets the dialogue for when the game first loads.
      */
     private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+        PlayerSave.Save pSave = PlayerSave.load();
+
+
+        if(pSave.lokiEnc < 2 || pSave.lokiEnc >= 4){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_INTRODUCTION);
+
+            pSave.lokiEnc += 1;
+
+        }else if(pSave.lokiEnc >= 1 && pSave.lokiEnc < 3){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
+
+            pSave.lokiEnc += 1;
+        }
+
+        PlayerSave.write(pSave);
+
     }
 
     /**

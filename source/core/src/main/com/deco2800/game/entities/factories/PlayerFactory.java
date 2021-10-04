@@ -109,16 +109,20 @@ public class PlayerFactory {
         animator.addAnimation("walk_up", 0.13f, Animation.PlayMode.LOOP);
         animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_up", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_right", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_up", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_down", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("damaged_left", 0.3f, Animation.PlayMode.NORMAL);
         animator.setAnimationScale(2f);
 
         Entity player = new Entity()
                 .addComponent(animator)
                 .addComponent(new PlayerAnimationController())
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYER))
                 .addComponent(new TrapComponent().setLayer(PhysicsLayer.TRAP))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                 .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
@@ -127,7 +131,8 @@ public class PlayerFactory {
                 .addComponent(new InventoryComponent(stats.gold))
                 .addComponent(inputComponent)
                 .addComponent(new PlayerStatsDisplay())
-                .addComponent(new PlayerLowHealthDisplay());
+                .addComponent(new PlayerLowHealthDisplay())
+                .addComponent(new PlayerWin());
 
         // Add equipped weapon.
         switch (weapon) {
@@ -154,6 +159,7 @@ public class PlayerFactory {
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
         //player.setScale(new Vector2().scl(2));
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
+        player.setEntityType("player");
         return player;
     }
 }
