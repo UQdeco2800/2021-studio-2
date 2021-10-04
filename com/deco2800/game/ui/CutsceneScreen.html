@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -174,47 +174,96 @@ extends <a href="UIComponent.html" title="class in com.deco2800.game.ui">UICompo
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#closeScreen()">closeScreen</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Removes the black screen.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the entity is created and registered.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the component is disposed.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/SpriteBatch.html?is-external=true" title="class or interface in com.badlogic.gdx.graphics.g2d" class="externalLink">SpriteBatch</a>&nbsp;batch)</code></th>
 <td class="colLast">
 <div class="block">Checks if the black screen should be rendered into the game.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getZIndex()">getZIndex</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets the priority of the text display.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isClosing()">isClosing</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns if the cutscene screen is currently closing.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOpen()">isOpen</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Checks if the cutscene screen when the player is teleporting between areas is being displayed.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOpening()">isOpening</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns if the cutscene screen is currently opening.</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveDown()">moveDown</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Moves the screens down relative to their original height.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveUp()">moveUp</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Moves the screens up relative to their original height.</div>
+</td>
+</tr>
+<tr class="altColor" id="i10">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#openScreen()">openScreen</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Shows the black screen.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i11">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#openScreenInstant()">openScreenInstant</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Shows the black screen with no fade in time.</div>
+</td>
+</tr>
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setClosed()">setClosed</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Sets the black screen to be closed.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setOpen()">setOpen</a></span>()</code></th>
 <td class="colLast">
@@ -332,6 +381,63 @@ extends <a href="UIComponent.html" title="class in com.deco2800.game.ui">UICompo
 <dd><code><a href="../rendering/RenderComponent.html#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch)">draw</a></code>&nbsp;in class&nbsp;<code><a href="../rendering/RenderComponent.html" title="class in com.deco2800.game.rendering">RenderComponent</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>batch</code> - Batch to render to.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="openScreen()">openScreen</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">openScreen</span>()</div>
+<div class="block">Shows the black screen.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="closeScreen()">closeScreen</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">closeScreen</span>()</div>
+<div class="block">Removes the black screen.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="openScreenInstant()">openScreenInstant</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">openScreenInstant</span>()</div>
+<div class="block">Shows the black screen with no fade in time.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="moveDown()">moveDown</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">moveDown</span>()</div>
+<div class="block">Moves the screens down relative to their original height.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="moveUp()">moveUp</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">moveUp</span>()</div>
+<div class="block">Moves the screens up relative to their original height.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isOpening()">isOpening</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isOpening</span>()</div>
+<div class="block">Returns if the cutscene screen is currently opening.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boolean, true if the cutscene screen is opening</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isClosing()">isClosing</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isClosing</span>()</div>
+<div class="block">Returns if the cutscene screen is currently closing.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boolean, true if the cutscene screen is closing</dd>
 </dl>
 </section>
 </li>
