@@ -224,11 +224,12 @@ public enum Dialogue {
     }),
 
     LOKI_ENCOUNTER_DEFEATED_1(new Message[]{
-            new Message(false, "How do you want me to kill you this time?"),
+            new Message(false, "In what manner would you like to die this time?"),
     }),
 
     LOKI_ENCOUNTER_DEFEATED_2(new Message[]{
-            new Message(false, "I'm baffled by how you made it this far."),
+            new Message(false, "I'm baffled by how you made it this far." +
+                    "\nNo matter, you'll make it no further than here."),
     }),
 
     ODIN_INTRODUCTION_FIRST(new Message[]{
@@ -324,6 +325,20 @@ public enum Dialogue {
             new Message(false, "Still trying to make it to Valhalla?" +
                     "\nyou'll have to make it past me again.")
     }),
+
+    THOR_INTRODUCTION_VICTORY_4(new Message[]{
+            new Message(false, "We really need to stop meeting like this," +
+                "\nmaybe instead we can meet in Valhalla before long."),
+            new Message(false, "Until then however, we fight!")
+    }),
+
+    THOR_INTRODUCTION_VICTORY_5(new Message[]{
+            new Message(false, "Ah, hello once again warrior. Did you wish" +
+                    "\nto clash with me once again?" +
+                    "\nVery well, I am happy to oblige.")
+    }),
+
+
 
     TEST_1(new Message[]{
             new Message(true, "Test 1 Message 1"),
