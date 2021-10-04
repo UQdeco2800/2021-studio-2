@@ -5,6 +5,7 @@ import com.deco2800.game.GdxGame;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
+import com.deco2800.game.input.InputService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.AfterEach;
@@ -29,6 +30,7 @@ class PauseMenuActionsTest {
     void beforeEach() {
         ServiceLocator.registerTimeSource(new GameTime());
         ServiceLocator.registerEntityService(new EntityService());
+        ServiceLocator.registerInputService(new InputService());
         entity = new Entity();
         actions = mock(PauseMenuActions.class);
         input = new PauseInputComponent();
