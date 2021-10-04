@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -160,12 +160,60 @@ float&nbsp;anchorSizeY)</code></th>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createLoki(com.deco2800.game.entities.Entity)">createLoki</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
+<td class="colLast">
+<div class="block">create Loki boss enemy entity</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createLokiDecoy(com.deco2800.game.entities.Entity)">createLokiDecoy</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
+<td class="colLast">
+<div class="block">create Loki boss decoys enemy entity</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMeleeAsgardViking(com.deco2800.game.entities.Entity)">createMeleeAsgardViking</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
+<td class="colLast">
+<div class="block">Creates a melee viking which will be used for the Asgard map.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMeleeElf(com.deco2800.game.entities.Entity)">createMeleeElf</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
 <td class="colLast">
 <div class="block">Creates a melee elf entity.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMeleeHellViking(com.deco2800.game.entities.Entity)">createMeleeHellViking</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
+<td class="colLast">
+<div class="block">Creates a melee viking which will be used for the Hell map.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMeleeViking(com.deco2800.game.entities.Entity)">createMeleeViking</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
+<td class="colLast">
+<div class="block">Creates a melee viking which will be used for the outdoor map.</div>
+</td>
+</tr>
+<tr class="altColor" id="i10">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createOdin(com.deco2800.game.entities.Entity)">createOdin</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i11">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createOutdoorArcher(com.deco2800.game.entities.Entity,float)">createOutdoorArcher</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target,
+float&nbsp;multishotChance)</code></th>
+<td class="colLast">
+<div class="block">Creates a ranged elf entity.</div>
+</td>
+</tr>
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createRangedElf(com.deco2800.game.entities.Entity,java.lang.String,float)">createRangedElf</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target,
 java.lang.String&nbsp;type,
@@ -275,6 +323,93 @@ float&nbsp;multishotChance)</span></div>
 <h3><a id="createBossNPC(com.deco2800.game.entities.Entity)">createBossNPC</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createBossNPC</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
 <div class="block">create boss enemy entity</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - enemy to chase (player)</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boss entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createOdin(com.deco2800.game.entities.Entity)">createOdin</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createOdin</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createMeleeViking(com.deco2800.game.entities.Entity)">createMeleeViking</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMeleeViking</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
+<div class="block">Creates a melee viking which will be used for the outdoor map.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - the entity that the NPC will chase and attack</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the enemy entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createMeleeHellViking(com.deco2800.game.entities.Entity)">createMeleeHellViking</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMeleeHellViking</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
+<div class="block">Creates a melee viking which will be used for the Hell map.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - the entity that the NPC will chase and attack</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the enemy entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createMeleeAsgardViking(com.deco2800.game.entities.Entity)">createMeleeAsgardViking</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMeleeAsgardViking</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
+<div class="block">Creates a melee viking which will be used for the Asgard map.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - the entity that the NPC will chase and attack</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the enemy entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createOutdoorArcher(com.deco2800.game.entities.Entity,float)">createOutdoorArcher</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createOutdoorArcher</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target,
+float&nbsp;multishotChance)</span></div>
+<div class="block">Creates a ranged elf entity.
+ elf that shoot arrow at target
+ It will retreat if the target is approach in certain range</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - entity to chase</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createLoki(com.deco2800.game.entities.Entity)">createLoki</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createLoki</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
+<div class="block">create Loki boss enemy entity</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - enemy to chase (player)</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>boss entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createLokiDecoy(com.deco2800.game.entities.Entity)">createLokiDecoy</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createLokiDecoy</span>&#8203;(<span class="arguments"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target)</span></div>
+<div class="block">create Loki boss decoys enemy entity</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>target</code> - enemy to chase (player)</dd>

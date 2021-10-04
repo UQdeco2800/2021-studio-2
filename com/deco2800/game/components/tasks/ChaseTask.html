@@ -103,7 +103,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="AlertableChaseTask.html" title="class in com.deco2800.game.components.tasks">AlertableChaseTask</a></code>, <code><a href="AlertChaseTask.html" title="class in com.deco2800.game.components.tasks">AlertChaseTask</a></code>, <code><a href="AnchoredChaseTask.html" title="class in com.deco2800.game.components.tasks">AnchoredChaseTask</a></code>, <code><a href="DeathPauseTask.html" title="class in com.deco2800.game.components.tasks">DeathPauseTask</a></code>, <code><a href="RangedChaseTask.html" title="class in com.deco2800.game.components.tasks">RangedChaseTask</a></code>, <code><a href="ZigChaseTask.html" title="class in com.deco2800.game.components.tasks">ZigChaseTask</a></code></dd>
+<dd><code><a href="AlertableChaseTask.html" title="class in com.deco2800.game.components.tasks">AlertableChaseTask</a></code>, <code><a href="AlertChaseTask.html" title="class in com.deco2800.game.components.tasks">AlertChaseTask</a></code>, <code><a href="AnchoredChaseTask.html" title="class in com.deco2800.game.components.tasks">AnchoredChaseTask</a></code>, <code><a href="BossShieldTask.html" title="class in com.deco2800.game.components.tasks">BossShieldTask</a></code>, <code><a href="DeathPauseTask.html" title="class in com.deco2800.game.components.tasks">DeathPauseTask</a></code>, <code><a href="RangedChaseTask.html" title="class in com.deco2800.game.components.tasks">RangedChaseTask</a></code>, <code><a href="ZigChaseTask.html" title="class in com.deco2800.game.components.tasks">ZigChaseTask</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">ChaseTask</span>
@@ -184,6 +184,14 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 int&nbsp;priority,
 float&nbsp;viewDistance,
 float&nbsp;maxChaseDistance)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.deco2800.game.entities.Entity,int,float,float,com.badlogic.gdx.math.Vector2)">ChaseTask</a></span>&#8203;(<a href="../../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target,
+int&nbsp;priority,
+float&nbsp;viewDistance,
+float&nbsp;maxChaseDistance,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -315,6 +323,23 @@ float&nbsp;maxChaseDistance)</code></th>
 int&nbsp;priority,
 float&nbsp;viewDistance,
 float&nbsp;maxChaseDistance)</span></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - The entity to chase.</dd>
+<dd><code>priority</code> - Task priority when chasing (0 when not chasing).</dd>
+<dd><code>viewDistance</code> - Maximum distance from the entity at which chasing can start.</dd>
+<dd><code>maxChaseDistance</code> - Maximum distance from the entity while chasing before giving up.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="&lt;init&gt;(com.deco2800.game.entities.Entity,int,float,float,com.badlogic.gdx.math.Vector2)">ChaseTask</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">ChaseTask</span>&#8203;(<span class="arguments"><a href="../../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;target,
+int&nbsp;priority,
+float&nbsp;viewDistance,
+float&nbsp;maxChaseDistance,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;moveSpeed)</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>target</code> - The entity to chase.</dd>
