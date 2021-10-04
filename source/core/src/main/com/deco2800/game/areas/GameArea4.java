@@ -326,10 +326,105 @@ public class GameArea4 extends GameArea {
         return 4;
     }
 
+    private void spawnMeleeElf() {
+        HashMap<String, Float>[] objects = map.getMeleeObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createMeleeElf(player);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnRangedElf() {
+        HashMap<String, Float>[] objects = map.getRangeObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createRangedElf(player,"normalArrow", 0.1f);
+            elf.setEntityType("ranged");
+            elf.getEvents().trigger("rangerLeft");
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnAssassinElf() {
+        HashMap<String, Float>[] objects = map.getAssassinObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createRangedElf(player,"fastArrow",0);
+            elf.setEntityType("assassin");
+            elf.getEvents().trigger("assassinLeft");
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnBoss() {
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createBossNPC(player);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnElfGuard() {
+        HashMap<String, Float>[] objects = map.getGuardObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf= NPCFactory.createElfGuard(player);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnAnchoredElf() {
+        HashMap<String, Float>[] objects = map.getAnchoredObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity anchor = ObstacleFactory.createAnchor();
+            Entity elf= NPCFactory.createAnchoredElf(player,anchor,3f);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
-    private void spawnMeleeElf() {
+    private void spawnMeleeElfRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -344,7 +439,7 @@ public class GameArea4 extends GameArea {
     /**
      * Spawn range elf on terrain, range elf can shoot target
      */
-    private void spawnRangedElf() {
+    private void spawnRangedElfRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -361,7 +456,7 @@ public class GameArea4 extends GameArea {
     /**
      * Spawn Assassin on terrain, range can shoot from far away with high damage
      */
-    private void spawnAssassinElf() {
+    private void spawnAssassinElfRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -378,7 +473,7 @@ public class GameArea4 extends GameArea {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    private void spawnBoss() {
+    private void spawnBossRndLc() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
@@ -387,7 +482,7 @@ public class GameArea4 extends GameArea {
         spawnEntityAt(boss, bossPos, true, true);
     }
 
-    private void spawnElfGuard() {
+    private void spawnElfGuardRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -400,7 +495,7 @@ public class GameArea4 extends GameArea {
     /**
      * Spawn anchored elf, elf only move at the certain anchored
      */
-    private void spawnAnchoredElf() {
+    private void spawnAnchoredElfRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 

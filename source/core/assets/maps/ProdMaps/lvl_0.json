@@ -69005,6 +69005,14 @@
             "width": 64
         }
     ],
+    "meleeObjects": [
+        {
+            "x": 84,
+            "y": 75,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "wallObjects": [
         {
             "x": 39,
