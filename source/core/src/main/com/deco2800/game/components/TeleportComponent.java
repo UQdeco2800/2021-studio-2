@@ -1,6 +1,5 @@
 package com.deco2800.game.components;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
@@ -9,7 +8,6 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
-import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Scanner;
 import java.util.Timer;
