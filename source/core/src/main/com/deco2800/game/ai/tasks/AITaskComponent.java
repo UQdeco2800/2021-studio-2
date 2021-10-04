@@ -1,8 +1,6 @@
 package com.deco2800.game.ai.tasks;
 
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.components.tasks.DeathPauseTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +19,6 @@ public class AITaskComponent extends Component implements TaskRunner {
 
     private final List<PriorityTask> priorityTasks = new ArrayList<>(2);
     private PriorityTask currentTask;
-    private int indexOfDeathTask;
 
 
     /**
@@ -35,9 +32,6 @@ public class AITaskComponent extends Component implements TaskRunner {
         logger.debug("{} Adding task {}", this, task);
         priorityTasks.add(task);
         task.create(this);
-        if (task.getClass().equals(DeathPauseTask.class)) {
-            indexOfDeathTask = priorityTasks.indexOf(task);
-        }
 
         return this;
     }
@@ -55,13 +49,6 @@ public class AITaskComponent extends Component implements TaskRunner {
 
         if (desiredtask != currentTask) {
             changeTask(desiredtask);
-        }
-        try {
-            if (getEntity().getComponent(CombatStatsComponent.class).isDead()) {
-                changeTask(priorityTasks.get(indexOfDeathTask));
-            }
-        } catch (NullPointerException E) {
-
         }
         currentTask.update();
     }

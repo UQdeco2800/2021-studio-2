@@ -20,7 +20,6 @@ public class MainMenuActions extends Component {
     @Override
     public void create() {
         entity.getEvents().addListener("startForest", this::onStartForest);
-        entity.getEvents().addListener("startTest", this::onStartTest);
         entity.getEvents().addListener("startTutorial", this::onStartTutorial);
         entity.getEvents().addListener("exit", this::onExit);
         entity.getEvents().addListener("settings", this::onSettings);
@@ -32,14 +31,6 @@ public class MainMenuActions extends Component {
     private void onStartForest() {
         logger.info("Start game");
         game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST);
-    }
-
-    /**
-     * Swaps to the Test Main Game screen.
-     */
-    private void onStartTest() {
-        logger.info("Start game");
-        game.setScreen(GdxGame.ScreenType.MAIN_GAME_TEST);
     }
 
     /**

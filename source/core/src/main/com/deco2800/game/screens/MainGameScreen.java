@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.areas.ForestGameArea;
 import com.deco2800.game.areas.GameArea;
-import com.deco2800.game.areas.TestGameArea;
 import com.deco2800.game.areas.TutorialGameArea;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -59,9 +58,12 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
     private GameArea gameArea;
+    private static boolean gameChange = false;
+    private final TerrainFactory terrainFactory;
 
     public MainGameScreen(GdxGame game) {
         this.game = game;
+
 
         logger.debug("Initialising main game screen services");
         ServiceLocator.registerTimeSource(new GameTime());
@@ -82,6 +84,7 @@ public class MainGameScreen extends ScreenAdapter {
         renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
         renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
 
+        terrainFactory = new TerrainFactory(renderer.getCamera());
         loadAssets();
         createUI();
     }
@@ -89,18 +92,32 @@ public class MainGameScreen extends ScreenAdapter {
     public MainGameScreen(GdxGame game, String world) {
         this(game);
         logger.debug("Initialising main game screen entities");
-        TerrainFactory terrainFactory = new TerrainFactory(renderer.getCamera());
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
-        } else if (world.equals("test")) {
-            this.gameArea = new TestGameArea(terrainFactory, game);
         } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory);
+            this.gameArea = new TutorialGameArea(terrainFactory, game);
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
     }
+
+    /**
+     * Use for teleport, track the current player health
+     */
+    public MainGameScreen(GdxGame game, String world, int currentHealth) {
+        this(game);
+        logger.debug("Initialising main game screen entities");
+
+        if (world.equals("forest")) {
+            this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
+        } else if (world.equals("tutorial")) {
+            this.gameArea = new TutorialGameArea(terrainFactory, game);
+        }
+        this.gameArea.create();
+        renderer.getCamera().setPlayer(this.gameArea.getPlayer());
+    }
+
 
     /**
      * Runs when the player dies, causes the camera to zoom in.
@@ -124,12 +141,36 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Use for teleport, get the leve change
+     */
+    public static void levelChange() {
+        gameChange = true;
+    }
+
+    /**
+     * render map or new map if teleport trigger
+     */
     @Override
     public void render(float delta) {
-        physicsEngine.update();
-        ServiceLocator.getEntityService().update();
-        renderer.render();
-        isPlayerDead();
+        if (gameChange) {
+            if (gameArea.getLevel() == 1) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 0) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);
+                gameChange = false;
+            }
+        } else {
+            physicsEngine.update();
+            ServiceLocator.getEntityService().update();
+            renderer.render();
+            isPlayerDead();
+        }
     }
 
     @Override

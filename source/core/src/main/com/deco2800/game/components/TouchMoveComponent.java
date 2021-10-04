@@ -7,9 +7,6 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class TouchMoveComponent extends TouchComponent {
 
     /**
@@ -118,15 +115,5 @@ public class TouchMoveComponent extends TouchComponent {
 
         float yDifference = player.getPosition().y - position.y > 0 ?
                 player.getPosition().y - position.y : -1 * (player.getPosition().y - position.y);
-        if (xDifference <= x && yDifference <= y) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    input.unlockPlayer();
-                    timer.cancel();
-                }
-            }, 500);
-        }
     }
 }

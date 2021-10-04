@@ -55,6 +55,18 @@ public class GdxGame extends Game {
         setScreen(newScreen(screenType));
     }
 
+    /**
+     * Use for teleport, track the current player health
+     */
+    public void setScreen(ScreenType screenType, int currentHealth) {
+        logger.info("Setting game screen to {}", screenType);
+        Screen currentScreen = getScreen();
+        if (currentScreen != null) {
+            currentScreen.dispose();
+        }
+        setScreen(newScreen(screenType, currentHealth));
+    }
+
     @Override
     public void dispose() {
         logger.debug("Disposing of current screen");
@@ -73,8 +85,26 @@ public class GdxGame extends Game {
                 return new MainMenuScreen(this);
             case MAIN_GAME_FOREST:
                 return new MainGameScreen(this, "forest");
-            case MAIN_GAME_TEST:
-                return new MainGameScreen(this, "test");
+            case MAIN_GAME_TUTORIAL:
+                return new MainGameScreen(this, "tutorial");
+            case SETTINGS:
+                return new SettingsScreen(this);
+            case DEATHSCREEN:
+                return new DeathScreen(this);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Use for teleport, track the current player health
+     */
+    private Screen newScreen(ScreenType screenType, int currentHealth) {
+        switch (screenType) {
+            case MAIN_MENU:
+                return new MainMenuScreen(this);
+            case MAIN_GAME_FOREST:
+                return new MainGameScreen(this, "forest", currentHealth);
             case MAIN_GAME_TUTORIAL:
                 return new MainGameScreen(this, "tutorial");
             case SETTINGS:
@@ -87,7 +117,7 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TEST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
+        MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN
     }
 
     /**

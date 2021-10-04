@@ -107,7 +107,7 @@ public class PlayerLowHealthDisplay extends UIComponent {
         if (play) {
             playHeartBeat(alpha);
         }
-        bloodImage.setColor(1, 0, 0, alpha); //opacity of image changes depending on hp %
+        //bloodImage.setColor(1, 0, 0, alpha); //opacity of image changes depending on hp %
         stack.setVisible(true);
     }
 

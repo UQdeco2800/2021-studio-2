@@ -40,6 +40,14 @@ class MeleeWeaponTest {
     }
 
     @Test
+    void shouldStrongAttack() {
+        short targetLayer = (1 << 3);
+        Entity entity = createAttacker(targetLayer);
+        // check that this doesn't throw exceptions
+        entity.getComponent(MeleeWeapon.class).strongAttack(1);
+    }
+
+    @Test
     void shouldCreateWeaponHitbox() {
         short targetLayer = (1 << 3);
         Entity entity = createAttacker(targetLayer);
@@ -72,7 +80,7 @@ class MeleeWeaponTest {
                 0, 0, new Vector2(0f, 0f)));
         weapon.setFrameDuration(200L);
         // assumes 3 frames in attack
-        assertEquals(200L * 3, weapon.getTotalAttackTime());
+        assertEquals(200L * 4, weapon.getTotalAttackTime());
     }
 
     @Test

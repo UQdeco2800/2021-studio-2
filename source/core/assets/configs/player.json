@@ -1,6 +1,7 @@
 {
-    "health": 3000000,
+
+    "health": 30000,
     "baseAttack": 10,
     "gold": 50,
     "favouriteColour": "peach"
-}
+}gi

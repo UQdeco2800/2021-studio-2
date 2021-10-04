@@ -1,4 +1,3 @@
-
 meleeElf.png
 size: 1024, 128
 format: RGBA8888
@@ -123,64 +122,167 @@ default
   orig: 49, 105
   offset: 0, 0
   index: 1
-  
-   
-front_death.png
-size: 128, 256
+
+meleeBackDeath.png
+size: 512, 128
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
-frontDeath
+backDeath
   rotate: false
-  xy: 1, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 0, 0
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
-frontDeath
+backDeath
   rotate: false
-  xy: 1, 67
-  size: 64, 64
-  orig: 64, 64
+  xy: 94, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 188, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 282, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 376, 0
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 
-left_death.png
-size: 132, 66
+meleeFrontDeath.png
+size: 512, 128
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
+repeat: none
+frontDeath
+  rotate: false
+  xy: 0, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 0
+frontDeath
+  rotate: false
+  xy: 94, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 1
+frontDeath
+  rotate: false
+  xy: 188, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 2
+frontDeath
+  rotate: false
+  xy: 282, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 3
+frontDeath
+  rotate: false
+  xy: 376, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: 4
+
+meleeElfLeftDeath.png
+size: 512, 128
+format: RGBA8888
+filter: Nearest,Nearest
 repeat: none
 leftDeath
   rotate: false
-  xy: 1, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 0, 0
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 leftDeath
   rotate: false
-  xy: 67, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 94, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 188, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 282, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 376, 0
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 
-right_death.png
-size: 132, 66
+meleeRightDeath.png
+size: 512, 128
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 rightDeath
   rotate: false
-  xy: 1, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 0, 0
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 rightDeath
   rotate: false
-  xy: 67, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 94, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 188, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 282, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+rightDeath
+  rotate: false
+  xy: 376, 0
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1

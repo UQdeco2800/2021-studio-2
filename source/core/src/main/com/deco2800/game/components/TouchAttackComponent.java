@@ -83,33 +83,53 @@ public class TouchAttackComponent extends TouchComponent {
         if (disable) {
             return;
         }
+
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;
         }
 
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+        if (target.getComponent(HitboxComponent.class)
+                != null
+                && target.getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.OBSTACLE
+                && !getEntity().canSeeEntity(target)) {
+            return;
+        }
+        //Dissolve arrow attacks after hits
+        if (getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.PROJECTILEWEAPON
+                || getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.IDLEPROJECTILEWEAPON) {
+
+            //Remove later on to make arrows stick into walls and more
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
+            getEntity().getEvents().trigger("brokenArrow");
+        }
+
+
+
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
             if (physicsComponent != null) {
+                Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
+                if (myEntity.data.containsKey("dealDamage")) {
+                    if (!((boolean) myEntity.data.get("dealDamage"))) {
+                        return;
+                    }
+                }
                 Body targetBody = physicsComponent.getBody();
                 Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
                 Vector2 impulse = direction.setLength(knockbackForce);
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
             }
         }
-
         if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC){
             //System.out.println("player collision");
             this.getEntity().getComponent(PhysicsMovementComponent.class).setStun();
-
-        }
-
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
-            //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
         }
         applyContinuousDamage(me, other);
     }
@@ -128,12 +148,33 @@ public class TouchAttackComponent extends TouchComponent {
             return;
         }
 
-        // Try to attack target.
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-            targetStats.hit(combatStats);
-            start = System.currentTimeMillis();
+
+        // Try to attack target.
+        if (targetStats != null) {
+            if (this.getEntity().data.containsKey("dealDamage")) {
+                if (!((boolean) this.getEntity().data.get("dealDamage"))) {
+                    return;
+                }
+            }
+
+            if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
+                targetStats.hit(combatStats);
+                if(entity.getEntityType().equals("viking")) {
+                    Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+                    if (direction.angleDeg() > 45 && direction.angleDeg() < 135) {
+                        entity.getEvents().trigger("attackUp");
+                    } else if (direction.angleDeg() > 135 && direction.angleDeg() < 225) {
+                        entity.getEvents().trigger("attackLeft");
+                    } else if (direction.angleDeg() > 225 && direction.angleDeg() < 315) {
+                        entity.getEvents().trigger("attackDown");
+                    } else {
+                        entity.getEvents().trigger("attackRight");
+                    }
+                }
+                start = System.currentTimeMillis();
+            }
         }
 
         // Apply continuous knockback
@@ -146,49 +187,6 @@ public class TouchAttackComponent extends TouchComponent {
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
                 targetBody.setLinearVelocity(targetBody.getLinearVelocity().clamp(-knockbackForce * 10, knockbackForce * 10));
             }
-        }
-    }
-
-    /**
-     * action apply when the hitbox components stop colliding
-     *
-     * @param me    the owner of the hitbox
-     * @param other the target of the hitbox
-     */
-    @Override
-    protected void onCollisionEnd(Fixture me, Fixture other) {
-        if (disable) {
-            return;
-        }
-        super.onCollisionEnd(me, other);
-        if (this.checkEntities(me, other)) {
-            return;
-        }
-
-        // Try to attack target.
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
-        CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-            targetStats.hit(combatStats);
-            start = System.currentTimeMillis();
-        }
-
-        // Apply knockback
-        //Maybe this should be called during collision as sometimes hitboxes can overlap without onCollision being called in time
-        PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-            if (physicsComponent != null) {
-                Body targetBody = physicsComponent.getBody();
-                Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-                Vector2 impulse = direction.setLength(knockbackForce);
-                targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
-            }
-        }
-
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
-            //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
         }
     }
 }

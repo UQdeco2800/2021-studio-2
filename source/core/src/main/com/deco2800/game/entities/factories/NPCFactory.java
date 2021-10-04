@@ -6,16 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
+import com.deco2800.game.components.npc.VikingAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.configs.ElfBossConfig;
-import com.deco2800.game.entities.configs.MeleeEnemyConfig;
-import com.deco2800.game.entities.configs.NPCConfigs;
-import com.deco2800.game.entities.configs.RangedEnemyConfig;
+import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -106,6 +105,7 @@ public class NPCFactory {
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
@@ -181,12 +181,12 @@ public class NPCFactory {
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
-
 
         elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -240,6 +240,7 @@ public class NPCFactory {
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
@@ -375,16 +376,8 @@ public class NPCFactory {
                         ServiceLocator.getResourceService().getAsset("images/rangedAllFinal.atlas", TextureAtlas.class));
 
 
-
-
-
         if (type.equals("fastArrow")) {
             elf.setEntityType("assassin");
-//            animator.addAnimation("assassinMoveLeft", 0.1f, Animation.PlayMode.LOOP);
-//            animator.addAnimation("assassinMoveRight", 0.1f, Animation.PlayMode.LOOP);
-//            animator.addAnimation("assassinMoveUp", 0.1f, Animation.PlayMode.LOOP);
-//            animator.addAnimation("assassinMoveDown", 0.1f, Animation.PlayMode.LOOP);
-
             animator.addAnimation("assassinLeft", 0.5f, Animation.PlayMode.LOOP);
             animator.addAnimation("assassinRight", 0.5f, Animation.PlayMode.LOOP);
             animator.addAnimation("assassinUp", 0.5f, Animation.PlayMode.LOOP);
@@ -395,13 +388,14 @@ public class NPCFactory {
             animator.addAnimation("assassinStunUp", 0.5f, Animation.PlayMode.NORMAL);
             animator.addAnimation("assassinStunDown", 0.5f, Animation.PlayMode.NORMAL);
 
+            animator.addAnimation("assassinLeftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinRightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinFrontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinBackDeath", 0.2f, Animation.PlayMode.NORMAL);
+
 
         } else {
             elf.setEntityType("ranged");
-//            animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.LOOP);
-//            animator.addAnimation("rangerMoveRight", 0.1f, Animation.PlayMode.LOOP);
-//            animator.addAnimation("rangerMoveUp", 0.1f, Animation.PlayMode.LOOP);
-//            animator.addAnimation("rangerMoveDown", 0.1f, Animation.PlayMode.LOOP);
             animator.addAnimation("rangerLeft", 0.5f, Animation.PlayMode.LOOP);
             animator.addAnimation("rangerRight", 0.5f, Animation.PlayMode.LOOP);
             animator.addAnimation("rangerUp", 0.5f, Animation.PlayMode.LOOP);
@@ -412,10 +406,12 @@ public class NPCFactory {
             animator.addAnimation("rangerStunUp", 0.5f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerStunDown", 0.5f, Animation.PlayMode.NORMAL);
 
-//            animator.addAnimation("rangerstunLeft", 0.5f, Animation.PlayMode.NORMAL);
-//            animator.addAnimation("rangerstunRight", 0.5f, Animation.PlayMode.NORMAL);
-//            animator.addAnimation("rangerstunUp", 0.5f, Animation.PlayMode.NORMAL);
-//            animator.addAnimation("rangerstunDown", 0.5f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+
+
         }
 
         elf
@@ -456,11 +452,15 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
+
                         .addTask(new AlertableChaseTask(
                 target, 10, 3f, 4f))
                         .addTask(new MeleeChaseTask(
                                 target, 10, 15f, 20f))
                         //.addTask(new SpawnMinionsTask(target))
+
+                        .addTask(new SpawnMinionsAndExplosionTask(target))
+
                         .addTask(new TeleportationTask(target, 2000))
 
                         .addTask(new DeathPauseTask(
@@ -490,16 +490,23 @@ public class NPCFactory {
         animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
 
+        animator.addAnimation("frontBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightBossDeath", 0.1f, Animation.PlayMode.NORMAL);
+
+
         boss
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
-                .addComponent(aiComponent);
-
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
         boss.scaleHeight(2);
+        boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));
@@ -511,12 +518,68 @@ public class NPCFactory {
                 healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
         boss.setEntityType("elfBoss");
-        boss.setScale(0.6f * 2, 1f * 2);
+        boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
 
         boss.setAttackRange(10);
 
         return boss;
+    }
+
+    public static Entity createMeleeViking(Entity target) {
+        Entity viking = createBaseNPCNoAI();
+        MeleeVikingConfig config = configs.vikingMelee;
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/viking.atlas", TextureAtlas.class));
+        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveRight", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("moveDown", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackDown", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackUp", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackLeft", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackRight", 0.2f, Animation.PlayMode.NORMAL);
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ZigChaseTask(
+                                target, 11, 4f, 4f, 1))
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+
+        viking
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new VikingAnimationController());
+
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
+        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
+        viking.addComponent(healthBarComponent);
+
+        viking.getComponent(AnimationRenderComponent.class).scaleEntity();
+        viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
+        //viking.setScale(1f, 1f);
+        viking.setEntityType("viking");
+        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        return viking;
     }
 
     /**

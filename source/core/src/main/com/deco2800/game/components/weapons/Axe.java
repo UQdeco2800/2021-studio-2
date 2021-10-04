@@ -8,8 +8,8 @@ import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Represents the axe used by entities. Main difference to its superclass is that
- * Axe uses axe-related assets. In future development this will have different
- * attack functionality, including combos, strong-attacks, etc.
+ * Axe uses axe-related assets, and also has a strong attack which
+ * uses an AOE (area of effect) attack.
  */
 public class Axe extends MeleeWeapon {
     /**
@@ -43,29 +43,32 @@ public class Axe extends MeleeWeapon {
         }
         switch (attackDirection) {
             case UP:
-                animator.startAnimation("back_axe_attack");
+                animator.startAnimation("up_attack");
                 break;
             case DOWN:
-                animator.startAnimation("front_axe_attack");
+                animator.startAnimation("down_attack");
                 break;
             case LEFT:
-                animator.startAnimation("left_axe_attack");
+                animator.startAnimation("left_attack");
                 break;
             case RIGHT:
-                animator.startAnimation("right_axe_attack");
+                animator.startAnimation("right_attack");
                 break;
         }
     }
 
     /**
-     * Plays attack sound during attack frame.
+     * Implements functionality for strong attacks, also plays attack sound
+     * during attack frame (for both light and strong).
      *
      * @see MeleeWeapon
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (hasAttacked && timeSinceAttack > frameDuration & timeSinceAttack < 2 * frameDuration) {
-            attackSound.play();
+        if (timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
+            if (hasAttacked) {
+                attackSound.play();
+            }
         }
         super.triggerAttackStage(timeSinceAttack);
     }

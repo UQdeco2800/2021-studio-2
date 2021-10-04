@@ -1,6 +1,7 @@
 package com.deco2800.game.components;
 
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,6 @@ public class CombatStatsComponent extends Component {
         setMaxHealth(health);
         setBaseAttack(baseAttack);
         //if entities can heal trigger this even
-
     }
 
     public void create() {
@@ -80,14 +80,18 @@ public class CombatStatsComponent extends Component {
             if (this.entity != null) {
                 if (getEntity().getComponent(KeyboardPlayerInputComponent.class) != null) {
                     getEntity().getComponent(KeyboardPlayerInputComponent.class).lockPlayer();
+                    // Deliberately chose this because other entities that have animations may have death animations
+                    // it is not possible for a class with no component to animate their death.
+                } else if (this.entity.getComponent(AnimationRenderComponent.class) == null) {
+                    this.entity.prepareDispose();
                 }
             }
         }
         if (this.entity != null) {
             entity.getEvents().trigger("updateHealth", this.health);
+            entity.getEvents().trigger("updateBossHealth", this.health);
         }
     }
-
 
     /**
      * Adds to the player's health. The amount added can be negative.
@@ -142,6 +146,45 @@ public class CombatStatsComponent extends Component {
     }
 
     /**
+     * Entity receives a hit, but also adds a weapon attack.
+     *
+     * @param attacker          the attacking entity with the weapon
+     * @param weaponAttackPower the weapon damage.
+     */
+    public void hit(CombatStatsComponent attacker, int weaponAttackPower) {
+        if (this.enabled) {
+            int newHealth = getHealth() - attacker.getBaseAttack() - weaponAttackPower;
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
+     * Hits purely by weapon attack, ignoring base combat stats of attacking entity.
+     *
+     * @param weaponAttackPower the weapon damage
+     */
+    public void weaponHit(int weaponAttackPower) {
+        if (this.enabled) {
+            int newHealth = getHealth() - weaponAttackPower;
+            //check for hit animations
+            checkHitAnimations();
+            //if entity has Transform Component and is about to die we don't want to update hp
+            // here since it will dispose. Instead we want to disable this component and perform
+            // our transformation.
+            if (!checkTransformation(newHealth)) {
+                setHealth(newHealth);
+            }
+        }
+    }
+
+    /**
      * plays hit animation if the entity has one in its animation controller and
      * atlas file. The event name registered for starting the hit animations must be called
      * 'hit'. The animation names don't have to be 'hit' though.
@@ -154,7 +197,8 @@ public class CombatStatsComponent extends Component {
 
     /**
      * if the entity has a Transform Component it will execute its transformation
-     * will only transform the entity if its hp <= 0 and will disable CombatStatsComponent
+     * will only transform the entity if its hp is less than or equal to 0 and will disable CombatStatsComponent
+     *
      * @param health the current health of the entity
      * @return true if entity has a TransformComponent otherwise false
      */
