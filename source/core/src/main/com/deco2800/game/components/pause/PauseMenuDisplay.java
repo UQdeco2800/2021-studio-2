@@ -121,7 +121,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
         stack.setPosition(stage.getWidth() / 2 , stage.getHeight() / 2 , Align.center);
     }
 
-    private void toggleMenu() {
+    public void toggleMenu() {
         stack.setVisible(ServiceLocator.getTimeSource().isPaused());
     }
 
