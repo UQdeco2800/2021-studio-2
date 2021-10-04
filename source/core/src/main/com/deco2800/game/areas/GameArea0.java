@@ -168,8 +168,8 @@ public class GameArea0 extends GameArea {
     }
 
     private void spawnCutsceneTrigger() {
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-        spawnEntityAt(moveTrigger4, new Vector2(17.3f, 66f), true, true);
+//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
+//        spawnEntityAt(moveTrigger4, new Vector2(17.3f, 66f), true, true);
 //        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
 //                DialogueSet.ORDERED);
 //        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
@@ -262,8 +262,6 @@ public class GameArea0 extends GameArea {
         int height = map.getDimensions().get("n_tiles_height");
         spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
                 true, true);
-        System.out.println(spawn.get("x").intValue());
-        System.out.println(spawn.get("y").intValue());
         player = newPlayer;
     }
 

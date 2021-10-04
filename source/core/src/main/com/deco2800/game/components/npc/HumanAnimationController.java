@@ -39,6 +39,8 @@ public class HumanAnimationController extends Component {
         entity.getEvents().addListener("attackDown", this::animateAttackDown);
         entity.getEvents().addListener("attackLeft", this::animateAttackLeft);
         entity.getEvents().addListener("attackRight", this::animateAttackRight);
+
+        animator.startAnimation("default");
     }
 
     public void setDeath() {

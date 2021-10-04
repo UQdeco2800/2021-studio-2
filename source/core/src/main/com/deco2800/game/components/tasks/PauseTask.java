@@ -26,7 +26,7 @@ public class PauseTask extends DefaultTask implements PriorityTask {
     @Override
     public int getPriority() {
         GameTime timeSource = ServiceLocator.getTimeSource();
-        if (timeSource.isPaused()) {
+        if (timeSource.isEnemiesPaused()) {
             return 25;
         } else {
             return -1;

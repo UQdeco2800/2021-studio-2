@@ -145,7 +145,7 @@ public class TextBox extends Component {
      */
     public void showBars() {
         this.showBars = true;
-        //ServiceLocator.getTimeSource().pause();
+        ServiceLocator.getTimeSource().pauseEnemies();
     }
 
     /**
@@ -153,7 +153,7 @@ public class TextBox extends Component {
      */
     public void hideBars() {
         this.showBars = false;
-        //ServiceLocator.getTimeSource().unpause();
+        ServiceLocator.getTimeSource().unpauseEnemies();
     }
 
     /**

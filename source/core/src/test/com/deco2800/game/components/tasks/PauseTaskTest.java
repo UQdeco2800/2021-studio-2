@@ -17,35 +17,46 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
-class DeathPauseTaskTest {
+class PauseTaskTest {
+
+    GameTime gameTime;
 
     @BeforeEach
     void beforeEach() {
         // Mock rendering, physics, game time
         RenderService renderService = new RenderService();
+        GameTime gameTime = new GameTime();
         renderService.setDebug(mock(DebugRenderer.class));
         ServiceLocator.registerRenderService(renderService);
-        GameTime gameTime = mock(GameTime.class);
-        when(gameTime.getDeltaTime()).thenReturn(20f / 1000);
         ServiceLocator.registerTimeSource(gameTime);
         ServiceLocator.registerPhysicsService(new PhysicsService());
+        this.gameTime = gameTime;
     }
 
     @Test
-    void getPriority() {
+    void shouldNotPause() {
         Entity taskRunner = new Entity();
         taskRunner.addComponent(new CombatStatsComponent(100, 10));
 
-        DeathPauseTask deathPauseTask = new DeathPauseTask(taskRunner, 0, 100, 100, 1.5f);
+        PauseTask pauseTask = new PauseTask();
 
-        deathPauseTask.create(() -> taskRunner);
+        pauseTask.create(() -> taskRunner);
 
-        //only run if the entity die
-        assertEquals(0, deathPauseTask.getPriority());
+        //The priority of the task should be -1 when the game is not paused.
+        assertEquals(-1, pauseTask.getPriority());
+    }
 
-        //the entity die
-        taskRunner.getComponent(CombatStatsComponent.class).setHealth(0);
-        assertEquals(100, deathPauseTask.getPriority());
+    @Test
+    void shouldPause() {
+        Entity taskRunner = new Entity();
+        taskRunner.addComponent(new CombatStatsComponent(100, 10));
 
+        PauseTask pauseTask = new PauseTask();
+
+        pauseTask.create(() -> taskRunner);
+
+        //The priority of the task should be 25 when the game has been paused.
+        gameTime.pauseEnemies();
+        assertEquals(25, pauseTask.getPriority());
     }
 }
