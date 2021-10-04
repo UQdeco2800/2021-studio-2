@@ -82,6 +82,6 @@ public class ExplosionSpawnTask extends DefaultTask implements PriorityTask {
      * @return boolean true reach desired scale
      */
     private boolean desiredScale() {
-        return owner.getEntity().getScale().cpy().dst(this.scale) < 0;
+        return owner.getEntity().getScale().cpy().dst(this.scale) <= 0;
     }
 }
