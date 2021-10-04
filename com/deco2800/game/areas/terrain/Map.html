@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,50 +157,55 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInitTeleportObjects()">getInitTeleportObjects</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHealthCrateObjects()">getHealthCrateObjects</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLavaObjects()">getLavaObjects</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInitTeleportObjects()">getInitTeleportObjects</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code>int[][]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLightTiles()">getLightTiles</a></span>()</code></th>
+<td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLavaObjects()">getLavaObjects</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>int[][]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMapTiles()">getMapTiles</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLightTiles()">getLightTiles</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i6">
-<td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSpikeObjects()">getSpikeObjects</a></span>()</code></th>
+<td class="colFirst"><code>int[][]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMapTiles()">getMapTiles</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTeleportObjects()">getTeleportObjects</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSpikeObjects()">getSpikeObjects</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
+<td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTeleportObjects()">getTeleportObjects</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTileRefs()">getTileRefs</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>int[][]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTransObstacles()">getTransObstacles</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWallObjects()">getWallObjects</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>java.lang.String[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#TileRefsArray()">TileRefsArray</a></span>()</code></th>
 <td class="colLast">
@@ -245,6 +250,12 @@ extends java.lang.Object</pre>
 </a>
 <h2>Method Details</h2>
 <ul class="blockList">
+<li class="blockList">
+<section class="detail">
+<h3><a id="getHealthCrateObjects()">getHealthCrateObjects</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">java.util.HashMap&lt;java.lang.String,&#8203;java.lang.Float&gt;[]</span>&nbsp;<span class="memberName">getHealthCrateObjects</span>()</div>
+</section>
+</li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getDimensions()">getDimensions</a></h3>
