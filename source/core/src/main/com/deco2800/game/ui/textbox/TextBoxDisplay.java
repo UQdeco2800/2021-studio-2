@@ -88,9 +88,9 @@ public class TextBoxDisplay extends UIComponent {
 
     private final float TEXT_Y_POS = 250f;
 
-    private final float CHARACTER_IMAGE_Y_POS = 250f;
+    private final float CHARACTER_IMAGE_Y_POS = 50f;
 
-    private final float CHARACTER_SIZE = 384f;
+    private final float CHARACTER_SIZE = 768f;
 
     private final float MAIN_CHARACTER_DISPLAY_X = 70f;
 
@@ -122,7 +122,7 @@ public class TextBoxDisplay extends UIComponent {
     private void addActors() {
         float MAIN_CHARACTER_NAME_X = 550f;
         float MAIN_CHARACTER_TEXT_X = 180f;
-        float MAIN_CHARACTER_X_POS = 100f;
+        float MAIN_CHARACTER_X_POS = 0f;
 
         topBar = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
@@ -322,15 +322,17 @@ public class TextBoxDisplay extends UIComponent {
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
-            case LOKI_OPENING:
+            case LOKI_INTRODUCTION:
+            case LOKI_ENCOUNTER:
                 enemyName = new Label("    LOKI", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/loki_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/loki_text_box.png", Texture.class));
                 break;
-            case GARMR:
-                enemyName = new Label("GARMR", skin);
+            case ELF_ENCOUNTER:
+            case ELF_INTRODUCTION:
+                enemyName = new Label("     Elf", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
