@@ -369,8 +369,9 @@ public class NPCFactory {
                         .addTask(new PauseTask())
                         .addTask(new SpawnMinionsTask(target))
                         .addTask(new TeleportationTask(target, 2000))
-                        .addTask(new DeathPauseTask(
-                                target, 0, 100, 100, 1.5f));
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
+
+
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
         shootProjectileTask.setProjectileType("fireBall");
         shootProjectileTask.setMultishotChance(0);
@@ -416,6 +417,60 @@ public class NPCFactory {
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
+    }
+
+    public static Entity createOdin(Entity target) {
+        Entity odin = createBaseNPCNoAI();
+        OdinBossConfig config = configs.odinBoss;
+
+//--------THE AI COMPONENT WHERE IT DOES THE ATTACK AND SUMMONING AND WHEN IT DIES SPAWN PORTAL-----
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(target, 10, 5f, 20f))
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
+
+ // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------------
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("Odin/odin.atlas",
+                                TextureAtlas.class));
+
+        animator.setAnimationScale(1f); //maybe?
+        animator.startAnimation("default");
+        setHumanAnimations(animator);
+
+  //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
+        odin.addComponent(new CombatStatsComponent(config.health, config.attack))
+            .addComponent(animator)
+            .addComponent(new HumanAnimationController())
+            .addComponent(aiComponent);
+//            .addComponent(new BossOverlayComponent());
+//        odin.getComponent(BossOverlayComponent.class).nameBoss("God King: ODIN");
+
+ // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------------
+        odin.setAttackRange(5);
+        //odin.getComponent(AnimationRenderComponent.class).scaleEntity();
+        odin.scaleWidth(2);  //MORE SCALLING HERE AND AT THE BOTTOM???
+        odin.scaleHeight(2);
+//
+//
+//-------------------ITS MASSIVE HEALTH BAR ON TOP OF ITS HEAD-------------------------------------
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
+        odin.addComponent(healthBarComponent);
+
+// ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
+        odin.setEntityType("odin"); //MAYBE NO USE? use for AI tasks
+        odin.setScale(0.8f * 2, 1f * 2); //Entity SCALING
+        PhysicsUtils.setScaledCollider(odin, 0.9f, 0.2f); //COLLIDER HIT BOX SCALER?
+        return odin;
     }
 
     /**
@@ -659,7 +714,7 @@ public class NPCFactory {
      * @param target enemy to chase (player)
      * @return boss entity
      */
-    public static Entity createLokiBossNPC(Entity target) {
+    public static Entity createLoki(Entity target) {
 
         Entity boss = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
@@ -729,6 +784,7 @@ public class NPCFactory {
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new PauseTask())
+                        .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 1000);

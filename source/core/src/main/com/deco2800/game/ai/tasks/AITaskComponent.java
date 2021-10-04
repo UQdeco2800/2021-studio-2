@@ -2,9 +2,6 @@ package com.deco2800.game.ai.tasks;
 
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
-
-import com.deco2800.game.components.tasks.DeathPauseTask;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

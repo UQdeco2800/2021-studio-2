@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-
 import com.deco2800.game.components.Touch.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.Touch.TouchAttackComponent;

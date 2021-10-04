@@ -7,6 +7,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.components.ColliderComponent;
 
 public class TouchTeleportComponent extends TouchComponent {
+
     public TouchTeleportComponent(short targetLayer, short myLayer) {
         super(targetLayer, myLayer);
     }

@@ -174,7 +174,7 @@ public class TutorialGameArea extends GameArea {
                 DialogueSet.ORDERED);
         spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
 
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_INTRODUCTION,
                 DialogueSet.BOSS_DEFEATED_BEFORE);
         spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
 

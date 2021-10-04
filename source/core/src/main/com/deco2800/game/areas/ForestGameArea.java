@@ -77,6 +77,8 @@ public class ForestGameArea extends GameArea {
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
             "player_hammer.png",
+            "portal.png",
+            "Odin/odin.png",
             "Assets/gametile-127.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
@@ -86,7 +88,6 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/lokiBoss.png",
-            "portal.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -95,10 +96,13 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "end/portal.atlas", "Odin/odin.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas", "end/portal.atlas"
+            "images/lokiBoss.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -141,7 +145,7 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        spawnTrees();
+        //spawnTrees();
         spawnPlayer();
         spawnCrate();
 //        spawnMeleeElf();
@@ -149,16 +153,17 @@ public class ForestGameArea extends GameArea {
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
+//        spawnBoss();
         spawnVikingMelee();
         spawnHellVikingMelee();
         spawnAsgardWarriorMelee();
         spawnOutdoorArcher();
-        spawnLokiBoss();
+        spawnLoki();
 
-//        spawnBoss();
-        spawnWin();
         playMusic();
         setDialogue();
+        spawnOdin();
+
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
 
@@ -229,6 +234,11 @@ public class ForestGameArea extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Scepter");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
+    }
+
+    private void spawnOdin() {
+        Entity odin = NPCFactory.createOdin(player);
+        spawnEntityAt(odin, new GridPoint2(20, 20), true, true);
     }
 
     /**
@@ -309,13 +319,12 @@ public class ForestGameArea extends GameArea {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    private void spawnLokiBoss() {
+    private void spawnLoki() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
-        GridPoint2 bossPos = new GridPoint2(100, 100);
-        Entity boss = NPCFactory.createLokiBossNPC(player);
-        spawnEntityAt(boss, bossPos, true, true);
+        Entity boss = NPCFactory.createLoki(player);
+        spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
     }
 
     /**
@@ -409,17 +418,6 @@ public class ForestGameArea extends GameArea {
         }
     }
 
-    public void spawnWin() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 1; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity win = ObstacleFactory.winCondition();
-            spawnEntityAt(win, randomPos, true, true);
-        }
-    }
-
     /**
      * Play the music on the background of the game
      */
@@ -472,14 +470,14 @@ public class ForestGameArea extends GameArea {
         if(pSave.lokiEnc < 2 || pSave.lokiEnc >= 4){
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_OPENING);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_INTRODUCTION);
 
             pSave.lokiEnc += 1;
 
         }else if(pSave.lokiEnc >= 1 && pSave.lokiEnc < 3){
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.GARMR);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
 
             pSave.lokiEnc += 1;
         }

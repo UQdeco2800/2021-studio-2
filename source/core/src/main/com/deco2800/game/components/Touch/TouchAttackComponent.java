@@ -158,7 +158,7 @@ public class TouchAttackComponent extends TouchComponent {
 
             if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
                 targetStats.hit(combatStats);
-                if(entity.getEntityType().equals("viking")) {
+                if(entity.getEntityType().equals("viking") || entity.getEntityType().equals("odin")) {
                     Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
                     if (direction.angleDeg() > 45 && direction.angleDeg() < 135) {
                         entity.getEvents().trigger("attackUp");

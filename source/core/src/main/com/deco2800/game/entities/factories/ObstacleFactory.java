@@ -3,6 +3,7 @@ package com.deco2800.game.entities.factories;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Touch.TeleportComponent;
 import com.deco2800.game.components.Touch.TouchAttackComponent;
@@ -197,8 +198,17 @@ public class ObstacleFactory {
         AnimationRenderComponent win2 = new AnimationRenderComponent(
                 ServiceLocator.getResourceService().getAsset("end/portal.atlas",
                         TextureAtlas.class));
-        win2.addAnimation("rotate", 0.5f, Animation.PlayMode.LOOP);
-        win2.startAnimation("rotate");
+        win2.addAnimation("spawn", 0.2f, Animation.PlayMode.NORMAL);
+        win2.addAnimation("rotate", 0.3f, Animation.PlayMode.LOOP);
+        win2.setAnimationScale(3f);
+        win2.startAnimation("spawn");
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                win2.startAnimation("rotate");
+            }
+        }, 1f);
+
 
         Entity win = new Entity()
                 .addComponent(win2)
