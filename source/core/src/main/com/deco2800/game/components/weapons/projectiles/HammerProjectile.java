@@ -102,6 +102,7 @@ public class HammerProjectile extends ProjectileController {
                     (ServiceLocator.getTimeSource().getTime() - gameTime) > 2000L) {
                 // Make projectile static.
                 this.status = STATIC;
+                animator.stopAnimation();
                 animator.startAnimation("default");
                 movingComponent.setMoving(false);
                 hitbox.setEnabled(false);
@@ -129,6 +130,7 @@ public class HammerProjectile extends ProjectileController {
         hitbox.setEnabled(true);
         this.gameTime = ServiceLocator.getTimeSource().getTime();
         this.status = RECALLING;
+        animator.stopAnimation();
         animator.startAnimation("hammer");
     }
 

@@ -294,7 +294,7 @@ public class WeaponFactory {
      * @return entity
      */
     public static Entity createMjolnir(short targetLayer, Vector2 target, Hammer owner) {
-        float speed = 10f;
+        float speed = 8f;
 
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
@@ -303,7 +303,7 @@ public class WeaponFactory {
 
         AnimationRenderComponent animator = new AnimationRenderComponent(
                 ServiceLocator.getResourceService().getAsset("images/hammer_projectile.atlas", TextureAtlas.class));
-        animator.addAnimation("hammer", 0.08f, Animation.PlayMode.LOOP);
+        animator.addAnimation("hammer", 0.10f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
 
         return new Entity()
