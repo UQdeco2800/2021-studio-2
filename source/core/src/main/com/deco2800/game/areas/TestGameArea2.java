@@ -161,7 +161,7 @@ public class TestGameArea2 extends GameArea {
     }
 
     private void spawnTeleport() {
-        Entity teleport = ObstacleFactory.creatTeleport();
+        Entity teleport = ObstacleFactory.createTeleport();
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
         //boss= 1;

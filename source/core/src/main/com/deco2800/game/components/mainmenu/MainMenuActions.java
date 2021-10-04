@@ -23,6 +23,7 @@ public class MainMenuActions extends Component {
         entity.getEvents().addListener("startTutorial", this::onStartTutorial);
         entity.getEvents().addListener("exit", this::onExit);
         entity.getEvents().addListener("settings", this::onSettings);
+        entity.getEvents().addListener("mainMenu", this::onMenu);
     }
 
     /**
@@ -57,6 +58,15 @@ public class MainMenuActions extends Component {
         logger.info("Exit game");
         game.exit();
     }
+
+    /**
+     * Sets the current screen to menu screen
+     */
+    private void onMenu() {
+        logger.info("Exit game");
+        game.setScreen(GdxGame.ScreenType.MAIN_MENU);
+    }
+
 
     /**
      * Swaps to the Settings screen.

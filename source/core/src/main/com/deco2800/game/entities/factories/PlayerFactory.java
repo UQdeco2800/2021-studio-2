@@ -91,7 +91,7 @@ public class PlayerFactory {
                 .addComponent(animator)
                 .addComponent(new PlayerAnimationController())
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYER))
                 .addComponent(new TrapComponent().setLayer(PhysicsLayer.TRAP))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                 //Remove the below lines when the player uses a separate weapon entity
@@ -101,7 +101,8 @@ public class PlayerFactory {
                 .addComponent(new InventoryComponent(stats.gold))
                 .addComponent(inputComponent)
                 .addComponent(new PlayerStatsDisplay())
-                .addComponent(new PlayerLowHealthDisplay());
+                .addComponent(new PlayerLowHealthDisplay())
+                .addComponent(new PlayerWin());
 
         // Add equipped weapon.
         if (weapon.equals("Scepter")) {

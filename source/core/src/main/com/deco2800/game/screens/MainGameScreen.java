@@ -14,7 +14,10 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
-import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.components.pause.PauseInputComponent;
+import com.deco2800.game.components.pause.PauseMenuActions;
+import com.deco2800.game.components.pause.PauseMenuDisplay;
+import com.deco2800.game.components.player.PlayerWin;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -106,7 +109,7 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-        Use for teleport, track the current player health
+     * Use for teleport, track the current player health
      */
     public MainGameScreen(GdxGame game, String world, int currentHealth) {
         this(game);
@@ -147,14 +150,14 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-     Use for teleport, get the leve change
+     * Use for teleport, get the leve change
      */
     public static void levelChange() {
         gameChange = true;
     }
 
     /**
-     render map or new map if teleport trigger
+     * render map or new map if teleport trigger
      */
     @Override
     public void render(float delta) {
@@ -180,8 +183,16 @@ public class MainGameScreen extends ScreenAdapter {
             ServiceLocator.getEntityService().update();
             renderer.render();
             isPlayerDead();
+            playerWin();
         }
     }
+
+    private void playerWin() {
+        if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+        }
+    }
+
 
     @Override
     public void resize(int width, int height) {
@@ -248,6 +259,9 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
+                .addComponent(new PauseMenuActions(game))
+                .addComponent(new PauseMenuDisplay())
+                .addComponent(new PauseInputComponent())
                 .addComponent(new Terminal())
                 .addComponent(inputComponent)
                 .addComponent(new TerminalDisplay());
