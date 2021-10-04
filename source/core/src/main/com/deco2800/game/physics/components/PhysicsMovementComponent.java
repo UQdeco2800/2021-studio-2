@@ -92,11 +92,14 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void DirectionAnimation() {
+        //System.out.println("animateAttack"+animateAttack);
+
         if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
             if (this.getDirection().x < 0) { //left
                 if (leftStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
+                            System.out.println("attackLeft");
                             this.getEntity().getEvents().trigger("attackLeft");
                         } else { //moveAnimation
                             this.getEntity().getEvents().trigger("LeftStart");
@@ -116,13 +119,14 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (rightStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
+                            System.out.println("attackRight");
                             this.getEntity().getEvents().trigger("attackRight");
                         } else { //moveAnimation
-                            System.out.println("move to the right");
+//                            System.out.println("move to the right");
                             this.getEntity().getEvents().trigger("RightStart");
                         }
                     } else { //stun animation
-                        System.out.println("stun right");
+                        //System.out.println("stun right");
                         this.getEntity().getEvents().trigger("stunRight");
                     }
 
@@ -140,12 +144,13 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (downStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
+                            System.out.println("attackDown");
                             this.getEntity().getEvents().trigger("attackDown");
                         } else { //moveAnimation
                             this.getEntity().getEvents().trigger("DownStart");
                         }
                     } else { //stun animation
-                        System.out.println("stun downt");
+//                        System.out.println("stun downt");
                         this.getEntity().getEvents().trigger("stunDown");
                     }
                     downStart=true;
@@ -161,12 +166,13 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (upStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
+                            System.out.println("attackUp");
                             this.getEntity().getEvents().trigger("attackUp");
                         } else { //moveAnimation
                             this.getEntity().getEvents().trigger("UpStart");
                         }
                     } else { //stun animation
-                        System.out.println("stun up");
+                        //System.out.println("stun up");
                         this.getEntity().getEvents().trigger("stunUp");
                     }
                     upStart=true;
@@ -179,148 +185,149 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         }
     }
 
-
-    public void DirectionAnimationXX() {
-        if (animateStun==false) {
-            if (animateAttack == true) {
-                if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
-                    if (this.getDirection().x < 0) {
-                        if (leftStart == false) {
-                            this.getEntity().getEvents().trigger("attackLeft");
-                            //System.out.println("LeftAttack");
-                            leftStart = true;
-                        }
-                        rightStart = false;
-                        upStart = false;
-                        downStart = false;
-                    } else {
-                        if (rightStart == false) {
-                            this.getEntity().getEvents().trigger("attackRight");
-                            //System.out.println("RightAttack");
-                            rightStart = true;
-                        }
-                        leftStart = false;
-                        upStart = false;
-                        downStart = false;
-                    }
-
-
-                } else {
-                    if (this.getDirection().y < 0) {
-                        if (downStart == false) {
-                            this.getEntity().getEvents().trigger("attackDown");
-                            //System.out.println("DownAttack");
-                            downStart = true;
-                        }
-                        leftStart = false;
-                        upStart = false;
-                        rightStart = false;
-                    } else {
-                        if (upStart == false) {
-                            this.getEntity().getEvents().trigger("attackUp");
-                            //System.out.println("UpAttack");
-                            upStart = true;
-                        }
-                        leftStart = false;
-                        downStart = false;
-                        rightStart = false;
-                    }
-                }
-            } else {
-                if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
-                    if (this.getDirection().x < 0) {
-                        if (leftStart == false) {
-                            this.getEntity().getEvents().trigger("LeftStart");
-                            leftStart = true;
-                        }
-                        rightStart = false;
-                        upStart = false;
-                        downStart = false;
-                    } else {
-                        if (rightStart == false) {
-                            this.getEntity().getEvents().trigger("RightStart");
-                            rightStart = true;
-                        }
-                        leftStart = false;
-                        upStart = false;
-                        downStart = false;
-                    }
-                } else {
-                    if (this.getDirection().y < 0) {
-                        if (downStart == false) {
-                            this.getEntity().getEvents().trigger("DownStart");
-                            downStart = true;
-                        }
-                        leftStart = false;
-                        upStart = false;
-                        rightStart = false;
-                    } else {
-                        if (upStart == false) {
-                            this.getEntity().getEvents().trigger("UpStart");
-                            upStart = true;
-                        }
-
-                    }
-                    leftStart = false;
-                    downStart = false;
-                    rightStart = false;
-                }
-            }
-            //System.out.println("this.getDirection().x" + this.getDirection().x + "this.getDirection().y" + this.getDirection().y);
-        }
-        else{
-            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { // x-axis movement ? y-axis movement
-                if (this.getDirection().x < 0) { //going left
-                    System.out.println("travelling on x axis stun");
-                    System.out.println("leftStart"+ leftStart);
-                    System.out.println("rightStart"+ rightStart);
-                    if (leftStart == false) {
-                        System.out.println("leftstart==false, initiate stunLeft");
-                        this.getEntity().getEvents().trigger("stunLeft");
-                        leftStart = true;
-                    }
-                    rightStart = false;
-                    upStart = false;
-                    downStart = false;
-                } else { //going right
-                    if (rightStart == false) {
-                        System.out.println("rightstart==false, initiate stunRight");
-                        this.getEntity().getEvents().trigger("stunRight");
-                        //System.out.println("RightAttack");
-                        rightStart = true;
-                    }
-                    leftStart = false;
-                    upStart = false;
-                    downStart = false;
-                }
-            } else { //travelling more on y-axis
-                if (this.getDirection().y < 0) {
-                    if (downStart == false) {
-                        this.getEntity().getEvents().trigger("stunDown");
-                        //System.out.println("DownAttack");
-                        downStart = true;
-                    }
-                    leftStart = false;
-                    upStart = false;
-                    rightStart = false;
-                } else {
-                    if (upStart == false) {
-                        this.getEntity().getEvents().trigger("stunUp");
-                        //System.out.println("UpAttack");
-                        upStart = true;
-                    }
-                    leftStart = false;
-                    downStart = false;
-                    rightStart = false;
-                }
-                animateStun=false;
-            }
-        }
-        }
+//
+//    public void DirectionAnimationXX() {
+//        if (animateStun==false) {
+//            if (animateAttack == true) {
+//                if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
+//                    if (this.getDirection().x < 0) {
+//                        if (leftStart == false) {
+//                            this.getEntity().getEvents().trigger("attackLeft");
+//                            //System.out.println("LeftAttack");
+//                            leftStart = true;
+//                        }
+//                        rightStart = false;
+//                        upStart = false;
+//                        downStart = false;
+//                    } else {
+//                        if (rightStart == false) {
+//                            this.getEntity().getEvents().trigger("attackRight");
+//                            //System.out.println("RightAttack");
+//                            rightStart = true;
+//                        }
+//                        leftStart = false;
+//                        upStart = false;
+//                        downStart = false;
+//                    }
+//
+//
+//                } else {
+//                    if (this.getDirection().y < 0) {
+//                        if (downStart == false) {
+//                            this.getEntity().getEvents().trigger("attackDown");
+//                            //System.out.println("DownAttack");
+//                            downStart = true;
+//                        }
+//                        leftStart = false;
+//                        upStart = false;
+//                        rightStart = false;
+//                    } else {
+//                        if (upStart == false) {
+//                            this.getEntity().getEvents().trigger("attackUp");
+//                            //System.out.println("UpAttack");
+//                            upStart = true;
+//                        }
+//                        leftStart = false;
+//                        downStart = false;
+//                        rightStart = false;
+//                    }
+//                }
+//            } else {
+//                if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
+//                    if (this.getDirection().x < 0) {
+//                        if (leftStart == false) {
+//                            this.getEntity().getEvents().trigger("LeftStart");
+//                            leftStart = true;
+//                        }
+//                        rightStart = false;
+//                        upStart = false;
+//                        downStart = false;
+//                    } else {
+//                        if (rightStart == false) {
+//                            this.getEntity().getEvents().trigger("RightStart");
+//                            rightStart = true;
+//                        }
+//                        leftStart = false;
+//                        upStart = false;
+//                        downStart = false;
+//                    }
+//                } else {
+//                    if (this.getDirection().y < 0) {
+//                        if (downStart == false) {
+//                            this.getEntity().getEvents().trigger("DownStart");
+//                            downStart = true;
+//                        }
+//                        leftStart = false;
+//                        upStart = false;
+//                        rightStart = false;
+//                    } else {
+//                        if (upStart == false) {
+//                            this.getEntity().getEvents().trigger("UpStart");
+//                            upStart = true;
+//                        }
+//
+//                    }
+//                    leftStart = false;
+//                    downStart = false;
+//                    rightStart = false;
+//                }
+//            }
+//            //System.out.println("this.getDirection().x" + this.getDirection().x + "this.getDirection().y" + this.getDirection().y);
+//        }
+//        else{
+//            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { // x-axis movement ? y-axis movement
+//                if (this.getDirection().x < 0) { //going left
+//                    System.out.println("travelling on x axis stun");
+//                    System.out.println("leftStart"+ leftStart);
+//                    System.out.println("rightStart"+ rightStart);
+//                    if (leftStart == false) {
+//                        System.out.println("leftstart==false, initiate stunLeft");
+//                        this.getEntity().getEvents().trigger("stunLeft");
+//                        leftStart = true;
+//                    }
+//                    rightStart = false;
+//                    upStart = false;
+//                    downStart = false;
+//                } else { //going right
+//                    if (rightStart == false) {
+//                        System.out.println("rightstart==false, initiate stunRight");
+//                        this.getEntity().getEvents().trigger("stunRight");
+//                        //System.out.println("RightAttack");
+//                        rightStart = true;
+//                    }
+//                    leftStart = false;
+//                    upStart = false;
+//                    downStart = false;
+//                }
+//            } else { //travelling more on y-axis
+//                if (this.getDirection().y < 0) {
+//                    if (downStart == false) {
+//                        this.getEntity().getEvents().trigger("stunDown");
+//                        //System.out.println("DownAttack");
+//                        downStart = true;
+//                    }
+//                    leftStart = false;
+//                    upStart = false;
+//                    rightStart = false;
+//                } else {
+//                    if (upStart == false) {
+//                        this.getEntity().getEvents().trigger("stunUp");
+//                        //System.out.println("UpAttack");
+//                        upStart = true;
+//                    }
+//                    leftStart = false;
+//                    downStart = false;
+//                    rightStart = false;
+//                }
+//                animateStun=false;
+//            }
+//        }
+//        }
 
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);
         setToVelocity(body, desiredVelocity);
+        //System.out.println(desiredVelocity);
         DirectionAnimation();
     }
 

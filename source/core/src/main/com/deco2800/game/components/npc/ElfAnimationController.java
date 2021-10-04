@@ -201,15 +201,15 @@ public class ElfAnimationController extends Component {
     public void animateLeftStun() {
         switch (entity.getEntityType()) {
             case "assassin":
-                System.out.println("assassin Left stun");
+                //System.out.println("assassin Left stun");
                 animator.startAnimation("assassinStunLeft");
                 break;
             case "ranged":
-                System.out.println("rangerUp");
+                //System.out.println("rangerUp");
                 animator.startAnimation("rangerStunLeft");
                 break;
             default:
-                System.out.println("melee stun left");
+                //System.out.println("melee stun left");
                 animator.startAnimation("stunLeft");
                 break;
         }
@@ -218,15 +218,15 @@ public class ElfAnimationController extends Component {
     public void animateRightStun() {
         switch (entity.getEntityType()) {
             case "assassin":
-                System.out.println("assassin Right stun");
+                //System.out.println("assassin Right stun");
                 animator.startAnimation("assassinStunRight");
                 break;
             case "ranged":
-                System.out.println("rangerUp");
+                //System.out.println("rangerUp");
                 animator.startAnimation("rangerStunRight");
                 break;
             default:
-                System.out.println("melee stun right");
+                //System.out.println("melee stun right");
                 animator.startAnimation("stunRight");
                 break;
         }
@@ -235,15 +235,15 @@ public class ElfAnimationController extends Component {
     public void animateUpStun() {
         switch (entity.getEntityType()) {
             case "assassin":
-                System.out.println("assassin Up stun");
+                //System.out.println("assassin Up stun");
                 animator.startAnimation("assassinStunUp");
                 break;
             case "ranged":
-                System.out.println("rangerUp");
+                //System.out.println("rangerUp");
                 animator.startAnimation("rangerStunUp");
                 break;
             default:
-                System.out.println("melee stun up");
+                //System.out.println("melee stun up");
                 animator.startAnimation("stunUp");
                 break;
         }
@@ -252,15 +252,15 @@ public class ElfAnimationController extends Component {
     public void animateDownStun() {
         switch (entity.getEntityType()) {
             case "assassin":
-                System.out.println("assassin Down stun");
+                //System.out.println("assassin Down stun");
                 animator.startAnimation("assassinStunDown");
                 break;
             case "ranged":
-                System.out.println("rangerDown");
+                //System.out.println("rangerDown");
                 animator.startAnimation("rangerStunDown");
                 break;
             default:
-                System.out.println("melee stun down");
+                //System.out.println("melee stun down");
                 animator.startAnimation("stunDown");
                 break;
         }

@@ -182,6 +182,11 @@ public class NPCFactory {
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.LOOP);
 
+        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+
 
         elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -451,10 +456,13 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new SpawnMinionsTask(target))
-                        .addTask(new TeleportationTask(target, 2000))
+                        .addTask(new AlertableChaseTask(
+                target, 10, 3f, 4f))
                         .addTask(new MeleeChaseTask(
                                 target, 10, 15f, 20f))
+                        //.addTask(new SpawnMinionsTask(target))
+                        .addTask(new TeleportationTask(target, 2000))
+
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
@@ -487,6 +495,7 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
                 .addComponent(aiComponent);
+
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.scaleWidth(2);
@@ -504,6 +513,9 @@ public class NPCFactory {
         boss.setEntityType("elfBoss");
         boss.setScale(0.6f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+
+        boss.setAttackRange(10);
+
         return boss;
     }
 
