@@ -162,7 +162,7 @@ public class ForestGameArea extends GameArea {
         spawnHellVikingMelee();
         spawnAsgardWarriorMelee();
         spawnOutdoorArcher();
-//        spawnLokiBoss();
+        spawnLoki();
 
         playMusic();
         setDialogue();
@@ -324,13 +324,12 @@ public class ForestGameArea extends GameArea {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    private void spawnLokiBoss() {
+    private void spawnLoki() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
-        GridPoint2 bossPos = new GridPoint2(100, 100);
-        Entity boss = NPCFactory.createLokiBossNPC(player);
-        spawnEntityAt(boss, bossPos, true, true);
+        Entity boss = NPCFactory.createLoki(player);
+        spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
     }
 
     /**

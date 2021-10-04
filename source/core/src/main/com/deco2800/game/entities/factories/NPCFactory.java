@@ -704,7 +704,7 @@ public class NPCFactory {
      * @param target enemy to chase (player)
      * @return boss entity
      */
-    public static Entity createLokiBossNPC(Entity target) {
+    public static Entity createLoki(Entity target) {
 
         Entity boss = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
@@ -772,6 +772,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
+                        .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 1000);
