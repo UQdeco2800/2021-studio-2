@@ -178,9 +178,9 @@ public class NPCFactory {
         animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);

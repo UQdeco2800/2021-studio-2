@@ -9,9 +9,9 @@ import com.deco2800.game.physics.BodyUserData;
 
 import java.util.Scanner;
 
-public class meleeStun extends TouchAttackComponent {
+public class MeleeStunTask extends TouchAttackComponent {
 
-    public meleeStun(short targetLayer, Entity player) {
+    public MeleeStunTask(short targetLayer, Entity player) {
         super(targetLayer);
         //this.player = player;
     }
