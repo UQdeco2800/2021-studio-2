@@ -1,13 +1,10 @@
 package com.deco2800.game.components.pause;
 
+import com.badlogic.gdx.Input;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Component;
-import com.deco2800.game.components.player.PlayerLowHealthDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.input.InputService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.AfterEach;
@@ -15,29 +12,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
-class PauseMenuDisplayTest {
-    PauseMenuActions actions;
-    @Mock
-    Entity entity;
-    PauseMenuDisplay pauseMenu;
+class PauseMenuActionsTest {
+        PauseInputComponent input;
+        @Mock
+        PauseMenuActions actions;
+        Entity entity;
 
 
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerTimeSource(new GameTime());
-        ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerEntityService(new EntityService());
         entity = new Entity();
-        actions = new PauseMenuActions(new GdxGame());
-        pauseMenu = mock(PauseMenuDisplay.class);
+        actions = mock(PauseMenuActions.class);
+        input = new PauseInputComponent();
         entity.addComponent(actions);
-        entity.addComponent(pauseMenu);
+        entity.addComponent(input);
         entity.create();
     }
 
@@ -49,21 +45,20 @@ class PauseMenuDisplayTest {
 
     @Test
     public void createTest() {
-        verify(pauseMenu).create();
+        verify(actions).create();
     }
 
     @Test
     public void disposeTest() {
         entity.dispose();
-        verify(pauseMenu).dispose();
+        verify(actions).dispose();
     }
 
     @Test
-    public void toggleMenuTest(){
-        //ensure that toggling pause toggles pause menu
-        entity.getEvents().addListener("toggleMenu", pauseMenu::toggleMenu);
-        actions.togglePauseGame();
-        verify(pauseMenu).toggleMenu();
+    public void togglePauseTest() {
+        //ensure user inputs triggers toggle pause
+        entity.getEvents().addListener("togglePause", actions::togglePauseGame);
+        input.keyDown(Input.Keys.P);
+        verify(actions).togglePauseGame();
     }
-
 }
