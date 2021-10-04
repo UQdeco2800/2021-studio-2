@@ -95,6 +95,8 @@ public class MainGameScreen extends ScreenAdapter {
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
+        } else if (world.equals("tutorial")) {
+            this.gameArea = new TutorialGameArea(terrainFactory, game);
         } else if (world.equals("game0")) {
             this.gameArea = new GameArea0(terrainFactory, game);
         } else if (world.equals("game1")) {
@@ -119,6 +121,8 @@ public class MainGameScreen extends ScreenAdapter {
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
+        } else if (world.equals("tutorial")) {
+            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
         } else if (world.equals("game0")) {
             this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
         } else if (world.equals("game1")) {
