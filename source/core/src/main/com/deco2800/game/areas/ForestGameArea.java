@@ -149,7 +149,7 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        spawnTrees();
+        //spawnTrees();
         spawnPlayer();
         spawnCrate();
 //        spawnMeleeElf();
@@ -157,16 +157,15 @@ public class ForestGameArea extends GameArea {
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
-        spawnBoss();
-        spawnVikingMelee();
-        spawnHellVikingMelee();
-        spawnAsgardWarriorMelee();
-        spawnOutdoorArcher();
-        spawnLokiBoss();
+//        spawnBoss();
+//        spawnVikingMelee();
+//        spawnHellVikingMelee();
+//        spawnAsgardWarriorMelee();
+//        spawnOutdoorArcher();
+//        spawnLokiBoss();
 
         playMusic();
         setDialogue();
-        spawnWin();
         spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
@@ -422,17 +421,6 @@ public class ForestGameArea extends GameArea {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity crate = ObstacleFactory.createHealthCrate();
             spawnEntityAt(crate, randomPos, true, true);
-        }
-    }
-
-    public void spawnWin() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < 1; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity win = ObstacleFactory.winCondition();
-            spawnEntityAt(win, randomPos, true, true);
         }
     }
 

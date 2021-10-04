@@ -11,7 +11,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
-import com.deco2800.game.components.npc.OdinAnimationController;
 import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.entities.Entity;
@@ -422,31 +421,26 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 5f, 20f));
+                        .addTask(new ChaseTask(target, 10, 5f, 20f))
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
 
  // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------------
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("Odin/odin.atlas",
                                 TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("LeftAttack", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("RightAttack", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("UpAttack", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("DownAttack", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("Default", 1f, Animation.PlayMode.NORMAL);
-        animator.startAnimation("Default");
-
+        animator.setAnimationScale(1f); //maybe?
+        animator.startAnimation("default");
+        setHumanAnimations(animator);
 
   //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
         odin.addComponent(new CombatStatsComponent(config.health, config.attack))
             .addComponent(animator)
-            .addComponent(new OdinAnimationController())
+            .addComponent(new HumanAnimationController())
             .addComponent(aiComponent);
+//            .addComponent(new BossOverlayComponent());
+//        odin.getComponent(BossOverlayComponent.class).nameBoss("God King: ODIN");
 
  // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------------
         odin.setAttackRange(5);
@@ -465,10 +459,9 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 healthBar, healthBarFrame, healthBarDecrease);
         odin.addComponent(healthBarComponent);
-//--------------------------------------------------------------------------------------------------
 
 // ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
-        odin.setEntityType("odinBoss"); //MAYBE NO USE? use for AI tasks
+        odin.setEntityType("odin"); //MAYBE NO USE? use for AI tasks
         odin.setScale(0.8f * 2, 1f * 2); //Entity SCALING
         PhysicsUtils.setScaledCollider(odin, 0.9f, 0.2f); //COLLIDER HIT BOX SCALER?
         return odin;
