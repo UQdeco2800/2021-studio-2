@@ -139,11 +139,11 @@ public class GameArea0 extends GameArea {
         spawnPlayer();
 
         spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnBoss();
 
         spawnObstacles();
         spawnLights();
@@ -328,15 +328,30 @@ public class GameArea0 extends GameArea {
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
-    private void spawnMeleeElf() {
+    private void spawnMeleeElfRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        HashMap<String, Float>[] walls = map.getWallObjects();
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity elf = NPCFactory.createMeleeElf(player);
             incNum();
             spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+    private void spawnMeleeElf() {
+        HashMap<String, Float>[] objects = map.getMeleeObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createMeleeElf(player);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
         }
     }
 
