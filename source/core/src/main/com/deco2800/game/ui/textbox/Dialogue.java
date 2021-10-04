@@ -284,8 +284,8 @@ public enum Dialogue {
     THOR_INTRODUCTION_FIRST(new Message[]{
             new Message(false, "Ahh, I see that you've made it past my" +
                     "\nbrother. I can't say I'm too surprised though"),
-            new Message(false, "He was never really one for real fights" +
-                    "\nHe always much preferred making others" +
+            new Message(false, "He was never really one for real fights," +
+                    "\nhe always much preferred making others" +
                     "\nfight and lurking around instead."),
             new Message(false, "I on the other hand, excel at battle" +
                     "\nCome! Test your will against the power " +
