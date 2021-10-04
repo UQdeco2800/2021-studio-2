@@ -25,6 +25,7 @@ public class PlayerSaveTest {
     @Test
     void testSaveChange(){
         PlayerSave.Save testSave = PlayerSave.initial();
+        PlayerSave.Save backupSave = PlayerSave.load();
 
         testSave.hasPlayed = true;
 
@@ -49,5 +50,7 @@ public class PlayerSaveTest {
         assertEquals(testSave.lokiWins, loadedSave.lokiWins);
         assertEquals(testSave.thorWins, loadedSave.thorWins);
         assertEquals(testSave.odinWins, loadedSave.odinWins);
+
+        PlayerSave.write(backupSave);
     }
 }
