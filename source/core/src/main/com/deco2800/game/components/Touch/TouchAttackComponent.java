@@ -9,6 +9,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 
 
 /**
@@ -83,18 +84,34 @@ public class TouchAttackComponent extends TouchComponent {
         if (disable) {
             return;
         }
+
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;
         }
 
+        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+        if (target.getComponent(HitboxComponent.class)
+                != null
+                && target.getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.OBSTACLE
+                && !getEntity().canSeeEntity(target)) {
+            return;
+        }
         //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
+        if (getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.PROJECTILEWEAPON
+                || getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.IDLEPROJECTILEWEAPON) {
+
             //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
+            getEntity().getEvents().trigger("brokenArrow");
         }
 
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
+
+
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
@@ -128,20 +145,31 @@ public class TouchAttackComponent extends TouchComponent {
             return;
         }
 
-        // Try to attack target.
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
 
+        // Try to attack target.
         if (targetStats != null) {
-            Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-            if (myEntity.data.containsKey("dealDamage")) {
-                if (!((boolean) myEntity.data.get("dealDamage"))) {
+            if (this.getEntity().data.containsKey("dealDamage")) {
+                if (!((boolean) this.getEntity().data.get("dealDamage"))) {
                     return;
                 }
             }
 
             if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
                 targetStats.hit(combatStats);
+                if(entity.getEntityType().equals("viking")) {
+                    Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+                    if (direction.angleDeg() > 45 && direction.angleDeg() < 135) {
+                        entity.getEvents().trigger("attackUp");
+                    } else if (direction.angleDeg() > 135 && direction.angleDeg() < 225) {
+                        entity.getEvents().trigger("attackLeft");
+                    } else if (direction.angleDeg() > 225 && direction.angleDeg() < 315) {
+                        entity.getEvents().trigger("attackDown");
+                    } else {
+                        entity.getEvents().trigger("attackRight");
+                    }
+                }
                 start = System.currentTimeMillis();
             }
         }

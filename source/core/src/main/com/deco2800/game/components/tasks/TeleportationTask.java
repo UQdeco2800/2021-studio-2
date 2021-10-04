@@ -1,7 +1,6 @@
 package com.deco2800.game.components.tasks;
 
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
@@ -10,7 +9,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.rendering.DebugRenderer;
@@ -135,7 +133,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             Entity entity = new Entity();
             entity.setPosition(position);
             entity.setScale(owner.getEntity().getScale());
-            Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
+            Entity vortex2 = WeaponFactory.createVortexExit(entity, getDirectionOfTarget(), false);
+
 
             gameArea.spawnEntityAt(vortex2, position, true, true);
         }
@@ -177,18 +176,22 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         entity.setPosition(owner.getEntity().getPosition());
         entity.setScale(owner.getEntity().getScale());
 
-        Entity vortex = WeaponFactory.createVortex(entity,
+        //todo: This doesn't need random entity positions to work, just set a vector
+        Entity vortex = WeaponFactory.createVortexEnter(entity,
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
                 new Vector2(0, 0);
+        //todo: get world size
         Vector2 maxPos = new Vector2(10, 10);
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
         entity2.setScale(owner.getEntity().getScale());
         gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortex(entity2, getDirectionOfTarget(), false);
+        Entity vortex2 = WeaponFactory.createVortexExit(entity2, getDirectionOfTarget(), false);
+
+        vortex.data.put("teleportLoc", pos2);
 
         gameArea.spawnEntityAt(vortex2, pos2, true, true);
     }
@@ -247,29 +250,12 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * check if target is block by any object
+     * Check if there are any object between the entity and the target
      *
-     * @return true if it not block, false otherwise
+     * @return true if no object, false otherwise
      */
     private boolean isTargetVisible() {
-        Vector2 from = owner.getEntity().getCenterPosition();
-        Vector2 to = target.getCenterPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from, to, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
-            return false;
-        }
-        Vector2 from2 = owner.getEntity().getPosition();
-        Vector2 to2 = target.getPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from2, to2, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
-            return false;
-        }
-        debugRenderer.drawLine(from, to);
-        return true;
+        return owner.getEntity().canSeeEntity(target);
     }
 
     /**

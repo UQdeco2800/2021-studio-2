@@ -2,7 +2,6 @@ package com.deco2800.game.entities.factories;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Touch.TeleportComponent;
@@ -132,7 +131,7 @@ public class ObstacleFactory {
     }
 
 
-    public static Entity creatTeleport() {
+    public static Entity createTeleport() {
 
         Entity teleport = new Entity()
                 .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))

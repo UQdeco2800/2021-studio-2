@@ -91,7 +91,7 @@ public class PlayerFactory {
                 .addComponent(animator)
                 .addComponent(new PlayerAnimationController())
                 .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.PLAYER))
                 .addComponent(new TrapComponent().setLayer(PhysicsLayer.TRAP))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                 //Remove the below lines when the player uses a separate weapon entity
