@@ -71,7 +71,10 @@ public class ForestGameArea extends GameArea {
             "images/fireball/fireballAinmation.png",
             "images/rangedFixed.png",
             "images/bossFixed.png",
-            "images/meleeAnimationsTextured.png"
+            "images/meleeAnimationsTextured.png",
+            "images/meleeFinal.png",
+            "images/assassinFinal.png",
+            "images/guardFinal.png"
 
 
     };
@@ -82,7 +85,8 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossEnemy.atlas", "images/bossAttack.atlas", "images/minionEnemy.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas", "images/bossFixed.atlas", "images/meleeAnimationsTextured.atlas"
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas", "images/rangedFixed.atlas", "images/bossFixed.atlas", "images/meleeAnimationsTextured.atlas",
+            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas"
 
 
     };
@@ -121,7 +125,7 @@ public class ForestGameArea extends GameArea {
         spawnPlayer();
         spawnCrate();
         spawnMeleeElf();
-//        spawnElfGuard();
+        spawnElfGuard();
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();

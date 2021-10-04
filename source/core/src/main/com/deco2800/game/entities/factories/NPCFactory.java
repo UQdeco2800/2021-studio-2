@@ -63,7 +63,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeAnimationsTextured.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
@@ -132,14 +132,14 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/guardElf.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
+        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.LOOP);
 
 
         elfGuard
@@ -184,7 +184,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -239,7 +239,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);
@@ -303,7 +303,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/rangedElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/rangedFinal.atlas", TextureAtlas.class));
 
         if (type.equals("fastArrow")) {
             elf.setEntityType("assassin");
@@ -378,7 +378,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/bossFixed.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/bossFinal.atlas", TextureAtlas.class));
         animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.NORMAL);

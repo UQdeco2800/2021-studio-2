@@ -1,4 +1,3 @@
-
 meleeFinal.png
 size: 1024, 512
 format: RGBA8888
@@ -200,3 +199,10 @@ stunUp
   orig: 94, 110
   offset: 0, 0
   index: -1
+default
+  rotate: false
+  xy: 2, 338
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1

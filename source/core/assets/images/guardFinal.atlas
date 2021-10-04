@@ -32,13 +32,6 @@ moveLeft
   orig: 94, 110
   offset: 0, 0
   index: 1
-moveRight
-  rotate: false
-  xy: 98, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
 moveLeft
   rotate: false
   xy: 194, 114
@@ -59,59 +52,66 @@ moveRight
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: 2
+  index: 1
 moveRight
   rotate: false
   xy: 290, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: 3
-moveUp
+  index: 2
+moveRight
   rotate: false
   xy: 386, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: 1
+  index: 3
 moveUp
   rotate: false
   xy: 386, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: 2
+  index: 1
 moveUp
   rotate: false
   xy: 482, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: 3
-stunBack
+  index: 2
+moveUp
   rotate: false
   xy: 482, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
-stunFront
+  index: 3
+stunBack
   rotate: false
   xy: 578, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-stunLeft
+stunFront
   rotate: false
   xy: 578, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-stunRight
+stunLeft
   rotate: false
   xy: 674, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: -1
+stunRight
+  rotate: false
+  xy: 674, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
