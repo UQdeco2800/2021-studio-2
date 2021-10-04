@@ -322,7 +322,7 @@ public class GameArea0 extends GameArea {
      */
     @Override
     public int getLevel() {
-        return 1;
+        return 0;
     }
 
     /**

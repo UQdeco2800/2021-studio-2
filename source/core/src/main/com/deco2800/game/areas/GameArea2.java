@@ -339,7 +339,7 @@ public class GameArea2 extends GameArea {
      */
     @Override
     public int getLevel() {
-        return 1;
+        return 2;
     }
 
     /**

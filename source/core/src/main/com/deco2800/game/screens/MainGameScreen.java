@@ -95,8 +95,16 @@ public class MainGameScreen extends ScreenAdapter {
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
-        } else if (world.equals("tutorial")) {
+        } else if (world.equals("game0")) {
             this.gameArea = new GameArea0(terrainFactory, game);
+        } else if (world.equals("game1")) {
+            this.gameArea = new GameArea1(terrainFactory, game);
+        } else if (world.equals("game2")) {
+            this.gameArea = new GameArea2(terrainFactory, game);
+        } else if (world.equals("game3")) {
+            this.gameArea = new GameArea3(terrainFactory, game);
+        } else if (world.equals("game4")) {
+            this.gameArea = new GameArea4(terrainFactory, game);
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -111,10 +119,16 @@ public class MainGameScreen extends ScreenAdapter {
 
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
-        } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
-        } else if (world.equals("test1")) {
-            this.gameArea = new TestGameArea1(terrainFactory, game, currentHealth);
+        } else if (world.equals("game0")) {
+            this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
+        } else if (world.equals("game1")) {
+            this.gameArea = new GameArea1(terrainFactory, game, currentHealth);
+        } else if (world.equals("game2")) {
+            this.gameArea = new GameArea2(terrainFactory, game, currentHealth);
+        } else if (world.equals("game3")) {
+            this.gameArea = new GameArea3(terrainFactory, game, currentHealth);
+        } else if (world.equals("game4")) {
+            this.gameArea = new GameArea4(terrainFactory, game, currentHealth);
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -156,20 +170,25 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (gameChange) {
-            if (gameArea.getLevel() == 1) {
+            if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
-                game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 0) {
+            } else if (gameArea.getLevel() == 1) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
-                game.setScreen(GdxGame.ScreenType.TEST1, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA2, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 2) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
-                game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 3) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA4, currentHealth);
                 gameChange = false;
             }
         } else {
