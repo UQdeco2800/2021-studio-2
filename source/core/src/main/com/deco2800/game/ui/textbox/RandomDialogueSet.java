@@ -16,53 +16,81 @@ public enum RandomDialogueSet {
                     Dialogue.TUTORIAL_FIRST
             },
             new Dialogue[]{
-                    Dialogue.TUTORIAL_REPEAT
+                    Dialogue.TUTORIAL_FIRST
             },
             new Dialogue[]{
-                    Dialogue.TUTORIAL_REPEAT
+                    Dialogue.TUTORIAL_FIRST
             },
             new Dialogue[]{
                     Dialogue.TUTORIAL_MOVE,
                     Dialogue.TUTORIAL_DASH,
                     Dialogue.TUTORIAL_ATTACK,
+                    Dialogue.TUTORIAL_ENEMIES,
+                    Dialogue.TUTORIAL_TRAPS,
                     Dialogue.TUTORIAL_EXIT
             }
     ),
 
-    LOKI_OPENING(
+    ELF_INTRODUCTION(
             new Dialogue[]{
-                    Dialogue.LOKI_FIRST
+                    Dialogue.ELF_INTRODUCTION_FIRST
             },
             new Dialogue[]{
-                    Dialogue.LOKI_DEFEAT_1,
-                    Dialogue.LOKI_DEFEAT_2,
-                    Dialogue.LOKI_DEFEAT_3,
-                    Dialogue.LOKI_DEFEAT_4,
-                    Dialogue.LOKI_DEFEAT_5,
+                    Dialogue.ELF_INTRODUCTION_VICTORY_1,
+                    Dialogue.ELF_INTRODUCTION_VICTORY_2,
             },
             new Dialogue[]{
-                    Dialogue.LOKI_DEFEAT_1,
-                    Dialogue.LOKI_DEFEAT_2,
-                    Dialogue.LOKI_DEFEAT_3,
-                    Dialogue.LOKI_DEFEAT_4,
-                    Dialogue.LOKI_DEFEAT_5,
+                    Dialogue.ELF_INTRODUCTION_DEFEATED_1,
+                    Dialogue.ELF_INTRODUCTION_DEFEATED_2,
             },
             null
     ),
 
-    GARMR(
+    ELF_ENCOUNTER(
             new Dialogue[]{
-                    Dialogue.GARMR_FIRST
+                    Dialogue.ELF_ENCOUNTER_FIRST
             },
             new Dialogue[]{
-                    Dialogue.GARMR_BEATEN_1,
-                    Dialogue.GARMR_BEATEN_2,
-                    Dialogue.GARMR_BEATEN_3,
-                    Dialogue.GARMR_BEATEN_4,
+                    Dialogue.ELF_ENCOUNTER_VICTORY_1,
+                    Dialogue.ELF_ENCOUNTER_VICTORY_2,
             },
             new Dialogue[]{
-                    Dialogue.GARMR_DEFEAT_1,
-                    Dialogue.GARMR_DEFEAT_2,
+                    Dialogue.ELF_ENCOUNTER_DEFEATED_1,
+                    Dialogue.ELF_ENCOUNTER_DEFEATED_2,
+            },
+            null
+    ),
+
+    LOKI_INTRODUCTION(
+            new Dialogue[]{
+                    Dialogue.LOKI_INTRODUCTION_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI_INTRODUCTION_VICTORY_1,
+                    Dialogue.LOKI_INTRODUCTION_VICTORY_2,
+                    Dialogue.LOKI_INTRODUCTION_VICTORY_3,
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI_INTRODUCTION_DEFEATED_1,
+                    Dialogue.LOKI_INTRODUCTION_DEFEATED_2,
+                    Dialogue.LOKI_INTRODUCTION_DEFEATED_3,
+                    Dialogue.LOKI_INTRODUCTION_DEFEATED_4,
+                    Dialogue.LOKI_INTRODUCTION_DEFEATED_5,
+            },
+            null
+    ),
+
+    LOKI_ENCOUNTER(
+            new Dialogue[]{
+                    Dialogue.LOKI_ENCOUNTER_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI_ENCOUNTER_VICTORY_1,
+                    Dialogue.LOKI_ENCOUNTER_VICTORY_2,
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI_ENCOUNTER_DEFEATED_1,
+                    Dialogue.LOKI_ENCOUNTER_DEFEATED_2,
             },
             null
     ),
