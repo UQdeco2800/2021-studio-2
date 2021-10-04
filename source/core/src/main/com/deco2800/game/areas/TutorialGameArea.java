@@ -40,20 +40,10 @@ public class TutorialGameArea extends GameArea {
     private static final float WALL_WIDTH = 0.1f;
     private static String[] tileTextures = null;
     private static final String[] forestTextures = {
-            "images/tree.png",
             "images/trap.png",
             "images/test.png",
             "images/arrow_normal.png",
             "images/crown.png",
-            "images/grass_1.png",
-            "images/grass_2.png",
-            "images/grass_3.png",
-            "images/hex_grass_1.png",
-            "images/hex_grass_2.png",
-            "images/hex_grass_3.png",
-            "images/iso_grass_1.png",
-            "images/iso_grass_2.png",
-            "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
             "images/player_axe.png",
@@ -86,23 +76,28 @@ public class TutorialGameArea extends GameArea {
             "images/boss_health_left.png",
             "images/boss_health_right.png"
     };
+
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
             "crate/crateHitBreak.png"
     };
+
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas"
     };
+
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
     };
+
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
             "sounds/arrow_shoot.mp3"
     };
+
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
 
@@ -252,7 +247,6 @@ public class TutorialGameArea extends GameArea {
         Entity teleport = ObstacleFactory.creatTeleport();
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
-        //boss= 1;
     }
 
     private void spawnPlayer() {
