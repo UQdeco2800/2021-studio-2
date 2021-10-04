@@ -9,7 +9,6 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
-import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Scanner;
 import java.util.Timer;
@@ -48,9 +47,7 @@ public class TeleportComponent extends TouchComponent {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
 
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
-            //System.out.println("here");
-            //target.getComponent(CombatStatsComponent.class).setHealth(50);
+        if (targetStats != null) {
             CutsceneScreen screen = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(CutsceneScreen.class);
             screen.setOpen();

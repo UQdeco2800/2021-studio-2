@@ -13,6 +13,8 @@ public class GameTime {
     private final long startTime;
     private float timeScale = 1f;
     private boolean paused = false;
+
+    private boolean enemiesPaused = false;
     // The amount of time game was paused since started
     private long timePaused;
     // The time at which game was paused last time
@@ -81,5 +83,17 @@ public class GameTime {
         timeScale = 1f;
         paused = false;
         timePaused += getTimeSince(previouslyPausedAt);
+    }
+
+    public void pauseEnemies() {
+        enemiesPaused = true;
+    }
+
+    public void unpauseEnemies() {
+        enemiesPaused = false;
+    }
+
+    public boolean isEnemiesPaused() {
+        return this.enemiesPaused;
     }
 }

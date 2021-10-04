@@ -79,6 +79,7 @@ public class NPCFactory {
                                 target, 11, 4f, 4f, 1))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
+                        .addTask(new PauseTask())
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
@@ -112,6 +113,7 @@ public class NPCFactory {
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 10, 3f, 4f))
+                .addTask(new PauseTask())
                 .addTask(new DeathPauseTask(
                         target, 0, 100, 100, 1.5f));
         elfGuard.addComponent(aiTaskComponent);
@@ -163,6 +165,7 @@ public class NPCFactory {
                         .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
                         .addTask(new AnchoredChaseTask(
                                 target, 3f, 4f, anchor, anchorSize))
+                        .addTask(new PauseTask())
                         .addTask(new AnchoredRetreatTask(anchor, anchorSize))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
@@ -217,6 +220,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new AnchoredWanderTask(
                                 anchor, anchorSizeX, anchorSizeY, 2f))
+                        .addTask(new PauseTask())
                         .addTask(new AnchoredChaseTask(
                                 target, 3f,
                                 4f, anchor, anchorSizeX, anchorSizeY))
@@ -278,6 +282,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 15f, 20f))
+                        .addTask(new PauseTask())
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
@@ -361,6 +366,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
+                        .addTask(new PauseTask())
                         .addTask(new SpawnMinionsTask(target))
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
@@ -488,6 +494,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ZigChaseTask(
                                 target, 11, 4f, 4f, 1))
+                        .addTask(new PauseTask())
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -538,6 +545,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 11, 4f, 4f, new Vector2(2f, 2f)))
+                        .addTask(new PauseTask())
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -588,6 +596,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 11, 4f, 4f, new Vector2(1.5f, 1.5f)))
+                        .addTask(new PauseTask())
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
@@ -658,6 +667,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 15f, 20f))
+                        .addTask(new PauseTask())
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
@@ -713,6 +723,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
+                        .addTask(new PauseTask())
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new SpawnDecoysTask(target))
                         .addTask(new DeathPauseTask(
@@ -772,6 +783,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
+                        .addTask(new PauseTask())
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));

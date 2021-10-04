@@ -83,14 +83,11 @@ public class ForestGameArea extends GameArea {
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
-            "images/outdoorArcher.png",
-            "images/outdoorWarrior.png",
-            "images/hellWarrior.png",
             "images/viking.png",
             "images/hellViking.png",
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
-            "images/lokiBoss.png"
+            "images/lokiBoss.png",
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -102,7 +99,6 @@ public class ForestGameArea extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "end/portal.atlas", "Odin/odin.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorWarrior.atlas",
-            "images/hellWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
@@ -169,7 +165,6 @@ public class ForestGameArea extends GameArea {
         spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
-
     }
 
     @Override

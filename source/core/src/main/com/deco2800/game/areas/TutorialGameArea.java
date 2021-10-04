@@ -261,7 +261,7 @@ public class TutorialGameArea extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
-        player.setPosition(new Vector2(15, 8)); //TESTING FOR TELEPORT
+        //player.setPosition(new Vector2(15, 8)); //TESTING FOR TELEPORT
     }
 
     private void spawnObstacles() {
