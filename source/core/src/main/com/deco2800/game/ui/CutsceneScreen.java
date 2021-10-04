@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.TextBox;
-import com.deco2800.game.utils.BooleanObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,35 +111,28 @@ public class CutsceneScreen extends UIComponent {
     /**
      * Shows the black screen.
      */
-    private void openScreen() {
+    public void openScreen() {
         moveDown();
     }
 
     /**
      * Removes the black screen.
      */
-    private void closeScreen() {
+    public void closeScreen() {
         moveUp();
     }
 
     /**
      * Shows the black screen with no fade in time.
      */
-    private void openScreenInstant() {
+    public void openScreenInstant() {
         blackScreen.setY(0);
-    }
-
-    /**
-     * Removes the black screen with no fade out time.
-     */
-    private void closeScreenInstant() {
-        blackScreen.setY(ServiceLocator.getRenderService().getStage().getHeight());
     }
 
     /**
      * Moves the screens down relative to their original height.
      */
-    private void moveDown() {
+    public void moveDown() {
         float initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         if (blackScreen.getY() > initialHeight - ServiceLocator.getRenderService().getStage().getHeight()
                 && opening) {
@@ -159,7 +151,7 @@ public class CutsceneScreen extends UIComponent {
     /**
      * Moves the screens up relative to their original height.
      */
-    private void moveUp() {
+    public void moveUp() {
         if (blackScreen.getY() < ServiceLocator.getRenderService().getStage().getHeight()
                 && closing) {
             blackScreen.setY(blackScreen.getY() + 15);
@@ -172,6 +164,24 @@ public class CutsceneScreen extends UIComponent {
                 }
             }, 15);
         }
+    }
+
+    /**
+     * Returns if the cutscene screen is currently opening.
+     *
+     * @return boolean, true if the cutscene screen is opening
+     */
+    public boolean isOpening() {
+        return this.opening;
+    }
+
+    /**
+     * Returns if the cutscene screen is currently closing.
+     *
+     * @return boolean, true if the cutscene screen is closing
+     */
+    public boolean isClosing() {
+        return this.closing;
     }
 
     /**

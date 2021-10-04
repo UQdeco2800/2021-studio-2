@@ -5,10 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.deco2800.game.areas.TestGameArea1;
 import com.deco2800.game.files.UserSettings;
-import com.deco2800.game.screens.DeathScreen;
-import com.deco2800.game.screens.MainGameScreen;
-import com.deco2800.game.screens.MainMenuScreen;
-import com.deco2800.game.screens.SettingsScreen;
+import com.deco2800.game.screens.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +54,7 @@ public class GdxGame extends Game {
     }
 
     /**
-     Use for teleport, track the current player health
+     * Use for teleport, track the current player health
      */
     public void setScreen(ScreenType screenType, int currentHealth) {
         logger.info("Setting game screen to {}", screenType);
@@ -92,6 +89,8 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
+            case END_SCREEN:
+                return new EndScreen(this);
             case GAMEAREA0:
                 return new MainGameScreen(this, "game0");
             case GAMEAREA1:
@@ -108,7 +107,7 @@ public class GdxGame extends Game {
     }
 
     /**
-     Use for teleport, track the current player health
+     * Use for teleport, track the current player health
      */
     private Screen newScreen(ScreenType screenType, int currentHealth) {
         switch (screenType) {
@@ -141,7 +140,7 @@ public class GdxGame extends Game {
 
     public enum ScreenType {
         MAIN_MENU, MAIN_GAME_FOREST, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, TEST1, GAMEAREA0, GAMEAREA1,
-        GAMEAREA2, GAMEAREA3, GAMEAREA4
+        GAMEAREA2, GAMEAREA3, GAMEAREA4, TEST2, END_SCREEN
     }
 
     /**

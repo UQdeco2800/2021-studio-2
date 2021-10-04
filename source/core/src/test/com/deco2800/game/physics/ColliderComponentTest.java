@@ -2,7 +2,6 @@ package com.deco2800.game.physics;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.components.ColliderComponent;
@@ -91,7 +90,7 @@ class ColliderComponentTest {
         ColliderComponent component = new ColliderComponent();
         entity.addComponent(component);
 
-        Shape shape = new CircleShape();
+        CircleShape shape = new CircleShape();
         component.setShape(shape);
         entity.create();
         assertEquals(shape.getType(), component.getFixture().getShape().getType());

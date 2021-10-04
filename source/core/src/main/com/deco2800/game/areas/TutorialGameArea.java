@@ -16,6 +16,7 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
@@ -74,7 +75,8 @@ public class TutorialGameArea extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/outdoorArcher.png"
     };
 
     public static final String[] healthRegenTextures = {
@@ -86,7 +88,7 @@ public class TutorialGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas",  "images/outdoorArcher.atlas"
     };
 
     private static final String[] forestSounds = {
@@ -167,7 +169,7 @@ public class TutorialGameArea extends GameArea {
                 DialogueSet.ORDERED);
         spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
 
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
+        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_INTRODUCTION,
                 DialogueSet.BOSS_DEFEATED_BEFORE);
         spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
 
@@ -246,8 +248,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnTeleport() {
-        //Spawns Teleport
-        Entity teleport = ObstacleFactory.creatTeleport();
+        Entity teleport = ObstacleFactory.createTeleport();
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
     }
@@ -320,7 +321,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     @Override
     public int getLevel() {
@@ -426,6 +427,14 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void loadAssets() {
+
+        logger.info("Resetting Save File");
+        PlayerSave.Save pSave = PlayerSave.initial();
+        PlayerSave.write(pSave);
+
+
+
+
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(tileTextures);
@@ -458,9 +467,18 @@ public class TutorialGameArea extends GameArea {
      * Sets the dialogue for when the game first loads.
      */
     private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+        PlayerSave.Save pSave = PlayerSave.load();
+
+
+        if(pSave.hasPlayed == false){
+            TextBox textBox = ServiceLocator.getEntityService()
+                    .getUIEntity().getComponent(TextBox.class);
+            textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+
+            pSave.hasPlayed = true;
+        }
+
+        PlayerSave.write(pSave);
     }
 
     @Override

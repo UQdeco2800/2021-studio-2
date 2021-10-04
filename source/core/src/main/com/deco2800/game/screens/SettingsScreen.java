@@ -25,6 +25,8 @@ public class SettingsScreen extends ScreenAdapter {
 
     private final GdxGame game;
     private final Renderer renderer;
+    private String[] settingMenuTextures = {"images/BackgroundSettings.png"};
+
 
     public SettingsScreen(GdxGame game) {
         this.game = game;
@@ -39,6 +41,7 @@ public class SettingsScreen extends ScreenAdapter {
         renderer = RenderFactory.createRenderer();
         renderer.getCamera().getEntity().setPosition(5f, 5f);
 
+        loadAssets();
         createUI();
     }
 
@@ -48,6 +51,18 @@ public class SettingsScreen extends ScreenAdapter {
         renderer.render();
     }
 
+    private void loadAssets() {
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.loadTextures(settingMenuTextures);
+        ServiceLocator.getResourceService().loadAll();
+    }
+
+    public void unloadAssets() {
+        ResourceService resourceService = ServiceLocator.getResourceService();
+        resourceService.unloadAssets(settingMenuTextures);
+    }
+
+
     @Override
     public void resize(int width, int height) {
         renderer.resize(width, height);
@@ -56,6 +71,7 @@ public class SettingsScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         renderer.dispose();
+        unloadAssets();
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
 
