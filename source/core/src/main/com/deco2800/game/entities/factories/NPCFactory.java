@@ -133,10 +133,10 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.LOOP);
@@ -303,18 +303,18 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/rangedFinal.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/rangedAllFinal.atlas", TextureAtlas.class));
 
         if (type.equals("fastArrow")) {
             elf.setEntityType("assassin");
-            animator.addAnimation("assassinMoveLeft", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinMoveRight", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinMoveUp", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinMoveDown", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinLeft", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.NORMAL);
+            animator.addAnimation("assassinMoveLeft", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinMoveRight", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinMoveUp", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinMoveDown", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinLeft", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinRight", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinUp", 0.1f, Animation.PlayMode.LOOP);
+            animator.addAnimation("assassinDown", 0.1f, Animation.PlayMode.LOOP);
         } else {
             elf.setEntityType("ranged");
             animator.addAnimation("rangerMoveLeft", 0.1f, Animation.PlayMode.NORMAL);

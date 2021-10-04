@@ -206,7 +206,7 @@ public class ElfAnimationController extends Component {
     }
 
     public void animateDownStun(){
-        animator.startAnimation("stunDOwn");
+        animator.startAnimation("stunDown");
     }
 
 }
