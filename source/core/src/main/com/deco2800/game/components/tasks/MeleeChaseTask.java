@@ -45,25 +45,25 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
      */
     @Override
     public void update () {
-        System.out.println("melee chase task update");
+        //System.out.println("melee chase task update");
         movementTask.setTarget(calculatePos());
         movementTask.update();
         if (movementTask.getStatus() != Task.Status.ACTIVE) {
             movementTask.start();
         }
-        System.out.println("super.getDistanceToTarget()"+super.getDistanceToTarget()+"owner.getEntity().getAttackRange()"+owner.getEntity().getAttackRange());
+        //System.out.println("super.getDistanceToTarget()"+super.getDistanceToTarget()+"owner.getEntity().getAttackRange()"+owner.getEntity().getAttackRange());
         if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10) {
             this.owner.getEntity().getEvents().trigger("wanderStart");
             //System.out.println(super.getDistanceToTarget() + "<" + owner.getEntity().getAttackRange());
             this.owner.getEntity().getComponent(PhysicsMovementComponent.class).setAnimateAttack();
-            System.out.println("setAnimateAttack()");
+            //System.out.println("setAnimateAttack()");
 
         } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
             //this.owner.getEntity().getEvents().trigger("fleeStart");
             //System.out.println(super.getDistanceToTarget() + ">" + owner.getEntity().getAttackRange());
             this.owner.getEntity().getEvents().trigger("chaseStart");
             this.owner.getEntity().getComponent(PhysicsMovementComponent.class).stopAnimateAttack();
-            System.out.println("stopAnimateAttack()");
+            //System.out.println("stopAnimateAttack()");
         }
     }
 

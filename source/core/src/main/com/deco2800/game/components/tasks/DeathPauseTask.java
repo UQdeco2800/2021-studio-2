@@ -71,7 +71,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
     @Override
     public int getPriority() {
         if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
-            return 100;
+            return 1000;
         } else {
             return 0;
         }

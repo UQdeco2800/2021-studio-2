@@ -99,7 +99,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (leftStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
-                            System.out.println("attackLeft");
+                            //System.out.println("attackLeft");
                             this.getEntity().getEvents().trigger("attackLeft");
                         } else { //moveAnimation
                             this.getEntity().getEvents().trigger("LeftStart");
@@ -119,7 +119,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (rightStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
-                            System.out.println("attackRight");
+                            //System.out.println("attackRight");
                             this.getEntity().getEvents().trigger("attackRight");
                         } else { //moveAnimation
 //                            System.out.println("move to the right");
@@ -144,7 +144,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (downStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
-                            System.out.println("attackDown");
+                            //System.out.println("attackDown");
                             this.getEntity().getEvents().trigger("attackDown");
                         } else { //moveAnimation
                             this.getEntity().getEvents().trigger("DownStart");
@@ -166,7 +166,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                 if (upStart == false) {//only initiate an animation once
                     if (animateStun == false) {
                         if (animateAttack == true) { //attack animation
-                            System.out.println("attackUp");
+                            //System.out.println("attackUp");
                             this.getEntity().getEvents().trigger("attackUp");
                         } else { //moveAnimation
                             this.getEntity().getEvents().trigger("UpStart");

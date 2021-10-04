@@ -59,7 +59,7 @@ public class ElfAnimationController extends Component {
                     animator.startAnimation("assassinLeft");
                     break;
                 case "ranged":
-                    System.out.println("rangerLeft");
+                    //System.out.println("rangerLeft");
                     animator.startAnimation("rangerLeft");
                     break;
                 default:
@@ -95,7 +95,7 @@ public class ElfAnimationController extends Component {
                     animator.startAnimation("assassinRight");
                     break;
                 case "ranged":
-                    System.out.println("rangerRight");
+                    //System.out.println("rangerRight");
                     animator.startAnimation("rangerRight");
                     break;
                 default:
@@ -131,7 +131,7 @@ public class ElfAnimationController extends Component {
                     animator.startAnimation("assassinUp");
                     break;
                 case "ranged":
-                    System.out.println("rangerUp");
+                    //System.out.println("rangerUp");
                     animator.startAnimation("rangerUp");
                     break;
                 default:
@@ -167,7 +167,7 @@ public class ElfAnimationController extends Component {
                     animator.startAnimation("assassinDown");
                     break;
                 case "ranged":
-                    System.out.println("rangerDown");
+                    //System.out.println("rangerDown");
                     animator.startAnimation("rangerDown");
                     break;
                 default:
