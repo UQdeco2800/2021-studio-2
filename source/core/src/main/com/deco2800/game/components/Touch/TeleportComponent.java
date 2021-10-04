@@ -47,7 +47,7 @@ public class TeleportComponent extends TouchComponent {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
 
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null) {
+        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
             CutsceneScreen screen = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(CutsceneScreen.class);
             screen.setOpen();

@@ -2,6 +2,7 @@ package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Touch.TeleportComponent;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
@@ -74,10 +76,35 @@ class TeleportComponentTest {
                         .addComponent(new ColliderComponent())
                         .addComponent(new TeleportComponent(triggerLayer))
                         .addComponent(new CombatStatsComponent(20, 0));
-
         entity.create();
         return entity;
     }
+
+    @Test
+    void saveTheHealthAfterTeleport() {
+        short layer = (1 << 6);
+        Entity entity = createPlayer(layer);
+        Entity target = createTelport(layer);
+
+        Fixture entityFixture = entity.getComponent(HitboxComponent.class).getFixture();
+        Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
+        assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 10);
+        entity.getComponent(CombatStatsComponent.class).setHealth(5);
+        entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 5);
+    }
+
+    Entity createPlayer(short targetLayer) {
+        Entity entity =
+                new Entity()
+                        .addComponent(new TouchAttackComponent(targetLayer))
+                        .addComponent(new CombatStatsComponent(10, 10))
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new HitboxComponent());
+        entity.create();
+        return entity;
+    }
+
 
     Entity createTarget(short layer) {
         Entity target =
@@ -85,6 +112,17 @@ class TeleportComponentTest {
                         .addComponent(new CombatStatsComponent(10, 0))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new HitboxComponent().setLayer(layer));
+        target.create();
+        return target;
+    }
+
+    Entity createTelport(short layer) {
+        Entity target =
+                new Entity()
+                        .addComponent(new CombatStatsComponent(0, 0))
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new HitboxComponent().setLayer(layer))
+                        .addComponent(new TeleportComponent(layer));
         target.create();
         return target;
     }

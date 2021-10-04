@@ -39,21 +39,12 @@ public class TutorialGameArea extends GameArea {
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(20, 370);
     private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
     private static final float WALL_WIDTH = 0.1f;
+    private static String[] tileTextures = null;
     private static final String[] forestTextures = {
-            "images/tree.png",
             "images/trap.png",
             "images/test.png",
             "images/arrow_normal.png",
             "images/crown.png",
-            "images/grass_1.png",
-            "images/grass_2.png",
-            "images/grass_3.png",
-            "images/hex_grass_1.png",
-            "images/hex_grass_2.png",
-            "images/hex_grass_3.png",
-            "images/iso_grass_1.png",
-            "images/iso_grass_2.png",
-            "images/iso_grass_3.png",
             "images/mud.png",
             "images/player.png",
             "images/player_axe.png",
@@ -87,24 +78,28 @@ public class TutorialGameArea extends GameArea {
             "images/boss_health_right.png",
             "images/outdoorArcher.png"
     };
-    private static String[] tileTextures = null;
+
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
             "crate/crateHitBreak.png"
     };
+
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",  "images/outdoorArcher.atlas"
     };
+
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
     };
+
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
             "sounds/arrow_shoot.mp3"
     };
+
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
 
@@ -254,7 +249,6 @@ public class TutorialGameArea extends GameArea {
         Entity teleport = ObstacleFactory.createTeleport();
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
-        //boss= 1;
     }
 
     private void spawnPlayer() {
@@ -325,7 +319,7 @@ public class TutorialGameArea extends GameArea {
      */
     @Override
     public int getLevel() {
-        return 1;
+        return 9;
     }
 
     /**
@@ -417,30 +411,6 @@ public class TutorialGameArea extends GameArea {
             spawnEntityAt(Anchoredelf, elfPos, true, true);
         }
     }
-
-    /*
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED);
-        spawnEntityAt(trigger, TEST_TRIGGER, true, true);
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-                DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(7f, 9.5f), true, true);
-        Entity moveTrigger = CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 5, 0);
-        spawnEntityAt(moveTrigger, new Vector2(10,5.8f), true, true);
-        Entity moveTrigger2 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-        spawnEntityAt(moveTrigger2, new Vector2(10.2f,9), true, true);
-        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(10, 5.8f), true, true);
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger4, new Vector2(2.2f, 3.3f), true, true);
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 0, 3);
-        spawnEntityAt(moveTrigger5, new Vector2(6.3f, 3.3f), true, true);
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-        spawnEntityAt(moveTrigger6, new Vector2(6.3f, 6.5f), true, true);
-    }
-    */
-
 
     private void playMusic() {
         Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
