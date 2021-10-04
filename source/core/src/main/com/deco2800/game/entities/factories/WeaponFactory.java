@@ -324,19 +324,23 @@ public class WeaponFactory {
      */
     public static Entity createExplosion(Entity ownerRunner) {
         Entity explosion = new Entity();
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/vortex.png", Texture.class));
-        sprite.setColor(Color.RED);
-        Vector2 scale = new Vector2(sprite.getWidth() / 30f, sprite.getHeight() / 30f);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/explosion/explosion.atlas", TextureAtlas.class));
+        animator.addAnimation("explode", 0.1f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("explode");
+
+        Vector2 scale = new Vector2(512 / 100f, 512 / 100f);
         ExplosionSpawnTask vortexSpawn = new ExplosionSpawnTask(ownerRunner, scale);
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(vortexSpawn);
         CircleShape circle = new CircleShape();
-        circle.setRadius(scale.x / 4);
+        circle.setRadius(scale.x / 2);
         circle.setPosition(circle.getPosition().add(scale.cpy().scl(0.5f)));
         explosion
                 .addComponent(new PhysicsComponent())
-                .addComponent(new TextureRenderComponent(sprite))
+                .addComponent(animator)
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.EXPLOSION)
                         .setShape(circle).setRestitution(0)
                         .setSensor(true))
