@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 class SpawnMinionsAndExplosionTaskTest {
 
     private static final String[] forestTextureAtlases = {
-            "images/meleeElf.atlas", "images/rangedElf.atlas", "images/explosion/explosion.atlas"
+            "images/meleeFinal.atlas", "images/rangedAllFinal.atlas", "images/explosion/explosion.atlas"
     };
 
     private static final String[] forestTextures = {
