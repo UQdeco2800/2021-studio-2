@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 /**
- * Forest area for the demo game with trees, a player, and some enemies.
+ * Tutorial Level where player learns mechanics of the game.
  */
 public class TutorialGameArea extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(TutorialGameArea.class);
@@ -197,26 +197,26 @@ public class TutorialGameArea extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
+        // Left Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
+        // Right Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
                 new GridPoint2(tileBounds.x, 0),
                 false,
                 false);
-        // Top
+        // Top Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
                 new GridPoint2(0, tileBounds.y),
                 false,
                 false);
-        // Bottom
+        // Bottom Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-        //Walls imported from JSON
+        //Imported Map Walls
         HashMap<String, Float>[] walls = map.getWallObjects();
         for (HashMap<String, Float> wall : walls) {
             int x = wall.get("x").intValue();
@@ -234,12 +234,14 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnPTraps() {
+        //Spawns Physical Traps
         GridPoint2 fixedPos = new GridPoint2(15, 15);
         Entity trap = ObstacleFactory.createPhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
     }
 
     private void spawnTraps() {
+        //Spawns Non-Physical Traps
         GridPoint2 fixedPos = new GridPoint2(8, 8);
         Entity trap = ObstacleFactory.createNonePhysicalTrap();
         spawnEntityAt(trap, fixedPos, true, true);
@@ -252,6 +254,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnPlayer() {
+        //Spawns Player
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
@@ -259,6 +262,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnObstacles() {
+        //Spawns obstacles
         int[][] obstacles = map.getTransObstacles();
         HashMap<String, String> tileRefs = map.getTileRefs();
         if (obstacles != null) {
@@ -281,6 +285,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnSpikeTraps() {
+        //Spawns Spike Traps
         HashMap<String, Float>[] spikeTraps = map.getSpikeObjects();
         for (HashMap<String, Float> spikeTrap : spikeTraps) {
             int x = spikeTrap.get("x").intValue();
@@ -298,6 +303,7 @@ public class TutorialGameArea extends GameArea {
     }
 
     private void spawnLavaTraps() {
+        //Spawns Lava Traps
         HashMap<String, Float>[] lavaTraps = map.getLavaObjects();
         for (HashMap<String, Float> lavaTrap : lavaTraps) {
             int x = lavaTrap.get("x").intValue();

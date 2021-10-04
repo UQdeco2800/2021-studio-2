@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="150" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="581">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="150" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="603">
  <editorsettings>
-  <export target="lvl_one.json" format="json"/>
+  <export target="lvl_2.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Level_One_Tiles" tilewidth="32" tileheight="32" tilecount="576" columns="24">
   <image source="../../Tileset/tileset.png" trans="00ff0a" width="768" height="768"/>
@@ -314,7 +314,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="12" name="Lights" width="150" height="150">
+ <layer id="12" name="Lights" width="150" height="150" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -468,10 +468,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="13" name="initTeleportObjects">
+ <objectgroup id="13" name="initTeleportObjects" visible="0">
   <object id="552" x="1248" y="2176" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="15" name="healthCrateObjects">
+ <objectgroup id="15" name="healthCrateObjects" visible="0">
   <object id="558" x="2752" y="2144" width="32" height="32"/>
   <object id="559" x="2944" y="2144" width="32" height="32"/>
   <object id="560" x="2752" y="1888" width="32" height="32"/>
@@ -491,10 +491,25 @@
   <object id="579" x="928" y="2848" width="32" height="32"/>
   <object id="580" x="1024" y="2848" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="11" name="teleportObjects">
+ <objectgroup id="11" name="teleportObjects" visible="0">
   <object id="551" x="3776" y="3200" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="2" name="wallObjects">
+ <objectgroup id="16" name="meleeObjects">
+  <object id="588" x="864" y="2816"/>
+  <object id="589" x="2272" y="2720"/>
+  <object id="590" x="1600" y="3168"/>
+  <object id="591" x="2560" y="2016"/>
+ </objectgroup>
+ <objectgroup id="17" name="rangeObjects">
+  <object id="592" x="1056" y="2816"/>
+  <object id="593" x="2272" y="2624"/>
+  <object id="594" x="3232" y="2144"/>
+  <object id="595" x="2944" y="1952"/>
+ </objectgroup>
+ <objectgroup id="21" name="bossObjects">
+  <object id="601" x="3360" y="3232"/>
+ </objectgroup>
+ <objectgroup id="2" name="wallObjects" visible="0">
   <object id="334" x="3712" y="3296" width="32" height="32"/>
   <object id="335" x="3680" y="3360" width="32" height="32"/>
   <object id="336" x="3712" y="3168" width="32" height="32"/>
@@ -611,9 +626,21 @@
   <object id="547" x="960" y="2176" width="32" height="32"/>
   <object id="548" x="1152" y="2144" width="64" height="32"/>
  </objectgroup>
- <objectgroup id="14" name="bossBounds">
+ <objectgroup id="23" name="anchoredObjects">
+  <object id="602" x="992" y="2720"/>
+ </objectgroup>
+ <objectgroup id="14" name="bossBounds" visible="0">
   <object id="553" x="3104" y="3008" width="512" height="448"/>
  </objectgroup>
- <objectgroup id="8" name="spikeObjects"/>
+ <objectgroup id="8" name="spikeObjects" visible="0"/>
  <objectgroup id="7" name="lavaObjects"/>
+ <objectgroup id="19" name="assassinObjects">
+  <object id="596" x="2784" y="1984"/>
+  <object id="597" x="2432" y="2624"/>
+ </objectgroup>
+ <objectgroup id="20" name="guardObjects">
+  <object id="598" x="3040" y="1984"/>
+  <object id="599" x="2496" y="2688"/>
+  <object id="600" x="1824" y="3200"/>
+ </objectgroup>
 </map>

@@ -33,7 +33,7 @@
          "name":"Lights",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":150,
          "x":0,
          "y":0
@@ -56,7 +56,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -265,7 +265,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -284,6 +284,138 @@
                  "width":64,
                  "x":3776,
                  "y":3200
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":16,
+         "name":"meleeObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":588,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":864,
+                 "y":2816
+                }, 
+                {
+                 "height":0,
+                 "id":589,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2272,
+                 "y":2720
+                }, 
+                {
+                 "height":0,
+                 "id":590,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1600,
+                 "y":3168
+                }, 
+                {
+                 "height":0,
+                 "id":591,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2560,
+                 "y":2016
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":17,
+         "name":"rangeObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":592,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1056,
+                 "y":2816
+                }, 
+                {
+                 "height":0,
+                 "id":593,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2272,
+                 "y":2624
+                }, 
+                {
+                 "height":0,
+                 "id":594,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3232,
+                 "y":2144
+                }, 
+                {
+                 "height":0,
+                 "id":595,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2944,
+                 "y":1952
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":21,
+         "name":"bossObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":601,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3360,
+                 "y":3232
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1563,6 +1695,28 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":23,
+         "name":"anchoredObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":602,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":992,
+                 "y":2720
+                }],
+         "opacity":1,
+         "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
@@ -1585,7 +1739,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1596,7 +1750,7 @@
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1610,9 +1764,86 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":19,
+         "name":"assassinObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":596,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2784,
+                 "y":1984
+                }, 
+                {
+                 "height":0,
+                 "id":597,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2432,
+                 "y":2624
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":20,
+         "name":"guardObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":598,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3040,
+                 "y":1984
+                }, 
+                {
+                 "height":0,
+                 "id":599,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2496,
+                 "y":2688
+                }, 
+                {
+                 "height":0,
+                 "id":600,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1824,
+                 "y":3200
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":581,
+ "nextlayerid":24,
+ "nextobjectid":603,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
