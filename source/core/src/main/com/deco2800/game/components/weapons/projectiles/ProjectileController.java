@@ -38,7 +38,6 @@ public abstract class ProjectileController extends Component {
      */
     @Override
     public void create() {
-        super.create();
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         this.hitbox = entity.getComponent(HitboxComponent.class);
         this.targetLayer = PhysicsLayer.NPC;
@@ -50,7 +49,6 @@ public abstract class ProjectileController extends Component {
      */
     @Override
     public void update() {
-        super.update();
         if ((ServiceLocator.getTimeSource().getTime() - gameTime) > this.stats.projectileLifespan) {
             entity.prepareDispose();
         }

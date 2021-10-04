@@ -53,7 +53,7 @@ public class ForestGameArea extends GameArea {
             "images/player_scepter.png",
             "images/player_longsword.png",
             "images/blast.png",
-            "images/hammer.png",
+            "images/hammer_projectile",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -86,7 +86,8 @@ public class ForestGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/player_longsword.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/player_longsword.atlas",
+            "images/hammer_projectile.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -191,7 +192,7 @@ public class ForestGameArea extends GameArea {
      * Spawn player at the terrain, create the player
      */
     private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Longsword");
+        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
     }

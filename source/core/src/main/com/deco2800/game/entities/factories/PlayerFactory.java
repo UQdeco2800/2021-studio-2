@@ -44,43 +44,64 @@ public class PlayerFactory {
 
         AnimationRenderComponent animator;
 
-        if (weapon.equals("Scepter")) {
-            animator = new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().getAsset("images/player_scepter.atlas", TextureAtlas.class));
-            // Sceptor animations
-            animator.addAnimation("left_scepter_attack", 0.1f);
-            animator.addAnimation("right_scepter_attack", 0.1f);
-            animator.addAnimation("up_scepter_attack", 0.1f);
-            animator.addAnimation("down_scepter_attack", 0.1f);
+        switch (weapon) {
+            case "Scepter":
+                animator = new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/player_scepter.atlas", TextureAtlas.class));
+                // Sceptor animations
+                animator.addAnimation("left_scepter_attack", 0.1f);
+                animator.addAnimation("right_scepter_attack", 0.1f);
+                animator.addAnimation("up_scepter_attack", 0.1f);
+                animator.addAnimation("down_scepter_attack", 0.1f);
 
-        } else if (weapon.equals("Hammer")) {
-            animator = new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().getAsset("images/player_hammer.atlas", TextureAtlas.class));
-            // Hammer/Mjolnir Animations
-            animator.addAnimation("hammer_aoe", 0.1f);
-            animator.addAnimation("left_hammer_attack", 0.1f);
-            animator.addAnimation("right_hammer_attack", 0.1f);
-            animator.addAnimation("up_hammer_attack", 0.1f);
-            animator.addAnimation("down_hammer_attack", 0.1f);
+                break;
+            case "Hammer":
+                animator = new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/player_hammer.atlas", TextureAtlas.class));
+                // Hammer/Mjolnir Animations
+                animator.addAnimation("hammer_aoe", 0.1f);
+                animator.addAnimation("left_hammer_attack", 0.1f);
+                animator.addAnimation("right_hammer_attack", 0.1f);
+                animator.addAnimation("up_hammer_attack", 0.1f);
+                animator.addAnimation("down_hammer_attack", 0.1f);
 
-        } else if (weapon.equals("Longsword")) {
-            animator = new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().getAsset("images/player_longsword.atlas", TextureAtlas.class));
-            // Hammer/Mjolnir Animations
-            animator.addAnimation("longsword_left", 0.1f);
-            animator.addAnimation("longsword_right", 0.1f);
-            animator.addAnimation("longsword_up", 0.1f);
-            animator.addAnimation("longsword_down", 0.1f);
+                animator.addAnimation("down_throw", 0.05f);
+                animator.addAnimation("up_throw", 0.05f);
+                animator.addAnimation("left_throw", 0.05f);
+                animator.addAnimation("right_throw", 0.05f);
+                animator.addAnimation("hammer_catch", 0.1f);
+                animator.addAnimation("hammer_recall", 0.2f);
 
-            // Axe (default)
-        } else {
-            animator = new AnimationRenderComponent(
-                    ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));
-            // Axe Animations (DEFAULT)
-            animator.addAnimation("left_attack", 0.1f);
-            animator.addAnimation("right_attack", 0.1f);
-            animator.addAnimation("up_attack", 0.1f);
-            animator.addAnimation("down_attack", 0.1f);
+                animator.addAnimation("walk_right_mjolnir", 0.18f, Animation.PlayMode.LOOP);
+                animator.addAnimation("walk_down_mjolnir", 0.13f, Animation.PlayMode.LOOP);
+                animator.addAnimation("walk_up_mjolnir", 0.13f, Animation.PlayMode.LOOP);
+                animator.addAnimation("walk_left_mjolnir", 0.18f, Animation.PlayMode.LOOP);
+                animator.addAnimation("default_mjolnir", 1f, Animation.PlayMode.NORMAL);
+                animator.addAnimation("default_backward_mjolnir", 1f, Animation.PlayMode.NORMAL);
+                animator.addAnimation("default_right_mjolnir", 1f, Animation.PlayMode.NORMAL);
+                animator.addAnimation("default_left_mjolnir", 1f, Animation.PlayMode.NORMAL);
+
+                break;
+            case "Longsword":
+                animator = new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/player_longsword.atlas", TextureAtlas.class));
+                // Hammer/Mjolnir Animations
+                animator.addAnimation("longsword_left", 0.1f);
+                animator.addAnimation("longsword_right", 0.1f);
+                animator.addAnimation("longsword_up", 0.1f);
+                animator.addAnimation("longsword_down", 0.1f);
+
+                // Axe (default)
+                break;
+            default:
+                animator = new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));
+                // Axe Animations (DEFAULT)
+                animator.addAnimation("left_attack", 0.1f);
+                animator.addAnimation("right_attack", 0.1f);
+                animator.addAnimation("up_attack", 0.1f);
+                animator.addAnimation("down_attack", 0.1f);
+                break;
         }
 
         animator.addAnimation("walk_right", 0.18f, Animation.PlayMode.LOOP);

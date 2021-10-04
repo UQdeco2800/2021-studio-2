@@ -36,6 +36,8 @@ public class Hammer extends MeleeWeapon {
 
     private HammerProjectile projectile;
 
+    private AnimationRenderComponent animator;
+
     public Hammer(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
 
         super(targetLayer, attackPower, knockback, weaponSize);
@@ -48,6 +50,12 @@ public class Hammer extends MeleeWeapon {
         hasRangeAttacked = false;
     }
 
+    @Override
+    public void create() {
+        super.create();
+        animator = entity.getComponent(AnimationRenderComponent.class);
+    }
+
     /**
      * Attacks, but also plays animation.
      *
@@ -57,11 +65,9 @@ public class Hammer extends MeleeWeapon {
     public void attack(int attackDirection) {
         if (isAttacking()) return;
         super.attack(attackDirection);
-        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
         }
-
         switch (attackDirection) {
             case UP:
                 animator.startAnimation("up_hammer_attack");
@@ -89,7 +95,6 @@ public class Hammer extends MeleeWeapon {
         }
         hasStrongAttacked = true;
         super.attack(MeleeWeapon.CENTER);
-        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
             return;
         }
@@ -98,8 +103,11 @@ public class Hammer extends MeleeWeapon {
 
     @Override
     public void rangedAttack(int attackDirection) {
-        if (isAttacking()) {
+        if (hasRangeAttacked) {
             projectile.recall();
+            animator.startAnimation("hammer_recall");
+            return;
+        } else if (isAttacking()) {
             return;
         }
         Vector2 target = entity.getPosition();
@@ -107,15 +115,19 @@ public class Hammer extends MeleeWeapon {
         switch (attackDirection) {
             case UP:
                 target.y += range;
+                animator.startAnimation("up_throw");
                 break;
             case DOWN:
                 target.y -= range;
+                animator.startAnimation("down_throw");
                 break;
             case LEFT:
                 target.x -= range;
+                animator.startAnimation("left_throw");
                 break;
             case RIGHT:
                 target.x += range;
+                animator.startAnimation("right_throw");
                 break;
         }
         // Spawn projectile
@@ -129,6 +141,7 @@ public class Hammer extends MeleeWeapon {
 
     public void destroyProjectile() {
         projectile.getEntity().prepareDispose();
+        animator.startAnimation("hammer_catch");
         projectile = null;
         hasRangeAttacked = false;
     }

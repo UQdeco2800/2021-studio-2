@@ -58,7 +58,7 @@ public class TutorialGameArea extends GameArea {
             "images/player_hammer.png",
             "images/player_scepter.png",
             "images/blast.png",
-            "images/hammer.png",
+            "images/hammer_projectile.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -91,7 +91,7 @@ public class TutorialGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"

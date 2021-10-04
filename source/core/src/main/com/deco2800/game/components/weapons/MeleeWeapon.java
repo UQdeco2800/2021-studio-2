@@ -37,8 +37,6 @@ public class MeleeWeapon extends Component {
      * Time when the entity last attacked, 0 if entity is not attacking.
      */
     protected long timeAtAttack;
-    protected long timeAtRangedAttack;
-    protected long timeAtAOEAttack;
 
     /**
      * Weapon Damage

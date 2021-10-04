@@ -35,7 +35,7 @@ public class PlayerAnimationController extends Component {
      * @return whether character is holding mjolnir.
      */
     boolean hasMjolnir() {
-        return false; //!(mjolnir != null && mjolnir.isEquipped());
+        return mjolnir != null && mjolnir.isEquipped();
     }
 
     /**

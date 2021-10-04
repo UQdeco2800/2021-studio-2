@@ -300,9 +300,14 @@ public class WeaponFactory {
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
+
+        AnimationRenderComponent animator = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("images/hammer_projectile.atlas", TextureAtlas.class));
+        animator.addAnimation("hammer", 0.08f, Animation.PlayMode.LOOP);
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+
         return new Entity()
-                //.addComponent(new AnimationRenderComponent())
-                .addComponent(new TextureRenderComponent("images/hammer.png"))
+                .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))

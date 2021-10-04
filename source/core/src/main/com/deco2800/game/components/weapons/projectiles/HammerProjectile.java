@@ -12,10 +12,11 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
- * Component that is the main controller of the projectile entity.
+ * Component that is the main controller of the mjolnir entity, 'shot' from hammer.
  */
 public class HammerProjectile extends ProjectileController {
 
@@ -40,9 +41,9 @@ public class HammerProjectile extends ProjectileController {
 
     /** Current status of Mjolnir. See below for constants */
     private int status;
-    int THROWING = 0;
-    int RECALLING = 1;
-    int STATIC = 2;
+    private final int THROWING = 0;
+    private final int RECALLING = 1;
+    private final int STATIC = 2;
 
     /** Game time since last notable event: e.g. since creation or since recall was called */
     private long gameTime;
@@ -50,6 +51,9 @@ public class HammerProjectile extends ProjectileController {
     protected Vector2 target;
     /** The hammer component that controls the projectile */
     private final Hammer owner;
+
+    /** Animator for the projectile */
+    private AnimationRenderComponent animator;
 
     /**
      * Component that is the main controller of the projectile entity.
@@ -60,7 +64,7 @@ public class HammerProjectile extends ProjectileController {
                 .getAsset("sounds/impact.ogg", Sound.class);
         this.status = THROWING;
         this.attackPower = 5;
-        this.knockback = 25;
+        this.knockback = 5;
         this.owner = owner;
         this.gameTime = ServiceLocator.getTimeSource().getTime();
     }
@@ -71,10 +75,12 @@ public class HammerProjectile extends ProjectileController {
     @Override
     public void create() {
         this.start = entity.getPosition();
+        this.animator = entity.getComponent(AnimationRenderComponent.class);
         entity.getEvents().addListener("collisionStart", this::onCollisionStart);
         this.hitbox = entity.getComponent(HitboxComponent.class);
         this.movingComponent = entity.getComponent(PhysicsMovementComponent.class);
         this.combatStats = entity.getComponent(CombatStatsComponent.class);
+        animator.startAnimation("hammer");
     }
 
     @Override
@@ -96,6 +102,7 @@ public class HammerProjectile extends ProjectileController {
                     (ServiceLocator.getTimeSource().getTime() - gameTime) > 2000L) {
                 // Make projectile static.
                 this.status = STATIC;
+                animator.startAnimation("default");
                 movingComponent.setMoving(false);
                 hitbox.setEnabled(false);
             }
@@ -107,7 +114,7 @@ public class HammerProjectile extends ProjectileController {
             float distance = entity.getPosition().dst(owner.getEntity().getPosition());
             // Terminate when target reached (< 0.25f away from owner)
             if (distance < 0.25f ||
-                    (ServiceLocator.getTimeSource().getTime() - gameTime) > 1000L) {
+                    (ServiceLocator.getTimeSource().getTime() - gameTime) > 2000L) {
                 owner.destroyProjectile();
             }
         }
@@ -122,6 +129,7 @@ public class HammerProjectile extends ProjectileController {
         hitbox.setEnabled(true);
         this.gameTime = ServiceLocator.getTimeSource().getTime();
         this.status = RECALLING;
+        animator.startAnimation("hammer");
     }
 
     /**
