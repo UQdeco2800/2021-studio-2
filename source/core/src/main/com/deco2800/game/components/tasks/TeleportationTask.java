@@ -98,8 +98,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             return;
         }
-        if (mapBound()) {
-            // ServiceLocator.getGameAreaService().getNumEnemy() == 0 &&
+        if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             Vector2 posBefore = owner.getEntity().getPosition();
             teleport(new Vector2(2f, 2f));
