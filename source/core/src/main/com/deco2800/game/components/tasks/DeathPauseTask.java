@@ -69,7 +69,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {
-                if (owner.getEntity().getEntityType().equals("elfBoss")) {
+                if (owner.getEntity().getEntityType().equals("elfBoss") || owner.getEntity().getEntityType().equals("human")) {
                     ServiceLocator.getGameAreaService().decBossNum();
                 } else {
                     ServiceLocator.getGameAreaService().decNum();
