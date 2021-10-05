@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <section class="description">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="Axe.html" title="class in com.deco2800.game.components.weapons">Axe</a></code>, <code><a href="Hammer.html" title="class in com.deco2800.game.components.weapons">Hammer</a></code>, <code><a href="Scepter.html" title="class in com.deco2800.game.components.weapons">Scepter</a></code></dd>
+<dd><code><a href="Axe.html" title="class in com.deco2800.game.components.weapons">Axe</a></code>, <code><a href="Hammer.html" title="class in com.deco2800.game.components.weapons">Hammer</a></code>, <code><a href="Longsword.html" title="class in com.deco2800.game.components.weapons">Longsword</a></code>, <code><a href="Scepter.html" title="class in com.deco2800.game.components.weapons">Scepter</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">MeleeWeapon</span>
@@ -127,6 +127,20 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 </thead>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><code>protected long</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#attackFrameDuration">attackFrameDuration</a></span></code></th>
+<td class="colLast">
+<div class="block">animation frame duration measured in milliseconds</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#attackFrameIndex">attackFrameIndex</a></span></code></th>
+<td class="colLast">
+<div class="block">the index of the frame where the attack lands</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#attackPower">attackPower</a></span></code></th>
 <td class="colLast">
@@ -151,30 +165,30 @@ extends <a href="../Component.html" title="class in com.deco2800.game.components
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected long</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#frameDuration">frameDuration</a></span></code></th>
-<td class="colLast">
-<div class="block">animation frame duration measured in milliseconds</div>
-</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasAttacked">hasAttacked</a></span></code></th>
 <td class="colLast">
 <div class="block">determines whether entity has attacked.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#knockback">knockback</a></span></code></th>
 <td class="colLast">
 <div class="block">Physical Knockback of weapon</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#LEFT">LEFT</a></span></code></th>
 <td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#numOfAttackFrames">numOfAttackFrames</a></span></code></th>
+<td class="colLast">
+<div class="block">number of light attack frames in animation</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
@@ -272,26 +286,33 @@ float&nbsp;knockback,
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#aoeAttack()">aoeAttack</a></span>()</code></th>
+<td class="colLast">
+<div class="block">The weapon's AEO (area of effect) attack.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#attack(int)">attack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
 <td class="colLast">
 <div class="block">Weapon attack, called by owner entity.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Called when the entity is created and registered.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>long</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTotalAttackTime()">getTotalAttackTime</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the total time the attack will take.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onCollisionStart(com.badlogic.gdx.physics.box2d.Fixture,com.badlogic.gdx.physics.box2d.Fixture)">onCollisionStart</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a>&nbsp;me,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a>&nbsp;other)</code></th>
@@ -300,28 +321,38 @@ float&nbsp;knockback,
  defined by the target layer.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFrameDuration(long)">setFrameDuration</a></span>&#8203;(long&nbsp;frameDuration)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rangedAttack(int)">rangedAttack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
+<td class="colLast">
+<div class="block">The weapon's ranged attack.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAttackFrameDuration(long)">setAttackFrameDuration</a></span>&#8203;(long&nbsp;frameDuration)</code></th>
 <td class="colLast">
 <div class="block">Sets frame duration, which determines how long an attack lasts.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#strongAttack(int)">strongAttack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAttackFrames(long,int,int)">setAttackFrames</a></span>&#8203;(long&nbsp;frameDuration,
+int&nbsp;numOfFrames,
+int&nbsp;attackIndex)</code></th>
 <td class="colLast">
-<div class="block">The weapon's strong / alternative attack.</div>
+<div class="block">Sets all frame information, which determines when an attack lands,
+ and how long the attack lasts.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#triggerAttackStage(long)">triggerAttackStage</a></span>&#8203;(long&nbsp;timeSinceAttack)</code></th>
 <td class="colLast">
 <div class="block">Used by update() to sync weapon hit box with animation.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -357,9 +388,23 @@ float&nbsp;knockback,
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="frameDuration">frameDuration</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">long</span>&nbsp;<span class="memberName">frameDuration</span></div>
+<h3><a id="attackFrameDuration">attackFrameDuration</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">long</span>&nbsp;<span class="memberName">attackFrameDuration</span></div>
 <div class="block">animation frame duration measured in milliseconds</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="numOfAttackFrames">numOfAttackFrames</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">numOfAttackFrames</span></div>
+<div class="block">number of light attack frames in animation</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="attackFrameIndex">attackFrameIndex</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">attackFrameIndex</span></div>
+<div class="block">the index of the frame where the attack lands</div>
 </section>
 </li>
 <li class="blockList">
@@ -539,10 +584,17 @@ float&nbsp;knockback,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="strongAttack(int)">strongAttack</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">strongAttack</span>&#8203;(<span class="arguments">int&nbsp;attackDirection)</span></div>
-<div class="block">The weapon's strong / alternative attack. This is to be implemented
+<h3><a id="rangedAttack(int)">rangedAttack</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">rangedAttack</span>&#8203;(<span class="arguments">int&nbsp;attackDirection)</span></div>
+<div class="block">The weapon's ranged attack. This is to be implemented
  in weapon sub-classes.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="aoeAttack()">aoeAttack</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">aoeAttack</span>()</div>
+<div class="block">The weapon's AEO (area of effect) attack.</div>
 </section>
 </li>
 <li class="blockList">
@@ -559,8 +611,8 @@ float&nbsp;knockback,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setFrameDuration(long)">setFrameDuration</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setFrameDuration</span>&#8203;(<span class="arguments">long&nbsp;frameDuration)</span></div>
+<h3><a id="setAttackFrameDuration(long)">setAttackFrameDuration</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAttackFrameDuration</span>&#8203;(<span class="arguments">long&nbsp;frameDuration)</span></div>
 <div class="block">Sets frame duration, which determines how long an attack lasts.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -570,10 +622,26 @@ float&nbsp;knockback,
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="setAttackFrames(long,int,int)">setAttackFrames</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAttackFrames</span>&#8203;(<span class="arguments">long&nbsp;frameDuration,
+int&nbsp;numOfFrames,
+int&nbsp;attackIndex)</span></div>
+<div class="block">Sets all frame information, which determines when an attack lands,
+ and how long the attack lasts.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>frameDuration</code> - how long each attack animation frame takes in milliseconds</dd>
+<dd><code>numOfFrames</code> - number of frames in the attack animation</dd>
+<dd><code>attackIndex</code> - the index of the frame where the attack lands. Attack lasts for
+                    1 frame duration.</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="getTotalAttackTime()">getTotalAttackTime</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">long</span>&nbsp;<span class="memberName">getTotalAttackTime</span>()</div>
-<div class="block">Returns the total time the attack will take. Assumes the attack animation only has
- 3 frames.</div>
+<div class="block">Returns the total time the attack will take.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>total time of attack</dd>

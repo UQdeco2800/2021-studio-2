@@ -118,7 +118,7 @@ extends <a href="MeleeWeapon.html" title="class in com.deco2800.game.components.
 <h3>Fields inherited from class&nbsp;com.deco2800.game.components.weapons.<a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.components.weapons.MeleeWeapon">
 <!--   -->
-</a><code><a href="MeleeWeapon.html#attackPower">attackPower</a>, <a href="MeleeWeapon.html#CENTER">CENTER</a>, <a href="MeleeWeapon.html#combatStats">combatStats</a>, <a href="MeleeWeapon.html#DOWN">DOWN</a>, <a href="MeleeWeapon.html#frameDuration">frameDuration</a>, <a href="MeleeWeapon.html#hasAttacked">hasAttacked</a>, <a href="MeleeWeapon.html#knockback">knockback</a>, <a href="MeleeWeapon.html#LEFT">LEFT</a>, <a href="MeleeWeapon.html#RIGHT">RIGHT</a>, <a href="MeleeWeapon.html#targetLayer">targetLayer</a>, <a href="MeleeWeapon.html#timeAtAttack">timeAtAttack</a>, <a href="MeleeWeapon.html#UP">UP</a>, <a href="MeleeWeapon.html#weaponHitbox">weaponHitbox</a>, <a href="MeleeWeapon.html#weaponSize">weaponSize</a></code></div>
+</a><code><a href="MeleeWeapon.html#attackFrameDuration">attackFrameDuration</a>, <a href="MeleeWeapon.html#attackFrameIndex">attackFrameIndex</a>, <a href="MeleeWeapon.html#attackPower">attackPower</a>, <a href="MeleeWeapon.html#CENTER">CENTER</a>, <a href="MeleeWeapon.html#combatStats">combatStats</a>, <a href="MeleeWeapon.html#DOWN">DOWN</a>, <a href="MeleeWeapon.html#hasAttacked">hasAttacked</a>, <a href="MeleeWeapon.html#knockback">knockback</a>, <a href="MeleeWeapon.html#LEFT">LEFT</a>, <a href="MeleeWeapon.html#numOfAttackFrames">numOfAttackFrames</a>, <a href="MeleeWeapon.html#RIGHT">RIGHT</a>, <a href="MeleeWeapon.html#targetLayer">targetLayer</a>, <a href="MeleeWeapon.html#timeAtAttack">timeAtAttack</a>, <a href="MeleeWeapon.html#UP">UP</a>, <a href="MeleeWeapon.html#weaponHitbox">weaponHitbox</a>, <a href="MeleeWeapon.html#weaponSize">weaponSize</a></code></div>
 <div class="inheritedList">
 <h3>Fields inherited from class&nbsp;com.deco2800.game.components.<a href="../Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.components.Component">
@@ -189,7 +189,7 @@ float&nbsp;knockback,
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#strongAttack(int)">strongAttack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rangedAttack(int)">rangedAttack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
 <td class="colLast">
 <div class="block">Attacks using an AOE (meleeWeapon.CENTER) direction.</div>
 </td>
@@ -210,7 +210,7 @@ float&nbsp;knockback,
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.weapons.<a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.weapons.MeleeWeapon">
 <!--   -->
-</a><code><a href="MeleeWeapon.html#create()">create</a>, <a href="MeleeWeapon.html#getTotalAttackTime()">getTotalAttackTime</a>, <a href="MeleeWeapon.html#setFrameDuration(long)">setFrameDuration</a>, <a href="MeleeWeapon.html#update()">update</a></code></div>
+</a><code><a href="MeleeWeapon.html#aoeAttack()">aoeAttack</a>, <a href="MeleeWeapon.html#create()">create</a>, <a href="MeleeWeapon.html#getTotalAttackTime()">getTotalAttackTime</a>, <a href="MeleeWeapon.html#setAttackFrameDuration(long)">setAttackFrameDuration</a>, <a href="MeleeWeapon.html#setAttackFrames(long,int,int)">setAttackFrames</a>, <a href="MeleeWeapon.html#update()">update</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="../Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
@@ -270,13 +270,13 @@ float&nbsp;knockback,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="strongAttack(int)">strongAttack</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">strongAttack</span>&#8203;(<span class="arguments">int&nbsp;attackDirection)</span></div>
+<h3><a id="rangedAttack(int)">rangedAttack</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">rangedAttack</span>&#8203;(<span class="arguments">int&nbsp;attackDirection)</span></div>
 <div class="block">Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
  connect with any enemies immediately around the entity.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="MeleeWeapon.html#strongAttack(int)">strongAttack</a></code>&nbsp;in class&nbsp;<code><a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></code></dd>
+<dd><code><a href="MeleeWeapon.html#rangedAttack(int)">rangedAttack</a></code>&nbsp;in class&nbsp;<code><a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></code></dd>
 </dl>
 </section>
 </li>

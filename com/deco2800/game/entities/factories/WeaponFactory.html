@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -184,13 +184,23 @@ float&nbsp;angle)</code></th>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMjolnir(short,com.badlogic.gdx.math.Vector2,com.deco2800.game.components.weapons.Hammer)">createMjolnir</a></span>&#8203;(short&nbsp;targetLayer,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+<a href="../../components/weapons/Hammer.html" title="class in com.deco2800.game.components.weapons">Hammer</a>&nbsp;owner)</code></th>
+<td class="colLast">
+<div class="block">Makes a hammer projectile that will move towards a target, and then
+ back to the owner entity, when called.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createNormalArrow(com.badlogic.gdx.math.Vector2,float)">createNormalArrow</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
 float&nbsp;angle)</code></th>
 <td class="colLast">
 <div class="block">create the normal arrow entity fly toward target</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createTrackingArrow(com.deco2800.game.entities.Entity,float)">createTrackingArrow</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;targetEntity,
 float&nbsp;angle)</code></th>
@@ -198,7 +208,7 @@ float&nbsp;angle)</code></th>
 <div class="block">create tracking arrow entity that can change trajectory</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createVortexEnter(com.deco2800.game.entities.Entity,float,boolean)">createVortexEnter</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;ownerRunner,
 float&nbsp;angle,
@@ -207,7 +217,7 @@ boolean&nbsp;reverseSpawn)</code></th>
 <div class="block">create the vortex for teleportation</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createVortexExit(com.deco2800.game.entities.Entity,float,boolean)">createVortexExit</a></span>&#8203;(<a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;ownerRunner,
 float&nbsp;angle,
@@ -373,6 +383,24 @@ boolean&nbsp;reverseSpawn)</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>target</code> - the location that the blast will try and reach</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>entity</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createMjolnir(short,com.badlogic.gdx.math.Vector2,com.deco2800.game.components.weapons.Hammer)">createMjolnir</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMjolnir</span>&#8203;(<span class="arguments">short&nbsp;targetLayer,
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target,
+<a href="../../components/weapons/Hammer.html" title="class in com.deco2800.game.components.weapons">Hammer</a>&nbsp;owner)</span></div>
+<div class="block">Makes a hammer projectile that will move towards a target, and then
+ back to the owner entity, when called.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>target</code> - the location that the blast will try and reach</dd>
+<dd><code>targetLayer</code> - the physics layer mjolnir can damage</dd>
+<dd><code>owner</code> - - the hammer weapon component that controls the projectile.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>entity</dd>
 </dl>
