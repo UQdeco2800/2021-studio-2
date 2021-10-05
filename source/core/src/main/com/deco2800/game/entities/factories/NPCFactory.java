@@ -37,6 +37,87 @@ import com.deco2800.game.services.ServiceLocator;
  * similar characteristics.
  */
 public class NPCFactory {
+
+    /**
+     * Final String variable to define the right movement for animations.
+     */
+    private static final String MOVE_RIGHT = "moveRight";
+
+    /**
+     * Final String variable to define the left movement for animations.
+     */
+    private static final String MOVE_LEFT = "moveLeft";
+
+    /**
+     * Final String variable to define the up movement for animations.
+     */
+    private static final String MOVE_UP = "moveUp";
+
+    /**
+     * Final String variable to define the down movement for animations.
+     */
+    private static final String MOVE_DOWN = "moveDown";
+
+    /**
+     * Final String variable to define the front death animations.
+     */
+    private static final String FRONT_DEATH = "frontDeath";
+
+    /**
+     * Final String variable to define the left death animations.
+     */
+    private static final String LEFT_DEATH = "leftDeath";
+
+    /**
+     * Final String variable to define the right death animations.
+     */
+    private static final String RIGHT_DEATH = "rightDeath";
+
+    /**
+     * Final String variable to define the back death animations.
+     */
+    private static final String BACK_DEATH = "backDeath";
+
+    /**
+     * Final String variable to define the down attack animations.
+     */
+    private static final String ATTACK_DOWN = "attackDown";
+
+    /**
+     * Final String variable to define the up attack animations.
+     */
+    private static final String ATTACK_UP = "attackUp";
+
+    /**
+     * Final String variable to define the left attack animations.
+     */
+    private static final String ATTACK_LEFT = "attackLeft";
+
+    /**
+     * Final String variable to define the right attack animations.
+     */
+    private static final String ATTACK_RIGHT = "attackRight";
+
+    /**
+     * Final String variable to define the left stun animations.
+     */
+    private static final String STUN_LEFT = "stunLeft";
+
+    /**
+     * Final String variable to define the right stun animations.
+     */
+    private static final String STUN_RIGHT = "stunRight";
+
+    /**
+     * Final String variable to define the down stun animations.
+     */
+    private static final String STUN_DOWN = "stunDown";
+
+    /**
+     * Final String variable to define the up stun animations.
+     */
+    private static final String STUN_UP = "stunUp";
+
     /**
      * load attribute from config
      */
@@ -62,25 +143,25 @@ public class NPCFactory {
 //                new AnimationRenderComponent(
 //                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
 //
-//        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 //
-//        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(FRONT_DEATH,, 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(LEFT_DEATH, , 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
 //        //BACK DEATH??
 //
-//        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+//        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 //
-//        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(ATTACK_RIGHT 0.4f, Animation.PlayMode.LOOP);
+//        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 //
 //        createMeleeElf().elf
 //        addComponent(animator);
@@ -97,25 +178,25 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
 
-        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -166,25 +247,25 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.5f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -231,25 +312,25 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
 
         anchoredElf
@@ -296,24 +377,24 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -396,10 +477,10 @@ public class NPCFactory {
             animator.addAnimation("rangerStunUp", 0.5f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerStunDown", 0.5f, Animation.PlayMode.NORMAL);
 
-            animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(LEFT_DEATH,  0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(RIGHT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(FRONT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
 
         }
@@ -452,20 +533,20 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/bossFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.5f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("attackLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.5f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("frontBossDeath", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("backBossDeath", 0.1f, Animation.PlayMode.NORMAL);
@@ -685,25 +766,22 @@ public class NPCFactory {
      * Sets the required animations for a melee enemy
      *
      * @param animator the animation component of the entity
-     * @return the animation component of the entity
      */
-    private static AnimationRenderComponent setHumanAnimations(AnimationRenderComponent animator) {
+    private static void setHumanAnimations(AnimationRenderComponent animator) {
 
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(MOVE_LEFT, 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
-
-        return animator;
     }
 
     /**

@@ -65,7 +65,7 @@ public class WeaponFactory {
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("arrow");
-        BaseArrowConfig config = configs.baseArrow;
+        ArrowConfig config = configs.baseArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(config.speedX, config.speedY));
         AITaskComponent aiComponent =
@@ -132,7 +132,6 @@ public class WeaponFactory {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/arrow_normal.png", Texture.class));
         trackingArrow
-                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
