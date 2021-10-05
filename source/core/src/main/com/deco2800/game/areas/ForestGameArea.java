@@ -234,7 +234,7 @@ public class ForestGameArea extends GameArea {
      * Spawn player at the terrain, create the player
      */
     private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
+        Entity newPlayer = PlayerFactory.createPlayer("Longsword");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
     }
