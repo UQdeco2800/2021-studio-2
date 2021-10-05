@@ -76,7 +76,7 @@ public class CutsceneTriggerFactory {
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(1f);
+        trigger.scaleHeight(2f);
         return trigger;
     }
 
@@ -106,7 +106,7 @@ public class CutsceneTriggerFactory {
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(1f);
+        trigger.scaleHeight(2f);
         return trigger;
     }
 
