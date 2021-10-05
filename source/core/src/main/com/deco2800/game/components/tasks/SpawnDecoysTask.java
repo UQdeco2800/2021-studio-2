@@ -62,7 +62,7 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
             Vector2 spawnPosition = owner.getEntity().getCenterPosition();
             switch (i % 4) {
                 case 0:
-                    spawnPosition.add(new Vector2(-1,1));
+                    spawnPosition.add(new Vector2(-1, 1));
                     break;
                 case 1:
                     spawnPosition.add(new Vector2(1, 1));

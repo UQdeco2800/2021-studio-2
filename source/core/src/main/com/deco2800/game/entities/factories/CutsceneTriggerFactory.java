@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.deco2800.game.components.*;
+import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.Touch.TouchAttackCutsceneComponent;
 import com.deco2800.game.components.Touch.TouchCutsceneComponent;
 import com.deco2800.game.components.Touch.TouchMoveComponent;
@@ -76,7 +77,7 @@ public class CutsceneTriggerFactory {
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(1f);
+        trigger.scaleHeight(2f);
         return trigger;
     }
 
@@ -106,7 +107,7 @@ public class CutsceneTriggerFactory {
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(1f);
+        trigger.scaleHeight(2f);
         return trigger;
     }
 

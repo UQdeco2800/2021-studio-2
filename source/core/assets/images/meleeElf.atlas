@@ -205,7 +205,7 @@ frontDeath
   offset: 0, 0
   index: 4
 
-meleeLeftDeath.png
+meleeElfLeftDeath.png
 size: 512, 128
 format: RGBA8888
 filter: Nearest,Nearest

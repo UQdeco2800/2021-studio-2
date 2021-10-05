@@ -10,15 +10,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.Touch.ExplosionTouchComponent;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.Touch.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.components.tasks.EntityHoverTask;
-import com.deco2800.game.components.tasks.ProjectileMovementTask;
-import com.deco2800.game.components.tasks.VortexSpawnTask;
-import com.deco2800.game.components.tasks.WeaponDisposeTask;
-import com.deco2800.game.components.weapons.Blast;
+import com.deco2800.game.components.tasks.*;
+import com.deco2800.game.components.weapons.Hammer;
+import com.deco2800.game.components.weapons.projectiles.BlastController;
+import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
@@ -319,6 +319,39 @@ public class WeaponFactory {
     }
 
     /**
+     * Create the explosion for Elf Boss
+     *
+     * @return Explosion entity
+     */
+    public static Entity createExplosion(Entity ownerRunner) {
+        Entity explosion = new Entity();
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/explosion/explosion.atlas", TextureAtlas.class));
+        animator.addAnimation("explode", 0.1f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("explode");
+
+        Vector2 scale = new Vector2(512 / 100f, 512 / 100f);
+        ExplosionSpawnTask vortexSpawn = new ExplosionSpawnTask(ownerRunner, scale);
+        AITaskComponent aiTaskComponent = new AITaskComponent()
+                .addTask(vortexSpawn);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(scale.x / 2);
+        circle.setPosition(circle.getPosition().add(scale.cpy().scl(0.5f)));
+        explosion
+                .addComponent(new PhysicsComponent())
+                .addComponent(animator)
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.EXPLOSION)
+                        .setShape(circle).setRestitution(0)
+                        .setSensor(true))
+                .addComponent(new ExplosionTouchComponent(PhysicsLayer.PLAYER, PhysicsLayer.EXPLOSION, 2f))
+                .addComponent(aiTaskComponent);
+        explosion.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+        return explosion;
+    }
+
+    /**
      * Creates a line entity
      *
      * @param TTL time to live in MS
@@ -366,14 +399,44 @@ public class WeaponFactory {
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
-        Entity blast = new Entity()
+        return new Entity()
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new Blast());
-        return blast;
+                .addComponent(new BlastController());
+    }
+
+    /**
+     * Makes a hammer projectile that will move towards a target, and then
+     * back to the owner entity, when called.
+     *
+     * @param target      the location that the blast will try and reach
+     * @param targetLayer the physics layer mjolnir can damage
+     * @param owner       - the hammer weapon component that controls the projectile.
+     * @return entity
+     */
+    public static Entity createMjolnir(short targetLayer, Vector2 target, Hammer owner) {
+        float speed = 8f;
+
+        PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
+        movingComponent.setMoving(true);
+        movingComponent.setTarget(target);
+        movingComponent.setMaxSpeed(new Vector2(speed, speed));
+
+        AnimationRenderComponent animator = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("images/hammer_projectile.atlas", TextureAtlas.class));
+        animator.addAnimation("hammer", 0.10f, Animation.PlayMode.LOOP);
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+
+        return new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(movingComponent)
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new HammerProjectile(targetLayer, owner));
     }
 
     public WeaponFactory() {

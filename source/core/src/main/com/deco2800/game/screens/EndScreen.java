@@ -1,9 +1,7 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.endGame.EndScreenActions;
 import com.deco2800.game.components.endGame.EndScreenAnimationController;
@@ -107,7 +105,6 @@ public class EndScreen extends ScreenAdapter {
                 .addComponent(new EndScreenActions(this.game))
                 .addComponent(new EndScreenDisplay())
                 .addComponent(new InputDecorator(stage, 10));
-
 
 
         //make the Display put to the background -> only bring it out when on the last frame

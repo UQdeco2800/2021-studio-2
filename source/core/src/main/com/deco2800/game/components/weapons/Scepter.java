@@ -24,14 +24,6 @@ public class Scepter extends MeleeWeapon {
      */
     private final Sound impactSound;
 
-    /**
-     * AOE / Strong attack size
-     */
-    private final Vector2 strongAttackSize;
-    /**
-     * Determines whether the axe has used its strong attack
-     */
-    private boolean hasStrongAttacked;
     private GameArea gameArea;
     private final float range = 6f;
 
@@ -41,8 +33,6 @@ public class Scepter extends MeleeWeapon {
                 getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
-        strongAttackSize = new Vector2(2f, 2f); // default size
-        hasStrongAttacked = false;
         this.gameArea = ServiceLocator.getGameAreaService();
     }
 
@@ -53,6 +43,7 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
+        if (timeAtAttack != 0 || hasAttacked) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
@@ -60,10 +51,10 @@ public class Scepter extends MeleeWeapon {
         }
         switch (attackDirection) {
             case UP:
-                animator.startAnimation("up_scepter_attack");
+                animator.startAnimation("up_attack");
                 break;
             case DOWN:
-                animator.startAnimation("down_scepter_attack");
+                animator.startAnimation("down_attack");
                 break;
             case LEFT:
                 animator.startAnimation("left_scepter_attack");
@@ -78,8 +69,10 @@ public class Scepter extends MeleeWeapon {
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
      */
-    public void strongAttack(int attackDirection) {
-        hasStrongAttacked = true;
+
+    @Override
+    public void rangedAttack(int attackDirection) {
+        super.rangedAttack(attackDirection);
         Vector2 target = entity.getCenterPosition();
         switch (attackDirection) {
             case UP:
@@ -107,14 +100,8 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
-            if (hasStrongAttacked) {
-                attackSound.play();
-                weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
-                hasStrongAttacked = false;
-                hasAttacked = false; // strong attack overrides light attack.
-
-            } else if (hasAttacked) {
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
+            if (hasAttacked) {
                 attackSound.play();
             }
         }
@@ -136,6 +123,3 @@ public class Scepter extends MeleeWeapon {
         return false;
     }
 }
-
-
-

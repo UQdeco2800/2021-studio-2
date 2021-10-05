@@ -2,7 +2,6 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.ai.tasks.Task;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.Touch.TouchAttackComponent;
@@ -46,11 +45,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
 
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
-            if (owner.getEntity().getEntityType().equals("viking")) {
-                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
-            } else if (owner.getEntity().getEntityType().equals("archer")) {
-                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
-            } else if (owner.getEntity().getEntityType().equals("human")) {
+            if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
             } else if (owner.getEntity().getEntityType().equals("odin")) {
                 Timer.schedule(new Timer.Task() {
@@ -74,7 +69,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {
-                if (owner.getEntity().getEntityType().equals("elfBoss")) {
+                if (owner.getEntity().getEntityType().equals("elfBoss") || owner.getEntity().getEntityType().equals("human")) {
                     ServiceLocator.getGameAreaService().decBossNum();
                 } else {
                     ServiceLocator.getGameAreaService().decNum();

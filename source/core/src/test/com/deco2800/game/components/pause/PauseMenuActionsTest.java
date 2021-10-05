@@ -1,7 +1,6 @@
 package com.deco2800.game.components.pause;
 
 import com.badlogic.gdx.Input;
-import com.deco2800.game.GdxGame;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -14,16 +13,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
 class PauseMenuActionsTest {
-        PauseInputComponent input;
-        @Mock
-        PauseMenuActions actions;
-        Entity entity;
+    PauseInputComponent input;
+    @Mock
+    PauseMenuActions actions;
+    Entity entity;
 
 
     @BeforeEach

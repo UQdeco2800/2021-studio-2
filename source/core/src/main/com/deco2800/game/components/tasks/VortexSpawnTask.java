@@ -54,7 +54,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     public VortexSpawnTask(Entity ownerRunner, Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
         this.rotateAngle = rotateAngle;
-        factor = new Vector2(this.scale.x / 10, this.scale.y / 10);
+        factor = new Vector2(this.scale.x / 50, this.scale.y / 50);
         this.ownerRunner = ownerRunner;
     }
 
@@ -80,7 +80,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
         }
         if (owner.getEntity().getScale().x < this.scale.x
                 && owner.getEntity().getScale().y < this.scale.y && !max) {
-            owner.getEntity().setScale(factor.scl(1.05f));
+            owner.getEntity().setScale(owner.getEntity().getScale().add(factor.scl(0.99f)));
             owner.getEntity().setPosition(position);
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
@@ -107,7 +107,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                         owner.getEntity().data.put("teleportTarget", false);
                     }
                 }
-                owner.getEntity().setScale(this.scale.scl(0.95f));
+                owner.getEntity().setScale(owner.getEntity().getScale().sub(factor.scl(1.01f)));
                 owner.getEntity().setPosition(position);
             } else if (owner.getEntity().getScale().x <= 0.1f
                     && owner.getEntity().getScale().y <= 0.1f) {

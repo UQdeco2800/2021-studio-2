@@ -8,20 +8,24 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  * of the events is triggered.
  */
 public class ProjectileAnimationController extends Component {
-    AnimationRenderComponent animator;
-    private boolean death;
-    private boolean animateCall;
+    /**
+     * animation
+     */
+    private AnimationRenderComponent animator;
 
+    /**
+     * create the animation
+     */
     @Override
     public void create() {
         super.create();
-        death = false;
-        animateCall = false;
         animator = this.entity.getComponent(AnimationRenderComponent.class);
         entity.getEvents().addListener("brokenArrow", this::broken);
     }
 
-
+    /**
+     * start the weapon break animation
+     */
     public void broken() {
         if (!entity.getEntityType().equals("fireBall")) {
             animator.startAnimation("brokenArrow");

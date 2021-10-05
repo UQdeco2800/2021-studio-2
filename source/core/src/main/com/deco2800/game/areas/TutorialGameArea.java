@@ -51,6 +51,7 @@ public class TutorialGameArea extends GameArea {
             "images/player_hammer.png",
             "images/player_scepter.png",
             "images/blast.png",
+            "images/hammer_projectile.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -71,11 +72,10 @@ public class TutorialGameArea extends GameArea {
             "images/guardElf.png",
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
-            "player_scepter.png",
-            "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
+            "images/explosion/explosion.png",
             "images/outdoorArcher.png"
     };
 
@@ -86,9 +86,13 @@ public class TutorialGameArea extends GameArea {
 
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
+
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas",  "images/outdoorArcher.atlas"
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
+            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
+            "images/explosion/explosion.atlas", "images/outdoorArcher.atlas"
     };
 
     private static final String[] forestSounds = {
@@ -433,8 +437,6 @@ public class TutorialGameArea extends GameArea {
         PlayerSave.write(pSave);
 
 
-
-
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(tileTextures);
@@ -470,7 +472,7 @@ public class TutorialGameArea extends GameArea {
         PlayerSave.Save pSave = PlayerSave.load();
 
 
-        if(pSave.hasPlayed == false){
+        if (pSave.hasPlayed == false) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
