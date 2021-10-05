@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 /**
- * Forest area for the demo game with trees, a player, and some enemies.
+ * Dungeon Level with an Elf Mage as the boss
  */
 public class GameArea0 extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(GameArea0.class);
@@ -140,11 +140,11 @@ public class GameArea0 extends GameArea {
         spawnPlayer();
 
         spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnBoss();
 
         spawnObstacles();
         spawnLights();
@@ -202,26 +202,26 @@ public class GameArea0 extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
+        // Left Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
+        // Right Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
                 new GridPoint2(tileBounds.x, 0),
                 false,
                 false);
-        // Top
+        // Top Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
                 new GridPoint2(0, tileBounds.y),
                 false,
                 false);
-        // Bottom
+        // Bottom Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-        //Walls imported from JSON
+        //Imported Map Walls
         HashMap<String, Float>[] walls = map.getWallObjects();
         for (HashMap<String, Float> wall : walls) {
             int x = wall.get("x").intValue();
@@ -349,21 +349,36 @@ public class GameArea0 extends GameArea {
      */
     @Override
     public int getLevel() {
-        return 1;
+        return 0;
     }
 
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
-    private void spawnMeleeElf() {
+    private void spawnMeleeElfRndLc() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        HashMap<String, Float>[] walls = map.getWallObjects();
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
             Entity elf = NPCFactory.createMeleeElf(player);
             incNum();
             spawnEntityAt(elf, randomPos, true, true);
+        }
+    }
+    private void spawnMeleeElf() {
+        HashMap<String, Float>[] objects = map.getMeleeObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createMeleeElf(player);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
         }
     }
 

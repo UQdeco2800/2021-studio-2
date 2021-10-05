@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 /**
- * Forest area for the demo game with trees, a player, and some enemies.
+ * Level based on Helhiem (lava level) with Loki as boss.
  */
 public class GameArea1 extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(GameArea1.class);
@@ -156,6 +156,8 @@ public class GameArea1 extends GameArea {
         spawnTraps();
         spawnPTraps();
 
+        spawnHealthCrateObject();
+
         playMusic();
         spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
@@ -177,26 +179,26 @@ public class GameArea1 extends GameArea {
         GridPoint2 tileBounds = terrain.getMapBounds(0);
         Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
 
-        // Left
+        // Left Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
+        // Right Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
                 new GridPoint2(tileBounds.x, 0),
                 false,
                 false);
-        // Top
+        // Top Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
                 new GridPoint2(0, tileBounds.y),
                 false,
                 false);
-        // Bottom
+        // Bottom Game Area Bounds
         spawnEntityAt(
                 ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
 
-        //Walls imported from JSON
+        //Imported Map Walls
         HashMap<String, Float>[] walls = map.getWallObjects();
         for (HashMap<String, Float> wall : walls) {
             int x = wall.get("x").intValue();
@@ -208,6 +210,20 @@ public class GameArea1 extends GameArea {
             spawnEntityAt(
                     ObstacleFactory.createWall((width / 32f) * 0.5f, (height / 32f) * 0.5f),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnHealthCrateObject() {
+        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
         }

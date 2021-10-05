@@ -84,6 +84,28 @@
         }, 
         {
          "draworder":"topdown",
+         "id":14,
+         "name":"meleeObjects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":563,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2688,
+                 "y":2400
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":2,
          "name":"wallObjects",
          "objects":[
@@ -478,8 +500,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":14,
- "nextobjectid":562,
+ "nextlayerid":15,
+ "nextobjectid":564,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

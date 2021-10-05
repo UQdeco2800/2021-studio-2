@@ -763,7 +763,7 @@ public class NPCFactory {
                 healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
         boss.setEntityType("human");
-        boss.setScale(0.8f * 2, 1f * 2);
+        boss.setScale(1f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
     }
@@ -821,7 +821,7 @@ public class NPCFactory {
                 healthBar, healthBarFrame, healthBarDecrease);
         boss.addComponent(healthBarComponent);
         boss.setEntityType("human");
-        boss.setScale(0.8f * 2, 1f * 2);
+        boss.setScale(1f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
         return boss;
     }

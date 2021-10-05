@@ -19,6 +19,40 @@ public class Map {
     private HashMap<String, Float>[] initTeleportObjects;
     private int[][] LightTiles;
     private HashMap<String, Float>[] bossBounds;
+    private HashMap<String, Float>[] healthCrateObjects;
+    private HashMap<String, Float>[] meleeObjects;
+    private HashMap<String, Float>[] rangeObjects;
+    private HashMap<String, Float>[] guardObjects;
+    private HashMap<String, Float>[] assassinObjects;
+    private HashMap<String, Float>[] bossObjects;
+    private HashMap<String, Float>[] anchoredObjects;
+
+    public HashMap<String, Float>[] getMeleeObjects() {
+        return meleeObjects;
+    }
+
+    public HashMap<String, Float>[] getGuardObjects() {
+        return guardObjects;
+    }
+
+    public HashMap<String, Float>[] getRangeObjects() {
+        return rangeObjects;
+    }
+
+    public HashMap<String, Float>[] getAssassinObjects() {
+        return assassinObjects;
+    }
+
+    public HashMap<String, Float>[] getBossObjects() {
+        return bossObjects;
+    }
+    public HashMap<String, Float>[] getAnchoredObjects() {
+        return anchoredObjects;
+    }
+
+    public HashMap<String, Float>[] getHealthCrateObjects() {
+        return healthCrateObjects;
+    }
 
     public HashMap<String, Integer> getDimensions() {
         return dimensions;

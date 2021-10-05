@@ -69545,5 +69545,85 @@
             "height": 64,
             "width": 32
         }
+    ],
+    "healthCrateObjects": [
+        {
+            "x": 62,
+            "y": 80,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 67,
+            "y": 80,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 48,
+            "y": 69,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 54,
+            "y": 54,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 69,
+            "y": 44,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 99,
+            "y": 60,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 94,
+            "y": 80,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 94,
+            "y": 88,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 105,
+            "y": 89,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 86,
+            "y": 94,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 85,
+            "y": 76,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 107,
+            "y": 74,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 112,
+            "y": 97,
+            "height": 0,
+            "width": 0
+        }
     ]
 }
