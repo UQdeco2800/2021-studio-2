@@ -109,8 +109,11 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             case Keys.SPACE:
                 entity.getEvents().trigger("attack", lastKeyPressed);
                 return true;
+            case Keys.ALT_LEFT:
+                entity.getEvents().trigger("rangedAttack", lastKeyPressed);
+                return true;
             case Keys.Q:
-                entity.getEvents().trigger("strongAttack", lastKeyPressed);
+                entity.getEvents().trigger("aoeAttack");
                 return true;
             case Keys.SHIFT_LEFT:
                 this.speedMultiplier = 1.4f;
@@ -217,6 +220,16 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         if (dashing || locked) {
             return;
         }
+        calculateDistance(speedMultiplier);
+        if (walkDirection.x == 0 && walkDirection.y == 0) {
+            entity.getEvents().trigger("walkStop");
+        } else {
+            calculateDistance(speedMultiplier);
+            entity.getEvents().trigger("walk", walkDirection);
+        }
+    }
+
+    public void triggerCutsceneWalk() {
         calculateDistance(speedMultiplier);
         if (walkDirection.x == 0 && walkDirection.y == 0) {
             entity.getEvents().trigger("walkStop");

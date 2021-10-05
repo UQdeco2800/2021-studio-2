@@ -3,13 +3,11 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.TouchAttackComponent;
-import com.deco2800.game.components.maingame.MainGameActions;
+import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.WeaponConfigs;
@@ -201,6 +199,16 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 owner.getEntity().getEvents().trigger("rangedUpShoot");
             } else if (targetDir > 270 && targetDir < 360) {
                 owner.getEntity().getEvents().trigger("rangedLeftShoot");
+            }
+        } else {
+            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("attackDown");
+            } else if (targetDir > 90 && targetDir < 180) {
+                owner.getEntity().getEvents().trigger("attackRight");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("attackUp");
+            } else if (targetDir > 270 && targetDir < 360) {
+                owner.getEntity().getEvents().trigger("attackLeft");
             }
         }
     }

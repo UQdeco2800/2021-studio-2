@@ -1,0 +1,90 @@
+
+portal.png
+size: 2048, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+spawn
+  rotate: false
+  xy: 2, 646
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+spawn
+  rotate: false
+  xy: 2, 324
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+spawn
+  rotate: false
+  xy: 324, 646
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+spawn
+  rotate: false
+  xy: 2, 2
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+spawn
+  rotate: false
+  xy: 324, 324
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 646, 646
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 324, 2
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 646, 324
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 968, 646
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 646, 2
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 968, 324
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+rotate
+  rotate: false
+  xy: 1290, 646
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1

@@ -3,6 +3,7 @@ package com.deco2800.game.components.weapons;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -29,6 +30,15 @@ public class Axe extends MeleeWeapon {
                 .getAsset("sounds/impact.ogg", Sound.class);
     }
 
+    // Special constructor for player (just uses default values).
+    public Axe() {
+        super(PhysicsLayer.NPC, 3, 25, new Vector2(1f, 0.5f));
+        attackSound = ServiceLocator.getResourceService().
+                getAsset("sounds/swish.ogg", Sound.class);
+        impactSound = ServiceLocator.getResourceService()
+                .getAsset("sounds/impact.ogg", Sound.class);
+    }
+
     /**
      * Attacks, but also plays animation.
      *
@@ -36,6 +46,7 @@ public class Axe extends MeleeWeapon {
      */
     @Override
     public void attack(int attackDirection) {
+        if (timeAtAttack != 0 || hasAttacked) return;
         super.attack(attackDirection);
         AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         if (animator == null) {
@@ -65,7 +76,7 @@ public class Axe extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
             if (hasAttacked) {
                 attackSound.play();
             }

@@ -3,3 +3,4 @@
 ### Gradle ###
 .gradle/
 source/script.py
+source/core/assets/ProcessMaps.py

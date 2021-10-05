@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
@@ -19,6 +20,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     private final PhysicsEngine physics;
     private final DebugRenderer debugRenderer;
     private final RaycastHit hit = new RaycastHit();
+    private Vector2 movementSpeed;
     protected MovementTask movementTask;
 
     /**
@@ -37,12 +39,27 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     }
 
     /**
+     * @param target           The entity to chase.
+     * @param priority         Task priority when chasing (0 when not chasing).
+     * @param viewDistance     Maximum distance from the entity at which chasing can start.
+     * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
+     */
+    public ChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance, Vector2 moveSpeed) {
+        this(target, priority, viewDistance, maxChaseDistance);
+        this.movementSpeed = moveSpeed.cpy();
+    }
+
+    /**
      * start the chase task - the entity will chase toward the position of the target
      */
     @Override
     public void start() {
         super.start();
-        movementTask = new MovementTask(target.getPosition());
+        if (movementSpeed != null) {
+            movementTask = new MovementTask(target.getPosition(), movementSpeed);
+        } else {
+            movementTask = new MovementTask(target.getPosition());
+        }
         movementTask.create(owner);
         movementTask.start();
         this.owner.getEntity().getEvents().trigger("chaseStart");

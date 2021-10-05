@@ -5,14 +5,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.areas.ForestGameArea;
-import com.deco2800.game.areas.GameArea;
-import com.deco2800.game.areas.TutorialGameArea;
+import com.deco2800.game.areas.*;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
 import com.deco2800.game.components.maingame.MainGameExitDisplay;
+import com.deco2800.game.components.pause.PauseInputComponent;
+import com.deco2800.game.components.pause.PauseMenuActions;
+import com.deco2800.game.components.pause.PauseMenuDisplay;
+import com.deco2800.game.components.player.PlayerWin;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -26,6 +28,7 @@ import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.CutsceneScreen;
 import com.deco2800.game.ui.terminal.Terminal;
 import com.deco2800.game.ui.terminal.TerminalDisplay;
 import com.deco2800.game.ui.textbox.TextBox;
@@ -97,6 +100,16 @@ public class MainGameScreen extends ScreenAdapter {
             this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
             this.gameArea = new TutorialGameArea(terrainFactory, game);
+        } else if (world.equals("game0")) {
+            this.gameArea = new GameArea0(terrainFactory, game);
+        } else if (world.equals("game1")) {
+            this.gameArea = new GameArea1(terrainFactory, game);
+        } else if (world.equals("game2")) {
+            this.gameArea = new GameArea2(terrainFactory, game);
+        } else if (world.equals("game3")) {
+            this.gameArea = new GameArea3(terrainFactory, game);
+        } else if (world.equals("game4")) {
+            this.gameArea = new GameArea4(terrainFactory, game);
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -110,9 +123,19 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         if (world.equals("forest")) {
-            this.gameArea = new ForestGameArea(terrainFactory, currentHealth);
+            this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game);
+            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
+        } else if (world.equals("game0")) {
+            this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
+        } else if (world.equals("game1")) {
+            this.gameArea = new GameArea1(terrainFactory, game, currentHealth);
+        } else if (world.equals("game2")) {
+            this.gameArea = new GameArea2(terrainFactory, game, currentHealth);
+        } else if (world.equals("game3")) {
+            this.gameArea = new GameArea3(terrainFactory, game, currentHealth);
+        } else if (world.equals("game4")) {
+            this.gameArea = new GameArea4(terrainFactory, game, currentHealth);
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -154,15 +177,30 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (gameChange) {
-            if (gameArea.getLevel() == 1) {
+            if (gameArea.getLevel() == 9){
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
-                game.setScreen(GdxGame.ScreenType.MAIN_GAME_FOREST, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA0, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 0) {
+            }else if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
-                game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 1) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA2, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 2) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 3) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA4, currentHealth);
                 gameChange = false;
             }
         } else {
@@ -170,8 +208,16 @@ public class MainGameScreen extends ScreenAdapter {
             ServiceLocator.getEntityService().update();
             renderer.render();
             isPlayerDead();
+            playerWin();
         }
     }
+
+    private void playerWin() {
+        if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+        }
+    }
+
 
     @Override
     public void resize(int width, int height) {
@@ -234,9 +280,13 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new TextBox())
                 .addComponent(textBoxInput)
                 .addComponent(new TextBoxDisplay())
+                .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
                 .addComponent(new MainGameExitDisplay())
+                .addComponent(new PauseMenuActions(game))
+                .addComponent(new PauseMenuDisplay())
+                .addComponent(new PauseInputComponent())
                 .addComponent(new Terminal())
                 .addComponent(inputComponent)
                 .addComponent(new TerminalDisplay());

@@ -12,6 +12,13 @@ public class GameTime {
     private static final Logger logger = LoggerFactory.getLogger(GameTime.class);
     private final long startTime;
     private float timeScale = 1f;
+    private boolean paused = false;
+
+    private boolean enemiesPaused = false;
+    // The amount of time game was paused since started
+    private long timePaused;
+    // The time at which game was paused last time
+    private long previouslyPausedAt;
 
     public GameTime() {
         startTime = TimeUtils.millis();
@@ -46,10 +53,47 @@ public class GameTime {
      * @return time passed since the game started in milliseconds
      */
     public long getTime() {
-        return TimeUtils.timeSinceMillis(startTime);
+        return TimeUtils.timeSinceMillis(startTime) - timePaused;
     }
 
     public long getTimeSince(long lastTime) {
         return getTime() - lastTime;
+    }
+
+    /**
+     * @return whether the game is paused
+     */
+    public boolean isPaused() {
+        return paused;
+    }
+
+    /**
+     * Pauses the game
+     */
+    public void pause() {
+        timeScale = 0f;
+        paused = true;
+        previouslyPausedAt = this.getTime();
+    }
+
+    /**
+     * Unpauses the game
+     */
+    public void unpause() {
+        timeScale = 1f;
+        paused = false;
+        timePaused += getTimeSince(previouslyPausedAt);
+    }
+
+    public void pauseEnemies() {
+        enemiesPaused = true;
+    }
+
+    public void unpauseEnemies() {
+        enemiesPaused = false;
+    }
+
+    public boolean isEnemiesPaused() {
+        return this.enemiesPaused;
     }
 }
