@@ -787,8 +787,6 @@ public class NPCFactory {
         shootProjectileTask.setMultishotChance(multishotChance);
         shootProjectileTask.setShootAnimationTimeMS(200);
         aiComponent.addTask(shootProjectileTask);
-        //create fireballs if needed
-        archer.data.put("createFireBall", true);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -836,16 +834,9 @@ public class NPCFactory {
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new PauseTask())
-                        .addTask(new TeleportationTask(target, 2000))
                         .addTask(new SpawnDecoysTask(target))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
-        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 1000);
-        shootProjectileTask.setProjectileType("fireBall");
-        shootProjectileTask.setMultishotChance(0);
-        aiComponent.addTask(shootProjectileTask);
-        //Dont create fireballs until ready and on the map
-        boss.data.put("createFireBall", false);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -896,15 +887,8 @@ public class NPCFactory {
                         .addTask(new ChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new PauseTask())
-                        .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
-        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 1000);
-        shootProjectileTask.setProjectileType("fireBall");
-        shootProjectileTask.setMultishotChance(0);
-        aiComponent.addTask(shootProjectileTask);
-        //Dont create fireballs until ready and on the map
-        boss.data.put("createFireBall", false);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
