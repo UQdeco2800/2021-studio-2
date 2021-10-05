@@ -1,4 +1,4 @@
-package com.deco2800.game.components.Touch;
+package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -10,22 +10,15 @@ import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
 
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TeleportComponent extends TouchComponent {
 
-    private Scanner scanner = new Scanner(System.in);
     private long start = 0;
 
     public TeleportComponent(short targetLayer) {
         super(targetLayer);
-    }
-
-    @Override
-    public void create() {
-        super.create();
     }
 
     /**

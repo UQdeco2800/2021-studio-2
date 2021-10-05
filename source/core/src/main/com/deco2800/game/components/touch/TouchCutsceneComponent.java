@@ -1,4 +1,4 @@
-package com.deco2800.game.components.Touch;
+package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.player.PlayerActions;
@@ -18,8 +18,6 @@ import com.deco2800.game.ui.textbox.TextBox;
  */
 public class TouchCutsceneComponent extends TouchComponent {
 
-    private Entity collidedEntity;
-    private PlayerActions actions;
     private final RandomDialogueSet dialogueSet;
     private final DialogueSet type;
 

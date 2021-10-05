@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
-import com.deco2800.game.components.Touch.TouchAttackCutsceneComponent;
-import com.deco2800.game.components.Touch.TouchCutsceneComponent;
-import com.deco2800.game.components.Touch.TouchMoveComponent;
+import com.deco2800.game.components.touch.TouchAttackCutsceneComponent;
+import com.deco2800.game.components.touch.TouchCutsceneComponent;
+import com.deco2800.game.components.touch.TouchMoveComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -46,7 +46,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                new Vector2(0f, 0f), 0, 0, true))
+                                new Vector2(0f, 0f), true))
                         .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -71,7 +71,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                new Vector2(0f, 0f), 0, 0, true))
+                                new Vector2(0f, 0f), true))
                         .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -116,19 +116,17 @@ public class CutsceneTriggerFactory {
      *
      * @param dialogueSet the dialogue set the entity will trigger
      * @param direction   direction to move the player
-     * @param x           x position that player moves in
-     * @param y           y position that player moves in
      * @return entity that will create the trigger within the map
      */
     public static Entity createMoveDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type,
-                                                   Vector2 direction, int x, int y) {
+                                                   Vector2 direction) {
         Entity trigger =
                 new Entity()
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                direction, x, y, false))
+                                direction, false))
                         .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
@@ -142,18 +140,16 @@ public class CutsceneTriggerFactory {
      * Creates an entity that can trigger a cutscene to start.
      *
      * @param direction direction to move the player
-     * @param x         x position that player moves in
-     * @param y         y position that player moves in
      * @return entity that will create the trigger within the map
      */
-    public static Entity createMoveTrigger(Vector2 direction, int x, int y) {
+    public static Entity createMoveTrigger(Vector2 direction) {
         Entity trigger =
                 new Entity()
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                direction, x, y, false));
+                                direction, false));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(ColliderComponent.class).setSensor(true);

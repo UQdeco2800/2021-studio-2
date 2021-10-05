@@ -1,4 +1,4 @@
-package com.deco2800.game.components.Touch;
+package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -13,16 +13,6 @@ public class TouchMoveComponent extends TouchComponent {
      * The direction the character will move in
      */
     private final Vector2 direction;
-
-    /**
-     * The distance on the x axis the character will need to move.
-     */
-    private final float x;
-
-    /**
-     * The distance on the y axis the character will need to move.
-     */
-    private final float y;
 
     /**
      * Checks if the component has been triggered before
@@ -43,11 +33,9 @@ public class TouchMoveComponent extends TouchComponent {
      * @param y           the y position for the player to move
      * @param repeatable  if the trigger can be repeated
      */
-    public TouchMoveComponent(short targetLayer, Vector2 direction, float x, float y, boolean repeatable) {
+    public TouchMoveComponent(short targetLayer, Vector2 direction, boolean repeatable) {
         super(targetLayer);
         this.direction = direction;
-        this.x = x;
-        this.y = y;
         this.repeatable = repeatable;
     }
 

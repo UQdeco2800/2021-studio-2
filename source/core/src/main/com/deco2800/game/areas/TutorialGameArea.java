@@ -180,14 +180,14 @@ public class TutorialGameArea extends GameArea {
         Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
         spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
 
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
+        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f));
         spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
 
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
+        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f));
         spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
 
 
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
+        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f));
         spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 

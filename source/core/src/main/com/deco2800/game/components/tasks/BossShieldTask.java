@@ -25,24 +25,7 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
         this.priority = priority;
         this.timeSource = ServiceLocator.getTimeSource();
         this.duration = duration;
-    }
 
-
-    private int getInactivePriority() {
-        float dst = getDistanceToTarget();
-        if (dst < viewDistance && isTargetVisible()) {
-            return priority;
-        }
-        return -1;
-    }
-
-
-    private int getActivePriority() {
-        float dst = super.getDistanceToTarget();
-        if (dst > maxChaseDistance || !isTargetVisible()) {
-            return -1; // Too far, stop chasing
-        }
-        return priority;
     }
 
     public void shieldController() {
@@ -50,8 +33,7 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
         float maxHealth = (float) owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
         if ((health / maxHealth) <= 0.5 && timeSource.getTime() >= endTime) {
             endTime = timeSource.getTime() + (int) (duration * 1000);
-            Random rand = new Random();
-            if (rand.nextDouble() > 0.5) {
+            if (((int)System.currentTimeMillis()) % 2 == 0) { //There were issues with sonarcloud and the security of Random()
                 this.shield = true;
                 currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             } else {

@@ -117,7 +117,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
      *
      * @return priority - allow to switch task if target is out of reach
      */
-    private int getActivePriority() {
+    protected int getActivePriority() {
         float dst = getDistanceToTarget();
         if (dst > maxChaseDistance || !isTargetVisible()) {
             return -1; // Too far, stop chasing
@@ -130,7 +130,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
      *
      * @return priority - allow to switch task if target is in view range
      */
-    private int getInactivePriority() {
+    protected int getInactivePriority() {
         float dst = getDistanceToTarget();
         if (dst < viewDistance && isTargetVisible()) {
             return priority;

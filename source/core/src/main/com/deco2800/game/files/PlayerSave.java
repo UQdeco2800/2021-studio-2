@@ -1,5 +1,8 @@
 package com.deco2800.game.files;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +16,7 @@ import java.util.Scanner;
 public class PlayerSave {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String SAVE_FILE = "playersave.save";
+    private static final Logger logger = LoggerFactory.getLogger(PlayerSave.class);
 
 /*
     public static Save get() {
@@ -36,8 +40,7 @@ public class PlayerSave {
      */
     public static void write(Save pSave) {
 
-        try {
-            FileWriter saveWrite = new FileWriter(SAVE_FILE);
+        try (FileWriter saveWrite = new FileWriter((SAVE_FILE))){
 
             saveWrite.write(String.valueOf(pSave.hasPlayed) + '\n');
             saveWrite.write(String.valueOf(pSave.lokiEnc) + '\n');
@@ -48,12 +51,10 @@ public class PlayerSave {
             saveWrite.write(String.valueOf(pSave.thorWins) + '\n');
             saveWrite.write(String.valueOf(pSave.odinWins) + '\n');
 
-            saveWrite.close();
-
-            System.out.println("Successfully wrote to the file.");
+            logger.debug("Player Save File correctly updated.");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.warn("Player Save File has not correctly written save status");
         }
 
     }
@@ -93,15 +94,13 @@ public class PlayerSave {
             playersave.thorWins = Integer.parseInt(saveRead.nextLine());
             playersave.odinWins = Integer.parseInt(saveRead.nextLine());
 
+            logger.debug("Player Save File correctly loaded into new game");
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
+            logger.warn("Player Save File has not correctly written save status");
         } catch (NumberFormatException numE) {
-            numE.printStackTrace();
+            logger.warn("Player Save File has not correctly written save status");
         }
-
-
         return playersave;
     }
 
