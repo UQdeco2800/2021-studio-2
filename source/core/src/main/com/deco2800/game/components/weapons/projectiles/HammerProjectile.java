@@ -20,39 +20,65 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class HammerProjectile extends ProjectileController {
 
-    /** Sound that plays when hammer hits enemy */
+    /**
+     * Sound that plays when hammer hits enemy
+     */
     private final Sound impactSound;
 
-    /** Start position of projectile */
+    /**
+     * Start position of projectile
+     */
     private Vector2 start;
-    /** Hitbox used by projectile */
+    /**
+     * Hitbox used by projectile
+     */
     private HitboxComponent hitbox;
-    /** Movement component used by projectile */
+    /**
+     * Movement component used by projectile
+     */
     private PhysicsMovementComponent movingComponent;
 
-    /** Damage the projectile does */
+    /**
+     * Damage the projectile does
+     */
     private final int attackPower;
-    /** Knockback applied when projectile hits target */
+    /**
+     * Knockback applied when projectile hits target
+     */
     private final int knockback;
-    /** The target layer that the projectile will damage */
+    /**
+     * The target layer that the projectile will damage
+     */
     private final short targetLayer;
-    /** CombatStats of owner entity */
+    /**
+     * CombatStats of owner entity
+     */
     protected CombatStatsComponent combatStats;
 
-    /** Current status of Mjolnir. See below for constants */
+    /**
+     * Current status of Mjolnir. See below for constants
+     */
     private int status;
     private final int THROWING = 0;
     private final int RECALLING = 1;
     private final int STATIC = 2;
 
-    /** Game time since last notable event: e.g. since creation or since recall was called */
+    /**
+     * Game time since last notable event: e.g. since creation or since recall was called
+     */
     private long gameTime;
-    /** The target that the projectile will move towards */
+    /**
+     * The target that the projectile will move towards
+     */
     protected Vector2 target;
-    /** The hammer component that controls the projectile */
+    /**
+     * The hammer component that controls the projectile
+     */
     private final Hammer owner;
 
-    /** Animator for the projectile */
+    /**
+     * Animator for the projectile
+     */
     private AnimationRenderComponent animator;
 
     /**
@@ -107,7 +133,7 @@ public class HammerProjectile extends ProjectileController {
                 movingComponent.setMoving(false);
                 hitbox.setEnabled(false);
             }
-        // Do nothing if static (changed by recall function)
+            // Do nothing if static (changed by recall function)
         } else if (this.status == RECALLING) {
             // Update target as being position of owner entity.
             movingComponent.setTarget(owner.getEntity().getPosition());
@@ -136,7 +162,8 @@ public class HammerProjectile extends ProjectileController {
 
     /**
      * Collision method used to detect whether projectile has collided with enemy
-     * @param me fixture of this projectile
+     *
+     * @param me    fixture of this projectile
      * @param other fixture of colliding entity.
      * @return if successful collision
      */

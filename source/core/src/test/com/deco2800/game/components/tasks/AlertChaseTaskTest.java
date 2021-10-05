@@ -1,6 +1,7 @@
 package com.deco2800.game.components.tasks;
 
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -80,6 +81,7 @@ class AlertChaseTaskTest {
     private Entity makePhysicsEntity() {
         return new Entity()
                 .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(100, 10))
                 .addComponent(new PhysicsMovementComponent());
     }
 }

@@ -113,6 +113,7 @@ public class PlayerActions extends Component {
 
     /**
      * Gets the players currently equipped weapon.
+     *
      * @return the currently equipped melee weapon.
      */
     public MeleeWeapon getEquippedWeapon() {
@@ -131,6 +132,7 @@ public class PlayerActions extends Component {
 
     /**
      * Gets an attack direction based on an input key.
+     *
      * @param keycode keycode of the player input
      * @return MeleeWeapon.direction of the attack.
      */

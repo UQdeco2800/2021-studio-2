@@ -11,16 +11,15 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
-import net.dermetfan.gdx.physics.box2d.PositionController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.deco2800.game.files.PlayerSave;
 
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
@@ -77,6 +76,14 @@ public class ForestGameArea extends GameArea {
             "images/guardElf.png",
             "images/rangedElf.png",
             "images/fireball/fireballAinmation.png",
+            "images/rangedFixed.png",
+            "images/bossFixed.png",
+            "images/meleeAnimationsTextured.png",
+            "images/meleeFinal.png",
+            "images/assassinFinal.png",
+            "images/guardFinal.png",
+            "images/rangedAllFinal.png",
+            "images/bossFinal.png",
             "player_scepter.png",
             "player_hammer.png",
             "player_axe.png",
@@ -87,6 +94,7 @@ public class ForestGameArea extends GameArea {
             "images/boss_health_left.png",
             "images/boss_health_right.png",
             "images/viking.png",
+            "images/explosion/explosion.png",
             "images/hellViking.png",
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
@@ -104,7 +112,9 @@ public class ForestGameArea extends GameArea {
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
-            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
+            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
+            "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/lokiBoss.atlas"
     };
     private static final String[] arrowSounds = {
@@ -151,18 +161,18 @@ public class ForestGameArea extends GameArea {
         //spawnTrees();
         spawnPlayer();
         spawnCrate();
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnBoss();
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
+        spawnVikingMelee();
+        spawnBoss();
         spawnVikingMelee();
         spawnHellVikingMelee();
         spawnAsgardWarriorMelee();
         spawnOutdoorArcher();
         spawnLoki();
-
         playMusic();
         setDialogue();
         spawnOdin();
@@ -327,6 +337,7 @@ public class ForestGameArea extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         Entity boss = NPCFactory.createLoki(player);
+        incBossNum();
         spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
     }
 
@@ -470,14 +481,14 @@ public class ForestGameArea extends GameArea {
         PlayerSave.Save pSave = PlayerSave.load();
 
 
-        if(pSave.lokiEnc < 2 || pSave.lokiEnc >= 4){
+        if (pSave.lokiEnc < 2 || pSave.lokiEnc >= 4) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_INTRODUCTION);
 
             pSave.lokiEnc += 1;
 
-        }else if(pSave.lokiEnc >= 1 && pSave.lokiEnc < 3){
+        } else if (pSave.lokiEnc >= 1 && pSave.lokiEnc < 3) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);

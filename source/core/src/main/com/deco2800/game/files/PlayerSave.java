@@ -1,12 +1,9 @@
 package com.deco2800.game.files;
 
-import com.deco2800.game.files.FileLoader.Location;
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -67,7 +64,7 @@ public class PlayerSave {
      *
      * @return Returns a PlayerSave.Save object with default values
      */
-    public static Save initial(){
+    public static Save initial() {
         Save playerSave = new Save();
         return playerSave;
     }
@@ -95,7 +92,6 @@ public class PlayerSave {
             playersave.lokiWins = Integer.parseInt(saveRead.nextLine());
             playersave.thorWins = Integer.parseInt(saveRead.nextLine());
             playersave.odinWins = Integer.parseInt(saveRead.nextLine());
-
 
 
         } catch (FileNotFoundException e) {

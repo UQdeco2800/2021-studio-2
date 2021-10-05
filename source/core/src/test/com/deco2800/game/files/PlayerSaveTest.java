@@ -1,14 +1,13 @@
 package com.deco2800.game.files;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerSaveTest {
 
     @Test
-    void testDefaultSave(){
+    void testDefaultSave() {
         PlayerSave.Save testSave = PlayerSave.initial();
 
         assertEquals(testSave.hasPlayed, false);
@@ -23,7 +22,7 @@ public class PlayerSaveTest {
     }
 
     @Test
-    void testSaveChange(){
+    void testSaveChange() {
         PlayerSave.Save testSave = PlayerSave.initial();
         PlayerSave.Save backupSave = PlayerSave.load();
 

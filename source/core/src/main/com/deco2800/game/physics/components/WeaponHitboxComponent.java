@@ -19,6 +19,15 @@ public class WeaponHitboxComponent extends ColliderComponent {
         // Weapon hit boxes aren't set by default.
     }
 
+//    protected void onCollisionStart(Fixture me, Fixture other) {
+//        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC){
+//            System.out.println("player collision");
+//            //this.getEntity().getComponent(PhysicsMovementComponent.class).setStun();
+//
+//        }
+
+    //}
+
     /**
      * Set physics as a box with a given size. Box is centered around the entity.
      *
@@ -27,6 +36,8 @@ public class WeaponHitboxComponent extends ColliderComponent {
      * @param direction the direction of the hit box, relative to the entity.
      * @return self
      */
+
+
     @SuppressWarnings("UnusedReturnValue")
     public ColliderComponent set(Vector2 size, int direction) {
 

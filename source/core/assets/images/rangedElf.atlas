@@ -355,31 +355,31 @@ repeat: none
 leftDeath
   rotate: false
   xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
-  index: 0
+  index: -1
 leftDeath
   rotate: false
   xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
-  index: 1
+  index: -1
 leftDeath
   rotate: false
-  xy: 0, 110
-  size: 94, 110
-  orig: 94, 110
+  xy: 0, 105
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
-  index: 2
+  index: -1
 leftDeath
   rotate: false
-  xy: 94, 110
-  size: 94, 110
-  orig: 94, 110
+  xy: 94, 105
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
-  index: 3
+  index: -1
 
 rangeElfFrontDeath.png
 size: 512, 128
@@ -628,36 +628,36 @@ repeat: none
 assassinLeftDeath
   rotate: false
   xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 assassinLeftDeath
   rotate: false
   xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 assassinLeftDeath
   rotate: false
   xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 assassinLeftDeath
   rotate: false
   xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 assassinLeftDeath
   rotate: false
   xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  size: 94, 105
+  orig: 94, 105
   offset: 0, 0
   index: -1
 
