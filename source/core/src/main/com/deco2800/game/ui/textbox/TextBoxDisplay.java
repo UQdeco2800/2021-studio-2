@@ -103,7 +103,7 @@ public class TextBoxDisplay extends UIComponent {
             ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH + 60f;
 
     private final float ENEMY_CHARACTER_X =
-            ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X;
+            ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X + 100f;
 
     private final float ENEMY_NAME_X = ServiceLocator.getRenderService().getStage().getWidth() - 705;
 
@@ -122,7 +122,7 @@ public class TextBoxDisplay extends UIComponent {
     private void addActors() {
         float MAIN_CHARACTER_NAME_X = 550f;
         float MAIN_CHARACTER_TEXT_X = 180f;
-        float MAIN_CHARACTER_X_POS = 0f;
+        float MAIN_CHARACTER_X_POS = -100f;
 
         topBar = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));

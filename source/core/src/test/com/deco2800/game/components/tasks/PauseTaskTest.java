@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class PauseTaskTest {

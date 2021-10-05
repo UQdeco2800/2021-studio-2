@@ -1,0 +1,33 @@
+rangeElfLeftDeath.png
+size: 256, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Left_death0
+  rotate: false
+  xy: 0, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+Left_death1
+  rotate: false
+  xy: 94, 0
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+Left_death2
+  rotate: false
+  xy: 0, 105
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1
+Left_death3
+  rotate: false
+  xy: 94, 105
+  size: 94, 105
+  orig: 94, 105
+  offset: 0, 0
+  index: -1

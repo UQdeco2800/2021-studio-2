@@ -1,6 +1,5 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -11,14 +10,12 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -251,7 +248,7 @@ public class GameArea2 extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
         int height = map.getDimensions().get("n_tiles_height");
-        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
+        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
                 true, true);
         player = newPlayer;
     }
@@ -335,7 +332,7 @@ public class GameArea2 extends GameArea {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     @Override
     public int getLevel() {
@@ -362,7 +359,7 @@ public class GameArea2 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createRangedElf(player,"normalArrow", 0.1f);
+            Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangerLeft");
             incNum();
@@ -379,7 +376,7 @@ public class GameArea2 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createRangedElf(player,"fastArrow",0);
+            Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
             elf.setEntityType("assassin");
             elf.getEvents().trigger("assassinLeft");
             incNum();
@@ -411,7 +408,7 @@ public class GameArea2 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf= NPCFactory.createElfGuard(player);
+            Entity elf = NPCFactory.createElfGuard(player);
             incNum();
             spawnEntityAt(
                     elf,
@@ -427,7 +424,7 @@ public class GameArea2 extends GameArea {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
             Entity anchor = ObstacleFactory.createAnchor();
-            Entity elf= NPCFactory.createAnchoredElf(player,anchor,3f);
+            Entity elf = NPCFactory.createAnchoredElf(player, anchor, 3f);
             incNum();
             spawnEntityAt(
                     elf,

@@ -1,6 +1,5 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -11,14 +10,12 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -59,6 +56,7 @@ public class GameArea1 extends GameArea {
             "images/player_hammer.png",
             "images/player_scepter.png",
             "images/blast.png",
+            "images/hammer_projectile.png",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -94,7 +92,7 @@ public class GameArea1 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -251,7 +249,7 @@ public class GameArea1 extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
         int height = map.getDimensions().get("n_tiles_height");
-        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
+        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
                 true, true);
         player = newPlayer;
     }
@@ -335,7 +333,7 @@ public class GameArea1 extends GameArea {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     @Override
     public int getLevel() {

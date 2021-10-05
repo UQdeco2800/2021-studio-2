@@ -28,7 +28,6 @@ public class EndScreenDisplay extends UIComponent {
 
     }
 
-
     private void buttonSetup() {
         //create new skin file for buttons
         //Skin menuButtons = new Skin(Gdx.files.internal(".json"));
