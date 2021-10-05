@@ -108,7 +108,7 @@ public class Dagger extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > frameDuration && timeSinceAttack < 2 * frameDuration) {
+        if (timeSinceAttack > attackFrameIndex && timeSinceAttack < 2 * attackFrameIndex) {
             if (hasStrongAttacked) {
                 attackSound.play();
                 weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
