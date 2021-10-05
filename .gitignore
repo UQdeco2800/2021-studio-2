@@ -4,3 +4,4 @@
 .gradle/
 source/script.py
 source/core/assets/ProcessMaps.py
+source/playersave.save
