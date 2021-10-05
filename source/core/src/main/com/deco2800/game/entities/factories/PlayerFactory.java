@@ -49,10 +49,12 @@ public class PlayerFactory {
                 animator = new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/player_scepter.atlas", TextureAtlas.class));
                 // Sceptor animations
-                animator.addAnimation("left_scepter_attack", 0.1f);
-                animator.addAnimation("right_scepter_attack", 0.1f);
-                animator.addAnimation("up_scepter_attack", 0.1f);
-                animator.addAnimation("down_scepter_attack", 0.1f);
+                animator.addAnimation("left_scepter_attack", 0.08f);
+                animator.addAnimation("right_scepter_attack", 0.08f);
+                animator.addAnimation("up_scepter_attack", 0.08f);
+                animator.addAnimation("down_scepter_attack", 0.08f);
+                animator.addAnimation("up_attack", 0.08f);
+                animator.addAnimation("down_attack", 0.08f);
 
                 break;
             case "Hammer":
