@@ -392,7 +392,6 @@ public class GameArea3 extends GameArea {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
             Entity elf = NPCFactory.createBossNPC(player);
-            incNum();
             spawnEntityAt(
                     elf,
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
