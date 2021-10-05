@@ -54,7 +54,9 @@ public class ForestGameArea extends GameArea {
             "images/player_axe.png",
             "images/player_hammer.png",
             "images/player_scepter.png",
+            "images/player_longsword.png",
             "images/blast.png",
+            "images/hammer_projectile",
             "images/health_left.png",
             "images/health_middle.png",
             "images/health_right.png",
@@ -77,6 +79,7 @@ public class ForestGameArea extends GameArea {
             "images/fireball/fireballAinmation.png",
             "player_scepter.png",
             "player_hammer.png",
+            "player_axe.png",
             "portal.png",
             "Odin/odin.png",
             "Assets/gametile-127.png",
@@ -97,8 +100,8 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "end/portal.atlas", "Odin/odin.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorWarrior.atlas",
+            "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
+            "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
@@ -231,7 +234,7 @@ public class ForestGameArea extends GameArea {
      * Spawn player at the terrain, create the player
      */
     private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Scepter");
+        Entity newPlayer = PlayerFactory.createPlayer("Longsword");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
     }
