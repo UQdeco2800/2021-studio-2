@@ -46,11 +46,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
 
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
-            if (owner.getEntity().getEntityType().equals("viking")) {
-                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
-            } else if (owner.getEntity().getEntityType().equals("archer")) {
-                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
-            } else if (owner.getEntity().getEntityType().equals("human")) {
+            if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
             } else if (owner.getEntity().getEntityType().equals("odin")) {
                 Timer.schedule(new Timer.Task() {
