@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -212,47 +212,54 @@ long&nbsp;cooldownMS)</code></th>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCooldownMS(long)">setCooldownMS</a></span>&#8203;(long&nbsp;cooldownMS)</code></th>
+<td class="colLast">
+<div class="block">set how long to wait before firing again</div>
+</td>
+</tr>
+<tr class="altColor" id="i2">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMultishotChance(double)">setMultishotChance</a></span>&#8203;(double&nbsp;multishotChance)</code></th>
 <td class="colLast">
 <div class="block">Set the chance that the entity shoot more than one arrow at a time</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setProjectileType(java.lang.String)">setProjectileType</a></span>&#8203;(java.lang.String&nbsp;projectileType)</code></th>
 <td class="colLast">
 <div class="block">Set the type of the projectile - whether it multishots, follow target or show trajectory</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setShootAnimationTimeMS(long)">setShootAnimationTimeMS</a></span>&#8203;(long&nbsp;shootAnimationTimeMS)</code></th>
 <td class="colLast">
 <div class="block">set how long to pause and play animation after firing</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shoot()">shoot</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Spawns in a projectile according to the class' variables</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showTrajectory(com.badlogic.gdx.math.Vector2)">showTrajectory</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;loc)</code></th>
 <td class="colLast">
 <div class="block">Show trajectory before shooting on debug screen</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start()">start</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Set the time of the last arrow fired to 0 and generate new fireballs;</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -343,6 +350,17 @@ long&nbsp;cooldownMS)</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>shootAnimationTimeMS</code> - time in MS to pause when shooting</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setCooldownMS(long)">setCooldownMS</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setCooldownMS</span>&#8203;(<span class="arguments">long&nbsp;cooldownMS)</span></div>
+<div class="block">set how long to wait before firing again</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>cooldownMS</code> - time in MS to pause after shooting</dd>
 </dl>
 </section>
 </li>

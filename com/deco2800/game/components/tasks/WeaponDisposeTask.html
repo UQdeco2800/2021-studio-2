@@ -109,6 +109,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">WeaponDisposeTask</span>
 extends <a href="ProjectileMovementTask.html" title="class in com.deco2800.game.components.tasks">ProjectileMovementTask</a>
 implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.deco2800.game.ai.tasks">PriorityTask</a></pre>
+<div class="block">Wait for the weapon break animation to run</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -163,7 +164,9 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,float)">WeaponDisposeTask</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;speed,
 float&nbsp;duration)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Pause the weapon in midair to wait for animation to run</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -192,21 +195,22 @@ float&nbsp;duration)</code></th>
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPriority()">getPriority</a></span>()</code></th>
 <td class="colLast">
-<div class="block">return the priority of the arrow
- If arrow is in moving, return 10, else return -1 and dispose the arrow</div>
+<div class="block">override all other task if the weapon is dead (health = 0);</div>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Update the arrow position on the screen</div>
+<div class="block">call wait for death animation</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#waitForDeathAnimation()">waitForDeathAnimation</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Dispose weapon hit box and wait for the weapon break animation to run</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -256,6 +260,13 @@ float&nbsp;duration)</code></th>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">WeaponDisposeTask</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;targetLoc,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;speed,
 float&nbsp;duration)</span></div>
+<div class="block">Pause the weapon in midair to wait for animation to run</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>targetLoc</code> - target position</dd>
+<dd><code>speed</code> - speed</dd>
+<dd><code>duration</code> - pause duration</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -272,8 +283,7 @@ float&nbsp;duration)</span></div>
 <section class="detail">
 <h3><a id="update()">update</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="ProjectileMovementTask.html#update()">ProjectileMovementTask</a></code></span></div>
-<div class="block">Update the arrow position on the screen</div>
+<div class="block">call wait for death animation</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../ai/tasks/Task.html#update()">update</a></code>&nbsp;in interface&nbsp;<code><a href="../../ai/tasks/Task.html" title="interface in com.deco2800.game.ai.tasks">Task</a></code></dd>
@@ -286,22 +296,21 @@ float&nbsp;duration)</span></div>
 <section class="detail">
 <h3><a id="waitForDeathAnimation()">waitForDeathAnimation</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">waitForDeathAnimation</span>()</div>
+<div class="block">Dispose weapon hit box and wait for the weapon break animation to run</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getPriority()">getPriority</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getPriority</span>()</div>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="ProjectileMovementTask.html#getPriority()">ProjectileMovementTask</a></code></span></div>
-<div class="block">return the priority of the arrow
- If arrow is in moving, return 10, else return -1 and dispose the arrow</div>
+<div class="block">override all other task if the weapon is dead (health = 0);</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../ai/tasks/PriorityTask.html#getPriority()">getPriority</a></code>&nbsp;in interface&nbsp;<code><a href="../../ai/tasks/PriorityTask.html" title="interface in com.deco2800.game.ai.tasks">PriorityTask</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="ProjectileMovementTask.html#getPriority()">getPriority</a></code>&nbsp;in class&nbsp;<code><a href="ProjectileMovementTask.html" title="class in com.deco2800.game.components.tasks">ProjectileMovementTask</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>int 10 if arrow is moving, -1 if arrow is not</dd>
+<dd>100 if weapon is dead, 0, otherwise</dd>
 </dl>
 </section>
 </li>
