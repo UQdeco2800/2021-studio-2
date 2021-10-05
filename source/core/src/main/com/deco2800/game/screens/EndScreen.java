@@ -1,12 +1,12 @@
 package com.deco2800.game.screens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.endGame.EndScreenActions;
-import com.deco2800.game.components.endGame.EndScreenAnimationController;
 import com.deco2800.game.components.endGame.EndScreenDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
@@ -16,6 +16,7 @@ import com.deco2800.game.input.InputService;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -27,8 +28,8 @@ import org.slf4j.LoggerFactory;
 public class EndScreen extends ScreenAdapter {
     private static final Logger logger = LoggerFactory.getLogger(EndScreen.class);
 
-    private static final String[] endScreenTextures = {"end/huh.png"};
-    private static final String[] endScreenAtlas = {};
+    private static final String[] endScreenTextures = {"end/winScreen.png", "end/winScreen2.png"};
+    private static final String[] endScreenAtlas = {"end/winScreen.atlas"};
     private final GdxGame game;
     private final Renderer renderer;
     private AnimationRenderComponent endAnimator;
@@ -37,14 +38,13 @@ public class EndScreen extends ScreenAdapter {
         this.game = game;
 
         logger.debug("Initialising End Screen services");
+        ServiceLocator.registerTimeSource(new GameTime());
         ServiceLocator.registerInputService(new InputService());
         ServiceLocator.registerResourceService(new ResourceService());
         ServiceLocator.registerEntityService(new EntityService());
         ServiceLocator.registerRenderService(new RenderService());
-        //ServiceLocator.registerTimeSource(new GameTime()); //dunno about this one
 
         renderer = RenderFactory.createRenderer();
-        //renderer.getCamera().getEntity().setPosition(5f, 5f); //;do i really need this?
 
         loadAssets();
         createUI();
@@ -70,7 +70,7 @@ public class EndScreen extends ScreenAdapter {
 
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
-        ServiceLocator.getResourceService().dispose();
+        //ServiceLocator.getResourceService().dispose();
         ServiceLocator.clear();
     }
 
@@ -92,32 +92,34 @@ public class EndScreen extends ScreenAdapter {
     public void createUI() {
         logger.debug("Creating ui for end game screen");
         Stage stage = ServiceLocator.getRenderService().getStage(); //if i use keyboard inputs
-//        this.endAnimator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
-//                "end/endScreen.atlas", TextureAtlas.class));
 
-        //add Animation frame name "startFrame","frame{#}", "ending",
+        this.endAnimator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
+                "end/winScreen.atlas", TextureAtlas.class));
 
-        //start the first frame and loop until keyboard input -> do this feature last -> play it
-        // all until the last frame.
-        //link the last frame to the looping frame.
-        //use a Timer.Schedule
+        this.endAnimator.addAnimation("winScreen", 0.06f, Animation.PlayMode.NORMAL);
 
+        //add components
         Entity endUi = new Entity()
-                .addComponent(new EndScreenAnimationController())
+                .addComponent(this.endAnimator)
                 .addComponent(new EndScreenActions(this.game))
                 .addComponent(new EndScreenDisplay())
                 .addComponent(new InputDecorator(stage, 10));
 
-
-
-        //make the Display put to the background -> only bring it out when on the last frame
-        //addComponents
-        //change frames based on player keyboard input
-
         ServiceLocator.getEntityService().register(endUi);
 
-        //position UI entity here
-        //Start first frame
+        endUi.setScale(20.5f,12.5f);
+        endUi.setPosition(-5.5f, -1.5f);
+
+        this.endAnimator.startAnimation("winScreen");
+
+        //display button after playing the win animations
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                endUi.getComponent(EndScreenDisplay.class).displayButtons();
+            }
+        }, 5f);
+
     }
 
 }

@@ -1,14 +1,10 @@
 package com.deco2800.game.components.endGame;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +12,6 @@ import org.slf4j.LoggerFactory;
 public class EndScreenDisplay extends UIComponent {
     private static final float Z_INDEX = 2f; //higher z index means placed to the front?
     private static final Logger logger = LoggerFactory.getLogger(EndScreenDisplay.class);
-    private Image endBackground;
-    private Stack endLayout;
-    private Sound congrats;
-    private Stack stack;
     private Table table;
 
     @Override
@@ -29,20 +21,13 @@ public class EndScreenDisplay extends UIComponent {
     }
 
     protected void addActors() {
-        stack = new Stack();
         table = new Table();
         table.setFillParent(true);
-        addBackground();
         buttonSetup();
 
 
     }
 
-    private void addBackground() {
-         endBackground =
-                new Image(ServiceLocator.getResourceService().getAsset("end/huh.png",
-                        Texture.class));
-    }
 
     private void buttonSetup() {
         //create new skin file for buttons
@@ -59,27 +44,16 @@ public class EndScreenDisplay extends UIComponent {
                         entity.getEvents().trigger("mainMenu");
                     }
                 });
-        stack.setFillParent(true);
-        stack.setTouchable(Touchable.disabled);
-        stack.add(endBackground);
+
         table.add(exitBtn);
-        stage.addActor(stack);
         stage.addActor(table);
-        //stage.addActor(table);
+        table.setVisible(false);
     }
 
-    private void displayButtons() {
-        //add buttons to table
-        //disable table and enable
+    public void displayButtons() {
+        table.setVisible(true);
     }
 
-    private void playSound() {
-
-    }
-
-    private void stopSound() {
-
-    }
 
     @Override
     public float getZIndex() {
