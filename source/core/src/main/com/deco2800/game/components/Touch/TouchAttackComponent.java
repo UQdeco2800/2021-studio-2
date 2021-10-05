@@ -111,7 +111,6 @@ public class TouchAttackComponent extends TouchComponent {
         }
 
 
-
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
@@ -128,7 +127,7 @@ public class TouchAttackComponent extends TouchComponent {
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
             }
         }
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC){
+        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC) {
             //System.out.println("player collision");
             this.getEntity().getComponent(PhysicsMovementComponent.class).setStun();
         }
@@ -162,7 +161,7 @@ public class TouchAttackComponent extends TouchComponent {
 
             if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
                 targetStats.hit(combatStats);
-                if(entity.getEntityType().equals("viking") || entity.getEntityType().equals("odin")) {
+                if (entity.getEntityType().equals("viking") || entity.getEntityType().equals("odin")) {
                     Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
                     if (direction.angleDeg() > 45 && direction.angleDeg() < 135) {
                         entity.getEvents().trigger("attackUp");

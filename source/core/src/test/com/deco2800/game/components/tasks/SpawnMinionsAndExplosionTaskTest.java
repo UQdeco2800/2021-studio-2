@@ -65,6 +65,7 @@ class SpawnMinionsAndExplosionTaskTest {
         resourceService.loadTextures(forestTextures);
         resourceService.loadAll();
     }
+
     @Test
     void inactivePriority() {
         Entity boss = createBoss();

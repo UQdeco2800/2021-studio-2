@@ -18,10 +18,10 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
 class PauseMenuActionsTest {
-        PauseInputComponent input;
-        @Mock
-        PauseMenuActions actions;
-        Entity entity;
+    PauseInputComponent input;
+    @Mock
+    PauseMenuActions actions;
+    Entity entity;
 
 
     @BeforeEach

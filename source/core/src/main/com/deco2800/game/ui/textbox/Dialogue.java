@@ -328,7 +328,7 @@ public enum Dialogue {
 
     THOR_INTRODUCTION_VICTORY_4(new Message[]{
             new Message(false, "We really need to stop meeting like this," +
-                "\nmaybe instead we can meet in Valhalla before long."),
+                    "\nmaybe instead we can meet in Valhalla before long."),
             new Message(false, "Until then however, we fight!")
     }),
 
@@ -337,7 +337,6 @@ public enum Dialogue {
                     "\nto clash with me once again?" +
                     "\nVery well, I am happy to oblige.")
     }),
-
 
 
     TEST_1(new Message[]{

@@ -107,7 +107,6 @@ public class EndScreen extends ScreenAdapter {
                 .addComponent(new InputDecorator(stage, 10));
 
 
-
         //make the Display put to the background -> only bring it out when on the last frame
         //addComponents
         //change frames based on player keyboard input

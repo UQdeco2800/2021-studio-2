@@ -233,12 +233,15 @@ public class ElfAnimationController extends Component {
     public void animateLeftAttack() {
         animator.startAnimation("attackLeft");
     }
+
     public void animateRightAttack() {
         animator.startAnimation("attackRight");
     }
+
     public void animateUpAttack() {
         animator.startAnimation("attackUp");
     }
+
     public void animateDownAttack() {
         animator.startAnimation("attackDown");
     }
@@ -310,7 +313,6 @@ public class ElfAnimationController extends Component {
                 break;
         }
     }
-
 
 
 //    public void animateRightStun(){

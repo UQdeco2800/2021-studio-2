@@ -411,9 +411,10 @@ public class WeaponFactory {
     /**
      * Makes a hammer projectile that will move towards a target, and then
      * back to the owner entity, when called.
-     * @param target the location that the blast will try and reach
+     *
+     * @param target      the location that the blast will try and reach
      * @param targetLayer the physics layer mjolnir can damage
-     * @param owner - the hammer weapon component that controls the projectile.
+     * @param owner       - the hammer weapon component that controls the projectile.
      * @return entity
      */
     public static Entity createMjolnir(short targetLayer, Vector2 target, Hammer owner) {

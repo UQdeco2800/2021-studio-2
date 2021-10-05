@@ -27,6 +27,7 @@ public class WeaponHitboxComponent extends ColliderComponent {
 //        }
 
     //}
+
     /**
      * Set physics as a box with a given size. Box is centered around the entity.
      *

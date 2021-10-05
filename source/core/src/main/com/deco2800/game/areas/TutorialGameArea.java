@@ -437,8 +437,6 @@ public class TutorialGameArea extends GameArea {
         PlayerSave.write(pSave);
 
 
-
-
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadTextures(tileTextures);
@@ -474,7 +472,7 @@ public class TutorialGameArea extends GameArea {
         PlayerSave.Save pSave = PlayerSave.load();
 
 
-        if(pSave.hasPlayed == false){
+        if (pSave.hasPlayed == false) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);

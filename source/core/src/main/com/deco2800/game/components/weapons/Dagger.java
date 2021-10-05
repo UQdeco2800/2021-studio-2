@@ -114,7 +114,6 @@ public class Dagger extends MeleeWeapon {
                 weaponHitbox.set(strongAttackSize.cpy(), MeleeWeapon.CENTER);
                 hasStrongAttacked = false;
                 hasAttacked = false; // strong attack overrides light attack.
-
             } else if (hasAttacked) {
                 attackSound.play();
             }

@@ -23,7 +23,7 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
      * Start the range chase task
      */
     @Override
-    public void start () {
+    public void start() {
         super.start();
         movementTask = new MovementTask(calculatePos());
         movementTask.create(owner);
@@ -44,7 +44,7 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
      * Update the ranged chase task
      */
     @Override
-    public void update () {
+    public void update() {
         //System.out.println("melee chase task update");
         movementTask.setTarget(calculatePos());
         movementTask.update();
@@ -75,7 +75,7 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
      * @return 10 if satisfy the requirement or -1 otherwise
      */
     @Override
-    public int getPriority () {
+    public int getPriority() {
         //Deadzone
         if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10) {
             return (super.getPriority());
@@ -89,7 +89,7 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
     /**
      * @return position that is close enough to attack but staying as far away as possible
      */
-    private Vector2 calculatePos () {
+    private Vector2 calculatePos() {
         Vector2 v1 = owner.getEntity().getPosition().cpy();
         Vector2 v2 = target.getPosition().cpy();
         Vector2 v3 = v1.cpy().sub(v2); //heading relative to entity

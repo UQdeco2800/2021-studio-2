@@ -480,14 +480,14 @@ public class ForestGameArea extends GameArea {
         PlayerSave.Save pSave = PlayerSave.load();
 
 
-        if(pSave.lokiEnc < 2 || pSave.lokiEnc >= 4){
+        if (pSave.lokiEnc < 2 || pSave.lokiEnc >= 4) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_INTRODUCTION);
 
             pSave.lokiEnc += 1;
 
-        }else if(pSave.lokiEnc >= 1 && pSave.lokiEnc < 3){
+        } else if (pSave.lokiEnc >= 1 && pSave.lokiEnc < 3) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);

@@ -108,14 +108,14 @@ public class PauseMenuDisplay extends MainMenuDisplay {
 
 
         stack.setSize(400f, 600f);
-        stack.setPosition(stage.getWidth() / 2 , stage.getHeight() / 2 , Align.center);
+        stack.setPosition(stage.getWidth() / 2, stage.getHeight() / 2, Align.center);
         stack.setVisible(false);
         stage.addActor(stack);
     }
 
     private void resizeMenu() {
 
-        stack.setPosition(stage.getWidth() / 2 , stage.getHeight() / 2 , Align.center);
+        stack.setPosition(stage.getWidth() / 2, stage.getHeight() / 2, Align.center);
     }
 
     public void toggleMenu() {

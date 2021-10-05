@@ -53,7 +53,7 @@ class LineEntityTest {
 
         entity.setTarget(v2, v1);
 
-        assertEquals(new Vector2(2,-3), entity.getPosition());
+        assertEquals(new Vector2(2, -3), entity.getPosition());
 
         entity.setPosition(0f, 0f);
         assertEquals(Vector2.Zero, entity.getPosition());

@@ -8,10 +8,14 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
  * of the events is triggered.
  */
 public class ProjectileAnimationController extends Component {
-    /** animation */
+    /**
+     * animation
+     */
     private AnimationRenderComponent animator;
 
-    /** create the animation */
+    /**
+     * create the animation
+     */
     @Override
     public void create() {
         super.create();

@@ -258,7 +258,7 @@ public class GameArea0 extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
         int height = map.getDimensions().get("n_tiles_height");
-        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
+        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
                 true, true);
         player = newPlayer;
     }
@@ -342,7 +342,7 @@ public class GameArea0 extends GameArea {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     @Override
     public int getLevel() {
@@ -364,6 +364,7 @@ public class GameArea0 extends GameArea {
             spawnEntityAt(elf, randomPos, true, true);
         }
     }
+
     private void spawnMeleeElf() {
         HashMap<String, Float>[] objects = map.getMeleeObjects();
         for (HashMap<String, Float> object : objects) {

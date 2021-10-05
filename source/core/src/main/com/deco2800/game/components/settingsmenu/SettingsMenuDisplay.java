@@ -104,7 +104,6 @@ public class SettingsMenuDisplay extends UIComponent {
         displayModeSelect.setSelected(getActiveMode(displayModeSelect.getItems()));
 
 
-
         //create reset game button
         Label resetLabel = new Label("Reset progress:", settingsSkin);
         Button resetBtn = new Button(settingsSkin, "reset");

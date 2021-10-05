@@ -44,16 +44,17 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
         }
         return priority;
     }
+
     public void shieldController() {
-        float health = (float)owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
-        float maxHealth = (float)owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
-        if((health/maxHealth) <= 0.5 && timeSource.getTime() >= endTime) {
+        float health = (float) owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
+        float maxHealth = (float) owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
+        if ((health / maxHealth) <= 0.5 && timeSource.getTime() >= endTime) {
             endTime = timeSource.getTime() + (int) (duration * 1000);
             Random rand = new Random();
-            if(rand.nextDouble() > 0.5) {
+            if (rand.nextDouble() > 0.5) {
                 this.shield = true;
                 currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
-            } else{
+            } else {
                 this.shield = false;
             }
         }
@@ -76,7 +77,7 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
 
     @Override
     public void update() {
-        if(shield) {
+        if (shield) {
             super.movementTask.stop();
             owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(currentHealth);
         }

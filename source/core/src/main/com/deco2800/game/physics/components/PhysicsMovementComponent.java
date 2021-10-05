@@ -23,14 +23,12 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private Vector2 maxSpeed = Vector2Utils.ONE;
 
 
-
     public boolean animateAttack;
     public boolean leftStart;
     public boolean rightStart;
     public boolean upStart;
     public boolean downStart;
     public boolean animateStun;
-
 
 
     @Override
@@ -364,8 +362,8 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         animateAttack = false;
     }
 
-    public void setStun (){
-        animateStun=true;
+    public void setStun() {
+        animateStun = true;
     }
 
 }

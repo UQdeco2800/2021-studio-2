@@ -64,7 +64,7 @@ public class PlayerSave {
      *
      * @return Returns a PlayerSave.Save object with default values
      */
-    public static Save initial(){
+    public static Save initial() {
         Save playerSave = new Save();
         return playerSave;
     }
@@ -92,7 +92,6 @@ public class PlayerSave {
             playersave.lokiWins = Integer.parseInt(saveRead.nextLine());
             playersave.thorWins = Integer.parseInt(saveRead.nextLine());
             playersave.odinWins = Integer.parseInt(saveRead.nextLine());
-
 
 
         } catch (FileNotFoundException e) {

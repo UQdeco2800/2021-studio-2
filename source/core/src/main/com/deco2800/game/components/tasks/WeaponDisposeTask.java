@@ -12,20 +12,29 @@ import com.deco2800.game.services.ServiceLocator;
  * Wait for the weapon break animation to run
  */
 public class WeaponDisposeTask extends ProjectileMovementTask implements PriorityTask {
-    /** Wait duration */
+    /**
+     * Wait duration
+     */
     private final float duration;
-    /** Start time */
+    /**
+     * Start time
+     */
     private double start;
-    /** Start end */
+    /**
+     * Start end
+     */
     private boolean declareEnd;
-    /** Time */
+    /**
+     * Time
+     */
     private final GameTime timeSource;
 
     /**
-     *  Pause the weapon in midair to wait for animation to run
+     * Pause the weapon in midair to wait for animation to run
+     *
      * @param targetLoc target position
-     * @param speed speed
-     * @param duration pause duration
+     * @param speed     speed
+     * @param duration  pause duration
      */
     public WeaponDisposeTask(Vector2 targetLoc, Vector2 speed, float duration) {
         super(targetLoc, speed);
@@ -62,6 +71,7 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
 
     /**
      * override all other task if the weapon is dead (health = 0);
+     *
      * @return 100 if weapon is dead, 0, otherwise
      */
     @Override

@@ -83,6 +83,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     /**
      * set how long to wait before firing again
+     *
      * @param cooldownMS time in MS to pause after shooting
      */
     public void setCooldownMS(long cooldownMS) {

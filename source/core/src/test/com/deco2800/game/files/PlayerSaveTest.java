@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlayerSaveTest {
 
     @Test
-    void testDefaultSave(){
+    void testDefaultSave() {
         PlayerSave.Save testSave = PlayerSave.initial();
 
         assertEquals(testSave.hasPlayed, false);
@@ -22,7 +22,7 @@ public class PlayerSaveTest {
     }
 
     @Test
-    void testSaveChange(){
+    void testSaveChange() {
         PlayerSave.Save testSave = PlayerSave.initial();
         PlayerSave.Save backupSave = PlayerSave.load();
 

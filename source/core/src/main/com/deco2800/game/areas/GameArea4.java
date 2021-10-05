@@ -232,7 +232,7 @@ public class GameArea4 extends GameArea {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
         int height = map.getDimensions().get("n_tiles_height");
-        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(),height - spawn.get("y").intValue()),
+        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
                 true, true);
         player = newPlayer;
     }
@@ -316,7 +316,7 @@ public class GameArea4 extends GameArea {
     }
 
     /**
-     Use for teleport, track the current map player in
+     * Use for teleport, track the current map player in
      */
     @Override
     public int getLevel() {
@@ -343,7 +343,7 @@ public class GameArea4 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createRangedElf(player,"normalArrow", 0.1f);
+            Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangerLeft");
             incNum();
@@ -360,7 +360,7 @@ public class GameArea4 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createRangedElf(player,"fastArrow",0);
+            Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
             elf.setEntityType("assassin");
             elf.getEvents().trigger("assassinLeft");
             incNum();
@@ -392,7 +392,7 @@ public class GameArea4 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf= NPCFactory.createElfGuard(player);
+            Entity elf = NPCFactory.createElfGuard(player);
             incNum();
             spawnEntityAt(
                     elf,
@@ -408,7 +408,7 @@ public class GameArea4 extends GameArea {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
             Entity anchor = ObstacleFactory.createAnchor();
-            Entity elf= NPCFactory.createAnchoredElf(player,anchor,3f);
+            Entity elf = NPCFactory.createAnchoredElf(player, anchor, 3f);
             incNum();
             spawnEntityAt(
                     elf,

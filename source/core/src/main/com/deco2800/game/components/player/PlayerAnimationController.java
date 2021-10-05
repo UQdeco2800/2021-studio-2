@@ -35,6 +35,7 @@ public class PlayerAnimationController extends Component {
 
     /**
      * Determines whether the player is currently holding mjolnir
+     *
      * @return whether character is holding mjolnir.
      */
     boolean hasMjolnir() {

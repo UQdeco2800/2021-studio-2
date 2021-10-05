@@ -55,7 +55,7 @@ class PauseMenuDisplayTest {
     }
 
     @Test
-    public void toggleMenuTest(){
+    public void toggleMenuTest() {
         //ensure that toggling pause toggles pause menu
         entity.getEvents().addListener("toggleMenu", pauseMenu::toggleMenu);
         actions.togglePauseGame();

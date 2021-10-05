@@ -39,7 +39,7 @@ public class EndScreenDisplay extends UIComponent {
     }
 
     private void addBackground() {
-         endBackground =
+        endBackground =
                 new Image(ServiceLocator.getResourceService().getAsset("end/huh.png",
                         Texture.class));
     }

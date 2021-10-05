@@ -23,10 +23,14 @@ public class MeleeWeapon extends Component {
      */
     protected long attackFrameDuration;
 
-    /** number of light attack frames in animation */
+    /**
+     * number of light attack frames in animation
+     */
     protected int numOfAttackFrames;
 
-    /** the index of the frame where the attack lands */
+    /**
+     * the index of the frame where the attack lands
+     */
     protected int attackFrameIndex;
 
     /**
@@ -172,10 +176,11 @@ public class MeleeWeapon extends Component {
     /**
      * Sets all frame information, which determines when an attack lands,
      * and how long the attack lasts.
+     *
      * @param frameDuration how long each attack animation frame takes in milliseconds
-     * @param numOfFrames number of frames in the attack animation
-     * @param attackIndex the index of the frame where the attack lands. Attack lasts for
-     *                    1 frame duration.
+     * @param numOfFrames   number of frames in the attack animation
+     * @param attackIndex   the index of the frame where the attack lands. Attack lasts for
+     *                      1 frame duration.
      */
     public void setAttackFrames(long frameDuration, int numOfFrames, int attackIndex) {
         this.attackFrameDuration = frameDuration;

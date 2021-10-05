@@ -91,13 +91,12 @@ class TeleportationTaskTest {
         teleportationTask.create(() -> taskRunner);
 
         System.out.println(taskRunner.getPosition());
-        taskRunner.setPosition(2f,2f);
+        taskRunner.setPosition(2f, 2f);
 
         // ensure that the priority is 100 (initial priority is 100
         assertEquals(100, teleportationTask.getPriority());
 
     }
-
 
 
     private Entity makePhysicsEntity() {
