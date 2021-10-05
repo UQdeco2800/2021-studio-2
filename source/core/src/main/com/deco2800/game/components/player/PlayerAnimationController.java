@@ -2,7 +2,6 @@ package com.deco2800.game.components.player;
 
 import com.deco2800.game.components.Component;
 import com.deco2800.game.components.weapons.Hammer;
-import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**

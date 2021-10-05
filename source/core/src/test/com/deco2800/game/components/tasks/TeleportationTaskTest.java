@@ -1,7 +1,6 @@
 package com.deco2800.game.components.tasks;
 
 import com.deco2800.game.areas.GameArea;
-import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
@@ -21,8 +20,10 @@ import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 class TeleportationTaskTest {

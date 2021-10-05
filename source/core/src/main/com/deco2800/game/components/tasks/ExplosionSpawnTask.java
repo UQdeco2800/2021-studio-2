@@ -5,8 +5,6 @@ import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controls the scale of a boss's explosion attack
  */

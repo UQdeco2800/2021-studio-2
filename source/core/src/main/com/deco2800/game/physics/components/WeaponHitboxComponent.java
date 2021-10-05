@@ -2,12 +2,9 @@ package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
 import com.deco2800.game.components.weapons.MeleeWeapon;
 import com.deco2800.game.utils.math.Vector2Utils;
-import com.deco2800.game.physics.PhysicsLayer;
 
 /**
  * Represents the hit box used by weapons.

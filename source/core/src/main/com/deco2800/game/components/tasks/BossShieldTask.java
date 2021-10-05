@@ -1,12 +1,11 @@
 package com.deco2800.game.components.tasks;
 
-import com.deco2800.game.ai.tasks.DefaultMultiTask;
-import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+
 import java.util.Random;
 
 public class BossShieldTask extends ChaseTask implements PriorityTask {

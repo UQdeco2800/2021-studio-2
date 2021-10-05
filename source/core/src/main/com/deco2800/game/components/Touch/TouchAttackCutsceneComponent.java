@@ -1,6 +1,5 @@
 package com.deco2800.game.components.Touch;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;

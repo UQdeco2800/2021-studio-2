@@ -20,7 +20,6 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
-import net.dermetfan.gdx.physics.box2d.PositionController;
 
 /**
  * Factory to create obstacle entities.

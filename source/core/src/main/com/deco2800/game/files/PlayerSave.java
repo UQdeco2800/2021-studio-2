@@ -1,12 +1,9 @@
 package com.deco2800.game.files;
 
-import com.deco2800.game.files.FileLoader.Location;
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.io.File;
 import java.util.Scanner;
 
 /**
