@@ -48,5 +48,4 @@ class DeathPauseTaskTest {
         assertEquals(100, deathPauseTask.getPriority());
 
     }
-
 }

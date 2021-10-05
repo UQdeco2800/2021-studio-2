@@ -39,12 +39,20 @@ public class HumanAnimationController extends Component {
         entity.getEvents().addListener("attackDown", this::animateAttackDown);
         entity.getEvents().addListener("attackLeft", this::animateAttackLeft);
         entity.getEvents().addListener("attackRight", this::animateAttackRight);
+
+        animator.startAnimation("default");
     }
 
+    /**
+     * Sets the death of the entity to be true.
+     */
     public void setDeath() {
         death = true;
     }
 
+    /**
+     * Animates the entity in the left direction, if the player is dead, then it will animate the death.
+     */
     public void animateLeft() {
         if (!death) {
             if (!attack && !left) {
@@ -59,7 +67,9 @@ public class HumanAnimationController extends Component {
         }
     }
 
-
+    /**
+     * Animates the entity in the right direction, if the player is dead, then it will animate the death.
+     */
     public void animateRight() {
         if (!death) {
             if (!attack && !right) {
@@ -73,6 +83,9 @@ public class HumanAnimationController extends Component {
         }
     }
 
+    /**
+     * Animates the entity in the up direction, if the player is dead, then it will animate the death.
+     */
     public void animateUp() {
         if (!death) {
             if(!attack && !up) {
@@ -87,6 +100,9 @@ public class HumanAnimationController extends Component {
         }
     }
 
+    /**
+     * Animates the entity in the down direction, if the player is dead, then it will animate the death.
+     */
     public void animateDown() {
         if (!death) {
             if(!attack && !down) {
@@ -101,24 +117,43 @@ public class HumanAnimationController extends Component {
         }
     }
 
+    /**
+     * Animates the entity to attack in the down direction, this will prevent animations from overriding
+     * for the duration of the attack animation.
+     */
     public void animateAttackDown() {
         animator.startAnimation("EnemyAttackDown");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
     }
+
+    /**
+     * Animates the entity to attack in the up direction, this will prevent animations from overriding
+     * for the duration of the attack animation.
+     */
     public void animateAttackUp() {
         animator.startAnimation("EnemyAttackUp");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
     }
+
+    /**
+     * Animates the entity to attack in the left direction, this will prevent animations from overriding
+     * for the duration of the attack animation.
+     */
     public void animateAttackLeft() {
         animator.startAnimation("EnemyAttackLeft");
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
     }
+
+    /**
+     * Animates the entity to attack in the right direction, this will prevent animations from overriding
+     * for the duration of the attack animation.
+     */
     public void animateAttackRight() {
         animator.startAnimation("EnemyAttackRight");
         attack = true;
@@ -126,6 +161,10 @@ public class HumanAnimationController extends Component {
         enableWalk();
     }
 
+    /**
+     * Clears any animations that the entity is currently moving in so it can start a new animation
+     * depending on the direction the entity is walking in.
+     */
     private void enableWalk() {
         up = false;
         down = false;
