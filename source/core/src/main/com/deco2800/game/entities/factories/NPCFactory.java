@@ -141,11 +141,7 @@ public class NPCFactory {
         elf.getComponent(AITaskComponent.class).
                 addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        elf.addComponent(healthBarComponent);
+        elf.addComponent(createHealthBarComponent());
 
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
         elf.setScale(0.6f, 1f);
@@ -197,11 +193,7 @@ public class NPCFactory {
 
         elfGuard.setEntityType("AlertCaller");
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        elfGuard.addComponent(healthBarComponent);
+        elfGuard.addComponent(createHealthBarComponent());
 
         elfGuard.getComponent(AnimationRenderComponent.class).scaleEntity();
         elfGuard.setScale(0.6f, 1f);
@@ -265,11 +257,7 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        anchoredElf.addComponent(healthBarComponent);
+        anchoredElf.addComponent(createHealthBarComponent());
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
         anchoredElf.setScale(0.6f, 1f);
@@ -333,15 +321,7 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new ElfAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                HealthBar, HealthBarFrame, HealthBarDecrease);
-        anchoredElf.addComponent(healthBarComponent);
+        anchoredElf.addComponent(createHealthBarComponent());
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
 
@@ -431,16 +411,7 @@ public class NPCFactory {
                 .addComponent(aiComponent);
 
         elf.setAttackRange(5);
-        //elf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                HealthBar, HealthBarFrame, HealthBarDecrease);
-        elf.addComponent(healthBarComponent);
+        elf.addComponent(createHealthBarComponent());
 
         elf.setScale(0.8f, 1f);
         PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
@@ -513,15 +484,7 @@ public class NPCFactory {
         boss.scaleHeight(2);
         boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        boss.addComponent(healthBarComponent);
+        boss.addComponent(createHealthBarComponent());
         boss.setEntityType("elfBoss");
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
@@ -568,15 +531,7 @@ public class NPCFactory {
 //
 //
 //-------------------ITS MASSIVE HEALTH BAR ON TOP OF ITS HEAD-------------------------------------
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        odin.addComponent(healthBarComponent);
+        odin.addComponent(createHealthBarComponent());
 
 // ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
         odin.setEntityType("odin"); //MAYBE NO USE? use for AI tasks
@@ -623,11 +578,7 @@ public class NPCFactory {
         viking.getComponent(AITaskComponent.class).
                 addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        viking.addComponent(healthBarComponent);
+        viking.addComponent(createHealthBarComponent());
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
@@ -674,11 +625,7 @@ public class NPCFactory {
         viking.getComponent(AITaskComponent.class).
                 addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        viking.addComponent(healthBarComponent);
+        viking.addComponent(createHealthBarComponent());
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
@@ -725,11 +672,7 @@ public class NPCFactory {
         viking.getComponent(AITaskComponent.class).
                 addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        viking.addComponent(healthBarComponent);
+        viking.addComponent(createHealthBarComponent());
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
@@ -803,15 +746,7 @@ public class NPCFactory {
                 .addComponent(aiComponent);
 
         archer.setAttackRange(5);
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                HealthBar, HealthBarFrame, HealthBarDecrease);
-        archer.addComponent(healthBarComponent);
+        archer.addComponent(createHealthBarComponent());
         archer.setEntityType("archer");
 
         PhysicsUtils.setScaledCollider(archer, 0.6f, 0.2f);
@@ -856,15 +791,7 @@ public class NPCFactory {
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.getComponent(BossOverlayComponent.class).nameBoss("Loki    ");
 
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        boss.addComponent(healthBarComponent);
+        boss.addComponent(createHealthBarComponent());
         boss.setEntityType("human");
         boss.setScale(1f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
@@ -907,19 +834,26 @@ public class NPCFactory {
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
 
+        boss.addComponent(createHealthBarComponent());
+        boss.setEntityType("human");
+        boss.setScale(1f * 2, 1f * 2);
+        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+        return boss;
+    }
+
+    /**
+     * Creates a health bar component and returns it for the enemy NPC
+     *
+     * @return HealthBarComponent which will be displayed above the entities
+     */
+    private static HealthBarComponent createHealthBarComponent() {
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));
         Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar_decrease.png", Texture.class));
         Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        boss.addComponent(healthBarComponent);
-        boss.setEntityType("human");
-        boss.setScale(1f * 2, 1f * 2);
-        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
-        return boss;
+        return new HealthBarComponent(healthBar, healthBarFrame, healthBarDecrease);
     }
 
     /**

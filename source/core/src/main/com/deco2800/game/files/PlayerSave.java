@@ -14,23 +14,13 @@ import java.util.Scanner;
  * Ways to save and load it
  */
 public class PlayerSave {
-    private static final String ROOT_DIR = "DECO2800Game";
     private static final String SAVE_FILE = "playersave.save";
     private static final Logger logger = LoggerFactory.getLogger(PlayerSave.class);
 
-/*
-    public static Save get() {
-        String path = ROOT_DIR + File.separator + SAVE_FILE;
-        Save playerSave = FileLoader.readClass(Save.class, path, Location.EXTERNAL);
-        // Use default values if file doesn't exist
-        return playerSave != null ? playerSave : new Save();
+    private PlayerSave() {
+        logger.warn("Instantiating of a class that is not suppose be an instance.");
+        throw new IllegalStateException("Instantiating static util class");
     }
-
-    public static void set(Save pSave) {
-        String path = ROOT_DIR + File.separator + SAVE_FILE;
-        FileLoader.writeClass(pSave, path, Location.EXTERNAL);
-    }
-*/
 
     /**
      * Function which takes in a PLayerSave.Save object
@@ -66,8 +56,7 @@ public class PlayerSave {
      * @return Returns a PlayerSave.Save object with default values
      */
     public static Save initial() {
-        Save playerSave = new Save();
-        return playerSave;
+        return new Save();
     }
 
     /**
@@ -112,15 +101,14 @@ public class PlayerSave {
         // whether or not the player has played the tutorial/game before
         public boolean hasPlayed = false;
 
-
         // number of times the player has encountered a specific boss
-        public int lokiEnc = 0;
-        public int thorEnc = 0;
-        public int odinEnc = 0;
+        public static int lokiEnc = 0;
+        public static int thorEnc = 0;
+        public static int odinEnc = 0;
 
         // number of times the player has defeated a specific boss
-        public int lokiWins = 0;
-        public int thorWins = 0;
-        public int odinWins = 0;
+        public static int lokiWins = 0;
+        public static int thorWins = 0;
+        public static int odinWins = 0;
     }
 }

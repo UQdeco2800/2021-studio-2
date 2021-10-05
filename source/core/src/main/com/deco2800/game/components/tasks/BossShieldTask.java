@@ -29,8 +29,8 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
     }
 
     public void shieldController() {
-        float health = (float) owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
-        float maxHealth = (float) owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
+        float health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
+        float maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
         if ((health / maxHealth) <= 0.5 && timeSource.getTime() >= endTime) {
             endTime = timeSource.getTime() + (int) (duration * 1000);
             if (((int)System.currentTimeMillis()) % 2 == 0) { //There were issues with sonarcloud and the security of Random()

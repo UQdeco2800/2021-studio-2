@@ -15,7 +15,7 @@ public class TouchWin extends TouchComponent {
         super(targetLayer);
     }
 
-
+    @Override
     void onCollisionStart(Fixture me, Fixture other) {
         if (hitboxComponent.getFixture() != me) {
             //do nothing
