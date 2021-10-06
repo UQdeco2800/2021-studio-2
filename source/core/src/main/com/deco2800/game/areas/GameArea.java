@@ -3,12 +3,14 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
+import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -25,7 +27,7 @@ public abstract class GameArea implements Disposable {
     protected Entity player;
     protected int numEnemy = 0;
     protected int numBoss = 0;
-
+    protected Map map;
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -52,6 +54,10 @@ public abstract class GameArea implements Disposable {
      */
     public int getLevel() {
         return 0;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     /**
@@ -84,22 +90,43 @@ public abstract class GameArea implements Disposable {
             if (getLevel() == 9) {
                 //tutorial level
                 Entity teleport = ObstacleFactory.createTeleport();
-                GridPoint2 fixedPos = new GridPoint2(15, 10);
+                HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
+                GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(), (map.getDimensions().get("n_tiles_heihgt") - teleportPos.get("y").intValue()));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
             } else if (getLevel() == 0) {
                 //gama area 0
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 1) {
                 //gama area 1
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 2) {
                 //gama area 2
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 3) {
                 //gama area 3
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 4) {
                 //gama area 4
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
 
             }
 

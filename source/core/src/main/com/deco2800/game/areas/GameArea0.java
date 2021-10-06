@@ -130,6 +130,7 @@ public class GameArea0 extends GameArea {
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/lvl_1.json");
         tileTextures = map.TileRefsArray();
+        super.setMap(map);
 
         super.create();
         loadAssets();
@@ -138,7 +139,7 @@ public class GameArea0 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnMeleeElf();
+        //spawnMeleeElf();
 //        spawnElfGuard();
 //        spawnRangedElf();
 //        spawnAssassinElf();
@@ -157,7 +158,8 @@ public class GameArea0 extends GameArea {
         spawnCutsceneTrigger();
 
         playMusic();
-        spawnTeleport();
+        //spawnTeleport();
+        decBossNum();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
