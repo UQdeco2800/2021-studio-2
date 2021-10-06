@@ -56,7 +56,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -78,7 +78,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -397,7 +397,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -463,7 +463,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -496,7 +496,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
@@ -511,12 +511,12 @@
          "columns":24,
          "firstgid":1,
          "image":"..\/..\/Tileset\/tileset.png",
-         "imageheight":768,
+         "imageheight":800,
          "imagewidth":768,
          "margin":0,
          "name":"Level_One_Tiles",
          "spacing":0,
-         "tilecount":576,
+         "tilecount":600,
          "tileheight":32,
          "tilewidth":32,
          "transparentcolor":"#00ff0a"

@@ -468,16 +468,16 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="11" name="teleportObjects">
+ <objectgroup id="11" name="teleportObjects" visible="0">
   <object id="551" x="3264" y="1952" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="13" name="initTeleportObjects">
+ <objectgroup id="13" name="initTeleportObjects" visible="0">
   <object id="561" x="1280" y="2304" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="14" name="meleeObjects">
   <object id="563" x="2688" y="2400"/>
  </objectgroup>
- <objectgroup id="2" name="wallObjects">
+ <objectgroup id="2" name="wallObjects" visible="0">
   <object id="207" x="1248" y="2176" width="544" height="64"/>
   <object id="208" x="1216" y="2240" width="32" height="320"/>
   <object id="209" x="1248" y="2528" width="576" height="32"/>
@@ -505,14 +505,14 @@
   <object id="330" x="2688" y="2240" width="32" height="32"/>
   <object id="331" x="2720" y="2240" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="8" name="spikeObjects">
+ <objectgroup id="8" name="spikeObjects" visible="0">
   <object id="553" x="2080" y="2304" width="32" height="32"/>
   <object id="554" x="2016" y="2432" width="32" height="32"/>
   <object id="555" x="2048" y="2464" width="32" height="32"/>
   <object id="556" x="2080" y="2496" width="32" height="32"/>
   <object id="557" x="2016" y="2496" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="7" name="lavaObjects">
+ <objectgroup id="7" name="lavaObjects" visible="0">
   <object id="558" x="2240" y="2464" width="64" height="64"/>
   <object id="559" x="2208" y="2496" width="32" height="32"/>
  </objectgroup>
