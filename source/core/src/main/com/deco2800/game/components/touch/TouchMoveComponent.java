@@ -6,8 +6,12 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TouchMoveComponent extends TouchComponent {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouchMoveComponent.class);
 
     /**
      * The direction the character will move in
@@ -29,8 +33,6 @@ public class TouchMoveComponent extends TouchComponent {
      *
      * @param targetLayer The physics layer of the target's collider.
      * @param direction   direction the player will attack in
-     * @param x           the x position for the player to move
-     * @param y           the y position for the player to move
      * @param repeatable  if the trigger can be repeated
      */
     public TouchMoveComponent(short targetLayer, Vector2 direction, boolean repeatable) {
@@ -81,6 +83,9 @@ public class TouchMoveComponent extends TouchComponent {
      */
     private void movePlayer(PlayerActions actions, KeyboardPlayerInputComponent input) {
         if (direction.x != 0 || direction.y != 0) {
+
+            logger.debug("The player will be moved in the direction {} due to collision", direction);
+
             input.lockPlayer();
             actions.walk(direction);
         }

@@ -7,6 +7,8 @@ import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -17,6 +19,8 @@ import com.deco2800.game.ui.textbox.TextBox;
  * if target entity has a PhysicsComponent.
  */
 public class TouchCutsceneComponent extends TouchComponent {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouchCutsceneComponent.class);
 
     private final RandomDialogueSet dialogueSet;
     private final DialogueSet type;
@@ -50,6 +54,8 @@ public class TouchCutsceneComponent extends TouchComponent {
         if (this.checkEntities(me, other)) {
             return;
         }
+
+        logger.debug("A cutscene will be played due to a collision with an entity with a TouchCutsceneComponent");
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
