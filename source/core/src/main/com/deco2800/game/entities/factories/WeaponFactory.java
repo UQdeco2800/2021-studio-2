@@ -24,6 +24,7 @@ import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.*;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -204,6 +205,27 @@ public class WeaponFactory {
         shootingSound("fireBall");
         hitbox.setScale(0.8f);
         return fireBall;
+    }
+
+    /**
+     * create tracking arrow entity that can change trajectory
+     *
+     * @return entity tracking arrow
+     */
+    public static Entity createFirePillar() {
+        Sprite pillarSprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/blast.png", Texture.class));
+
+        HitboxComponent hitbox = new HitboxComponent();
+
+        Entity pillar = new Entity()
+                .addComponent(new TextureRenderComponent(pillarSprite))
+                .addComponent(new PhysicsComponent())
+                .addComponent(hitbox.setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER));
+
+        return pillar;
     }
 
     /**

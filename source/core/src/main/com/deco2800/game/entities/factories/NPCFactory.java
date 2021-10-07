@@ -844,10 +844,10 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(
-                                target, 10, 7f, 10f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 20f, 20f))
                         .addTask(new PauseTask())
-                        .addTask(new SpawnDecoysTask(target))
+                        .addTask(new FirePillarTask(target, 1000, 50))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
@@ -855,7 +855,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
 
-        animator.setAnimationScale(1f);
+        animator.setAnimationScale(2f);
 
         setHumanAnimations(animator);
 
@@ -871,8 +871,8 @@ public class NPCFactory {
 
         boss.addComponent(createHealthBarComponent());
         boss.setEntityType("human");
-        boss.setScale(1f * 2, 1f * 2);
-        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+        boss.getComponent(ColliderComponent.class).setDensity(1.5f);
+        PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
         return boss;
     }
 
@@ -899,7 +899,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
 
-        animator.setAnimationScale(1f);
+        animator.setAnimationScale(2f);
 
         setHumanAnimations(animator);
 
@@ -914,8 +914,8 @@ public class NPCFactory {
 
         boss.addComponent(createHealthBarComponent());
         boss.setEntityType("human");
-        boss.setScale(1f * 2, 1f * 2);
-        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+        boss.getComponent(ColliderComponent.class).setDensity(1.5f);
+        PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
         return boss;
     }
 
