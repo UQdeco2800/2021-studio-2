@@ -24,7 +24,6 @@ import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.PhysicsUtils;
 import com.deco2800.game.physics.components.*;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
@@ -213,19 +212,19 @@ public class WeaponFactory {
      * @return The pillar entity that will damage on contact
      */
     public static Entity createFirePillarBase() {
-        Sprite pillarSprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
-
         AITaskComponent aiComponent =
                 new AITaskComponent()
-                        .addTask(new FirePillarAttackTask());
+                        .addTask(new FirePillarBaseTask());
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
                                 "images/firePillar.atlas", TextureAtlas.class));
-        animator.addAnimation("firePillar", 0.05f, Animation.PlayMode.NORMAL);
-        animator.startAnimation("firePillar");
+
+        animator.setAnimationScale(2f);
+
+        animator.addAnimation("firePillarSpawning", 0.05f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("firePillarSpawning");
 
         Entity pillar = new Entity()
                 .addComponent(animator)
@@ -233,6 +232,8 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(aiComponent);
+
+        pillar.setScale(0.8f, 0.8f);
 
         return pillar;
     }
@@ -243,19 +244,18 @@ public class WeaponFactory {
      * @return The pillar entity that will damage on contact
      */
     public static Entity createFirePillar() {
-        Sprite pillarSprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
-
         AITaskComponent aiComponent =
                 new AITaskComponent()
-                        .addTask(new FirePillarAttackTask());
+                        .addTask(new FirePillarDamageTask());
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
                                 "images/firePillar.atlas", TextureAtlas.class));
-        animator.addAnimation("firePillar", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("firePillar", 0.10f, Animation.PlayMode.LOOP);
         animator.startAnimation("firePillar");
+
+        animator.setAnimationScale(2f);
 
         Entity pillar = new Entity()
                 .addComponent(animator)
@@ -263,6 +263,7 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER))
+                .addComponent(new PhysicsMovementComponent())
                 .addComponent(aiComponent);
 
         pillar.setScale(0.8f, 0.8f);

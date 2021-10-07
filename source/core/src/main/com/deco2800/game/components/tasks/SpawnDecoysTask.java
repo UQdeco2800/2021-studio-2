@@ -53,7 +53,6 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
         if (canSpawn()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             owner.getEntity().setEntityType("transformed");
-            System.out.println("transformed");
 
             spawn();
             spawn++;

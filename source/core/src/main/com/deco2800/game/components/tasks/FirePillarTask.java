@@ -116,7 +116,7 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         logger.debug("Boss Spawning Fire Pillar");
 
         Entity pillar =
-            WeaponFactory.createFirePillar();
+            WeaponFactory.createFirePillarBase();
         Vector2 lastPosition = lastPositions.remove(0);
         Vector2 position = new Vector2(lastPosition.x * 2 + target.getPosition().x,
                 lastPosition.y * 2 + target.getPosition().y);

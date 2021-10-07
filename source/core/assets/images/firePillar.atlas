@@ -10,22 +10,22 @@ firePillar
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
-firePillar
+  index: 1
+firePillarSpawning
   rotate: false
   xy: 36, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
-firePillar
+firePillarSpawning
   rotate: false
   xy: 70, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
-firePillar
+firePillarSpawning
   rotate: false
   xy: 104, 2
   size: 32, 32
@@ -38,8 +38,8 @@ firePillar
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
-firePillar
+  index: 2
+firePillarSpawning
   rotate: false
   xy: 172, 2
   size: 32, 32
