@@ -137,11 +137,11 @@ public class GameArea0 extends GameArea {
         spawnPlayer();
 
         spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnBoss();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
+        spawnBoss();
 
         spawnObstacles();
         spawnLights();
