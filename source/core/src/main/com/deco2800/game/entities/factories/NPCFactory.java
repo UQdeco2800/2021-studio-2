@@ -844,12 +844,14 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new RangedChaseTask(
+                        .addTask(new ChaseTask(
                                 target, 10, 20f, 20f))
                         .addTask(new PauseTask())
-                        .addTask(new FirePillarTask(target, 1000, 50))
+                        .addTask(new FirePillarTask(target, 600, 50))
                         .addTask(new DeathPauseTask(
-                                target, 0, 100, 100, 1.5f));
+                                target, 0, 100, 100, 1.5f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 7f, 10f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -863,6 +865,7 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
+
                 .addComponent(aiComponent)
                 .addComponent(new BossOverlayComponent());
         boss.setAttackRange(5);
@@ -889,7 +892,7 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(
+                        .addTask(new RangedChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new PauseTask())
                         .addTask(new DeathPauseTask(

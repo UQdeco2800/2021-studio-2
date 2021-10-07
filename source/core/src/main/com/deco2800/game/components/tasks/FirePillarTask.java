@@ -13,6 +13,8 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +45,15 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
     /** Duration of the shoot animation time in Milliseconds. */
     private long shootAnimationTimeMS;
 
+    /** List of previous positions of the player. */
+    private LinkedList<Vector2> lastPositions;
+
+    /** List of the previous Fire Pillar entities for disposal. */
+    private LinkedList<Entity> firePillars;
+
+    /** Count used to delay the ticks between pillars spawned. */
+    private int count;
+
     private static final Logger logger = LoggerFactory.getLogger(FirePillarTask .class);
 
     /**
@@ -58,9 +69,12 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         this.gameArea = ServiceLocator.getGameAreaService();
         physics = ServiceLocator.getPhysicsService().getPhysics();
         debugRenderer = ServiceLocator.getRenderService().getDebug();
+        lastPositions = new LinkedList<>();
+        firePillars = new LinkedList<>();
 
         lastShootAnimation = 0;
         lastFiredTime = 0;
+        count = 0;
     }
 
     @Override
@@ -91,34 +105,23 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
      * @return
      */
     private void spawnPillar() {
+        lastPositions.add(target.getPosition().cpy());
+        lastFiredTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+        if (lastPositions.size() < 2) {
+            return;
+        }
+
         shootAnimation();
 
         logger.debug("Boss Spawning Fire Pillar");
 
         Entity pillar =
             WeaponFactory.createFirePillar();
+        Vector2 lastPosition = lastPositions.remove(0);
+        Vector2 position = new Vector2(lastPosition.x * 2 + target.getPosition().x,
+                lastPosition.y * 2 + target.getPosition().y);
 
-        Vector2 position = target.getPosition().cpy();
-
-        lastFiredTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                gameArea.spawnEntityAt(pillar, position, true, true);
-                timer.cancel();
-            }
-        }, 1000);
-
-        Timer disposeTimer = new Timer();
-        disposeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                pillar.dispose();
-                timer.cancel();
-            }
-        }, 1500);
+        gameArea.spawnEntityAt(pillar, new Vector2(position.x / 3, position.y / 3), true, true);
     }
 
     /**

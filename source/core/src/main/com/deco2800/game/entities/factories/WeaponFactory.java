@@ -208,22 +208,64 @@ public class WeaponFactory {
     }
 
     /**
-     * create tracking arrow entity that can change trajectory
+     * Creates a fire pillar base that will not do damage to the Player but will indicate it is spawning
      *
-     * @return entity tracking arrow
+     * @return The pillar entity that will damage on contact
+     */
+    public static Entity createFirePillarBase() {
+        Sprite pillarSprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/blast.png", Texture.class));
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new FirePillarAttackTask());
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/firePillar.atlas", TextureAtlas.class));
+        animator.addAnimation("firePillar", 0.05f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("firePillar");
+
+        Entity pillar = new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(aiComponent);
+
+        return pillar;
+    }
+
+    /**
+     * Creates a fire pillar that will do damage to the Player
+     *
+     * @return The pillar entity that will damage on contact
      */
     public static Entity createFirePillar() {
         Sprite pillarSprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/blast.png", Texture.class));
 
-        HitboxComponent hitbox = new HitboxComponent();
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new FirePillarAttackTask());
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/firePillar.atlas", TextureAtlas.class));
+        animator.addAnimation("firePillar", 0.05f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("firePillar");
 
         Entity pillar = new Entity()
-                .addComponent(new TextureRenderComponent(pillarSprite))
+                .addComponent(animator)
                 .addComponent(new PhysicsComponent())
-                .addComponent(hitbox.setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER));
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER))
+                .addComponent(aiComponent);
+
+        pillar.setScale(0.8f, 0.8f);
 
         return pillar;
     }
