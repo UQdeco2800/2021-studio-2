@@ -93,93 +93,93 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     public void DirectionAnimation() {
         //System.out.println("animateAttack"+animateAttack);
 
-        if (!this.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
-            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
-                if (this.getDirection().x < 0) { //left
-                    if (leftStart == false) {//only initiate an animation once
-                        if (animateStun == false) {
-                            if (animateAttack == true) { //attack animation
-                                //System.out.println("attackLeft");
-                                this.getEntity().getEvents().trigger("attackLeft");
-                            } else { //moveAnimation
-                                this.getEntity().getEvents().trigger("LeftStart");
-                            }
-                        } else { //stun animation
-                            this.getEntity().getEvents().trigger("stunLeft");
-                        }
-                        animateStun = false; //?? check if this is correct pos
-                        leftStart = true;
-                    }
-                    //only one direction can be initialised at once - reset
-                    rightStart = false;
-                    downStart = false;
-                    upStart = false;
-                } else if (this.getDirection().x > 0) {//right
-                    if (rightStart == false) {//only initiate an animation once
-                        if (animateStun == false) {
-                            if (animateAttack == true) { //attack animation
-                                //System.out.println("attackRight");
-                                this.getEntity().getEvents().trigger("attackRight");
-                            } else { //moveAnimation
-                                //                            System.out.println("move to the right");
-                                this.getEntity().getEvents().trigger("RightStart");
-                            }
-                        } else { //stun animation
-                            //System.out.println("stun right");
-                            this.getEntity().getEvents().trigger("stunRight");
-                        }
-
-                        rightStart = true;
-                        animateStun = false; //??
-                    }
-                    //only one direction can be initialised at once - reset
-                    leftStart = false;
-                    downStart = false;
-                    upStart = false;
-                }
-            } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) {//y axis movement
-                if (this.getDirection().y < 0) { //down
-                    if (downStart == false) {//only initiate an animation once
-                        if (animateStun == false) {
-                            if (animateAttack == true) { //attack animation
-                                //System.out.println("attackDown");
-                                this.getEntity().getEvents().trigger("attackDown");
-                            } else { //moveAnimation
-                                this.getEntity().getEvents().trigger("DownStart");
-                            }
-                        } else { //stun animation
-                            //                        System.out.println("stun downt");
-                            this.getEntity().getEvents().trigger("stunDown");
-                        }
-                        downStart = true;
-                        animateStun = false; //??
-                    }
-
-                    leftStart = false;
-                    rightStart = false;
-                    upStart = false;
-                } else if (this.getDirection().y > 0) {//up
-                    if (upStart == false) {//only initiate an animation once
-                        if (animateStun == false) {
-                            if (animateAttack == true) { //attack animation
-                                //System.out.println("attackUp");
-                                this.getEntity().getEvents().trigger("attackUp");
-                            } else { //moveAnimation
-                                this.getEntity().getEvents().trigger("UpStart");
-                            }
-                        } else { //stun animation
-                            //System.out.println("stun up");
-                            this.getEntity().getEvents().trigger("stunUp");
-                        }
-                        upStart = true;
-                        animateStun = false; //??
-                    }
-                    leftStart = false;
-                    rightStart = false;
-                    downStart = false;
-                }
-            }
-        } else {
+//        if (!this.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+//            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
+//                if (this.getDirection().x < 0) { //left
+//                    if (leftStart == false) {//only initiate an animation once
+//                        if (animateStun == false) {
+//                            if (animateAttack == true) { //attack animation
+//                                //System.out.println("attackLeft");
+//                                this.getEntity().getEvents().trigger("attackLeft");
+//                            } else { //moveAnimation
+//                                this.getEntity().getEvents().trigger("LeftStart");
+//                            }
+//                        } else { //stun animation
+//                            this.getEntity().getEvents().trigger("stunLeft");
+//                        }
+//                        animateStun = false; //?? check if this is correct pos
+//                        leftStart = true;
+//                    }
+//                    //only one direction can be initialised at once - reset
+//                    rightStart = false;
+//                    downStart = false;
+//                    upStart = false;
+//                } else if (this.getDirection().x > 0) {//right
+//                    if (rightStart == false) {//only initiate an animation once
+//                        if (animateStun == false) {
+//                            if (animateAttack == true) { //attack animation
+//                                //System.out.println("attackRight");
+//                                this.getEntity().getEvents().trigger("attackRight");
+//                            } else { //moveAnimation
+//                                //                            System.out.println("move to the right");
+//                                this.getEntity().getEvents().trigger("RightStart");
+//                            }
+//                        } else { //stun animation
+//                            //System.out.println("stun right");
+//                            this.getEntity().getEvents().trigger("stunRight");
+//                        }
+//
+//                        rightStart = true;
+//                        animateStun = false; //??
+//                    }
+//                    //only one direction can be initialised at once - reset
+//                    leftStart = false;
+//                    downStart = false;
+//                    upStart = false;
+//                }
+//            } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) {//y axis movement
+//                if (this.getDirection().y < 0) { //down
+//                    if (downStart == false) {//only initiate an animation once
+//                        if (animateStun == false) {
+//                            if (animateAttack == true) { //attack animation
+//                                //System.out.println("attackDown");
+//                                this.getEntity().getEvents().trigger("attackDown");
+//                            } else { //moveAnimation
+//                                this.getEntity().getEvents().trigger("DownStart");
+//                            }
+//                        } else { //stun animation
+//                            //                        System.out.println("stun downt");
+//                            this.getEntity().getEvents().trigger("stunDown");
+//                        }
+//                        downStart = true;
+//                        animateStun = false; //??
+//                    }
+//
+//                    leftStart = false;
+//                    rightStart = false;
+//                    upStart = false;
+//                } else if (this.getDirection().y > 0) {//up
+//                    if (upStart == false) {//only initiate an animation once
+//                        if (animateStun == false) {
+//                            if (animateAttack == true) { //attack animation
+//                                //System.out.println("attackUp");
+//                                this.getEntity().getEvents().trigger("attackUp");
+//                            } else { //moveAnimation
+//                                this.getEntity().getEvents().trigger("UpStart");
+//                            }
+//                        } else { //stun animation
+//                            //System.out.println("stun up");
+//                            this.getEntity().getEvents().trigger("stunUp");
+//                        }
+//                        upStart = true;
+//                        animateStun = false; //??
+//                    }
+//                    leftStart = false;
+//                    rightStart = false;
+//                    downStart = false;
+//                }
+//            }
+//        } else {
             if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
                 if (this.getDirection().x < 0) { //left
                     this.getEntity().getEvents().trigger("LeftStart");
@@ -193,7 +193,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
                     this.getEntity().getEvents().trigger("UpStart");
                 }
             }
-        }
+//        }
     }
 
 //

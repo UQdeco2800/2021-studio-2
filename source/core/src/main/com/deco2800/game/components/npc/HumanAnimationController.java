@@ -54,7 +54,13 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the left direction, if the player is dead, then it will animate the death.
      */
     public void animateLeft() {
-        if (!death) {
+        if (entity.getEntityType().equals("transformed")) {
+            if (!attack && !left) {
+                animator.startAnimation("transformedMoveLeft");
+                enableWalk();
+                left = true;
+            }
+        } else if (!death) {
             if (!attack && !left) {
                 animator.startAnimation("moveLeft");
                 enableWalk();
@@ -71,7 +77,13 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the right direction, if the player is dead, then it will animate the death.
      */
     public void animateRight() {
-        if (!death) {
+        if (entity.getEntityType().equals("transformed")) {
+            if (!attack && !right) {
+                animator.startAnimation("transformedMoveRight");
+                enableWalk();
+                right = true;
+            }
+        } else if (!death) {
             if (!attack && !right) {
                 animator.startAnimation("moveRight");
                 enableWalk();
@@ -88,7 +100,13 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the up direction, if the player is dead, then it will animate the death.
      */
     public void animateUp() {
-        if (!death) {
+        if (entity.getEntityType().equals("transformed")) {
+            if (!attack && !up) {
+                animator.startAnimation("transformedMoveUp");
+                enableWalk();
+                up = true;
+            }
+        } else if (!death) {
             if (!attack && !up) {
                 animator.startAnimation("moveUp");
                 enableWalk();
@@ -105,7 +123,15 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the down direction, if the player is dead, then it will animate the death.
      */
     public void animateDown() {
-        if (!death) {
+        if (entity.getEntityType().equals("transformed")) {
+            System.out.println("here");
+            if (!attack && !down) {
+                animator.startAnimation("transformedMoveDown");
+                System.out.println("here2");
+                enableWalk();
+                down = true;
+            }
+        } else if (!death) {
             if (!attack && !down) {
                 animator.startAnimation("moveDown");
                 enableWalk();
@@ -123,6 +149,9 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackDown() {
+        if (entity.getEntityType().equals("transformed")) {
+            animateDown();
+        }
         animator.startAnimation("EnemyAttackDown");
         attack = true;
         this.start = System.currentTimeMillis();
@@ -134,6 +163,9 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackUp() {
+        if (entity.getEntityType().equals("transformed")) {
+            animateUp();
+        }
         animator.startAnimation("EnemyAttackUp");
         attack = true;
         this.start = System.currentTimeMillis();
@@ -145,6 +177,9 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackLeft() {
+        if (entity.getEntityType().equals("transformed")) {
+            animateLeft();
+        }
         animator.startAnimation("EnemyAttackLeft");
         attack = true;
         this.start = System.currentTimeMillis();
@@ -156,6 +191,9 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackRight() {
+        if (entity.getEntityType().equals("transformed")) {
+            animateRight();
+        }
         animator.startAnimation("EnemyAttackRight");
         attack = true;
         this.start = System.currentTimeMillis();

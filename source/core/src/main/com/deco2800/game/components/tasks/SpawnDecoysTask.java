@@ -31,6 +31,11 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
     private int spawn = 0;
 
     /**
+     * Spawned enemies.
+     */
+    private boolean spawned = false;
+
+    /**
      * spawn the minion to help the boss attack the target
      *
      * @param target The entity to chase.
@@ -47,6 +52,9 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
     public void update() {
         if (canSpawn()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            owner.getEntity().setEntityType("transformed");
+            System.out.println("transformed");
+
             spawn();
             spawn++;
         }
@@ -56,8 +64,9 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
      * Spawns in enemies according to the classes variables
      */
     public void spawn() {
+        spawned = true;
         for (int i = 0; i < 4; i++) {
-            Entity elf = NPCFactory.createLokiDecoy(target);
+            Entity elf = NPCFactory.createMeleeHellViking(target);
             ServiceLocator.getGameAreaService().incNum();
             Vector2 spawnPosition = owner.getEntity().getCenterPosition();
             switch (i % 4) {
@@ -112,14 +121,17 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
         float maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
         float health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float ratio = health / maxHealth;
+        if (ratio < 0.5) {
+            owner.getEntity().setEntityType("loki");
+        }
+        if (spawned) {
+            return false;
+        }
 
         if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && ratio < 0.5 && mapBound()) {
             return true;
         }
 
-        if (ratio < 0.5 && spawn < 1) {
-            return true;
-        }
-        return ratio < 0.25 && spawn < 2;
+        return ratio < 0.75 && spawn < 1;
     }
 }
