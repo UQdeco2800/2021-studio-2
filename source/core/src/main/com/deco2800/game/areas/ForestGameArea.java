@@ -160,22 +160,22 @@ public class ForestGameArea extends GameArea {
         spawnTerrain();
         //spawnTrees();
         spawnPlayer();
-        spawnCrate();
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnVikingMelee();
-        spawnBoss();
-        spawnVikingMelee();
-        spawnHellVikingMelee();
-        spawnAsgardWarriorMelee();
-        spawnOutdoorArcher();
+//        spawnCrate();
+//        spawnMeleeElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnVikingMelee();
+//        spawnBoss();
+//        spawnVikingMelee();
+//        spawnHellVikingMelee();
+//        spawnAsgardWarriorMelee();
+//        spawnOutdoorArcher();
         spawnLoki();
         playMusic();
         setDialogue();
-        spawnOdin();
+//        spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
