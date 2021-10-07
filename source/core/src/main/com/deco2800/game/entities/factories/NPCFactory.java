@@ -850,7 +850,8 @@ public class NPCFactory {
                                 target, 0, 100, 100, 1.5f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new SpawnDecoysTask(target));
+                        .addTask(new SpawnDecoysTask(target))
+                        .addTask(new SpawnHellWarriorTask(target, 10000));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
