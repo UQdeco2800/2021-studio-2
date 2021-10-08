@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="150" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="623">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="150" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="26" nextobjectid="655">
  <editorsettings>
   <export target="lvl_2.json" format="json"/>
  </editorsettings>
@@ -494,22 +494,34 @@
  <objectgroup id="11" name="teleportObjects" visible="0">
   <object id="551" x="3776" y="3200" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="16" name="meleeObjects" visible="0">
-  <object id="588" x="864" y="2816"/>
-  <object id="589" x="2272" y="2720"/>
-  <object id="590" x="1600" y="3168"/>
-  <object id="591" x="2560" y="2016"/>
+ <objectgroup id="16" name="meleeObjects"/>
+ <objectgroup id="24" name="outdoorMeleeObjects">
+  <object id="636" x="2816" y="1952"/>
+  <object id="638" x="3168" y="2112"/>
  </objectgroup>
- <objectgroup id="17" name="rangeObjects" visible="0">
-  <object id="592" x="1056" y="2816"/>
-  <object id="593" x="2272" y="2624"/>
-  <object id="594" x="3232" y="2144"/>
-  <object id="595" x="2944" y="1952"/>
+ <objectgroup id="25" name="asgardMeleeObjects">
+  <object id="640" x="2176" y="2720"/>
+  <object id="641" x="2272" y="2592"/>
+  <object id="642" x="2496" y="2752"/>
+  <object id="648" x="1568" y="3072"/>
+  <object id="649" x="1568" y="3264"/>
+  <object id="650" x="1856" y="3168"/>
+  <object id="651" x="864" y="2848"/>
+ </objectgroup>
+ <objectgroup id="17" name="rangeObjects">
+  <object id="623" x="3360" y="2112"/>
+  <object id="625" x="2976" y="2112"/>
+  <object id="630" x="3072" y="1888"/>
+  <object id="631" x="2816" y="1824"/>
+  <object id="632" x="2784" y="2176"/>
+  <object id="633" x="2496" y="2016"/>
+  <object id="646" x="2496" y="2624"/>
+  <object id="653" x="896" y="2720"/>
  </objectgroup>
  <objectgroup id="21" name="bossObjects" visible="0">
   <object id="601" x="3360" y="3232"/>
  </objectgroup>
- <objectgroup id="2" name="wallObjects">
+ <objectgroup id="2" name="wallObjects" visible="0">
   <object id="334" x="3712" y="3296" width="32" height="32"/>
   <object id="335" x="3680" y="3360" width="32" height="32"/>
   <object id="336" x="3712" y="3168" width="32" height="32"/>

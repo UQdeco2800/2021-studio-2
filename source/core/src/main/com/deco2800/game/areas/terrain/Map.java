@@ -26,6 +26,16 @@ public class Map {
     private HashMap<String, Float>[] assassinObjects;
     private HashMap<String, Float>[] bossObjects;
     private HashMap<String, Float>[] anchoredObjects;
+    private HashMap<String, Float>[] asgardMeleeObjects;
+    private HashMap<String, Float>[] outdoorMeleeObjects;
+
+    public HashMap<String, Float>[] getAsgardMeleeObjects() {
+        return asgardMeleeObjects;
+    }
+
+    public HashMap<String, Float>[] getOutdoorMeleeObjects() {
+        return outdoorMeleeObjects;
+    }
 
     public HashMap<String, Float>[] getMeleeObjects() {
         return meleeObjects;
