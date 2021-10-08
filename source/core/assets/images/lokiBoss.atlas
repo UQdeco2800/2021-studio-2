@@ -158,6 +158,34 @@ leftDeath
   orig: 128, 128
   offset: 0, 0
   index: 1
+frontDeath
+  rotate: false
+  xy: 132, 392
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+frontDeath
+  rotate: false
+  xy: 392, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+frontDeath
+  rotate: false
+  xy: 1042, 782
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+frontDeath
+  rotate: false
+  xy: 1042, 522
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 moveDown
   rotate: false
   xy: 2, 782
@@ -341,6 +369,34 @@ rightDeath
   offset: 0, 0
   index: 4
 rightDeath
+  rotate: false
+  xy: 392, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+backDeath
+  rotate: false
+  xy: 2, 652
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+backDeath
+  rotate: false
+  xy: 2, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+backDeath
+  rotate: false
+  xy: 782, 652
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+backDeath
   rotate: false
   xy: 392, 2
   size: 128, 128

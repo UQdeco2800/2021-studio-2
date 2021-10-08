@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.tasks.loki.FirePillarBaseTask;
+import com.deco2800.game.components.tasks.loki.FirePillarDamageTask;
 import com.deco2800.game.components.touch.ExplosionTouchComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.touch.TouchTeleportComponent;
@@ -232,6 +234,7 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(aiComponent);
+        pillar.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
 
         pillar.setScale(0.8f, 0.8f);
 

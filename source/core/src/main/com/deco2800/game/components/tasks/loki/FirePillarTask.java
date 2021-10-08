@@ -1,4 +1,4 @@
-package com.deco2800.game.components.tasks;
+package com.deco2800.game.components.tasks.loki;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
@@ -14,9 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class FirePillarTask extends DefaultTask implements PriorityTask {
@@ -118,10 +115,10 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         Entity pillar =
             WeaponFactory.createFirePillarBase();
         Vector2 lastPosition = lastPositions.remove(0);
-        Vector2 position = new Vector2(lastPosition.x * 2 + target.getPosition().x,
-                lastPosition.y * 2 + target.getPosition().y);
+        Vector2 position = new Vector2(lastPosition.x + target.getPosition().x,
+                lastPosition.y + target.getPosition().y);
 
-        gameArea.spawnEntityAt(pillar, new Vector2(position.x / 3, position.y / 3), true, true);
+        gameArea.spawnEntityAt(pillar, new Vector2(position.x / 2, position.y / 2), true, true);
     }
 
     /**

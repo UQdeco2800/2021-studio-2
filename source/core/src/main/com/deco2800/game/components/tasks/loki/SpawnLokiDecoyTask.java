@@ -1,4 +1,4 @@
-package com.deco2800.game.components.tasks;
+package com.deco2800.game.components.tasks.loki;
 
 
 import com.badlogic.gdx.math.Vector2;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Spawns in the boss's minions
  */
-public class SpawnHellWarriorTask extends DefaultTask implements PriorityTask {
+public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
 
     /**
      * target entity (player)
@@ -49,11 +49,11 @@ public class SpawnHellWarriorTask extends DefaultTask implements PriorityTask {
      *
      * @param target The entity to chase.
      */
-    public SpawnHellWarriorTask(Entity target, long cooldownMS) {
+    public SpawnLokiDecoyTask(Entity target, long cooldownMS) {
         this.target = target;
         this.gameArea = ServiceLocator.getGameAreaService();
         this.cooldownMS = cooldownMS;
-        this.lastFiredTime = 0;
+        this.lastFiredTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
     }
 
     /**
@@ -74,8 +74,13 @@ public class SpawnHellWarriorTask extends DefaultTask implements PriorityTask {
      */
     public void spawn() {
         lastFiredTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-        Entity elf = NPCFactory.createMeleeHellViking(target);
-        gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
+        Entity loki;
+        if (spawn % 2 != 0) {
+            loki = NPCFactory.createMeleeLokiDecoy(target);
+        } else {
+            loki = NPCFactory.createRangedLokiDecoy(target);
+        }
+        gameArea.spawnEntityAt(loki, owner.getEntity().getCenterPosition(), true, true);
     }
 
     /**
@@ -97,6 +102,25 @@ public class SpawnHellWarriorTask extends DefaultTask implements PriorityTask {
      * @return true if can spawn, false otherwise
      */
     private boolean canSpawn() {
-        return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFiredTime >= cooldownMS);
+        return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFiredTime >= cooldownMS
+                && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
+    }
+
+    /**
+     * Returns the distance of the entity to the target
+     *
+     * @return Returns the distance as a float between the player and the enemy
+     */
+    private float getDistanceToTarget() {
+        return owner.getEntity().getCenterPosition().dst(target.getPosition());
+    }
+
+    /**
+     * Check if there are any object between the entity and the target
+     *
+     * @return true if no object, false otherwise
+     */
+    private boolean isTargetVisible() {
+        return owner.getEntity().canSeeEntity(target);
     }
 }

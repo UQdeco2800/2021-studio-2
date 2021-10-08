@@ -1,4 +1,4 @@
-package com.deco2800.game.components.tasks;
+package com.deco2800.game.components.tasks.loki;
 
 
 import com.badlogic.gdx.math.Vector2;

@@ -1,4 +1,4 @@
-package com.deco2800.game.components.tasks;
+package com.deco2800.game.components.tasks.loki;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -22,12 +22,8 @@ public class FirePillarDamageTask extends DefaultTask implements PriorityTask {
     /** Spawn time of the entity. */
     private long spawnTime;
 
-    private GameArea gameArea;
-
     public FirePillarDamageTask() {
-
         this.spawnTime = ServiceLocator.getTimeSource().getTime();
-        this.gameArea = ServiceLocator.getGameAreaService();
     }
 
     /**
@@ -37,7 +33,7 @@ public class FirePillarDamageTask extends DefaultTask implements PriorityTask {
      * @return int 10 if arrow is moving, -1 if arrow is not
      */
     public int getPriority() {
-        if ((ServiceLocator.getTimeSource().getTime() - spawnTime) > 300) {
+        if ((ServiceLocator.getTimeSource().getTime() - spawnTime) > 1000) {
             owner.getEntity().prepareDispose();
             return -1;
         }

@@ -9,10 +9,13 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
+import com.deco2800.game.components.tasks.loki.FirePillarTask;
+import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.tasks.*;
+import com.deco2800.game.components.tasks.loki.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
@@ -737,8 +740,6 @@ public class NPCFactory {
                         .addTask(new ChaseTask(
                                 target, 11, 4f, 4f, new Vector2(1.5f, 1.5f)))
                         .addTask(new PauseTask())
-                        .addTask(new AlertableChaseTask(
-                                target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
@@ -845,13 +846,13 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new PauseTask())
-                        .addTask(new FirePillarTask(target, 600, 50))
+                        .addTask(new FirePillarTask(target, 600, 150))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new SpawnDecoysTask(target))
-                        .addTask(new SpawnHellWarriorTask(target, 10000));
+                        .addTask(new SpawnLokiDecoyTask(target, 5000));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -882,6 +883,95 @@ public class NPCFactory {
         boss.getComponent(ColliderComponent.class).setDensity(1.5f);
         PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
         return boss;
+    }
+
+    /**
+     * create Loki boss enemy entity
+     *
+     * @param target enemy to chase (player)
+     * @return boss entity
+     */
+    public static Entity createRangedLokiDecoy(Entity target) {
+        Entity boss = createBaseNPCNoAI();
+        ElfBossConfig config = configs.elfBoss;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new PauseTask())
+                        .addTask(new FirePillarTask(target, 600, 150))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 7f, 10f))
+                        .addTask(new SpawnLokiDecoyTask(target, 7000));
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+        animator.setAnimationScale(2f);
+
+        setHumanAnimations(animator);
+
+        boss
+                .addComponent(new CombatStatsComponent(1, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new HumanAnimationController())
+                .addComponent(aiComponent);
+        boss.setAttackRange(5);
+        boss.getComponent(AnimationRenderComponent.class).scaleEntity();
+
+        boss.addComponent(createHealthBarComponent());
+        boss.setEntityType("decoy");
+        boss.getComponent(ColliderComponent.class).setDensity(1.5f);
+        PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
+        return boss;
+    }
+
+    /**
+     * create Loki boss enemy entity
+     *
+     * @param target enemy to chase (player)
+     * @return boss entity
+     */
+    public static Entity createMeleeLokiDecoy(Entity target) {
+        Entity viking = createBaseNPCNoAI();
+        MeleeHellWarriorConfig config = configs.hellWarriorMelee;
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+
+        setHumanAnimations(animator);
+
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(
+                                target, 11, 4f, 4f, new Vector2(2f, 2f)))
+                        .addTask(new PauseTask())
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
+
+        viking
+                .addComponent(new CombatStatsComponent(1, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new HumanAnimationController());
+
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        viking.addComponent(createHealthBarComponent());
+
+        viking.getComponent(AnimationRenderComponent.class).scaleEntity();
+        viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
+        viking.setEntityType("viking");
+        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        return viking;
     }
 
     /**

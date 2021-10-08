@@ -1,4 +1,4 @@
-package com.deco2800.game.components.tasks;
+package com.deco2800.game.components.tasks.loki;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -37,7 +37,7 @@ public class FirePillarBaseTask extends DefaultTask implements PriorityTask {
      * @return int 10 if arrow is moving, -1 if arrow is not
      */
     public int getPriority() {
-        if ((ServiceLocator.getTimeSource().getTime() - spawnTime) > 200) {
+        if ((ServiceLocator.getTimeSource().getTime() - spawnTime) > 350) {
             Entity pillar = WeaponFactory.createFirePillar();
             Vector2 ownerPos = owner.getEntity().getPosition();
 
