@@ -10,12 +10,14 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -128,6 +130,7 @@ public class GameArea0 extends GameArea {
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/lvl_1.json");
         tileTextures = map.TileRefsArray();
+        super.setMap(map);
 
         super.create();
         loadAssets();
@@ -136,12 +139,8 @@ public class GameArea0 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnBoss();
+        spawnMovementCutscenes(map);
+        spawnDialogueCutscenes();
 
         spawnObstacles();
         spawnLights();
@@ -152,10 +151,9 @@ public class GameArea0 extends GameArea {
         spawnTraps();
         spawnPTraps();
 
-        spawnCutsceneTrigger();
-
         playMusic();
-        spawnTeleport();
+        //spawnTeleport();
+        decBossNum();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
@@ -163,30 +161,6 @@ public class GameArea0 extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Level 1"));
         spawnEntity(ui);
-    }
-
-    private void spawnCutsceneTrigger() {
-//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-//        spawnEntityAt(moveTrigger4, new Vector2(17.3f, 66f), true, true);
-//        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-//                DialogueSet.ORDERED);
-//        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
-//
-//        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-//                DialogueSet.BOSS_DEFEATED_BEFORE);
-//        spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
-//
-//        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-//        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
-//
-//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
-//        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
-//
-//        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
-//        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
-//
-//        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-//        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
     private void spawnTerrain() {
@@ -230,6 +204,20 @@ public class GameArea0 extends GameArea {
             spawnEntityAt(
                     ObstacleFactory.createWall((width / 32f) * 0.5f, (height / 32f) * 0.5f),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnDialogueCutscenes() {
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
         }
