@@ -85,6 +85,8 @@ public class GameArea1 extends GameArea {
             "images/boss_health_left.png",
             "images/boss_health_right.png",
             "images/hellViking.png",
+            "images/lokiBoss.png",
+            "images/firePillar.png"
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -96,7 +98,7 @@ public class GameArea1 extends GameArea {
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas",
-            "images/hellViking.atlas"
+            "images/hellViking.atlas", "images/lokiBoss.atlas", "images/firePillar.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -146,7 +148,7 @@ public class GameArea1 extends GameArea {
 //        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
-//        spawnBoss();
+        spawnBoss();
 
         spawnHellWarriorObject(map);
         spawnMovementCutscenes(map);
@@ -415,12 +417,18 @@ public class GameArea1 extends GameArea {
      * spawn boss - only spawn on the map if other enemies are killed
      */
     private void spawnBoss() {
-        /*GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
-        GridPoint2 bossPos = new GridPoint2(100, 100);
-        Entity boss = NPCFactory.createBossNPC(player);
-        spawnEntityAt(boss, bossPos, true, true);
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity elf = NPCFactory.createLoki(player);
+            incNum();
+            spawnEntityAt(
+                    elf,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     private void spawnElfGuard() {

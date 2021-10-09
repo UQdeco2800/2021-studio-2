@@ -846,13 +846,13 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new PauseTask())
-                        .addTask(new FirePillarTask(target, 600, 150))
+                        .addTask(new FirePillarTask(target, 800, 150))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 7f, 10f))
                         .addTask(new SpawnDecoysTask(target))
-                        .addTask(new SpawnLokiDecoyTask(target, 5000));
+                        .addTask(new SpawnLokiDecoyTask(target, 8000));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -898,12 +898,12 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new PauseTask())
-                        .addTask(new FirePillarTask(target, 600, 150))
+                        .addTask(new FirePillarTask(target, 1000, 150))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f))
                         .addTask(new RangedChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new SpawnLokiDecoyTask(target, 7000));
+                        .addTask(new SpawnLokiDecoyTask(target, 10000));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(

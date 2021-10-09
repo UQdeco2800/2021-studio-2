@@ -84,6 +84,8 @@ public class GameArea2 extends GameArea {
             "images/boss_health_left.png",
             "images/boss_health_right.png",
             "images/hellViking.png",
+            "images/lokiBoss.png",
+            "images/firePillar.png"
 
     };
     private static String[] tileTextures = null;
@@ -95,7 +97,8 @@ public class GameArea2 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hellViking.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hellViking.atlas",
+            "images/lokiBoss.atlas", "images/firePillar.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -140,6 +143,7 @@ public class GameArea2 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
+        spawnBoss();
         spawnHellWarriorObject(map);
         spawnMovementCutscenes(map);
         spawnDialogueCutscenes();
@@ -408,7 +412,7 @@ public class GameArea2 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createBossNPC(player);
+            Entity elf = NPCFactory.createLoki(player);
             incNum();
             spawnEntityAt(
                     elf,

@@ -98893,6 +98893,14 @@
             "width": 512
         }
     ],
+  "bossObjects": [
+    {
+      "x": 110,
+      "y": 50,
+      "height": 0,
+      "width": 0
+    }
+    ],
     "wallObjects": [
         {
             "x": 102,
