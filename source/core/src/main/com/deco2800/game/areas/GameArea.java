@@ -10,6 +10,8 @@ import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import java.util.List;
  * <p>Support for enabling/disabling game areas could be added by making this a Component instead.
  */
 public abstract class GameArea implements Disposable {
+    private static final Logger logger = LoggerFactory.getLogger(GameArea.class);
 
     protected TerrainComponent terrain;
     protected List<Entity> areaEntities;
@@ -88,15 +91,19 @@ public abstract class GameArea implements Disposable {
      */
     public void decBossNum() {
         numBoss--;
+        System.out.println(numBoss);
         if (numBoss == 0) {
+            logger.info("Number of Bosses is now at 0");
             if (getLevel() == 9) {
                 //tutorial level
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
                 GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(), (map.getDimensions().get("n_tiles_heihgt") - teleportPos.get("y").intValue()));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
             } else if (getLevel() == 0) {
                 //gama area 0
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
                 GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
@@ -104,6 +111,7 @@ public abstract class GameArea implements Disposable {
 
             } else if (getLevel() == 1) {
                 //gama area 1
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
                 GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
@@ -111,6 +119,7 @@ public abstract class GameArea implements Disposable {
 
             } else if (getLevel() == 2) {
                 //gama area 2
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
                 GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
@@ -118,6 +127,7 @@ public abstract class GameArea implements Disposable {
 
             } else if (getLevel() == 3) {
                 //gama area 3
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
                 GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
@@ -125,6 +135,7 @@ public abstract class GameArea implements Disposable {
 
             } else if (getLevel() == 4) {
                 //gama area 4
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
                 GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
@@ -212,7 +223,7 @@ public abstract class GameArea implements Disposable {
         spawnEntity(entity);
     }
 
-    protected void spawnHellWarriorObject(Map map) {
+    protected void spawnHellWarriorObject() {
         HashMap<String, Float>[] warriors = map.getHellMeleeObjects() ;
         for (HashMap<String, Float> warrior : warriors) {
             int x = warrior.get("x").intValue();
@@ -226,7 +237,7 @@ public abstract class GameArea implements Disposable {
         }
     }
 
-    protected void spawnAsgardWarriorObject(Map map) {
+    protected void spawnAsgardWarriorObject() {
         HashMap<String, Float>[] crates = map.getAsgardMeleeObjects();
         for (HashMap<String, Float> crate : crates) {
             int x = crate.get("x").intValue();
@@ -240,7 +251,7 @@ public abstract class GameArea implements Disposable {
         }
     }
 
-    protected void spawnOutdoorWarriorObject(Map map) {
+    protected void spawnOutdoorWarriorObject() {
         HashMap<String, Float>[] warriors = map.getOutdoorMeleeObjects();
         for (HashMap<String, Float> warrior : warriors) {
             int x = warrior.get("x").intValue();
@@ -254,7 +265,7 @@ public abstract class GameArea implements Disposable {
         }
     }
 
-    protected void spawnOutdoorArcherObject(Map map) {
+    protected void spawnOutdoorArcherObject() {
         HashMap<String, Float>[] crates = map.getRangeObjects();
         for (HashMap<String, Float> crate : crates) {
             int x = crate.get("x").intValue();
@@ -268,7 +279,7 @@ public abstract class GameArea implements Disposable {
         }
     }
 
-    protected void spawnMovementCutscenes(Map map) {
+    protected void spawnMovementCutscenes() {
         HashMap<String, Float>[] lefts = map.getMoveLeftObjects();
         if (lefts != null) {
             for (HashMap<String, Float> left : lefts) {

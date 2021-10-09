@@ -114,7 +114,6 @@ public class GameArea3 extends GameArea {
 
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
-    private static Map map;
     private int playerHealth = 300;
 
     public GameArea3(TerrainFactory terrainFactory, GdxGame game) {
@@ -145,10 +144,10 @@ public class GameArea3 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnOutdoorArcherObject(map);
-        spawnOutdoorWarriorObject(map);
-        spawnAsgardWarriorObject(map);
-        spawnMovementCutscenes(map);
+        spawnOutdoorArcherObject();
+        spawnOutdoorWarriorObject();
+        spawnAsgardWarriorObject();
+        spawnMovementCutscenes();
         spawnDialogueCutscenes();
 
         spawnObstacles();
@@ -420,6 +419,7 @@ public class GameArea3 extends GameArea {
                     false,
                     false);
         }
+        incBossNum();
     }
 
     private void spawnElfGuard() {

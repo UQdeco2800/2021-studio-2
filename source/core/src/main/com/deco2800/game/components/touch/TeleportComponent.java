@@ -36,10 +36,8 @@ public class TeleportComponent extends TouchComponent {
 
         logger.debug("A TeleportComponent entity has been collided with");
 
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
-            //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
+        if (this.checkEntities(me, other)) {
+            return;
         }
 
         // Try to teleport player

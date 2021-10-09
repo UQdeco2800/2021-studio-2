@@ -107,7 +107,6 @@ public class GameArea0 extends GameArea {
 
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
-    private static Map map;
     private int playerHealth = 300;
 
     public GameArea0(TerrainFactory terrainFactory, GdxGame game) {
@@ -130,7 +129,6 @@ public class GameArea0 extends GameArea {
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/lvl_1.json");
         tileTextures = map.TileRefsArray();
-        super.setMap(map);
 
         super.create();
         loadAssets();
@@ -139,7 +137,7 @@ public class GameArea0 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnMovementCutscenes(map);
+        spawnMovementCutscenes();
         spawnDialogueCutscenes();
 
         spawnObstacles();
@@ -152,7 +150,7 @@ public class GameArea0 extends GameArea {
         spawnPTraps();
 
         playMusic();
-        //spawnTeleport();
+        spawnTeleport();
         decBossNum();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }

@@ -22,6 +22,8 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
     private boolean declareEnd;
     private long endTime;
 
+    private boolean dead = false;
+
     public DeathPauseTask(Entity target, int priority, float viewDistance, float maxChaseDistance, float duration) {
         super(target, priority, viewDistance, maxChaseDistance);
         this.duration = duration;
@@ -69,13 +71,16 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {
-                if (owner.getEntity().getEntityType().equals("elfBoss") || owner.getEntity().getEntityType().equals("loki")) {
-                    ServiceLocator.getGameAreaService().decBossNum();
-                } else {
-                    ServiceLocator.getGameAreaService().decNum();
+                if (!dead) {
+                    if (owner.getEntity().getEntityType().equals("elfBoss") || owner.getEntity().getEntityType().equals("loki")) {
+                        ServiceLocator.getGameAreaService().decBossNum();
+                    } else {
+                        ServiceLocator.getGameAreaService().decNum();
+                    }
+                    //owner.getEntity().prepareDispose();
+                    status = Status.FINISHED;
                 }
-                //owner.getEntity().prepareDispose();
-                status = Status.FINISHED;
+                dead = true;
             }
         }
     }

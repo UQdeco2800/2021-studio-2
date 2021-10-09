@@ -85,7 +85,8 @@ public class GameArea2 extends GameArea {
             "images/boss_health_right.png",
             "images/hellViking.png",
             "images/lokiBoss.png",
-            "images/firePillar.png"
+            "images/firePillar.png",
+            "images/hammer_projectile.png",
 
     };
     private static String[] tileTextures = null;
@@ -98,7 +99,7 @@ public class GameArea2 extends GameArea {
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hellViking.atlas",
-            "images/lokiBoss.atlas", "images/firePillar.atlas"
+            "images/lokiBoss.atlas", "images/firePillar.atlas", "images/hammer_projectile.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -112,7 +113,6 @@ public class GameArea2 extends GameArea {
 
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
-    private static Map map;
     private int playerHealth = 300;
 
     public GameArea2(TerrainFactory terrainFactory, GdxGame game) {
@@ -144,8 +144,8 @@ public class GameArea2 extends GameArea {
         spawnPlayer();
 
         spawnBoss();
-        spawnHellWarriorObject(map);
-        spawnMovementCutscenes(map);
+//        spawnHellWarriorObject();
+        spawnMovementCutscenes();
         spawnDialogueCutscenes();
 
         spawnObstacles();
@@ -420,6 +420,7 @@ public class GameArea2 extends GameArea {
                     false,
                     false);
         }
+        incBossNum();
     }
 
     private void spawnElfGuard() {

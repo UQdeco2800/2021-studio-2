@@ -22,13 +22,7 @@ public class TouchWin extends TouchComponent {
 
     @Override
     void onCollisionStart(Fixture me, Fixture other) {
-        if (hitboxComponent.getFixture() != me) {
-            //do nothing
-            return;
-        }
-
-        if (PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
-            // Doesn't match our target layer, ignore
+        if (this.checkEntities(me, other)) {
             return;
         }
         Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
