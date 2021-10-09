@@ -270,6 +270,13 @@ moveLeft
   orig: 128, 128
   offset: 0, 0
   index: 1
+defaultLeft
+  rotate: false
+  xy: 652, 392
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 moveLeft
   rotate: false
   xy: 652, 392
@@ -277,6 +284,13 @@ moveLeft
   orig: 128, 128
   offset: 0, 0
   index: 3
+defaultRight
+  rotate: false
+  xy: 2, 522
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 moveRight
   rotate: false
   xy: 2, 522
@@ -347,6 +361,13 @@ moveUp
   orig: 128, 128
   offset: 0, 0
   index: 7
+defaultUp
+  rotate: false
+  xy: 652, 522
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
 rightDeath
   rotate: false
   xy: 2, 652
@@ -438,6 +459,13 @@ transformedMoveDown
   orig: 128, 128
   offset: 0, 0
   index: 1
+defaultTransformed
+  rotate: false
+  xy: 652, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 transformedMoveDown
   rotate: false
   xy: 1172, 652
@@ -445,6 +473,13 @@ transformedMoveDown
   orig: 128, 128
   offset: 0, 0
   index: 6
+defaultTransformedLeft
+  rotate: false
+  xy: 392, 392
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 transformedMoveLeft
   rotate: false
   xy: 132, 652
@@ -481,6 +516,13 @@ transformedMoveRight
   offset: 0, 0
   index: 2
 transformedMoveRight
+  rotate: false
+  xy: 1042, 652
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+defaultTransformedRight
   rotate: false
   xy: 1042, 652
   size: 128, 128
@@ -529,3 +571,10 @@ transformedMoveUp
   orig: 128, 128
   offset: 0, 0
   index: 6
+defaultTransformedUp
+  rotate: false
+  xy: 522, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1

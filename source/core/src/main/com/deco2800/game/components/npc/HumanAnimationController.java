@@ -40,6 +40,11 @@ public class HumanAnimationController extends Component {
         entity.getEvents().addListener("attackLeft", this::animateAttackLeft);
         entity.getEvents().addListener("attackRight", this::animateAttackRight);
 
+        entity.getEvents().addListener("stopUp", this::stopUp);
+        entity.getEvents().addListener("stopDown", this::stopDown);
+        entity.getEvents().addListener("stopLeft", this::stopLeft);
+        entity.getEvents().addListener("stopRight", this::stopRight);
+
         animator.startAnimation("default");
     }
 
@@ -124,10 +129,8 @@ public class HumanAnimationController extends Component {
      */
     public void animateDown() {
         if (entity.getEntityType().equals("transformed")) {
-            System.out.println("here");
             if (!attack && !down) {
                 animator.startAnimation("transformedMoveDown");
-                System.out.println("here2");
                 enableWalk();
                 down = true;
             }
@@ -198,6 +201,66 @@ public class HumanAnimationController extends Component {
         attack = true;
         this.start = System.currentTimeMillis();
         enableWalk();
+    }
+
+    /**
+     * Play the animation for the entity when the entity is stationary and was previously moving left.
+     */
+    public void stopLeft() {
+        if (!death) {
+            if (entity.getEntityType().equals("transformed")) {
+                animator.startAnimation("defaultTransformedLeft");
+            } else {
+                animator.startAnimation("defaultLeft");
+            }
+        } else {
+            animateLeft();
+        }
+    }
+
+    /**
+     * Play the animation for the entity when the entity is stationary and was previously moving right.
+     */
+    public void stopRight() {
+        if (!death) {
+            if (entity.getEntityType().equals("transformed")) {
+                animator.startAnimation("defaultTransformedRight");
+            } else {
+                animator.startAnimation("defaultRight");
+            }
+        } else {
+            animateRight();
+        }
+    }
+
+    /**
+     * Play the animation for the entity when the entity is stationary and was previously moving down.
+     */
+    public void stopDown() {
+        if (!death) {
+            if (entity.getEntityType().equals("transformed")) {
+                animator.startAnimation("defaultTransformed");
+            } else {
+                animator.startAnimation("default");
+            }
+        } else {
+            animateDown();
+        }
+    }
+
+    /**
+     * Play the animation for the entity when the entity is stationary and was previously moving up.
+     */
+    public void stopUp() {
+        if (!death) {
+            if (entity.getEntityType().equals("transformed")) {
+                animator.startAnimation("defaultTransformedUp");
+            } else {
+                animator.startAnimation("defaultUp");
+            }
+        } else {
+            animateUp();
+        }
     }
 
     /**

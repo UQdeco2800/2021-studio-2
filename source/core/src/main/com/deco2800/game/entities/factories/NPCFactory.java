@@ -771,6 +771,9 @@ public class NPCFactory {
     private static void setHumanAnimations(AnimationRenderComponent animator) {
 
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultRight", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultUp", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation(MOVE_LEFT, 0.2f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_UP, 0.1f, Animation.PlayMode.LOOP);
@@ -862,6 +865,10 @@ public class NPCFactory {
         animator.addAnimation("transformedMoveRight", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("transformedMoveDown", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("transformedMoveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("defaultTransformedLeft", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultTransformedRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultTransformedUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultTransformed", 0.1f, Animation.PlayMode.NORMAL);
 
         animator.setAnimationScale(2f);
 
