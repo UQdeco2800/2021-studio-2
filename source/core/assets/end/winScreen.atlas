@@ -4,266 +4,266 @@ size: 8192, 8192
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-1
+winScreen
   rotate: false
   xy: 2, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-2
+winScreen
   rotate: false
   xy: 2, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-3
+winScreen
   rotate: false
   xy: 1924, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 1
+winScreen
   rotate: false
   xy: 2, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 2
+winScreen
   rotate: false
   xy: 2, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 3
+winScreen
   rotate: false
   xy: 1924, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 4
+winScreen
   rotate: false
   xy: 3846, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 5
+winScreen
   rotate: false
   xy: 2, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 6
+winScreen
   rotate: false
   xy: 1924, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 7
+winScreen
   rotate: false
   xy: 3846, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 8
+winScreen
   rotate: false
   xy: 5768, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 9
+winScreen
   rotate: false
   xy: 2, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 10
+winScreen
   rotate: false
   xy: 1924, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 11
+winScreen
   rotate: false
   xy: 2, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 12
+winScreen
   rotate: false
   xy: 3846, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 13
+winScreen
   rotate: false
   xy: 5768, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 14
+winScreen
   rotate: false
   xy: 2, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 15
+winScreen
   rotate: false
   xy: 1924, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 16
+winScreen
   rotate: false
   xy: 3846, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 17
+winScreen
   rotate: false
   xy: 5768, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 18
+winScreen
   rotate: false
   xy: 2, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 19
+winScreen
   rotate: false
   xy: 1924, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 20
+winScreen
   rotate: false
   xy: 3846, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 21
+winScreen
   rotate: false
   xy: 5768, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 22
+winScreen
   rotate: false
   xy: 1924, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 23
+winScreen
   rotate: false
   xy: 3846, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 24
+winScreen
   rotate: false
   xy: 3846, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 25
+winScreen
   rotate: false
   xy: 5768, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 26
+winScreen
   rotate: false
   xy: 5768, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 27
+winScreen
   rotate: false
   xy: 5768, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 28
+winScreen
   rotate: false
   xy: 5768, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 29
+winScreen
   rotate: false
   xy: 3846, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 30
+winScreen
   rotate: false
   xy: 3846, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 31
+winScreen
   rotate: false
   xy: 3846, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 32
+winScreen
   rotate: false
   xy: 5768, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 33
+winScreen
   rotate: false
   xy: 5768, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 34
+winScreen
   rotate: false
   xy: 5768, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 35
+winScreen
   rotate: false
   xy: 5768, 2
   size: 1920, 1080
@@ -276,182 +276,182 @@ size: 8192, 8192
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-Frame 36
+winScreen
   rotate: false
   xy: 2, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 37
+winScreen
   rotate: false
   xy: 2, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 38
+winScreen
   rotate: false
   xy: 2, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 39
+winScreen
   rotate: false
   xy: 2, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 40
+winScreen
   rotate: false
   xy: 1924, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 41
+winScreen
   rotate: false
   xy: 1924, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 42
+winScreen
   rotate: false
   xy: 2, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 43
+winScreen
   rotate: false
   xy: 2, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 44
+winScreen
   rotate: false
   xy: 1924, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 45
+winScreen
   rotate: false
   xy: 1924, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 46
+winScreen
   rotate: false
   xy: 3846, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 47
+winScreen
   rotate: false
   xy: 3846, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 48
+winScreen
   rotate: false
   xy: 2, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 49
+winScreen
   rotate: false
   xy: 1924, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 50
+winScreen
   rotate: false
   xy: 3846, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 51
+winScreen
   rotate: false
   xy: 5768, 6494
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 52
+winScreen
   rotate: false
   xy: 2, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 53
+winScreen
   rotate: false
   xy: 1924, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 54
+winScreen
   rotate: false
   xy: 3846, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 55
+winScreen
   rotate: false
   xy: 5768, 5412
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 56
+winScreen
   rotate: false
   xy: 2, 1084
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 57
+winScreen
   rotate: false
   xy: 1924, 2166
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 58
+winScreen
   rotate: false
   xy: 3846, 3248
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 59
+winScreen
   rotate: false
   xy: 5768, 4330
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 60
+winScreen
   rotate: false
   xy: 2, 2
   size: 1920, 1080
   orig: 1920, 1080
   offset: 0, 0
   index: -1
-Frame 61
+winScreen
   rotate: false
   xy: 1924, 1084
   size: 1920, 1080
