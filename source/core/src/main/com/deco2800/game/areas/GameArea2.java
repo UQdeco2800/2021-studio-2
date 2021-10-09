@@ -83,7 +83,9 @@ public class GameArea2 extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/hellViking.png",
+
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -94,7 +96,7 @@ public class GameArea2 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hellViking.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -139,12 +141,9 @@ public class GameArea2 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
+        spawnHellWarriorObject(map);
+        spawnMovementCutscenes(map);
+        spawnDialogueCutscenes();
 
         spawnObstacles();
         spawnLights();
@@ -176,6 +175,20 @@ public class GameArea2 extends GameArea {
 
             spawnEntityAt(
                     ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnDialogueCutscenes() {
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);

@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
+import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -207,6 +209,120 @@ public abstract class GameArea implements Disposable {
 
         entity.setPosition(entityPos);
         spawnEntity(entity);
+    }
+
+    protected void spawnHellWarriorObject(Map map) {
+        HashMap<String, Float>[] warriors = map.getHellMeleeObjects() ;
+        for (HashMap<String, Float> warrior : warriors) {
+            int x = warrior.get("x").intValue();
+            int y = warrior.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createMeleeHellViking(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnAsgardWarriorObject(Map map) {
+        HashMap<String, Float>[] crates = map.getAsgardMeleeObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createMeleeAsgardViking(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnOutdoorWarriorObject(Map map) {
+        HashMap<String, Float>[] warriors = map.getOutdoorMeleeObjects();
+        for (HashMap<String, Float> warrior : warriors) {
+            int x = warrior.get("x").intValue();
+            int y = warrior.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createMeleeViking(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnOutdoorArcherObject(Map map) {
+        HashMap<String, Float>[] crates = map.getRangeObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createOutdoorArcher(player, 0.1f),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnMovementCutscenes(Map map) {
+        HashMap<String, Float>[] lefts = map.getMoveLeftObjects();
+        if (lefts != null) {
+            for (HashMap<String, Float> left : lefts) {
+                int x = left.get("x").intValue();
+                int y = left.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createMoveTrigger(new Vector2(-1f, 0f), 1, 1),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
+
+        HashMap<String, Float>[] rights = map.getMoveRightObjects();
+        if (rights != null) {
+            for (HashMap<String, Float> right : rights) {
+                int x = right.get("x").intValue();
+                int y = right.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 1, 1),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
+
+        HashMap<String, Float>[] downs = map.getMoveDownObjects();
+        if (downs != null) {
+            for (HashMap<String, Float> down : downs) {
+                int x = down.get("x").intValue();
+                int y = down.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 1, 1),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
+
+        HashMap<String, Float>[] ups = map.getMoveUpObjects();
+        if (ups != null) {
+            for (HashMap<String, Float> up : ups) {
+                int x = up.get("x").intValue();
+                int y = up.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, 1f), 1, 1 ),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
     }
 
 }

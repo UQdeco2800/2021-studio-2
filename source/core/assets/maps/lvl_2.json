@@ -69223,6 +69223,30 @@
             "width": 64
         }
     ],
+  "moveDownObjects": [
+    {
+      "x": 78,
+      "y": 92,
+      "height": 0,
+      "width": 0
+    }
+  ],
+  "moveRightObjects": [
+    {
+      "x": 78,
+      "y": 102,
+      "height": 0,
+      "width": 0
+    }
+  ],
+  "cutsceneObjects": [
+    {
+      "x": 99,
+      "y": 101,
+      "height": 0,
+      "width": 0
+    }
+  ],
     "wallObjects": [
         {
             "x": 116,

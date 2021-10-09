@@ -146,16 +146,11 @@ public class GameArea3 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnBoss();
-
-        spawnOutdoorArcherObject();
-        spawnOutdoorWarriorObject();
-        spawnAsgardWarriorObject();
+        spawnOutdoorArcherObject(map);
+        spawnOutdoorWarriorObject(map);
+        spawnAsgardWarriorObject(map);
+        spawnMovementCutscenes(map);
+        spawnDialogueCutscenes();
 
         spawnObstacles();
         spawnLights();
@@ -237,42 +232,14 @@ public class GameArea3 extends GameArea {
         }
     }
 
-    private void spawnAsgardWarriorObject() {
-        HashMap<String, Float>[] crates = map.getAsgardMeleeObjects();
-        for (HashMap<String, Float> crate : crates) {
-            int x = crate.get("x").intValue();
-            int y = crate.get("y").intValue();
+    private void spawnDialogueCutscenes() {
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    NPCFactory.createMeleeAsgardViking(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
-    }
-
-    private void spawnOutdoorWarriorObject() {
-        HashMap<String, Float>[] warriors = map.getOutdoorMeleeObjects();
-        for (HashMap<String, Float> warrior : warriors) {
-            int x = warrior.get("x").intValue();
-            int y = warrior.get("y").intValue();
-
-            spawnEntityAt(
-                    NPCFactory.createMeleeViking(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
-    }
-
-    private void spawnOutdoorArcherObject() {
-        HashMap<String, Float>[] crates = map.getRangeObjects();
-        for (HashMap<String, Float> crate : crates) {
-            int x = crate.get("x").intValue();
-            int y = crate.get("y").intValue();
-
-            spawnEntityAt(
-                    NPCFactory.createOutdoorArcher(player, 0.1f),
+                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
