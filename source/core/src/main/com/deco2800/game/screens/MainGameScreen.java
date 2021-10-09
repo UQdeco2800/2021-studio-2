@@ -53,7 +53,8 @@ public class MainGameScreen extends ScreenAdapter {
             "images/textBoxDisplay/black_bars.png",
             "images/textBoxDisplay/prison_text_box.png",
             "images/textBoxDisplay/loki_image.png",
-            "images/textBoxDisplay/loki_text_box.png"
+            "images/textBoxDisplay/loki_text_box.png",
+            "end/white.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
@@ -159,8 +160,10 @@ public class MainGameScreen extends ScreenAdapter {
     private void zoomCamera() {
         if (((OrthographicCamera) renderer.getCamera().getCamera()).zoom > 0.4) {
             ((OrthographicCamera) renderer.getCamera().getCamera()).zoom -= 0.008;
-        } else {
+        } else if (this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
             game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+        } else if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
         }
     }
 
@@ -214,7 +217,7 @@ public class MainGameScreen extends ScreenAdapter {
 
     private void playerWin() {
         if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
-            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+            zoomCamera();
         }
     }
 

@@ -22,6 +22,8 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Time;
+
 /**
  * the End screen to be played after Odin dies
  */
@@ -110,8 +112,12 @@ public class EndScreen extends ScreenAdapter {
         endUi.setScale(20.5f,12.5f);
         endUi.setPosition(-5.5f, -1.5f);
 
-        this.endAnimator.startAnimation("winScreen");
-
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                endAnimator.startAnimation("winScreen");
+            }
+        }, 0.2f);
         //display button after playing the win animations
         Timer.schedule(new Timer.Task() {
             @Override
