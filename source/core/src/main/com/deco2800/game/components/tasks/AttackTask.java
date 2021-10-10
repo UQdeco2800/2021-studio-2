@@ -28,8 +28,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
     private final float maxChaseDistance;
     private Vector2 moveSpeed = Vector2Utils.ONE;
     private final PhysicsEngine physics;
-    private final DebugRenderer debugRenderer;
-    private final RaycastHit hit = new RaycastHit();
     private MovementTask movementTask;
 
     /**
@@ -45,7 +43,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         this.viewDistance = viewDistance;
         this.maxChaseDistance = maxChaseDistance;
         physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**
@@ -73,7 +70,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         this.viewDistance = viewDistance;
         this.maxChaseDistance = maxChaseDistance;
         physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**

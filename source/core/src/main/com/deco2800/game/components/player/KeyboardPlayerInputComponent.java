@@ -70,6 +70,11 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     private boolean locked = false;
 
     /**
+     * Defines the String used to trigger the event to stop walking
+     */
+    private final String WALK_STOP = "walkStop";
+
+    /**
      * Stores the last system time since the dash ability was pressed.
      */
     //Used to check cool down of the dash ability: private long lastDash = 0L;
@@ -184,7 +189,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         this.down = 0;
         this.up = 0;
         this.speedMultiplier = 1;
-        entity.getEvents().trigger("walkStop");
+        entity.getEvents().trigger(WALK_STOP);
     }
 
 
@@ -207,8 +212,9 @@ public class KeyboardPlayerInputComponent extends InputComponent {
             case Input.Buttons.RIGHT:
                 entity.getEvents().trigger("mouseStrongAttack", new Vector2(screenX, screenY));
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     /**
@@ -222,7 +228,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         }
         calculateDistance(speedMultiplier);
         if (walkDirection.x == 0 && walkDirection.y == 0) {
-            entity.getEvents().trigger("walkStop");
+            entity.getEvents().trigger(WALK_STOP);
         } else {
             calculateDistance(speedMultiplier);
             entity.getEvents().trigger("walk", walkDirection);
@@ -232,7 +238,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     public void triggerCutsceneWalk() {
         calculateDistance(speedMultiplier);
         if (walkDirection.x == 0 && walkDirection.y == 0) {
-            entity.getEvents().trigger("walkStop");
+            entity.getEvents().trigger(WALK_STOP);
         } else {
             calculateDistance(speedMultiplier);
             entity.getEvents().trigger("walk", walkDirection);

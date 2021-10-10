@@ -1,4 +1,4 @@
-package com.deco2800.game.components.Touch;
+package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -10,6 +10,8 @@ import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -22,10 +24,15 @@ import com.deco2800.game.physics.components.PhysicsMovementComponent;
  */
 
 public class TouchAttackComponent extends TouchComponent {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouchAttackComponent.class);
+
     private float knockbackForce = 0f;
     private CombatStatsComponent combatStats;
     private long start = 0;
     private boolean disable = false;
+
+    private final String DEAL_DAMAGE = "dealDamage";
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -98,6 +105,9 @@ public class TouchAttackComponent extends TouchComponent {
                 && !getEntity().canSeeEntity(target)) {
             return;
         }
+
+        logger.debug("A TouchAttackComponent entity has been collided with");
+
         //Dissolve arrow attacks after hits
         if (getEntity().getComponent(HitboxComponent.class).getLayer()
                 == PhysicsLayer.PROJECTILEWEAPON
@@ -113,11 +123,10 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-            if (physicsComponent != null) {
+        if (physicsComponent != null && (knockbackForce > 0f || hitboxComponent.getFixture() != me)) {
                 Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-                if (myEntity.data.containsKey("dealDamage")) {
-                    if (!((boolean) myEntity.data.get("dealDamage"))) {
+                if (myEntity.data.containsKey(DEAL_DAMAGE)) {
+                    if (!((boolean) myEntity.data.get(DEAL_DAMAGE))) {
                         return;
                     }
                 }
@@ -125,7 +134,6 @@ public class TouchAttackComponent extends TouchComponent {
                 Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
                 Vector2 impulse = direction.setLength(knockbackForce);
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
-            }
         }
         if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC) {
             //System.out.println("player collision");
@@ -153,8 +161,8 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Try to attack target.
         if (targetStats != null) {
-            if (this.getEntity().data.containsKey("dealDamage")) {
-                if (!((boolean) this.getEntity().data.get("dealDamage"))) {
+            if (this.getEntity().data.containsKey(DEAL_DAMAGE)) {
+                if (!((boolean) this.getEntity().data.get(DEAL_DAMAGE))) {
                     return;
                 }
             }
@@ -179,14 +187,12 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Apply continuous knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-            if (physicsComponent != null) {
-                Body targetBody = physicsComponent.getBody();
-                Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-                Vector2 impulse = direction.setLength(0.5f);
-                targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
-                targetBody.setLinearVelocity(targetBody.getLinearVelocity().clamp(-knockbackForce * 10, knockbackForce * 10));
-            }
+        if (physicsComponent != null && (knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
+            Body targetBody = physicsComponent.getBody();
+            Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+            Vector2 impulse = direction.setLength(0.5f);
+            targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+            targetBody.setLinearVelocity(targetBody.getLinearVelocity().clamp(-knockbackForce * 10, knockbackForce * 10));
         }
     }
 }
