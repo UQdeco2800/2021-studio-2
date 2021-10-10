@@ -89,7 +89,8 @@ public class TutorialGameArea extends GameArea {
 
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas",
+            "images/player_axe.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/outdoorArcher.atlas"
@@ -259,7 +260,7 @@ public class TutorialGameArea extends GameArea {
 
     private void spawnPlayer() {
         //Spawns Player
-        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
+        Entity newPlayer = PlayerFactory.createPlayer("Scepter");
         spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
         player = newPlayer;
         //player.setPosition(new Vector2(15, 8)); //TESTING FOR TELEPORT
