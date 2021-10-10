@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -140,30 +140,54 @@ int&nbsp;lastKeyPressed)</code></th>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createDownMoveTrigger()">createDownMoveTrigger</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move down</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createLeftMoveTrigger()">createLeftMoveTrigger</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move left</div>
+</td>
+</tr>
+<tr class="altColor" id="i4">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createLokiTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet)">createLokiTrigger</a></span>&#8203;(<a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
 <a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type)</code></th>
 <td class="colLast">
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,com.badlogic.gdx.math.Vector2,int,int)">createMoveDialogueTrigger</a></span>&#8203;(<a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,com.badlogic.gdx.math.Vector2)">createMoveDialogueTrigger</a></span>&#8203;(<a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
 <a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;direction,
-int&nbsp;x,
-int&nbsp;y)</code></th>
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;direction)</code></th>
 <td class="colLast">
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMoveTrigger(com.badlogic.gdx.math.Vector2,int,int)">createMoveTrigger</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;direction,
-int&nbsp;x,
-int&nbsp;y)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMovementEndTrigger()">createMovementEndTrigger</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Creates an entity that can trigger a cutscene to start.</div>
+<div class="block">Creates an entity trigger that will allow the player ot start inputting controls again.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createRightMoveTrigger()">createRightMoveTrigger</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move right</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createUpMoveTrigger()">createUpMoveTrigger</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move up</div>
 </td>
 </tr>
 </tbody>
@@ -235,19 +259,15 @@ int&nbsp;lastKeyPressed)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,com.badlogic.gdx.math.Vector2,int,int)">createMoveDialogueTrigger</a></h3>
+<h3><a id="createMoveDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,com.badlogic.gdx.math.Vector2)">createMoveDialogueTrigger</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMoveDialogueTrigger</span>&#8203;(<span class="arguments"><a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
 <a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;direction,
-int&nbsp;x,
-int&nbsp;y)</span></div>
+<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;direction)</span></div>
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>dialogueSet</code> - the dialogue set the entity will trigger</dd>
 <dd><code>direction</code> - direction to move the player</dd>
-<dd><code>x</code> - x position that player moves in</dd>
-<dd><code>y</code> - y position that player moves in</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>entity that will create the trigger within the map</dd>
 </dl>
@@ -255,18 +275,57 @@ int&nbsp;y)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="createMoveTrigger(com.badlogic.gdx.math.Vector2,int,int)">createMoveTrigger</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMoveTrigger</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;direction,
-int&nbsp;x,
-int&nbsp;y)</span></div>
-<div class="block">Creates an entity that can trigger a cutscene to start.</div>
+<h3><a id="createLeftMoveTrigger()">createLeftMoveTrigger</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createLeftMoveTrigger</span>()</div>
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move left</div>
 <dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>direction</code> - direction to move the player</dd>
-<dd><code>x</code> - x position that player moves in</dd>
-<dd><code>y</code> - y position that player moves in</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>entity that will create the trigger within the map</dd>
+<dd>an Entity that will force the player to move left when collided with</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createRightMoveTrigger()">createRightMoveTrigger</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createRightMoveTrigger</span>()</div>
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move right</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an Entity that will force the player to move right when collided with</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createUpMoveTrigger()">createUpMoveTrigger</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createUpMoveTrigger</span>()</div>
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move up</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an Entity that will force the player to move up when collided with</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createDownMoveTrigger()">createDownMoveTrigger</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createDownMoveTrigger</span>()</div>
+<div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move down</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an Entity that will force the player to move down when collided with</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="createMovementEndTrigger()">createMovementEndTrigger</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createMovementEndTrigger</span>()</div>
+<div class="block">Creates an entity trigger that will allow the player ot start inputting controls again. This will be
+ used to end a movement cutscene.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an Entity that allows the player to start inputting directions when collided with</dd>
 </dl>
 </section>
 </li>

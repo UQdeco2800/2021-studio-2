@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -218,13 +218,27 @@ float&nbsp;maxChaseDistance,
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
+<td class="colFirst"><code>protected int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getActivePriority()">getActivePriority</a></span>()</code></th>
+<td class="colLast">
+<div class="block">return the priority when the task is running</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
 <td class="colFirst"><code>protected float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDistanceToTarget()">getDistanceToTarget</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Return the distance from the current entity toward the target in flaot (displacement)</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
+<td class="colFirst"><code>protected int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInactivePriority()">getInactivePriority</a></span>()</code></th>
+<td class="colLast">
+<div class="block">return the priorit when the task is not running</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPriority()">getPriority</a></span>()</code></th>
 <td class="colLast">
@@ -232,21 +246,21 @@ float&nbsp;maxChaseDistance,
  or return the priority of chasetask when it inactive (other task run)</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTargetVisible()">isTargetVisible</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Check if there are any object between the entity and the target</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#start()">start</a></span>()</code></th>
 <td class="colLast">
 <div class="block">start the chase task - the entity will chase toward the position of the target</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stop()">stop</a></span>()</code></th>
 <td class="colLast">
@@ -254,7 +268,7 @@ float&nbsp;maxChaseDistance,
  In this if get priority return -1, stop chase task</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -422,6 +436,28 @@ float&nbsp;maxChaseDistance,
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>float distance toward target</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getActivePriority()">getActivePriority</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getActivePriority</span>()</div>
+<div class="block">return the priority when the task is running</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>priority - allow to switch task if target is out of reach</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getInactivePriority()">getInactivePriority</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getInactivePriority</span>()</div>
+<div class="block">return the priorit when the task is not running</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>priority - allow to switch task if target is in view range</dd>
 </dl>
 </section>
 </li>
