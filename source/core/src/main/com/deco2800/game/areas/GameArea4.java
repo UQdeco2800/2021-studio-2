@@ -15,6 +15,7 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
@@ -137,13 +138,6 @@ public class GameArea4 extends GameArea {
 
         spawnTerrain();
         spawnPlayer();
-
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnBoss();
 
         spawnObstacles();
         spawnLights();
@@ -561,13 +555,15 @@ public class GameArea4 extends GameArea {
         resourceService.unloadAssets(arrowSounds);
     }
 
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
+    private void setInitialDialogue() {
+        PlayerSave.write();
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.TUTORIAL;
+
+        PlayerSave.Save.setHasPlayed(true);
+        textBox.setRandomFirstEncounter(dialogueSet);
     }
 
     @Override

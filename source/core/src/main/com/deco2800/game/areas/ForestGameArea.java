@@ -175,7 +175,6 @@ public class ForestGameArea extends GameArea {
 //        spawnOutdoorArcher();
         spawnLoki();
         playMusic();
-        setDialogue();
 //        spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
@@ -473,32 +472,6 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(forestTextureAtlases);
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        PlayerSave.Save pSave = PlayerSave.load();
-
-
-        if (pSave.lokiEnc < 2 || pSave.lokiEnc >= 4) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_INTRODUCTION);
-
-            pSave.lokiEnc += 1;
-
-        } else if (pSave.lokiEnc >= 1 && pSave.lokiEnc < 3) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
-
-            pSave.lokiEnc += 1;
-        }
-
-        PlayerSave.write(pSave);
-
     }
 
     /**

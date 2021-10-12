@@ -15,6 +15,7 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
@@ -139,6 +140,7 @@ public class GameArea0 extends GameArea {
 
         spawnMovementCutscenes();
         spawnDialogueCutscenes();
+        setInitialDialogue();
 
         spawnObstacles();
         spawnLights();
@@ -208,13 +210,26 @@ public class GameArea0 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_ENCOUNTER;;
+        DialogueSet set;
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            set = DialogueSet.FIRST_ENCOUNTER;
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                set = DialogueSet.BOSS_DEFEATED_BEFORE;
+            }
+        }
         HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
         for (HashMap<String, Float> dialogue : dialogues) {
             int x = dialogue.get("x").intValue();
             int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
@@ -481,10 +496,25 @@ public class GameArea0 extends GameArea {
     /**
      * Sets the dialogue for when the game first loads.
      */
-    private void setDialogue() {
+    private void setInitialDialogue() {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(RandomDialogueSet.ELF_INTRODUCTION);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(RandomDialogueSet.ELF_INTRODUCTION);
+            }
+        }
+        PlayerSave.Save.setElfWins(0);
+        PlayerSave.Save.setElfEnc(1);
+        PlayerSave.write();
     }
 
     @Override

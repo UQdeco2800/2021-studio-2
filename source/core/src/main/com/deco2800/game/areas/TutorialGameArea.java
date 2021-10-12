@@ -434,7 +434,7 @@ public class TutorialGameArea extends GameArea {
 
         logger.info("Resetting Save File");
         PlayerSave.Save pSave = PlayerSave.initial();
-        PlayerSave.write(pSave);
+        PlayerSave.write();
 
 
         logger.debug("Loading assets");
@@ -463,24 +463,6 @@ public class TutorialGameArea extends GameArea {
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(arrowSounds);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        PlayerSave.Save pSave = PlayerSave.load();
-
-
-        if (pSave.hasPlayed == false) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
-
-            pSave.hasPlayed = true;
-        }
-
-        PlayerSave.write(pSave);
     }
 
     @Override

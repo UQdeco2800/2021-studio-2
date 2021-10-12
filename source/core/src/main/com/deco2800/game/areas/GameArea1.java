@@ -15,6 +15,7 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
@@ -143,16 +144,12 @@ public class GameArea1 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
         spawnBoss();
 
-//        spawnHellWarriorObject();
+        spawnHellWarriorObject();
         spawnMovementCutscenes();
         spawnDialogueCutscenes();
+        setInitialDialogue();
 
         spawnObstacles();
         spawnLights();
@@ -237,17 +234,58 @@ public class GameArea1 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
+        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_ENCOUNTER;;
+        DialogueSet set;
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            set = DialogueSet.FIRST_ENCOUNTER;
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                set = DialogueSet.BOSS_DEFEATED_BEFORE;
+            }
+        }
+
         HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
         for (HashMap<String, Float> dialogue : dialogues) {
             int x = dialogue.get("x").intValue();
             int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
         }
+    }
+
+    /**
+     * Sets the dialogue for when the game first loads.
+     */
+    private void setInitialDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_INTRODUCTION;
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getLokiEnc() == 0) {
+            textBox.setRandomFirstEncounter(dialogueSet);
+        } else {
+            if (PlayerSave.Save.getLokiWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
+            }
+        }
+        PlayerSave.Save.setLokiEnc(1);
+        PlayerSave.Save.setElfWins(1);
+        PlayerSave.Save.setLokiWins(0);
+        PlayerSave.write();
     }
 
     private void spawnPTraps() {
@@ -498,14 +536,6 @@ public class GameArea1 extends GameArea {
         resourceService.unloadAssets(arrowSounds);
     }
 
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
-    }
 
     @Override
     public void dispose() {
