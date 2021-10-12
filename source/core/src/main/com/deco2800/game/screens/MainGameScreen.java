@@ -99,7 +99,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game);
+            this.gameArea = new GameArea3(terrainFactory, game);
         } else if (world.equals("game0")) {
             this.gameArea = new GameArea0(terrainFactory, game);
         } else if (world.equals("game1")) {
