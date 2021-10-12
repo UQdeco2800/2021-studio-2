@@ -101,7 +101,7 @@ public class GameArea3 extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/arrow_broken/arrowBroken.atlas",
+            "images/arrow_broken/arrowBroken.atlas", "Odin/odin.atlas", "end/portal.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -151,7 +151,7 @@ public class GameArea3 extends GameArea {
         spawnAsgardWarriorObject(map);
         spawnMovementCutscenes(map);
         spawnDialogueCutscenes();
-
+        spawnOdin();
         spawnObstacles();
         spawnLights();
 
@@ -163,6 +163,7 @@ public class GameArea3 extends GameArea {
         spawnHealthCrateObject();
         playMusic();
         spawnTeleport();
+
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
@@ -226,6 +227,20 @@ public class GameArea3 extends GameArea {
 
             spawnEntityAt(
                     ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnOdin() {
+        HashMap<String, Float>[] bossObjects = map.getBossObjects();
+        for (HashMap<String, Float> boss : bossObjects) {
+            int x = boss.get("x").intValue();
+            int y = boss.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createOdin(player),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
