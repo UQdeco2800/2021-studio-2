@@ -20,7 +20,7 @@ public abstract class ProjectileController extends Component {
     protected HitboxComponent hitbox;
     protected short targetLayer;
     protected CombatStatsComponent combatStats;
-    protected final long gameTime;
+    protected long gameTime;
     protected Vector2 target;
 
     /**
@@ -73,11 +73,11 @@ public abstract class ProjectileController extends Component {
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
         if (targetStats != null) {
             // add entity's base attack to attack, if they exist.
-            if (hitbox == null) {
+//            if (hitbox == null) {
                 targetStats.weaponHit(this.stats.attackPower);
-            } else {
+            /*} else {
                 targetStats.hit(combatStats, this.stats.attackPower);
-            }
+            } This set of code will always be redundant since hitbox can never be null */
         }
 
         // Apply knockback

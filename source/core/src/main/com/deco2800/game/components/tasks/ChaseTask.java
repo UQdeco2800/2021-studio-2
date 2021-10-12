@@ -17,9 +17,6 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
     private final int priority;
     private final float viewDistance;
     private final float maxChaseDistance;
-    private final PhysicsEngine physics;
-    private final DebugRenderer debugRenderer;
-    private final RaycastHit hit = new RaycastHit();
     private Vector2 movementSpeed;
     protected MovementTask movementTask;
 
@@ -34,8 +31,6 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
         this.priority = priority;
         this.viewDistance = viewDistance;
         this.maxChaseDistance = maxChaseDistance;
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**
@@ -117,7 +112,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
      *
      * @return priority - allow to switch task if target is out of reach
      */
-    private int getActivePriority() {
+    protected int getActivePriority() {
         float dst = getDistanceToTarget();
         if (dst > maxChaseDistance || !isTargetVisible()) {
             return -1; // Too far, stop chasing
@@ -130,7 +125,7 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
      *
      * @return priority - allow to switch task if target is in view range
      */
-    private int getInactivePriority() {
+    protected int getInactivePriority() {
         float dst = getDistanceToTarget();
         if (dst < viewDistance && isTargetVisible()) {
             return priority;

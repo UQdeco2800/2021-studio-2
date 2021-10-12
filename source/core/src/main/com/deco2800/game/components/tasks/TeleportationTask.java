@@ -28,18 +28,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     private final Entity target;
     /**
-     * object - physics engine
-     */
-    private final PhysicsEngine physics;
-    /**
-     * debug mode
-     */
-    private final DebugRenderer debugRenderer;
-    /**
-     * ray cast on debug mode
-     */
-    private final RaycastHit hit = new RaycastHit();
-    /**
      * cooldown before skill can cast again
      */
     private final long cooldown;
@@ -77,8 +65,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         this.target = target;
         this.cooldown = cooldown;
         this.gameArea = ServiceLocator.getGameAreaService();
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**

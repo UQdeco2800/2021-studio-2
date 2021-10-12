@@ -160,7 +160,6 @@ public class PlayerFactory {
         player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f, 0.4f), new Vector2(0.5f, 0.2f));
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
-        //player.setScale(new Vector2().scl(2));
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
         player.setEntityType("player");
         return player;

@@ -10,9 +10,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Touch.ExplosionTouchComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
-import com.deco2800.game.components.Touch.TouchTeleportComponent;
+import com.deco2800.game.components.touch.ExplosionTouchComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.*;
@@ -65,7 +65,7 @@ public class WeaponFactory {
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("arrow");
-        BaseArrowConfig config = configs.baseArrow;
+        ArrowConfig config = configs.baseArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(config.speedX, config.speedY));
         AITaskComponent aiComponent =
@@ -132,7 +132,6 @@ public class WeaponFactory {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/arrow_normal.png", Texture.class));
         trackingArrow
-                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);

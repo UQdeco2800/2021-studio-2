@@ -30,10 +30,6 @@ public class HammerProjectile extends ProjectileController {
      */
     private Vector2 start;
     /**
-     * Hitbox used by projectile
-     */
-    private HitboxComponent hitbox;
-    /**
      * Movement component used by projectile
      */
     private PhysicsMovementComponent movingComponent;
@@ -46,14 +42,6 @@ public class HammerProjectile extends ProjectileController {
      * Knockback applied when projectile hits target
      */
     private final int knockback;
-    /**
-     * The target layer that the projectile will damage
-     */
-    private final short targetLayer;
-    /**
-     * CombatStats of owner entity
-     */
-    protected CombatStatsComponent combatStats;
 
     /**
      * Current status of Mjolnir. See below for constants
@@ -63,14 +51,6 @@ public class HammerProjectile extends ProjectileController {
     private final int RECALLING = 1;
     private final int STATIC = 2;
 
-    /**
-     * Game time since last notable event: e.g. since creation or since recall was called
-     */
-    private long gameTime;
-    /**
-     * The target that the projectile will move towards
-     */
-    protected Vector2 target;
     /**
      * The hammer component that controls the projectile
      */

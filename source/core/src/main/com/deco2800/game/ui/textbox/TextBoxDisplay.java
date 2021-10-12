@@ -338,6 +338,8 @@ public class TextBoxDisplay extends UIComponent {
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
+            default:
+                break;
         }
         setNPCPosition();
     }

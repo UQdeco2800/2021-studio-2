@@ -2,8 +2,8 @@ package com.deco2800.game.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Touch.TouchCutsceneComponent;
-import com.deco2800.game.components.Touch.TouchMoveComponent;
+import com.deco2800.game.components.touch.TouchCutsceneComponent;
+import com.deco2800.game.components.touch.TouchMoveComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -120,7 +120,7 @@ class TouchCutsceneComponentTest {
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchMoveComponent(triggerLayer,
-                                new Vector2(1f, 0), 5f, 0f, false))
+                                new Vector2(1f, 0), false))
                         .addComponent(new TouchCutsceneComponent(triggerLayer, RandomDialogueSet.TEST,
                                 dialogueSet));
         entity.create();
