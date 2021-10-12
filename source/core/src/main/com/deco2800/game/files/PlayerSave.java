@@ -52,19 +52,12 @@ public class PlayerSave {
 
     }
 
+    /**
+     * Saves a completely reset file to the player save file.
+     */
     public static void resetFile() {
         Save.resetSave();
         write();
-    }
-
-    /**
-     * Function which returns a default save file object with
-     * default values as though the game had never been reset
-     *
-     * @return Returns a PlayerSave.Save object with default values
-     */
-    public static Save initial() {
-        return new Save();
     }
 
     /**
@@ -96,6 +89,7 @@ public class PlayerSave {
 
         } catch (FileNotFoundException | NumberFormatException e) {
             logger.warn("Player Save File has not correctly written save status");
+            Save.resetSave();
         }
     }
 

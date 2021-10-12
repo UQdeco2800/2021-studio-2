@@ -286,7 +286,7 @@ public class GameArea3 extends GameArea {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
 
-        RandomDialogueSet dialogueSet = RandomDialogueSet.TEST;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_INTRODUCTION;
 
         PlayerSave.Save.setHasPlayed(true);
         if (PlayerSave.Save.getOdinEnc() == 0) {
@@ -307,7 +307,7 @@ public class GameArea3 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_ENCOUNTER;;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;

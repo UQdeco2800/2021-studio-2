@@ -433,7 +433,6 @@ public class TutorialGameArea extends GameArea {
     private void loadAssets() {
 
         logger.info("Resetting Save File");
-        PlayerSave.Save pSave = PlayerSave.initial();
         PlayerSave.write();
 
 
