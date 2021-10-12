@@ -5,6 +5,7 @@ import com.deco2800.game.events.listeners.EventListener1;
 import com.deco2800.game.events.listeners.EventListener2;
 import com.deco2800.game.events.listeners.EventListener3;
 import com.deco2800.game.extensions.GameExtension;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,7 +60,11 @@ class EventHandlerTest {
 
     @Test
     void shouldHandleNoListeners() {
-        handler.trigger("not-real-event");
+        try {
+            handler.trigger("not-real-event");
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     @Test

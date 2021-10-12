@@ -28,7 +28,7 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
     /**
      * number of time enemy is spawn
      */
-    private static int spawn = 0;
+    private int spawn = 0;
 
     /**
      * spawn the minion to help the boss attack the target
@@ -97,7 +97,6 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
      * @return true if not, false otherwise
      */
     public boolean mapBound() {
-        //todo: this isn't always true map can change sizes, wont always be 30x30
         return owner.getEntity().getPosition().x < 0
                 && owner.getEntity().getPosition().y < 0
                 && owner.getEntity().getPosition().x > 30

@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.entities.Entity;

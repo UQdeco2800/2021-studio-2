@@ -7,7 +7,7 @@ import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.WeaponConfigs;
@@ -126,7 +126,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
                     for (Entity fireball : entities) {
                         if (!ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
-                            entities[index] = WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(index - 1, 1));
+                            entities[index] = WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(index - 1f, 1f));
                             gameArea.spawnEntityAt(entities[index], owner.getEntity().getCenterPosition(), true, true);
                             lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
                             return (true);

@@ -53,12 +53,13 @@ public class AITaskComponent extends Component implements TaskRunner {
             if (desiredtask != currentTask) {
                 changeTask(desiredtask);
             }
-            try {
+            /*try {
                 if (getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+                    logger.info("The entity {} is dead.", entity);
                 }
-            } catch (NullPointerException E) {
-
-            }
+            } catch (NullPointerException e) {
+                logger.warn("Entity does not contain a CombatStatsComponent");
+            } */
             currentTask.update();
         }
     }

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
-public class TransformBarrelComponentTest {
+class TransformBarrelComponentTest {
     @Spy
     TransformBarrelComponent barrel;
 

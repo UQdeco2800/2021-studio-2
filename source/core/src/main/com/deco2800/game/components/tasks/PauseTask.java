@@ -12,12 +12,6 @@ import com.deco2800.game.services.ServiceLocator;
 public class PauseTask extends DefaultTask implements PriorityTask {
 
     /**
-     * Constructor for the Pause Task to prevent the NPC from moving and attacking.
-     */
-    public PauseTask() {
-    }
-
-    /**
      * Checks if the game is paused and the priority will change depending on this. If the
      * game is paused, this task will have the highest priority and will stop the enemy from moving.
      *
