@@ -531,6 +531,46 @@ public class NPCFactory {
         return boss;
     }
 
+    public static Entity createThor(Entity target) {
+        Entity thor = createBaseNPCNoAI();
+        OdinBossConfig config = configs.odinBoss;
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(target, 10, 5f, 20f))
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("thor/thor.atlas",
+                                TextureAtlas.class));
+        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
+
+        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar.png", Texture.class));
+        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_bar_decrease.png", Texture.class));
+        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/enemy_health_border.png", Texture.class));
+        HealthBarComponent healthBarComponent = new HealthBarComponent(
+                healthBar, healthBarFrame, healthBarDecrease);
+
+        thor.addComponent(new CombatStatsComponent(config.health, config.attack))
+                .addComponent(animator)
+                .addComponent(new HumanAnimationController())
+                .addComponent(aiComponent)
+                .addComponent(healthBarComponent);
+        thor.scaleWidth(2);
+        thor.scaleHeight(2);
+        return thor;
+    }
+
     public static Entity createOdin(Entity target) {
         Entity odin = createBaseNPCNoAI();
         OdinBossConfig config = configs.odinBoss;
