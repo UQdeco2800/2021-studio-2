@@ -406,9 +406,9 @@ public class GameArea1 extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity elfKing = NPCFactory.createElfGuard(player);
+        Entity elfGuard = NPCFactory.createElfGuard(player);
         incNum();
-        spawnEntityAt(elfKing, randomPos, true, true);
+        spawnEntityAt(elfGuard, randomPos, true, true);
     }
 
     /**

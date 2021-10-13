@@ -34,7 +34,7 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
     /**
      * Add listener to this alertable entity to detect event when the AlertCaller triggers "alert"
      *
-     * @return 10 if alerted (always see the target), default otherwise
+     * @return 15 if alerted (always see the target), default otherwise
      */
     @Override
     public int getPriority() {
@@ -47,7 +47,7 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
             }
         }
         if (alerted) {
-            return 10;
+            return 15;
         }
         return super.getPriority();
     }

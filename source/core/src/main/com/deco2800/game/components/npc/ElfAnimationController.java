@@ -70,7 +70,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
@@ -106,7 +106,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
@@ -142,7 +142,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
@@ -178,7 +178,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {

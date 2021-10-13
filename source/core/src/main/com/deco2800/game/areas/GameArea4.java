@@ -392,10 +392,10 @@ public class GameArea4 extends GameArea {
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createElfGuard(player);
+            Entity elfGuard = NPCFactory.createElfGuard(player);
             incNum();
             spawnEntityAt(
-                    elf,
+                    elfGuard,
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
@@ -484,9 +484,9 @@ public class GameArea4 extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity elfKing = NPCFactory.createElfGuard(player);
+        Entity elfGuard = NPCFactory.createElfGuard(player);
         incNum();
-        spawnEntityAt(elfKing, randomPos, true, true);
+        spawnEntityAt(elfGuard, randomPos, true, true);
     }
 
     /**

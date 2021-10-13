@@ -30,7 +30,7 @@ public class AlertChaseTask extends ChaseTask implements PriorityTask {
 
     @Override
     public void stop() {
-        super.start();
+        super.stop();
         owner.getEntity().getEvents().trigger("unAlert");
     }
 

@@ -123,9 +123,7 @@ public class NPCFactory {
                         .addTask(new ZigChaseTask(
                                 target, 11, 4f, 4f, 1))
                         .addTask(new AlertableChaseTask(
-                                target, 10, 3f, 4f))
-                        .addTask(new MeleeChaseTask(
-                                target, 10, 15f, 20f))
+                                target, 10, 4f, 4f))
                         .addTask(new PauseTask())
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
@@ -135,11 +133,6 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new ElfAnimationController());
-
-        elf.getComponent(AITaskComponent.class).
-                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-        elf.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
@@ -158,10 +151,10 @@ public class NPCFactory {
 
     public static Entity createElfGuard(Entity target) {
         Entity elfGuard = createBaseNPCNoAI();
-        ElfBossConfig config = configs.elfBoss;
+        MeleeEnemyConfig config = configs.elfMelee;
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                .addTask(new AlertChaseTask(target, 10, 3f, 4f))
+                .addTask(new AlertChaseTask(target, 15, 3f, 4f))
                 .addTask(new PauseTask())
                 .addTask(new DeathPauseTask(
                         target, 0, 100, 100, 1.5f));
@@ -205,7 +198,6 @@ public class NPCFactory {
 
         elfGuard.getComponent(AnimationRenderComponent.class).scaleEntity();
         elfGuard.setScale(0.6f, 1f);
-        elfGuard.setEntityType("melee");
         PhysicsUtils.setScaledCollider(elfGuard, 0.9f, 0.2f);
         return elfGuard;
     }
@@ -460,10 +452,8 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(
-                                target, 10, 7f, 10f))
                         .addTask(new AlertableChaseTask(
-                                target, 10, 3f, 4f))
+                                target, 10, 7f, 10f))
                         .addTask(new MeleeChaseTask(
                                 target, 10, 15f, 20f))
                         .addTask(new SpawnMinionsAndExplosionTask(target))
@@ -658,11 +648,6 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
 
-        viking.getComponent(AITaskComponent.class).
-                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-        viking.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
-
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
         Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
@@ -709,11 +694,6 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
 
-        viking.getComponent(AITaskComponent.class).
-                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-        viking.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
-
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
         Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
@@ -759,11 +739,6 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
-
-        viking.getComponent(AITaskComponent.class).
-                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
-        viking.getComponent(AITaskComponent.class).
-                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
         Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
         Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
