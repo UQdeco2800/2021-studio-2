@@ -99,6 +99,13 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/lokiBoss.png",
+            "thor/aoe_attck.png",
+            "thor/up_attck.png",
+            "thor/down_attck.png",
+            "thor/left_attck.png",
+            "thor/right_attck.png",
+            "thor/walk_left.png",
+            "thor/walk_right.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -115,7 +122,7 @@ public class ForestGameArea extends GameArea {
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas"
+            "images/lokiBoss.atlas", "thor/thor.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -161,18 +168,19 @@ public class ForestGameArea extends GameArea {
         //spawnTrees();
         spawnPlayer();
         spawnCrate();
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnVikingMelee();
-        spawnBoss();
-        spawnVikingMelee();
-        spawnHellVikingMelee();
-        spawnAsgardWarriorMelee();
-        spawnOutdoorArcher();
-        spawnLoki();
+        spawnThor();
+//        spawnMeleeElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnVikingMelee();
+//        spawnBoss();
+//        spawnVikingMelee();
+//        spawnHellVikingMelee();
+//        spawnAsgardWarriorMelee();
+//        spawnOutdoorArcher();
+//        spawnLoki();
         playMusic();
         setDialogue();
         spawnOdin();
@@ -339,6 +347,14 @@ public class ForestGameArea extends GameArea {
         Entity boss = NPCFactory.createLoki(player);
         incBossNum();
         spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
+    }
+    private void spawnThor() {
+        /*GridPoint2 minPos = new GridPoint2(0, 0);
+        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
+        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
+        Entity boss = NPCFactory.createThor(player);
+        incBossNum();
+        spawnEntityAt(boss, new GridPoint2(15, 15), true, true);
     }
 
     /**
