@@ -57,42 +57,9 @@ public class NPCFactory {
      * @return entity
      */
 
-//    public static void MeleeAnimations(){
-//       AnimationRenderComponent animator =
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-//
-//        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
-//
-//        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-//        //BACK DEATH??
-//
-//        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
-//
-//        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
-//
-//        createMeleeElf().elf
-//        addComponent(animator);
-//
-//    }
     public static Entity createMeleeElf(Entity target) {
         Entity elf = createBaseNPCNoAI();
         MeleeEnemyConfig config = configs.elfMelee;
-//        //AnimationRenderComponent animator =MeleeAnimations();
-//        MeleeAnimations();
-
-
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
@@ -141,7 +108,8 @@ public class NPCFactory {
         elf.addComponent(healthBarComponent);
 
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        elf.setScale(0.6f, 1f);
+        //elf.setScale(0.6f, 1f);
+        elf.setScale(1f, 1.3f);
         elf.setEntityType("melee");
         PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
 
@@ -198,6 +166,7 @@ public class NPCFactory {
 
         elfGuard.getComponent(AnimationRenderComponent.class).scaleEntity();
         elfGuard.setScale(0.6f, 1f);
+        elfGuard.setScale(1f, 1.3f);
         PhysicsUtils.setScaledCollider(elfGuard, 0.9f, 0.2f);
         return elfGuard;
     }
@@ -264,7 +233,7 @@ public class NPCFactory {
         anchoredElf.addComponent(healthBarComponent);
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        anchoredElf.setScale(0.6f, 1f);
+        anchoredElf.setScale(1f, 1.3f);
         anchoredElf.setEntityType("melee");
         PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
         anchoredElf.setAttackRange(6);
@@ -339,7 +308,7 @@ public class NPCFactory {
 
         anchoredElf.setEntityType("melee");
 
-        anchoredElf.setScale(0.6f, 1f);
+        anchoredElf.setScale(1f, 1.3f);
         PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
         return anchoredElf;
     }

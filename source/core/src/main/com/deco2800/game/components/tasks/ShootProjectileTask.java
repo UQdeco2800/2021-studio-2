@@ -173,6 +173,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     public void update() {
         if (canShoot() || poweringUp) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            //trigger shoot projectile animations here
             shoot();
         }
         checkFireBalls();
