@@ -139,12 +139,12 @@ public class GameArea4 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
+//        spawnMeleeElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnBoss();
 
         spawnObstacles();
         spawnLights();
@@ -164,6 +164,20 @@ public class GameArea4 extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Level 5"));
         spawnEntity(ui);
+    }
+
+    private void spawnDialogueCutscenes() {
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     private void spawnTerrain() {

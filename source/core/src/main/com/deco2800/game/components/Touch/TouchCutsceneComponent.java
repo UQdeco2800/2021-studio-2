@@ -1,6 +1,7 @@
 package com.deco2800.game.components.Touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
@@ -22,6 +23,8 @@ public class TouchCutsceneComponent extends TouchComponent {
     private PlayerActions actions;
     private final RandomDialogueSet dialogueSet;
     private final DialogueSet type;
+    private int maxRepeats;
+    private int numRepeats;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -30,10 +33,12 @@ public class TouchCutsceneComponent extends TouchComponent {
      * @param dialogueSet The set of dialogue which a dialogue will be chosen from to display
      * @param type        The type of randomness for the selection of dialogue
      */
-    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type) {
+    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type, int maxRepeats) {
         super(targetLayer);
         this.dialogueSet = dialogueSet;
         this.type = type;
+        this.maxRepeats = maxRepeats;
+        this.numRepeats = 0;
     }
 
     /**
@@ -49,9 +54,13 @@ public class TouchCutsceneComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
+        if (numRepeats >= maxRepeats) {
+            return;
+        }
         if (this.checkEntities(me, other)) {
             return;
         }
+        numRepeats++;
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);

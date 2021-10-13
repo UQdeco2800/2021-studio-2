@@ -83,7 +83,12 @@ public class GameArea3 extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/viking.png",
+            "images/hellViking.png",
+            "images/outdoorArcher.png",
+            "images/asgardWarrior.png",
+            "images/arrow_normal.png",
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -94,7 +99,9 @@ public class GameArea3 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas",
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/arrow_broken/arrowBroken.atlas", "Odin/odin.atlas", "end/portal.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -139,13 +146,12 @@ public class GameArea3 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
-
+        spawnOutdoorArcherObject(map);
+        spawnOutdoorWarriorObject(map);
+        spawnAsgardWarriorObject(map);
+        spawnMovementCutscenes(map);
+        spawnDialogueCutscenes();
+        spawnOdin();
         spawnObstacles();
         spawnLights();
 
@@ -157,6 +163,7 @@ public class GameArea3 extends GameArea {
         spawnHealthCrateObject();
         playMusic();
         spawnTeleport();
+
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
@@ -220,6 +227,34 @@ public class GameArea3 extends GameArea {
 
             spawnEntityAt(
                     ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnOdin() {
+        HashMap<String, Float>[] bossObjects = map.getBossObjects();
+        for (HashMap<String, Float> boss : bossObjects) {
+            int x = boss.get("x").intValue();
+            int y = boss.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createOdin(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnDialogueCutscenes() {
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Touch.TouchCutsceneComponent;
 import com.deco2800.game.components.Touch.TouchMoveComponent;
+import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -122,7 +123,7 @@ class TouchCutsceneComponentTest {
                         .addComponent(new TouchMoveComponent(triggerLayer,
                                 new Vector2(1f, 0), 5f, 0f, false))
                         .addComponent(new TouchCutsceneComponent(triggerLayer, RandomDialogueSet.TEST,
-                                dialogueSet));
+                                dialogueSet, Integer.MAX_VALUE));
         entity.create();
         return entity;
     }
@@ -132,7 +133,8 @@ class TouchCutsceneComponentTest {
                 new Entity()
                         .addComponent(new CombatStatsComponent(10, 0))
                         .addComponent(new PhysicsComponent())
-                        .addComponent(new HitboxComponent().setLayer(layer));
+                        .addComponent(new HitboxComponent().setLayer(layer))
+                        .addComponent(new KeyboardPlayerInputComponent());
         target.create();
         return target;
     }

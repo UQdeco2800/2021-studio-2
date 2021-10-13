@@ -26,6 +26,46 @@ public class Map {
     private HashMap<String, Float>[] assassinObjects;
     private HashMap<String, Float>[] bossObjects;
     private HashMap<String, Float>[] anchoredObjects;
+    private HashMap<String, Float>[] asgardMeleeObjects;
+    private HashMap<String, Float>[] outdoorMeleeObjects;
+    private HashMap<String, Float>[] hellMeleeObjects;
+    private HashMap<String, Float>[] moveRightObjects;
+    private HashMap<String, Float>[] moveLeftObjects;
+    private HashMap<String, Float>[] moveUpObjects;
+    private HashMap<String, Float>[] moveDownObjects;
+    private HashMap<String, Float>[] cutsceneObjects;
+
+    public HashMap<String, Float>[] getCutsceneObjects() {
+        return cutsceneObjects;
+    }
+
+    public HashMap<String, Float>[] getMoveRightObjects() {
+        return moveRightObjects;
+    }
+
+    public HashMap<String, Float>[] getMoveDownObjects() {
+        return moveDownObjects;
+    }
+
+    public HashMap<String, Float>[] getMoveLeftObjects() {
+        return moveLeftObjects;
+    }
+
+    public HashMap<String, Float>[] getMoveUpObjects() {
+        return moveUpObjects;
+    }
+
+    public HashMap<String, Float>[] getHellMeleeObjects() {
+        return hellMeleeObjects;
+    }
+
+    public HashMap<String, Float>[] getAsgardMeleeObjects() {
+        return asgardMeleeObjects;
+    }
+
+    public HashMap<String, Float>[] getOutdoorMeleeObjects() {
+        return outdoorMeleeObjects;
+    }
 
     public HashMap<String, Float>[] getMeleeObjects() {
         return meleeObjects;
