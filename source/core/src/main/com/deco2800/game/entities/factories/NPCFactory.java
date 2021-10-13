@@ -586,7 +586,7 @@ public class NPCFactory {
                         .addTask(new ChaseTask(target, 10, 5f, 20f))
                         .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
 
-        // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------------
+        // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("Odin/odin.atlas",
@@ -596,7 +596,7 @@ public class NPCFactory {
         animator.startAnimation("default");
         setHumanAnimations(animator);
 
-        //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
+        //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS-------------------
         odin.addComponent(new CombatStatsComponent(config.health, config.attack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
@@ -604,7 +604,7 @@ public class NPCFactory {
 //            .addComponent(new BossOverlayComponent());
 //        odin.getComponent(BossOverlayComponent.class).nameBoss("God King: ODIN");
 
-        // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------------
+        // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------
         odin.setAttackRange(5);
         //odin.getComponent(AnimationRenderComponent.class).scaleEntity();
         odin.scaleWidth(2);  //MORE SCALLING HERE AND AT THE BOTTOM???

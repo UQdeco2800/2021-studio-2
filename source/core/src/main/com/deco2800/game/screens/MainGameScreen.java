@@ -53,8 +53,7 @@ public class MainGameScreen extends ScreenAdapter {
             "images/textBoxDisplay/black_bars.png",
             "images/textBoxDisplay/prison_text_box.png",
             "images/textBoxDisplay/loki_image.png",
-            "images/textBoxDisplay/loki_text_box.png",
-            "end/white.png"
+            "images/textBoxDisplay/loki_text_box.png"
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
@@ -100,7 +99,7 @@ public class MainGameScreen extends ScreenAdapter {
         if (world.equals("forest")) {
             this.gameArea = new ForestGameArea(terrainFactory);
         } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game);
+            this.gameArea = new GameArea3(terrainFactory, game);
         } else if (world.equals("game0")) {
             this.gameArea = new GameArea0(terrainFactory, game);
         } else if (world.equals("game1")) {

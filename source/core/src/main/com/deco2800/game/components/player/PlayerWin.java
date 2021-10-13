@@ -24,7 +24,8 @@ public class PlayerWin extends UIComponent {
     }
 
     private void addActors() {
-        whiteScreen = new Image(ServiceLocator.getResourceService().getAsset("end/white.png",
+        whiteScreen = new Image(ServiceLocator.getResourceService().getAsset("images/textBoxDisplay" +
+                        "/black_bars.png",
                 Texture.class));
         // setup
         whiteScreen.setScaling(Scaling.stretch);

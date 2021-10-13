@@ -124,7 +124,7 @@ public class EndScreen extends ScreenAdapter {
             public void run() {
                 endUi.getComponent(EndScreenDisplay.class).displayButtons();
             }
-        }, 5f);
+        }, 4.5f);
 
     }
 
