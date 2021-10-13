@@ -69241,6 +69241,18 @@
             "y": 70,
             "height": 32,
             "width": 32
+        },
+        {
+            "x": 79,
+            "y": 70,
+            "height": 32,
+            "width": 64
+        },
+        {
+            "x": 53,
+            "y": 70,
+            "height": 32,
+            "width": 96
         }
     ],
     "spikeObjects": [
