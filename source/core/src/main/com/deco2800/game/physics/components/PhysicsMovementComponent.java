@@ -22,12 +22,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
 
-
     public boolean animateAttack;
-    public boolean leftStart;
-    public boolean rightStart;
-    public boolean upStart;
-    public boolean downStart = false;
     public boolean animateStun;
 
 
@@ -81,111 +76,75 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     public void setTarget(Vector2 target) {
         logger.trace("Setting target to {}", target);
         this.targetPosition = target;
-        if (this.targetPosition.x < 1) {
-        }
     }
 
     public void setMaxSpeed(Vector2 maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
 
+    /**
+     * enemy move down
+     */
     public void downAnimation() {
-        if (animateStun == false) {
-            if (animateAttack == true) { //attack animation
-                this.getEntity().getEvents().trigger("attackDown");
-            }
-            else { //moveAnimation
-                this.getEntity().getEvents().trigger("DownStart");
-            }
-        } else { //stun animation
-            this.getEntity().getEvents().trigger("stunDown");
-        }
+        this.getEntity().getEvents().trigger("DownStart");
     }
 
-    public void upAnimation(){
-        if (animateStun == false) {
-            if (animateAttack == true) { //attack animation
-                this.getEntity().getEvents().trigger("attackUp");
-            }
-            else { //moveAnimation
-                this.getEntity().getEvents().trigger("UpStart");
-            }
-        } else { //stun animation
-            this.getEntity().getEvents().trigger("stunUp");
-        }
+    /**
+     * enemy move up
+     */
+    public void upAnimation() {
+        this.getEntity().getEvents().trigger("UpStart");
     }
 
-    public void leftAnimation(){
-        if (animateStun == false) {
-            if (animateAttack == true) { //attack animation
-                this.getEntity().getEvents().trigger("attackLeft");
-            }
-            else { //moveAnimation
-                this.getEntity().getEvents().trigger("LeftStart");
-            }
-        } else { //stun animation
-            this.getEntity().getEvents().trigger("stunLeft");
-        }
+    /**
+     * enemy move left
+     */
+    public void leftAnimation() {
+        this.getEntity().getEvents().trigger("LeftStart");
     }
 
-    public void rightAnimation(){
-        if (animateStun == false) {
-            if (animateAttack == true) { //attack animation
-                this.getEntity().getEvents().trigger("attackRight");
-            }
-            else { //moveAnimation
-                this.getEntity().getEvents().trigger("RightStart");
-            }
-        } else { //stun animation
-            this.getEntity().getEvents().trigger("stunRight");
-        }
+    /**
+     * enemy move right
+     */
+    public void rightAnimation() {
+        this.getEntity().getEvents().trigger("RightStart");
     }
 
-    public void deathAnimation(){
+    /**
+     *
+     */
+    public void deathAnimation() {
         if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
             if (this.getDirection().x < 0) { //left
                 this.getEntity().getEvents().trigger("LeftStart");
-            } else if (this.getDirection().x > 0) {//right
+            } else if (this.getDirection().x > 0) { //right
                 this.getEntity().getEvents().trigger("RightStart");
             }
-        } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) {//y axis movement
+        } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) { //y axis movement
             if (this.getDirection().y < 0) { //down
                 this.getEntity().getEvents().trigger("DownStart");
-            } else if (this.getDirection().y > 0) {//up
+            } else if (this.getDirection().y > 0) { //up
                 this.getEntity().getEvents().trigger("UpStart");
             }
         }
     }
 
-    public void DirectionAnimation() {
+    /**
+     *
+     */
+    public void directionAnimation() {
         if (!this.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
             if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
                 if (this.getDirection().x < 0) { //left
-                    if (leftStart == false) {//only initiate an animation once
-                        leftAnimation();
-                        leftStart=true;
-                        animateStun = false; //??
-                    }
-                } else if (this.getDirection().x > 0) {//right
-                    if (rightStart == false) {//only initiate an animation once
-                        rightAnimation();
-                        rightStart = true;
-                        animateStun = false; //??
-                    }
+                    leftAnimation();
+                } else if (this.getDirection().x > 0) { //right
+                    rightAnimation();
                 }
-            } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) {//y axis movement
+            } else { //y axis movement
                 if (this.getDirection().y < 0) { //down
-                    if (downStart == false) {//only initiate an animation once
-                        downAnimation();
-                        downStart = true;
-                        animateStun = false; //??
-                    }
-                } else if (this.getDirection().y > 0) {//up
-                    if (upStart == false) {//only initiate an animation once
-                        upAnimation();
-                        upStart = true;
-                        animateStun = false; //??
-                    }
+                    downAnimation();
+                } else if (this.getDirection().y > 0) { //up
+                    upAnimation();
                 }
             }
         } else {
@@ -197,7 +156,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);
         setToVelocity(body, desiredVelocity);
-        DirectionAnimation();
+        directionAnimation();
     }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {
@@ -219,9 +178,4 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         //System.out.println("stopAnimateAttack, set to false");
         animateAttack = false;
     }
-
-    public void setStun() {
-        animateStun = true;
-    }
-
 }

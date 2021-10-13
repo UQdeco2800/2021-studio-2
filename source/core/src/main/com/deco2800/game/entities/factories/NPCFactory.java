@@ -403,7 +403,7 @@ public class NPCFactory {
                 HealthBar, HealthBarFrame, HealthBarDecrease);
         elf.addComponent(healthBarComponent);
 
-        elf.setScale(0.8f, 1f);
+        elf.setScale(1.2f, 1.2f);
         PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
         return elf;
     }

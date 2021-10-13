@@ -169,13 +169,13 @@ public class ForestGameArea extends GameArea {
         spawnPlayer();
         spawnCrate();
 
-        spawnThor();
+//        spawnThor();
         spawnMeleeElf();
         spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnVikingMelee();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
+        spawnVikingMelee();
 //        spawnBoss();
 //        spawnVikingMelee();
 //        spawnHellVikingMelee();
@@ -184,10 +184,10 @@ public class ForestGameArea extends GameArea {
 //        spawnLoki();
 
 
-        spawnBoss();
+//        spawnBoss();
         playMusic();
         setDialogue();
-        spawnOdin();
+//        spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
