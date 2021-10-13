@@ -85,6 +85,8 @@ public class TouchAttackComponent extends TouchComponent {
             return;
         }
 
+
+
         super.onCollisionStart(me, other);
         if (this.checkEntities(me, other)) {
             return;
@@ -109,6 +111,9 @@ public class TouchAttackComponent extends TouchComponent {
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getEvents().trigger("brokenArrow");
         }
+
+        // check layer - NPC or check type
+        // then trigger stun
 
 
         // Apply Initial knockback
