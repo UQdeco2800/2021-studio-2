@@ -82,7 +82,8 @@ public class GameArea0 extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -93,7 +94,9 @@ public class GameArea0 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas","images/arrow_broken/arrowBroken.atlas",
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/lokiBoss.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -376,6 +379,8 @@ public class GameArea0 extends GameArea {
         }
     }
 
+
+
     /**
      * Spawn range elf on terrain, range elf can shoot target
      */
@@ -385,8 +390,10 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createMeleeElf(player);
+                Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
                 incNum();
+                elf.setEntityType("ranged");
+                elf.getEvents().trigger("rangerLeft");
                 spawnEntityAt(
                         elf,
                         new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
@@ -405,7 +412,11 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createMeleeElf(player);
+
+                Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
+                elf.setEntityType("assassin");
+                elf.getEvents().trigger("assassinLeft");
+
                 incNum();
                 spawnEntityAt(
                         elf,
@@ -425,7 +436,7 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createMeleeElf(player);
+                Entity elf = NPCFactory.createBossNPC(player);
                 incNum();
                 spawnEntityAt(
                         elf,
@@ -442,7 +453,7 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createMeleeElf(player);
+                Entity elf = NPCFactory.createElfGuard(player);
                 incNum();
                 spawnEntityAt(
                         elf,
@@ -462,7 +473,8 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createMeleeElf(player);
+                Entity anchor = ObstacleFactory.createAnchor();
+                Entity elf = NPCFactory.createAnchoredElf(player, anchor, 3f);
                 incNum();
                 spawnEntityAt(
                         elf,
