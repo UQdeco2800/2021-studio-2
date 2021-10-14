@@ -64,8 +64,6 @@ public class PlayerSave {
      * Function which reads and then returns a save object from
      * the file at location in SAVE_FILE
      *
-     * @return Returns the PlayerSave.Save object as stored in the written
-     * save file
      */
     public static void load() {
         try {

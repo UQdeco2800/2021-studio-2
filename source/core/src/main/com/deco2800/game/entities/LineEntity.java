@@ -31,6 +31,7 @@ public class LineEntity extends Entity {
      *
      * @param target location of target
      * @param origin location of owner
+     * @return Vector2 representation of the different in positions between the target and origin vectors
      */
     public Vector2 setTarget(Vector2 target, Vector2 origin) {
         Vector2 v1 = origin.cpy();

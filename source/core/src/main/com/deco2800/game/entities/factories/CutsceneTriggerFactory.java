@@ -111,32 +111,6 @@ public class CutsceneTriggerFactory {
     }
 
     /**
-     * Creates an entity that can trigger a cutscene to start.
-     *
-<<<<<<< HEAD
-     * @param dialogueSet the dialogue set the entity will trigger
-     * @param direction   direction to move the player
-     * @return entity that will create the trigger within the map
-     */
-    public static Entity createMoveDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type,
-                                                   Vector2 direction) {
-        Entity trigger =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                        .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                direction, false))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, Integer.MAX_VALUE));
-
-        trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        trigger.getComponent(ColliderComponent.class).setSensor(true);
-        PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(0f);
-        return trigger;
-    }
-
-    /**
      * Creates an entity that can trigger the start of a movement cutscene that will force the player to move left
      *
      * @return an Entity that will force the player to move left when collided with
