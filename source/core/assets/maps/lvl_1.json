@@ -160685,6 +160685,44 @@
             "width": 736
         }
     ],
+    "moveRightObjects": [
+        {
+            "x": 151,
+            "y": 113,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 178,
+            "y": 116,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "cutsceneObjects": [
+        {
+            "x": 183,
+            "y": 115,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "bossObjects": [
+        {
+            "x": 189,
+            "y": 118,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveDownObjects": [
+        {
+            "x": 178,
+            "y": 113,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "teleportObjects": [
         {
             "x": 193,

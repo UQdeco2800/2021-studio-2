@@ -8,6 +8,7 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.deco2800.game.physics.PhysicsLayer;
 
 public class TouchMoveComponent extends TouchComponent {
 
@@ -56,10 +57,10 @@ public class TouchMoveComponent extends TouchComponent {
         if (triggered && !repeatable) {
             return;
         }
-        triggered = true;
-        if (this.checkEntities(me, other)) {
+        if(hitboxComponent.getFixture() != me || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)){
             return;
         }
+        triggered = true;
 
         Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
@@ -88,6 +89,8 @@ public class TouchMoveComponent extends TouchComponent {
 
             input.lockPlayer();
             actions.walk(direction);
+        } else {
+            input.unlockPlayer();
         }
     }
 }

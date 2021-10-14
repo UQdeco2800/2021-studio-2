@@ -38122,9 +38122,9 @@
             374,
             0,
             0,
-            0,
-            0,
-            0,
+            539,
+            540,
+            541,
             0,
             0,
             129,
@@ -38274,9 +38274,9 @@
             327,
             0,
             0,
-            0,
-            0,
-            0,
+            563,
+            564,
+            565,
             0,
             0,
             153,
@@ -38426,9 +38426,9 @@
             9,
             0,
             0,
-            0,
-            0,
-            0,
+            587,
+            588,
+            589,
             199,
             0,
             0,
@@ -68987,7 +68987,79 @@
         "573": "Assets/gametile-573.png",
         "574": "Assets/gametile-574.png",
         "575": "Assets/gametile-575.png",
-        "576": "Assets/gametile-576.png"
+        "576": "Assets/gametile-576.png",
+        "577": "Assets/gametile-577.png",
+        "578": "Assets/gametile-578.png",
+        "579": "Assets/gametile-579.png",
+        "580": "Assets/gametile-580.png",
+        "581": "Assets/gametile-581.png",
+        "582": "Assets/gametile-582.png",
+        "583": "Assets/gametile-583.png",
+        "584": "Assets/gametile-584.png",
+        "585": "Assets/gametile-585.png",
+        "586": "Assets/gametile-586.png",
+        "587": "Assets/gametile-587.png",
+        "588": "Assets/gametile-588.png",
+        "589": "Assets/gametile-589.png",
+        "590": "Assets/gametile-590.png",
+        "591": "Assets/gametile-591.png",
+        "592": "Assets/gametile-592.png",
+        "593": "Assets/gametile-593.png",
+        "594": "Assets/gametile-594.png",
+        "595": "Assets/gametile-595.png",
+        "596": "Assets/gametile-596.png",
+        "597": "Assets/gametile-597.png",
+        "598": "Assets/gametile-598.png",
+        "599": "Assets/gametile-599.png",
+        "600": "Assets/gametile-600.png",
+        "601": "Assets/gametile-601.png",
+        "602": "Assets/gametile-602.png",
+        "603": "Assets/gametile-603.png",
+        "604": "Assets/gametile-604.png",
+        "605": "Assets/gametile-605.png",
+        "606": "Assets/gametile-606.png",
+        "607": "Assets/gametile-607.png",
+        "608": "Assets/gametile-608.png",
+        "609": "Assets/gametile-609.png",
+        "610": "Assets/gametile-610.png",
+        "611": "Assets/gametile-611.png",
+        "612": "Assets/gametile-612.png",
+        "613": "Assets/gametile-613.png",
+        "614": "Assets/gametile-614.png",
+        "615": "Assets/gametile-615.png",
+        "616": "Assets/gametile-616.png",
+        "617": "Assets/gametile-617.png",
+        "618": "Assets/gametile-618.png",
+        "619": "Assets/gametile-619.png",
+        "620": "Assets/gametile-620.png",
+        "621": "Assets/gametile-621.png",
+        "622": "Assets/gametile-622.png",
+        "623": "Assets/gametile-623.png",
+        "624": "Assets/gametile-624.png",
+        "625": "Assets/gametile-625.png",
+        "626": "Assets/gametile-626.png",
+        "627": "Assets/gametile-627.png",
+        "628": "Assets/gametile-628.png",
+        "629": "Assets/gametile-629.png",
+        "630": "Assets/gametile-630.png",
+        "631": "Assets/gametile-631.png",
+        "632": "Assets/gametile-632.png",
+        "633": "Assets/gametile-633.png",
+        "634": "Assets/gametile-634.png",
+        "635": "Assets/gametile-635.png",
+        "636": "Assets/gametile-636.png",
+        "637": "Assets/gametile-637.png",
+        "638": "Assets/gametile-638.png",
+        "639": "Assets/gametile-639.png",
+        "640": "Assets/gametile-640.png",
+        "641": "Assets/gametile-641.png",
+        "642": "Assets/gametile-642.png",
+        "643": "Assets/gametile-643.png",
+        "644": "Assets/gametile-644.png",
+        "645": "Assets/gametile-645.png",
+        "646": "Assets/gametile-646.png",
+        "647": "Assets/gametile-647.png",
+        "648": "Assets/gametile-648.png"
     },
     "initTeleportObjects": [
         {
@@ -69863,6 +69935,126 @@
         {
             "x": 36,
             "y": 67,
+            "height": 32,
+            "width": 64
+        },
+        {
+            "x": 36,
+            "y": 67,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 27,
+            "y": 83,
+            "height": 32,
+            "width": 96
+        },
+        {
+            "x": 24,
+            "y": 81,
+            "height": 32,
+            "width": 96
+        },
+        {
+            "x": 24,
+            "y": 82,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 24,
+            "y": 84,
+            "height": 64,
+            "width": 32
+        },
+        {
+            "x": 25,
+            "y": 85,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 24,
+            "y": 87,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 24,
+            "y": 89,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 36,
+            "y": 90,
+            "height": 32,
+            "width": 64
+        },
+        {
+            "x": 37,
+            "y": 88,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 37,
+            "y": 85,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 35,
+            "y": 81,
+            "height": 32,
+            "width": 96
+        },
+        {
+            "x": 60,
+            "y": 98,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 60,
+            "y": 100,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 47,
+            "y": 93,
+            "height": 32,
+            "width": 64
+        },
+        {
+            "x": 47,
+            "y": 97,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 79,
+            "y": 79,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 98,
+            "y": 93,
+            "height": 32,
+            "width": 64
+        },
+        {
+            "x": 107,
+            "y": 93,
+            "height": 32,
+            "width": 128
+        },
+        {
+            "x": 114,
+            "y": 102,
             "height": 32,
             "width": 64
         }

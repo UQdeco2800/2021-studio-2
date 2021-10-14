@@ -95,6 +95,78 @@ public enum RandomDialogueSet {
             null
     ),
 
+    THOR_INTRODUCTION(
+            new Dialogue[]{
+                    Dialogue.THOR_INTRODUCTION_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.THOR_INTRODUCTION_VICTORY_1,
+                    Dialogue.THOR_INTRODUCTION_VICTORY_2,
+                    Dialogue.THOR_INTRODUCTION_VICTORY_3,
+
+            },
+            new Dialogue[]{
+                    Dialogue.THOR_INTRODUCTION_DEFEAT_1,
+                    Dialogue.THOR_INTRODUCTION_DEFEAT_2,
+                    Dialogue.THOR_INTRODUCTION_DEFEAT_3,
+            },
+            null
+    ),
+
+    THOR_ENCOUNTER(
+            new Dialogue[]{
+                    Dialogue.THOR_ENCOUNTER_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.THOR_ENCOUNTER_VICTORY_1,
+                    Dialogue.THOR_ENCOUNTER_VICTORY_2,
+                    Dialogue.THOR_ENCOUNTER_VICTORY_3,
+                    Dialogue.THOR_ENCOUNTER_VICTORY_4,
+                    Dialogue.THOR_ENCOUNTER_VICTORY_5,
+
+            },
+            new Dialogue[]{
+                    Dialogue.THOR_ENCOUNTER_DEFEAT_1,
+                    Dialogue.THOR_ENCOUNTER_DEFEAT_2,
+                    Dialogue.THOR_ENCOUNTER_DEFEAT_3,
+            },
+            null
+    ),
+
+    ODIN_INTRODUCTION(
+            new Dialogue[]{
+                    Dialogue.ODIN_INTRODUCTION_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_INTRODUCTION_VICTORY_1,
+                    Dialogue.ODIN_INTRODUCTION_VICTORY_2,
+                    Dialogue.ODIN_INTRODUCTION_VICTORY_3,
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_INTRODUCTION_DEFEAT_1,
+                    Dialogue.ODIN_INTRODUCTION_DEFEAT_2,
+                    Dialogue.ODIN_INTRODUCTION_DEFEAT_3,
+            },
+            null
+    ),
+
+    ODIN_ENCOUNTER(
+            new Dialogue[]{
+                    Dialogue.ODIN_ENCOUNTER_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_ENCOUNTER_VICTORY_1,
+                    Dialogue.ODIN_ENCOUNTER_VICTORY_2,
+                    Dialogue.ODIN_ENCOUNTER_VICTORY_3,
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_ENCOUNTER_DEFEAT_1,
+                    Dialogue.ODIN_ENCOUNTER_DEFEAT_2,
+                    Dialogue.ODIN_ENCOUNTER_DEFEAT_3,
+            },
+            null
+    ),
+
     TEST(
             new Dialogue[]{
                     Dialogue.TEST_1

@@ -10,12 +10,15 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -80,7 +83,12 @@ public class GameArea3 extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/viking.png",
+            "images/hellViking.png",
+            "images/outdoorArcher.png",
+            "images/asgardWarrior.png",
+            "images/arrow_normal.png",
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -91,8 +99,9 @@ public class GameArea3 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "Odin/odin.atlas", "end/portal.atlas"
-
+            "images/player_scepter.atlas", "images/player_hammer.atlas",
+            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
+            "images/arrow_broken/arrowBroken.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -106,7 +115,6 @@ public class GameArea3 extends GameArea {
 
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
-    private static Map map;
     private int playerHealth = 300;
 
     public GameArea3(TerrainFactory terrainFactory, GdxGame game) {
@@ -137,12 +145,12 @@ public class GameArea3 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-        spawnOdin();
+        spawnOutdoorArcherObject();
+        spawnOutdoorWarriorObject();
+        spawnAsgardWarriorObject();
+        spawnMovementCutscenes();
+        spawnDialogueCutscenes();
+        setInitialDialogue();
 
         spawnObstacles();
         spawnLights();
@@ -274,6 +282,58 @@ public class GameArea3 extends GameArea {
         }
     }
 
+    private void setInitialDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_INTRODUCTION;
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getOdinEnc() == 0) {
+            textBox.setRandomFirstEncounter(dialogueSet);
+        } else {
+            if (PlayerSave.Save.getOdinWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
+            }
+        }
+        PlayerSave.Save.setOdinEnc(1);
+        PlayerSave.Save.setThorWins(1);
+        PlayerSave.Save.setOdinWins(0);
+        PlayerSave.write();
+    }
+
+    private void spawnDialogueCutscenes() {
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_ENCOUNTER;;
+        DialogueSet set;
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            set = DialogueSet.FIRST_ENCOUNTER;
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                set = DialogueSet.BOSS_DEFEATED_BEFORE;
+            }
+        }
+
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
     private void spawnLights() {
         int[][] lights = map.getLightTiles();
         HashMap<String, String> tileRefs = map.getTileRefs();
@@ -387,18 +447,19 @@ public class GameArea3 extends GameArea {
         }
     }
 
-    private void spawnOdin() {
+    private void spawnBoss() {
         HashMap<String, Float>[] objects = map.getBossObjects();
         for (HashMap<String, Float> object : objects) {
             int x = object.get("x").intValue();
             int y = object.get("y").intValue();
-            Entity odin = NPCFactory.createOdin(player);
+            Entity elf = NPCFactory.createBossNPC(player);
             spawnEntityAt(
-                    odin,
+                    elf,
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
         }
+        incBossNum();
     }
 
     private void spawnElfGuard() {
@@ -557,15 +618,6 @@ public class GameArea3 extends GameArea {
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(arrowSounds);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        TextBox textBox = ServiceLocator.getEntityService()
-                .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
     }
 
     @Override

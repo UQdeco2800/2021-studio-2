@@ -8,18 +8,22 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
 
 /**
  * Forest area for the demo game with trees, a player, and some enemies.
@@ -99,6 +103,7 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/lokiBoss.png",
+            "images/firePillar.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -115,7 +120,7 @@ public class ForestGameArea extends GameArea {
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas"
+            "images/lokiBoss.atlas", "images/firePillar.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -140,7 +145,11 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Use for teleport, track the current playerHealth
+     * Creates the current game area with the terrain factory required to produce the map
+     * as well as the health of the player.
+     *
+     * @param terrainFactory Base game engine terrain factory to produce the map assets
+     * @param currentHealth the current health of the main character as an integer
      */
     public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -158,8 +167,9 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
+        //spawnTrees();
         spawnPlayer();
-        spawnCrate();
+//        spawnCrate();
 //        spawnMeleeElf();
 //        spawnElfGuard();
 //        spawnRangedElf();
@@ -171,12 +181,67 @@ public class ForestGameArea extends GameArea {
 //        spawnHellVikingMelee();
 //        spawnAsgardWarriorMelee();
 //        spawnOutdoorArcher();
-//        spawnLoki();
+        setInitialDialogue();
+        spawnLoki();
         playMusic();
-        setDialogue();
-        spawnOdin();
+//        spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
+    }
+
+    private void setInitialDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_INTRODUCTION;
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getOdinEnc() == 0) {
+            textBox.setRandomFirstEncounter(dialogueSet);
+        } else {
+            if (PlayerSave.Save.getOdinWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
+            }
+        }
+        PlayerSave.Save.setOdinEnc(1);
+        PlayerSave.Save.setThorWins(1);
+        PlayerSave.Save.setOdinWins(0);
+        PlayerSave.write();
+    }
+
+    private void spawnDialogueCutscenes() {
+        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;;
+        DialogueSet set;
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            set = DialogueSet.FIRST_ENCOUNTER;
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                set = DialogueSet.BOSS_DEFEATED_BEFORE;
+            }
+        }
+
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        if (dialogues == null) {
+            return;
+        }
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     @Override
@@ -471,32 +536,6 @@ public class ForestGameArea extends GameArea {
         resourceService.unloadAssets(forestTextureAtlases);
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        PlayerSave.Save pSave = PlayerSave.load();
-
-
-        if (pSave.lokiEnc < 2 || pSave.lokiEnc >= 4) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.LOKI_INTRODUCTION);
-
-            pSave.lokiEnc += 1;
-
-        } else if (pSave.lokiEnc >= 1 && pSave.lokiEnc < 3) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
-
-            pSave.lokiEnc += 1;
-        }
-
-        PlayerSave.write(pSave);
-
     }
 
     /**
