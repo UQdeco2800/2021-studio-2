@@ -158,6 +158,8 @@ public class GameArea0 extends GameArea {
         spawnSpikeTraps();
         spawnLavaTraps();
 
+        spawnHealthCrateObject();
+
         spawnTraps();
         spawnPTraps();
 
@@ -336,6 +338,22 @@ public class GameArea0 extends GameArea {
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
                     false,
                     false);
+        }
+    }
+
+    private void spawnHealthCrateObject() {
+        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
+        if (crates != null) {
+            for (HashMap<String, Float> crate : crates) {
+                int x = crate.get("x").intValue();
+                int y = crate.get("y").intValue();
+
+                spawnEntityAt(
+                        ObstacleFactory.createHealthCrate(),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
         }
     }
 
