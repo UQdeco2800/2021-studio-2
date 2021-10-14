@@ -169,17 +169,17 @@ public enum RandomDialogueSet {
 
     ODIN_KILLED(
             new Dialogue[]{
-                    Dialogue.ODIN_ENCOUNTER_FIRST
+                    Dialogue.ODIN_KILLED_FIRST
             },
             new Dialogue[]{
-                    Dialogue.ODIN_ENCOUNTER_VICTORY_1,
-                    Dialogue.ODIN_ENCOUNTER_VICTORY_2,
-                    Dialogue.ODIN_ENCOUNTER_VICTORY_3,
+                    Dialogue.ODIN_KILLED_VICTORY_1,
+                    Dialogue.ODIN_KILLED_VICTORY_2,
+                    Dialogue.ODIN_KILLED_VICTORY_3,
             },
             new Dialogue[]{
-                    Dialogue.ODIN_ENCOUNTER_DEFEAT_1,
-                    Dialogue.ODIN_ENCOUNTER_DEFEAT_2,
-                    Dialogue.ODIN_ENCOUNTER_DEFEAT_3,
+                    Dialogue.ODIN_KILLED_DEFEAT_1,
+                    Dialogue.ODIN_KILLED_DEFEAT_2,
+                    Dialogue.ODIN_KILLED_DEFEAT_3,
             },
             null
     ),
