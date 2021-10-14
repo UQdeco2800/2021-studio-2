@@ -152,24 +152,23 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code>static <a href="PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initial()">initial</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Function which returns a default save file object with
- default values as though the game had never been reset</div>
-</td>
-</tr>
-<tr class="rowColor" id="i1">
-<td class="colFirst"><code>static <a href="PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></code></td>
+<td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#load()">load</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Function which reads and then returns a save object from
  the file at location in SAVE_FILE</div>
 </td>
 </tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetFile()">resetFile</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Saves a completely reset file to the player save file.</div>
+</td>
+</tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>static void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#write(com.deco2800.game.files.PlayerSave.Save)">write</a></span>&#8203;(<a href="PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a>&nbsp;pSave)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#write()">write</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Function which takes in a PLayerSave.Save object
  and writes it to the save file as is.</div>
@@ -199,39 +198,25 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="write(com.deco2800.game.files.PlayerSave.Save)">write</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">write</span>&#8203;(<span class="arguments"><a href="PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a>&nbsp;pSave)</span></div>
+<h3><a id="write()">write</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">write</span>()</div>
 <div class="block">Function which takes in a PLayerSave.Save object
  and writes it to the save file as is.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>pSave</code> - Takes a PlayerSave.Save to be written to file</dd>
-</dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="initial()">initial</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></span>&nbsp;<span class="memberName">initial</span>()</div>
-<div class="block">Function which returns a default save file object with
- default values as though the game had never been reset</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Returns a PlayerSave.Save object with default values</dd>
-</dl>
+<h3><a id="resetFile()">resetFile</a></h3>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">resetFile</span>()</div>
+<div class="block">Saves a completely reset file to the player save file.</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="load()">load</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="PlayerSave.Save.html" title="class in com.deco2800.game.files">PlayerSave.Save</a></span>&nbsp;<span class="memberName">load</span>()</div>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">load</span>()</div>
 <div class="block">Function which reads and then returns a save object from
  the file at location in SAVE_FILE</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Returns the PlayerSave.Save object as stored in the written
- save file</dd>
-</dl>
 </section>
 </li>
 </ul>

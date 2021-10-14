@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -137,21 +137,26 @@ implements <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/b
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected <a href="terrain/Map.html" title="class in com.deco2800.game.areas.terrain">Map</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#map">map</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#numBoss">numBoss</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#numEnemy">numEnemy</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#player">player</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="terrain/TerrainComponent.html" title="class in com.deco2800.game.areas.terrain">TerrainComponent</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#terrain">terrain</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -270,13 +275,23 @@ implements <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/b
 </td>
 </tr>
 <tr class="rowColor" id="i9">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMap(com.deco2800.game.areas.terrain.Map)">setMap</a></span>&#8203;(<a href="terrain/Map.html" title="class in com.deco2800.game.areas.terrain">Map</a>&nbsp;map)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i10">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnAsgardWarriorObject()">spawnAsgardWarriorObject</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnEntity(com.deco2800.game.entities.Entity)">spawnEntity</a></span>&#8203;(<a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity)</code></th>
 <td class="colLast">
 <div class="block">Spawn entity at its current position</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a></span>&#8203;(<a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/GridPoint2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">GridPoint2</a>&nbsp;tilePos,
@@ -286,7 +301,7 @@ boolean&nbsp;centerY)</code></th>
 <div class="block">Spawn entity on a given tile.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2,boolean,boolean)">spawnEntityAt</a></span>&#8203;(<a href="../entities/Entity.html" title="class in com.deco2800.game.entities">Entity</a>&nbsp;entity,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;entityPos,
@@ -295,6 +310,26 @@ boolean&nbsp;centerY)</code></th>
 <td class="colLast">
 <div class="block">Spawn entity on a given tile.</div>
 </td>
+</tr>
+<tr class="altColor" id="i14">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnHellWarriorObject()">spawnHellWarriorObject</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i15">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnMovementCutscenes()">spawnMovementCutscenes</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor" id="i16">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnOutdoorArcherObject()">spawnOutdoorArcherObject</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i17">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#spawnOutdoorWarriorObject()">spawnOutdoorWarriorObject</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -348,6 +383,12 @@ boolean&nbsp;centerY)</code></th>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">numBoss</span></div>
 </section>
 </li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="map">map</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="terrain/Map.html" title="class in com.deco2800.game.areas.terrain">Map</a></span>&nbsp;<span class="memberName">map</span></div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -397,6 +438,12 @@ boolean&nbsp;centerY)</code></th>
 <h3><a id="getLevel()">getLevel</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getLevel</span>()</div>
 <div class="block">Use for teleport, track the current map player in</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="setMap(com.deco2800.game.areas.terrain.Map)">setMap</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMap</span>&#8203;(<span class="arguments"><a href="terrain/Map.html" title="class in com.deco2800.game.areas.terrain">Map</a>&nbsp;map)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -492,6 +539,36 @@ boolean&nbsp;centerY)</span></div>
 <dd><code>centerX</code> - true to center entity X on the tile, false to align the bottom left corner</dd>
 <dd><code>centerY</code> - true to center entity Y on the tile, false to align the bottom left corner</dd>
 </dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnHellWarriorObject()">spawnHellWarriorObject</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnHellWarriorObject</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnAsgardWarriorObject()">spawnAsgardWarriorObject</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnAsgardWarriorObject</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnOutdoorWarriorObject()">spawnOutdoorWarriorObject</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnOutdoorWarriorObject</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnOutdoorArcherObject()">spawnOutdoorArcherObject</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnOutdoorArcherObject</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="spawnMovementCutscenes()">spawnMovementCutscenes</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">spawnMovementCutscenes</span>()</div>
 </section>
 </li>
 </ul>
