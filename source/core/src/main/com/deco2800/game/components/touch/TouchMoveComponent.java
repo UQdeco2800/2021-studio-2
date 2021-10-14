@@ -2,6 +2,7 @@ package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
@@ -89,6 +90,7 @@ public class TouchMoveComponent extends TouchComponent {
         Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
         KeyboardPlayerInputComponent input = collidedEntity.getComponent(KeyboardPlayerInputComponent.class);
+        CombatStatsComponent combat = collidedEntity.getComponent(CombatStatsComponent.class);
         //Checks if the entity that has collided is the player
         if (actions == null) {
             return;
@@ -96,7 +98,7 @@ public class TouchMoveComponent extends TouchComponent {
         actions.stopWalking();
         input.stopWalking();
         openCutsceneBars();
-        movePlayer(actions, input);
+        movePlayer(actions, input, combat);
     }
 
     /**
@@ -105,16 +107,20 @@ public class TouchMoveComponent extends TouchComponent {
      *
      * @param actions the actions of the entity moving
      * @param input   the input controller of the player
+     * @param combat  the health stats of the player component
      */
-    private void movePlayer(PlayerActions actions, KeyboardPlayerInputComponent input) {
+    private void movePlayer(PlayerActions actions, KeyboardPlayerInputComponent input, CombatStatsComponent combat) {
         if (direction.x != 0 || direction.y != 0) {
 
             logger.debug("The player will be moved in the direction {} due to collision", direction);
 
             input.lockPlayer();
+            combat.setDamageLocked(true);
             actions.walk(direction);
         } else {
             input.unlockPlayer();
+            combat.setDamageLocked(false);
+
         }
     }
 }
