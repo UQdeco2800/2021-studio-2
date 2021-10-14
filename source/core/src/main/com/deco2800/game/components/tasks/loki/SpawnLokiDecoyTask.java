@@ -48,6 +48,7 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
      * spawn the minion to help the boss attack the target
      *
      * @param target The entity to chase.
+     * @param cooldownMS the time as a float between the ability being casted by Loki
      */
     public SpawnLokiDecoyTask(Entity target, long cooldownMS) {
         this.target = target;

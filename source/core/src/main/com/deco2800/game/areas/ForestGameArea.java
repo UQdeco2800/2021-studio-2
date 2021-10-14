@@ -145,7 +145,11 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Use for teleport, track the current playerHealth
+     * Creates the current game area with the terrain factory required to produce the map
+     * as well as the health of the player.
+     *
+     * @param terrainFactory Base game engine terrain factory to produce the map assets
+     * @param currentHealth the current health of the main character as an integer
      */
     public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();

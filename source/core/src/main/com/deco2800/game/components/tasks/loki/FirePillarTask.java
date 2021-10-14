@@ -97,9 +97,7 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
     }
 
     /**
-     * Creates a pillar at the location
-     *
-     * @return
+     * Creates a pillar at the last location of the player, recorded at a delay.
      */
     private void spawnPillar() {
         lastPositions.add(target.getPosition().cpy());

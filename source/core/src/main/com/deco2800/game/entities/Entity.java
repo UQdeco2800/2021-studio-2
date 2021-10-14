@@ -331,6 +331,7 @@ public class Entity {
     /**
      * Check if there are any object between the entity and the target entity
      *
+     * @param target the player Entity that other NPC entities will attempt to track
      * @return true if no object, false otherwise
      */
     public boolean canSeeEntity(Entity target) {
@@ -360,6 +361,7 @@ public class Entity {
     /**
      * Check if there are any object between the entity and the target location
      *
+     * @param target the player Entity that other NPC entities will attempt to track
      * @return true if no object, false otherwise
      */
     public boolean canSeeTarget(Vector2 target) {

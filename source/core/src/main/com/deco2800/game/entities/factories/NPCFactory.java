@@ -423,9 +423,9 @@ public class NPCFactory {
      *
      * @param target entity to chase
      * @param type   arrow type ("normalArrow", "trackingArrow", "fastArrow")
+     * @param multishotChance the decimal representation of the probability of a multishot occurring as a float
      * @return entity
      */
-
     public static Entity createRangedElf(Entity target, String type, float multishotChance) {
         Entity elf = createBaseNPCNoAI();
         RangedEnemyConfig config = configs.elfRanged;
@@ -793,6 +793,7 @@ public class NPCFactory {
      * elf that shoot arrow at target
      * It will retreat if the target is approach in certain range
      *
+     * @param multishotChance the decimal representation of the probability of a multishot occurring as a float
      * @param target entity to chase
      * @return entity
      */
