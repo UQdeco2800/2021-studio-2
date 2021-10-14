@@ -190,6 +190,7 @@ public class ObstacleFactory {
         crate.getComponent(TouchHealComponent.class).setEnabled(false);
         crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         crate.getComponent(AnimationRenderComponent.class).scaleEntity();
+        PhysicsUtils.setScaledCollider(crate, 0.6f, 0.3f);
         return crate;
     }
 

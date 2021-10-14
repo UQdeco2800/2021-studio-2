@@ -41,17 +41,16 @@ public class CutsceneTriggerFactory {
     public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type) {
         Entity trigger =
                 new Entity()
-                        .addComponent(new TextureRenderComponent("images/prisoner.png"))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                new Vector2(0f, 0f), true))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
+                                new Vector2(0f, 0f), false))
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, 1));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        trigger.getComponent(TextureRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
+        trigger.getComponent(ColliderComponent.class).setSensor(true);
         trigger.scaleHeight(1f);
         return trigger;
     }
@@ -72,7 +71,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
                                 new Vector2(0f, 0f), true))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, Integer.MAX_VALUE));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(TextureRenderComponent.class).scaleEntity();
@@ -114,6 +113,7 @@ public class CutsceneTriggerFactory {
     /**
      * Creates an entity that can trigger a cutscene to start.
      *
+<<<<<<< HEAD
      * @param dialogueSet the dialogue set the entity will trigger
      * @param direction   direction to move the player
      * @return entity that will create the trigger within the map
@@ -127,7 +127,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
                                 direction, false))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type));
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, Integer.MAX_VALUE));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(ColliderComponent.class).setSensor(true);

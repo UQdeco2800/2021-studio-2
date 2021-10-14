@@ -211,7 +211,7 @@ public enum Dialogue {
 
     LOKI_ENCOUNTER_FIRST(new Message[]{
             new Message(false, "It's nice to see you in the flesh... " +
-                    "\nFor now"),
+                    "\nFor now."),
     }),
 
     LOKI_ENCOUNTER_VICTORY_1(new Message[]{
@@ -233,55 +233,133 @@ public enum Dialogue {
     }),
 
     ODIN_INTRODUCTION_FIRST(new Message[]{
-            new Message(false, "Greetings Warrior, it is impressive that you" +
-                    "\nhave made it this far however now you face" +
-                    "\na god of pure power and so this is where" +
-                    "\nyou shall fail"),
-            new Message(false, "Perhaps after being put down quickly you" +
-                    "\nwill finally accept your fate and finally" +
-                    "\nand finally give up on your fools quest"),
-            new Message(false, "Come, let us fight and I will send you back" +
-                    "\n to where you belong")
+            new Message(true, "So this is where I belong, the golden statues" +
+                    "\nand pristine white walls." +
+                    "\nI could get use to this but I am not yet" +
+                    "\nworthy for a place here."),
+            new Message(true, "I cannot live here with those who belittled me" +
+                    "\nand locked me away." +
+                    "\nThis will be mine. And mine only."),
     }),
 
     ODIN_INTRODUCTION_DEFEAT_1(new Message[]{
+            new Message(true, "I couldn't see from the shine of the walls." +
+                    "\nHis eye patch must've helped him."),
+    }),
+
+    ODIN_INTRODUCTION_DEFEAT_2(new Message[]{
+            new Message(true, "Good skills for an old man. I'm impressed."),
+    }),
+
+    ODIN_INTRODUCTION_DEFEAT_3(new Message[]{
+            new Message(true, "I was taught the elderly should be" +
+                    "\nrespected. Not this time."),
+    }),
+
+    ODIN_INTRODUCTION_VICTORY_1(new Message[]{
+            new Message(true, "The old man didn't know what was coming for him." +
+                    "\nI can't wait to relive this joy."),
+    }),
+
+    ODIN_INTRODUCTION_VICTORY_2(new Message[]{
+            new Message(true, "More time in this golden palace." +
+                    "\nI could live here forever."),
+    }),
+
+    ODIN_INTRODUCTION_VICTORY_3(new Message[]{
+            new Message(true, "The curse on me may have been a blessing." +
+                    "\nBattles for the rest of my life."),
+    }),
+
+    ODIN_ENCOUNTER_FIRST(new Message[]{
+            new Message(false, "Greetings Warrior, it is impressive that you" +
+                    "\nhave made it this far however now you face" +
+                    "\na god of pure power and so this is where" +
+                    "\nyou shall fail."),
+            new Message(false, "Perhaps after being put down quickly you" +
+                    "\nwill finally accept your fate and finally" +
+                    "\ngive up on your fools quest."),
+            new Message(false, "Come, let us fight and I will send you back" +
+                    "\nto where you belong")
+    }),
+
+    ODIN_ENCOUNTER_DEFEAT_1(new Message[]{
             new Message(false, "Why have you come back for a second time?" +
                     "\nthe result will only be the same. You - sent" +
                     "\nback to the beginning.")
 
     }),
 
-    ODIN_INTRODUCTION_DEFEAT_2(new Message[]{
+    ODIN_ENCOUNTER_DEFEAT_2(new Message[]{
             new Message(false, "Your persistence is noteworthy. It is" +
                     "\nhowever folly as well. You shall not make it" +
                     "\nthrough"),
             new Message(false, "Give up now.")
     }),
 
-    ODIN_INTRODUCTION_DEFEAT_3(new Message[]{
+    ODIN_ENCOUNTER_DEFEAT_3(new Message[]{
             new Message(false, "Just how many times will you try? Failing" +
                     "\neach time. Your hubris led you here, and yet" +
                     "\nyou cling to it still")
     }),
 
-    ODIN_INTRODUCTION_VICTORY_1(new Message[]{
+    ODIN_ENCOUNTER_VICTORY_1(new Message[]{
             new Message(false, "Why are you back? Just because you" +
                     "\ncan?")
 
     }),
 
-    ODIN_INTRODUCTION_VICTORY_2(new Message[]{
+    ODIN_ENCOUNTER_VICTORY_2(new Message[]{
             new Message(false, "What are you doing here again?" +
                     "\n Valhalla awaits.")
     }),
 
-    ODIN_INTRODCTION_VICTORY_3(new Message[]{
+    ODIN_ENCOUNTER_VICTORY_3(new Message[]{
             new Message(false, "Are you really still that eager to battle?" +
                     "\n even with Valhalla now yours to roam?" +
                     "\n So be it.")
     }),
 
     THOR_INTRODUCTION_FIRST(new Message[]{
+            new Message(true, "I'm finally free from Loki, the heat from Hell" +
+                    "\nand the chains within the prison." +
+                    "\nI'm nearly there. I can feel it"),
+            new Message(true, "It feels like home here, what I'm use to." +
+                    "\nThe soft, grassy fields and the chilling breeze"),
+            new Message(true, "I wonder who else stands before me on" +
+                    "\nmy journey. They aren't ready to face my wrath.")
+    }),
+
+    THOR_INTRODUCTION_DEFEAT_1(new Message[]{
+            new Message(true, "This place feels different," +
+                    "\nnot like home but I'm ready this time."),
+    }),
+
+    THOR_INTRODUCTION_DEFEAT_2(new Message[]{
+            new Message(true, "Thor may have bested me this time," +
+                    "\nbut he's incompetent, unwilling to learn."),
+    }),
+
+    THOR_INTRODUCTION_DEFEAT_3(new Message[]{
+            new Message(true, "I've seen his skills, he got lucky last time."),
+    }),
+
+    THOR_INTRODUCTION_VICTORY_1(new Message[]{
+            new Message(true, "It was a breeze last time," +
+                    "\nI don't see it being any different."),
+    }),
+
+    THOR_INTRODUCTION_VICTORY_2(new Message[]{
+            new Message(true, "Finally back in my element," +
+                    "\nThor is nothing compared to me."),
+    }),
+
+    THOR_INTRODUCTION_VICTORY_3(new Message[]{
+            new Message(true, "I have to go through this again..." +
+                    "\nWhat a waste of time."),
+    }),
+
+    THOR_ENCOUNTER_FIRST(new Message[]{
             new Message(false, "Ahh, I see that you've made it past my" +
                     "\nbrother. I can't say I'm too surprised though"),
             new Message(false, "He was never really one for real fights," +
@@ -292,47 +370,47 @@ public enum Dialogue {
                     "\nof a true god and see how you fare!")
     }),
 
-    THOR_INTRODUCTION_DEFEAT_1(new Message[]{
+    THOR_ENCOUNTER_DEFEAT_1(new Message[]{
             new Message(false, "What purpose does it serve to try again?" +
                     "\nI cannot be bested in combat. Learn to" +
                     "\naccept your limits"),
             new Message(false, "It is unbecoming of you to keep trying")
     }),
 
-    THOR_INTRODUCTION_DEFEAT_2(new Message[]{
+    THOR_ENCOUNTER_DEFEAT_2(new Message[]{
             new Message(false, "What? Back again? Allow me to send you back" +
                     "\nto whence you came.")
     }),
 
-    THOR_INTRODUCTION_DEFEAT_3(new Message[]{
+    THOR_ENCOUNTER_DEFEAT_3(new Message[]{
             new Message(false, "Your stubbornness is noteworthy, it is" +
                     "\nhowever also ugly. Learn to accept when you are" +
                     "\nbested.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_1(new Message[]{
+    THOR_ENCOUNTER_VICTORY_1(new Message[]{
             new Message(false, "I see that you've come back for a second" +
                     "\ntime. An error on your part."),
             new Message(false, "I shall make sure you don't defeat me again.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_2(new Message[]{
+    THOR_ENCOUNTER_VICTORY_2(new Message[]{
             new Message(false, "Ahhh you wish to fight me again?" +
                     "\nCome, you'll find me a willing opponent.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_3(new Message[]{
+    THOR_ENCOUNTER_VICTORY_3(new Message[]{
             new Message(false, "Still trying to make it to Valhalla?" +
                     "\nyou'll have to make it past me again.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_4(new Message[]{
+    THOR_ENCOUNTER_VICTORY_4(new Message[]{
             new Message(false, "We really need to stop meeting like this," +
                     "\nmaybe instead we can meet in Valhalla before long."),
             new Message(false, "Until then however, we fight!")
     }),
 
-    THOR_INTRODUCTION_VICTORY_5(new Message[]{
+    THOR_ENCOUNTER_VICTORY_5(new Message[]{
             new Message(false, "Ah, hello once again warrior. Did you wish" +
                     "\nto clash with me once again?" +
                     "\nVery well, I am happy to oblige.")

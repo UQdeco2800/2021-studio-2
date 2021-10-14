@@ -10,12 +10,15 @@ import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -136,13 +139,6 @@ public class GameArea4 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnBoss();
-
         spawnObstacles();
         spawnLights();
 
@@ -161,6 +157,20 @@ public class GameArea4 extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Level 5"));
         spawnEntity(ui);
+    }
+
+    private void spawnDialogueCutscenes() {
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     private void spawnTerrain() {
@@ -545,13 +555,15 @@ public class GameArea4 extends GameArea {
         resourceService.unloadAssets(arrowSounds);
     }
 
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
+    private void setInitialDialogue() {
+        PlayerSave.write();
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.TUTORIAL;
+
+        PlayerSave.Save.setHasPlayed(true);
+        textBox.setRandomFirstEncounter(dialogueSet);
     }
 
     @Override

@@ -37,7 +37,6 @@ import java.util.concurrent.TimeUnit;
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     public PhysicsMovementComponent physicsMovement;
 
-
     private final Entity target;
     private final PhysicsEngine physics;
     private final DebugRenderer debugRenderer;
