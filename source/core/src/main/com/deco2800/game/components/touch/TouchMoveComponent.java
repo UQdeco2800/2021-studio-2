@@ -27,7 +27,17 @@ public class TouchMoveComponent extends TouchComponent {
     /**
      * Used to see if the move component should be repeated or not
      */
-    private final boolean repeatable;
+    private boolean repeatable = true;
+
+    /**
+     * Maximum number of times the cutscene can be repeated
+     */
+    private int maxRepeats = Integer.MAX_VALUE;
+
+    /**
+     * Current number of times the cutscene has been triggered
+     */
+    private int numRepeats = 0;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -43,6 +53,19 @@ public class TouchMoveComponent extends TouchComponent {
     }
 
     /**
+     * Create a component which attacks entities on collision, without knockback.
+     *
+     * @param targetLayer The physics layer of the target's collider.
+     * @param direction   direction the player will attack in
+     * @param maxRepeats  maximum number of times this will be repeated
+     */
+    public TouchMoveComponent(short targetLayer, Vector2 direction, int maxRepeats) {
+        super(targetLayer);
+        this.direction = direction;
+        this.maxRepeats = maxRepeats;
+    }
+
+    /**
      * The method that is called once a collision event is triggered. The method
      * will check that the correct entities are in the collision, if they are not
      * then the method will terminate prematurely.
@@ -54,13 +77,14 @@ public class TouchMoveComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-        if (triggered && !repeatable) {
+        if ((triggered && !repeatable) || (numRepeats >= maxRepeats)) {
             return;
         }
         if(hitboxComponent.getFixture() != me || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)){
             return;
         }
         triggered = true;
+        numRepeats++;
 
         Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);

@@ -50,14 +50,37 @@ public enum Dialogue {
                     "\nto escape.")
     }),
 
+    TUTORIAL_TRAPS(new Message[]{
+            new Message(false, "The place is littered with traps," +
+                    "\nbe careful where you're stepping."),
+            new Message(false, "I'll meet you in the next room and show" +
+                    "\nyou what I'm talking about.")
+    }),
+
+    TUTORIAL_CRATES(new Message[]{
+            new Message(false, "You better get use to injuries." +
+                    "\nThere are crates spread across the worlds." +
+                    "\nBreak them for a health potion."),
+    }),
+
     TUTORIAL_ATTACK(new Message[]{
             new Message(false, "Use SPACE BAR to swing the axe at" +
                     "\nthe gate. Careful though, this is the" +
                     "\nonly thing that won't attack back."),
-            new Message(false, "User Q or Right Click to activate your" +
-                    "\nweapons power, each weapon has one" +
-                    "\nand they're all different. You should test" +
-                    "\nit out before heading off into battle.")
+            new Message(false, "There are some weapons you'll find along the way." +
+                    "\nUse them to your advantage and utilise the power" +
+                    "\nthey possess."),
+            new Message(false, "The Greatsword has a powerful AOE attack" +
+                    "\nwhen pressing Q."),
+            new Message(false, "The scepter is capable of firing a powerful" +
+                    "\nblast when pressing ALT"),
+            new Message(false, "Lastly, Thor's hammer allows can call" +
+                    "\nan AOE attack on Q and a deadly weapon" +
+                    "\nthrow on ALT."),
+            new Message(false, "You'll know what I'm talking about" +
+                    "\nwhen you wield them yourself." +
+                    "\nFor now, practice on some crates before taking" +
+                    "\nout the guard.")
     }),
 
     TUTORIAL_ENEMIES(new Message[]{
@@ -68,14 +91,15 @@ public enum Dialogue {
                     "\nyou from the shadows.")
     }),
 
-    TUTORIAL_TRAPS(new Message[]{
-            new Message(false, "The place is littered with traps," +
-                    "\nbe careful where you're stepping.")
-    }),
-
     TUTORIAL_EXIT(new Message[]{
+            new Message(false, "Between the worlds, you'll find a teleport pad." +
+                    "\nThese are how the Gods get around."),
+            new Message(false, "You'll need your hands stained with blood" +
+                    "\nbefore you're deemed worthy to enter."),
+            new Message(true, "I understand. Nothing will get in my way."),
             new Message(false, "Good luck warrior, I hope to never" +
-                    "\nsee you again.")
+                    "\nsee you again."),
+            new Message(true, "Thank you. Same to you."),
     }),
 
     ELF_INTRODUCTION_FIRST(new Message[]{

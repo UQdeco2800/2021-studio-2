@@ -313,7 +313,7 @@ public class GameArea3 extends GameArea {
             int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);

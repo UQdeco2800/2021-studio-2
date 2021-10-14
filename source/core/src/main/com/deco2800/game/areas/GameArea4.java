@@ -83,7 +83,9 @@ public class GameArea4 extends GameArea {
             "player_hammer.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
-            "images/boss_health_right.png"
+            "images/boss_health_right.png",
+            "images/hammer_projectile.png",
+            "images/meleeFinal.png"
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -94,7 +96,8 @@ public class GameArea4 extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas"
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas",
+            "images/meleeFinal.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -143,6 +146,12 @@ public class GameArea4 extends GameArea {
 
         spawnSpikeTraps();
         spawnLavaTraps();
+        spawnTutorialObstacles();
+        spawnDialogueCutscenes();
+        setInitialDialogue();
+        decBossNum();
+        spawnTeleport();
+        spawnEnemy();
 
         playMusic();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
@@ -155,17 +164,59 @@ public class GameArea4 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
-        for (HashMap<String, Float> dialogue : dialogues) {
-            int x = dialogue.get("x").intValue();
-            int y = dialogue.get("y").intValue();
+        Entity trigger = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED, 3);
+        spawnEntityAt(trigger, new Vector2(25f, 40f), true, true);
 
-            spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TEST, DialogueSet.FIRST_ENCOUNTER),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
+        Entity trigger2 = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED, 1);
+        spawnEntityAt(trigger2, new Vector2(34.5f, 40f), true, true);
+
+        Entity trigger3 = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED, 2);
+        spawnEntityAt(trigger3, new Vector2(43.2f, 40f), true, true);
+
+        Entity trigger4 = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
+                DialogueSet.ORDERED, 1);
+        spawnEntityAt(trigger4, new Vector2(51.2f, 41.5f), true, true);
+    }
+
+    private void spawnTutorialObstacles() {
+        Entity crate1 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate1, new Vector2(20, 35.8f), true, true);
+        Entity crate2 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate2, new Vector2(20.8f, 35.8f), true, true);
+        Entity crate3 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate3, new Vector2(20, 36.3f), true, true);
+        Entity crate4 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate4, new Vector2(27.5f, 35.8f), true, true);
+        Entity crate5 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate5, new Vector2(26.8f, 35.8f), true, true);
+
+        Entity crate6 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate6, new Vector2(43f, 35.8f), true, true);
+        Entity crate7 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate7, new Vector2(43.8f, 35.8f), true, true);
+        Entity crate8 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate8, new Vector2(40f, 35.8f), true, true);
+
+        Entity crate9 = ObstacleFactory.createHealthCrate();
+        spawnEntityAt(crate9, new Vector2(50f, 42.4f), true, true);
+    }
+
+    private void spawnEnemy() {
+        Entity enemy = NPCFactory.createMeleeElf(player);
+        spawnEntityAt(enemy, new Vector2(50f, 37.5f), true, true);
+    }
+
+    private void spawnTeleport() {
+        logger.info("Spawning the teleport object");
+        Entity teleport = ObstacleFactory.createTeleport();
+        HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+        GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+        this.spawnEntityAt(teleport, fixedPos, true, true);
+
     }
 
     private void spawnTerrain() {
@@ -306,7 +357,7 @@ public class GameArea4 extends GameArea {
      */
     @Override
     public int getLevel() {
-        return 4;
+        return 9;
     }
 
     private void playMusic() {

@@ -24,9 +24,10 @@ public enum RandomDialogueSet {
             new Dialogue[]{
                     Dialogue.TUTORIAL_MOVE,
                     Dialogue.TUTORIAL_DASH,
+                    Dialogue.TUTORIAL_TRAPS,
+                    Dialogue.TUTORIAL_CRATES,
                     Dialogue.TUTORIAL_ATTACK,
                     Dialogue.TUTORIAL_ENEMIES,
-                    Dialogue.TUTORIAL_TRAPS,
                     Dialogue.TUTORIAL_EXIT
             }
     ),

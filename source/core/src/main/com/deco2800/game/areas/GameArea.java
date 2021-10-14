@@ -212,6 +212,9 @@ public abstract class GameArea implements Disposable {
      */
     protected void spawnHealthCrateObject() {
         HashMap<String, Float>[] crates = map.getHealthCrateObjects();
+        if(crates == null) {
+            return;
+        }
         for (HashMap<String, Float> crate : crates) {
             int x = crate.get("x").intValue();
             int y = crate.get("y").intValue();

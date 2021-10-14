@@ -72,7 +72,7 @@ public class PlayerActions extends Component {
         // impulse = (desiredVel - currentVel) * mass
         Vector2 impulse = desiredVelocity.sub(velocity).scl(body.getMass());
         body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
-        System.out.println(entity.getPosition()); //Used for debugging
+        //System.out.println(entity.getPosition()); //Used for debugging
     }
 
     /**

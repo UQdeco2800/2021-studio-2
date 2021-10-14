@@ -2,6 +2,7 @@ package com.deco2800.game.components.mainmenu;
 
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.Component;
+import com.deco2800.game.files.PlayerSave;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,12 @@ public class MainMenuActions extends Component {
      */
     private void onStartTutorial() {
         logger.info("Start game");
-        game.setScreen(GdxGame.ScreenType.GAMEAREA4);
+        PlayerSave.load();
+        if (PlayerSave.Save.getHasPlayed()) {
+            game.setScreen(GdxGame.ScreenType.GAMEAREA0);
+        } else {
+            game.setScreen(GdxGame.ScreenType.GAMEAREA4);
+        }
     }
 
 
