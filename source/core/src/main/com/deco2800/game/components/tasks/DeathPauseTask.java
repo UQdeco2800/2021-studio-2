@@ -14,6 +14,8 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
 
 public class DeathPauseTask extends ChaseTask implements PriorityTask {
     private final float duration;
@@ -52,6 +54,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
+                        showDialogue();
                         spawnWin();
                     }
                 }, 2f);
@@ -84,6 +87,26 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                     status = Status.FINISHED;
                 }
                 dead = true;
+            }
+        }
+    }
+
+    private void showDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_KILLED;
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getOdinEnc() == 0) {
+            textBox.setRandomFirstEncounter(dialogueSet);
+        } else {
+            if (PlayerSave.Save.getOdinWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
     }

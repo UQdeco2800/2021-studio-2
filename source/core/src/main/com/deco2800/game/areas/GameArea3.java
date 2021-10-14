@@ -89,6 +89,8 @@ public class GameArea3 extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/arrow_normal.png",
+            "Odin/odin.png",
+            "portal.png",
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -101,7 +103,7 @@ public class GameArea3 extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/arrow_broken/arrowBroken.atlas",
+            "images/arrow_broken/arrowBroken.atlas", "Odin/odin.atlas", "end/portal.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -145,12 +147,13 @@ public class GameArea3 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnOutdoorArcherObject();
-        spawnOutdoorWarriorObject();
-        spawnAsgardWarriorObject();
-        spawnMovementCutscenes();
+//        spawnOutdoorArcherObject();
+//        spawnOutdoorWarriorObject();
+//        spawnAsgardWarriorObject();
+//        spawnMovementCutscenes();
         spawnDialogueCutscenes();
         setInitialDialogue();
+
 
         spawnObstacles();
         spawnLights();
@@ -163,6 +166,7 @@ public class GameArea3 extends GameArea {
         spawnHealthCrateObject();
         playMusic();
         spawnTeleport();
+        spawnOdin();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
@@ -388,6 +392,11 @@ public class GameArea3 extends GameArea {
                     false,
                     false);
         }
+    }
+
+    private void spawnOdin() {
+        Entity odin = NPCFactory.createOdin(player);
+        spawnEntityAt(odin, new GridPoint2(105, map.getDimensions().get("n_tiles_height") - 101), true, true);
     }
 
     /**

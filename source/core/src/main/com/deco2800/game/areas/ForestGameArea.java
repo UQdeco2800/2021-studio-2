@@ -182,9 +182,9 @@ public class ForestGameArea extends GameArea {
 //        spawnAsgardWarriorMelee();
 //        spawnOutdoorArcher();
         setInitialDialogue();
-        spawnLoki();
+        //spawnLoki();
         playMusic();
-//        spawnOdin();
+        spawnOdin();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
@@ -214,7 +214,7 @@ public class ForestGameArea extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;
