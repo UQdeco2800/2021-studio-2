@@ -147,6 +147,7 @@ public class GameArea0 extends GameArea {
 
         spawnSpikeTraps();
         spawnLavaTraps();
+        spawnHealthCrateObject();
 
         spawnTraps();
         spawnPTraps();

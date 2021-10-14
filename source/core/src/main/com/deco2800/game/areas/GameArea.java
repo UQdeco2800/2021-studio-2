@@ -201,6 +201,24 @@ public abstract class GameArea implements Disposable {
     }
 
     /**
+     * Spawns a create object which will reveal a health potion at the positions specified
+     * within the Tiled JSON file.
+     */
+    protected void spawnHealthCrateObject() {
+        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    /**
      * Spawn entity on a given tile. Requires the terrain to be set first.
      *
      * @param entity    Entity (not yet registered)

@@ -172,20 +172,6 @@ public class GameArea2 extends GameArea {
         spawnEntity(ui);
     }
 
-    private void spawnHealthCrateObject() {
-        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
-        for (HashMap<String, Float> crate : crates) {
-            int x = crate.get("x").intValue();
-            int y = crate.get("y").intValue();
-
-            spawnEntityAt(
-                    ObstacleFactory.createHealthCrate(),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
-    }
-
     private void spawnDialogueCutscenes() {
         RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_ENCOUNTER;;
         DialogueSet set;

@@ -218,20 +218,6 @@ public class GameArea3 extends GameArea {
         }
     }
 
-    private void spawnHealthCrateObject() {
-        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
-        for (HashMap<String, Float> crate : crates) {
-            int x = crate.get("x").intValue();
-            int y = crate.get("y").intValue();
-
-            spawnEntityAt(
-                    ObstacleFactory.createHealthCrate(),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
-    }
-
     private void spawnPTraps() {
         GridPoint2 fixedPos = new GridPoint2(15, 15);
         Entity trap = ObstacleFactory.createPhysicalTrap();
