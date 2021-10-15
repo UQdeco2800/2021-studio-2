@@ -76,6 +76,7 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
     public void spawn() {
         lastFiredTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         Entity loki;
+        ServiceLocator.getGameAreaService().incNum();
         if (spawn % 2 != 0) {
             loki = NPCFactory.createMeleeLokiDecoy(target);
         } else {
