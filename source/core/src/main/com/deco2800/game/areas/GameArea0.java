@@ -84,6 +84,12 @@ public class GameArea0 extends GameArea {
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
+            "images/meleeFinal.png",
+            "images/assassinFinal.png",
+            "images/guardFinal.png",
+            "images/rangedAllFinal.png",
+            "images/bossFinal.png",
+            "images/fireball/fireballAnimation.png",
 
     };
     private static String[] tileTextures = null;
@@ -94,11 +100,11 @@ public class GameArea0 extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas","images/arrow_broken/arrowBroken.atlas",
-            "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas"
+            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas",
+            "images/rangedAllFinal.atlas", "images/bossFinal.atlas", "images/fireball/fireballAnimation.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
