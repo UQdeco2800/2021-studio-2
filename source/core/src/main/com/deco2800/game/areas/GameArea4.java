@@ -404,7 +404,6 @@ public class GameArea4 extends GameArea {
 
         RandomDialogueSet dialogueSet = RandomDialogueSet.TUTORIAL;
 
-        PlayerSave.Save.setHasPlayed(true);
         textBox.setRandomFirstEncounter(dialogueSet);
     }
 
