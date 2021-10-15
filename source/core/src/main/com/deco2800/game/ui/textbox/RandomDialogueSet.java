@@ -96,6 +96,38 @@ public enum RandomDialogueSet {
             null
     ),
 
+    LOKI2_INTRODUCTION(
+            new Dialogue[]{
+                    Dialogue.LOKI2_INTRODUCTION_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI2_INTRODUCTION_VICTORY_1,
+                    Dialogue.LOKI2_INTRODUCTION_VICTORY_2,
+                    Dialogue.LOKI2_INTRODUCTION_VICTORY_3,
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI2_INTRODUCTION_DEFEATED_1,
+                    Dialogue.LOKI2_INTRODUCTION_DEFEATED_2,
+                    Dialogue.LOKI2_INTRODUCTION_DEFEATED_3,
+            },
+            null
+    ),
+
+    LOKI2_ENCOUNTER(
+            new Dialogue[]{
+                    Dialogue.LOKI2_ENCOUNTER_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI2_ENCOUNTER_VICTORY_1,
+                    Dialogue.LOKI2_ENCOUNTER_VICTORY_2,
+            },
+            new Dialogue[]{
+                    Dialogue.LOKI2_ENCOUNTER_DEFEATED_1,
+                    Dialogue.LOKI2_ENCOUNTER_DEFEATED_2,
+            },
+            null
+    ),
+
     THOR_INTRODUCTION(
             new Dialogue[]{
                     Dialogue.THOR_INTRODUCTION_FIRST
