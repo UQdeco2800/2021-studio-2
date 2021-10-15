@@ -89,7 +89,7 @@ public class ObstacleFactory {
     public static Entity createRSNonePhysicalTrap(float width, float height) {
         Entity trap = new Entity()
                 .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
-                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new CombatStatsComponent(1000000, 70))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
         trap.setScale(width, height);

@@ -69187,54 +69187,127 @@
             "width": 64
         }
     ],
-    "meleeObjects": [
+    "meleeObjects": [],
+    "moveDownObjects": [
         {
-            "x": 27,
-            "y": 88,
+            "x": 78,
+            "y": 92,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "cutsceneObjects": [
+        {
+            "x": 99,
+            "y": 101,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "outdoorMeleeObjects": [
+        {
+            "x": 88,
+            "y": 61,
             "height": 0,
             "width": 0
         },
         {
-            "x": 71,
+            "x": 99,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "asgardMeleeObjects": [
+        {
+            "x": 68,
             "y": 85,
             "height": 0,
             "width": 0
         },
         {
-            "x": 50,
+            "x": 71,
+            "y": 81,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 78,
+            "y": 86,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 49,
+            "y": 96,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 49,
+            "y": 102,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 58,
             "y": 99,
             "height": 0,
             "width": 0
         },
         {
-            "x": 80,
-            "y": 63,
+            "x": 27,
+            "y": 89,
             "height": 0,
             "width": 0
         }
     ],
     "rangeObjects": [
         {
-            "x": 33,
-            "y": 88,
+            "x": 105,
+            "y": 66,
             "height": 0,
             "width": 0
         },
         {
-            "x": 71,
+            "x": 93,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 96,
+            "y": 59,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 88,
+            "y": 57,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 87,
+            "y": 68,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 78,
+            "y": 63,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 78,
             "y": 82,
             "height": 0,
             "width": 0
         },
         {
-            "x": 101,
-            "y": 67,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 92,
-            "y": 61,
+            "x": 28,
+            "y": 85,
             "height": 0,
             "width": 0
         }
@@ -69270,54 +69343,6 @@
             "x": 115,
             "y": 98,
             "height": 32,
-            "width": 32
-        },
-        {
-            "x": 110,
-            "y": 97,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 106,
-            "y": 97,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 102,
-            "y": 97,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 98,
-            "y": 97,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 98,
-            "y": 103,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 102,
-            "y": 103,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 106,
-            "y": 103,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 110,
-            "y": 103,
-            "height": 64,
             "width": 32
         },
         {
@@ -69705,42 +69730,6 @@
             "width": 32
         },
         {
-            "x": 90,
-            "y": 55,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 95,
-            "y": 55,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 95,
-            "y": 63,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 90,
-            "y": 65,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 84,
-            "y": 67,
-            "height": 64,
-            "width": 32
-        },
-        {
-            "x": 84,
-            "y": 59,
-            "height": 64,
-            "width": 32
-        },
-        {
             "x": 80,
             "y": 61,
             "height": 32,
@@ -70057,6 +70046,90 @@
             "y": 102,
             "height": 32,
             "width": 64
+        },
+        {
+            "x": 84,
+            "y": 60,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 90,
+            "y": 56,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 95,
+            "y": 56,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 95,
+            "y": 64,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 90,
+            "y": 66,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 84,
+            "y": 68,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 98,
+            "y": 98,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 102,
+            "y": 98,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 106,
+            "y": 98,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 110,
+            "y": 98,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 110,
+            "y": 104,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 106,
+            "y": 104,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 102,
+            "y": 104,
+            "height": 32,
+            "width": 32
+        },
+        {
+            "x": 98,
+            "y": 104,
+            "height": 32,
+            "width": 32
         }
     ],
     "anchoredObjects": [
@@ -70107,6 +70180,14 @@
         {
             "x": 57,
             "y": 100,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveRightObjects": [
+        {
+            "x": 78,
+            "y": 102,
             "height": 0,
             "width": 0
         }
