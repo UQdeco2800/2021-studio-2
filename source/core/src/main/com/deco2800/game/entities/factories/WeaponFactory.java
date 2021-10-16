@@ -183,7 +183,7 @@ public class WeaponFactory {
         circle.setRadius(0.25f);
         circle.setPosition(circle.getPosition().add(new Vector2(1,1).scl(0.5f)));
         ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON)
-                .setShape(circle).setRestitution(0);
+                .setShape(circle);
 
         fireBall
                 .addComponent(animator)
