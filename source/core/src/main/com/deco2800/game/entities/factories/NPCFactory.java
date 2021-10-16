@@ -580,47 +580,46 @@ public class NPCFactory {
 
     public static Entity createOdin(Entity target) {
         Entity odin = createBaseNPCNoAI();
-        OdinBossConfig config = configs.odinBoss;
+        ElfBossConfig config = configs.elfBoss;
 
-//--------THE AI COMPONENT WHERE IT DOES THE ATTACK AND SUMMONING AND WHEN IT DIES SPAWN PORTAL-----
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 5f, 20f))
-                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
+                        .addTask(new ChaseTask(target, 10, 20f, 40f))
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
+                        .addTask(new PauseTask());
 
-        // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 3000);
+        shootProjectileTask.setProjectileType("beam");
+        shootProjectileTask.setMultishotChance(0);
+        shootProjectileTask.setShootAnimationTimeMS(1);
+        aiComponent.addTask(shootProjectileTask);
+        odin.data.put("createFireBall", true);
+
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("Odin/odin.atlas",
                                 TextureAtlas.class));
 
-        animator.setAnimationScale(1f); //maybe?
+        //animator.setAnimationScale(2f);
+
         animator.startAnimation("default");
         setHumanAnimations(animator);
 
-        //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS-------------------
         odin.addComponent(new CombatStatsComponent(config.health, config.attack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
-                .addComponent(aiComponent);
-//            .addComponent(new BossOverlayComponent());
-//        odin.getComponent(BossOverlayComponent.class).nameBoss("God King: ODIN");
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
+        odin.getComponent(BossOverlayComponent.class).nameBoss("Odin   ");
+        odin.setAttackRange(10);
 
-        // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------
-        odin.setAttackRange(5);
-        //odin.getComponent(AnimationRenderComponent.class).scaleEntity();
-        odin.scaleWidth(2);  //MORE SCALLING HERE AND AT THE BOTTOM???
-        odin.scaleHeight(2);
-//
-//
-//-------------------ITS MASSIVE HEALTH BAR ON TOP OF ITS HEAD-------------------------------------
+        odin.getComponent(AnimationRenderComponent.class).scaleEntity();
         odin.addComponent(createHealthBarComponent());
+        odin.setEntityType("odin");
+        odin.setScale(0.8f * 2, 1f * 2);
 
-// ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
-        odin.setEntityType("odin"); //MAYBE NO USE? use for AI tasks
-        odin.setScale(0.8f * 2, 1f * 2); //Entity SCALING
-        PhysicsUtils.setScaledCollider(odin, 0.9f, 0.2f); //COLLIDER HIT BOX SCALER?
+        PhysicsUtils.setScaledCollider(odin, 0.6f, 0.3f);
         return odin;
     }
 
