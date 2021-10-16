@@ -82,21 +82,26 @@ public class Dagger extends MeleeWeapon {
     public void strongAttack(int attackDirection) {
         hasStrongAttacked = true;
         Vector2 target = entity.getCenterPosition();
+        float angle = 0f;
         switch (attackDirection) {
             case UP:
                 target.y += this.range;
+                angle = 270f;
                 break;
             case DOWN:
                 target.y -= this.range;
+                angle = 90f;
                 break;
             case LEFT:
                 target.x -= this.range;
+                angle = 0f;
                 break;
             case RIGHT:
                 target.x += this.range;
+                angle = 180f;
                 break;
         }
-        Entity blast = WeaponFactory.createBlast(target);
+        Entity blast = WeaponFactory.createBlast(target, angle);
         gameArea.spawnEntityAt(blast, entity.getCenterPosition(), true, true);
     }
 

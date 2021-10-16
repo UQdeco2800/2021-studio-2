@@ -88,7 +88,7 @@ public class TutorialGameArea extends GameArea {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
 
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas", "images/fireball/fireballAnimationBlue.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas",
             "images/player_axe.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",

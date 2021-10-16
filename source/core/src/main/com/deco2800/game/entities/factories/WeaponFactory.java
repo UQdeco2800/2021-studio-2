@@ -391,21 +391,31 @@ public class WeaponFactory {
      * @param target the location that the blast will try and reach
      * @return entity
      */
-    public static Entity createBlast(Vector2 target) {
+    public static Entity createBlast(Vector2 target, float angle) {
         float speed = 8f;
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/fireball/fireballAnimationBlue.atlas", TextureAtlas.class));
+        animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("hit", 0.2f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("flying");
+
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
-        return new Entity()
-                .addComponent(new TextureRenderComponent(sprite))
+        Entity entity = new Entity()
+                .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(new BlastController());
+        entity.setAngle(angle);
+        return entity;
     }
 
     /**

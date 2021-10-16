@@ -110,7 +110,7 @@ public class ForestGameArea extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas", "images/fireball/fireballAnimationBlue.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
