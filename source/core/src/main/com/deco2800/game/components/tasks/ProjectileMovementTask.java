@@ -7,6 +7,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.raycast.RaycastHit;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -30,8 +31,7 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
 
     //Arrow have sound effect when they disappear
     private void playArrow() {
-        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class);
-        arrowEffect.play();
+        ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class).play();
     }
 
     /**

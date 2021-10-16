@@ -3,6 +3,7 @@ package com.deco2800.game.components.Touch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
@@ -150,16 +151,11 @@ public class TouchAttackComponent extends TouchComponent {
                 == PhysicsLayer.IDLEPROJECTILEWEAPON) {
 
             //Remove later on to make arrows stick into walls and more
-            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            //getEntity().getComponent(AITaskComponent.class).dispose();
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
             knockbackForce = 0;
-            //getEntity().getComponent(HitboxComponent.class).dispose();
             getEntity().getEvents().trigger("brokenArrow");
-            if (getEntity().getEntityType().equals("fireball")) {
-                getEntity().prepareDispose();
-                System.out.println("here");
-            }
         }
     }
 
