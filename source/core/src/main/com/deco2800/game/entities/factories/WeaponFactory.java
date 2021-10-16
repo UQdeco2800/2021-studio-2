@@ -77,11 +77,11 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
+                                "images/newArrowBroken/atlas/arrow.atlas", TextureAtlas.class));
         animator.addAnimation("brokenArrow", 0.02f, Animation.PlayMode.NORMAL);
         animator.addAnimation("arrow", 0.02f, Animation.PlayMode.LOOP);
 
-        normalArrow.setScale(new Vector2(1.615f, 1.375f));
+        normalArrow.setScale(new Vector2(1f, 0.3f));
         normalArrow.setAngle(angle);
         animator.startAnimation("arrow");
 
@@ -128,11 +128,11 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
+                                "images/newArrowBroken/atlas/arrow.atlas", TextureAtlas.class));
         animator.addAnimation("brokenArrow", 0.02f, Animation.PlayMode.NORMAL);
         animator.addAnimation("arrow", 0.02f, Animation.PlayMode.LOOP);
 
-        trackingArrow.setScale(new Vector2(1.615f, 1.375f));
+        trackingArrow.setScale(new Vector2(1f, 0.3f));
         trackingArrow.setAngle(angle);
         animator.startAnimation("arrow");
 
@@ -228,11 +228,11 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
+                                "images/newArrowBroken/atlas/arrow.atlas", TextureAtlas.class));
         animator.addAnimation("brokenArrow", 0.02f, Animation.PlayMode.NORMAL);
         animator.addAnimation("arrow", 0.02f, Animation.PlayMode.LOOP);
 
-        normalArrow.setScale(new Vector2(1.615f, 1.375f));
+        normalArrow.setScale(new Vector2(1f, 0.3f));
         normalArrow.setAngle(angle);
         animator.startAnimation("arrow");
 

@@ -118,7 +118,7 @@ public class ForestGameArea extends GameArea {
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
@@ -173,9 +173,9 @@ public class ForestGameArea extends GameArea {
         spawnMeleeElf();
         spawnElfGuard();
         spawnRangedElf();
-        spawnAssassinElf();
-        spawnAnchoredElf();
-        spawnVikingMelee();
+//        spawnAssassinElf();
+//        spawnAnchoredElf();
+//        spawnVikingMelee();
 //        spawnBoss();
 //        spawnVikingMelee();
 //        spawnHellVikingMelee();
