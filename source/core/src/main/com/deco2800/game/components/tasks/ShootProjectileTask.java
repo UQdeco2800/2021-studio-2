@@ -394,6 +394,16 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     }
                     break;
                 }
+                case "beam": {
+                    Vector2 relativeLoc = target.getPosition().cpy().sub(owner.getEntity().getPosition());
+                    relativeLoc.scl(30);
+                    relativeLoc.add(owner.getEntity().getPosition());
+                    Entity odinProjectile = WeaponFactory.createOdinProjectile(relativeLoc,
+                            getDirectionOfTarget());
+                    gameArea.spawnEntityAt(odinProjectile, owner.getEntity().getCenterPosition(), true, true);
+                    shootAnimation();
+                    break;
+                }
             }
         }
     }
