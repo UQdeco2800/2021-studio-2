@@ -51,13 +51,13 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
             if (owner.getEntity().getEntityType().equals("odin")) {
+                showDialogue();
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
-                        showDialogue();
                         spawnWin();
                     }
-                }, 2f);
+                }, 4.5f);
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
             } else if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();

@@ -1,0 +1,27 @@
+
+beamBroken.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+brokenArrow
+  rotate: false
+  xy: 2, 606
+  size: 640, 300
+  orig: 640, 300
+  offset: 0, 0
+  index: -1
+brokenArrow
+  rotate: false
+  xy: 2, 304
+  size: 640, 300
+  orig: 640, 300
+  offset: 0, 0
+  index: -1
+arrow
+  rotate: false
+  xy: 2, 2
+  size: 640, 300
+  orig: 640, 300
+  offset: 0, 0
+  index: -1

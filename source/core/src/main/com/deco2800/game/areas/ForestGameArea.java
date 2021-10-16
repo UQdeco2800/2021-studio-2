@@ -92,7 +92,9 @@ public class ForestGameArea extends GameArea {
             "player_hammer.png",
             "player_axe.png",
             "portal.png",
-            "Odin/odin.png",
+            "Odin/odinAttack.png",
+            "Odin/odinDeath.png",
+            "Odin/odinMovement.png",
             "Assets/gametile-127.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
@@ -103,7 +105,8 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/lokiBoss.png",
-            "images/firePillar.png"
+            "images/firePillar.png",
+            "Odin/OdinProjectile/beam_normal.png",
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -120,14 +123,15 @@ public class ForestGameArea extends GameArea {
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas", "images/firePillar.atlas"
+            "images/lokiBoss.atlas", "images/firePillar.atlas", "Odin/OdinProjectile/beamBroken.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
             "sounds/arrow_shoot.mp3"
     };
     private static final String[] forestSounds = {
-            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
+            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg", "sounds/beam_shoot" +
+            ".mp3", "sounds/beam_disappear.mp3"
     };
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
@@ -167,7 +171,6 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        //spawnTrees();
         spawnPlayer();
 //        spawnCrate();
 //        spawnMeleeElf();
@@ -181,8 +184,8 @@ public class ForestGameArea extends GameArea {
 //        spawnHellVikingMelee();
 //        spawnAsgardWarriorMelee();
 //        spawnOutdoorArcher();
-        setInitialDialogue();
-        //spawnLoki();
+//        setInitialDialogue();
+//        spawnLoki();
         playMusic();
         spawnOdin();
 

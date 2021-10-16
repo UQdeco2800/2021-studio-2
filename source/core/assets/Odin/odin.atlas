@@ -1,6 +1,264 @@
 
-odin.png
-size: 4096, 2048
+odinAttack.png
+size: 4096, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+EnemyAttackDown
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 1322, 112
+  size: 649, 530
+  orig: 649, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 1322, 112
+  size: 649, 530
+  orig: 649, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 1322, 112
+  size: 649, 530
+  orig: 649, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 1322, 112
+  size: 649, 530
+  orig: 649, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 1973, 112
+  size: 619, 530
+  orig: 619, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 644, 112
+  size: 676, 530
+  orig: 676, 530
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 2594, 47
+  size: 558, 595
+  orig: 558, 595
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+
+odinDeath.png
+size: 2048, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
@@ -46,6 +304,27 @@ frontDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
+frontDeath
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
 backDeath
   rotate: false
   xy: 2, 1286
@@ -88,6 +367,27 @@ backDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
+backDeath
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
 leftDeath
   rotate: false
   xy: 2, 1286
@@ -130,6 +430,27 @@ leftDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
+leftDeath
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
 rightDeath
   rotate: false
   xy: 2, 1286
@@ -172,65 +493,106 @@ rightDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackDown
+rightDeath
   rotate: false
-  xy: 1928, 644
+  xy: 644, 2
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackLeft
+rightDeath
   rotate: false
-  xy: 2570, 1286
+  xy: 1286, 644
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackRight
+rightDeath
   rotate: false
-  xy: 1928, 2
+  xy: 1286, 2
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackUp
-  rotate: false
-  xy: 2570, 644
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
+
+odinMovement.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
 moveDown
   rotate: false
-  xy: 3212, 1286
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveLeft
-  rotate: false
-  xy: 2570, 2
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveRight
-  rotate: false
-  xy: 3212, 644
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveUp
-  rotate: false
-  xy: 3212, 2
+  xy: 2, 1277
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
 default
   rotate: false
-  xy: 644, 2
+  xy: 2, 1277
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 1086, 1286
+  size: 430, 631
+  orig: 430, 631
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 644, 653
+  size: 439, 631
+  orig: 439, 631
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 644, 1286
+  size: 440, 631
+  orig: 440, 631
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 2, 2
+  size: 440, 631
+  orig: 440, 631
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 1085, 653
+  size: 340, 631
+  orig: 340, 631
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 1518, 1286
+  size: 340, 631
+  orig: 340, 631
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 1427, 653
+  size: 340, 631
+  orig: 340, 631
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 444, 2
+  size: 340, 631
+  orig: 340, 631
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 2, 635
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
