@@ -89,8 +89,12 @@ public class GameArea3 extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/arrow_normal.png",
-            "Odin/odin.png",
+            "Odin/odinAttack.png",
+            "Odin/odinDeath.png",
+            "Odin/odinMovement.png",
             "portal.png",
+            "Odin/OdinProjectile/beam_normal.png",
+            "Odin/OdinProjectile/beamBroken.png",
     };
     private static String[] tileTextures = null;
     public static final String[] healthRegenTextures = {
@@ -104,13 +108,16 @@ public class GameArea3 extends GameArea {
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/arrow_broken/arrowBroken.atlas", "Odin/odin.atlas", "end/portal.atlas",
+            "images/hammer_projectile.atlas", "Odin/OdinProjectile/beamBroken.atlas"
     };
     private static final String[] forestSounds = {
-            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
+            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg", "sounds/beam_shoot" +
+            ".mp3", "sounds/beam_disappear.mp3"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3"
+            "sounds/arrow_shoot.mp3",
+            "sounds/beam_shoot.mp3"
     };
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
@@ -147,13 +154,12 @@ public class GameArea3 extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-//        spawnOutdoorArcherObject();
-//        spawnOutdoorWarriorObject();
-//        spawnAsgardWarriorObject();
-//        spawnMovementCutscenes();
+        spawnOutdoorArcherObject();
+        spawnOutdoorWarriorObject();
+        spawnAsgardWarriorObject();
+        spawnMovementCutscenes();
         spawnDialogueCutscenes();
         setInitialDialogue();
-
 
         spawnObstacles();
         spawnLights();
