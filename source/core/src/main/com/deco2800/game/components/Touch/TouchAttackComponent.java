@@ -109,6 +109,8 @@ public class TouchAttackComponent extends TouchComponent {
             //Remove later on to make arrows stick into walls and more
             getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
+            getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+            this.knockbackForce = 0;
             getEntity().getEvents().trigger("brokenArrow");
         }
 
