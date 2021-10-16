@@ -179,7 +179,11 @@ public class WeaponFactory {
                                 new Vector2(config.speedX, config.speedY), 0.8f));
         fireBall.data.put("fireBallMovement", false);
 
-        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(0.25f);
+        circle.setPosition(circle.getPosition().add(new Vector2(1,1).scl(0.5f)));
+        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON)
+                .setShape(circle).setRestitution(0);
 
         fireBall
                 .addComponent(animator)
@@ -192,7 +196,6 @@ public class WeaponFactory {
                 .addComponent(new PlayerActions())
                 .addComponent(new TouchAttackComponent(PhysicsLayer.NONE, 1f));
         shootingSound("fireBall");
-        hitbox.setScale(0.8f);
         return fireBall;
     }
 
