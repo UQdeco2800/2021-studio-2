@@ -166,7 +166,7 @@ public class WeaponFactory {
                                 "images/fireball/fireballAnimation.atlas", TextureAtlas.class));
         animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("hit", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("hit", 0.02f, Animation.PlayMode.NORMAL);
         animator.startAnimation("staticFireball");
 
         AITaskComponent aiComponent =
