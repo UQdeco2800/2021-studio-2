@@ -58,7 +58,7 @@ public class ColliderComponent extends Component {
                 fixtureDef.shape = makeBoundingBox();
             }
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
-            physBody.destroyFixture(fixture);
+            dispose();
             fixture = physBody.createFixture(fixtureDef);
         }
     }

@@ -100,22 +100,6 @@ public class TouchAttackComponent extends TouchComponent {
                 && !getEntity().canSeeEntity(target)) {
             return;
         }
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer()
-                == PhysicsLayer.PROJECTILEWEAPON
-                || getEntity().getComponent(HitboxComponent.class).getLayer()
-                == PhysicsLayer.IDLEPROJECTILEWEAPON) {
-
-            //Remove later on to make arrows stick into walls and more
-            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
-            getEntity().getEvents().trigger("brokenArrow");
-        }
-
-        // check layer - NPC or check type
-        // then trigger stun
-
-
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
@@ -156,6 +140,25 @@ public class TouchAttackComponent extends TouchComponent {
                 } else {
                     this.getEntity().getEvents().trigger("stunUp");
                 }
+            }
+        }
+
+        //Dissolve arrow attacks after hits
+        if (getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.PROJECTILEWEAPON
+                || getEntity().getComponent(HitboxComponent.class).getLayer()
+                == PhysicsLayer.IDLEPROJECTILEWEAPON) {
+
+            //Remove later on to make arrows stick into walls and more
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
+            getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+            knockbackForce = 0;
+            //getEntity().getComponent(HitboxComponent.class).dispose();
+            getEntity().getEvents().trigger("brokenArrow");
+            if (getEntity().getEntityType().equals("fireball")) {
+                getEntity().prepareDispose();
+                System.out.println("here");
             }
         }
     }
