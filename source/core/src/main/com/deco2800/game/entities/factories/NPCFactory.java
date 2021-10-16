@@ -587,7 +587,8 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 5f, 20f))
-                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
+                        .addTask(new PauseTask());
 
         // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------------
         AnimationRenderComponent animator =
@@ -691,7 +692,7 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(
-                                target, 11, 4f, 4f, new Vector2(2f, 2f)))
+                                target, 11, 4f, 4f, new Vector2(1.6f, 1.6f)))
                         .addTask(new PauseTask())
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
@@ -809,7 +810,7 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType("normalArrow");
+        shootProjectileTask.setProjectileType("fastArrow");
         shootProjectileTask.setMultishotChance(multishotChance);
         shootProjectileTask.setShootAnimationTimeMS(200);
         aiComponent.addTask(shootProjectileTask);
@@ -854,7 +855,7 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f))
                         .addTask(new RangedChaseTask(
-                                target, 10, 7f, 10f))
+                                target, 10, 20f, 20f))
                         .addTask(new SpawnDecoysTask(target))
                         .addTask(new SpawnLokiDecoyTask(target, 8000));
 
@@ -882,7 +883,7 @@ public class NPCFactory {
 
                 .addComponent(aiComponent)
                 .addComponent(new BossOverlayComponent());
-        boss.setAttackRange(5);
+        boss.setAttackRange(3);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.getComponent(BossOverlayComponent.class).nameBoss("Loki    ");
 
@@ -910,7 +911,7 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f))
                         .addTask(new RangedChaseTask(
-                                target, 10, 7f, 10f))
+                                target, 10, 20f, 20f))
                         .addTask(new SpawnLokiDecoyTask(target, 10000));
 
         AnimationRenderComponent animator =
@@ -925,7 +926,7 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent);
-        boss.setAttackRange(5);
+        boss.setAttackRange(3);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
 
         boss.addComponent(createHealthBarComponent());

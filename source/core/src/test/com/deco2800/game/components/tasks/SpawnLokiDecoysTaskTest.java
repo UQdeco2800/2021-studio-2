@@ -14,6 +14,7 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,9 @@ class SpawnLokiDecoysTaskTest {
 
     @Mock
     GameArea gameArea;
+
+    @Mock
+    GameTime gameTime;
 
     private SpawnLokiDecoyTask spawn;
 
@@ -92,6 +96,9 @@ class SpawnLokiDecoysTaskTest {
 
     @Test
     void getDistanceToTargetTest() {
+        gameTime = mock(GameTime.class);
+        ServiceLocator.registerTimeSource(gameTime);
+        when(gameTime.getTime()).thenReturn(0L);
         Entity target = new Entity();
         Entity boss = createSpawner(target);
 

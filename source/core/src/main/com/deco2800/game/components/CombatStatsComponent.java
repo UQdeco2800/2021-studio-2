@@ -165,6 +165,7 @@ public class CombatStatsComponent extends Component {
             int newHealth = getHealth() - attacker.getBaseAttack() - weaponAttackPower;
             //check for hit animations
             checkHitAnimations();
+            this.entity.getEvents().trigger("enemyHit");
             //if entity has Transform Component and is about to die we don't want to update hp
             // here since it will dispose. Instead we want to disable this component and perform
             // our transformation.
