@@ -90,10 +90,6 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                     && (int) owner.getEntity().data.get("teleportID") == 1) {
                 if (!owner.getEntity().data.containsKey("teleportTarget")) {
                     //Add body offset
-                    /*System.out.println(((Vector2) owner.getEntity().data.get("teleportLoc")));
-                    System.out.println(bodyOffset);
-                    owner.getEntity().data.put("teleportLoc",
-                            ((Vector2) owner.getEntity().data.get("teleportLoc")).add(bodyOffset));*/
                     owner.getEntity().data.put("teleportTarget", true);
                 }
             }

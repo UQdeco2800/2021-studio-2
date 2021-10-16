@@ -61,7 +61,7 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
             this.declareEnd = false;
         } else {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            if ((System.currentTimeMillis() - start) / 1000 >= duration) {
+            if ((System.currentTimeMillis() - start) / 500 >= duration) {
                 stop();
                 owner.getEntity().prepareDispose();
                 status = Status.FINISHED;

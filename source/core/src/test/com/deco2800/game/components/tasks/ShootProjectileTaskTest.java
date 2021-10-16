@@ -1,6 +1,7 @@
 package com.deco2800.game.components.tasks;
 
 import com.deco2800.game.ai.tasks.AITaskComponent;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.physics.components.PhysicsComponent;
@@ -64,7 +65,41 @@ class ShootProjectileTaskTest {
         assertEquals(20, shootProjectileTask.getPriority());
     }
 
-    // not done - need to fine tune on edge cases (do for sprint 2)
+    @Test
+    void updateCooldown() {
+        Entity target = new Entity();
+        target.setPosition(2f, 2f);
+
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
+        shootProjectileTask.setProjectileType("normalArrow");
+        shootProjectileTask.setMultishotChance(0.1);
+        AITaskComponent ai = new AITaskComponent().addTask(shootProjectileTask);
+        Entity entity = makePhysicsEntity().addComponent(ai);
+        entity.create();
+        entity.setAttackRange(5);
+        entity.setPosition(0f, 0f);
+        shootProjectileTask.setCooldownMS(500);
+        // can see enemy
+        assertEquals(20, shootProjectileTask.getPriority());
+        shootProjectileTask.start();
+        // need to wait 2 seconds (cool down) before can shoot
+        long time = System.currentTimeMillis();
+        while (System.currentTimeMillis() - time <= 700) {
+            // Wait
+            entity.earlyUpdate();
+        }
+        // can see enemy
+        assertEquals(20, shootProjectileTask.getPriority());
+
+        // need to count the number of spawn entity
+        for (int i = 0; i < 5; i++) {
+            entity.earlyUpdate();
+            //entity.update();
+            ServiceLocator.getPhysicsService().getPhysics().update();
+        }
+
+        assertEquals(20, shootProjectileTask.getPriority());
+    }
 
     private Entity makePhysicsEntity() {
         return new Entity()
