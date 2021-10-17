@@ -132,7 +132,9 @@ public class ForestGameArea extends GameArea {
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3"
+            "sounds/arrow_shoot.mp3",
+            "sounds/death_2.mp3",
+            "sounds/death_1.mp3"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -178,9 +180,9 @@ public class ForestGameArea extends GameArea {
         spawnPlayer();
         spawnCrate();
 
-        spawnMeleeElf();
+//        spawnMeleeElf();
 //        spawnElfGuard();
-//        spawnRangedElf();
+        spawnRangedElf();
         playMusic();
         setInitialDialogue();
         spawnBoss();

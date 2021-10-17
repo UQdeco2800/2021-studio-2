@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -13,6 +14,7 @@ import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
+import java.util.Random;
 
 public class DeathPauseTask extends ChaseTask implements PriorityTask {
     private final float duration;
@@ -27,6 +29,17 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         this.declareEnd = true;
     }
 
+    private void playElfDead() {
+        Random random = new Random();
+        int numCase = random.nextInt(2);
+        switch (numCase) {
+            case 1:
+                ServiceLocator.getResourceService().getAsset("sounds/death_1.mp3", Sound.class).play();
+            case 0:
+                ServiceLocator.getResourceService().getAsset("sounds/death_2.mp3", Sound.class).play();
+        }
+    }
+
     @Override
     public void update() {
         if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
@@ -38,6 +51,13 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
 
         if (this.declareEnd) {
             this.start = System.currentTimeMillis();
+            if (owner.getEntity().getEntityType().equals("melee")
+                    || owner.getEntity().getEntityType().equals("assassin")
+                    || owner.getEntity().getEntityType().equals("ranged")
+                    || owner.getEntity().getEntityType().equals("melee")
+                    || owner.getEntity().getEntityType().equals("AlertCaller")) {
+                playElfDead();
+            }
             if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
             } else if (owner.getEntity().getEntityType().equals("odin")) {
