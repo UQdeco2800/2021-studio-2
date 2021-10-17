@@ -75,7 +75,7 @@ public abstract class ProjectileController extends Component {
         if (targetStats != null) {
             // add entity's base attack to attack, if they exist.
 //            if (hitbox == null) {
-                targetStats.weaponHit(this.stats.attackPower);
+            targetStats.weaponHit(this.stats.attackPower);
             /*} else {
                 targetStats.hit(combatStats, this.stats.attackPower);
             } This set of code will always be redundant since hitbox can never be null */

@@ -18,40 +18,62 @@ import java.util.concurrent.TimeUnit;
 
 public class FirePillarTask extends DefaultTask implements PriorityTask {
 
-    /** Required to spawn the entity which will damage the player. */
+    /**
+     * Required to spawn the entity which will damage the player.
+     */
     private GameArea gameArea;
 
-    /** Physics Engine to handle collisions between enemy and attack.  */
+    /**
+     * Physics Engine to handle collisions between enemy and attack.
+     */
     private PhysicsEngine physics;
 
-    /** Provides a view of the entities debug information. */
+    /**
+     * Provides a view of the entities debug information.
+     */
     private DebugRenderer debugRenderer;
 
-    /** The target entity the enemy will attempt to attack. */
+    /**
+     * The target entity the enemy will attempt to attack.
+     */
     private Entity target;
 
-    /** THe delay between each attacks for this task. */
+    /**
+     * THe delay between each attacks for this task.
+     */
     private long cooldownMS;
 
-    /** Last time that the attack was created. */
+    /**
+     * Last time that the attack was created.
+     */
     private long lastFiredTime;
 
-    /** Time of the last shoot animation played. */
+    /**
+     * Time of the last shoot animation played.
+     */
     private long lastShootAnimation;
 
-    /** Duration of the shoot animation time in Milliseconds. */
+    /**
+     * Duration of the shoot animation time in Milliseconds.
+     */
     private long shootAnimationTimeMS;
 
-    /** List of previous positions of the player. */
+    /**
+     * List of previous positions of the player.
+     */
     private LinkedList<Vector2> lastPositions;
 
-    /** List of the previous Fire Pillar entities for disposal. */
+    /**
+     * List of the previous Fire Pillar entities for disposal.
+     */
     private LinkedList<Entity> firePillars;
 
-    /** Count used to delay the ticks between pillars spawned. */
+    /**
+     * Count used to delay the ticks between pillars spawned.
+     */
     private int count;
 
-    private static final Logger logger = LoggerFactory.getLogger(FirePillarTask .class);
+    private static final Logger logger = LoggerFactory.getLogger(FirePillarTask.class);
 
     /**
      * Constructor for the AI task that will allow the enemy to create fire pillars.
@@ -111,7 +133,7 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         logger.debug("Boss Spawning Fire Pillar");
 
         Entity pillar =
-            WeaponFactory.createFirePillarBase();
+                WeaponFactory.createFirePillarBase();
         Vector2 lastPosition = lastPositions.remove(0);
         Vector2 position = new Vector2(lastPosition.x + target.getPosition().x,
                 lastPosition.y + target.getPosition().y);

@@ -188,7 +188,8 @@ public class GameArea2 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_ENCOUNTER;
+        ;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;

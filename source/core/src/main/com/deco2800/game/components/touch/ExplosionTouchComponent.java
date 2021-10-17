@@ -40,10 +40,10 @@ public class ExplosionTouchComponent extends TouchComponent {
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-                Body targetBody = physicsComponent.getBody();
-                Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-                Vector2 impulse = direction.setLength(knockbackForce);
-                targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+            Body targetBody = physicsComponent.getBody();
+            Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+            Vector2 impulse = direction.setLength(knockbackForce);
+            targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         applyContinuousDamage(me, other);
     }

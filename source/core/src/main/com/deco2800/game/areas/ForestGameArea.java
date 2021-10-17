@@ -157,7 +157,7 @@ public class ForestGameArea extends GameArea {
      * as well as the health of the player.
      *
      * @param terrainFactory Base game engine terrain factory to produce the map assets
-     * @param currentHealth the current health of the main character as an integer
+     * @param currentHealth  the current health of the main character as an integer
      */
     public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -214,7 +214,8 @@ public class ForestGameArea extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;
+        ;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;

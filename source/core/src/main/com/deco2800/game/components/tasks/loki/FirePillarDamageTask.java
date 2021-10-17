@@ -1,16 +1,7 @@
 package com.deco2800.game.components.tasks.loki;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
-import com.deco2800.game.ai.tasks.Task;
-import com.deco2800.game.areas.GameArea;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.services.ServiceLocator;
 
 /**
@@ -19,7 +10,9 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class FirePillarDamageTask extends DefaultTask implements PriorityTask {
 
-    /** Spawn time of the entity. */
+    /**
+     * Spawn time of the entity.
+     */
     private long spawnTime;
 
     public FirePillarDamageTask() {

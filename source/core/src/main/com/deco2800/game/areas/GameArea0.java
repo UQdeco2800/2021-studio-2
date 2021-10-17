@@ -212,7 +212,8 @@ public class GameArea0 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_ENCOUNTER;
+        ;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;

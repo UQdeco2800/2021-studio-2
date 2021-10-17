@@ -5,8 +5,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.components.ColliderComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TouchTeleportComponent extends TouchComponent {
 

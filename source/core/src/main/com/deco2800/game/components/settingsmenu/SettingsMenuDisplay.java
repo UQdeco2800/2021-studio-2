@@ -150,7 +150,7 @@ public class SettingsMenuDisplay extends UIComponent {
         resetBtn.addListener((Event event) -> {
             PlayerSave.resetFile();
             return true;
-                    });
+        });
         return table;
     }
 

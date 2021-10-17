@@ -119,7 +119,8 @@ class LongswordTest {
             entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
         } catch (Exception e) {
             Assertions.fail();
-        }    }
+        }
+    }
 
     Entity createAttacker(short targetLayer) {
 

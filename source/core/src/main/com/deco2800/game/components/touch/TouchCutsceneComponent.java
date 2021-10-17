@@ -1,9 +1,6 @@
 package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
-import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
