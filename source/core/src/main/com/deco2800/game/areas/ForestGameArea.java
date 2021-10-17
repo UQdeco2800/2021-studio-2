@@ -110,7 +110,7 @@ public class ForestGameArea extends GameArea {
             "thor/left_attck.png",
             "thor/right_attck.png",
             "thor/walk_left.png",
-            "thor/walk_right.png"
+            "thor/walk_right.png",
             "images/firePillar.png"
     };
     public static final String[] healthRegenTextures = {
@@ -182,7 +182,6 @@ public class ForestGameArea extends GameArea {
         spawnElfGuard();
         spawnRangedElf();
         playMusic();
-        setDialogue();
         setInitialDialogue();
         spawnLoki();
         playMusic();

@@ -90,7 +90,7 @@ public class TutorialGameArea extends GameArea {
 
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/outdoorArcher.atlas"

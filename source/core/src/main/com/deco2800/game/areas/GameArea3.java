@@ -102,7 +102,7 @@ public class GameArea3 extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/arrow_broken/arrowBroken.atlas",
+            "images/newArrowBroken/atlas/arrow.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
