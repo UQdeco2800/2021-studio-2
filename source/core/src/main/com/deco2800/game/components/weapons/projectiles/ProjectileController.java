@@ -52,9 +52,10 @@ public abstract class ProjectileController extends Component {
     }
 
     /**
-     * @param me
-     * @param other
-     * @return if successful collision
+     * Collision method used to detect whether projectile has collided with enemy
+     *
+     * @param me    fixture of this projectile
+     * @param other fixture of colliding entity.
      */
     protected void onCollisionStart(Fixture me, Fixture other) {
 

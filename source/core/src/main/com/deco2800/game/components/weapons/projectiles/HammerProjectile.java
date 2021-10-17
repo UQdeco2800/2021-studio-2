@@ -164,7 +164,6 @@ public class HammerProjectile extends ProjectileController {
      *
      * @param me    fixture of this projectile
      * @param other fixture of colliding entity.
-     * @return if successful collision
      */
     protected void onCollisionStart(Fixture me, Fixture other) {
 

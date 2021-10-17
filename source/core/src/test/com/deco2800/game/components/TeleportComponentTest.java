@@ -1,8 +1,8 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Touch.TeleportComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TeleportComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -13,6 +13,7 @@ import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -88,10 +89,10 @@ class TeleportComponentTest {
 
         Fixture entityFixture = entity.getComponent(HitboxComponent.class).getFixture();
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
-        assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 10);
+        Assertions.assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 10);
         entity.getComponent(CombatStatsComponent.class).setHealth(5);
         entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
-        assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 5);
+        Assertions.assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 5);
     }
 
     Entity createPlayer(short targetLayer) {

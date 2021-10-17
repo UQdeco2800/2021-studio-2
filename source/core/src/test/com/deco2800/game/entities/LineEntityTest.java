@@ -45,12 +45,6 @@ class LineEntityTest {
         Vector2 v1 = new Vector2(0f, 0f);
         Vector2 v2 = new Vector2(5f, -5f);
 
-        /*Vector2 v3 = v2.cpy().sub(v1);
-        //update position
-        Vector2 centerPoint = v3.cpy().setLength(v3.len() / 2).add(v1);
-        Vector2 bodyOffset = entity.getCenterPosition().cpy().sub(entity.getPosition());
-        Vector2 position = centerPoint.sub(bodyOffset);*/
-
         entity.setTarget(v2, v1);
 
         assertEquals(new Vector2(2, -3), entity.getPosition());
@@ -79,12 +73,6 @@ class LineEntityTest {
 
         entity.update();
         // unable to pinpoint 1 second
-        /*
-        while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCreate) <= 1000) {
-            entity.update();
-        }
-
-         */
 
         entity.dispose();
 

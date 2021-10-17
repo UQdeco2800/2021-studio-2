@@ -99,9 +99,9 @@ public class TerrainFactory {
     /**
      * A version of createTerrain that takes a map object as an input to render a specific map
      *
-     * @param terrainType
-     * @param map
-     * @return
+     * @param terrainType terrain type
+     * @param map Map of tiles
+     * @return TerrainComponent
      */
     public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();

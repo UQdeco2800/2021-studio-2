@@ -1,4 +1,4 @@
-package com.deco2800.game.components.Touch;
+package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.Component;

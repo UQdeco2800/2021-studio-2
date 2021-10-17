@@ -3,6 +3,7 @@ package com.deco2800.game.files;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class PlayerSaveTest {
 
@@ -10,7 +11,7 @@ public class PlayerSaveTest {
     void testDefaultSave() {
         PlayerSave.Save testSave = PlayerSave.initial();
 
-        assertEquals(testSave.hasPlayed, false);
+        assertFalse(testSave.hasPlayed);
 
         assertEquals(testSave.lokiEnc, 0);
         assertEquals(testSave.thorEnc, 0);
