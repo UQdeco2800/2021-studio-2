@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
 import java.util.TimerTask;

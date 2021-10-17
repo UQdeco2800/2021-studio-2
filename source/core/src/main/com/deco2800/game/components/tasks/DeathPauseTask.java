@@ -11,7 +11,6 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
 public class DeathPauseTask extends ChaseTask implements PriorityTask {

@@ -10,7 +10,6 @@ import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
 
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 

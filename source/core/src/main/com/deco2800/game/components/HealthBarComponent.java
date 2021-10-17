@@ -65,8 +65,8 @@ public class HealthBarComponent extends RenderComponent {
         healthDecrease.setScale(height, width);
     }
 
-    private static double round(double value, int precision) {
-        int scale = (int) Math.pow(10, precision);
+    private static double round(double value) {
+        int scale = (int) Math.pow(10, 1);
         return (double) Math.round(value * scale) / scale;
     }
 
@@ -87,14 +87,14 @@ public class HealthBarComponent extends RenderComponent {
             float saveHealth = previousHealth;
             healthDecreaseCheck = true;
             ratioOfHealthPrevious = saveHealth / MaxHealth;
-            ratioOfHealthPrevious = (float) round(ratioOfHealthPrevious, 1);
+            ratioOfHealthPrevious = (float) round(ratioOfHealthPrevious);
             start = System.currentTimeMillis();
 
         }
         previousHealth = currentHealth;
 
         ratioOfHealth = currentHealth / MaxHealth;
-        ratioOfHealth = (float) round(ratioOfHealth, 1);
+        ratioOfHealth = (float) round(ratioOfHealth);
         if (ratioOfHealth == 0f) {
             ratioOfHealth = 0.01f;
         }

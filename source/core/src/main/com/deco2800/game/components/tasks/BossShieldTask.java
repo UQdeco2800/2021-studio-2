@@ -12,9 +12,9 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
     private final GameTime timeSource;
     private final float duration;
     private long endTime;
-    private float maxChaseDistance;
-    private int priority;
-    private float viewDistance;
+    private final float maxChaseDistance;
+    private final int priority;
+    private final float viewDistance;
     private boolean shield;
     private int currentHealth;
 

@@ -12,7 +12,7 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     private final float maxChaseDistance;
     private long start = System.currentTimeMillis();
     private boolean zigLeft = false;
-    private float speedMultiplier;
+    private final float speedMultiplier;
 
     /**
      * Initialise zig zag chase task - advance movement task

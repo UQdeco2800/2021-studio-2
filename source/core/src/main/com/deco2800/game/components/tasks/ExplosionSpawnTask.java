@@ -20,7 +20,6 @@ public class ExplosionSpawnTask extends DefaultTask implements PriorityTask {
 
     private final Entity ownerRunner;
 
-
     /**
      * Spawn the explosion
      *

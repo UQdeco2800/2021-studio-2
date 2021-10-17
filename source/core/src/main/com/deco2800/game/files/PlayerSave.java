@@ -65,8 +65,7 @@ public class PlayerSave {
      * @return Returns a PlayerSave.Save object with default values
      */
     public static Save initial() {
-        Save playerSave = new Save();
-        return playerSave;
+        return new Save();
     }
 
     /**
@@ -77,32 +76,29 @@ public class PlayerSave {
      * save file
      */
     public static Save load() {
-        Save playersave = new Save();
+        Save playerSave = new Save();
 
 
         try {
             File saveFile = new File(SAVE_FILE);
             Scanner saveRead = new Scanner(saveFile);
 
-            playersave.hasPlayed = Boolean.parseBoolean(saveRead.nextLine());
-            playersave.lokiEnc = Integer.parseInt(saveRead.nextLine());
-            playersave.thorEnc = Integer.parseInt(saveRead.nextLine());
-            playersave.odinEnc = Integer.parseInt(saveRead.nextLine());
+            playerSave.hasPlayed = Boolean.parseBoolean(saveRead.nextLine());
+            playerSave.lokiEnc = Integer.parseInt(saveRead.nextLine());
+            playerSave.thorEnc = Integer.parseInt(saveRead.nextLine());
+            playerSave.odinEnc = Integer.parseInt(saveRead.nextLine());
 
-            playersave.lokiWins = Integer.parseInt(saveRead.nextLine());
-            playersave.thorWins = Integer.parseInt(saveRead.nextLine());
-            playersave.odinWins = Integer.parseInt(saveRead.nextLine());
+            playerSave.lokiWins = Integer.parseInt(saveRead.nextLine());
+            playerSave.thorWins = Integer.parseInt(saveRead.nextLine());
+            playerSave.odinWins = Integer.parseInt(saveRead.nextLine());
 
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NumberFormatException e) {
             e.printStackTrace();
-
-        } catch (NumberFormatException numE) {
-            numE.printStackTrace();
         }
 
 
-        return playersave;
+        return playerSave;
     }
 
     /**

@@ -473,7 +473,7 @@ public class TutorialGameArea extends GameArea {
         PlayerSave.Save pSave = PlayerSave.load();
 
 
-        if (pSave.hasPlayed == false) {
+        if (!pSave.hasPlayed) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);

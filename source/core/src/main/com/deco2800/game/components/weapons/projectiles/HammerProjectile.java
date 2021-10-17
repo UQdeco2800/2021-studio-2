@@ -61,7 +61,6 @@ public class HammerProjectile extends ProjectileController {
     private int status;
     private final int THROWING = 0;
     private final int RECALLING = 1;
-    private final int STATIC = 2;
 
     /**
      * Game time since last notable event: e.g. since creation or since recall was called
@@ -127,7 +126,7 @@ public class HammerProjectile extends ProjectileController {
             if ((Math.abs(position.x - start.x) > distance || Math.abs(position.y - start.y) > distance) ||
                     (ServiceLocator.getTimeSource().getTime() - gameTime) > 2000L) {
                 // Make projectile static.
-                this.status = STATIC;
+                this.status = 2;
                 animator.stopAnimation();
                 animator.startAnimation("default");
                 movingComponent.setMoving(false);

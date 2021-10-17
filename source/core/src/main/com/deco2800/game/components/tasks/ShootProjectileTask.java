@@ -390,7 +390,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         shootFastArrow(AOE);
     }
 
-    private void  updateTrajectory(float AOE) {
+    private void updateTrajectory(float AOE) {
         float turningAngle = 30f / UserSettings.get().fps;
         Vector2 relativeLocationTarget = tragectoryLocation.cpy()
                 .sub(owner.getEntity().getCenterPosition());
