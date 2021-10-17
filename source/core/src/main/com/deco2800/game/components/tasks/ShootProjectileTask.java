@@ -104,6 +104,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     private static final Logger logger = LoggerFactory.getLogger(ShootProjectileTask.class);
 
+    /** time when the boss start rampage */
+    private long rampageStart = 0;
+
     public enum projectileTypes {
         normalArrow,
         trackingArrow,
@@ -519,13 +522,31 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         if (owner.getEntity().getEntityType().equals("elfBoss")) {
             int health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             int max = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
-            if ((float) health / max <= 0.5f && count == 0) {
-                logger.info("Berserk mode: Attack Speed x 4");
-                logger.info("Berserk mode: Deal true damage 20% player health");
-                setCooldownMS(500);
-                owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(
-                        target.getComponent(CombatStatsComponent.class).getMaxHealth() / 5);
-                count++;
+            if ((float) health / max <= 0.5f) {
+                if (count == 0) {
+                    logger.info("Berserk mode: Attack Speed x 4");
+                    logger.info("Berserk mode: Deal true damage 20% player health");
+                    setCooldownMS(500);
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(
+                            target.getComponent(CombatStatsComponent.class).getMaxHealth() / 5);
+                    rampageStart = System.currentTimeMillis();
+                    count++;
+                }
+                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0) {
+                    if ((float) health / max <= 0.25) {
+                        logger.info("You can't kill a boss when his minions are alive");
+                        owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
+                    }
+                }
+                if (count == 1) {
+                    if (System.currentTimeMillis() - rampageStart >= 30000) {
+                        logger.info("Berserk off");
+                        setCooldownMS(2000);
+                        owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
+                        owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+                        count++;
+                    }
+                }
             }
         }
         checkFireBalls();

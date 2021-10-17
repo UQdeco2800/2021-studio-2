@@ -179,11 +179,11 @@ public class ForestGameArea extends GameArea {
         spawnCrate();
 
         spawnMeleeElf();
-        spawnElfGuard();
-        spawnRangedElf();
+//        spawnElfGuard();
+//        spawnRangedElf();
         playMusic();
         setInitialDialogue();
-        spawnLoki();
+        spawnBoss();
         playMusic();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
