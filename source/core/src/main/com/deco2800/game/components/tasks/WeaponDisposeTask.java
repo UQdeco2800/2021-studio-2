@@ -5,6 +5,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**
  * Wait for the weapon break animation to run
@@ -55,8 +56,7 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
         } else {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             if ((System.currentTimeMillis() - start) / 500 >= duration) {
-                stop();
-                owner.getEntity().prepareDispose();
+                owner.getEntity().getComponent(AnimationRenderComponent.class).dispose();
                 status = Status.FINISHED;
             }
         }
