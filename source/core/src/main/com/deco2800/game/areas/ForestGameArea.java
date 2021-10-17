@@ -510,7 +510,7 @@ public class ForestGameArea extends GameArea {
 
             pSave.lokiEnc += 1;
 
-        } else if (pSave.lokiEnc >= 1 && pSave.lokiEnc < 3) {
+        } else if (pSave.lokiEnc < 3) {
             TextBox textBox = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(TextBox.class);
             textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);

@@ -8,10 +8,7 @@ import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.RandomUtils;
 

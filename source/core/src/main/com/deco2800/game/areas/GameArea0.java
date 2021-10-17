@@ -407,7 +407,7 @@ public class GameArea0 extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.fastArrow,  0);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.fastArrow, 0);
             elf.setEntityType("assassin");
             elf.getEvents().trigger("assassinLeft");
             spawnEntityAt(elf, randomPos, true, true);

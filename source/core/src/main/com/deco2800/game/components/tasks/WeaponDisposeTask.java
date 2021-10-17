@@ -5,8 +5,6 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ServiceLocator;
 
 /**
  * Wait for the weapon break animation to run
