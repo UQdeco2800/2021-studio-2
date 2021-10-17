@@ -4,20 +4,6 @@ size: 4096, 1024
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-default
-  rotate: false
-  xy: 2, 2
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveDown
-  rotate: false
-  xy: 2, 2
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
 EnemyAttackDown
   rotate: false
   xy: 2, 2
@@ -418,69 +404,125 @@ rightDeath
   index: -1
 
 odinMovement.png
-size: 2048, 2048
+size: 4096, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-moveLeft
-  rotate: false
-  xy: 2, 1286
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveLeft
-  rotate: false
-  xy: 2, 644
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveLeft
-  rotate: false
-  xy: 644, 1286
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveLeft
-  rotate: false
-  xy: 2, 2
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveRight
+default
   rotate: false
   xy: 644, 644
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-moveRight
+moveUp
   rotate: false
-  xy: 1286, 1286
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveRight
-  rotate: false
-  xy: 644, 2
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveRight
-  rotate: false
-  xy: 1286, 644
+  xy: 2, 1286
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
 moveUp
   rotate: false
+  xy: 2, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 644, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 644, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 1286, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 1928, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
   xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 1928, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 2570, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 1928, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 2570, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 3212, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 2570, 2
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
