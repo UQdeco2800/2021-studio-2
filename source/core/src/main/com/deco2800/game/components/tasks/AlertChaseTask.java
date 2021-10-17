@@ -6,13 +6,15 @@ import com.deco2800.game.entities.Entity;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Chases a target entity and alerts nearby enemies after 3 secinds
+ * Chases a target entity and alerts nearby enemies after 3 seconds
  */
 public class AlertChaseTask extends ChaseTask implements PriorityTask {
 
+    /** time that entity discover the target (player) */
     private long timeDiscoveredTarget;
 
     /**
+     * Alert the target to other enemy nearby
      * @param target           The entity to chase.
      * @param priority         Task priority when chasing (0 when not chasing).
      * @param viewDistance     Maximum distance from the entity at which chasing can start.

@@ -39,6 +39,7 @@ public class WeaponFactory {
      */
     private static final WeaponConfigs configs =
             FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
+    /** player stat json file */
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
@@ -96,14 +97,16 @@ public class WeaponFactory {
         return normalArrow;
     }
 
+    /**
+     * create Thor weapon
+     * @return entiry - thor weapon
+     */
     public static Entity createMjolnir() {
-        Entity mjolnir =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new PhysicsMovementComponent())
-                        .addComponent(new WeaponHitboxComponent())
-                        .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
-        return mjolnir;
+        return new Entity()
+                .addComponent(new PhysicsComponent())
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(new WeaponHitboxComponent())
+                .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
     }
 
     /**
@@ -152,6 +155,7 @@ public class WeaponFactory {
      *
      * @param targetEntity target (player)
      * @param owner        owner to hover at until needed
+     * @param offset offset of fireball from center position
      * @return entity tracking arrow
      */
     public static Entity createFireBall(Entity targetEntity, Entity owner, Vector2 offset) {
@@ -181,7 +185,7 @@ public class WeaponFactory {
 
         CircleShape circle = new CircleShape();
         circle.setRadius(0.25f);
-        circle.setPosition(circle.getPosition().add(new Vector2(1,1).scl(0.5f)));
+        circle.setPosition(circle.getPosition().add(new Vector2(1, 1).scl(0.5f)));
         ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON)
                 .setShape(circle);
 
@@ -246,6 +250,7 @@ public class WeaponFactory {
     /**
      * create the vortex for teleportation
      *
+     * @param ownerRunner entity that call vortex enter
      * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex
@@ -269,7 +274,8 @@ public class WeaponFactory {
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.TELEPORT)
                         .setShape(circle).setRestitution(0))
-                .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER, PhysicsLayer.TELEPORT))
+                .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER,
+                        PhysicsLayer.TELEPORT))
                 .addComponent(aiTaskComponent);
         //vortex.setScale(scale);
         vortex.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
@@ -281,6 +287,7 @@ public class WeaponFactory {
     /**
      * create the vortex for teleportation
      *
+     * @param ownerRunner entity that call vortex exit (spawn vortex)
      * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex
@@ -309,6 +316,7 @@ public class WeaponFactory {
     /**
      * Create the explosion for Elf Boss
      *
+     * @param ownerRunner entity that call create Explosion (spawn it)
      * @return Explosion entity
      */
     public static Entity createExplosion(Entity ownerRunner) {
@@ -333,7 +341,8 @@ public class WeaponFactory {
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.EXPLOSION)
                         .setShape(circle).setRestitution(0)
                         .setSensor(true))
-                .addComponent(new ExplosionTouchComponent(PhysicsLayer.PLAYER, PhysicsLayer.EXPLOSION, 2f))
+                .addComponent(new ExplosionTouchComponent(PhysicsLayer.PLAYER,
+                        PhysicsLayer.EXPLOSION, 2f))
                 .addComponent(aiTaskComponent);
         explosion.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
         return explosion;
@@ -343,8 +352,9 @@ public class WeaponFactory {
      * Creates a line entity
      *
      * @param TTL time to live in MS
+     * @return return the entity - the line represent the arrow trajectory
      */
-    public static LineEntity AimingLine(long TTL) {
+    public static LineEntity aimingLine(long TTL) {
         LineEntity line = new LineEntity(TTL);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/aiming_line.png", Texture.class));
@@ -381,11 +391,12 @@ public class WeaponFactory {
      */
     public static Entity createBlast(Vector2 target) {
         float speed = 8f;
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
+
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/blast.png", Texture.class));
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
         return new Entity()
                 .addComponent(new TextureRenderComponent(sprite))
@@ -414,7 +425,8 @@ public class WeaponFactory {
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
 
         AnimationRenderComponent animator = new AnimationRenderComponent(
-                ServiceLocator.getResourceService().getAsset("images/hammer_projectile.atlas", TextureAtlas.class));
+                ServiceLocator.getResourceService().getAsset(
+                        "images/hammer_projectile.atlas", TextureAtlas.class));
         animator.addAnimation("hammer", 0.10f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
 
@@ -427,6 +439,9 @@ public class WeaponFactory {
                 .addComponent(new HammerProjectile(targetLayer, owner));
     }
 
+    /**
+     * throw error
+     */
     public WeaponFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }

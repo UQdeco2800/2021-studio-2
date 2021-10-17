@@ -69,7 +69,8 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {
-                if (owner.getEntity().getEntityType().equals("elfBoss") || owner.getEntity().getEntityType().equals("human")) {
+                if (owner.getEntity().getEntityType().equals("elfBoss")
+                        || owner.getEntity().getEntityType().equals("human")) {
                     ServiceLocator.getGameAreaService().decBossNum();
                 } else {
                     ServiceLocator.getGameAreaService().decNum();
@@ -82,8 +83,8 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
 
     private void spawnWin() {
         Entity win = ObstacleFactory.winCondition();
-        ServiceLocator.getGameAreaService().
-                spawnEntityAt(win, owner.getEntity().getCenterPosition(), true, true);
+        ServiceLocator.getGameAreaService().spawnEntityAt(win,
+                owner.getEntity().getCenterPosition(), true, true);
     }
 
 

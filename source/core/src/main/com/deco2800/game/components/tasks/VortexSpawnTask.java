@@ -41,7 +41,8 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     private boolean max = false;
 
-    private Entity ownerRunner;
+    /** owner of the entity that run this task */
+    private final Entity ownerRunner;
 
 
     /**
@@ -70,7 +71,8 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(
+                owner.getEntity().getPosition());
         Vector2 position = ownerRunner.getCenterPosition().sub(bodyOffset);
         owner.getEntity().setAngle(rotateAngle + rotateFactor);
         if (owner.getEntity().getScale().x > this.scale.x

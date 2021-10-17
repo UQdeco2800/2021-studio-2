@@ -8,18 +8,19 @@ import com.deco2800.game.services.ServiceLocator;
 /**
  * Chases a target entity if they've been alerted or can see the target
  */
-@SuppressWarnings("GDXJavaUnsafeIterator")
 public class AlertableChaseTask extends ChaseTask implements PriorityTask {
-
+    /** the enemy is alert */
     private boolean alerted = false;
 
     /**
+     * If alert is trigger - enemy can see the target
      * @param target           The entity to chase.
      * @param priority         Task priority when chasing (0 when not chasing).
      * @param viewDistance     Maximum distance from the entity at which chasing can start.
      * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
      */
-    public AlertableChaseTask(Entity target, int priority, float viewDistance, float maxChaseDistance) {
+    public AlertableChaseTask(Entity target, int priority, float viewDistance,
+                              float maxChaseDistance) {
         super(target, priority, viewDistance, maxChaseDistance);
     }
 
@@ -41,7 +42,7 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
         for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
             //get event triggered
             if (entity.getEntityType() != null && entity.getEntityType().equals("AlertCaller")) {
-                //todo: dont re-add to same entity
+                //todo: don't re-add to same entity
                 entity.getEvents().addListener("alert", this::alerted);
                 entity.getEvents().addListener("unAlert", this::unAlerted);
             }

@@ -369,7 +369,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     if (aimingLine != null) {
                         aimingLine.setTarget(tragectoryLocation, owner.getEntity().getCenterPosition());
                     } else {
-                        aimingLine = WeaponFactory.AimingLine(cooldownMS);
+                        aimingLine = WeaponFactory.aimingLine(cooldownMS);
                         gameArea.spawnEntityAt(aimingLine, aimingLine.setTarget(tragectoryLocation, owner.getEntity().getCenterPosition()), true, true);
                     }
                     float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;
