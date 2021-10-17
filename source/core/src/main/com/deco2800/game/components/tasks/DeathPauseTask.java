@@ -35,14 +35,19 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         int numCase = random.nextInt(2);
         switch (numCase) {
             case 1:
-                ServiceLocator.getResourceService().getAsset("sounds/death_1.mp3", Sound.class).play();
+                ServiceLocator.getResourceService().getAsset(
+                        "sounds/death_1.mp3", Sound.class).play(0.5f);
+                break;
             case 0:
-                ServiceLocator.getResourceService().getAsset("sounds/death_2.mp3", Sound.class).play();
+                ServiceLocator.getResourceService().getAsset(
+                        "sounds/death_2.mp3", Sound.class).play(0.5f);
+                break;
         }
     }
 
     private void playElfBossDeath() {
-        ServiceLocator.getResourceService().getAsset("sounds/boss_death.mp3", Sound.class).play();
+        ServiceLocator.getResourceService().getAsset(
+                "sounds/boss_death.mp3", Sound.class).play(0.5f);
     }
 
     @Override
