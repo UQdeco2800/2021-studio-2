@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -137,16 +137,6 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#downStart">downStart</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#leftStart">leftStart</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code><a href="../../entities/factories/NPCFactory.html" title="class in com.deco2800.game.entities.factories">NPCFactory</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#npcFactory">npcFactory</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -154,16 +144,6 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 <tr class="rowColor">
 <td class="colFirst"><code><a href="PhysicsComponent.html" title="class in com.deco2800.game.physics.components">PhysicsComponent</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#physicsComponent">physicsComponent</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rightStart">rightStart</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#upStart">upStart</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -228,59 +208,87 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#directionAnimation()">directionAnimation</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deathAnimation()">deathAnimation</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i2">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#directionAnimation()">directionAnimation</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#downAnimation()">downAnimation</a></span>()</code></th>
+<td class="colLast">
+<div class="block">enemy move down</div>
+</td>
+</tr>
+<tr class="altColor" id="i4">
 <td class="colFirst"><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDirection()">getDirection</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMoving()">getMoving</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTarget()">getTarget</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#leftAnimation()">leftAnimation</a></span>()</code></th>
+<td class="colLast">
+<div class="block">enemy move left</div>
+</td>
+</tr>
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rightAnimation()">rightAnimation</a></span>()</code></th>
+<td class="colLast">
+<div class="block">enemy move right</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAnimateAttack()">setAnimateAttack</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMaxSpeed(com.badlogic.gdx.math.Vector2)">setMaxSpeed</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;maxSpeed)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMoving(boolean)">setMoving</a></span>&#8203;(boolean&nbsp;movementEnabled)</code></th>
 <td class="colLast">
 <div class="block">Enable/disable movement for the controller.</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setStun()">setStun</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</code></th>
 <td class="colLast">
 <div class="block">Set a target to move towards.</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopAnimateAttack()">stopAnimateAttack</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i14">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#upAnimation()">upAnimation</a></span>()</code></th>
+<td class="colLast">
+<div class="block">enemy move up</div>
+</td>
+</tr>
+<tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -330,30 +338,6 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 <section class="detail">
 <h3><a id="animateAttack">animateAttack</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">animateAttack</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="leftStart">leftStart</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">leftStart</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="rightStart">rightStart</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">rightStart</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="upStart">upStart</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">upStart</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="downStart">downStart</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">downStart</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -473,6 +457,40 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="downAnimation()">downAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">downAnimation</span>()</div>
+<div class="block">enemy move down</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="upAnimation()">upAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">upAnimation</span>()</div>
+<div class="block">enemy move up</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="leftAnimation()">leftAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">leftAnimation</span>()</div>
+<div class="block">enemy move left</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="rightAnimation()">rightAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">rightAnimation</span>()</div>
+<div class="block">enemy move right</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="deathAnimation()">deathAnimation</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">deathAnimation</span>()</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="directionAnimation()">directionAnimation</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">directionAnimation</span>()</div>
 </section>
@@ -493,12 +511,6 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 <section class="detail">
 <h3><a id="stopAnimateAttack()">stopAnimateAttack</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">stopAnimateAttack</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="setStun()">setStun</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setStun</span>()</div>
 </section>
 </li>
 </ul>

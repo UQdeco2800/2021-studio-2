@@ -163,7 +163,9 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 int&nbsp;priority,
 float&nbsp;viewDistance,
 float&nbsp;maxChaseDistance)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">If alert is trigger - enemy can see the target</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -239,6 +241,7 @@ float&nbsp;maxChaseDistance)</code></th>
 int&nbsp;priority,
 float&nbsp;viewDistance,
 float&nbsp;maxChaseDistance)</span></div>
+<div class="block">If alert is trigger - enemy can see the target</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>target</code> - The entity to chase.</dd>
@@ -269,7 +272,7 @@ float&nbsp;maxChaseDistance)</span></div>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="ChaseTask.html#getPriority()">getPriority</a></code>&nbsp;in class&nbsp;<code><a href="ChaseTask.html" title="class in com.deco2800.game.components.tasks">ChaseTask</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>10 if alerted (always see the target), default otherwise</dd>
+<dd>15 if alerted (always see the target), default otherwise</dd>
 </dl>
 </section>
 </li>

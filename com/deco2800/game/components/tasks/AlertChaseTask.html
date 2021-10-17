@@ -107,7 +107,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <pre>public class <span class="typeNameLabel">AlertChaseTask</span>
 extends <a href="ChaseTask.html" title="class in com.deco2800.game.components.tasks">ChaseTask</a>
 implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.deco2800.game.ai.tasks">PriorityTask</a></pre>
-<div class="block">Chases a target entity and alerts nearby enemies after 3 secinds</div>
+<div class="block">Chases a target entity and alerts nearby enemies after 3 seconds</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -163,7 +163,9 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 int&nbsp;priority,
 float&nbsp;viewDistance,
 float&nbsp;maxChaseDistance)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Alert the target to other enemy nearby</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -260,6 +262,7 @@ float&nbsp;maxChaseDistance)</code></th>
 int&nbsp;priority,
 float&nbsp;viewDistance,
 float&nbsp;maxChaseDistance)</span></div>
+<div class="block">Alert the target to other enemy nearby</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>target</code> - The entity to chase.</dd>

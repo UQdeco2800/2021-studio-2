@@ -62,7 +62,7 @@ loadScripts(document, 'script');</script>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -115,6 +115,25 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 <!--   -->
 </a>
 <h2>Nested Class Summary</h2>
+<div class="memberSummary">
+<table>
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<thead>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="ShootProjectileTask.projectileTypes.html" title="enum in com.deco2800.game.components.tasks">ShootProjectileTask.projectileTypes</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="inheritedList">
 <h2>Nested classes/interfaces inherited from interface&nbsp;com.deco2800.game.ai.tasks.<a href="../../ai/tasks/Task.html" title="interface in com.deco2800.game.ai.tasks">Task</a></h2>
 <a id="nested.classes.inherited.from.class.com.deco2800.game.ai.tasks.Task">
@@ -128,30 +147,6 @@ implements <a href="../../ai/tasks/PriorityTask.html" title="interface in com.de
 <!--   -->
 </a>
 <h2>Field Summary</h2>
-<div class="memberSummary">
-<table>
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
-<thead>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colSecond" scope="col">Field</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initshoot">initshoot</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../physics/components/PhysicsMovementComponent.html" title="class in com.deco2800.game.physics.components">PhysicsMovementComponent</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#physicsMovement">physicsMovement</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="inheritedList">
 <h3>Fields inherited from class&nbsp;com.deco2800.game.ai.tasks.<a href="../../ai/tasks/DefaultTask.html" title="class in com.deco2800.game.ai.tasks">DefaultTask</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.ai.tasks.DefaultTask">
@@ -226,7 +221,7 @@ long&nbsp;cooldownMS)</code></th>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setProjectileType(java.lang.String)">setProjectileType</a></span>&#8203;(java.lang.String&nbsp;projectileType)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setProjectileType(com.deco2800.game.components.tasks.ShootProjectileTask.projectileTypes)">setProjectileType</a></span>&#8203;(<a href="ShootProjectileTask.projectileTypes.html" title="enum in com.deco2800.game.components.tasks">ShootProjectileTask.projectileTypes</a>&nbsp;projectileType)</code></th>
 <td class="colLast">
 <div class="block">Set the type of the projectile - whether it multishots, follow target or show trajectory</div>
 </td>
@@ -247,7 +242,7 @@ long&nbsp;cooldownMS)</code></th>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showTrajectory(com.badlogic.gdx.math.Vector2)">showTrajectory</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;loc)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showTrajectory()">showTrajectory</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Show trajectory before shooting on debug screen</div>
 </td>
@@ -291,28 +286,6 @@ long&nbsp;cooldownMS)</code></th>
 </section>
 <section class="details">
 <ul class="blockList">
-<!-- ============ FIELD DETAIL =========== -->
-<li class="blockList">
-<section class="fieldDetails"><a id="field.detail">
-<!--   -->
-</a>
-<h2>Field Details</h2>
-<ul class="blockList">
-<li class="blockList">
-<section class="detail">
-<h3><a id="physicsMovement">physicsMovement</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../physics/components/PhysicsMovementComponent.html" title="class in com.deco2800.game.physics.components">PhysicsMovementComponent</a></span>&nbsp;<span class="memberName">physicsMovement</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="initshoot">initshoot</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">initshoot</span></div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li class="blockList">
 <section class="constructorDetails"><a id="constructor.detail">
@@ -399,8 +372,8 @@ long&nbsp;cooldownMS)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="showTrajectory(com.badlogic.gdx.math.Vector2)">showTrajectory</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">showTrajectory</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;loc)</span></div>
+<h3><a id="showTrajectory()">showTrajectory</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">showTrajectory</span>()</div>
 <div class="block">Show trajectory before shooting on debug screen</div>
 </section>
 </li>
@@ -417,8 +390,8 @@ long&nbsp;cooldownMS)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="setProjectileType(java.lang.String)">setProjectileType</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setProjectileType</span>&#8203;(<span class="arguments">java.lang.String&nbsp;projectileType)</span></div>
+<h3><a id="setProjectileType(com.deco2800.game.components.tasks.ShootProjectileTask.projectileTypes)">setProjectileType</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setProjectileType</span>&#8203;(<span class="arguments"><a href="ShootProjectileTask.projectileTypes.html" title="enum in com.deco2800.game.components.tasks">ShootProjectileTask.projectileTypes</a>&nbsp;projectileType)</span></div>
 <div class="block">Set the type of the projectile - whether it multishots, follow target or show trajectory</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -478,7 +451,7 @@ long&nbsp;cooldownMS)</span></div>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
