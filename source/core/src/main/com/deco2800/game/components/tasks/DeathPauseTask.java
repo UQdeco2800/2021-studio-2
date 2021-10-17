@@ -64,7 +64,6 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             if (owner.getEntity().getEntityType().equals("melee")
                     || owner.getEntity().getEntityType().equals("assassin")
                     || owner.getEntity().getEntityType().equals("ranged")
-                    || owner.getEntity().getEntityType().equals("melee")
                     || owner.getEntity().getEntityType().equals("AlertCaller")
                     || owner.getEntity().getEntityType().equals("viking")
                     || owner.getEntity().getEntityType().equals("archer")) {

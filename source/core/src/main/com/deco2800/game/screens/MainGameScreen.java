@@ -107,22 +107,22 @@ public class MainGameScreen extends ScreenAdapter {
                 this.gameArea = new ForestGameArea(terrainFactory);
                 break;
             case "tutorial":
-                this.gameArea = new TutorialGameArea(terrainFactory, game);
+                this.gameArea = new TutorialGameArea(terrainFactory);
                 break;
             case "game0":
-                this.gameArea = new GameArea0(terrainFactory, game);
+                this.gameArea = new GameArea0(terrainFactory);
                 break;
             case "game1":
-                this.gameArea = new GameArea1(terrainFactory, game);
+                this.gameArea = new GameArea1(terrainFactory);
                 break;
             case "game2":
-                this.gameArea = new GameArea2(terrainFactory, game);
+                this.gameArea = new GameArea2(terrainFactory);
                 break;
             case "game3":
-                this.gameArea = new GameArea3(terrainFactory, game);
+                this.gameArea = new GameArea3(terrainFactory);
                 break;
             case "game4":
-                this.gameArea = new GameArea4(terrainFactory, game);
+                this.gameArea = new GameArea4(terrainFactory);
                 break;
         }
         this.gameArea.create();
@@ -141,22 +141,22 @@ public class MainGameScreen extends ScreenAdapter {
                 this.gameArea = new ForestGameArea(terrainFactory);
                 break;
             case "tutorial":
-                this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
+                this.gameArea = new TutorialGameArea(terrainFactory, currentHealth);
                 break;
             case "game0":
-                this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
+                this.gameArea = new GameArea0(terrainFactory, currentHealth);
                 break;
             case "game1":
-                this.gameArea = new GameArea1(terrainFactory, game, currentHealth);
+                this.gameArea = new GameArea1(terrainFactory, currentHealth);
                 break;
             case "game2":
-                this.gameArea = new GameArea2(terrainFactory, game, currentHealth);
+                this.gameArea = new GameArea2(terrainFactory, currentHealth);
                 break;
             case "game3":
-                this.gameArea = new GameArea3(terrainFactory, game, currentHealth);
+                this.gameArea = new GameArea3(terrainFactory, currentHealth);
                 break;
             case "game4":
-                this.gameArea = new GameArea4(terrainFactory, game, currentHealth);
+                this.gameArea = new GameArea4(terrainFactory, currentHealth);
                 break;
         }
         this.gameArea.create();

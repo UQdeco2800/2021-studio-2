@@ -32,98 +32,14 @@ import java.util.HashMap;
  */
 public class GameArea4 extends GameArea {
     private static final Logger logger = LoggerFactory.getLogger(GameArea4.class);
-    private static final int NUM_MELEE_ELF = 2;
-    private static final int NUM_ANCHORED_ELF = 1;
-    private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(60, 70);
-    private static final GridPoint2 TEST_TRIGGER = new GridPoint2(20, 21);
-    private static final float WALL_WIDTH = 0.1f;
-    private static final String[] forestTextures = {
-            "images/tree.png",
-            "images/trap.png",
-            "images/test.png",
-            "images/arrow_normal.png",
-            "images/crown.png",
-            "images/grass_1.png",
-            "images/grass_2.png",
-            "images/grass_3.png",
-            "images/hex_grass_1.png",
-            "images/hex_grass_2.png",
-            "images/hex_grass_3.png",
-            "images/iso_grass_1.png",
-            "images/iso_grass_2.png",
-            "images/iso_grass_3.png",
-            "images/mud.png",
-            "images/player.png",
-            "images/player_axe.png",
-            "images/player_hammer.png",
-            "images/player_scepter.png",
-            "images/blast.png",
-            "images/health_left.png",
-            "images/health_middle.png",
-            "images/health_right.png",
-            "images/health_frame_left.png",
-            "images/health_frame_middle.png",
-            "images/health_frame_right.png",
-            "images/hp_icon.png",
-            "images/dash_icon.png",
-            "images/prisoner.png",
-            "images/rock.png",
-            "images/enemy_health_bar.png",
-            "images/enemy_health_border.png",
-            "images/enemy_health_bar_decrease.png",
-            "images/vortex.png",
-            "images/aiming_line.png",
-            "images/bossAttack.png",
-            "images/meleeElf.png",
-            "images/guardElf.png",
-            "images/rangedElf.png",
-            "images/fireball/fireballAnimation.png",
-            "player_scepter.png",
-            "player_hammer.png",
-            "images/boss_health_middle.png",
-            "images/boss_health_left.png",
-            "images/boss_health_right.png",
-            "images/hammer_projectile.png",
-            "images/meleeFinal.png"
-    };
-    private static String[] tileTextures = null;
-    public static final String[] healthRegenTextures = {
-            "healthRegen/healthPotion_placeholder.png",
-            "crate/crateHitBreak.png"
-    };
-    private static final String[] forestTextureAtlases = {
-            "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas",
-            "images/meleeFinal.atlas", "images/newArrowBroken/atlas/arrow.atlas",
-    };
-    private static final String[] forestSounds = {
-            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
-    };
-    private static final String[] arrowSounds = {
-            "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3",
-            "sounds/death_2.mp3",
-            "sounds/death_1.mp3",
-            "sounds/boss_death.mp3"
-    };
-    private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
-    private static final String[] forestMusic = {backgroundMusic};
 
-    private final TerrainFactory terrainFactory;
-    private final GdxGame game;
-    private int playerHealth = 300;
-
-    public GameArea4(TerrainFactory terrainFactory, GdxGame game) {
+    public GameArea4(TerrainFactory terrainFactory) {
         super();
-        this.game = game;
         this.terrainFactory = terrainFactory;
     }
 
-    public GameArea4(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
+    public GameArea4(TerrainFactory terrainFactory, int currentHealth) {
         super();
-        this.game = game;
         this.terrainFactory = terrainFactory;
         this.playerHealth = currentHealth;
     }
@@ -361,44 +277,6 @@ public class GameArea4 extends GameArea {
     public int getLevel() {
         return 9;
     }
-
-    private void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
-
-    }
-
-    private void loadAssets() {
-        logger.debug("Loading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.loadTextures(tileTextures);
-        resourceService.loadTextures(healthRegenTextures);
-        resourceService.loadTextures(forestTextures);
-        resourceService.loadTextureAtlases(forestTextureAtlases);
-        resourceService.loadSounds(forestSounds);
-        resourceService.loadMusic(forestMusic);
-        resourceService.loadSounds(arrowSounds);
-
-        while (resourceService.loadForMillis(10)) {
-            // This could be upgraded to a loading screen
-            logger.info("Loading... {}%", resourceService.getProgress());
-        }
-    }
-
-    private void unloadAssets() {
-        logger.debug("Unloading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.unloadAssets(forestTextures);
-        resourceService.unloadAssets(tileTextures);
-        resourceService.unloadAssets(healthRegenTextures);
-        resourceService.unloadAssets(forestTextureAtlases);
-        resourceService.unloadAssets(forestSounds);
-        resourceService.unloadAssets(forestMusic);
-        resourceService.unloadAssets(arrowSounds);
-    }
-
     private void setInitialDialogue() {
         PlayerSave.write();
         TextBox textBox = ServiceLocator.getEntityService()
@@ -407,12 +285,5 @@ public class GameArea4 extends GameArea {
         RandomDialogueSet dialogueSet = RandomDialogueSet.TUTORIAL;
 
         textBox.setRandomFirstEncounter(dialogueSet);
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-        ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
-        this.unloadAssets();
     }
 }

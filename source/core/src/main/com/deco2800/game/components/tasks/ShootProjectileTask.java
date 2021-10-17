@@ -187,7 +187,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         if (!ServiceLocator.getEntityService().getEntities().contains(
                                 fireball, true)) {
                             entities[index] = WeaponFactory.createFireBall(target,
-                                    owner.getEntity(), new Vector2(index - 1, 1));
+                                    owner.getEntity(), new Vector2(index - 1f, 1f));
                             gameArea.spawnEntityAt(entities[index],
                                     owner.getEntity().getCenterPosition(),
                                     true, true);

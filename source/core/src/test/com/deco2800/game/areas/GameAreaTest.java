@@ -15,8 +15,6 @@ import static org.mockito.Mockito.verify;
 class GameAreaTest {
     @Test
     void shouldSpawnEntities() {
-        TerrainFactory factory = mock(TerrainFactory.class);
-
         GameArea gameArea =
                 new GameArea() {
                     @Override

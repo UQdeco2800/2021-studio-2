@@ -3,6 +3,7 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
@@ -23,7 +24,6 @@ import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.HashMap;
 
 /**
@@ -31,119 +31,11 @@ import java.util.HashMap;
  */
 @SuppressWarnings("SuspiciousNameCombination")
 public class ForestGameArea extends GameArea {
-    private static final Logger logger = LoggerFactory.getLogger(ForestGameArea.class);
     private static final int NUM_CRATES = 3;
     private static final int NUM_TREES = 7;
     private static final int NUM_MELEE_ELF = 2;
     private static final int NUM_ANCHORED_ELF = 1;
     private static final GridPoint2 PLAYER_SPAWN = new GridPoint2(10, 10);
-    private static final float WALL_WIDTH = 0.1f;
-    private static final String[] forestTextures = {
-            "images/tree.png",
-            "images/trap.png",
-            "images/test.png",
-            "images/arrow_normal.png",
-            "images/crown.png",
-            "images/grass_1.png",
-            "images/grass_2.png",
-            "images/grass_3.png",
-            "images/hex_grass_1.png",
-            "images/hex_grass_2.png",
-            "images/hex_grass_3.png",
-            "images/iso_grass_1.png",
-            "images/iso_grass_2.png",
-            "images/iso_grass_3.png",
-            "images/mud.png",
-            "images/player.png",
-            "images/player_axe.png",
-            "images/player_hammer.png",
-            "images/player_scepter.png",
-            "images/player_longsword.png",
-            "images/blast.png",
-            "images/hammer_projectile",
-            "images/health_left.png",
-            "images/health_middle.png",
-            "images/health_right.png",
-            "images/health_frame_left.png",
-            "images/health_frame_middle.png",
-            "images/health_frame_right.png",
-            "images/hp_icon.png",
-            "images/dash_icon.png",
-            "images/prisoner.png",
-            "images/rock.png",
-            "images/enemy_health_bar.png",
-            "images/enemy_health_border.png",
-            "images/enemy_health_bar_decrease.png",
-            "images/vortex.png",
-            "images/aiming_line.png",
-            "images/bossAttack.png",
-            "images/meleeElf.png",
-            "images/guardElf.png",
-            "images/rangedElf.png",
-            "images/fireball/fireballAnimation.png",
-            "images/rangedFixed.png",
-            "images/bossFixed.png",
-            "images/meleeAnimationsTextured.png",
-            "images/meleeFinal.png",
-            "images/assassinFinal.png",
-            "images/guardFinal.png",
-            "images/rangedAllFinal.png",
-            "images/bossFinal.png",
-            "player_scepter.png",
-            "player_hammer.png",
-            "player_axe.png",
-            "portal.png",
-            "Odin/odin.png",
-            "Assets/gametile-127.png",
-            "images/boss_health_middle.png",
-            "images/boss_health_left.png",
-            "images/boss_health_right.png",
-            "images/viking.png",
-            "images/explosion/explosion.png",
-            "images/hellViking.png",
-            "images/outdoorArcher.png",
-            "images/asgardWarrior.png",
-            "images/lokiBoss.png",
-            "thor/aoe_attck.png",
-            "thor/up_attck.png",
-            "thor/down_attck.png",
-            "thor/left_attck.png",
-            "thor/right_attck.png",
-            "thor/walk_left.png",
-            "thor/walk_right.png",
-            "images/firePillar.png"
-    };
-    public static final String[] healthRegenTextures = {
-            "healthRegen/healthPotion_placeholder.png",
-            "crate/crateHitBreak.png"
-    };
-    private static final String[] forestTextureAtlases = {
-            "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
-            "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
-            "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
-            "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
-            "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
-            "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas"
-    };
-    private static final String[] arrowSounds = {
-            "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3",
-            "sounds/death_2.mp3",
-            "sounds/death_1.mp3",
-            "sounds/boss_death.mp3"
-    };
-    private static final String[] forestSounds = {
-            "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
-    };
-    private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
-    private static final String[] forestMusic = {backgroundMusic};
-    private final TerrainFactory terrainFactory;
-    private int playerHealth = 300;
 
     /**
      * Intialise the forest game
@@ -495,57 +387,5 @@ public class ForestGameArea extends GameArea {
             Entity crate = ObstacleFactory.createHealthCrate();
             spawnEntityAt(crate, randomPos, true, true);
         }
-    }
-
-    /**
-     * Play the music on the background of the game
-     */
-    private void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
-    }
-
-    /**
-     * Load the texture from files
-     */
-    private void loadAssets() {
-
-        logger.debug("Loading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.loadTextures(forestTextures);
-        resourceService.loadTextures(healthRegenTextures);
-        resourceService.loadTextureAtlases(forestTextureAtlases);
-        resourceService.loadSounds(forestSounds);
-        resourceService.loadMusic(forestMusic);
-        resourceService.loadSounds(arrowSounds);
-        while (resourceService.loadForMillis(10)) {
-            // This could be upgraded to a loading screen
-            logger.info("Loading... {}%", resourceService.getProgress());
-        }
-    }
-
-    /**
-     * Unload the assets (include image and sound)
-     */
-    private void unloadAssets() {
-        logger.debug("Unloading assets");
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        resourceService.unloadAssets(forestTextures);
-        resourceService.unloadAssets(healthRegenTextures);
-        resourceService.unloadAssets(forestTextureAtlases);
-        resourceService.unloadAssets(forestSounds);
-        resourceService.unloadAssets(forestMusic);
-    }
-
-    /**
-     * Dispose the asset (call unloadAssets).
-     */
-    @Override
-    public void dispose() {
-        super.dispose();
-        ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
-        this.unloadAssets();
     }
 }
