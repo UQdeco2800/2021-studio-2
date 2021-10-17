@@ -469,6 +469,7 @@ public abstract class GameArea implements Disposable {
             }
         }
     }
+
     protected void spawnTerrain() {
         // Background terrain
         terrain = terrainFactory.createTerrain(TerrainFactory.TerrainType.TEST, map);
@@ -632,7 +633,7 @@ public abstract class GameArea implements Disposable {
         resourceService.loadTextures(tileTextures);
         resourceService.loadTextureAtlases(textureAtlases);
         resourceService.loadSounds(sounds);
-        resourceService.loadMusic(new String[] {backgroundMusic});
+        resourceService.loadMusic(new String[]{backgroundMusic});
         while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
