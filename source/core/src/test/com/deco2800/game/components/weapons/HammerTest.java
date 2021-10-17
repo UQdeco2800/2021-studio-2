@@ -34,7 +34,9 @@ class HammerTest {
         System.out.println("impact:" + resourceService.containsAsset("sounds/impact.ogg", Sound.class));
         System.out.println("swish:" + resourceService.containsAsset("sounds/swish.ogg", Sound.class));
         // wait for assets to load
-        resourceService.loadForMillis(10);
+        while (resourceService.loadForMillis(10)) {
+            // wait for assets to load
+        }
     }
 
     @Test
