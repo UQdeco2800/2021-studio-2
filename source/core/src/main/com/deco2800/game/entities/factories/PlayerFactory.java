@@ -157,7 +157,7 @@ public class PlayerFactory {
                 break;
         }
 
-        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f, 0.4f), new Vector2(0.5f, 0.2f));
+        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.25f, 0.2f), new Vector2(0.5f, 0.1f));
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);

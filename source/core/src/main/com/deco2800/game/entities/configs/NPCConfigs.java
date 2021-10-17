@@ -11,4 +11,5 @@ public class NPCConfigs {
     public ElfBossConfig elfBoss = new ElfBossConfig();
     public RangedEnemyConfig elfRanged = new RangedEnemyConfig();
     public OdinBossConfig odinBoss = new OdinBossConfig();
+    public LokiBossConfig lokiBoss = new LokiBossConfig();
 }

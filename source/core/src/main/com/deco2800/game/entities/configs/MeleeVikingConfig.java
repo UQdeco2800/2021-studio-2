@@ -7,9 +7,9 @@ public class MeleeVikingConfig {
     /**
      * health attribute
      */
-    public int health = 100;
+    public int health = 70;
     /**
      * attack attribute
      */
-    public int baseAttack = 30;
+    public int baseAttack = 25;
 }

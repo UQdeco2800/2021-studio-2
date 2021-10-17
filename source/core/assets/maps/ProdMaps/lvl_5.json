@@ -69115,7 +69115,7 @@
     ],
     "bossObjects": [
         {
-            "x": 110,
+            "x": 112,
             "y": 60,
             "height": 0,
             "width": 0
@@ -69153,50 +69153,6 @@
             "width": 0
         }
     ],
-    "meleeObjects": [
-        {
-            "x": 29,
-            "y": 22,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 40,
-            "y": 28,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 67,
-            "y": 32,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 75,
-            "y": 31,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 102,
-            "y": 31,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 112,
-            "y": 48,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 58,
-            "y": 65,
-            "height": 0,
-            "width": 0
-        }
-    ],
     "rangeObjects": [
         {
             "x": 60,
@@ -69225,6 +69181,54 @@
         {
             "x": 89,
             "y": 32,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 36,
+            "y": 18,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 42,
+            "y": 22,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 71,
+            "y": 31,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 61,
+            "y": 44,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 73,
+            "y": 44,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 52,
+            "y": 71,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 59,
+            "y": 73,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 56,
+            "y": 62,
             "height": 0,
             "width": 0
         }
@@ -69531,5 +69535,94 @@
         }
     ],
     "spikeObjects": [],
-    "lavaObjects": []
+    "lavaObjects": [],
+    "outdoorMeleeObjects": [
+        {
+            "x": 94,
+            "y": 28,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 102,
+            "y": 28,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 108,
+            "y": 28,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 61,
+            "y": 38,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 67,
+            "y": 33,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 69,
+            "y": 40,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 59,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 64,
+            "y": 69,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 46,
+            "y": 71,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 39,
+            "y": 28,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 34,
+            "y": 23,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 44,
+            "y": 33,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 111,
+            "y": 37,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveDownObjects": [
+        {
+            "x": 111,
+            "y": 53,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "cutsceneObjects": []
 }

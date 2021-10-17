@@ -38,7 +38,7 @@ public class CutsceneTriggerFactory {
      * @param type        the type of selection of dialogue
      * @return entity that will create the trigger within the map
      */
-    public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type) {
+    public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type, int numRepeats) {
         Entity trigger =
                 new Entity()
                         .addComponent(new PhysicsComponent())
@@ -46,12 +46,38 @@ public class CutsceneTriggerFactory {
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
                                 new Vector2(0f, 0f), false))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, 1));
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, numRepeats));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
         trigger.getComponent(ColliderComponent.class).setSensor(true);
         trigger.scaleHeight(1f);
+        return trigger;
+    }
+
+    /**
+     * Creates an entity that can trigger a cutscene to start.
+     *
+     * @param dialogueSet the dialogue set the entity will trigger
+     * @param type        the type of selection of dialogue
+     * @return entity that will create the trigger within the map
+     */
+    public static Entity createPrisonerCutscene(RandomDialogueSet dialogueSet, DialogueSet type, int numRepeats) {
+
+        Entity trigger =
+                new Entity()
+                        .addComponent(new TextureRenderComponent("images/textBoxDisplay/prisoner_image.png"))
+                        .addComponent(new PhysicsComponent())
+                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
+                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
+                        .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
+                                new Vector2(0f, 0f), numRepeats))
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, numRepeats));
+
+        trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
+        PhysicsUtils.setScaledCollider(trigger, 0.6f, 0.3f);
+        trigger.getComponent(ColliderComponent.class).setSensor(true);
+        trigger.scaleHeight(2f);
         return trigger;
     }
 

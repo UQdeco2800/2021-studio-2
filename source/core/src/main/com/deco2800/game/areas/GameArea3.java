@@ -101,7 +101,7 @@ public class GameArea3 extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/arrow_broken/arrowBroken.atlas",
+            "images/arrow_broken/arrowBroken.atlas", "Odin/odin.atlas", "end/portal.atlas"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -152,6 +152,7 @@ public class GameArea3 extends GameArea {
         spawnDialogueCutscenes();
         setInitialDialogue();
 
+        spawnOdin();
         spawnObstacles();
         spawnLights();
 
@@ -163,6 +164,7 @@ public class GameArea3 extends GameArea {
         spawnHealthCrateObject();
         playMusic();
         spawnTeleport();
+
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
@@ -218,14 +220,14 @@ public class GameArea3 extends GameArea {
         }
     }
 
-    private void spawnHealthCrateObject() {
-        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
-        for (HashMap<String, Float> crate : crates) {
-            int x = crate.get("x").intValue();
-            int y = crate.get("y").intValue();
+    private void spawnOdin() {
+        HashMap<String, Float>[] bossObjects = map.getBossObjects();
+        for (HashMap<String, Float> boss : bossObjects) {
+            int x = boss.get("x").intValue();
+            int y = boss.get("y").intValue();
 
             spawnEntityAt(
-                    ObstacleFactory.createHealthCrate(),
+                    NPCFactory.createOdin(player),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
@@ -300,7 +302,6 @@ public class GameArea3 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setOdinEnc(1);
         PlayerSave.Save.setThorWins(1);
         PlayerSave.Save.setOdinWins(0);
         PlayerSave.write();
@@ -327,7 +328,7 @@ public class GameArea3 extends GameArea {
             int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);

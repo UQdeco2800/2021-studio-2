@@ -193,7 +193,7 @@ public class ForestGameArea extends GameArea {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
 
-        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_INTRODUCTION;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;
 
         PlayerSave.Save.setHasPlayed(true);
         if (PlayerSave.Save.getOdinEnc() == 0) {
@@ -207,7 +207,6 @@ public class ForestGameArea extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setOdinEnc(1);
         PlayerSave.Save.setThorWins(1);
         PlayerSave.Save.setOdinWins(0);
         PlayerSave.write();
@@ -237,7 +236,7 @@ public class ForestGameArea extends GameArea {
             int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
