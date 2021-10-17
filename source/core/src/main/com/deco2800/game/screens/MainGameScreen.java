@@ -102,20 +102,28 @@ public class MainGameScreen extends ScreenAdapter {
         this(game);
         logger.debug("Initialising main game screen entities");
 
-        if (world.equals("forest")) {
-            this.gameArea = new ForestGameArea(terrainFactory);
-        } else if (world.equals("tutorial")) {
-            this.gameArea = new GameArea3(terrainFactory, game);
-        } else if (world.equals("game0")) {
-            this.gameArea = new GameArea0(terrainFactory, game);
-        } else if (world.equals("game1")) {
-            this.gameArea = new GameArea1(terrainFactory, game);
-        } else if (world.equals("game2")) {
-            this.gameArea = new GameArea2(terrainFactory, game);
-        } else if (world.equals("game3")) {
-            this.gameArea = new GameArea3(terrainFactory, game);
-        } else if (world.equals("game4")) {
-            this.gameArea = new GameArea4(terrainFactory, game);
+        switch (world) {
+            case "forest":
+                this.gameArea = new ForestGameArea(terrainFactory);
+                break;
+            case "tutorial":
+                this.gameArea = new GameArea3(terrainFactory, game);
+                break;
+            case "game0":
+                this.gameArea = new GameArea0(terrainFactory, game);
+                break;
+            case "game1":
+                this.gameArea = new GameArea1(terrainFactory, game);
+                break;
+            case "game2":
+                this.gameArea = new GameArea2(terrainFactory, game);
+                break;
+            case "game3":
+                this.gameArea = new GameArea3(terrainFactory, game);
+                break;
+            case "game4":
+                this.gameArea = new GameArea4(terrainFactory, game);
+                break;
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -128,20 +136,28 @@ public class MainGameScreen extends ScreenAdapter {
         this(game);
         logger.debug("Initialising main game screen entities");
 
-        if (world.equals("forest")) {
-            this.gameArea = new ForestGameArea(terrainFactory);
-        } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
-        } else if (world.equals("game0")) {
-            this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
-        } else if (world.equals("game1")) {
-            this.gameArea = new GameArea1(terrainFactory, game, currentHealth);
-        } else if (world.equals("game2")) {
-            this.gameArea = new GameArea2(terrainFactory, game, currentHealth);
-        } else if (world.equals("game3")) {
-            this.gameArea = new GameArea3(terrainFactory, game, currentHealth);
-        } else if (world.equals("game4")) {
-            this.gameArea = new GameArea4(terrainFactory, game, currentHealth);
+        switch (world) {
+            case "forest":
+                this.gameArea = new ForestGameArea(terrainFactory);
+                break;
+            case "tutorial":
+                this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
+                break;
+            case "game0":
+                this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
+                break;
+            case "game1":
+                this.gameArea = new GameArea1(terrainFactory, game, currentHealth);
+                break;
+            case "game2":
+                this.gameArea = new GameArea2(terrainFactory, game, currentHealth);
+                break;
+            case "game3":
+                this.gameArea = new GameArea3(terrainFactory, game, currentHealth);
+                break;
+            case "game4":
+                this.gameArea = new GameArea4(terrainFactory, game, currentHealth);
+                break;
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -291,7 +307,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
-                .addComponent(new MainGameExitDisplay())
+                //.addComponent(new MainGameExitDisplay())
                 .addComponent(new PauseMenuActions(game))
                 .addComponent(new PauseMenuDisplay())
                 .addComponent(new PauseInputComponent())
