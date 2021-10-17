@@ -246,37 +246,37 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private void shootAnimation() {
         shootAnimationStart = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         float targetDir = (getDirectionOfTarget() + 360 - 45) % 360; //shift axis
-        if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("assassin")) {
-            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-                owner.getEntity().getEvents().trigger("assassinDownShoot");
-            } else if (targetDir > 90 && targetDir < 180) {
-                owner.getEntity().getEvents().trigger("assassinRightShoot");
-            } else if (targetDir > 180 && targetDir < 270) {
-                owner.getEntity().getEvents().trigger("assassinUpShoot");
-            } else if (targetDir > 270 && targetDir < 360) {
-                owner.getEntity().getEvents().trigger("assassinLeftShoot");
-            }
-        } else if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("ranged")) {
-            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-                owner.getEntity().getEvents().trigger("rangedDownShoot");
-            } else if (targetDir > 90 && targetDir < 180) {
-                owner.getEntity().getEvents().trigger("rangedRightShoot");
-            } else if (targetDir > 180 && targetDir < 270) {
-                owner.getEntity().getEvents().trigger("rangedUpShoot");
-            } else if (targetDir > 270 && targetDir < 360) {
-                owner.getEntity().getEvents().trigger("rangedLeftShoot");
-            }
-        } else {
-            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-                owner.getEntity().getEvents().trigger("attackDown");
-            } else if (targetDir > 90 && targetDir < 180) {
-                owner.getEntity().getEvents().trigger("attackRight");
-            } else if (targetDir > 180 && targetDir < 270) {
-                owner.getEntity().getEvents().trigger("attackUp");
-            } else if (targetDir > 270 && targetDir < 360) {
-                owner.getEntity().getEvents().trigger("attackLeft");
-            }
-        }
+//        if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("assassin")) {
+//            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+//                owner.getEntity().getEvents().trigger("assassinDownShoot");
+//            } else if (targetDir > 90 && targetDir < 180) {
+//                owner.getEntity().getEvents().trigger("assassinRightShoot");
+//            } else if (targetDir > 180 && targetDir < 270) {
+//                owner.getEntity().getEvents().trigger("assassinUpShoot");
+//            } else if (targetDir > 270 && targetDir < 360) {
+//                owner.getEntity().getEvents().trigger("assassinLeftShoot");
+//            }
+//        } else if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("ranged")) {
+//            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+//                owner.getEntity().getEvents().trigger("rangedDownShoot");
+//            } else if (targetDir > 90 && targetDir < 180) {
+//                owner.getEntity().getEvents().trigger("rangedRightShoot");
+//            } else if (targetDir > 180 && targetDir < 270) {
+//                owner.getEntity().getEvents().trigger("rangedUpShoot");
+//            } else if (targetDir > 270 && targetDir < 360) {
+//                owner.getEntity().getEvents().trigger("rangedLeftShoot");
+//            }
+//        } else {
+//            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+//                owner.getEntity().getEvents().trigger("attackDown");
+//            } else if (targetDir > 90 && targetDir < 180) {
+//                owner.getEntity().getEvents().trigger("attackRight");
+//            } else if (targetDir > 180 && targetDir < 270) {
+//                owner.getEntity().getEvents().trigger("attackUp");
+//            } else if (targetDir > 270 && targetDir < 360) {
+//                owner.getEntity().getEvents().trigger("attackLeft");
+//            }
+//        }
     }
 
     /**
@@ -374,15 +374,15 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
         //Rotate archer
         float targetDir = (relativeLocationTarget.angleDeg() + 180 - 45) % 360; //shift axis
-        if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-            owner.getEntity().getEvents().trigger("DownStart");
-        } else if (targetDir > 90 && targetDir < 180) {
-            owner.getEntity().getEvents().trigger("RightStart");
-        } else if (targetDir > 180 && targetDir < 270) {
-            owner.getEntity().getEvents().trigger("UpStart");
-        } else if (targetDir > 270 && targetDir < 360) {
-            owner.getEntity().getEvents().trigger("LeftStart");
-        }
+//        if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+//            owner.getEntity().getEvents().trigger("DownStart");
+//        } else if (targetDir > 90 && targetDir < 180) {
+//            owner.getEntity().getEvents().trigger("RightStart");
+//        } else if (targetDir > 180 && targetDir < 270) {
+//            owner.getEntity().getEvents().trigger("UpStart");
+//        } else if (targetDir > 270 && targetDir < 360) {
+//            owner.getEntity().getEvents().trigger("LeftStart");
+//        }
 
         updateTrajectory(AOE);
         float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;

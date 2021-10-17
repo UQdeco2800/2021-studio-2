@@ -65,6 +65,13 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
                 if (entity.getEntityType().equals("assassin")) {
                     animator.startAnimation("assassinLeftDeath");
                 } else {
@@ -93,6 +100,13 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
                 if (entity.getEntityType().equals("assassin")) {
                     //animator.startAnimation("assassinRightDeath");
                     animator.startAnimation("assassinLeftDeath");
@@ -122,6 +136,13 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
                 if (entity.getEntityType().equals("assassin")) {
                     //animator.startAnimation("assassinLeftDeath");
                     animator.startAnimation("assassinFrontDeath");
@@ -151,6 +172,13 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
+                            animator.getEntity().getScale().y);
+                } else {
+                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
+                            animator.getEntity().getScale().y);
+                }
                 if (entity.getEntityType().equals("assassin")) {
                     animator.startAnimation("assassinBackDeath");
                     //animator.startAnimation("assassinLeftDeath");
