@@ -40,6 +40,9 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
         }
     }
 
+    private void playElfBossDeath() {
+        ServiceLocator.getResourceService().getAsset("sounds/boss_death.mp3", Sound.class).play();
+    }
     @Override
     public void update() {
         if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
@@ -57,6 +60,9 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                     || owner.getEntity().getEntityType().equals("melee")
                     || owner.getEntity().getEntityType().equals("AlertCaller")) {
                 playElfDead();
+            }
+            if (owner.getEntity().getEntityType().equals("elfBoss")) {
+                playElfBossDeath();
             }
             if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
