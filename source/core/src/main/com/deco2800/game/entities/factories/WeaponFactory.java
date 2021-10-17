@@ -56,7 +56,7 @@ public class WeaponFactory {
         if (projectileType.contains("Arrow")) {
             Sound arrowEffect = ServiceLocator.getResourceService().getAsset(
                     "sounds/arrow_shoot.mp3", Sound.class);
-            arrowEffect.play();
+            arrowEffect.play(0.3f);
         }
     }
 
