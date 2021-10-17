@@ -9,7 +9,6 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

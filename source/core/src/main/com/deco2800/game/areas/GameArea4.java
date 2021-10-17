@@ -14,8 +14,6 @@ import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Smaller room based level

@@ -800,7 +800,7 @@ public class NPCFactory {
      * elf that shoot arrow at target
      * It will retreat if the target is approach in certain range
      *
-     * @param target          entity to chase
+     * @param target entity to chase
      * @return entity
      */
     public static Entity createOutdoorArcher(Entity target) {

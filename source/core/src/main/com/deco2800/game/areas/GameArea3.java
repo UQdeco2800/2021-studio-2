@@ -36,7 +36,8 @@ public class GameArea3 extends GameArea {
      */
     @Override
     public void create() {
-        tileTextures = FileLoader.readClass(Map.class, "maps/lvl_2.json").TileRefsArray();
+        map = FileLoader.readClass(Map.class, "maps/lvl_2.json");
+        tileTextures = map.TileRefsArray();
 
         super.create();
         loadAssets();

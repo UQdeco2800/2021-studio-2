@@ -10,8 +10,6 @@ import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.utils.math.RandomUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Tutorial Level where player learns mechanics of the game.

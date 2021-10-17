@@ -1,6 +1,5 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
