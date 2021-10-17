@@ -60,12 +60,12 @@ public abstract class ProjectileController extends Component {
 
         if (hitbox == null || hitbox.getFixture() != me) {
             // Not triggered by weapon hit box, ignore
-            return false;
+            return;
         }
 
         if (PhysicsLayer.notContains(this.targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
-            return false;
+            return;
         }
 
         // Try to attack target.

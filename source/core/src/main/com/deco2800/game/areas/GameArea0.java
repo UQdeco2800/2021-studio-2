@@ -148,8 +148,6 @@ public class GameArea0 extends GameArea {
         spawnTraps();
         spawnPTraps();
 
-        spawnCutsceneTrigger();
-
         playMusic();
         spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);

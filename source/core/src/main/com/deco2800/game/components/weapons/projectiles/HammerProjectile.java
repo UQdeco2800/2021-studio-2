@@ -166,16 +166,16 @@ public class HammerProjectile extends ProjectileController {
      * @param other fixture of colliding entity.
      * @return if successful collision
      */
-    protected boolean onCollisionStart(Fixture me, Fixture other) {
+    protected void onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {
             // Not triggered by weapon hit box, ignore
-            return false;
+            return;
         }
 
         if (PhysicsLayer.notContains(this.targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
-            return false;
+            return;
         }
 
         // Try to attack target.
@@ -198,7 +198,7 @@ public class HammerProjectile extends ProjectileController {
             Vector2 impulse = direction.setLength(knockback);
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
-        return true; // successfully collided with target.
+        // successfully collided with target.
     }
 
     @Override
