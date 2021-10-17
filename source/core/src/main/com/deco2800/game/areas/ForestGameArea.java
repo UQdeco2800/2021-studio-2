@@ -389,7 +389,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity archer = NPCFactory.createOutdoorArcher(player, 0.1f);
+            Entity archer = NPCFactory.createOutdoorArcher(player);
             incNum();
             spawnEntityAt(archer, randomPos, true, true);
         }

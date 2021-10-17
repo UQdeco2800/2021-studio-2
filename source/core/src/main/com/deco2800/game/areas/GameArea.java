@@ -298,7 +298,7 @@ public abstract class GameArea implements Disposable {
             int y = crate.get("y").intValue();
 
             spawnEntityAt(
-                    NPCFactory.createOutdoorArcher(player, 0.1f),
+                    NPCFactory.createOutdoorArcher(player),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
