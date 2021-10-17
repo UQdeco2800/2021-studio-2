@@ -221,7 +221,6 @@ public class GameArea2 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setLoki2Enc(1);
         PlayerSave.Save.setLokiWins(1);
         PlayerSave.Save.setLoki2Wins(0);
         PlayerSave.write();

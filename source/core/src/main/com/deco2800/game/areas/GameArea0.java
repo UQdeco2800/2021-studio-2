@@ -566,7 +566,6 @@ public class GameArea0 extends GameArea {
             }
         }
         PlayerSave.Save.setElfWins(0);
-        PlayerSave.Save.setElfEnc(1);
         PlayerSave.write();
     }
 

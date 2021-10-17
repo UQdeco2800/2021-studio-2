@@ -302,7 +302,6 @@ public class GameArea3 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setOdinEnc(1);
         PlayerSave.Save.setThorWins(1);
         PlayerSave.Save.setOdinWins(0);
         PlayerSave.write();

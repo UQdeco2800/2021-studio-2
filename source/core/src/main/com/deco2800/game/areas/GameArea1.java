@@ -268,7 +268,6 @@ public class GameArea1 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setLokiEnc(1);
         PlayerSave.Save.setElfWins(1);
         PlayerSave.Save.setLokiWins(0);
         PlayerSave.write();
