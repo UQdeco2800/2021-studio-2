@@ -97,7 +97,7 @@ public class ElfAnimationController extends Component {
     }
 
     public void animateRight() {
-        animate("right");
+        animate("Right");
     }
 
     public void animateUp() {
