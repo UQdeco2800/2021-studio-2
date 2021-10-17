@@ -10,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.tasks.loki.FirePillarBaseTask;
+import com.deco2800.game.components.tasks.loki.FirePillarDamageTask;
 import com.deco2800.game.components.touch.ExplosionTouchComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.touch.TouchTeleportComponent;
@@ -68,7 +70,7 @@ public class WeaponFactory {
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("arrow");
-        BaseArrowConfig config = configs.baseArrow;
+        ArrowConfig config = configs.baseArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(config.speedX, config.speedY));
         AITaskComponent aiComponent =
@@ -204,6 +206,72 @@ public class WeaponFactory {
                 .addComponent(new TouchAttackComponent(PhysicsLayer.NONE, 1f));
         shootingSound("fireBall");
         return fireBall;
+    }
+
+    /**
+     * Creates a fire pillar base that will not do damage to the Player but will indicate it is spawning
+     *
+     * @return The pillar entity that will damage on contact
+     */
+    public static Entity createFirePillarBase() {
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new FirePillarBaseTask());
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/firePillar.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator.addAnimation("firePillarSpawning", 0.05f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("firePillarSpawning");
+
+        Entity pillar = new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(aiComponent);
+        pillar.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+
+        pillar.setScale(0.8f, 0.8f);
+
+        return pillar;
+    }
+
+    /**
+     * Creates a fire pillar that will do damage to the Player
+     *
+     * @return The pillar entity that will damage on contact
+     */
+    public static Entity createFirePillar() {
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new FirePillarDamageTask());
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/firePillar.atlas", TextureAtlas.class));
+        animator.addAnimation("firePillar", 0.10f, Animation.PlayMode.LOOP);
+        animator.startAnimation("firePillar");
+
+        animator.setAnimationScale(2f);
+
+        Entity pillar = new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER))
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(aiComponent);
+
+        pillar.setScale(0.8f, 0.8f);
+
+        return pillar;
     }
 
     /**

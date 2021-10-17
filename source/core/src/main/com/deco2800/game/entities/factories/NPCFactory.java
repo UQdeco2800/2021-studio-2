@@ -9,10 +9,13 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
+import com.deco2800.game.components.tasks.loki.FirePillarTask;
+import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.tasks.*;
+import com.deco2800.game.components.tasks.loki.*;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
@@ -37,6 +40,87 @@ import com.deco2800.game.services.ServiceLocator;
  * similar characteristics.
  */
 public class NPCFactory {
+
+    /**
+     * Final String variable to define the right movement for animations.
+     */
+    private static final String MOVE_RIGHT = "moveRight";
+
+    /**
+     * Final String variable to define the left movement for animations.
+     */
+    private static final String MOVE_LEFT = "moveLeft";
+
+    /**
+     * Final String variable to define the up movement for animations.
+     */
+    private static final String MOVE_UP = "moveUp";
+
+    /**
+     * Final String variable to define the down movement for animations.
+     */
+    private static final String MOVE_DOWN = "moveDown";
+
+    /**
+     * Final String variable to define the front death animations.
+     */
+    private static final String FRONT_DEATH = "frontDeath";
+
+    /**
+     * Final String variable to define the left death animations.
+     */
+    private static final String LEFT_DEATH = "leftDeath";
+
+    /**
+     * Final String variable to define the right death animations.
+     */
+    private static final String RIGHT_DEATH = "rightDeath";
+
+    /**
+     * Final String variable to define the back death animations.
+     */
+    private static final String BACK_DEATH = "backDeath";
+
+    /**
+     * Final String variable to define the down attack animations.
+     */
+    private static final String ATTACK_DOWN = "attackDown";
+
+    /**
+     * Final String variable to define the up attack animations.
+     */
+    private static final String ATTACK_UP = "attackUp";
+
+    /**
+     * Final String variable to define the left attack animations.
+     */
+    private static final String ATTACK_LEFT = "attackLeft";
+
+    /**
+     * Final String variable to define the right attack animations.
+     */
+    private static final String ATTACK_RIGHT = "attackRight";
+
+    /**
+     * Final String variable to define the left stun animations.
+     */
+    private static final String STUN_LEFT = "stunLeft";
+
+    /**
+     * Final String variable to define the right stun animations.
+     */
+    private static final String STUN_RIGHT = "stunRight";
+
+    /**
+     * Final String variable to define the down stun animations.
+     */
+    private static final String STUN_DOWN = "stunDown";
+
+    /**
+     * Final String variable to define the up stun animations.
+     */
+    private static final String STUN_UP = "stunUp";
+
     /**
      * load attribute from config
      */
@@ -56,7 +140,6 @@ public class NPCFactory {
      * @param target entity to chase
      * @return entity
      */
-
     public static Entity createMeleeElf(Entity target) {
         Entity elf = createBaseNPCNoAI();
         MeleeEnemyConfig config = configs.elfMelee;
@@ -64,25 +147,25 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
 
-        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -101,11 +184,12 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new ElfAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        elf.addComponent(healthBarComponent);
+        elf.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        elf.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        elf.addComponent(createHealthBarComponent());
 
         elf.getComponent(AnimationRenderComponent.class).scaleEntity();
         //elf.setScale(0.6f, 1f);
@@ -131,25 +215,25 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.5f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         elfGuard
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -158,11 +242,7 @@ public class NPCFactory {
 
         elfGuard.setEntityType("AlertCaller");
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        elfGuard.addComponent(healthBarComponent);
+        elfGuard.addComponent(createHealthBarComponent());
 
         elfGuard.getComponent(AnimationRenderComponent.class).scaleEntity();
         elfGuard.setScale(0.6f, 1f);
@@ -200,25 +280,25 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
 
         anchoredElf
@@ -226,11 +306,7 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        anchoredElf.addComponent(healthBarComponent);
+        anchoredElf.addComponent(createHealthBarComponent());
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
         anchoredElf.setScale(1f, 1.3f);
@@ -269,24 +345,24 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
-        animator.addAnimation("attackDown", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackLeft", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         anchoredElf
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
@@ -294,15 +370,7 @@ public class NPCFactory {
                 .addComponent(aiComponent)
                 .addComponent(new ElfAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                HealthBar, HealthBarFrame, HealthBarDecrease);
-        anchoredElf.addComponent(healthBarComponent);
+        anchoredElf.addComponent(createHealthBarComponent());
 
         anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
 
@@ -377,10 +445,10 @@ public class NPCFactory {
             animator.addAnimation("rangerStunUp", 0.5f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerStunDown", 0.5f, Animation.PlayMode.NORMAL);
 
-            animator.addAnimation("leftDeath", 0.2f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("rightDeath", 0.2f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("frontDeath", 0.2f, Animation.PlayMode.NORMAL);
-            animator.addAnimation("backDeath", 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(LEFT_DEATH,  0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(RIGHT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(FRONT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
 
         }
@@ -392,16 +460,7 @@ public class NPCFactory {
                 .addComponent(aiComponent);
 
         elf.setAttackRange(5);
-        //elf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                HealthBar, HealthBarFrame, HealthBarDecrease);
-        elf.addComponent(healthBarComponent);
+        elf.addComponent(createHealthBarComponent());
 
         elf.setScale(1.2f, 1.2f);
         PhysicsUtils.setScaledCollider(elf, 0.9f, 0.2f);
@@ -440,20 +499,20 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/bossFinal.atlas", TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.5f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("attackLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("attackDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ATTACK_DOWN, 0.5f, Animation.PlayMode.LOOP);
 
-        animator.addAnimation("stunLeft", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunRight", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunUp", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("stunDown", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation("frontBossDeath", 0.1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("backBossDeath", 0.1f, Animation.PlayMode.NORMAL);
@@ -472,15 +531,7 @@ public class NPCFactory {
         boss.scaleHeight(2);
         boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        boss.addComponent(healthBarComponent);
+        boss.addComponent(createHealthBarComponent());
         boss.setEntityType("elfBoss");
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
@@ -567,15 +618,7 @@ public class NPCFactory {
 //
 //
 //-------------------ITS MASSIVE HEALTH BAR ON TOP OF ITS HEAD-------------------------------------
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        odin.addComponent(healthBarComponent);
+        odin.addComponent(createHealthBarComponent());
 
 // ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
         odin.setEntityType("odin"); //MAYBE NO USE? use for AI tasks
@@ -610,18 +653,16 @@ public class NPCFactory {
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
-
-        viking
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+        viking.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        viking.addComponent(healthBarComponent);
+        viking.addComponent(createHealthBarComponent());
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
@@ -657,17 +698,16 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
-        viking
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+        viking.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
 
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        viking.addComponent(healthBarComponent);
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+        viking.addComponent(createHealthBarComponent());
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
@@ -698,22 +738,18 @@ public class NPCFactory {
                         .addTask(new ChaseTask(
                                 target, 11, 4f, 4f, new Vector2(1.5f, 1.5f)))
                         .addTask(new PauseTask())
-                        .addTask(new AlertableChaseTask(
-                                target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
-        viking
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+        viking.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
-
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(HealthBar, HealthBarFrame, HealthBarDecrease);
-        viking.addComponent(healthBarComponent);
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+        viking.addComponent(createHealthBarComponent());
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
@@ -730,19 +766,21 @@ public class NPCFactory {
     private static void setHumanAnimations(AnimationRenderComponent animator) {
 
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("frontDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("backDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("leftDeath", 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("rightDeath", 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultLeft", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultRight", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultUp", 0.05f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(MOVE_LEFT, 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(BACK_DEATH, 0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
-
     }
 
     /**
@@ -750,6 +788,7 @@ public class NPCFactory {
      * elf that shoot arrow at target
      * It will retreat if the target is approach in certain range
      *
+     * @param multishotChance the decimal representation of the probability of a multishot occurring as a float
      * @param target entity to chase
      * @return entity
      */
@@ -784,15 +823,7 @@ public class NPCFactory {
                 .addComponent(aiComponent);
 
         archer.setAttackRange(5);
-        Sprite HealthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite HealthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite HealthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                HealthBar, HealthBarFrame, HealthBarDecrease);
-        archer.addComponent(healthBarComponent);
+        archer.addComponent(createHealthBarComponent());
         archer.setEntityType("archer");
 
         PhysicsUtils.setScaledCollider(archer, 0.6f, 0.2f);
@@ -812,18 +843,29 @@ public class NPCFactory {
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(
-                                target, 10, 7f, 10f))
                         .addTask(new PauseTask())
-                        .addTask(new SpawnDecoysTask(target))
+                        .addTask(new FirePillarTask(target, 800, 150))
                         .addTask(new DeathPauseTask(
-                                target, 0, 100, 100, 1.5f));
+                                target, 0, 100, 100, 1.5f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 7f, 10f))
+                        .addTask(new SpawnDecoysTask(target))
+                        .addTask(new SpawnLokiDecoyTask(target, 8000));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
 
-        animator.setAnimationScale(1f);
+        animator.addAnimation("transformedMoveLeft", 0.2f, Animation.PlayMode.LOOP);
+        animator.addAnimation("transformedMoveRight", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("transformedMoveDown", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("transformedMoveUp", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("defaultTransformedLeft", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultTransformedRight", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultTransformedUp", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("defaultTransformed", 0.1f, Animation.PlayMode.NORMAL);
+
+        animator.setAnimationScale(2f);
 
         setHumanAnimations(animator);
 
@@ -831,76 +873,122 @@ public class NPCFactory {
                 .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
+
                 .addComponent(aiComponent)
                 .addComponent(new BossOverlayComponent());
         boss.setAttackRange(5);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.getComponent(BossOverlayComponent.class).nameBoss("Loki    ");
 
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        boss.addComponent(healthBarComponent);
-        boss.setEntityType("human");
-        boss.setScale(1f * 2, 1f * 2);
-        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
+        boss.addComponent(createHealthBarComponent());
+        boss.setEntityType("loki");
+        boss.getComponent(ColliderComponent.class).setDensity(1.5f);
+        PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
         return boss;
     }
 
     /**
-     * create Loki boss decoys enemy entity
+     * create Loki boss enemy entity
      *
      * @param target enemy to chase (player)
      * @return boss entity
      */
-    public static Entity createLokiDecoy(Entity target) {
-
+    public static Entity createRangedLokiDecoy(Entity target) {
         Entity boss = createBaseNPCNoAI();
         ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(
-                                target, 10, 7f, 10f))
                         .addTask(new PauseTask())
+                        .addTask(new FirePillarTask(target, 1000, 150))
                         .addTask(new DeathPauseTask(
-                                target, 0, 100, 100, 1.5f));
+                                target, 0, 100, 100, 1.5f))
+                        .addTask(new RangedChaseTask(
+                                target, 10, 7f, 10f))
+                        .addTask(new SpawnLokiDecoyTask(target, 10000));
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+        animator.setAnimationScale(2f);
+
+        setHumanAnimations(animator);
+
+        boss
+                .addComponent(new CombatStatsComponent(1, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(new HumanAnimationController())
+                .addComponent(aiComponent);
+        boss.setAttackRange(5);
+        boss.getComponent(AnimationRenderComponent.class).scaleEntity();
+
+        boss.addComponent(createHealthBarComponent());
+        boss.setEntityType("decoy");
+        boss.getComponent(ColliderComponent.class).setDensity(1.5f);
+        PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
+        return boss;
+    }
+
+    /**
+     * create Loki boss enemy entity
+     *
+     * @param target enemy to chase (player)
+     * @return boss entity
+     */
+    public static Entity createMeleeLokiDecoy(Entity target) {
+        Entity viking = createBaseNPCNoAI();
+        MeleeHellWarriorConfig config = configs.hellWarriorMelee;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
 
-        animator.setAnimationScale(1f);
-
         setHumanAnimations(animator);
 
-        boss
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-                .addComponent(animator)
-                .addComponent(new HumanAnimationController())
-                .addComponent(aiComponent)
-                .addComponent(new BossOverlayComponent());
-        boss.setAttackRange(5);
-        boss.getComponent(AnimationRenderComponent.class).scaleEntity();
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
+                        .addTask(new ChaseTask(
+                                target, 11, 4f, 4f, new Vector2(2f, 2f)))
+                        .addTask(new PauseTask())
+                        .addTask(new AlertableChaseTask(
+                                target, 10, 3f, 4f))
+                        .addTask(new DeathPauseTask(
+                                target, 0, 100, 100, 1.5f));
 
+        viking
+                .addComponent(new CombatStatsComponent(1, config.baseAttack))
+                .addComponent(animator)
+                .addComponent(aiComponent)
+                .addComponent(new HumanAnimationController());
+
+        viking.getComponent(AITaskComponent.class).
+                addTask(new AlertableChaseTask(target, 10, 3f, 4f));
+        viking.getComponent(AITaskComponent.class).
+                addTask(new ZigChaseTask(target, 11, 3f, 6f, 1));
+
+        viking.addComponent(createHealthBarComponent());
+
+        viking.getComponent(AnimationRenderComponent.class).scaleEntity();
+        viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
+        viking.setEntityType("viking");
+        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        return viking;
+    }
+
+    /**
+     * Creates a health bar component and returns it for the enemy NPC
+     *
+     * @return HealthBarComponent which will be displayed above the entities
+     */
+    private static HealthBarComponent createHealthBarComponent() {
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));
         Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar_decrease.png", Texture.class));
         Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(
-                healthBar, healthBarFrame, healthBarDecrease);
-        boss.addComponent(healthBarComponent);
-        boss.setEntityType("human");
-        boss.setScale(1f * 2, 1f * 2);
-        PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
-        return boss;
+        return new HealthBarComponent(healthBar, healthBarFrame, healthBarDecrease);
     }
 
     /**

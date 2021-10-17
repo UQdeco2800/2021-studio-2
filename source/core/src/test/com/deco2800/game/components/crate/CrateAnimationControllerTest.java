@@ -15,7 +15,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(GameExtension.class)
-public class CrateAnimationControllerTest {
+class CrateAnimationControllerTest {
     CombatStatsComponent combat;
     @Mock
     CrateAnimationController animate;

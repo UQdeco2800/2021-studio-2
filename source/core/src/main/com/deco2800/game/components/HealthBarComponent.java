@@ -82,18 +82,17 @@ public class HealthBarComponent extends RenderComponent {
     @Override
     public void update() {
         float currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
-        float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
+        float maxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
         if (currentHealth != previousHealth) {
             float saveHealth = previousHealth;
             healthDecreaseCheck = true;
-            ratioOfHealthPrevious = saveHealth / MaxHealth;
+            ratioOfHealthPrevious = saveHealth / maxHealth;
             ratioOfHealthPrevious = (float) round(ratioOfHealthPrevious);
             start = System.currentTimeMillis();
 
         }
         previousHealth = currentHealth;
-
-        ratioOfHealth = currentHealth / MaxHealth;
+        ratioOfHealth = currentHealth / maxHealth;
         ratioOfHealth = (float) round(ratioOfHealth);
         if (ratioOfHealth == 0f) {
             ratioOfHealth = 0.01f;
@@ -108,7 +107,6 @@ public class HealthBarComponent extends RenderComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-        Vector2 position = entity.getPosition();
         Vector2 positionCenter = entity.getCenterPosition();
         float angle = entity.getAngle();
 

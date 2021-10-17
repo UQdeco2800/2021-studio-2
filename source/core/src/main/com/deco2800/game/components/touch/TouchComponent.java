@@ -24,7 +24,7 @@ abstract class TouchComponent extends Component {
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchComponent(short targetLayer) {
+    protected TouchComponent(short targetLayer) {
         this.targetLayer = targetLayer;
     }
 
@@ -33,7 +33,7 @@ abstract class TouchComponent extends Component {
      *
      * @param targetLayer The physics layer of the target's collider.
      */
-    public TouchComponent(short targetLayer, short myLayer) {
+    protected TouchComponent(short targetLayer, short myLayer) {
         this.targetLayer = targetLayer;
         this.myLayer = myLayer;
     }

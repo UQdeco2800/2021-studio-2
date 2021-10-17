@@ -39,13 +39,11 @@ public class ExplosionTouchComponent extends TouchComponent {
 
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-            if (physicsComponent != null) {
+        if (physicsComponent != null && (knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
                 Body targetBody = physicsComponent.getBody();
                 Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
                 Vector2 impulse = direction.setLength(knockbackForce);
                 targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
-            }
         }
         applyContinuousDamage(me, other);
     }
@@ -98,24 +96,19 @@ public class ExplosionTouchComponent extends TouchComponent {
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
 
         // Try to attack target.
-        if (targetStats != null) {
-
-            if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
-                targetStats.hit(combatStats);
-                start = System.currentTimeMillis();
-            }
+        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
+            targetStats.hit(combatStats);
+            start = System.currentTimeMillis();
         }
 
         // Apply continuous knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
-        if ((physicsComponent != null && knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
-            if (physicsComponent != null) {
-                Body targetBody = physicsComponent.getBody();
-                Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-                Vector2 impulse = direction.setLength(0.5f);
-                targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
-                targetBody.setLinearVelocity(targetBody.getLinearVelocity().clamp(-knockbackForce * 10, knockbackForce * 10));
-            }
+        if (physicsComponent != null && (knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
+            Body targetBody = physicsComponent.getBody();
+            Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+            Vector2 impulse = direction.setLength(0.5f);
+            targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+            targetBody.setLinearVelocity(targetBody.getLinearVelocity().clamp(-knockbackForce * 10, knockbackForce * 10));
         }
     }
 }

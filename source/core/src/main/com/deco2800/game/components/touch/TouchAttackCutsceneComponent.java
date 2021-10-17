@@ -7,11 +7,15 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.TextBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TouchAttackCutsceneComponent extends TouchComponent {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouchAttackCutsceneComponent.class);
 
     private final int repeats;
 
@@ -53,6 +57,9 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
         if (actions == null) {
             return;
         }
+
+        logger.debug("A collision with the entity has caused the player to start attacking");
+
         actions.stopWalking();
         input.stopWalking();
         openCutsceneBars();
@@ -69,6 +76,9 @@ public class TouchAttackCutsceneComponent extends TouchComponent {
     private void repeatAttacks(KeyboardPlayerInputComponent input, Entity player, int count) {
         input.setLastKeyPressed(lastKeyPressed);
         player.getEvents().trigger("attack", lastKeyPressed);
+
+        logger.debug("The player has forced an attack {} times", count + 1);
+
         if (count < repeats) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {

@@ -72,16 +72,10 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     }
 
     /**
-     * update task to waiting
-     */
-    private void startWaiting() {
-        swapTask(waitTask);
-    }
-
-    /**
      * update task to move task
      */
-    private void startMoving() {
+    @Override
+    protected void startMoving() {
         calculatedOffset = getRandomOffsetInRange();
         movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         swapTask(movementTask);

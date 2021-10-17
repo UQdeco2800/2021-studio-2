@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.files.UserSettings.DisplaySettings;
 import com.deco2800.game.services.ServiceLocator;
@@ -146,7 +147,10 @@ public class SettingsMenuDisplay extends UIComponent {
         table.add(resetLabel).right().padRight(15f);
         table.add(resetBtn).left();
         // Events on push
-
+        resetBtn.addListener((Event event) -> {
+            PlayerSave.resetFile();
+            return true;
+                    });
         return table;
     }
 

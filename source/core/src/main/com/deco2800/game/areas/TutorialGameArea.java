@@ -141,8 +141,6 @@ public class TutorialGameArea extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnCutsceneTrigger();
-
         spawnMeleeElf();
         spawnElfGuard();
         spawnRangedElf();
@@ -169,28 +167,6 @@ public class TutorialGameArea extends GameArea {
         spawnEntity(ui);
     }
 
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED);
-        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
-
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_INTRODUCTION,
-                DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
-
-        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
-
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f));
-        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
-
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f));
-        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
-
-
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f));
-        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
-    }
 
     private void spawnTerrain() {
         // Background terrain
@@ -431,8 +407,7 @@ public class TutorialGameArea extends GameArea {
     private void loadAssets() {
 
         logger.info("Resetting Save File");
-        PlayerSave.Save pSave = PlayerSave.initial();
-        PlayerSave.write(pSave);
+        PlayerSave.write();
 
 
         logger.debug("Loading assets");
@@ -461,24 +436,6 @@ public class TutorialGameArea extends GameArea {
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(arrowSounds);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        PlayerSave.Save pSave = PlayerSave.load();
-
-
-        if (!pSave.hasPlayed) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
-
-            pSave.hasPlayed = true;
-        }
-
-        PlayerSave.write(pSave);
     }
 
     @Override

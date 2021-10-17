@@ -200,7 +200,7 @@ leftDeath
   orig: 128, 128
   offset: 0, 0
   index: 1
-leftDefault
+defaultLeft
   rotate: false
   xy: 392, 782
   size: 128, 128
@@ -396,7 +396,7 @@ rightDeath
   orig: 128, 128
   offset: 0, 0
   index: 1
-rightDefault
+defaultRight
   rotate: false
   xy: 132, 782
   size: 128, 128
@@ -410,7 +410,7 @@ moveRight
   orig: 128, 128
   offset: 0, 0
   index: 1
-upDefault
+defaultUp
   rotate: false
   xy: 912, 392
   size: 128, 128

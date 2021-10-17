@@ -3,12 +3,18 @@ package com.deco2800.game.areas;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
+import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
+import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.services.ServiceLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -19,13 +25,14 @@ import java.util.List;
  * <p>Support for enabling/disabling game areas could be added by making this a Component instead.
  */
 public abstract class GameArea implements Disposable {
+    private static final Logger logger = LoggerFactory.getLogger(GameArea.class);
 
     protected TerrainComponent terrain;
     protected List<Entity> areaEntities;
     protected Entity player;
     protected int numEnemy = 0;
     protected int numBoss = 0;
-
+    protected Map map;
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -54,6 +61,10 @@ public abstract class GameArea implements Disposable {
         return 0;
     }
 
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
     /**
      * increase number of enemy on the map (keep track) - when the enemy is create and spawn
      */
@@ -80,12 +91,58 @@ public abstract class GameArea implements Disposable {
      */
     public void decBossNum() {
         numBoss--;
-        if (getLevel() == 0) {
-            if (numBoss == 0) {
+        System.out.println(numBoss);
+        if (numBoss == 0) {
+            logger.info("Number of Bosses is now at 0");
+            if (getLevel() == 9) {
+                //tutorial level
+                logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
-                GridPoint2 fixedPos = new GridPoint2(15, 10);
+                HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
+                GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(), (map.getDimensions().get("n_tiles_heihgt") - teleportPos.get("y").intValue()));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
+            } else if (getLevel() == 0) {
+                //gama area 0
+                logger.info("Spawning the teleport object");
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+
+            } else if (getLevel() == 1) {
+                //gama area 1
+                logger.info("Spawning the teleport object");
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+
+            } else if (getLevel() == 2) {
+                //gama area 2
+                logger.info("Spawning the teleport object");
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+
+            } else if (getLevel() == 3) {
+                //gama area 3
+                logger.info("Spawning the teleport object");
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+
+            } else if (getLevel() == 4) {
+                //gama area 4
+                logger.info("Spawning the teleport object");
+                Entity teleport = ObstacleFactory.createTeleport();
+                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                this.spawnEntityAt(teleport, fixedPos, true, true);
+
             }
+
         }
     }
 
@@ -163,6 +220,120 @@ public abstract class GameArea implements Disposable {
 
         entity.setPosition(entityPos);
         spawnEntity(entity);
+    }
+
+    protected void spawnHellWarriorObject() {
+        HashMap<String, Float>[] warriors = map.getHellMeleeObjects() ;
+        for (HashMap<String, Float> warrior : warriors) {
+            int x = warrior.get("x").intValue();
+            int y = warrior.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createMeleeHellViking(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnAsgardWarriorObject() {
+        HashMap<String, Float>[] crates = map.getAsgardMeleeObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createMeleeAsgardViking(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnOutdoorWarriorObject() {
+        HashMap<String, Float>[] warriors = map.getOutdoorMeleeObjects();
+        for (HashMap<String, Float> warrior : warriors) {
+            int x = warrior.get("x").intValue();
+            int y = warrior.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createMeleeViking(player),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnOutdoorArcherObject() {
+        HashMap<String, Float>[] crates = map.getRangeObjects();
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    NPCFactory.createOutdoorArcher(player, 0.1f),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnMovementCutscenes() {
+        HashMap<String, Float>[] lefts = map.getMoveLeftObjects();
+        if (lefts != null) {
+            for (HashMap<String, Float> left : lefts) {
+                int x = left.get("x").intValue();
+                int y = left.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createLeftMoveTrigger(),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
+
+        HashMap<String, Float>[] rights = map.getMoveRightObjects();
+        if (rights != null) {
+            for (HashMap<String, Float> right : rights) {
+                int x = right.get("x").intValue();
+                int y = right.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createRightMoveTrigger(),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
+
+        HashMap<String, Float>[] downs = map.getMoveDownObjects();
+        if (downs != null) {
+            for (HashMap<String, Float> down : downs) {
+                int x = down.get("x").intValue();
+                int y = down.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createDownMoveTrigger(),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
+
+        HashMap<String, Float>[] ups = map.getMoveUpObjects();
+        if (ups != null) {
+            for (HashMap<String, Float> up : ups) {
+                int x = up.get("x").intValue();
+                int y = up.get("y").intValue();
+
+                spawnEntityAt(
+                        CutsceneTriggerFactory.createUpMoveTrigger(),
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        false,
+                        false);
+            }
+        }
     }
 
 }

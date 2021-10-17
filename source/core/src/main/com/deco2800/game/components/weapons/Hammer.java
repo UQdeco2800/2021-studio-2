@@ -81,6 +81,8 @@ public class Hammer extends MeleeWeapon {
             case RIGHT:
                 animator.startAnimation("right_hammer_attack");
                 break;
+            default:
+                break;
         }
     }
 
@@ -128,6 +130,8 @@ public class Hammer extends MeleeWeapon {
             case RIGHT:
                 target.x += range;
                 animator.startAnimation("right_throw");
+                break;
+            default:
                 break;
         }
         // Spawn projectile

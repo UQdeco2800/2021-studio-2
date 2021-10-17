@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MessageTest {
+class MessageTest {
 
     /**
      * Message with main character speaking.
