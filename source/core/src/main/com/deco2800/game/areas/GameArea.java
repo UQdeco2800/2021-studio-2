@@ -7,12 +7,15 @@ import com.badlogic.gdx.utils.Disposable;
 import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
+import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
+import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.utils.math.GridPoint2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -250,6 +253,12 @@ public abstract class GameArea implements Disposable {
         }
     }
 
+    protected void displayUI(String areaName) {
+        Entity ui = new Entity();
+        ui.addComponent(new GameAreaDisplay(areaName));
+        spawnEntity(ui);
+    }
+
     /**
      * get the number of enemy on the map
      *
@@ -458,6 +467,157 @@ public abstract class GameArea implements Disposable {
                         false,
                         false);
             }
+        }
+    }
+    protected void spawnTerrain() {
+        // Background terrain
+        terrain = terrainFactory.createTerrain(TerrainFactory.TerrainType.TEST, map);
+        spawnEntity(new Entity().addComponent(terrain));
+
+        // Terrain walls
+        float tileSize = terrain.getTileSize();
+        GridPoint2 tileBounds = terrain.getMapBounds(0);
+        Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
+
+        // Left
+        spawnEntityAt(
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
+        // Right
+        spawnEntityAt(
+                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
+                new GridPoint2(tileBounds.x, 0),
+                false,
+                false);
+        // Top
+        spawnEntityAt(
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
+                new GridPoint2(0, tileBounds.y),
+                false,
+                false);
+        // Bottom
+        spawnEntityAt(
+                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
+
+        //Imported Map Walls
+        HashMap<String, Float>[] walls = map.getWallObjects();
+        for (HashMap<String, Float> wall : walls) {
+            int x = wall.get("x").intValue();
+            int y = wall.get("y").intValue();
+            float width = wall.get("width");
+            float height = wall.get("height");
+
+            int unitHeight = (int) ((height / 32f));
+            spawnEntityAt(
+                    ObstacleFactory.createWall((width / 32f) * 0.5f, (height / 32f) * 0.5f),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnPTraps() {
+        GridPoint2 fixedPos = new GridPoint2(15, 15);
+        Entity trap = ObstacleFactory.createPhysicalTrap();
+        spawnEntityAt(trap, fixedPos, true, true);
+    }
+
+    protected void spawnTraps() {
+        GridPoint2 fixedPos = new GridPoint2(8, 8);
+        Entity trap = ObstacleFactory.createNonePhysicalTrap();
+        spawnEntityAt(trap, fixedPos, true, true);
+    }
+
+    protected void spawnTeleport() {
+        Entity teleport = ObstacleFactory.createTeleport();
+        GridPoint2 fixedPos = new GridPoint2(15, 10);
+        spawnEntityAt(teleport, fixedPos, true, true);
+        //boss= 1;
+    }
+
+    protected void spawnPlayer() {
+        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
+        HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
+        int height = map.getDimensions().get("n_tiles_height");
+        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
+                true, true);
+        player = newPlayer;
+    }
+
+    protected void spawnObstacles() {
+        int[][] obstacles = map.getTransObstacles();
+        HashMap<String, String> tileRefs = map.getTileRefs();
+        if (obstacles != null) {
+            GridPoint2 min = new GridPoint2(0, 0);
+            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
+                    map.getDimensions().get("n_tiles_height") - 1);
+
+            for (int y = min.y; y <= max.y; y++) {
+                for (int x = min.y; x <= max.x; x++) {
+                    if (obstacles[y][x] != 0) {
+
+                        Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(obstacles[y][x])));
+                        GridPoint2 pos = new GridPoint2(x, max.y - y);
+
+                        spawnEntityAt(obstacle, pos, true, false);
+                    }
+                }
+            }
+        }
+    }
+
+    protected void spawnLights() {
+        int[][] lights = map.getLightTiles();
+        HashMap<String, String> tileRefs = map.getTileRefs();
+        if (lights != null) {
+            GridPoint2 min = new GridPoint2(0, 0);
+            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
+                    map.getDimensions().get("n_tiles_height") - 1);
+
+            for (int y = min.y; y <= max.y; y++) {
+                for (int x = min.y; x <= max.x; x++) {
+                    if (lights[y][x] != 0) {
+
+                        Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(lights[y][x])));
+                        GridPoint2 pos = new GridPoint2(x, max.y - y);
+
+                        spawnEntityAt(obstacle, pos, true, false);
+                    }
+                }
+            }
+        }
+    }
+
+    protected void spawnSpikeTraps() {
+        HashMap<String, Float>[] spikeTraps = map.getSpikeObjects();
+        for (HashMap<String, Float> spikeTrap : spikeTraps) {
+            int x = spikeTrap.get("x").intValue();
+            int y = spikeTrap.get("y").intValue();
+            float width = spikeTrap.get("width");
+            float height = spikeTrap.get("height");
+
+            int unitHeight = (int) ((height / 32f));
+            spawnEntityAt(
+                    ObstacleFactory.createRSPhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    false,
+                    false);
+        }
+    }
+
+    protected void spawnLavaTraps() {
+        HashMap<String, Float>[] lavaTraps = map.getLavaObjects();
+        for (HashMap<String, Float> lavaTrap : lavaTraps) {
+            int x = lavaTrap.get("x").intValue();
+            int y = lavaTrap.get("y").intValue();
+            float width = lavaTrap.get("width");
+            float height = lavaTrap.get("height");
+
+            int unitHeight = (int) ((height / 32f));
+            spawnEntityAt(
+                    ObstacleFactory.createRSNonePhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    false,
+                    false);
         }
     }
 

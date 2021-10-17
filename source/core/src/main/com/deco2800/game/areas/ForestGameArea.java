@@ -152,66 +152,6 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * Spawn the terrain - spawn map entity on terrain
-     */
-    private void spawnTerrain() {
-        // Background terrain
-        terrain = terrainFactory.createTerrain(TerrainType.FOREST_DEMO);
-        spawnEntity(new Entity().addComponent(terrain));
-        // Terrain walls
-        float tileSize = terrain.getTileSize();
-        GridPoint2 tileBounds = terrain.getMapBounds(0);
-        Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
-
-        // Left
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
-        // Top
-        spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
-                new GridPoint2(0, tileBounds.y),
-                false,
-                false);
-        // Bottom
-        spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
-    }
-
-    /**
-     * Spawn tree on terrain
-     */
-    private void spawnTrees() {
-        GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-
-        for (int i = 0; i < NUM_TREES; i++) {
-            GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity tree = ObstacleFactory.createTree();
-            spawnEntityAt(tree, randomPos, true, false);
-        }
-    }
-
-    /**
-     * Spawn player at the terrain, create the player
-     */
-    private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Longsword");
-        spawnEntityAt(newPlayer, PLAYER_SPAWN, true, true);
-        player = newPlayer;
-    }
-
-    private void spawnOdin() {
-        Entity odin = NPCFactory.createOdin(player);
-        spawnEntityAt(odin, new GridPoint2(20, 20), true, true);
-    }
-
-    /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
     private void spawnMeleeElf() {
@@ -287,21 +227,6 @@ public class ForestGameArea extends GameArea {
     }
 
     /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    private void spawnLoki() {
-        Entity boss = NPCFactory.createLoki(player);
-        incBossNum();
-        spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
-    }
-
-    private void spawnThor() {
-        Entity boss = NPCFactory.createThor(player);
-        incBossNum();
-        spawnEntityAt(boss, new GridPoint2(15, 15), true, true);
-    }
-
-    /**
      * Spawn range elf on terrain, range elf can shoot target
      */
     private void spawnRangedElf() {
@@ -333,15 +258,6 @@ public class ForestGameArea extends GameArea {
             spawnEntityAt(elf, randomPos, true, true);
             incNum();
         }
-    }
-
-    /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    private void spawnBoss() {
-        GridPoint2 bossPos = new GridPoint2(100, 100);
-        Entity boss = NPCFactory.createBossNPC(player);
-        spawnEntityAt(boss, bossPos, true, true);
     }
 
     private void spawnElfGuard() {

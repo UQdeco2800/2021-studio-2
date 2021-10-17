@@ -53,7 +53,7 @@ public class GameArea1 extends GameArea {
 
         super.create();
         loadAssets();
-        displayUI();
+        displayUI("Level 2");
 
         spawnTerrain();
         spawnPlayer();
@@ -79,58 +79,6 @@ public class GameArea1 extends GameArea {
         playMusic();
         spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
-    }
-
-    private void displayUI() {
-        Entity ui = new Entity();
-        ui.addComponent(new GameAreaDisplay("Level 2"));
-        spawnEntity(ui);
-    }
-
-    private void spawnTerrain() {
-        // Background terrain
-        terrain = terrainFactory.createTerrain(TerrainType.TEST, map);
-        spawnEntity(new Entity().addComponent(terrain));
-
-        // Terrain walls
-        float tileSize = terrain.getTileSize();
-        GridPoint2 tileBounds = terrain.getMapBounds(0);
-        Vector2 worldBounds = new Vector2(tileBounds.x * tileSize, tileBounds.y * tileSize);
-
-        // Left Game Area Bounds
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y), GridPoint2Utils.ZERO, false, false);
-        // Right Game Area Bounds
-        spawnEntityAt(
-                ObstacleFactory.createWall(WALL_WIDTH, worldBounds.y),
-                new GridPoint2(tileBounds.x, 0),
-                false,
-                false);
-        // Top Game Area Bounds
-        spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH),
-                new GridPoint2(0, tileBounds.y),
-                false,
-                false);
-        // Bottom Game Area Bounds
-        spawnEntityAt(
-                ObstacleFactory.createWall(worldBounds.x, WALL_WIDTH), GridPoint2Utils.ZERO, false, false);
-
-        //Imported Map Walls
-        HashMap<String, Float>[] walls = map.getWallObjects();
-        for (HashMap<String, Float> wall : walls) {
-            int x = wall.get("x").intValue();
-            int y = wall.get("y").intValue();
-            float width = wall.get("width");
-            float height = wall.get("height");
-
-            int unitHeight = (int) ((height / 32f));
-            spawnEntityAt(
-                    ObstacleFactory.createWall((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
-                    false,
-                    false);
-        }
     }
 
     private void spawnDialogueCutscenes() {
@@ -185,112 +133,6 @@ public class GameArea1 extends GameArea {
         PlayerSave.Save.setElfWins(1);
         PlayerSave.Save.setLokiWins(0);
         PlayerSave.write();
-    }
-
-    private void spawnPTraps() {
-        GridPoint2 fixedPos = new GridPoint2(15, 15);
-        Entity trap = ObstacleFactory.createPhysicalTrap();
-        spawnEntityAt(trap, fixedPos, true, true);
-    }
-
-    private void spawnTraps() {
-        GridPoint2 fixedPos = new GridPoint2(8, 8);
-        Entity trap = ObstacleFactory.createNonePhysicalTrap();
-        spawnEntityAt(trap, fixedPos, true, true);
-    }
-
-    private void spawnTeleport() {
-        Entity teleport = ObstacleFactory.createTeleport();
-        GridPoint2 fixedPos = new GridPoint2(15, 10);
-        spawnEntityAt(teleport, fixedPos, true, true);
-        //boss= 1;
-    }
-
-    private void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
-        HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
-        int height = map.getDimensions().get("n_tiles_height");
-        spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
-                true, true);
-        player = newPlayer;
-    }
-
-    private void spawnObstacles() {
-        int[][] obstacles = map.getTransObstacles();
-        HashMap<String, String> tileRefs = map.getTileRefs();
-        if (obstacles != null) {
-            GridPoint2 min = new GridPoint2(0, 0);
-            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
-                    map.getDimensions().get("n_tiles_height") - 1);
-
-            for (int y = min.y; y <= max.y; y++) {
-                for (int x = min.y; x <= max.x; x++) {
-                    if (obstacles[y][x] != 0) {
-
-                        Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(obstacles[y][x])));
-                        GridPoint2 pos = new GridPoint2(x, max.y - y);
-
-                        spawnEntityAt(obstacle, pos, true, false);
-                    }
-                }
-            }
-        }
-    }
-
-    private void spawnLights() {
-        int[][] lights = map.getLightTiles();
-        HashMap<String, String> tileRefs = map.getTileRefs();
-        if (lights != null) {
-            GridPoint2 min = new GridPoint2(0, 0);
-            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
-                    map.getDimensions().get("n_tiles_height") - 1);
-
-            for (int y = min.y; y <= max.y; y++) {
-                for (int x = min.y; x <= max.x; x++) {
-                    if (lights[y][x] != 0) {
-
-                        Entity obstacle = ObstacleFactory.createObstacle(tileRefs.get(String.valueOf(lights[y][x])));
-                        GridPoint2 pos = new GridPoint2(x, max.y - y);
-
-                        spawnEntityAt(obstacle, pos, true, false);
-                    }
-                }
-            }
-        }
-    }
-
-    private void spawnSpikeTraps() {
-        HashMap<String, Float>[] spikeTraps = map.getSpikeObjects();
-        for (HashMap<String, Float> spikeTrap : spikeTraps) {
-            int x = spikeTrap.get("x").intValue();
-            int y = spikeTrap.get("y").intValue();
-            float width = spikeTrap.get("width");
-            float height = spikeTrap.get("height");
-
-            int unitHeight = (int) ((height / 32f));
-            spawnEntityAt(
-                    ObstacleFactory.createRSPhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
-                    false,
-                    false);
-        }
-    }
-
-    private void spawnLavaTraps() {
-        HashMap<String, Float>[] lavaTraps = map.getLavaObjects();
-        for (HashMap<String, Float> lavaTrap : lavaTraps) {
-            int x = lavaTrap.get("x").intValue();
-            int y = lavaTrap.get("y").intValue();
-            float width = lavaTrap.get("width");
-            float height = lavaTrap.get("height");
-
-            int unitHeight = (int) ((height / 32f));
-            spawnEntityAt(
-                    ObstacleFactory.createRSNonePhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
-                    false,
-                    false);
-        }
     }
 
     /**
