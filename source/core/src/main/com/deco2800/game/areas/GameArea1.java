@@ -220,20 +220,6 @@ public class GameArea1 extends GameArea {
         }
     }
 
-    private void spawnHealthCrateObject() {
-        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
-        for (HashMap<String, Float> crate : crates) {
-            int x = crate.get("x").intValue();
-            int y = crate.get("y").intValue();
-
-            spawnEntityAt(
-                    ObstacleFactory.createHealthCrate(),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
-    }
-
     private void spawnDialogueCutscenes() {
         RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_ENCOUNTER;
         DialogueSet set;
@@ -255,7 +241,7 @@ public class GameArea1 extends GameArea {
             int y = dialogue.get("y").intValue();
 
             spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
@@ -283,7 +269,6 @@ public class GameArea1 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setLokiEnc(1);
         PlayerSave.Save.setElfWins(1);
         PlayerSave.Save.setLokiWins(0);
         PlayerSave.write();

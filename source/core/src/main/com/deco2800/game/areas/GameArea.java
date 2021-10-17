@@ -99,14 +99,16 @@ public abstract class GameArea implements Disposable {
                 logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
-                GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(), (map.getDimensions().get("n_tiles_heihgt") - teleportPos.get("y").intValue()));
+                GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(),
+                        (map.getDimensions().get("n_tiles_heihgt") - teleportPos.get("y").intValue()));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
             } else if (getLevel() == 0) {
                 //gama area 0
                 logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 1) {
@@ -114,7 +116,8 @@ public abstract class GameArea implements Disposable {
                 logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 2) {
@@ -122,7 +125,8 @@ public abstract class GameArea implements Disposable {
                 logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 3) {
@@ -130,7 +134,8 @@ public abstract class GameArea implements Disposable {
                 logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
 
             } else if (getLevel() == 4) {
@@ -138,7 +143,8 @@ public abstract class GameArea implements Disposable {
                 logger.info("Spawning the teleport object");
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(), (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 1));
+                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
 
             }
@@ -197,6 +203,27 @@ public abstract class GameArea implements Disposable {
 
         entity.setPosition(worldPos);
         spawnEntity(entity);
+    }
+
+    /**
+     * Spawns a create object which will reveal a health potion at the positions specified
+     * within the Tiled JSON file.
+     */
+    protected void spawnHealthCrateObject() {
+        HashMap<String, Float>[] crates = map.getHealthCrateObjects();
+        if(crates == null) {
+            return;
+        }
+        for (HashMap<String, Float> crate : crates) {
+            int x = crate.get("x").intValue();
+            int y = crate.get("y").intValue();
+
+            spawnEntityAt(
+                    ObstacleFactory.createHealthCrate(),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     /**

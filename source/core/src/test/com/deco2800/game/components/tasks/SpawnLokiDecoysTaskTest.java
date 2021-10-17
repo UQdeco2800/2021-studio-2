@@ -1,7 +1,10 @@
 package com.deco2800.game.components.tasks;
 
+import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
+import com.deco2800.game.components.tasks.loki.SpawnLokiDecoyTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -17,22 +20,29 @@ import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.Mock;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(GameExtension.class)
-class SpawnMinionsAndExplosionTaskTest {
+class SpawnLokiDecoysTaskTest {
+
+    @Mock
+    GameArea gameArea;
 
     @Mock
     GameTime gameTime;
 
+    private SpawnLokiDecoyTask spawn;
+
     private static final String[] forestTextureAtlases = {
-            "images/meleeFinal.atlas", "images/rangedAllFinal.atlas", "images/explosion/explosion.atlas"
+            "images/hellViking.atlas", "images/lokiBoss.atlas", "images/firePillar.atlas"
     };
 
     private static final String[] forestTextures = {
@@ -49,8 +59,9 @@ class SpawnMinionsAndExplosionTaskTest {
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
-            "images/vortex.png",
-            "images/explosion/explosion.png"
+            "images/hellViking.png",
+            "images/lokiBoss.png",
+            "images/firePillar.png"
     };
 
     @BeforeEach
@@ -61,8 +72,9 @@ class SpawnMinionsAndExplosionTaskTest {
         ServiceLocator.registerRenderService(renderService);
         ServiceLocator.registerPhysicsService(new PhysicsService());
         ServiceLocator.registerEntityService(new EntityService());
-        GameArea gameArea = mock(GameArea.class);
+        gameArea = mock(GameArea.class);
         ServiceLocator.registerGameArea(gameArea);
+
 
         ResourceService resourceService = new ResourceService();
         ServiceLocator.registerResourceService(resourceService);
@@ -73,10 +85,8 @@ class SpawnMinionsAndExplosionTaskTest {
 
     @Test
     void inactivePriority() {
-        Entity boss = createBoss();
         Entity target = new Entity();
-        SpawnMinionsAndExplosionTask spawn =
-                new SpawnMinionsAndExplosionTask(target);
+        Entity boss = createSpawner(target);
 
         spawn.create(() -> boss);
 
@@ -85,42 +95,113 @@ class SpawnMinionsAndExplosionTaskTest {
     }
 
     @Test
-    void activePriority() {
+    void getDistanceToTargetTest() {
         gameTime = mock(GameTime.class);
         ServiceLocator.registerTimeSource(gameTime);
         when(gameTime.getTime()).thenReturn(0L);
-
-        Entity boss = createBoss();
         Entity target = new Entity();
-        SpawnMinionsAndExplosionTask spawn =
-                new SpawnMinionsAndExplosionTask(target);
+        Entity boss = createSpawner(target);
+
+        target.setPosition(0f, 0f);
+        boss.setPosition(0f, 0f);
+        spawn.create(() -> boss);
+
+        spawn.spawn();
+
+        verify(gameArea).incNum();
+    }
+
+    @Test
+    void getActivePriority() {
+        Entity target = new Entity();
+        Entity boss = createSpawner(target);
+
+        boss.setAttackRange(5f);
+        target.setPosition(0f, 0f);
+        boss.setPosition(0f, 0f);
+        spawn.create(() -> boss);
+
+        assertEquals(20, spawn.getPriority());
+    }
+
+    @Test
+    void canSeeTarget() {
+        Entity target = new Entity();
+        Entity boss = createSpawner(target);
+
+        boss.setAttackRange(5f);
+        target.setPosition(0f, 0f);
+        boss.setPosition(0f, 0f);
+        spawn.create(() -> boss);
+
+        assertTrue(boss.canSeeEntity(target));
+    }
+
+    @Test
+    void getDistanceFromTargetTest() {
+        Entity target = new Entity();
+        Entity boss = createSpawner(target);
+
+        boss.setAttackRange(5f);
+        target.setPosition(0f, 0f);
+        boss.setPosition(0f, 0f);
+        spawn.create(() -> boss);
+
+        assertEquals(0f, boss.getCenterPosition().dst(target.getCenterPosition()));
+    }
+
+    @Test
+    void shouldSpawn() {
+        Entity target = new Entity();
+        Entity boss = createSpawner(target);
 
         spawn.create(() -> boss);
 
         boss.create();
         // inactive when boss health not < 50%
 
+        spawn.update();
+        // inactive after the task is update
+        assertEquals(-1, spawn.getPriority());
 
         // active when boss health < 50%
         boss.getComponent(CombatStatsComponent.class).setHealth(40);
 
-        // active
-        assertEquals(20, spawn.getPriority());
+        spawn.update();
+    }
+
+    @Test
+    void shouldChangeEntity() {
+        Entity target = new Entity();
+        Entity boss = createSpawner(target);
+
+        spawn.create(() -> boss);
+
+        boss.create();
+        // inactive when boss health not < 50%
 
         spawn.update();
         // inactive after the task is update
         assertEquals(-1, spawn.getPriority());
 
-        boss.getComponent(CombatStatsComponent.class).setHealth(24);
-        // active again if health is reduce to 25%
-        assertEquals(20, spawn.getPriority());
+        // should set entity type to transformed on health < 75%
+        boss.getComponent(CombatStatsComponent.class).setHealth(60);
+        spawn.update();
 
-        // boss can only spawn at most two wave of enemy - one at < 50%, and one at < 25%
-
+        // should set entity type back to loki on health < 50%
+        boss.getComponent(CombatStatsComponent.class).setHealth(40);
+        spawn.update();
     }
 
-    private Entity createBoss() {
+    private Entity createSpawner(Entity target) {
+
+        AITaskComponent AI = new AITaskComponent();
+        spawn = new SpawnLokiDecoyTask(target, 0);
+
+        AI.addTask(spawn);
+
         return new Entity()
+                .addComponent(AI)
                 .addComponent(new PhysicsMovementComponent())
                 .addComponent(new HitboxComponent())
                 .addComponent(new CombatStatsComponent(100, 10))

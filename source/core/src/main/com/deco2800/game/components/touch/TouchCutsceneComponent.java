@@ -1,6 +1,7 @@
 package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
@@ -66,6 +67,27 @@ public class TouchCutsceneComponent extends TouchComponent {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
         textBox.showBars();
+
+        switch(dialogueSet) {
+            case ELF_ENCOUNTER:
+                PlayerSave.Save.setElfEnc(1);
+                break;
+            case LOKI_ENCOUNTER:
+                PlayerSave.Save.setLokiEnc(1);
+                break;
+            case LOKI2_ENCOUNTER:
+                PlayerSave.Save.setLoki2Enc(1);
+                break;
+            case THOR_ENCOUNTER:
+                PlayerSave.Save.setThorEnc(1);
+                break;
+            case ODIN_ENCOUNTER:
+                PlayerSave.Save.setOdinEnc(1);
+                break;
+            default:
+                break;
+        }
+
         switch (type) {
             case FIRST_ENCOUNTER:
                 textBox.setRandomFirstEncounter(dialogueSet);

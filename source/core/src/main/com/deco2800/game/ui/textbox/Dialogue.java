@@ -50,14 +50,37 @@ public enum Dialogue {
                     "\nto escape.")
     }),
 
+    TUTORIAL_TRAPS(new Message[]{
+            new Message(false, "The place is littered with traps," +
+                    "\nbe careful where you're stepping."),
+            new Message(false, "I'll meet you in the next room and show" +
+                    "\nyou what I'm talking about.")
+    }),
+
+    TUTORIAL_CRATES(new Message[]{
+            new Message(false, "You better get use to injuries." +
+                    "\nThere are crates spread across the worlds." +
+                    "\nBreak them for a health potion."),
+    }),
+
     TUTORIAL_ATTACK(new Message[]{
             new Message(false, "Use SPACE BAR to swing the axe at" +
                     "\nthe gate. Careful though, this is the" +
                     "\nonly thing that won't attack back."),
-            new Message(false, "User Q or Right Click to activate your" +
-                    "\nweapons power, each weapon has one" +
-                    "\nand they're all different. You should test" +
-                    "\nit out before heading off into battle.")
+            new Message(false, "There are some weapons you'll find along the way." +
+                    "\nUse them to your advantage and utilise the power" +
+                    "\nthey possess."),
+            new Message(false, "The Greatsword has a powerful AOE attack" +
+                    "\nwhen pressing Q."),
+            new Message(false, "The scepter is capable of firing a powerful" +
+                    "\nblast when pressing ALT"),
+            new Message(false, "Lastly, Thor's hammer allows can call" +
+                    "\nan AOE attack on Q and a deadly weapon" +
+                    "\nthrow on ALT."),
+            new Message(false, "You'll know what I'm talking about" +
+                    "\nwhen you wield them yourself." +
+                    "\nFor now, practice on some crates before taking" +
+                    "\nout the guard.")
     }),
 
     TUTORIAL_ENEMIES(new Message[]{
@@ -68,14 +91,15 @@ public enum Dialogue {
                     "\nyou from the shadows.")
     }),
 
-    TUTORIAL_TRAPS(new Message[]{
-            new Message(false, "The place is littered with traps," +
-                    "\nbe careful where you're stepping.")
-    }),
-
     TUTORIAL_EXIT(new Message[]{
+            new Message(false, "Between the worlds, you'll find a teleport pad." +
+                    "\nThese are how the Gods get around."),
+            new Message(false, "You'll need your hands stained with blood" +
+                    "\nbefore you're deemed worthy to enter."),
+            new Message(true, "I understand. Nothing will get in my way."),
             new Message(false, "Good luck warrior, I hope to never" +
-                    "\nsee you again.")
+                    "\nsee you again."),
+            new Message(true, "Thank you. Same to you."),
     }),
 
     ELF_INTRODUCTION_FIRST(new Message[]{
@@ -206,7 +230,7 @@ public enum Dialogue {
 
     LOKI_INTRODUCTION_DEFEATED_5(new Message[]{
             new Message(false, "Good attempt, are you really going" +
-                    "\n to try again?"),
+                    "\nto try again?"),
     }),
 
     LOKI_ENCOUNTER_FIRST(new Message[]{
@@ -231,6 +255,89 @@ public enum Dialogue {
             new Message(false, "I'm baffled by how you made it this far." +
                     "\nNo matter, you'll make it no further than here."),
     }),
+
+    LOKI2_INTRODUCTION_FIRST(new Message[]{
+            new Message(true, "What? I thought the teleport pad would" +
+                    "\nget me out of here. It seems like I've only gone further."),
+            new Message(true, "I have a higher chance of dying from" +
+                    "\nthe heat than anyone in my way."),
+            new Message(false, "Ignorant fool..."),
+            new Message(true, "What?! I saw you die at my hands."),
+            new Message(true, "Can't wait to kill you again.")
+    }),
+
+    LOKI2_INTRODUCTION_VICTORY_1(new Message[]{
+            new Message(true, "Killing Lokis may now be my new" +
+                    "\nfavourite hobby."),
+            new Message(true, "One down, another one to go."),
+    }),
+
+    LOKI2_INTRODUCTION_VICTORY_2(new Message[]{
+            new Message(false, "I'm surprised you made it through my" +
+                    "\ndecoy again."),
+            new Message(false, "It means that I get to have my " +
+                    "\nrevenge however."),
+    }),
+
+    LOKI2_INTRODUCTION_VICTORY_3(new Message[]{
+            new Message(false, "Come find me again. I know you can't" +
+                    "\nwait to kill me."),
+    }),
+
+    LOKI2_INTRODUCTION_DEFEATED_1(new Message[]{
+            new Message(false, "How did you get past my decoy again." +
+                    "\nI must not be like I use to be."),
+            new Message(false, "Still good enough to kill you however.")
+    }),
+
+    LOKI2_INTRODUCTION_DEFEATED_2(new Message[]{
+            new Message(true, "I'm prepared this time, the heat" +
+                    "\nwon't get to me."),
+            new Message(true, "Where are you Loki? Are you afraid" +
+                    "\nof a rematch?."),
+    }),
+
+    LOKI2_INTRODUCTION_DEFEATED_3(new Message[]{
+            new Message(true, "Spawn decoys, transform and fire." +
+                    "\nEasy."),
+            new Message(true, "Same as the clown I just killed."),
+    }),
+
+    LOKI2_ENCOUNTER_FIRST(new Message[]{
+            new Message(false, "I see you've reached me again" +
+                    "\nbut have you really? Am I just another clone?"),
+            new Message(true, "Are you afraid? I've seen what you" +
+                    "\ncan do and I'm far from impressed."),
+            new Message(false, "Fool! This is going to be fun isn't it." +
+                    "\nWatching you die didn't seem as fun."),
+            new Message(true, "So it is you. I'll make sure I savour" +
+                    "\nthe moment."),
+            new Message(false, "Is it? Who knows."),
+    }),
+
+    LOKI2_ENCOUNTER_VICTORY_1(new Message[]{
+            new Message(true, "Killing Loki. It never gets old."),
+            new Message(false, "I don't recall that happening." +
+                    "\nI must've been asleep while a decoy was watching over."),
+    }),
+
+    LOKI2_ENCOUNTER_VICTORY_2(new Message[]{
+            new Message(false, "Can't wait to get my revenge." +
+                    "\nI knew you wouldn't get past the others."),
+    }),
+
+    LOKI2_ENCOUNTER_DEFEATED_1(new Message[]{
+            new Message(true, "Hiding behind your decoys once again." +
+                    "\nYou can't hide forever."),
+    }),
+
+    LOKI2_ENCOUNTER_DEFEATED_2(new Message[]{
+            new Message(false, "Interesting. You seem to keep getting back" +
+                    "\nto me then dying."),
+            new Message(false, "Are you finding this fun?"),
+            new Message(true, "I will when I finally kill you."),
+    }),
+
 
     ODIN_INTRODUCTION_FIRST(new Message[]{
             new Message(true, "So this is where I belong, the golden statues" +

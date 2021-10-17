@@ -69947,6 +69947,14 @@
             "width": 512
         }
     ],
+    "bossObjects": [
+        {
+            "x": 105,
+            "y": 101,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "spikeObjects": [],
     "lavaObjects": []
 }

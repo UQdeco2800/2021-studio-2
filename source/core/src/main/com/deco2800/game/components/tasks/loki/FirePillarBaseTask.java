@@ -22,7 +22,6 @@ public class FirePillarBaseTask extends DefaultTask implements PriorityTask {
     private final GameArea gameArea;
 
     public FirePillarBaseTask() {
-
         this.spawnTime = ServiceLocator.getTimeSource().getTime();
         this.gameArea = ServiceLocator.getGameAreaService();
     }
