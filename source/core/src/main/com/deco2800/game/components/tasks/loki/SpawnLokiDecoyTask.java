@@ -33,7 +33,7 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
     /**
      * THe delay between each attacks for this task.
      */
-    private long cooldownMS;
+    private final long cooldownMS;
 
     /**
      * Last time that the attack was created.
@@ -44,7 +44,7 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
     /**
      * Spawned enemies.
      */
-    private boolean spawned = false;
+    private final boolean spawned = false;
 
     /**
      * spawn the minion to help the boss attack the target

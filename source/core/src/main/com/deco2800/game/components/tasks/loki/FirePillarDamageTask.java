@@ -13,7 +13,7 @@ public class FirePillarDamageTask extends DefaultTask implements PriorityTask {
     /**
      * Spawn time of the entity.
      */
-    private long spawnTime;
+    private final long spawnTime;
 
     public FirePillarDamageTask() {
         this.spawnTime = ServiceLocator.getTimeSource().getTime();

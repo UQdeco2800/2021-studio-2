@@ -208,6 +208,7 @@ public class TouchAttackComponent extends TouchComponent {
         // Apply continuous knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f) || (hitboxComponent.getFixture() != me)) {
+            assert physicsComponent != null;
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
             Vector2 impulse = direction.setLength(0.5f);

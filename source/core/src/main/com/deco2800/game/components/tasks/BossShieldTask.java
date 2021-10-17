@@ -10,17 +10,11 @@ public class BossShieldTask extends ChaseTask implements PriorityTask {
     private final GameTime timeSource;
     private final float duration;
     private long endTime;
-    private final float maxChaseDistance;
-    private final int priority;
-    private final float viewDistance;
     private boolean shield;
     private int currentHealth;
 
     public BossShieldTask(Entity target, int priority, float viewDistance, float maxChaseDistance, float duration) {
         super(target, priority, viewDistance, maxChaseDistance);
-        this.maxChaseDistance = maxChaseDistance;
-        this.viewDistance = viewDistance;
-        this.priority = priority;
         this.timeSource = ServiceLocator.getTimeSource();
         this.duration = duration;
 

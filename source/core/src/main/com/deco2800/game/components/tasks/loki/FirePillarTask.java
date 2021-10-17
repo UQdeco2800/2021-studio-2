@@ -21,27 +21,17 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
     /**
      * Required to spawn the entity which will damage the player.
      */
-    private GameArea gameArea;
-
-    /**
-     * Physics Engine to handle collisions between enemy and attack.
-     */
-    private PhysicsEngine physics;
-
-    /**
-     * Provides a view of the entities debug information.
-     */
-    private DebugRenderer debugRenderer;
+    private final GameArea gameArea;
 
     /**
      * The target entity the enemy will attempt to attack.
      */
-    private Entity target;
+    private final Entity target;
 
     /**
      * THe delay between each attacks for this task.
      */
-    private long cooldownMS;
+    private final long cooldownMS;
 
     /**
      * Last time that the attack was created.
@@ -56,22 +46,12 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
     /**
      * Duration of the shoot animation time in Milliseconds.
      */
-    private long shootAnimationTimeMS;
+    private final long shootAnimationTimeMS;
 
     /**
      * List of previous positions of the player.
      */
-    private LinkedList<Vector2> lastPositions;
-
-    /**
-     * List of the previous Fire Pillar entities for disposal.
-     */
-    private LinkedList<Entity> firePillars;
-
-    /**
-     * Count used to delay the ticks between pillars spawned.
-     */
-    private int count;
+    private final LinkedList<Vector2> lastPositions;
 
     private static final Logger logger = LoggerFactory.getLogger(FirePillarTask.class);
 
@@ -86,14 +66,9 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         this.cooldownMS = cooldownMS;
         this.shootAnimationTimeMS = shootAnimationTimeMS;
         this.gameArea = ServiceLocator.getGameAreaService();
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
         lastPositions = new LinkedList<>();
-        firePillars = new LinkedList<>();
-
         lastShootAnimation = 0;
         lastFiredTime = 0;
-        count = 0;
     }
 
     @Override

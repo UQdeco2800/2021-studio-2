@@ -17,9 +17,9 @@ public class FirePillarBaseTask extends DefaultTask implements PriorityTask {
     /**
      * Spawn time of the entity.
      */
-    private long spawnTime;
+    private final long spawnTime;
 
-    private GameArea gameArea;
+    private final GameArea gameArea;
 
     public FirePillarBaseTask() {
 

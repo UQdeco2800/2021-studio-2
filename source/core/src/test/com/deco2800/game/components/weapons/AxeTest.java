@@ -29,9 +29,7 @@ class AxeTest {
         ServiceLocator.registerResourceService(new ResourceService());
         ResourceService resourceService = ServiceLocator.getResourceService();
         resourceService.loadSounds(new String[]{"sounds/impact.ogg", "sounds/swish.ogg"});
-        while (resourceService.loadForMillis(10)) {
-            // wait for assets to load
-        }
+        resourceService.loadForMillis(10);
     }
 
     @Test

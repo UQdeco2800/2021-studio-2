@@ -215,7 +215,6 @@ public class ForestGameArea extends GameArea {
 
     private void spawnDialogueCutscenes() {
         RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;
-        ;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;

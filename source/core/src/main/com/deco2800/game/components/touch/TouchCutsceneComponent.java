@@ -22,7 +22,7 @@ public class TouchCutsceneComponent extends TouchComponent {
 
     private final RandomDialogueSet dialogueSet;
     private final DialogueSet type;
-    private int maxRepeats;
+    private final int maxRepeats;
     private int numRepeats;
 
     /**
