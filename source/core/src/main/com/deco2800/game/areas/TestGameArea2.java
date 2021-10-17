@@ -75,12 +75,10 @@ public class TestGameArea2 extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
-    private final GdxGame game;
     private static Map map;
 
     public TestGameArea2(TerrainFactory terrainFactory, GdxGame game) {
         super();
-        this.game = game;
         this.terrainFactory = terrainFactory;
     }
 

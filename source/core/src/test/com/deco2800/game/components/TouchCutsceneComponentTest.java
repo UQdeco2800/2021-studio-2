@@ -120,7 +120,7 @@ class TouchCutsceneComponentTest {
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchMoveComponent(triggerLayer,
-                                new Vector2(1f, 0), 5f, 0f, false))
+                                new Vector2(1f, 0), false))
                         .addComponent(new TouchCutsceneComponent(triggerLayer, RandomDialogueSet.TEST,
                                 dialogueSet));
         entity.create();

@@ -16,9 +16,7 @@ import org.slf4j.LoggerFactory;
 public class PauseMenuDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(PauseMenuDisplay.class);
     private static final String[] pauseMenuTextures = {"images/pauseMenu.png"};
-    private Image menuBackground;
     private Stack stack;
-    private Table pauseTable;
 
 
     @Override
@@ -32,9 +30,9 @@ public class PauseMenuDisplay extends MainMenuDisplay {
 
     protected void addActors() {
         stack = new Stack();
-        menuBackground = new Image(ServiceLocator.getResourceService().getAsset("images/pauseMenu.png",
+        Image menuBackground = new Image(ServiceLocator.getResourceService().getAsset("images/pauseMenu.png",
                 Texture.class));
-        pauseTable = new Table();
+        Table pauseTable = new Table();
 
         Skin menuButtons = new Skin(Gdx.files.internal("pauseMenuSkin/pause.json"));
 

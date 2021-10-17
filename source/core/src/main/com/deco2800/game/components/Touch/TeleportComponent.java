@@ -16,8 +16,6 @@ import java.util.TimerTask;
 
 public class TeleportComponent extends TouchComponent {
 
-    private Scanner scanner = new Scanner(System.in);
-    private long start = 0;
 
     public TeleportComponent(short targetLayer) {
         super(targetLayer);
@@ -47,7 +45,7 @@ public class TeleportComponent extends TouchComponent {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
 
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
+        if (targetStats != null && ((System.currentTimeMillis()) / 1000.) > 0.5) {
             CutsceneScreen screen = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(CutsceneScreen.class);
             screen.setOpen();

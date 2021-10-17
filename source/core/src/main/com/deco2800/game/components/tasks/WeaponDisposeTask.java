@@ -24,10 +24,6 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
      * Start end
      */
     private boolean declareEnd;
-    /**
-     * Time
-     */
-    private final GameTime timeSource;
 
     /**
      * Pause the weapon in midair to wait for animation to run
@@ -39,7 +35,6 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
     public WeaponDisposeTask(Vector2 targetLoc, Vector2 speed, float duration) {
         super(targetLoc, speed);
         this.duration = duration;
-        this.timeSource = ServiceLocator.getTimeSource();
         this.declareEnd = true;
     }
 

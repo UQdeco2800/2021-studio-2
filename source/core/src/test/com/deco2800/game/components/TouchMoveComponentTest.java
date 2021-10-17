@@ -238,7 +238,7 @@ class TouchMoveComponentTest {
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchMoveComponent(triggerLayer,
-                                direction, 5f, 0f, false));
+                                direction, false));
         entity.create();
         return entity;
     }
@@ -250,7 +250,7 @@ class TouchMoveComponentTest {
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchMoveComponent(triggerLayer,
-                                direction, 5f, 0f, true));
+                                direction, true));
         entity.create();
         return entity;
     }

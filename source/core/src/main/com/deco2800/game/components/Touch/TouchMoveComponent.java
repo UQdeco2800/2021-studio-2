@@ -15,16 +15,6 @@ public class TouchMoveComponent extends TouchComponent {
     private final Vector2 direction;
 
     /**
-     * The distance on the x axis the character will need to move.
-     */
-    private final float x;
-
-    /**
-     * The distance on the y axis the character will need to move.
-     */
-    private final float y;
-
-    /**
      * Checks if the component has been triggered before
      */
     private boolean triggered = false;
@@ -39,15 +29,11 @@ public class TouchMoveComponent extends TouchComponent {
      *
      * @param targetLayer The physics layer of the target's collider.
      * @param direction   direction the player will attack in
-     * @param x           the x position for the player to move
-     * @param y           the y position for the player to move
      * @param repeatable  if the trigger can be repeated
      */
-    public TouchMoveComponent(short targetLayer, Vector2 direction, float x, float y, boolean repeatable) {
+    public TouchMoveComponent(short targetLayer, Vector2 direction, boolean repeatable) {
         super(targetLayer);
         this.direction = direction;
-        this.x = x;
-        this.y = y;
         this.repeatable = repeatable;
     }
 

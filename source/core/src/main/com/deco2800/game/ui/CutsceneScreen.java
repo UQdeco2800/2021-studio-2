@@ -17,10 +17,6 @@ public class CutsceneScreen extends UIComponent {
      */
     private static final float Z_INDEX = 10f;
 
-    /**
-     * Instance of the Text Box that will be displayed to the screen.
-     */
-    private TextBox textBox;
 
     /**
      * Bars to indicate a cutscene is taking place.
@@ -42,10 +38,10 @@ public class CutsceneScreen extends UIComponent {
      */
     private boolean closing = false;
 
+
     @Override
     public void create() {
         super.create();
-        textBox = entity.getComponent(TextBox.class);
         addActors();
         openScreenInstant();
     }

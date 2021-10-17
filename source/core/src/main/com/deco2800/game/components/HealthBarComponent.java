@@ -12,11 +12,10 @@ public class HealthBarComponent extends RenderComponent {
     private final Sprite health;
     private final Sprite healthBar;
     private final Sprite healthDecrease;
-    private float heightOfHealth;
-    private float xSize = 0.8f;
-    private float size;
+    private final float heightOfHealth;
+    private final float xSize = 0.8f;
+    private final float size;
     private float previousHealth;
-    private float saveHealth;
     private boolean healthDecreaseCheck;
     private long start = 0;
 
@@ -85,7 +84,7 @@ public class HealthBarComponent extends RenderComponent {
         float currentHealth = getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float MaxHealth = getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
         if (currentHealth != previousHealth) {
-            saveHealth = previousHealth;
+            float saveHealth = previousHealth;
             healthDecreaseCheck = true;
             ratioOfHealthPrevious = saveHealth / MaxHealth;
             ratioOfHealthPrevious = (float) round(ratioOfHealthPrevious, 1);

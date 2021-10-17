@@ -16,16 +16,12 @@ import com.deco2800.game.services.ServiceLocator;
 
 public class DeathPauseTask extends ChaseTask implements PriorityTask {
     private final float duration;
-    private final GameTime timeSource;
     private double start;
-    private int priority;
     private boolean declareEnd;
-    private long endTime;
 
     public DeathPauseTask(Entity target, int priority, float viewDistance, float maxChaseDistance, float duration) {
         super(target, priority, viewDistance, maxChaseDistance);
         this.duration = duration;
-        this.timeSource = ServiceLocator.getTimeSource();
         this.declareEnd = true;
     }
 

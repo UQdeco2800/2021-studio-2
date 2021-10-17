@@ -17,12 +17,8 @@ public class ExplosionSpawnTask extends DefaultTask implements PriorityTask {
      * upscale factor
      */
     private final Vector2 factor;
-    /**
-     * check if explosion is at max scale (desire)
-     */
-    private boolean max = false;
 
-    private Entity ownerRunner;
+    private final Entity ownerRunner;
 
 
     /**
@@ -50,7 +46,7 @@ public class ExplosionSpawnTask extends DefaultTask implements PriorityTask {
             owner.getEntity().setPosition(position);
         }
         if (owner.getEntity().getScale().x < this.scale.x
-                && owner.getEntity().getScale().y < this.scale.y && !max) {
+                && owner.getEntity().getScale().y < this.scale.y) {
             owner.getEntity().setScale(owner.getEntity().getScale().add(factor.scl(0.99f)));
             owner.getEntity().setPosition(position);
         } else {
