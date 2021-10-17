@@ -202,7 +202,7 @@ public class MainGameScreen extends ScreenAdapter {
             if (gameArea.getLevel() == 9) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
-                game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA0, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();

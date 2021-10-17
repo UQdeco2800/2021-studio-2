@@ -100,14 +100,18 @@ public class GameArea3 extends GameArea {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/newArrowBroken/atlas/arrow.atlas", "Odin/odin.atlas", "end/portal.atlas"
+            "images/newArrowBroken/atlas/arrow.atlas", "Odin/odin.atlas", "end/portal.atlas",
+            "images/newArrowBroken/atlas/arrow.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3"
+            "sounds/arrow_shoot.mp3",
+            "sounds/death_2.mp3",
+            "sounds/death_1.mp3",
+            "sounds/boss_death.mp3"
     };
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};

@@ -15,7 +15,7 @@ import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class DeathPauseTask extends ChaseTask implements PriorityTask {
     private final float duration;
@@ -31,7 +31,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
     }
 
     private void playElfDead() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         int numCase = random.nextInt(2);
         switch (numCase) {
             case 1:
@@ -60,7 +60,9 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                     || owner.getEntity().getEntityType().equals("assassin")
                     || owner.getEntity().getEntityType().equals("ranged")
                     || owner.getEntity().getEntityType().equals("melee")
-                    || owner.getEntity().getEntityType().equals("AlertCaller")) {
+                    || owner.getEntity().getEntityType().equals("AlertCaller")
+                    || owner.getEntity().getEntityType().equals("viking")
+                    || owner.getEntity().getEntityType().equals("archer")) {
                 playElfDead();
             }
             if (owner.getEntity().getEntityType().equals("elfBoss")) {
