@@ -137,9 +137,6 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "forest":
-                this.gameArea = new ForestGameArea(terrainFactory);
-                break;
             case "tutorial":
                 this.gameArea = new TutorialGameArea(terrainFactory, currentHealth);
                 break;

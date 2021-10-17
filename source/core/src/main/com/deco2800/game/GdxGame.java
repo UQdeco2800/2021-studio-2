@@ -80,8 +80,6 @@ public class GdxGame extends Game {
         switch (screenType) {
             case MAIN_MENU:
                 return new MainMenuScreen(this);
-            case MAIN_GAME_FOREST:
-                return new MainGameScreen(this, "forest");
             case MAIN_GAME_TUTORIAL:
                 return new MainGameScreen(this, "tutorial");
             case SETTINGS:
@@ -112,8 +110,6 @@ public class GdxGame extends Game {
         switch (screenType) {
             case MAIN_MENU:
                 return new MainMenuScreen(this);
-            case MAIN_GAME_FOREST:
-                return new MainGameScreen(this, "forest", currentHealth);
             case MAIN_GAME_TUTORIAL:
                 return new MainGameScreen(this, "tutorial", currentHealth);
             case SETTINGS:
