@@ -319,11 +319,11 @@ public class NPCFactory {
      * It will retreat if the target is approach in certain range
      *
      * @param target entity to chase
-     * @param type   arrow type ("normalArrow", "trackingArrow", "fastArrow")
+     * @param type   arrow type
      * @return entity
      */
 
-    public static Entity createRangedElf(Entity target, String type, float multishotChance) {
+    public static Entity createRangedElf(Entity target, ShootProjectileTask.projectileTypes type, float multishotChance) {
         Entity elf = createBaseNPCNoAI();
         RangedEnemyConfig config = configs.elfRanged;
         AITaskComponent aiComponent =
@@ -347,7 +347,7 @@ public class NPCFactory {
                         ServiceLocator.getResourceService().getAsset("images/rangedAllFinal.atlas", TextureAtlas.class));
 
 
-        if (type.equals("fastArrow")) {
+        if (type.equals(ShootProjectileTask.projectileTypes.fastArrow)) {
             elf.setEntityType("assassin");
             animator.addAnimation("assassinLeft", 0.5f, Animation.PlayMode.LOOP);
             animator.addAnimation("assassinRight", 0.5f, Animation.PlayMode.LOOP);
@@ -431,7 +431,7 @@ public class NPCFactory {
                                 target, 0, 100, 100, 1.5f));
 
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType("fireBall");
+        shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.fireBall);
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
         //Dont create fireballs until ready and on the map
@@ -767,7 +767,6 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(multishotChance);
         shootProjectileTask.setShootAnimationTimeMS(200);
         aiComponent.addTask(shootProjectileTask);

@@ -78,11 +78,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     /**
      * the type of arrow
      */
-    private String projectileType = "normalArrow";
-    /**
-     * constant value represent the fire ball type projectile
-     */
-    private static final String FIREBALL = "fireBall";
+    private projectileTypes projectileType = projectileTypes.normalArrow;
     /**
      * if the power up is trigger
      */
@@ -108,7 +104,12 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     private static final Logger logger = LoggerFactory.getLogger(ShootProjectileTask.class);
 
-    public boolean initshoot = false;
+    public enum projectileTypes {
+        normalArrow,
+        trackingArrow,
+        fastArrow,
+        fireBall
+    }
 
 
     /**
@@ -156,10 +157,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * @return true if fireballs are present
      */
     private boolean checkFireBalls() {
-        boolean found = false;
         //Stops the fireballs from being created until ready.
         //Specifically so the boss doesnt create them before he teleports
-        if (projectileType.equals(FIREBALL)) {
+        if (projectileType.equals(projectileTypes.fireBall)) {
             if (owner.getEntity().data.get("createFireBall").equals(true)) {
                 if (!owner.getEntity().data.containsKey("fireBalls")) {
                     //create fireball list
@@ -173,7 +173,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     owner.getEntity().data.put("fireBalls", entities);
                     lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
                     return (true);
-                } else if (projectileType.equals(FIREBALL) && TimeUnit.NANOSECONDS.toMillis(
+                } else if (projectileType.equals(projectileTypes.fireBall) && TimeUnit.NANOSECONDS.toMillis(
                         System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
                     //Add new fireball
                     int index = 0;
@@ -191,7 +191,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         }
                         index++;
                     }
-                } else if (projectileType.equals(FIREBALL)) {
+                } else if (projectileType.equals(projectileTypes.fireBall)) {
                     //Check for fireball but don't make one
                     Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
                     for (Entity fireball : entities) {
@@ -285,7 +285,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             Random rand = new SecureRandom();
 
             switch (projectileType) {
-                case "normalArrow": {
+                case normalArrow: {
                     Vector2 relativeLoc = target.getPosition().cpy().sub(owner.getEntity().getPosition());
                     relativeLoc.scl(30);
                     relativeLoc.add(owner.getEntity().getPosition());
@@ -306,7 +306,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     shootAnimation();
                     break;
                 }
-                case "trackingArrow": {
+                case trackingArrow: {
                     //Spawns arrows in a different location on a circle around the entity
                     Vector2 offset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
                     offset.setAngleDeg(getDirectionOfTarget());
@@ -332,7 +332,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     shootAnimation();
                     break;
                 }
-                case "fastArrow": {
+                case fastArrow: {
                     float AOE = 1f;
                     if (!poweringUp) {
                         poweringUp = true;
@@ -436,7 +436,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     }
                     break;
                 }
-                case FIREBALL: {
+                case fireBall: {
                     if (checkFireBalls()) {
                         //TrackingArrowConfig config = new TrackingArrowConfig();
                         Entity fireBall = getNextFireBall();
@@ -485,7 +485,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      *
      * @param projectileType type of arrow
      */
-    public void setProjectileType(String projectileType) {
+    public void setProjectileType(projectileTypes projectileType) {
         this.projectileType = projectileType;
     }
 
@@ -579,10 +579,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * @return true if can shoot, false otherwise
      */
     private boolean canShoot() {
-        if (projectileType.equals(FIREBALL) && checkFireBalls()) {
+        if (projectileType.equals(projectileTypes.fireBall) && checkFireBalls()) {
             return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
                     && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
-        } else if (!projectileType.equals(FIREBALL)) {
+        } else if (!projectileType.equals(projectileTypes.fireBall)) {
             return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
                     && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
         } else {

@@ -35,7 +35,6 @@ class ShootProjectileTaskTest {
         target.setPosition(2f, 2f);
 
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(0.1);
         AITaskComponent ai = new AITaskComponent().addTask(shootProjectileTask);
         Entity entity = makePhysicsEntity().addComponent(ai);
@@ -70,7 +69,6 @@ class ShootProjectileTaskTest {
         target.setPosition(2f, 2f);
 
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType("normalArrow");
         shootProjectileTask.setMultishotChance(0.1);
         AITaskComponent ai = new AITaskComponent().addTask(shootProjectileTask);
         Entity entity = makePhysicsEntity().addComponent(ai);
