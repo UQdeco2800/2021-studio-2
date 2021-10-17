@@ -68,7 +68,7 @@ public class TouchCutsceneComponent extends TouchComponent {
                 .getUIEntity().getComponent(TextBox.class);
         textBox.showBars();
 
-        switch(dialogueSet) {
+        switch (dialogueSet) {
             case ELF_ENCOUNTER:
                 PlayerSave.Save.setElfEnc(1);
                 break;

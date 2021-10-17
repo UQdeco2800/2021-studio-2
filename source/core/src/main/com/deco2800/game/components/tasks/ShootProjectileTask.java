@@ -104,7 +104,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     private static final Logger logger = LoggerFactory.getLogger(ShootProjectileTask.class);
 
-    /** time when the boss start rampage */
+    /**
+     * time when the boss start rampage
+     */
     private long rampageStart = 0;
 
     public enum projectileTypes {

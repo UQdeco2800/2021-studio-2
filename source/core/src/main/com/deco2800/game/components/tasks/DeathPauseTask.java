@@ -14,6 +14,7 @@ import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
+
 import java.util.Random;
 
 public class DeathPauseTask extends ChaseTask implements PriorityTask {
@@ -43,6 +44,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
     private void playElfBossDeath() {
         ServiceLocator.getResourceService().getAsset("sounds/boss_death.mp3", Sound.class).play();
     }
+
     @Override
     public void update() {
         if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
