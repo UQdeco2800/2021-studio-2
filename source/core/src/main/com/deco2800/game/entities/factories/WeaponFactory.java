@@ -111,12 +111,8 @@ public class WeaponFactory {
         Entity beam = createBaseArrow();
         beam.setEntityType("beam");
         ArrowConfig config = configs.baseArrow;
-
-
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(config.speedX, config.speedY));
-
-
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
@@ -131,7 +127,6 @@ public class WeaponFactory {
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         beam.setScale(scale);
         beam.setAngle(angle);
-
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
@@ -142,10 +137,8 @@ public class WeaponFactory {
         beam.setScale(beam.getScale().x * 0.1f,
                 beam.getScale().y * 0.1f);
         animator.startAnimation("arrow");
-
         beam.addComponent(animator);
         beam.addComponent(new ProjectileAnimationController());
-
         shootingSound("beam");
         return beam;
     }
