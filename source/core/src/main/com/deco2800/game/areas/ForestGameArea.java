@@ -80,7 +80,7 @@ public class ForestGameArea extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "images/rangedFixed.png",
             "images/bossFixed.png",
             "images/meleeAnimationsTextured.png",
@@ -120,7 +120,7 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",

@@ -79,7 +79,7 @@ public class GameArea3 extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "player_scepter.png",
             "player_hammer.png",
             "images/boss_health_middle.png",
@@ -99,7 +99,7 @@ public class GameArea3 extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/viking.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/newArrowBroken/atlas/arrow.atlas",
@@ -115,18 +115,15 @@ public class GameArea3 extends GameArea {
     private static final String[] forestMusic = {backgroundMusic};
 
     private final TerrainFactory terrainFactory;
-    private final GdxGame game;
     private int playerHealth = 300;
 
     public GameArea3(TerrainFactory terrainFactory, GdxGame game) {
         super();
-        this.game = game;
         this.terrainFactory = terrainFactory;
     }
 
     public GameArea3(TerrainFactory terrainFactory, GdxGame game, int currentHealth) {
         super();
-        this.game = game;
         this.terrainFactory = terrainFactory;
         this.playerHealth = currentHealth;
     }

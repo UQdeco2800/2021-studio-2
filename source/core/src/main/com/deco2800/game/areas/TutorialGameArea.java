@@ -72,7 +72,7 @@ public class TutorialGameArea extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
