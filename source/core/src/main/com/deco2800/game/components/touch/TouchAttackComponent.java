@@ -109,16 +109,16 @@ public class TouchAttackComponent extends TouchComponent {
         // Apply Initial knockback
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f || hitboxComponent.getFixture() != me)) {
-                Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-                if (myEntity.data.containsKey(DEAL_DAMAGE)) {
-                    if (!((boolean) myEntity.data.get(DEAL_DAMAGE))) {
-                        return;
-                    }
+            Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
+            if (myEntity.data.containsKey(DEAL_DAMAGE)) {
+                if (!((boolean) myEntity.data.get(DEAL_DAMAGE))) {
+                    return;
                 }
-                Body targetBody = physicsComponent.getBody();
-                Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
-                Vector2 impulse = direction.setLength(knockbackForce);
-                targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
+            }
+            Body targetBody = physicsComponent.getBody();
+            Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+            Vector2 impulse = direction.setLength(knockbackForce);
+            targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
 
         applyContinuousDamage(me, other);

@@ -223,7 +223,7 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void spawnHellWarriorObject() {
-        HashMap<String, Float>[] warriors = map.getHellMeleeObjects() ;
+        HashMap<String, Float>[] warriors = map.getHellMeleeObjects();
         for (HashMap<String, Float> warrior : warriors) {
             int x = warrior.get("x").intValue();
             int y = warrior.get("y").intValue();

@@ -9,13 +9,13 @@ import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.BossOverlayComponent;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
-import com.deco2800.game.components.tasks.loki.FirePillarTask;
-import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
-import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.npc.ElfAnimationController;
 import com.deco2800.game.components.npc.HumanAnimationController;
 import com.deco2800.game.components.tasks.*;
-import com.deco2800.game.components.tasks.loki.*;
+import com.deco2800.game.components.tasks.loki.FirePillarTask;
+import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
+import com.deco2800.game.components.tasks.loki.SpawnLokiDecoyTask;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
@@ -226,7 +226,7 @@ public class NPCFactory {
         animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
@@ -286,7 +286,7 @@ public class NPCFactory {
         animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
         animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
 
@@ -351,7 +351,7 @@ public class NPCFactory {
         animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
 
         animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
 
         animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
@@ -445,7 +445,7 @@ public class NPCFactory {
             animator.addAnimation("rangerStunUp", 0.5f, Animation.PlayMode.NORMAL);
             animator.addAnimation("rangerStunDown", 0.5f, Animation.PlayMode.NORMAL);
 
-            animator.addAnimation(LEFT_DEATH,  0.2f, Animation.PlayMode.NORMAL);
+            animator.addAnimation(LEFT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
             animator.addAnimation(RIGHT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
             animator.addAnimation(FRONT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
             animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
@@ -775,7 +775,7 @@ public class NPCFactory {
         animator.addAnimation(MOVE_DOWN, 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(BACK_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH,  0.5f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
@@ -789,7 +789,7 @@ public class NPCFactory {
      * It will retreat if the target is approach in certain range
      *
      * @param multishotChance the decimal representation of the probability of a multishot occurring as a float
-     * @param target entity to chase
+     * @param target          entity to chase
      * @return entity
      */
     public static Entity createOutdoorArcher(Entity target, float multishotChance) {
