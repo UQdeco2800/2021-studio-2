@@ -131,7 +131,9 @@ public class ResourceService implements Disposable {
      */
     private <T> void loadAssets(String[] assetNames, Class<T> type) {
         for (String resource : assetNames) {
-            loadAsset(resource, type);
+            if (resource != null) {
+                loadAsset(resource, type);
+            }
         }
     }
 
