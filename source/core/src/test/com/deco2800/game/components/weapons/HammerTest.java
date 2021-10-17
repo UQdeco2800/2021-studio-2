@@ -14,6 +14,7 @@ import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +34,7 @@ class HammerTest {
         System.out.println("impact:" + resourceService.containsAsset("sounds/impact.ogg", Sound.class));
         System.out.println("swish:" + resourceService.containsAsset("sounds/swish.ogg", Sound.class));
         // wait for assets to load
-        while (resourceService.loadForMillis(10)) ;
+        resourceService.loadForMillis(10);
     }
 
     @Test
@@ -114,7 +115,11 @@ class HammerTest {
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
 
         // This should not cause an exception, but the attack should be ignored
-        entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        try {
+            entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     Entity createAttacker(short targetLayer) {

@@ -1,12 +1,12 @@
 package com.deco2800.game.components.touch;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.player.PlayerActions;
-import com.deco2800.game.entities.Entity;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * When this entity touches a valid enemy's hitbox, deal damage to them and apply a knockback.
@@ -18,10 +18,12 @@ import com.deco2800.game.ui.textbox.TextBox;
  */
 public class TouchCutsceneComponent extends TouchComponent {
 
-    private Entity collidedEntity;
-    private PlayerActions actions;
+    private static final Logger logger = LoggerFactory.getLogger(TouchCutsceneComponent.class);
+
     private final RandomDialogueSet dialogueSet;
     private final DialogueSet type;
+    private final int maxRepeats;
+    private int numRepeats;
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -30,10 +32,12 @@ public class TouchCutsceneComponent extends TouchComponent {
      * @param dialogueSet The set of dialogue which a dialogue will be chosen from to display
      * @param type        The type of randomness for the selection of dialogue
      */
-    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type) {
+    public TouchCutsceneComponent(short targetLayer, RandomDialogueSet dialogueSet, DialogueSet type, int maxRepeats) {
         super(targetLayer);
         this.dialogueSet = dialogueSet;
         this.type = type;
+        this.maxRepeats = maxRepeats;
+        this.numRepeats = 0;
     }
 
     /**
@@ -49,9 +53,15 @@ public class TouchCutsceneComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
+        if (numRepeats >= maxRepeats) {
+            return;
+        }
         if (this.checkEntities(me, other)) {
             return;
         }
+        numRepeats++;
+
+        logger.debug("A cutscene will be played due to a collision with an entity with a TouchCutsceneComponent");
 
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);

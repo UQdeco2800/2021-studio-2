@@ -69107,12 +69107,144 @@
             "width": 32
         }
     ],
+    "outdoorMeleeObjects": [
+        {
+            "x": 88,
+            "y": 61,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 99,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "asgardMeleeObjects": [
+        {
+            "x": 68,
+            "y": 85,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 71,
+            "y": 81,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 78,
+            "y": 86,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 49,
+            "y": 96,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 49,
+            "y": 102,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 58,
+            "y": 99,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 27,
+            "y": 89,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "rangeObjects": [
+        {
+            "x": 105,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 93,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 96,
+            "y": 59,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 88,
+            "y": 57,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 87,
+            "y": 68,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 78,
+            "y": 63,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 78,
+            "y": 82,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 28,
+            "y": 85,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "teleportObjects": [
         {
             "x": 118,
             "y": 100,
             "height": 64,
             "width": 64
+        }
+    ],
+    "moveDownObjects": [
+        {
+            "x": 78,
+            "y": 92,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveRightObjects": [
+        {
+            "x": 78,
+            "y": 102,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "cutsceneObjects": [
+        {
+            "x": 99,
+            "y": 101,
+            "height": 0,
+            "width": 0
         }
     ],
     "wallObjects": [

@@ -23,7 +23,7 @@ public class ProjectileTest {
         ServiceLocator.registerResourceService(new ResourceService());
         ResourceService resourceService = ServiceLocator.getResourceService();
         // wait for assets to load
-        while (resourceService.loadForMillis(10)) ;
+        resourceService.loadForMillis(10);
     }
 
     @Test

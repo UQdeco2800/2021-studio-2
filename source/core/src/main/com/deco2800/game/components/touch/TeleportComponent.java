@@ -4,8 +4,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
@@ -14,7 +12,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TeleportComponent extends TouchComponent {
-
 
     public TeleportComponent(short targetLayer) {
         super(targetLayer);
@@ -28,11 +25,8 @@ public class TeleportComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-
-        //Dissolve arrow attacks after hits
-        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.PROJECTILEWEAPON) {
-            //Remove later on to make arrows stick into walls and more
-            getEntity().prepareDispose();
+        if (this.checkEntities(me, other)) {
+            return;
         }
 
         // Try to teleport player

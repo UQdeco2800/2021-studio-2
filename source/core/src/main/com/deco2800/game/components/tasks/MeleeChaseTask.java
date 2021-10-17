@@ -67,9 +67,8 @@ public class MeleeChaseTask extends ChaseTask implements PriorityTask {
     @Override
     public int getPriority() {
         //Deadzone
-        if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10) {
-            return (super.getPriority());
-        } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
+        if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10 ||
+                super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
             return (super.getPriority());
         }
         return (-1);

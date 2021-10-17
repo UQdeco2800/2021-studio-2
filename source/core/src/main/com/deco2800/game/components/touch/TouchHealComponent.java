@@ -4,11 +4,16 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * component to allow entities to give health to entities on collision
  */
 public class TouchHealComponent extends TouchComponent {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouchHealComponent.class);
+
     /**
      * Create a component which allows Player entity to interact with the Health item and give itself health
      *
@@ -37,6 +42,9 @@ public class TouchHealComponent extends TouchComponent {
             return;
         }
         if (enabled) {
+
+            logger.debug("The player will be healed due to a collision with an entity with a TouchHealComponent");
+
             Entity player = ((BodyUserData) other.getBody().getUserData()).entity;
             player.getEvents().trigger("healEntity", 100);
             //dispose health potion after giving player hp

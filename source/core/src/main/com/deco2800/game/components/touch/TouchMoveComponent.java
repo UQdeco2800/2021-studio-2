@@ -6,8 +6,13 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
+import com.deco2800.game.physics.PhysicsLayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TouchMoveComponent extends TouchComponent {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouchMoveComponent.class);
 
     /**
      * The direction the character will move in
@@ -52,10 +57,10 @@ public class TouchMoveComponent extends TouchComponent {
         if (triggered && !repeatable) {
             return;
         }
-        triggered = true;
-        if (this.checkEntities(me, other)) {
+        if (hitboxComponent.getFixture() != me || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
             return;
         }
+        triggered = true;
 
         Entity collidedEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         PlayerActions actions = collidedEntity.getComponent(PlayerActions.class);
@@ -79,8 +84,13 @@ public class TouchMoveComponent extends TouchComponent {
      */
     private void movePlayer(PlayerActions actions, KeyboardPlayerInputComponent input) {
         if (direction.x != 0 || direction.y != 0) {
+
+            logger.debug("The player will be moved in the direction {} due to collision", direction);
+
             input.lockPlayer();
             actions.walk(direction);
+        } else {
+            input.unlockPlayer();
         }
     }
 }

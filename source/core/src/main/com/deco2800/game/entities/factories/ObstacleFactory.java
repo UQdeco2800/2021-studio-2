@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
+import com.deco2800.game.components.crate.CrateAnimationController;
+import com.deco2800.game.components.crate.TransformBarrelComponent;
 import com.deco2800.game.components.touch.TeleportComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.touch.TouchHealComponent;
 import com.deco2800.game.components.touch.TouchWin;
-import com.deco2800.game.components.crate.CrateAnimationController;
-import com.deco2800.game.components.crate.TransformBarrelComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -190,6 +190,7 @@ public class ObstacleFactory {
         crate.getComponent(TouchHealComponent.class).setEnabled(false);
         crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         crate.getComponent(AnimationRenderComponent.class).scaleEntity();
+        PhysicsUtils.setScaledCollider(crate, 0.6f, 0.3f);
         return crate;
     }
 

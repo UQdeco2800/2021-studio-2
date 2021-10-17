@@ -50,6 +50,8 @@ public class Longsword extends MeleeWeapon {
             case RIGHT:
                 animator.startAnimation("longsword_right");
                 break;
+            default:
+                break;
         }
     }
 

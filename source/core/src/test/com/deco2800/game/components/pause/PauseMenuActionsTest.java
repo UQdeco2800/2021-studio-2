@@ -44,18 +44,18 @@ class PauseMenuActionsTest {
     }
 
     @Test
-    public void createTest() {
+    void createTest() {
         verify(actions).create();
     }
 
     @Test
-    public void disposeTest() {
+    void disposeTest() {
         entity.dispose();
         verify(actions).dispose();
     }
 
     @Test
-    public void togglePauseTest() {
+    void togglePauseTest() {
         //ensure user inputs triggers toggle pause
         entity.getEvents().addListener("togglePause", actions::togglePauseGame);
         input.keyDown(Input.Keys.P);

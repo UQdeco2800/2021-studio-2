@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.extensions.GameExtension;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -32,7 +33,11 @@ class TerrainComponentTest {
 
     @Test
     void shouldConvertPositionHexagonal() {
-        TerrainComponent component = makeComponent(TerrainOrientation.HEXAGONAL, 3f);
+        try {
+            TerrainComponent component = makeComponent(TerrainOrientation.HEXAGONAL, 3f);
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     private static TerrainComponent makeComponent(TerrainOrientation orientation, @SuppressWarnings("SameParameterValue") float tileSize) {

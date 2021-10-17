@@ -11,12 +11,15 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.components.tasks.ShootProjectileTask;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
 import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
@@ -76,7 +79,7 @@ public class GameArea0 extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "player_scepter.png",
             "player_hammer.png",
             "images/boss_health_middle.png",
@@ -91,7 +94,7 @@ public class GameArea0 extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hammer_projectile.atlas"
     };
     private static final String[] forestSounds = {
@@ -106,7 +109,6 @@ public class GameArea0 extends GameArea {
 
     private final TerrainFactory terrainFactory;
     private final GdxGame game;
-    private static Map map;
     private int playerHealth = 300;
 
     public GameArea0(TerrainFactory terrainFactory, GdxGame game) {
@@ -138,6 +140,9 @@ public class GameArea0 extends GameArea {
         spawnPlayer();
 
         spawnMeleeElf();
+        spawnMovementCutscenes();
+        spawnDialogueCutscenes();
+        setInitialDialogue();
 
         spawnObstacles();
         spawnLights();
@@ -150,6 +155,7 @@ public class GameArea0 extends GameArea {
 
         playMusic();
         spawnTeleport();
+        decBossNum();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
     }
 
@@ -200,6 +206,33 @@ public class GameArea0 extends GameArea {
             spawnEntityAt(
                     ObstacleFactory.createWall((width / 32f) * 0.5f, (height / 32f) * 0.5f),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    false,
+                    false);
+        }
+    }
+
+    private void spawnDialogueCutscenes() {
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_ENCOUNTER;
+        DialogueSet set;
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            set = DialogueSet.FIRST_ENCOUNTER;
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                set = DialogueSet.BOSS_DEFEATED_BEFORE;
+            }
+        }
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set),
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);
         }
@@ -462,10 +495,25 @@ public class GameArea0 extends GameArea {
     /**
      * Sets the dialogue for when the game first loads.
      */
-    private void setDialogue() {
+    private void setInitialDialogue() {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
-        textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(RandomDialogueSet.ELF_INTRODUCTION);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(RandomDialogueSet.ELF_INTRODUCTION);
+            }
+        }
+        PlayerSave.Save.setElfWins(0);
+        PlayerSave.Save.setElfEnc(1);
+        PlayerSave.write();
     }
 
     @Override

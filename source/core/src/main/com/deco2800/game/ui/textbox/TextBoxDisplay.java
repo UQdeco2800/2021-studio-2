@@ -334,9 +334,27 @@ public class TextBoxDisplay extends UIComponent {
             case ELF_INTRODUCTION:
                 enemyName = new Label("     Elf", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
-                        .getAsset("images/textBoxDisplay/prisoner_image.png", Texture.class));
+                        .getAsset("images/textBoxDisplay/elf_image.png", Texture.class));
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
+                break;
+            case ODIN_INTRODUCTION:
+            case ODIN_ENCOUNTER:
+                enemyName = new Label("     ODIN", skin);
+                enemyImage = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/odin_image.png", Texture.class));
+                enemyBox = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/enemy_default_text_box.png", Texture.class));
+                break;
+            case THOR_ENCOUNTER:
+            case THOR_INTRODUCTION:
+                enemyName = new Label("     THOR", skin);
+                enemyImage = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/thor_image.png", Texture.class));
+                enemyBox = new Image(ServiceLocator.getResourceService()
+                        .getAsset("images/textBoxDisplay/outdoor_text_box.png", Texture.class));
+                break;
+            default:
                 break;
         }
         setNPCPosition();

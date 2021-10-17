@@ -5,8 +5,6 @@ import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.Vector2Utils;
 
@@ -28,8 +26,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
     private final float maxChaseDistance;
     private Vector2 moveSpeed = Vector2Utils.ONE;
     private final PhysicsEngine physics;
-    private final DebugRenderer debugRenderer;
-    private final RaycastHit hit = new RaycastHit();
     private MovementTask movementTask;
 
     /**
@@ -45,7 +41,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         this.viewDistance = viewDistance;
         this.maxChaseDistance = maxChaseDistance;
         physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**
@@ -73,7 +68,6 @@ public class AttackTask extends DefaultTask implements PriorityTask {
         this.viewDistance = viewDistance;
         this.maxChaseDistance = maxChaseDistance;
         physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
     }
 
     /**

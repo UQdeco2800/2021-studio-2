@@ -2,55 +2,93 @@ package com.deco2800.game.files;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerSaveTest {
 
     @Test
     void testDefaultSave() {
-        PlayerSave.Save testSave = PlayerSave.initial();
+        assertFalse(PlayerSave.Save.getHasPlayed());
 
-        assertFalse(testSave.hasPlayed);
+        assertEquals(PlayerSave.Save.getElfEnc(), 0);
+        assertEquals(PlayerSave.Save.getLokiEnc(), 0);
+        assertEquals(PlayerSave.Save.getLoki2Enc(), 0);
+        assertEquals(PlayerSave.Save.getThorEnc(), 0);
+        assertEquals(PlayerSave.Save.getOdinEnc(), 0);
 
-        assertEquals(testSave.lokiEnc, 0);
-        assertEquals(testSave.thorEnc, 0);
-        assertEquals(testSave.odinEnc, 0);
+        assertEquals(PlayerSave.Save.getElfWins(), 0);
+        assertEquals(PlayerSave.Save.getLokiWins(), 0);
+        assertEquals(PlayerSave.Save.getLoki2Wins(), 0);
+        assertEquals(PlayerSave.Save.getThorWins(), 0);
+        assertEquals(PlayerSave.Save.getOdinWins(), 0);
+    }
 
-        assertEquals(testSave.lokiWins, 0);
-        assertEquals(testSave.thorWins, 0);
-        assertEquals(testSave.odinWins, 0);
+    @Test
+    void testSaveReset() {
+        PlayerSave.Save.setHasPlayed(true);
+
+        PlayerSave.Save.setElfEnc(1);
+        PlayerSave.Save.setLokiEnc(2);
+        PlayerSave.Save.setLoki2Enc(3);
+        PlayerSave.Save.setThorEnc(4);
+        PlayerSave.Save.setOdinEnc(5);
+
+        PlayerSave.Save.setElfWins(6);
+        PlayerSave.Save.setLokiWins(7);
+        PlayerSave.Save.setLoki2Wins(8);
+        PlayerSave.Save.setThorWins(9);
+        PlayerSave.Save.setOdinWins(10);
+
+        PlayerSave.write();
+        PlayerSave.Save.resetSave();
+
+        assertFalse(PlayerSave.Save.getHasPlayed());
+        assertEquals(PlayerSave.Save.getElfEnc(), 0);
+        assertEquals(PlayerSave.Save.getLokiEnc(), 0);
+        assertEquals(PlayerSave.Save.getLoki2Enc(), 0);
+        assertEquals(PlayerSave.Save.getThorEnc(), 0);
+        assertEquals(PlayerSave.Save.getOdinEnc(), 0);
+
+        assertEquals(PlayerSave.Save.getElfWins(), 0);
+        assertEquals(PlayerSave.Save.getLokiWins(), 0);
+        assertEquals(PlayerSave.Save.getLoki2Wins(), 0);
+        assertEquals(PlayerSave.Save.getThorWins(), 0);
+        assertEquals(PlayerSave.Save.getOdinWins(), 0);
     }
 
     @Test
     void testSaveChange() {
-        PlayerSave.Save testSave = PlayerSave.initial();
-        PlayerSave.Save backupSave = PlayerSave.load();
+        PlayerSave.Save.setHasPlayed(true);
 
-        testSave.hasPlayed = true;
+        PlayerSave.Save.setElfEnc(1);
+        PlayerSave.Save.setLokiEnc(2);
+        PlayerSave.Save.setLoki2Enc(3);
+        PlayerSave.Save.setThorEnc(4);
+        PlayerSave.Save.setOdinEnc(5);
 
-        testSave.lokiEnc = 8;
-        testSave.thorEnc = 7;
-        testSave.odinEnc = 5;
+        PlayerSave.Save.setElfWins(6);
+        PlayerSave.Save.setLokiWins(7);
+        PlayerSave.Save.setLoki2Wins(8);
+        PlayerSave.Save.setThorWins(9);
+        PlayerSave.Save.setOdinWins(10);
 
-        testSave.lokiWins = 5;
-        testSave.thorWins = 4;
-        testSave.odinWins = 3;
+        PlayerSave.write();
+        PlayerSave.Save.resetSave();
 
-        PlayerSave.write(testSave);
+        PlayerSave.load();
 
-        PlayerSave.Save loadedSave = PlayerSave.load();
+        assertTrue(PlayerSave.Save.getHasPlayed());
 
-        assertEquals(testSave.hasPlayed, loadedSave.hasPlayed);
+        assertEquals(PlayerSave.Save.getElfEnc(), 1);
+        assertEquals(PlayerSave.Save.getLokiEnc(), 2);
+        assertEquals(PlayerSave.Save.getLoki2Enc(), 3);
+        assertEquals(PlayerSave.Save.getThorEnc(), 4);
+        assertEquals(PlayerSave.Save.getOdinEnc(), 5);
 
-        assertEquals(testSave.lokiEnc, loadedSave.lokiEnc);
-        assertEquals(testSave.thorEnc, loadedSave.thorEnc);
-        assertEquals(testSave.odinEnc, loadedSave.odinEnc);
-
-        assertEquals(testSave.lokiWins, loadedSave.lokiWins);
-        assertEquals(testSave.thorWins, loadedSave.thorWins);
-        assertEquals(testSave.odinWins, loadedSave.odinWins);
-
-        PlayerSave.write(backupSave);
+        assertEquals(PlayerSave.Save.getElfWins(), 6);
+        assertEquals(PlayerSave.Save.getLokiWins(), 7);
+        assertEquals(PlayerSave.Save.getLoki2Wins(), 8);
+        assertEquals(PlayerSave.Save.getThorWins(), 9);
+        assertEquals(PlayerSave.Save.getOdinWins(), 10);
     }
 }

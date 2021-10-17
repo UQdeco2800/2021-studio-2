@@ -1,6 +1,5 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
@@ -12,7 +11,6 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
 import com.deco2800.game.components.tasks.ShootProjectileTask;
 import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
@@ -20,9 +18,6 @@ import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.DialogueSet;
-import com.deco2800.game.ui.textbox.RandomDialogueSet;
-import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
@@ -72,7 +67,7 @@ public class TutorialGameArea extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
             "images/boss_health_right.png",
@@ -90,7 +85,7 @@ public class TutorialGameArea extends GameArea {
 
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/outdoorArcher.atlas"
@@ -141,8 +136,6 @@ public class TutorialGameArea extends GameArea {
         spawnTerrain();
         spawnPlayer();
 
-        spawnCutsceneTrigger();
-
         spawnMeleeElf();
         spawnElfGuard();
         spawnRangedElf();
@@ -169,28 +162,6 @@ public class TutorialGameArea extends GameArea {
         spawnEntity(ui);
     }
 
-    private void spawnCutsceneTrigger() {
-        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED);
-        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
-
-        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_INTRODUCTION,
-                DialogueSet.BOSS_DEFEATED_BEFORE);
-        spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
-
-        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
-
-        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f));
-        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
-
-        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f));
-        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
-
-
-        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f));
-        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
-    }
 
     private void spawnTerrain() {
         // Background terrain
@@ -431,8 +402,7 @@ public class TutorialGameArea extends GameArea {
     private void loadAssets() {
 
         logger.info("Resetting Save File");
-        PlayerSave.Save pSave = PlayerSave.initial();
-        PlayerSave.write(pSave);
+        PlayerSave.write();
 
 
         logger.debug("Loading assets");
@@ -461,24 +431,6 @@ public class TutorialGameArea extends GameArea {
         resourceService.unloadAssets(forestSounds);
         resourceService.unloadAssets(forestMusic);
         resourceService.unloadAssets(arrowSounds);
-    }
-
-    /**
-     * Sets the dialogue for when the game first loads.
-     */
-    private void setDialogue() {
-        PlayerSave.Save pSave = PlayerSave.load();
-
-
-        if (!pSave.hasPlayed) {
-            TextBox textBox = ServiceLocator.getEntityService()
-                    .getUIEntity().getComponent(TextBox.class);
-            textBox.setRandomFirstEncounter(RandomDialogueSet.TUTORIAL);
-
-            pSave.hasPlayed = true;
-        }
-
-        PlayerSave.write(pSave);
     }
 
     @Override

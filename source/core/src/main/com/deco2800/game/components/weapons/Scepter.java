@@ -61,6 +61,8 @@ public class Scepter extends MeleeWeapon {
             case RIGHT:
                 animator.startAnimation("right_scepter_attack");
                 break;
+            default:
+                break;
         }
     }
 
@@ -86,6 +88,8 @@ public class Scepter extends MeleeWeapon {
                 break;
             case RIGHT:
                 target.x += range;
+                break;
+            default:
                 break;
         }
         Entity blast = WeaponFactory.createBlast(target);
