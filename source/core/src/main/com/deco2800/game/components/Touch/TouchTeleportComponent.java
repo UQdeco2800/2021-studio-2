@@ -13,11 +13,6 @@ public class TouchTeleportComponent extends TouchComponent {
     }
 
     @Override
-    public void create() {
-        super.create();
-    }
-
-    @Override
     void onCollisionStart(Fixture me, Fixture other) {
         if (!this.checkEntities(me, other)) {
             return;
@@ -35,8 +30,6 @@ public class TouchTeleportComponent extends TouchComponent {
             if ((boolean) this.getEntity().data.get("teleportTarget")) {
                 target.teleport((Vector2) this.getEntity().data.get("teleportLoc"));
                 //Set this to only let the target travel once
-                //this.getEntity().data.put("teleportTarget", false);
-                //this.getEntity().getComponent(ColliderComponent.class).enabled = false;
             }
         }
     }

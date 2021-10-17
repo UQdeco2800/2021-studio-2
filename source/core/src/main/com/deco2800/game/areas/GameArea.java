@@ -95,7 +95,6 @@ public abstract class GameArea implements Disposable {
      * @return int number of enemy
      */
     public int getNumEnemy() {
-        //return 0;
         return numEnemy;
     }
 

@@ -71,35 +71,12 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("mainMenu");
                     }
                 });
-//        restartTutorialBtn.addListener(
-//                new ChangeListener() {
-//                    @Override
-//                    public void changed(ChangeEvent changeEvent, Actor actor) {
-//                        logger.debug("Start button clicked");
-//                        //Needs to check which one it is in
-//                        entity.getEvents().trigger("startTutorial");
-//                    }
-//                });
-//
-//        exitBtn.addListener(
-//                new ChangeListener() {
-//                    @Override
-//                    public void changed(ChangeEvent changeEvent, Actor actor) {
-//
-//                        logger.debug("Exit button clicked");
-//                        entity.getEvents().trigger("exit");
-//                    }
-//                });
 
         pauseTable.add(contBtn).padTop(150f);
         pauseTable.row();
         pauseTable.add(restartForestBtn).padTop(30f);
         pauseTable.row();
         pauseTable.add(mainMenuBtn).padTop(30f);
-//        pauseTable.row();
-//        pauseTable.add(restartTutorialBtn).padTop(30f);
-//        pauseTable.row();
-//        pauseTable.add(exitBtn).padTop(30f);
 
         stack.add(menuBackground);
         stack.add(pauseTable);

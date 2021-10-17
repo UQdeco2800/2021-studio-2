@@ -394,9 +394,6 @@ public class GameArea1 extends GameArea {
      * spawn boss - only spawn on the map if other enemies are killed
      */
     private void spawnBoss() {
-        /*GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);

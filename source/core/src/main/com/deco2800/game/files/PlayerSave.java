@@ -14,20 +14,6 @@ public class PlayerSave {
     private static final String ROOT_DIR = "DECO2800Game";
     private static final String SAVE_FILE = "playersave.save";
 
-/*
-    public static Save get() {
-        String path = ROOT_DIR + File.separator + SAVE_FILE;
-        Save playerSave = FileLoader.readClass(Save.class, path, Location.EXTERNAL);
-        // Use default values if file doesn't exist
-        return playerSave != null ? playerSave : new Save();
-    }
-
-    public static void set(Save pSave) {
-        String path = ROOT_DIR + File.separator + SAVE_FILE;
-        FileLoader.writeClass(pSave, path, Location.EXTERNAL);
-    }
-*/
-
     /**
      * Function which takes in a PLayerSave.Save object
      * and writes it to the save file as is.

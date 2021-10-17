@@ -25,11 +25,6 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
     }
 
     @Override
-    public void start() {
-        super.start();
-    }
-
-    @Override
     public void update() {
         if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
             waitForDeathAnimation();

@@ -20,11 +20,6 @@ public class TeleportComponent extends TouchComponent {
         super(targetLayer);
     }
 
-    @Override
-    public void create() {
-        super.create();
-    }
-
     /**
      * action apply when the hitbox component collide
      *

@@ -20,11 +20,6 @@ public class ExplosionTouchComponent extends TouchComponent {
     }
 
     @Override
-    public void create() {
-        super.create();
-    }
-
-    @Override
     void onCollisionStart(Fixture me, Fixture other) {
         if (disable) {
             return;

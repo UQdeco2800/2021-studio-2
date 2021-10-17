@@ -138,11 +138,6 @@ public class GameArea0 extends GameArea {
         spawnPlayer();
 
         spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnBoss();
 
         spawnObstacles();
         spawnLights();
@@ -164,30 +159,6 @@ public class GameArea0 extends GameArea {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay("Level 1"));
         spawnEntity(ui);
-    }
-
-    private void spawnCutsceneTrigger() {
-//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, 5);
-//        spawnEntityAt(moveTrigger4, new Vector2(17.3f, 66f), true, true);
-//        Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
-//                DialogueSet.ORDERED);
-//        spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
-//
-//        Entity trigger3 = CutsceneTriggerFactory.createLokiTrigger(RandomDialogueSet.LOKI_OPENING,
-//                DialogueSet.BOSS_DEFEATED_BEFORE);
-//        spawnEntityAt(trigger3, new Vector2(21f, 177f), true, true);
-//
-//        Entity moveTrigger3 = CutsceneTriggerFactory.createAttackTrigger(3, Input.Keys.D);
-//        spawnEntityAt(moveTrigger3, new Vector2(21f, 181.3f), true, true);
-//
-//        Entity moveTrigger4 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 20, 0);
-//        spawnEntityAt(moveTrigger4, new Vector2(14.6f, 180.2f), true, true);
-//
-//        Entity moveTrigger5 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(0f, -1f), 0, -10);
-//        spawnEntityAt(moveTrigger5, new Vector2(14.7f, 184.5f), true, true);
-//
-//        Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
-//        spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
     }
 
     private void spawnTerrain() {
@@ -419,9 +390,6 @@ public class GameArea0 extends GameArea {
      * spawn boss - only spawn on the map if other enemies are killed
      */
     private void spawnBoss() {
-        /*GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);

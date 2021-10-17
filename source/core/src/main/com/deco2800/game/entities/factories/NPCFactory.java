@@ -726,9 +726,8 @@ public class NPCFactory {
      * Sets the required animations for a melee enemy
      *
      * @param animator the animation component of the entity
-     * @return the animation component of the entity
      */
-    private static AnimationRenderComponent setHumanAnimations(AnimationRenderComponent animator) {
+    private static void setHumanAnimations(AnimationRenderComponent animator) {
 
         animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
         animator.addAnimation("moveLeft", 0.2f, Animation.PlayMode.LOOP);
@@ -744,7 +743,6 @@ public class NPCFactory {
         animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
 
-        return animator;
     }
 
     /**

@@ -56,7 +56,7 @@ public abstract class ProjectileController extends Component {
      * @param other
      * @return if successful collision
      */
-    protected boolean onCollisionStart(Fixture me, Fixture other) {
+    protected void onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {
             // Not triggered by weapon hit box, ignore
@@ -89,7 +89,6 @@ public abstract class ProjectileController extends Component {
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         this.onHit();
-        return true; // successfully collided with target.
     }
 
     /**

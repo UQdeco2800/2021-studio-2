@@ -147,9 +147,6 @@ public class SettingsMenuDisplay extends UIComponent {
         table.add(resetBtn).left();
         // Events on push
 
-//        resetBtn.addListener((Event event) -> {
-//                    });
-
         return table;
     }
 
