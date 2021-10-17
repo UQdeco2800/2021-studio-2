@@ -249,8 +249,23 @@ public class GameArea0 extends GameArea {
 
     private void spawnTeleport() {
         Entity teleport = ObstacleFactory.createTeleport();
-        GridPoint2 fixedPos = new GridPoint2(15, 10);
-        spawnEntityAt(teleport, fixedPos, true, true);
+        HashMap<String, Float>[] teleportObjects = map.getTeleportObjects();
+        if (teleportObjects != null) {
+            for (HashMap<String, Float> teleportObject : teleportObjects) {
+                int x = teleportObject.get("x").intValue();
+                int y = teleportObject.get("y").intValue();
+                float width = teleportObject.get("width");
+                float height = teleportObject.get("height");
+                int unitHeight = (int) ((height / 32f));
+
+                spawnEntityAt(teleport,
+                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                        false,
+                        false);
+
+                //spawnEntityAt(teleport, fixedPos, true, true);
+            }
+        }
         //boss= 1;
     }
 
@@ -454,10 +469,10 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createBossNPC(player);
+                Entity boss = NPCFactory.createBossNPC(player);
                 incNum();
                 spawnEntityAt(
-                        elf,
+                        boss,
                         new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                         false,
                         false);
