@@ -30,8 +30,7 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
 
     //Arrow have sound effect when they disappear
     private void playArrow() {
-        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class);
-        arrowEffect.play();
+        ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class).play(0.2f);
     }
 
     /**

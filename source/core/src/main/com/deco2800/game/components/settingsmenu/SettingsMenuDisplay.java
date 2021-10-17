@@ -147,12 +147,10 @@ public class SettingsMenuDisplay extends UIComponent {
         table.add(resetLabel).right().padRight(15f);
         table.add(resetBtn).left();
         // Events on push
-
         resetBtn.addListener((Event event) -> {
             PlayerSave.resetFile();
             return true;
-                    });
-
+        });
         return table;
     }
 

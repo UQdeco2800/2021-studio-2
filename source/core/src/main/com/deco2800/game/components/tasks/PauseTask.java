@@ -5,18 +5,20 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Task that does nothing other than waiting for a given time. Status is Finished
  * after the time has passed.
  */
 public class PauseTask extends DefaultTask implements PriorityTask {
 
-    /** Last time that the attack was created. */
+    /**
+     * Last time that the attack was created.
+     */
     private long lastTimeHit;
 
-    /** When the event listener has already been initialised. */
+    /**
+     * When the event listener has already been initialised.
+     */
     private boolean initialised;
 
     /**

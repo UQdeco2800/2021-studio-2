@@ -37,11 +37,6 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("stunUp", this::animateUpStun);
         entity.getEvents().addListener("stunDown", this::animateDownStun);
 
-        //entity.getEvents().addListener("rangedLeftShoot", this::animateRangerLeft);
-//        entity.getEvents().addListener("rangedRightShoot", this::animateRangerRight);
-//        entity.getEvents().addListener("rangedUpShoot", this::animateRangerUp);
-//        entity.getEvents().addListener("rangedDownShoot", this::animateRangerDown);
-
         entity.getEvents().addListener("assassinLeftShoot", this::animateAssassinLeft);
         entity.getEvents().addListener("assassinRightShoot", this::animateAssassinRight);
         entity.getEvents().addListener("assassinUpShoot", this::animateAssassinUp);
@@ -70,14 +65,13 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
                             animator.getEntity().getScale().y);
                 }
-
                 if (entity.getEntityType().equals("assassin")) {
                     animator.startAnimation("assassinLeftDeath");
                 } else {
@@ -106,7 +100,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
@@ -142,7 +136,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
@@ -150,11 +144,11 @@ public class ElfAnimationController extends Component {
                             animator.getEntity().getScale().y);
                 }
                 if (entity.getEntityType().equals("assassin")) {
-                    animator.startAnimation("assassinLeftDeath");
-                    //animator.startAnimation("assassinFrontDeath");
+                    //animator.startAnimation("assassinLeftDeath");
+                    animator.startAnimation("assassinFrontDeath");
                 } else {
-                    //animator.startAnimation("frontDeath");
-                    animator.startAnimation("leftDeath");
+                    animator.startAnimation("frontDeath");
+                    //animator.startAnimation("leftDeath");
                 }
             } else {
                 animator.startAnimation("frontBossDeath");
@@ -178,7 +172,7 @@ public class ElfAnimationController extends Component {
             }
         } else {
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee")) {
+                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
                             animator.getEntity().getScale().y);
                 } else {
@@ -186,33 +180,17 @@ public class ElfAnimationController extends Component {
                             animator.getEntity().getScale().y);
                 }
                 if (entity.getEntityType().equals("assassin")) {
-                    //animator.startAnimation("assassinBackDeath");
-                    animator.startAnimation("assassinLeftDeath");
+                    animator.startAnimation("assassinBackDeath");
+                    //animator.startAnimation("assassinLeftDeath");
                 } else {
-                    //animator.startAnimation("backDeath");
-                    animator.startAnimation("leftDeath");
+                    animator.startAnimation("backDeath");
+                    //animator.startAnimation("leftDeath");
                 }
             } else {
                 animator.startAnimation("backBossDeath");
             }
         }
     }
-
-    //public void animateRangerLeft() {
-//        animator.startAnimation("rangerLeft");
-//    }
-
-//    public void animateRangerRight() {
-//        animator.startAnimation("rangerRight");
-//    }
-//
-//    public void animateRangerUp() {
-//        animator.startAnimation("rangerUp");
-//    }
-//
-//    public void animateRangerDown() {
-//        animator.startAnimation("rangerDown");
-//    }
 
     public void animateAssassinLeft() {
         animator.startAnimation("assassinLeft");
@@ -249,15 +227,12 @@ public class ElfAnimationController extends Component {
     public void animateLeftStun() {
         switch (entity.getEntityType()) {
             case "assassin":
-                //System.out.println("assassin Left stun");
                 animator.startAnimation("assassinStunLeft");
                 break;
             case "ranged":
-                //System.out.println("rangerUp");
                 animator.startAnimation("rangerStunLeft");
                 break;
             default:
-                //System.out.println("melee stun left");
                 animator.startAnimation("stunLeft");
                 break;
         }
@@ -266,15 +241,12 @@ public class ElfAnimationController extends Component {
     public void animateRightStun() {
         switch (entity.getEntityType()) {
             case "assassin":
-                //System.out.println("assassin Right stun");
                 animator.startAnimation("assassinStunRight");
                 break;
             case "ranged":
-                //System.out.println("rangerUp");
                 animator.startAnimation("rangerStunRight");
                 break;
             default:
-                //System.out.println("melee stun right");
                 animator.startAnimation("stunRight");
                 break;
         }
@@ -314,18 +286,6 @@ public class ElfAnimationController extends Component {
         }
     }
 
-
-//    public void animateRightStun(){
-//        animator.startAnimation("stunRight");
-//    }
-//
-//    public void animateUpStun(){
-//        animator.startAnimation("stunUp");
-//    }
-//
-//    public void animateDownStun(){
-//        animator.startAnimation("stunDown");
-//    }
 
 }
 

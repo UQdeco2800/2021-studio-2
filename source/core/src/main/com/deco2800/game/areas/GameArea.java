@@ -158,8 +158,7 @@ public abstract class GameArea implements Disposable {
      * @return int number of enemy
      */
     public int getNumEnemy() {
-        return 0;
-        //return numEnemy;
+        return numEnemy;
     }
 
     /**
@@ -212,7 +211,7 @@ public abstract class GameArea implements Disposable {
      */
     protected void spawnHealthCrateObject() {
         HashMap<String, Float>[] crates = map.getHealthCrateObjects();
-        if(crates == null) {
+        if (crates == null) {
             return;
         }
         for (HashMap<String, Float> crate : crates) {
@@ -251,7 +250,7 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void spawnHellWarriorObject() {
-        HashMap<String, Float>[] warriors = map.getHellMeleeObjects() ;
+        HashMap<String, Float>[] warriors = map.getHellMeleeObjects();
         for (HashMap<String, Float> warrior : warriors) {
             int x = warrior.get("x").intValue();
             int y = warrior.get("y").intValue();
@@ -299,7 +298,7 @@ public abstract class GameArea implements Disposable {
             int y = crate.get("y").intValue();
 
             spawnEntityAt(
-                    NPCFactory.createOutdoorArcher(player, 0.1f),
+                    NPCFactory.createOutdoorArcher(player),
                     new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
                     false,
                     false);

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MainMenuActions extends Component {
     private static final Logger logger = LoggerFactory.getLogger(MainMenuActions.class);
-    private GdxGame game;
+    private final GdxGame game;
 
     public MainMenuActions(GdxGame game) {
         this.game = game;
@@ -42,7 +42,7 @@ public class MainMenuActions extends Component {
         logger.info("Start game");
         PlayerSave.load();
         if (PlayerSave.Save.getHasPlayed()) {
-            game.setScreen(GdxGame.ScreenType.GAMEAREA1);
+            game.setScreen(GdxGame.ScreenType.GAMEAREA0);
         } else {
             game.setScreen(GdxGame.ScreenType.GAMEAREA4);
         }

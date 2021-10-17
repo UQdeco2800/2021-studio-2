@@ -24,8 +24,7 @@ public class Scepter extends MeleeWeapon {
      */
     private final Sound impactSound;
 
-    private GameArea gameArea;
-    private final float range = 6f;
+    private final GameArea gameArea;
 
     public Scepter(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
@@ -76,18 +75,19 @@ public class Scepter extends MeleeWeapon {
     public void rangedAttack(int attackDirection) {
         super.rangedAttack(attackDirection);
         Vector2 target = entity.getCenterPosition();
+        float range = 6f;
         switch (attackDirection) {
             case UP:
-                target.y += this.range;
+                target.y += range;
                 break;
             case DOWN:
-                target.y -= this.range;
+                target.y -= range;
                 break;
             case LEFT:
-                target.x -= this.range;
+                target.x -= range;
                 break;
             case RIGHT:
-                target.x += this.range;
+                target.x += range;
                 break;
             default:
                 break;

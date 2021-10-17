@@ -52,20 +52,21 @@ public abstract class ProjectileController extends Component {
     }
 
     /**
-     * @param me
-     * @param other
-     * @return if successful collision
+     * Collision method used to detect whether projectile has collided with enemy
+     *
+     * @param me    fixture of this projectile
+     * @param other fixture of colliding entity.
      */
-    protected boolean onCollisionStart(Fixture me, Fixture other) {
+    protected void onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {
             // Not triggered by weapon hit box, ignore
-            return false;
+            return;
         }
 
         if (PhysicsLayer.notContains(this.targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
-            return false;
+            return;
         }
 
         // Try to attack target.
@@ -74,7 +75,7 @@ public abstract class ProjectileController extends Component {
         if (targetStats != null) {
             // add entity's base attack to attack, if they exist.
 //            if (hitbox == null) {
-                targetStats.weaponHit(this.stats.attackPower);
+            targetStats.weaponHit(this.stats.attackPower);
             /*} else {
                 targetStats.hit(combatStats, this.stats.attackPower);
             } This set of code will always be redundant since hitbox can never be null */
@@ -89,7 +90,6 @@ public abstract class ProjectileController extends Component {
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         this.onHit();
-        return true; // successfully collided with target.
     }
 
     /**

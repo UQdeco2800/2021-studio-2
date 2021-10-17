@@ -49,7 +49,6 @@ public class HammerProjectile extends ProjectileController {
     private int status;
     private final int THROWING = 0;
     private final int RECALLING = 1;
-    private final int STATIC = 2;
 
     /**
      * The hammer component that controls the projectile
@@ -107,7 +106,7 @@ public class HammerProjectile extends ProjectileController {
             if ((Math.abs(position.x - start.x) > distance || Math.abs(position.y - start.y) > distance) ||
                     (ServiceLocator.getTimeSource().getTime() - gameTime) > 2000L) {
                 // Make projectile static.
-                this.status = STATIC;
+                this.status = 2;
                 animator.stopAnimation();
                 animator.startAnimation("default");
                 movingComponent.setMoving(false);
@@ -145,18 +144,17 @@ public class HammerProjectile extends ProjectileController {
      *
      * @param me    fixture of this projectile
      * @param other fixture of colliding entity.
-     * @return if successful collision
      */
-    protected boolean onCollisionStart(Fixture me, Fixture other) {
+    protected void onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {
             // Not triggered by weapon hit box, ignore
-            return false;
+            return;
         }
 
         if (PhysicsLayer.notContains(this.targetLayer, other.getFilterData().categoryBits)) {
             // Doesn't match our target layer, ignore
-            return false;
+            return;
         }
 
         // Try to attack target.
@@ -179,7 +177,7 @@ public class HammerProjectile extends ProjectileController {
             Vector2 impulse = direction.setLength(knockback);
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
-        return true; // successfully collided with target.
+        // successfully collided with target.
     }
 
     @Override

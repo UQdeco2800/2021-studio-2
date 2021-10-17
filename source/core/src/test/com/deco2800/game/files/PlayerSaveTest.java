@@ -2,13 +2,13 @@ package com.deco2800.game.files;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerSaveTest {
 
     @Test
     void testDefaultSave() {
-        assertEquals(PlayerSave.Save.getHasPlayed(), false);
+        assertFalse(PlayerSave.Save.getHasPlayed());
 
         assertEquals(PlayerSave.Save.getElfEnc(), 0);
         assertEquals(PlayerSave.Save.getLokiEnc(), 0);
@@ -42,7 +42,7 @@ public class PlayerSaveTest {
         PlayerSave.write();
         PlayerSave.Save.resetSave();
 
-        assertEquals(PlayerSave.Save.getHasPlayed(), false);
+        assertFalse(PlayerSave.Save.getHasPlayed());
         assertEquals(PlayerSave.Save.getElfEnc(), 0);
         assertEquals(PlayerSave.Save.getLokiEnc(), 0);
         assertEquals(PlayerSave.Save.getLoki2Enc(), 0);
@@ -77,7 +77,7 @@ public class PlayerSaveTest {
 
         PlayerSave.load();
 
-        assertEquals(PlayerSave.Save.getHasPlayed(), true);
+        assertTrue(PlayerSave.Save.getHasPlayed());
 
         assertEquals(PlayerSave.Save.getElfEnc(), 1);
         assertEquals(PlayerSave.Save.getLokiEnc(), 2);

@@ -258,7 +258,8 @@ public enum Dialogue {
 
     LOKI2_INTRODUCTION_FIRST(new Message[]{
             new Message(true, "What? I thought the teleport pad would" +
-                    "\nget me out of here. It seems like I've only gone further."),
+                    "\nget me out of here. It seems like I've only" +
+                    "\ngone further."),
             new Message(true, "I have a higher chance of dying from" +
                     "\nthe heat than anyone in my way."),
             new Message(false, "Ignorant fool..."),

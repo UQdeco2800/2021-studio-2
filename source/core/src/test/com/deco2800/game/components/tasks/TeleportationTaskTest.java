@@ -53,34 +53,7 @@ class TeleportationTaskTest {
         ServiceLocator.registerResourceService(resourceService);
         resourceService.loadTextures(forestTextures);
         resourceService.loadAll();
-
     }
-
-    // need to mock terrain, image, combat stat component, ...
-    /*
-    @Test
-    void outsideOfAreaBound() {
-        Entity taskRunner = makePhysicsEntity();
-        taskRunner.setPosition(100, 100);
-        System.out.println(taskRunner.getPosition());
-        AITaskComponent aiTaskComponent = new AITaskComponent();
-        aiTaskComponent.addTask(new WanderTask(new Vector2(2f, 2f), 2f));
-        TeleportationTask teleportationTask = new TeleportationTask(taskRunner, 1000);
-
-        aiTaskComponent.addTask(teleportationTask);
-
-        taskRunner.addComponent(aiTaskComponent);
-
-        taskRunner.create();
-
-        teleportationTask.update();
-        System.out.println(taskRunner.getPosition());
-
-        // ensure that the priority is 10
-        assertEquals(100, teleportationTask.getPriority());
-    }
-
-     */
 
     @Test
     void insideOfAreaBound() {

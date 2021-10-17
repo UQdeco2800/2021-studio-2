@@ -99,26 +99,23 @@ public class TerrainFactory {
     /**
      * A version of createTerrain that takes a map object as an input to render a specific map
      *
-     * @param terrainType
-     * @param map
-     * @return
+     * @param terrainType terrain type
+     * @param map         Map of tiles
+     * @return TerrainComponent
      */
     public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();
-        switch (terrainType) {
-            case TEST:
-                String[] tileRefs = map.TileRefsArray();
-                ArrayList<TextureRegion> textures = new ArrayList<>();
+        if (terrainType == TerrainType.TEST) {
+            String[] tileRefs = map.TileRefsArray();
+            ArrayList<TextureRegion> textures = new ArrayList<>();
 
-                for (String s : tileRefs) {
-                    textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
-                }
+            for (String s : tileRefs) {
+                textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
+            }
 
-                return createWorldTerrain(0.5f, textures, map.getMapTiles(), map.getDimensions());
-
-            default:
-                return null;
+            return createWorldTerrain(textures, map.getMapTiles(), map.getDimensions());
         }
+        return null;
     }
 
     private TerrainComponent createForestDemoTerrain(
@@ -151,26 +148,26 @@ public class TerrainFactory {
         TerrainTile rockTile = new TerrainTile(rocks);
         TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
         // Create base grass
-        fillTiles(layer, MAP_SIZE, grassTile);
+        fillTiles(layer, grassTile);
 
         // Add some grass and rocks
-        fillTilesAtRandom(layer, MAP_SIZE, grassTuftTile, TUFT_TILE_COUNT);
-        fillTilesAtRandom(layer, MAP_SIZE, rockTile, ROCK_TILE_COUNT);
+        fillTilesAtRandom(layer, grassTuftTile, TUFT_TILE_COUNT);
+        fillTilesAtRandom(layer, rockTile, ROCK_TILE_COUNT);
 
         tiledMap.getLayers().add(layer);
         return tiledMap;
     }
 
     private TerrainComponent createWorldTerrain(
-            float tileWorldSize, ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions) {
+            ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions) {
 
         GridPoint2 tilePixelSize = new GridPoint2(textures.get(1).getRegionWidth(), textures.get(1).getRegionHeight());
 
         TiledMap tiledMap = createTiles(tilePixelSize, textures, map, dimensions);
 
-        TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
+        TiledMapRenderer renderer = createRenderer(tiledMap, (float) 0.5 / tilePixelSize.x);
 
-        return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+        return new TerrainComponent(camera, tiledMap, renderer, orientation, (float) 0.5);
     }
 
     private TiledMap createTiles(
@@ -213,9 +210,9 @@ public class TerrainFactory {
     }
 
     private static void fillTilesAtRandom(
-            TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile, int amount) {
+            TiledMapTileLayer layer, TerrainTile tile, int amount) {
         GridPoint2 min = new GridPoint2(0, 0);
-        GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
+        GridPoint2 max = new GridPoint2(TerrainFactory.MAP_SIZE.x - 1, TerrainFactory.MAP_SIZE.y - 1);
 
         for (int i = 0; i < amount; i++) {
             GridPoint2 tilePos = RandomUtils.random(min, max);
@@ -224,9 +221,9 @@ public class TerrainFactory {
         }
     }
 
-    private static void fillTiles(TiledMapTileLayer layer, GridPoint2 mapSize, TerrainTile tile) {
-        for (int x = 0; x < mapSize.x; x++) {
-            for (int y = 0; y < mapSize.y; y++) {
+    private static void fillTiles(TiledMapTileLayer layer, TerrainTile tile) {
+        for (int x = 0; x < TerrainFactory.MAP_SIZE.x; x++) {
+            for (int y = 0; y < TerrainFactory.MAP_SIZE.y; y++) {
                 Cell cell = new Cell();
                 cell.setTile(tile);
                 layer.setCell(x, y, cell);

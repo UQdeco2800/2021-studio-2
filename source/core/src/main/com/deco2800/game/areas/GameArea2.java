@@ -22,7 +22,6 @@ import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 import com.deco2800.game.utils.math.GridPoint2Utils;
-import com.deco2800.game.utils.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +77,7 @@ public class GameArea2 extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "player_scepter.png",
             "player_hammer.png",
             "images/boss_health_middle.png",
@@ -98,16 +97,20 @@ public class GameArea2 extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/hellViking.atlas",
             "images/lokiBoss.atlas", "images/firePillar.atlas", "images/hammer_projectile.atlas",
+            "images/newArrowBroken/atlas/arrow.atlas",
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3"
+            "sounds/arrow_shoot.mp3",
+            "sounds/death_2.mp3",
+            "sounds/death_1.mp3",
+            "sounds/boss_death.mp3"
     };
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
@@ -173,7 +176,7 @@ public class GameArea2 extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI2_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI2_ENCOUNTER;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;

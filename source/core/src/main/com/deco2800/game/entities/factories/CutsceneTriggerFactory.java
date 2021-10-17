@@ -200,12 +200,10 @@ public class CutsceneTriggerFactory {
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(ColliderComponent.class).setSensor(true);
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
         trigger.scaleHeight(0.1f);
-
         return trigger;
     }
 }

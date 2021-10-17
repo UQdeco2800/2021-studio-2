@@ -109,7 +109,8 @@ class MeleeWeaponTest {
             entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
         } catch (Exception e) {
             Assertions.fail();
-        }    }
+        }
+    }
 
     Entity createAttacker(short targetLayer) {
         Entity entity =

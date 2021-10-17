@@ -33,7 +33,6 @@ public class DeathScreen extends ScreenAdapter {
     private final Renderer renderer;
     private static final String[] deathScreenTextures = {"playerDeath/player_death.png"};
     private static final String[] deathScreenAtlases = {"playerDeath/player_death.atlas"};
-    private AnimationRenderComponent animator;
 
     public DeathScreen(GdxGame game) {
         this.game = game;
@@ -98,9 +97,9 @@ public class DeathScreen extends ScreenAdapter {
         logger.debug("Creating ui");
         Stage stage = ServiceLocator.getRenderService().getStage();
 
-        this.animator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
+        AnimationRenderComponent animator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
                 "playerDeath/player_death.atlas", TextureAtlas.class));
-        this.animator.addAnimation("death_animation", 0.20f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("death_animation", 0.20f, Animation.PlayMode.NORMAL);
 
         Entity ui = new Entity();
         ui.addComponent(new DeathDisplay())
@@ -110,6 +109,6 @@ public class DeathScreen extends ScreenAdapter {
         ServiceLocator.getEntityService().register(ui);
         ui.setScale(5, 5);
         ui.setPosition(2.7f, -0.5f);
-        this.animator.startAnimation("death_animation");
+        animator.startAnimation("death_animation");
     }
 }

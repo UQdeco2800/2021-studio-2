@@ -7,6 +7,7 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.areas.terrain.TerrainFactory.TerrainType;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
+import com.deco2800.game.components.tasks.ShootProjectileTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
@@ -79,7 +80,7 @@ public class ForestGameArea extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "images/rangedFixed.png",
             "images/bossFixed.png",
             "images/meleeAnimationsTextured.png",
@@ -103,6 +104,13 @@ public class ForestGameArea extends GameArea {
             "images/outdoorArcher.png",
             "images/asgardWarrior.png",
             "images/lokiBoss.png",
+            "thor/aoe_attck.png",
+            "thor/up_attck.png",
+            "thor/down_attck.png",
+            "thor/left_attck.png",
+            "thor/right_attck.png",
+            "thor/walk_left.png",
+            "thor/walk_right.png",
             "images/firePillar.png"
     };
     public static final String[] healthRegenTextures = {
@@ -112,19 +120,22 @@ public class ForestGameArea extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/arrow_broken/arrowBroken.atlas",
+            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas", "images/firePillar.atlas"
+            "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
-            "sounds/arrow_shoot.mp3"
+            "sounds/arrow_shoot.mp3",
+            "sounds/death_2.mp3",
+            "sounds/death_1.mp3",
+            "sounds/boss_death.mp3"
     };
     private static final String[] forestSounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg"
@@ -149,7 +160,7 @@ public class ForestGameArea extends GameArea {
      * as well as the health of the player.
      *
      * @param terrainFactory Base game engine terrain factory to produce the map assets
-     * @param currentHealth the current health of the main character as an integer
+     * @param currentHealth  the current health of the main character as an integer
      */
     public ForestGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -167,24 +178,15 @@ public class ForestGameArea extends GameArea {
         displayUI();
 
         spawnTerrain();
-        //spawnTrees();
         spawnPlayer();
-//        spawnCrate();
-//        spawnMeleeElf();
-//        spawnElfGuard();
-//        spawnRangedElf();
-//        spawnAssassinElf();
-//        spawnAnchoredElf();
-//        spawnVikingMelee();
-//        spawnBoss();
-//        spawnVikingMelee();
-//        spawnHellVikingMelee();
-//        spawnAsgardWarriorMelee();
-//        spawnOutdoorArcher();
-        setInitialDialogue();
-        spawnLoki();
+        spawnCrate();
+
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
         playMusic();
-//        spawnOdin();
+        setInitialDialogue();
+        playMusic();
 
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
     }
@@ -213,7 +215,7 @@ public class ForestGameArea extends GameArea {
     }
 
     private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_ENCOUNTER;
         DialogueSet set;
         if (PlayerSave.Save.getElfEnc() == 0) {
             set = DialogueSet.FIRST_ENCOUNTER;
@@ -386,7 +388,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity archer = NPCFactory.createOutdoorArcher(player, 0.1f);
+            Entity archer = NPCFactory.createOutdoorArcher(player);
             incNum();
             spawnEntityAt(archer, randomPos, true, true);
         }
@@ -396,12 +398,15 @@ public class ForestGameArea extends GameArea {
      * spawn boss - only spawn on the map if other enemies are killed
      */
     private void spawnLoki() {
-        /*GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         Entity boss = NPCFactory.createLoki(player);
         incBossNum();
         spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
+    }
+
+    private void spawnThor() {
+        Entity boss = NPCFactory.createThor(player);
+        incBossNum();
+        spawnEntityAt(boss, new GridPoint2(15, 15), true, true);
     }
 
     /**
@@ -413,7 +418,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, "normalArrow", 0.1f);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.normalArrow, 0.1f);
             incNum();
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangerLeft");
@@ -430,7 +435,7 @@ public class ForestGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, "fastArrow", 0);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.fastArrow, 0);
             elf.setEntityType("assassin");
             elf.getEvents().trigger("assassinLeft");
             spawnEntityAt(elf, randomPos, true, true);
@@ -442,9 +447,6 @@ public class ForestGameArea extends GameArea {
      * spawn boss - only spawn on the map if other enemies are killed
      */
     private void spawnBoss() {
-        /*GridPoint2 minPos = new GridPoint2(0, 0);
-        GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
-        GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);*/
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);
@@ -455,9 +457,9 @@ public class ForestGameArea extends GameArea {
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-        Entity elfKing = NPCFactory.createElfGuard(player);
+        Entity elfGuard = NPCFactory.createElfGuard(player);
         incNum();
-        spawnEntityAt(elfKing, randomPos, true, true);
+        spawnEntityAt(elfGuard, randomPos, true, true);
     }
 
     /**

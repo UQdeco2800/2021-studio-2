@@ -8,10 +8,7 @@ import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.physics.raycast.RaycastHit;
-import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.RandomUtils;
 
@@ -125,27 +122,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             gameArea.spawnEntityAt(vortex2, position, true, true);
         }
 
-        /*
-        Entity vortex = WeaponFactory.createVortex(owner.getEntity(),
-                getDirectionOfTarget(), false);
-        //System.out.println("owner position " + owner.getEntity().getCenterPosition());
-        gameArea.spawnEntityAt(vortex, owner.getEntity().getPosition(), true, true);
-
-
-
-        Entity entity = new Entity();
-        entity.setPosition(position);
-        Entity vortex2 = WeaponFactory.createVortex(entity, getDirectionOfTarget(), false);
-
-        gameArea.spawnEntityAt(vortex2, position, true, true);
-
-         */
-
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 1000) {
             owner.getEntity().setPosition(position);
             owner.getEntity().data.put("createFireBall", true);
         }
-        //owner.getEntity().setPosition(position);
     }
 
     /**
@@ -174,8 +154,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
         entity2.setScale(owner.getEntity().getScale());
-        gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(), true, true);
-        Entity vortex2 = WeaponFactory.createVortexExit(entity2, getDirectionOfTarget(), false);
+        gameArea.spawnEntityAt(vortex, owner.getEntity().getCenterPosition(),
+                true, true);
+        Entity vortex2 = WeaponFactory.createVortexExit(entity2, getDirectionOfTarget(),
+                false);
 
         vortex.data.put("teleportLoc", pos2);
 

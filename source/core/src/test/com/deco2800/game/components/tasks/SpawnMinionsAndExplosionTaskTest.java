@@ -32,6 +32,7 @@ class SpawnMinionsAndExplosionTaskTest {
     GameTime gameTime;
 
     private static final String[] forestTextureAtlases = {
+            "images/rangedElf.atlas", "images/meleeElf.atlas",
             "images/meleeFinal.atlas", "images/rangedAllFinal.atlas", "images/explosion/explosion.atlas"
     };
 

@@ -7,9 +7,9 @@ import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
+import com.deco2800.game.physics.PhysicsLayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.deco2800.game.physics.PhysicsLayer;
 
 public class TouchMoveComponent extends TouchComponent {
 
@@ -81,7 +81,7 @@ public class TouchMoveComponent extends TouchComponent {
         if ((triggered && !repeatable) || (numRepeats >= maxRepeats)) {
             return;
         }
-        if(hitboxComponent.getFixture() != me || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)){
+        if (hitboxComponent.getFixture() != me || PhysicsLayer.notContains(targetLayer, other.getFilterData().categoryBits)) {
             return;
         }
         triggered = true;

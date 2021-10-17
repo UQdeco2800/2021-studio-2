@@ -17,19 +17,13 @@ public class PlayerSave {
     private static final String SAVE_FILE = "playersave.save";
     private static final Logger logger = LoggerFactory.getLogger(PlayerSave.class);
 
-    private PlayerSave() {
-        logger.warn("Instantiating of a class that is not suppose be an instance.");
-        throw new IllegalStateException("Instantiating static util class");
-    }
-
     /**
      * Function which takes in a PLayerSave.Save object
      * and writes it to the save file as is.
-     *
      */
     public static void write() {
 
-        try (FileWriter saveWrite = new FileWriter((SAVE_FILE))){
+        try (FileWriter saveWrite = new FileWriter((SAVE_FILE))) {
 
             saveWrite.write(String.valueOf(Save.getHasPlayed()) + '\n');
             saveWrite.write(String.valueOf(Save.getElfEnc()) + '\n');
@@ -63,7 +57,6 @@ public class PlayerSave {
     /**
      * Function which reads and then returns a save object from
      * the file at location in SAVE_FILE
-     *
      */
     public static void load() {
         try {
@@ -128,6 +121,7 @@ public class PlayerSave {
         public static int getElfEnc() {
             return elfEnc;
         }
+
         public static int getLokiEnc() {
             return lokiEnc;
         }
@@ -135,6 +129,7 @@ public class PlayerSave {
         public static int getLoki2Enc() {
             return loki2Enc;
         }
+
         public static int getThorEnc() {
             return thorEnc;
         }
@@ -146,12 +141,15 @@ public class PlayerSave {
         public static int getElfWins() {
             return elfWins;
         }
+
         public static int getLokiWins() {
             return lokiWins;
         }
+
         public static int getLoki2Wins() {
             return loki2Wins;
         }
+
         public static int getThorWins() {
             return thorWins;
         }
@@ -167,9 +165,11 @@ public class PlayerSave {
         public static void setLokiEnc(int num) {
             lokiEnc = num;
         }
+
         public static void setLoki2Enc(int num) {
             loki2Enc = num;
         }
+
         public static void setThorEnc(int num) {
             thorEnc = num;
         }
@@ -185,9 +185,11 @@ public class PlayerSave {
         public static void setLokiWins(int num) {
             lokiWins = num;
         }
+
         public static void setLoki2Wins(int num) {
             loki2Wins = num;
         }
+
         public static void setThorWins(int num) {
             thorWins = num;
         }

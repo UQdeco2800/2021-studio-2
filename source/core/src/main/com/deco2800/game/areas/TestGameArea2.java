@@ -50,7 +50,7 @@ public class TestGameArea2 extends GameArea {
             "images/meleeElf.png",
             "images/guardElf.png",
             "images/rangedElf.png",
-            "images/fireball/fireballAinmation.png",
+            "images/fireball/fireballAnimation.png",
             "player_scepter.png",
             "player_hammer.png",
             "images/boss_health_middle.png",
@@ -62,7 +62,7 @@ public class TestGameArea2 extends GameArea {
     private static final String[] forestTextureAtlases = {
             "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
             "images/player.atlas", "images/bossAttack.atlas", "images/meleeElf.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAinmation.atlas",
+            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "images/player_scepter.atlas", "images/player_hammer.atlas", "images/outdoorArcher.atlas"
     };
     private static final String[] forestSounds = {
@@ -75,12 +75,10 @@ public class TestGameArea2 extends GameArea {
     private static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
     private static final String[] forestMusic = {backgroundMusic};
     private final TerrainFactory terrainFactory;
-    private final GdxGame game;
     private static Map map;
 
     public TestGameArea2(TerrainFactory terrainFactory, GdxGame game) {
         super();
-        this.game = game;
         this.terrainFactory = terrainFactory;
     }
 

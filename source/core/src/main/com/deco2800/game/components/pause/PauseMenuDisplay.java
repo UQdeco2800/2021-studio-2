@@ -16,9 +16,7 @@ import org.slf4j.LoggerFactory;
 public class PauseMenuDisplay extends MainMenuDisplay {
     private static final Logger logger = LoggerFactory.getLogger(PauseMenuDisplay.class);
     private static final String[] pauseMenuTextures = {"images/pauseMenu.png"};
-    private Image menuBackground;
     private Stack stack;
-    private Table pauseTable;
 
 
     @Override
@@ -32,9 +30,9 @@ public class PauseMenuDisplay extends MainMenuDisplay {
 
     protected void addActors() {
         stack = new Stack();
-        menuBackground = new Image(ServiceLocator.getResourceService().getAsset("images/pauseMenu.png",
+        Image menuBackground = new Image(ServiceLocator.getResourceService().getAsset("images/pauseMenu.png",
                 Texture.class));
-        pauseTable = new Table();
+        Table pauseTable = new Table();
 
         Skin menuButtons = new Skin(Gdx.files.internal("pauseMenuSkin/pause.json"));
 
@@ -73,35 +71,12 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                         entity.getEvents().trigger("mainMenu");
                     }
                 });
-//        restartTutorialBtn.addListener(
-//                new ChangeListener() {
-//                    @Override
-//                    public void changed(ChangeEvent changeEvent, Actor actor) {
-//                        logger.debug("Start button clicked");
-//                        //Needs to check which one it is in
-//                        entity.getEvents().trigger("startTutorial");
-//                    }
-//                });
-//
-//        exitBtn.addListener(
-//                new ChangeListener() {
-//                    @Override
-//                    public void changed(ChangeEvent changeEvent, Actor actor) {
-//
-//                        logger.debug("Exit button clicked");
-//                        entity.getEvents().trigger("exit");
-//                    }
-//                });
 
         pauseTable.add(contBtn).padTop(150f);
         pauseTable.row();
         pauseTable.add(restartForestBtn).padTop(30f);
         pauseTable.row();
         pauseTable.add(mainMenuBtn).padTop(30f);
-//        pauseTable.row();
-//        pauseTable.add(restartTutorialBtn).padTop(30f);
-//        pauseTable.row();
-//        pauseTable.add(exitBtn).padTop(30f);
 
         stack.add(menuBackground);
         stack.add(pauseTable);

@@ -1,11 +1,9 @@
 package com.deco2800.game.components.tasks.loki;
 
 
-import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.DefaultTask;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
@@ -32,22 +30,26 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
      */
     private int spawn = 0;
 
-    /** THe delay between each attacks for this task. */
-    private long cooldownMS;
+    /**
+     * THe delay between each attacks for this task.
+     */
+    private final long cooldownMS;
 
-    /** Last time that the attack was created. */
+    /**
+     * Last time that the attack was created.
+     */
     private long lastFiredTime;
 
 
     /**
      * Spawned enemies.
      */
-    private boolean spawned = false;
+    private final boolean spawned = false;
 
     /**
      * spawn the minion to help the boss attack the target
      *
-     * @param target The entity to chase.
+     * @param target     The entity to chase.
      * @param cooldownMS the time as a float between the ability being casted by Loki
      */
     public SpawnLokiDecoyTask(Entity target, long cooldownMS) {

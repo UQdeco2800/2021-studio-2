@@ -13,7 +13,7 @@ public class BossOverlayComponent extends UIComponent {
     /**
      * Health Bar length Multiplier
      */
-    private float lengthMultiplier = 5;
+    private final float lengthMultiplier = 5;
 
     /**
      * has the boss spawned
