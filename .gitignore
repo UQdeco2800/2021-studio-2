@@ -5,3 +5,4 @@
 source/script.py
 source/core/assets/ProcessMaps.py
 source/playersave.save
+source/core/assets/playersave.save
