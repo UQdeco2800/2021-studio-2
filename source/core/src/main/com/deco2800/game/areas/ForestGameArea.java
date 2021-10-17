@@ -352,6 +352,7 @@ public class ForestGameArea extends GameArea {
         incBossNum();
         spawnEntityAt(boss, new GridPoint2(10, 10), true, true);
     }
+
     private void spawnThor() {
         /*GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);

@@ -35,41 +35,77 @@ import java.util.concurrent.TimeUnit;
  * Spawns an arrow to shoot at a target
  */
 public class ShootProjectileTask extends DefaultTask implements PriorityTask {
-    /** entity represent the target - player */
+    /**
+     * entity represent the target - player
+     */
     private final Entity target;
-    /** control the game flow */
+    /**
+     * control the game flow
+     */
     private final PhysicsEngine physics;
-    /** debug screen */
+    /**
+     * debug screen
+     */
     private final DebugRenderer debugRenderer;
-    /** cast a line from owner to target */
+    /**
+     * cast a line from owner to target
+     */
     private final RaycastHit hit = new RaycastHit();
-    /** time before can shoot again */
+    /**
+     * time before can shoot again
+     */
     private long cooldownMS;
-    /** time when begin to shoot arrow */
+    /**
+     * time when begin to shoot arrow
+     */
     private long lastFired;
-    /** time when begin to shoot fireball */
+    /**
+     * time when begin to shoot fireball
+     */
     private long lastCreatedFireball;
-    /** Game area to spawn arrow */
+    /**
+     * Game area to spawn arrow
+     */
     private final GameArea gameArea;
-    /** the location to spawn the arrow */
+    /**
+     * the location to spawn the arrow
+     */
     private Vector2 tragectoryLocation = null;
-    /** chance to shoot multiple arrow */
+    /**
+     * chance to shoot multiple arrow
+     */
     private double multishotChance = 0.00;
-    /** the type of arrow */
+    /**
+     * the type of arrow
+     */
     private String projectileType = "normalArrow";
-    /** constant value represent the fire ball type projectile */
+    /**
+     * constant value represent the fire ball type projectile
+     */
     private static final String FIREBALL = "fireBall";
-    /** if the power up is trigger */
+    /**
+     * if the power up is trigger
+     */
     private boolean poweringUp = false;
-    /** the line to aim for fast arrow */
+    /**
+     * the line to aim for fast arrow
+     */
     private LineEntity aimingLine = null;
-    /** time to play shoot animation - projectile shoot */
+    /**
+     * time to play shoot animation - projectile shoot
+     */
     private long shootAnimationTimeMS;
-    /** time of the first animation */
+    /**
+     * time of the first animation
+     */
     private long shootAnimationStart = 0;
-    /** count so that the boss only rampage once  */
+    /**
+     * count so that the boss only rampage once
+     */
     private int count = 0;
-    /** logger for boss turning rampage */
+    /**
+     * logger for boss turning rampage
+     */
     private static final Logger logger = LoggerFactory.getLogger(ShootProjectileTask.class);
 
     public boolean initshoot = false;
@@ -128,9 +164,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 if (!owner.getEntity().data.containsKey("fireBalls")) {
                     //create fireball list
                     Entity[] entities = new Entity[]{
-                        null,
-                        WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
-                        null
+                            null,
+                            WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
+                            null
                     };
                     gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
                             true, true);

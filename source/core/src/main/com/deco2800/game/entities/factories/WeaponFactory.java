@@ -39,7 +39,9 @@ public class WeaponFactory {
      */
     private static final WeaponConfigs configs =
             FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
-    /** player stat json file */
+    /**
+     * player stat json file
+     */
     private static final PlayerConfig stats =
             FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
@@ -99,6 +101,7 @@ public class WeaponFactory {
 
     /**
      * create Thor weapon
+     *
      * @return entiry - thor weapon
      */
     public static Entity createMjolnir() {
@@ -155,7 +158,7 @@ public class WeaponFactory {
      *
      * @param targetEntity target (player)
      * @param owner        owner to hover at until needed
-     * @param offset offset of fireball from center position
+     * @param offset       offset of fireball from center position
      * @return entity tracking arrow
      */
     public static Entity createFireBall(Entity targetEntity, Entity owner, Vector2 offset) {
@@ -250,7 +253,7 @@ public class WeaponFactory {
     /**
      * create the vortex for teleportation
      *
-     * @param ownerRunner entity that call vortex enter
+     * @param ownerRunner  entity that call vortex enter
      * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex
@@ -287,7 +290,7 @@ public class WeaponFactory {
     /**
      * create the vortex for teleportation
      *
-     * @param ownerRunner entity that call vortex exit (spawn vortex)
+     * @param ownerRunner  entity that call vortex exit (spawn vortex)
      * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex

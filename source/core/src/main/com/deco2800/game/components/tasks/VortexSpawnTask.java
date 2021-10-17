@@ -41,7 +41,9 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     private boolean max = false;
 
-    /** owner of the entity that run this task */
+    /**
+     * owner of the entity that run this task
+     */
     private final Entity ownerRunner;
 
 

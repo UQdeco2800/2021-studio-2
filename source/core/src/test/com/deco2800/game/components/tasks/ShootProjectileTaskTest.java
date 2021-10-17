@@ -1,7 +1,6 @@
 package com.deco2800.game.components.tasks;
 
 import com.deco2800.game.ai.tasks.AITaskComponent;
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.physics.components.PhysicsComponent;

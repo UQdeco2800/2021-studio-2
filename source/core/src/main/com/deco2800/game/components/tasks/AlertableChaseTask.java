@@ -9,11 +9,14 @@ import com.deco2800.game.services.ServiceLocator;
  * Chases a target entity if they've been alerted or can see the target
  */
 public class AlertableChaseTask extends ChaseTask implements PriorityTask {
-    /** the enemy is alert */
+    /**
+     * the enemy is alert
+     */
     private boolean alerted = false;
 
     /**
      * If alert is trigger - enemy can see the target
+     *
      * @param target           The entity to chase.
      * @param priority         Task priority when chasing (0 when not chasing).
      * @param viewDistance     Maximum distance from the entity at which chasing can start.
