@@ -76,13 +76,4 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
         v3.add(v1);
         return (v3);
     }
-
-    /**
-     * Return the distance of entity to target
-     *
-     * @return float distance from entity (owner) to target
-     */
-    protected float getDistanceToTarget() {
-        return owner.getEntity().getPosition().dst(target.getPosition());
-    }
 } 

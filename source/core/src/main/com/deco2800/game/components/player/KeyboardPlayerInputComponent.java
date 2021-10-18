@@ -77,7 +77,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     /**
      * Stores the last system time since the dash ability was pressed.
      */
-    //Used to check cool down of the dash ability: private long lastDash = 0L;
     public KeyboardPlayerInputComponent() {
         super(5);
     }

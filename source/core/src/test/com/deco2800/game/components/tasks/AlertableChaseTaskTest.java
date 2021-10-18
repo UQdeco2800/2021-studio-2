@@ -84,7 +84,6 @@ class AlertableChaseTaskTest {
         }
 
         float newDistance2 = entity.getPosition().dst(target.getPosition());
-        //System.out.println(newDistance - oldDistance);
         assertTrue(newDistance2 - oldDistance != 0);
     }
 

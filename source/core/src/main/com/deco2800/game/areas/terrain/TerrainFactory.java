@@ -186,7 +186,6 @@ public class TerrainFactory {
 
         // Create the map
         GridPoint2 mapSize = new GridPoint2(dimensions.get("n_tiles_width"), dimensions.get("n_tiles_height"));
-        //fillTiles(layer, mapSize, tiles.get(0));
 
         placeTiles(layer, mapSize, tiles, map);
 

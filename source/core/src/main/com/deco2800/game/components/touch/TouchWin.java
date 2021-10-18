@@ -7,9 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TouchWin extends TouchComponent {
-
-    private static final Logger logger = LoggerFactory.getLogger(TouchWin.class);
-
     /**
      * Create a component which allows entities to interact with each other once they are within the vicinity.
      *

@@ -56,7 +56,6 @@ public class ElfAnimationController extends Component {
                     animator.startAnimation("assassin" + modifier);
                     break;
                 case "ranged":
-                    //System.out.println("rangerLeft");
                     animator.startAnimation("ranger" + modifier);
                     break;
                 default:

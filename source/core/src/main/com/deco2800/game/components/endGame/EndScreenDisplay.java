@@ -17,8 +17,6 @@ public class EndScreenDisplay extends UIComponent {
     private static final float Z_INDEX = 2f; //higher z index means placed to the front?
     private static final Logger logger = LoggerFactory.getLogger(EndScreenDisplay.class);
     private Image endBackground;
-    private Stack endLayout;
-    private Sound congrats;
     private Stack stack;
     private Table table;
 

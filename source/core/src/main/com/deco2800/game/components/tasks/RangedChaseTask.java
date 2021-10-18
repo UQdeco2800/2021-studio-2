@@ -34,7 +34,6 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
         if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10) {
             this.owner.getEntity().getEvents().trigger("wanderStart");
         } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
-            //this.owner.getEntity().getEvents().trigger("fleeStart");
             this.owner.getEntity().getEvents().trigger("chaseStart");
         }
     }

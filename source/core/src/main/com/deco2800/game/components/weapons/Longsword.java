@@ -61,10 +61,8 @@ public class Longsword extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
-            if (hasAttacked) {
-                attackSound.play();
-            }
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration && hasAttacked) {
+            attackSound.play();
         }
         super.triggerAttackStage(timeSinceAttack);
     }

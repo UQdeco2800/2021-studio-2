@@ -164,48 +164,45 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private boolean checkFireBalls() {
         //Stops the fireballs from being created until ready.
         //Specifically so the boss doesnt create them before he teleports
-        if (projectileType.equals(projectileTypes.FIREBALL)) {
-            if (owner.getEntity().data.get("createFireBall").equals(true)) {
-                if (!owner.getEntity().data.containsKey("fireBalls")) {
-                    //create fireball list
-                    Entity[] entities = new Entity[]{
-                            null,
-                            WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
-                            null
-                    };
-                    gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
-                            true, true);
-                    owner.getEntity().data.put("fireBalls", entities);
-                    lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                    return (true);
-                } else if (projectileType.equals(projectileTypes.FIREBALL) && TimeUnit.NANOSECONDS.toMillis(
-                        System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
-                    //Add new fireball
-                    int index = 0;
-                    Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
-                    for (Entity fireball : entities) {
-                        if (!ServiceLocator.getEntityService().getEntities().contains(
-                                fireball, true)) {
-                            entities[index] = WeaponFactory.createFireBall(target,
-                                    owner.getEntity(), new Vector2(index - 1f, 1f));
-                            gameArea.spawnEntityAt(entities[index],
-                                    owner.getEntity().getCenterPosition(),
-                                    true, true);
-                            lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                            return (true);
-                        }
-                        index++;
+        if (projectileType.equals(projectileTypes.FIREBALL) && owner.getEntity().data.get("createFireBall").equals(true)) {
+            if (!owner.getEntity().data.containsKey("fireBalls")) {
+                //create fireball list
+                Entity[] entities = new Entity[]{
+                        null,
+                        WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
+                        null
+                };
+                gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
+                        true, true);
+                owner.getEntity().data.put("fireBalls", entities);
+                lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+                return (true);
+            } else if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
+                //Add new fireball
+                int index = 0;
+                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                for (Entity fireball : entities) {
+                    if (!ServiceLocator.getEntityService().getEntities().contains(
+                            fireball, true)) {
+                        entities[index] = WeaponFactory.createFireBall(target,
+                                owner.getEntity(), new Vector2(index - 1f, 1f));
+                        gameArea.spawnEntityAt(entities[index],
+                                owner.getEntity().getCenterPosition(),
+                                true, true);
+                        lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+                        return (true);
                     }
-                } else if (projectileType.equals(projectileTypes.FIREBALL)) {
-                    //Check for fireball but don't make one
-                    Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
-                    for (Entity fireball : entities) {
-                        if (ServiceLocator.getEntityService().getEntities().contains(
-                                fireball, true)) {
-                            if (fireball.data.get("fireBallMovement").equals(false)) {
-                                return (true);
-                            }
-                        }
+                    index++;
+                }
+            } else {
+                //Check for fireball but don't make one
+                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                for (Entity fireball : entities) {
+                    if (ServiceLocator.getEntityService().getEntities().contains(
+                            fireball, true)
+                            && fireball.data.get("fireBallMovement").equals(false)) {
+                        return (true);
+
                     }
                 }
             }
@@ -221,10 +218,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private Entity getNextFireBall() {
         Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
         for (Entity fireball : entities) {
-            if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
-                if (fireball.data.get("fireBallMovement").equals(false)) {
-                    return (fireball);
-                }
+            if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)
+                    && fireball.data.get("fireBallMovement").equals(false)) {
+                return (fireball);
             }
         }
         return (null);
@@ -534,20 +530,17 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     rampageStart = System.currentTimeMillis();
                     count++;
                 }
-                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0) {
-                    if ((float) health / max <= 0.25) {
-                        logger.info("You can't kill a boss when his minions are alive");
-                        owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                    }
+                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
+                        && (float) health / max <= 0.25) {
+                    logger.info("You can't kill a boss when his minions are alive");
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
                 }
-                if (count == 1) {
-                    if (System.currentTimeMillis() - rampageStart >= 30000) {
-                        logger.info("Berserk off");
-                        setCooldownMS(2000);
-                        owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                        owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
-                        count++;
-                    }
+                if (count == 1 && System.currentTimeMillis() - rampageStart >= 30000) {
+                    logger.info("Berserk off");
+                    setCooldownMS(2000);
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+                    count++;
                 }
             }
         }

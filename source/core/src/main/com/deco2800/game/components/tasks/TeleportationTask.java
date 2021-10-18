@@ -96,10 +96,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             teleport();
         }
 
-        if (spawn) {
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 800) {
-                owner.getEntity().setPosition(pos2);
-            }
+        if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 800) {
+            owner.getEntity().setPosition(pos2);
         }
 
     }
@@ -237,12 +235,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         int currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
         int maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
 
-        if ((float) currentHealth / maxHealth < 0.5f) {
-            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
+        if ((float) currentHealth / maxHealth < 0.5f && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
                     && isTargetVisible()
                     && getDistanceToTarget() < owner.getEntity().getAttackRange()) {
-                return currentHealth < health;
-            }
+            return currentHealth < health;
         }
         return false;
     }

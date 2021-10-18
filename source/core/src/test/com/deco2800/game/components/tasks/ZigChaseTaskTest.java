@@ -67,7 +67,6 @@ class ZigChaseTaskTest {
                 break;
             }
         }
-        //System.out.println(count);
     }
 
     @Test

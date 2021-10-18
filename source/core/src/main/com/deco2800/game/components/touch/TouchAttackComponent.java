@@ -23,9 +23,6 @@ import org.slf4j.LoggerFactory;
  */
 
 public class TouchAttackComponent extends TouchComponent {
-
-    private static final Logger logger = LoggerFactory.getLogger(TouchAttackComponent.class);
-
     private float knockbackForce = 0f;
     private CombatStatsComponent combatStats;
     private long start = 0;
@@ -109,10 +106,9 @@ public class TouchAttackComponent extends TouchComponent {
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f || hitboxComponent.getFixture() != me)) {
             Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-            if (myEntity.data.containsKey(DEAL_DAMAGE)) {
-                if (!((boolean) myEntity.data.get(DEAL_DAMAGE))) {
-                    return;
-                }
+            if (myEntity.data.containsKey(DEAL_DAMAGE)
+                    && !((boolean) myEntity.data.get(DEAL_DAMAGE))) {
+                return;
             }
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
@@ -180,10 +176,9 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Try to attack target.
         if (targetStats != null) {
-            if (this.getEntity().data.containsKey(DEAL_DAMAGE)) {
-                if (!((boolean) this.getEntity().data.get(DEAL_DAMAGE))) {
-                    return;
-                }
+            if (this.getEntity().data.containsKey(DEAL_DAMAGE)
+                    && !((boolean) this.getEntity().data.get(DEAL_DAMAGE))) {
+                return;
             }
 
             if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {

@@ -40,12 +40,6 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
      */
     private long lastFiredTime;
 
-
-    /**
-     * Spawned enemies.
-     */
-    private final boolean spawned = false;
-
     /**
      * spawn the minion to help the boss attack the target
      *
