@@ -18,6 +18,9 @@ public class PhysicsMovementComponent extends Component {
     private Vector2 targetPosition;
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
+    private boolean stopped = false;
+    private String previousDirection = null;
+    private boolean death = false;
 
 
     @Override
@@ -47,6 +50,25 @@ public class PhysicsMovementComponent extends Component {
         if (!movementEnabled) {
             Body body = physicsComponent.getBody();
             setToVelocity(body, Vector2.Zero);
+            if (previousDirection != null && !stopped) {
+                switch (previousDirection) {
+                    case "left":
+                        this.getEntity().getEvents().trigger("stopLeft");
+                        break;
+                    case "up":
+                        this.getEntity().getEvents().trigger("stopUp");
+                        break;
+                    case "right":
+                        this.getEntity().getEvents().trigger("stopRight");
+                        break;
+                    default:
+                        this.getEntity().getEvents().trigger("stopDown");
+                        break;
+                }
+                stopped = true;
+            } else {
+                stopped = false;
+            }
         }
     }
 
@@ -76,6 +98,7 @@ public class PhysicsMovementComponent extends Component {
      * enemy move down
      */
     public void downAnimation() {
+        previousDirection = "down";
         this.getEntity().getEvents().trigger("DownStart");
     }
 
@@ -83,6 +106,7 @@ public class PhysicsMovementComponent extends Component {
      * enemy move up
      */
     public void upAnimation() {
+        previousDirection = "up";
         this.getEntity().getEvents().trigger("UpStart");
     }
 
@@ -90,6 +114,7 @@ public class PhysicsMovementComponent extends Component {
      * enemy move left
      */
     public void leftAnimation() {
+        previousDirection = "left";
         this.getEntity().getEvents().trigger("LeftStart");
     }
 
@@ -97,6 +122,7 @@ public class PhysicsMovementComponent extends Component {
      * enemy move right
      */
     public void rightAnimation() {
+        previousDirection = "right";
         this.getEntity().getEvents().trigger("RightStart");
     }
 
@@ -104,17 +130,20 @@ public class PhysicsMovementComponent extends Component {
      *
      */
     public void deathAnimation() {
-        if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
-            if (this.getDirection().x < 0) { //left
-                this.getEntity().getEvents().trigger("LeftStart");
-            } else if (this.getDirection().x > 0) { //right
-                this.getEntity().getEvents().trigger("RightStart");
-            }
-        } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) { //y axis movement
-            if (this.getDirection().y < 0) { //down
-                this.getEntity().getEvents().trigger("DownStart");
-            } else if (this.getDirection().y > 0) { //up
-                this.getEntity().getEvents().trigger("UpStart");
+        if (!death) {
+            death = true;
+            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
+                if (this.getDirection().x < 0) { //left
+                    this.getEntity().getEvents().trigger("LeftStart");
+                } else if (this.getDirection().x > 0) { //right
+                    this.getEntity().getEvents().trigger("RightStart");
+                }
+            } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) { //y axis movement
+                if (this.getDirection().y < 0) { //down
+                    this.getEntity().getEvents().trigger("DownStart");
+                } else if (this.getDirection().y > 0) { //up
+                    this.getEntity().getEvents().trigger("UpStart");
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class HumanAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
+    private boolean dead = false;
     private boolean attack;
     private long start;
     private boolean left = false;
@@ -46,6 +47,8 @@ public class HumanAnimationController extends Component {
         entity.getEvents().addListener("stopLeft", this::stopLeft);
         entity.getEvents().addListener("stopRight", this::stopRight);
 
+        entity.getEvents().addListener("enableWalk", this::enableWalk);
+
         animator.startAnimation("default");
     }
 
@@ -67,10 +70,15 @@ public class HumanAnimationController extends Component {
                 left = true;
             }
         } else if (!death) {
-            if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
+            if (!attack && !left) {
+                animator.startAnimation("moveLeft");
+                enableWalk();
+                left = true;
+            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else {
+        } else if (!dead){
+            dead = true;
             animator.startAnimation("leftDeath");
         }
     }
@@ -93,7 +101,8 @@ public class HumanAnimationController extends Component {
             } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else {
+        } else if (!dead){
+            dead = true;
             animator.startAnimation("rightDeath");
         }
     }
@@ -116,7 +125,8 @@ public class HumanAnimationController extends Component {
             } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else {
+        } else if (!dead){
+            dead = true;
             animator.startAnimation("frontDeath");
         }
     }
@@ -139,7 +149,8 @@ public class HumanAnimationController extends Component {
             } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else {
+        } else if (!dead){
+            dead = true;
             animator.startAnimation("backDeath");
         }
     }

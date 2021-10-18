@@ -167,6 +167,7 @@ public class CombatStatsComponent extends Component {
             //check for hit animations
             checkHitAnimations();
             this.entity.getEvents().trigger("enemyHit");
+            this.entity.getEvents().trigger("enableWalk");
             //if entity has Transform Component and is about to die we don't want to update hp
             // here since it will dispose. Instead we want to disable this component and perform
             // our transformation.
