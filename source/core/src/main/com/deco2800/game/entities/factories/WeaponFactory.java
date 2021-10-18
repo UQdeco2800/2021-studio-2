@@ -86,7 +86,7 @@ public class WeaponFactory {
 
         normalArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(BaseArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(ArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController());
@@ -110,7 +110,7 @@ public class WeaponFactory {
                 "Odin/OdinProjectile/beam_normal.png", Texture.class));
         beam
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(BaseArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(ArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         beam.setScale(scale);
@@ -161,7 +161,7 @@ public class WeaponFactory {
 
         trackingArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(BaseArrowConfig.HEALTH, TrackingArrowConfig.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(TrackingArrowConfig.HEALTH, TrackingArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController());
@@ -211,7 +211,7 @@ public class WeaponFactory {
         fireBall
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController())
-                .addComponent(new CombatStatsComponent(BaseArrowConfig.HEALTH, TrackingArrowConfig.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(TrackingArrowConfig.HEALTH, TrackingArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new PhysicsMovementComponent())

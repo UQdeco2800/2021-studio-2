@@ -60,5 +60,6 @@ public class EndScreenDisplay extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
+        //don't draw
     }
 }
