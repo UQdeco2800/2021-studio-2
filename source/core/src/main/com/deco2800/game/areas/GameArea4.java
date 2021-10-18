@@ -16,11 +16,21 @@ import com.deco2800.game.ui.textbox.TextBox;
  * Smaller room based level
  */
 public class GameArea4 extends GameArea {
+
+    /**
+     * Gamer area 4
+     * @param terrainFactory terrain factory
+     */
     public GameArea4(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Gamer area 4 with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public GameArea4(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;
