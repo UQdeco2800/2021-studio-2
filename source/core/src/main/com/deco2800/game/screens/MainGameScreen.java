@@ -292,7 +292,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
-                .addComponent(new MainGameExitDisplay())
+                //.addComponent(new MainGameExitDisplay())
                 .addComponent(new PauseMenuActions(game))
                 .addComponent(new PauseMenuDisplay())
                 .addComponent(new PauseInputComponent())
