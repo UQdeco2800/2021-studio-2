@@ -130,7 +130,10 @@ public abstract class GameArea implements Disposable {
             "rangedDeath.png",
             "guardDeath.png",
             "meleeDeath.png",
-            "assassinDeath.png"
+            "assassinDeath.png",
+            "bossDeath.png",
+            "assassinWalk.png",
+            "rangedWalk.png"
     };
     protected static final String[] textureAtlases = {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
@@ -144,7 +147,8 @@ public abstract class GameArea implements Disposable {
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas", "Odin" +
-            "/OdinProjectile/beamBroken.atlas", "rangedDeath.atlas",  "guardDeath.atlas", "meleeDeath.atlas", "assassinDeath.atlas"
+            "/OdinProjectile/beamBroken.atlas", "rangedDeath.atlas",  "guardDeath.atlas", "meleeDeath.atlas", "assassinDeath.atlas", "bossDeath.atlas", "assassinWalk.atlas",
+            "rangedWalk.atlas"
     };
     protected static final String[] sounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg",
