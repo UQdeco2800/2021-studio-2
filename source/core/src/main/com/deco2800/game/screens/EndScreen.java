@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.endGame.EndScreenActions;
+import com.deco2800.game.components.endgame.EndScreenActions;
 import com.deco2800.game.components.maingame.EndScreenDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;

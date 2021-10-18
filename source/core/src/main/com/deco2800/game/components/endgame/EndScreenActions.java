@@ -1,4 +1,4 @@
-package com.deco2800.game.components.endGame;
+package com.deco2800.game.components.endgame;
 
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.mainmenu.MainMenuActions;
