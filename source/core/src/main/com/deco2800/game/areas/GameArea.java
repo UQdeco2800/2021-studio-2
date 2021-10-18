@@ -134,7 +134,8 @@ public abstract class GameArea implements Disposable {
             "bossDeath.png",
             "assassinWalk.png",
             "rangedWalk.png",
-            "guardMeleeAttack.png"
+            "guardMeleeAttack.png",
+            "guardWalk.png"
     };
     protected static final String[] textureAtlases = {
             "images/outdoorArcher.atlas", "images/terrain_iso_grass.atlas", "crate/crateHitBreak.atlas", "images/elf.atlas",
