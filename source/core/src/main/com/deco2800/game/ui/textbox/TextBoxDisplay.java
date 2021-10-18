@@ -80,32 +80,32 @@ public class TextBoxDisplay extends UIComponent {
      */
     private final BooleanObject closing = new BooleanObject(false);
 
-    private static final float textBoxHeight = 400f;
+    private static final float TEXT_BOX_HEIGHT = 400f;
 
-    private static final float textBoxWidth = 800f;
+    private static final float TEXT_BOX_WIDTH = 800f;
 
-    private static final float displayYPos = 115f;
+    private static final float DISPLAY_Y_POS = 115f;
 
-    private static final float textYPos = 250f;
+    private static final float TEXT_Y_POS = 250f;
 
-    private static final float characterImageYPos = 50f;
+    private static final float CHARACTER_IMAGE_Y_POS = 50f;
 
-    private static final float characterSize = 768f;
+    private static final float CHARACTER_SIZE = 768f;
 
-    private static final float mainCharacterDisplayX = 70f;
+    private static final float MAIN_CHARACTER_DISPLAY_X = 70f;
 
-    private static final float nameY = 325f;
+    private static final float NAME_Y = 325f;
 
-    private static final float barHeight = 120f;
+    private static final float BAR_HEIGHT = 120f;
 
     private final float enemyDisplayX =
-            ServiceLocator.getRenderService().getStage().getWidth() - textBoxWidth - mainCharacterDisplayX;
+            ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH - MAIN_CHARACTER_DISPLAY_X;
 
     private final float enemyTextX =
-            ServiceLocator.getRenderService().getStage().getWidth() - textBoxWidth + 60f;
+            ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH + 60f;
 
     private final float enemyCharacterX =
-            ServiceLocator.getRenderService().getStage().getWidth() - characterSize - mainCharacterDisplayX + 100f;
+            ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X + 100f;
 
     private final float enemyNameX = ServiceLocator.getRenderService().getStage().getWidth() - 705;
 
@@ -129,11 +129,11 @@ public class TextBoxDisplay extends UIComponent {
         botBar = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
         topBar.setWidth(ServiceLocator.getRenderService().getStage().getWidth());
-        topBar.setHeight(barHeight);
+        topBar.setHeight(BAR_HEIGHT);
         topBar.setY(ServiceLocator.getRenderService().getStage().getHeight());
-        botBar.setHeight(barHeight);
+        botBar.setHeight(BAR_HEIGHT);
         botBar.setWidth(ServiceLocator.getRenderService().getStage().getWidth());
-        botBar.setY(-barHeight);
+        botBar.setY(-BAR_HEIGHT);
 
         stage.addActor(topBar);
         stage.addActor(botBar);
@@ -141,19 +141,19 @@ public class TextBoxDisplay extends UIComponent {
         //Text box for the main character set up
         mainCharacterName = new Label("WARRIOR", skin);
         mainCharacterName.setAlignment(Align.center);
-        mainCharacterName.setPosition(mainCharacterNameX, nameY);
+        mainCharacterName.setPosition(mainCharacterNameX, NAME_Y);
         mainCharacterLabel = new Label("", skin);
-        mainCharacterLabel.setPosition(mainCharacterTextX, textYPos);
+        mainCharacterLabel.setPosition(mainCharacterTextX, TEXT_Y_POS);
         mainCharacterBox = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/default_text_box.png", Texture.class));
-        mainCharacterBox.setPosition(mainCharacterDisplayX, displayYPos);
-        mainCharacterBox.setWidth(textBoxWidth);
-        mainCharacterBox.setHeight(textBoxHeight);
+        mainCharacterBox.setPosition(MAIN_CHARACTER_DISPLAY_X, DISPLAY_Y_POS);
+        mainCharacterBox.setWidth(TEXT_BOX_WIDTH);
+        mainCharacterBox.setHeight(TEXT_BOX_HEIGHT);
         mainCharacterImage = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/main_character_image.png", Texture.class));
-        mainCharacterImage.setPosition(mainCharacterXPos, characterImageYPos);
-        mainCharacterImage.setWidth(characterSize);
-        mainCharacterImage.setHeight(characterSize);
+        mainCharacterImage.setPosition(mainCharacterXPos, CHARACTER_IMAGE_Y_POS);
+        mainCharacterImage.setWidth(CHARACTER_SIZE);
+        mainCharacterImage.setHeight(CHARACTER_SIZE);
 
         stage.addActor(mainCharacterImage);
         stage.addActor(mainCharacterBox);
@@ -256,7 +256,7 @@ public class TextBoxDisplay extends UIComponent {
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
-        if (bar.getY() > initialHeight - barHeight && type.getBoolean()) {
+        if (bar.getY() > initialHeight - BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() - 6);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -280,7 +280,7 @@ public class TextBoxDisplay extends UIComponent {
         if (bar == topBar) {
             initialHeight = ServiceLocator.getRenderService().getStage().getHeight();
         }
-        if (bar.getY() < initialHeight + barHeight && type.getBoolean()) {
+        if (bar.getY() < initialHeight + BAR_HEIGHT && type.getBoolean()) {
             bar.setY(bar.getY() + 6);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -368,18 +368,18 @@ public class TextBoxDisplay extends UIComponent {
      */
     private void setNPCPosition() {
         enemyLabel = new Label("", skin);
-        enemyLabel.setPosition(enemyTextX, textYPos);
+        enemyLabel.setPosition(enemyTextX, TEXT_Y_POS);
 
         enemyName.setAlignment(Align.center);
-        enemyName.setPosition(enemyNameX, nameY);
+        enemyName.setPosition(enemyNameX, NAME_Y);
 
-        enemyImage.setPosition(enemyCharacterX, characterImageYPos);
-        enemyImage.setWidth(characterSize);
-        enemyImage.setHeight(characterSize);
+        enemyImage.setPosition(enemyCharacterX, CHARACTER_IMAGE_Y_POS);
+        enemyImage.setWidth(CHARACTER_SIZE);
+        enemyImage.setHeight(CHARACTER_SIZE);
 
-        enemyBox.setPosition(enemyDisplayX, displayYPos);
-        enemyBox.setWidth(textBoxWidth);
-        enemyBox.setHeight(textBoxHeight);
+        enemyBox.setPosition(enemyDisplayX, DISPLAY_Y_POS);
+        enemyBox.setWidth(TEXT_BOX_WIDTH);
+        enemyBox.setHeight(TEXT_BOX_HEIGHT);
 
         stage.addActor(enemyImage);
         stage.addActor(enemyBox);

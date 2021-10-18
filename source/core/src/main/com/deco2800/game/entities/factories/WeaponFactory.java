@@ -110,7 +110,7 @@ public class WeaponFactory {
                 "Odin/OdinProjectile/beam_normal.png", Texture.class));
         beam
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(ArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(BaseArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         beam.setScale(scale);
