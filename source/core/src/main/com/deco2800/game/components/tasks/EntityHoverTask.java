@@ -14,7 +14,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
 
     private final Vector2 givenOffset;
     private Vector2 calculatedOffset;
-    private float moveSpeedScl;
+    private final float moveSpeedScl;
 
     /**
      * @param waitTime      How long in seconds to wait between wandering.
@@ -72,16 +72,10 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     }
 
     /**
-     * update task to waiting
-     */
-    private void startWaiting() {
-        swapTask(waitTask);
-    }
-
-    /**
      * update task to move task
      */
-    private void startMoving() {
+    @Override
+    protected void startMoving() {
         calculatedOffset = getRandomOffsetInRange();
         movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         swapTask(movementTask);
@@ -124,7 +118,6 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
                 .sub(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         distance.x = Math.abs(distance.x);
         distance.y = Math.abs(distance.y);
-        Vector2 moveSpeed = distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len())));
-        return (moveSpeed);
+        return (distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len()))));
     }
 }

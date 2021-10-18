@@ -53,7 +53,13 @@ public class MainGameScreen extends ScreenAdapter {
             "images/textBoxDisplay/black_bars.png",
             "images/textBoxDisplay/prison_text_box.png",
             "images/textBoxDisplay/loki_image.png",
-            "images/textBoxDisplay/loki_text_box.png"
+            "images/textBoxDisplay/loki_text_box.png",
+            "images/textBoxDisplay/enemy_default_text_box.png",
+            "images/textBoxDisplay/elf_image.png",
+            "images/textBoxDisplay/odin_image.png",
+            "images/textBoxDisplay/thor_image.png",
+            "images/textBoxDisplay/outdoor_text_box.png",
+
     };
     private static final Vector2 CAMERA_POSITION = new Vector2(7.5f, 7.5f);
     private static final String[] playerLowHealthSounds = {"sounds/heartBeat_placeholder.mp3"};
@@ -96,20 +102,25 @@ public class MainGameScreen extends ScreenAdapter {
         this(game);
         logger.debug("Initialising main game screen entities");
 
-        if (world.equals("forest")) {
-            this.gameArea = new ForestGameArea(terrainFactory);
-        } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game);
-        } else if (world.equals("game0")) {
-            this.gameArea = new GameArea0(terrainFactory, game);
-        } else if (world.equals("game1")) {
-            this.gameArea = new GameArea1(terrainFactory, game);
-        } else if (world.equals("game2")) {
-            this.gameArea = new GameArea2(terrainFactory, game);
-        } else if (world.equals("game3")) {
-            this.gameArea = new GameArea3(terrainFactory, game);
-        } else if (world.equals("game4")) {
-            this.gameArea = new GameArea4(terrainFactory, game);
+        switch (world) {
+            case "tutorial":
+                this.gameArea = new TutorialGameArea(terrainFactory);
+                break;
+            case "game0":
+                this.gameArea = new GameArea0(terrainFactory);
+                break;
+            case "game1":
+                this.gameArea = new GameArea1(terrainFactory);
+                break;
+            case "game2":
+                this.gameArea = new GameArea2(terrainFactory);
+                break;
+            case "game3":
+                this.gameArea = new GameArea3(terrainFactory);
+                break;
+            case "game4":
+                this.gameArea = new GameArea4(terrainFactory);
+                break;
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -122,20 +133,25 @@ public class MainGameScreen extends ScreenAdapter {
         this(game);
         logger.debug("Initialising main game screen entities");
 
-        if (world.equals("forest")) {
-            this.gameArea = new ForestGameArea(terrainFactory);
-        } else if (world.equals("tutorial")) {
-            this.gameArea = new TutorialGameArea(terrainFactory, game, currentHealth);
-        } else if (world.equals("game0")) {
-            this.gameArea = new GameArea0(terrainFactory, game, currentHealth);
-        } else if (world.equals("game1")) {
-            this.gameArea = new GameArea1(terrainFactory, game, currentHealth);
-        } else if (world.equals("game2")) {
-            this.gameArea = new GameArea2(terrainFactory, game, currentHealth);
-        } else if (world.equals("game3")) {
-            this.gameArea = new GameArea3(terrainFactory, game, currentHealth);
-        } else if (world.equals("game4")) {
-            this.gameArea = new GameArea4(terrainFactory, game, currentHealth);
+        switch (world) {
+            case "tutorial":
+                this.gameArea = new TutorialGameArea(terrainFactory, currentHealth);
+                break;
+            case "game0":
+                this.gameArea = new GameArea0(terrainFactory, currentHealth);
+                break;
+            case "game1":
+                this.gameArea = new GameArea1(terrainFactory, currentHealth);
+                break;
+            case "game2":
+                this.gameArea = new GameArea2(terrainFactory, currentHealth);
+                break;
+            case "game3":
+                this.gameArea = new GameArea3(terrainFactory, currentHealth);
+                break;
+            case "game4":
+                this.gameArea = new GameArea4(terrainFactory, currentHealth);
+                break;
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -177,12 +193,12 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (gameChange) {
-            if (gameArea.getLevel() == 9){
+            if (gameArea.getLevel() == 9) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA0, currentHealth);
                 gameChange = false;
-            }else if (gameArea.getLevel() == 0) {
+            } else if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);

@@ -12,6 +12,7 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,20 +41,12 @@ class MeleeWeaponTest {
     }
 
     @Test
-    void shouldStrongAttack() {
-        short targetLayer = (1 << 3);
-        Entity entity = createAttacker(targetLayer);
-        // check that this doesn't throw exceptions
-        entity.getComponent(MeleeWeapon.class).strongAttack(1);
-    }
-
-    @Test
     void shouldCreateWeaponHitbox() {
         short targetLayer = (1 << 3);
         Entity entity = createAttacker(targetLayer);
 
         MeleeWeapon weapon = entity.getComponent(MeleeWeapon.class); // arbitrary
-        weapon.setFrameDuration(100L);
+        weapon.setAttackFrameDuration(100L);
         weapon.attack(MeleeWeapon.UP);
         weapon.triggerAttackStage(150L); // attack frame
 
@@ -78,9 +71,9 @@ class MeleeWeaponTest {
         short targetLayer = (1 << 3);
         MeleeWeapon weapon = (new MeleeWeapon(targetLayer,
                 0, 0, new Vector2(0f, 0f)));
-        weapon.setFrameDuration(200L);
+        weapon.setAttackFrameDuration(200L);
         // assumes 3 frames in attack
-        assertEquals(200L * 4, weapon.getTotalAttackTime());
+        assertEquals(200L * 3, weapon.getTotalAttackTime());
     }
 
     @Test
@@ -112,7 +105,11 @@ class MeleeWeaponTest {
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
 
         // This should not cause an exception, but the attack should be ignored
-        entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        try {
+            entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     Entity createAttacker(short targetLayer) {

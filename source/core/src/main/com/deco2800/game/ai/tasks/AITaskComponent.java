@@ -1,6 +1,5 @@
 package com.deco2800.game.ai.tasks;
 
-import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
@@ -52,12 +51,6 @@ public class AITaskComponent extends Component implements TaskRunner {
             }
             if (desiredtask != currentTask) {
                 changeTask(desiredtask);
-            }
-            try {
-                if (getEntity().getComponent(CombatStatsComponent.class).isDead()) {
-                }
-            } catch (NullPointerException E) {
-
             }
             currentTask.update();
         }

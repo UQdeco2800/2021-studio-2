@@ -1,111 +1,111 @@
 {
-com.badlogic.gdx.graphics.g2d.BitmapFont: {
-	prstart: {
-		file: prstart.fnt
-	}
-	prstartlarge: {
-		file: prstartlarge.fnt
-	}
-}
-com.badlogic.gdx.graphics.Color: {
-	RGBA_0_0_0_255: {
-		r: 0
-		g: 0
-		b: 0
-		a: 1
-	}
-	RGBA_200_200_200_255: {
-		r: 0.78431374
-		g: 0.78431374
-		b: 0.78431374
-		a: 1
-	}
-	RGBA_255_255_255_255: {
-		r: 1
-		g: 1
-		b: 1
-		a: 1
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	apply: {
-		up: ApplyB
-		down: ApplyW
-	}
-	exit: {
-		up: ExitB
-		down: ExitW
-	}
-	reset: {
-		up: 243043484_879489939641417_8050408554820556031_n
-		down: 243643435_868297157153172_1050889079716488289_n
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
-	default: {
-		checkboxOn: ButtonOn
-		checkboxOff: ButtonOff
-		font: prstart
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	default: {
-		font: prstart
-		fontColor: RGBA_200_200_200_255
-	}
-	title: {
-		font: prstartlarge
-		fontColor: RGBA_200_200_200_255
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-	default: {
-		font: prstart
-		fontColorSelected: RGBA_255_255_255_255
-		fontColorUnselected: RGBA_0_0_0_255
-		selection: Slider
-		background: FPSBox
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: {
-		vScrollKnob: ButtonOff
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
-	default: {
-		font: prstart
-		fontColor: RGBA_255_255_255_255
-		background: ResolutionBox
-		scrollStyle: default
-		listStyle: default
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
-	default-horizontal: {
-		background: Slider
-		knob: ButtonOff
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: {
-		font: prstart
-		fontColor: RGBA_200_200_200_255
-		downFontColor: RGBA_255_255_255_255
-		overFontColor: RGBA_0_0_0_255
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-	default: {
-		font: prstart
-		fontColor: RGBA_200_200_200_255
-		background: FPSBox
-		cursor: toppng.com-text-cursor-icon-403x842 (2)
-	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
-	default: {
-		label: default
-	}
-}
+    com.badlogic.gdx.graphics.g2d.BitmapFont: {
+        prstart: {
+            file: prstart.fnt
+        }
+        prstartlarge: {
+            file: prstartlarge.fnt
+        }
+    }
+    com.badlogic.gdx.graphics.Color: {
+        RGBA_0_0_0_255: {
+            r: 0
+            g: 0
+            b: 0
+            a: 1
+        }
+        RGBA_200_200_200_255: {
+            r: 0.78431374
+            g: 0.78431374
+            b: 0.78431374
+            a: 1
+        }
+        RGBA_255_255_255_255: {
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+        apply: {
+            up: ApplyB
+            down: ApplyW
+        }
+        exit: {
+            up: ExitB
+            down: ExitW
+        }
+        reset: {
+            up: 243043484_879489939641417_8050408554820556031_n
+            down: 243643435_868297157153172_1050889079716488289_n
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+        default: {
+            checkboxOn: ButtonOn
+            checkboxOff: ButtonOff
+            font: prstart
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+        default: {
+            font: prstart
+            fontColor: RGBA_200_200_200_255
+        }
+        title: {
+            font: prstartlarge
+            fontColor: RGBA_200_200_200_255
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+        default: {
+            font: prstart
+            fontColorSelected: RGBA_255_255_255_255
+            fontColorUnselected: RGBA_0_0_0_255
+            selection: Slider
+            background: FPSBox
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+        default: {
+            vScrollKnob: ButtonOff
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+        default: {
+            font: prstart
+            fontColor: RGBA_255_255_255_255
+            background: ResolutionBox
+            scrollStyle: default
+            listStyle: default
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+        default-horizontal: {
+            background: Slider
+            knob: ButtonOff
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+        default: {
+            font: prstart
+            fontColor: RGBA_200_200_200_255
+            downFontColor: RGBA_255_255_255_255
+            overFontColor: RGBA_0_0_0_255
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+        default: {
+            font: prstart
+            fontColor: RGBA_200_200_200_255
+            background: FPSBox
+            cursor: toppng.com-text-cursor-icon-403x842 (2)
+        }
+    }
+    com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
+        default: {
+            label: default
+        }
+    }
 }

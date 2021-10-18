@@ -1,0 +1,26 @@
+up_attck.png
+size: 256, 256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+thor_up_attack
+  rotate: false
+  xy: 0, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_up_attack
+  rotate: false
+  xy: 128, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+thor_up_attack
+  rotate: false
+  xy: 0, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2

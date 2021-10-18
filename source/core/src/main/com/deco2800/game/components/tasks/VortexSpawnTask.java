@@ -41,7 +41,10 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     private boolean max = false;
 
-    private Entity ownerRunner;
+    /**
+     * owner of the entity that run this task
+     */
+    private final Entity ownerRunner;
 
 
     /**
@@ -54,7 +57,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
     public VortexSpawnTask(Entity ownerRunner, Vector2 desiredScale, float rotateAngle) {
         this.scale = desiredScale;
         this.rotateAngle = rotateAngle;
-        factor = new Vector2(this.scale.x / 10, this.scale.y / 10);
+        factor = new Vector2(this.scale.x / 50, this.scale.y / 50);
         this.ownerRunner = ownerRunner;
     }
 
@@ -70,7 +73,8 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(
+                owner.getEntity().getPosition());
         Vector2 position = ownerRunner.getCenterPosition().sub(bodyOffset);
         owner.getEntity().setAngle(rotateAngle + rotateFactor);
         if (owner.getEntity().getScale().x > this.scale.x
@@ -80,7 +84,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
         }
         if (owner.getEntity().getScale().x < this.scale.x
                 && owner.getEntity().getScale().y < this.scale.y && !max) {
-            owner.getEntity().setScale(factor.scl(1.05f));
+            owner.getEntity().setScale(owner.getEntity().getScale().add(factor.scl(0.99f)));
             owner.getEntity().setPosition(position);
             time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         } else {
@@ -90,10 +94,6 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                     && (int) owner.getEntity().data.get("teleportID") == 1) {
                 if (!owner.getEntity().data.containsKey("teleportTarget")) {
                     //Add body offset
-                    /*System.out.println(((Vector2) owner.getEntity().data.get("teleportLoc")));
-                    System.out.println(bodyOffset);
-                    owner.getEntity().data.put("teleportLoc",
-                            ((Vector2) owner.getEntity().data.get("teleportLoc")).add(bodyOffset));*/
                     owner.getEntity().data.put("teleportTarget", true);
                 }
             }
@@ -107,7 +107,7 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
                         owner.getEntity().data.put("teleportTarget", false);
                     }
                 }
-                owner.getEntity().setScale(this.scale.scl(0.95f));
+                owner.getEntity().setScale(owner.getEntity().getScale().sub(factor.scl(1.01f)));
                 owner.getEntity().setPosition(position);
             } else if (owner.getEntity().getScale().x <= 0.1f
                     && owner.getEntity().getScale().y <= 0.1f) {

@@ -4,7 +4,6 @@
 .gradle/
 source/script.py
 source/core/assets/ProcessMaps.py
-source/core/assets/Tileset/Sample Quiz - Long Questions.docx
-source/core/assets/Tileset/Quiz - Long Questions.docx
-.gitignore
-source/core/assets/maps/RawTiled/asd.tsx
+source/playersave.save
+source/core/assets/playersave.save
+source/save.json

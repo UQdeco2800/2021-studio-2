@@ -13,6 +13,7 @@ import com.deco2800.game.components.Component;
 public abstract class TransformEntityComponent extends Component {
     //implement a timer for transformation animation and then player can interact with the entity
 
+    @Override
     public void create() {
         super.create();
         entity.getEvents().addListener("transformEntity", this::transform);

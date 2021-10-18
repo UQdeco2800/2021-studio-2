@@ -3,7 +3,6 @@ package com.deco2800.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.deco2800.game.areas.TestGameArea1;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.*;
 import org.slf4j.Logger;
@@ -81,8 +80,6 @@ public class GdxGame extends Game {
         switch (screenType) {
             case MAIN_MENU:
                 return new MainMenuScreen(this);
-            case MAIN_GAME_FOREST:
-                return new MainGameScreen(this, "forest");
             case MAIN_GAME_TUTORIAL:
                 return new MainGameScreen(this, "tutorial");
             case SETTINGS:
@@ -113,8 +110,6 @@ public class GdxGame extends Game {
         switch (screenType) {
             case MAIN_MENU:
                 return new MainMenuScreen(this);
-            case MAIN_GAME_FOREST:
-                return new MainGameScreen(this, "forest", currentHealth);
             case MAIN_GAME_TUTORIAL:
                 return new MainGameScreen(this, "tutorial", currentHealth);
             case SETTINGS:

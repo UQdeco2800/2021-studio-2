@@ -1,9 +1,6 @@
 package com.deco2800.game.ai.tasks;
 
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.physics.PhysicsService;
-import com.deco2800.game.rendering.DebugRenderer;
-import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,12 +15,6 @@ class AITaskComponentTest {
     void beforeEach() {
         // Mock game time
         ServiceLocator.registerTimeSource(new GameTime());
-    }
-
-    @Test
-    void shouldRunNothingWithNoTask() {
-        AITaskComponent taskComponent = new AITaskComponent();
-        taskComponent.update();
     }
 
     @Test

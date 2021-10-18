@@ -86,6 +86,7 @@ public class Map {
     public HashMap<String, Float>[] getBossObjects() {
         return bossObjects;
     }
+
     public HashMap<String, Float>[] getAnchoredObjects() {
         return anchoredObjects;
     }

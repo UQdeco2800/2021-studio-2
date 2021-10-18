@@ -27,6 +27,8 @@ public class WeaponHitboxComponent extends ColliderComponent {
      * @param direction the direction of the hit box, relative to the entity.
      * @return self
      */
+
+
     @SuppressWarnings("UnusedReturnValue")
     public ColliderComponent set(Vector2 size, int direction) {
 

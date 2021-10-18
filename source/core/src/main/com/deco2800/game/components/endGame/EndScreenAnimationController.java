@@ -6,6 +6,7 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 
 public class EndScreenAnimationController extends Component {
     AnimationRenderComponent endAnimation;
+
     @Override
     public void create() {
         super.create();
@@ -23,6 +24,7 @@ public class EndScreenAnimationController extends Component {
     /**
      * selects the frame to play based on the frame number. this allows multiple frames or no
      * need to change .atlas file names
+     *
      * @param frameNum the number of the frame
      */
     public void advanceFrame(String frameNum) {

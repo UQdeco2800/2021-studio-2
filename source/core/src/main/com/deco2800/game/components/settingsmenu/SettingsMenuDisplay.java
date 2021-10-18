@@ -13,9 +13,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.GdxGame.ScreenType;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.files.UserSettings.DisplaySettings;
-import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.utils.StringDecorator;
@@ -105,7 +105,6 @@ public class SettingsMenuDisplay extends UIComponent {
         displayModeSelect.setSelected(getActiveMode(displayModeSelect.getItems()));
 
 
-
         //create reset game button
         Label resetLabel = new Label("Reset progress:", settingsSkin);
         Button resetBtn = new Button(settingsSkin, "reset");
@@ -148,10 +147,10 @@ public class SettingsMenuDisplay extends UIComponent {
         table.add(resetLabel).right().padRight(15f);
         table.add(resetBtn).left();
         // Events on push
-
-//        resetBtn.addListener((Event event) -> {
-//                    });
-
+        resetBtn.addListener((Event event) -> {
+            PlayerSave.resetFile();
+            return true;
+        });
         return table;
     }
 

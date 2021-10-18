@@ -1,7 +1,6 @@
 package com.deco2800.game.components.pause;
 
 import com.badlogic.gdx.Input;
-import com.deco2800.game.GdxGame;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -14,16 +13,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
 class PauseMenuActionsTest {
-        PauseInputComponent input;
-        @Mock
-        PauseMenuActions actions;
-        Entity entity;
+    PauseInputComponent input;
+    @Mock
+    PauseMenuActions actions;
+    Entity entity;
 
 
     @BeforeEach
@@ -46,18 +44,18 @@ class PauseMenuActionsTest {
     }
 
     @Test
-    public void createTest() {
+    void createTest() {
         verify(actions).create();
     }
 
     @Test
-    public void disposeTest() {
+    void disposeTest() {
         entity.dispose();
         verify(actions).dispose();
     }
 
     @Test
-    public void togglePauseTest() {
+    void togglePauseTest() {
         //ensure user inputs triggers toggle pause
         entity.getEvents().addListener("togglePause", actions::togglePauseGame);
         input.keyDown(Input.Keys.P);

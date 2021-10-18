@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -21,7 +21,18 @@ public class MeleeWeapon extends Component {
     /**
      * animation frame duration measured in milliseconds
      */
-    protected long frameDuration;
+    protected long attackFrameDuration;
+
+    /**
+     * number of light attack frames in animation
+     */
+    protected int numOfAttackFrames;
+
+    /**
+     * the index of the frame where the attack lands
+     */
+    protected int attackFrameIndex;
+
     /**
      * determines whether entity has attacked.
      */
@@ -53,7 +64,7 @@ public class MeleeWeapon extends Component {
     /**
      * Weapon attack width and range in terms of x and y, relative to entity size
      */
-    protected Vector2 weaponSize;
+    protected final Vector2 weaponSize;
     /**
      * Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
      * entity can re-use the same weapon hit box instance, provided they aren't setting/destroying
@@ -78,7 +89,8 @@ public class MeleeWeapon extends Component {
         this.knockback = knockback;
         this.weaponSize = weaponSize;
         timeAtAttack = 0L;
-        frameDuration = 100L; // default frame duration is set at 100 milliseconds.
+        // default attack frame information
+        setAttackFrames(100L, 3, 1);
         hasAttacked = false;
     }
 
@@ -118,11 +130,18 @@ public class MeleeWeapon extends Component {
     }
 
     /**
-     * The weapon's strong / alternative attack. This is to be implemented
+     * The weapon's ranged attack. This is to be implemented
      * in weapon sub-classes.
      */
-    public void strongAttack(int attackDirection) {
-        // to be implemented in sub-class
+    public void rangedAttack(int attackDirection) {
+        // To be implemented in sub-classes
+    }
+
+    /**
+     * The weapon's AEO (area of effect) attack.
+     */
+    public void aoeAttack() {
+        // To be implemented in sub-classes
     }
 
     /**
@@ -132,12 +151,14 @@ public class MeleeWeapon extends Component {
      *                        0 - if the entity is not attacking.
      */
     protected void triggerAttackStage(long timeSinceAttack) {
-        // Set hit box during attack frame (2nd frame).
-        if (hasAttacked && timeSinceAttack > frameDuration && timeSinceAttack < 3 * frameDuration) {
+        // Set hit box during attack frame
+        if (hasAttacked && timeSinceAttack > attackFrameIndex * attackFrameDuration &&
+                timeSinceAttack < (attackFrameIndex + 1) * attackFrameDuration) {
+
             weaponHitbox.set(weaponSize.cpy(), attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
-            // Destroy hit box as soon as attack frame ends (3rd frame).
-        } else if (timeSinceAttack >= 3 * frameDuration) {
+            // Destroy hit box as soon as attack frame ends.
+        } else if (timeSinceAttack >= (attackFrameIndex + 1) * attackFrameDuration) {
             timeAtAttack = 0;
             weaponHitbox.destroy();
         }
@@ -148,18 +169,32 @@ public class MeleeWeapon extends Component {
      *
      * @param frameDuration how long each attack animation frame takes.
      */
-    public void setFrameDuration(long frameDuration) {
-        this.frameDuration = frameDuration;
+    public void setAttackFrameDuration(long frameDuration) {
+        this.attackFrameDuration = frameDuration;
     }
 
     /**
-     * Returns the total time the attack will take. Assumes the attack animation only has
-     * 3 frames.
+     * Sets all frame information, which determines when an attack lands,
+     * and how long the attack lasts.
+     *
+     * @param frameDuration how long each attack animation frame takes in milliseconds
+     * @param numOfFrames   number of frames in the attack animation
+     * @param attackIndex   the index of the frame where the attack lands. Attack lasts for
+     *                      1 frame duration.
+     */
+    public void setAttackFrames(long frameDuration, int numOfFrames, int attackIndex) {
+        this.attackFrameDuration = frameDuration;
+        this.numOfAttackFrames = numOfFrames;
+        this.attackFrameIndex = attackIndex;
+    }
+
+    /**
+     * Returns the total time the attack will take.
      *
      * @return total time of attack
      */
     public long getTotalAttackTime() {
-        return 4 * frameDuration; // number of frames * frame duration.
+        return numOfAttackFrames * attackFrameDuration; // number of frames * frame duration.
     }
 
     /**

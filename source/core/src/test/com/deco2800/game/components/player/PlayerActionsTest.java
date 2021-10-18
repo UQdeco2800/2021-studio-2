@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(GameExtension.class)
-public class PlayerActionsTest {
+class PlayerActionsTest {
 
     @Test
     void shouldMoveUp() {

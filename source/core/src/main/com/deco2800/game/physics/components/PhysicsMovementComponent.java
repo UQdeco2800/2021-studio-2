@@ -3,6 +3,7 @@ package com.deco2800.game.physics.components;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.ai.movement.MovementController;
+import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.utils.math.Vector2Utils;
@@ -20,6 +21,10 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     private Vector2 targetPosition;
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
+
+    public boolean animateAttack;
+    public boolean animateStun;
+
 
     @Override
     public void create() {
@@ -71,35 +76,87 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     public void setTarget(Vector2 target) {
         logger.trace("Setting target to {}", target);
         this.targetPosition = target;
-        if (this.targetPosition.x < 1) {
-            //System.out.println("x target position <1");
-        }
     }
 
     public void setMaxSpeed(Vector2 maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
 
-    public void DirectionAnimation() {
-        if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) {
-            if (this.getDirection().x < 0) {
+    /**
+     * enemy move down
+     */
+    public void downAnimation() {
+        this.getEntity().getEvents().trigger("DownStart");
+    }
+
+    /**
+     * enemy move up
+     */
+    public void upAnimation() {
+        this.getEntity().getEvents().trigger("UpStart");
+    }
+
+    /**
+     * enemy move left
+     */
+    public void leftAnimation() {
+        this.getEntity().getEvents().trigger("LeftStart");
+    }
+
+    /**
+     * enemy move right
+     */
+    public void rightAnimation() {
+        this.getEntity().getEvents().trigger("RightStart");
+    }
+
+    /**
+     *
+     */
+    public void deathAnimation() {
+        if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
+            if (this.getDirection().x < 0) { //left
                 this.getEntity().getEvents().trigger("LeftStart");
-            } else {
+            } else if (this.getDirection().x > 0) { //right
                 this.getEntity().getEvents().trigger("RightStart");
             }
-        } else {
-            if (this.getDirection().y < 0) {
+        } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) { //y axis movement
+            if (this.getDirection().y < 0) { //down
                 this.getEntity().getEvents().trigger("DownStart");
-            } else {
+            } else if (this.getDirection().y > 0) { //up
                 this.getEntity().getEvents().trigger("UpStart");
             }
         }
     }
 
+    /**
+     *
+     */
+    public void directionAnimation() {
+        if (!this.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
+                if (this.getDirection().x < 0) { //left
+                    leftAnimation();
+                } else if (this.getDirection().x > 0) { //right
+                    rightAnimation();
+                }
+            } else { //y axis movement
+                if (this.getDirection().y < 0) { //down
+                    downAnimation();
+                } else if (this.getDirection().y > 0) { //up
+                    upAnimation();
+                }
+            }
+        } else {
+            deathAnimation();
+        }
+    }
+
+
     private void updateDirection(Body body) {
         Vector2 desiredVelocity = getDirection().scl(maxSpeed);
         setToVelocity(body, desiredVelocity);
-        DirectionAnimation();
+        directionAnimation();
     }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {
@@ -111,5 +168,14 @@ public class PhysicsMovementComponent extends Component implements MovementContr
 
     public Vector2 getDirection() {
         return targetPosition.cpy().sub(entity.getPosition()).nor();
+    }
+
+    public void setAnimateAttack() {
+        animateAttack = true;
+    }
+
+    public void stopAnimateAttack() {
+        //System.out.println("stopAnimateAttack, set to false");
+        animateAttack = false;
     }
 }

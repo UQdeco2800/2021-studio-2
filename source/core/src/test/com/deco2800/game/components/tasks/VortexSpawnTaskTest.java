@@ -2,12 +2,14 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.entities.Entity;
+import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +31,8 @@ class VortexSpawnTaskTest {
         when(gameTime.getDeltaTime()).thenReturn(20f / 1000);
         ServiceLocator.registerTimeSource(gameTime);
         ServiceLocator.registerPhysicsService(new PhysicsService());
+        ServiceLocator.registerEntityService(new EntityService());
+
     }
 
     @Test
@@ -39,18 +43,42 @@ class VortexSpawnTaskTest {
 
         vortexSpawnTask.create(() -> taskRunner);
 
-        // initially the size is 10% of the expected size -> upscale
+        // ensure that the priority is 10
         assertEquals(10, vortexSpawnTask.getPriority());
 
-        Vector2 scale = new Vector2(1f, 1f);
-        for (int i = 0; i < 45; i++) {
+
+        for (int i = 0; i < 45; i++) { //update a task couple of times
             vortexSpawnTask.update();
-            assertEquals(scale.scl(1.05f), taskRunner.getScale());
+            assertEquals(taskRunner.getScale().x, taskRunner.getScale().y);
         }
 
-        // the priority is always 10,
-        assertEquals(10, vortexSpawnTask.getPriority());
+        Vector2 scale = new Vector2(8.203527f, 8.203527f);
+        // check the new scale of the entity after updating the vortex spawn task
+        assertEquals(scale, taskRunner.getScale());
 
+        Vector2 scale2 = new Vector2(10f, 10f);
+
+        while (taskRunner.getScale().x != scale2.x) { //x scale and y scale always the same
+            vortexSpawnTask.update();
+        }
+
+        assertEquals(scale2, taskRunner.getScale());
+
+        long timeStart = System.currentTimeMillis();
+        long timeWait = 0;
+
+        while (taskRunner.getScale().x == scale2.x) {
+            vortexSpawnTask.update();
+            if (System.currentTimeMillis() - timeStart >= 1) {
+                timeWait++;
+                timeStart = System.currentTimeMillis();
+            }
+        }
+
+        Assertions.assertTrue(timeWait > 700 && timeWait < 800); // time vortex scale down
+
+        // ensure the priority always return 10
+        assertEquals(10, vortexSpawnTask.getPriority());
     }
 
 }

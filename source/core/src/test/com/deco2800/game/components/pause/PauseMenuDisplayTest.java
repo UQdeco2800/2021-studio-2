@@ -1,9 +1,6 @@
 package com.deco2800.game.components.pause;
 
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Component;
-import com.deco2800.game.components.player.PlayerLowHealthDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -15,10 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
 class PauseMenuDisplayTest {
@@ -48,18 +44,18 @@ class PauseMenuDisplayTest {
     }
 
     @Test
-    public void createTest() {
+    void createTest() {
         verify(pauseMenu).create();
     }
 
     @Test
-    public void disposeTest() {
+    void disposeTest() {
         entity.dispose();
         verify(pauseMenu).dispose();
     }
 
     @Test
-    public void toggleMenuTest(){
+    void toggleMenuTest() {
         //ensure that toggling pause toggles pause menu
         entity.getEvents().addListener("toggleMenu", pauseMenu::toggleMenu);
         actions.togglePauseGame();

@@ -12,9 +12,29 @@ import com.deco2800.game.services.ServiceLocator;
 public class PauseTask extends DefaultTask implements PriorityTask {
 
     /**
-     * Constructor for the Pause Task to prevent the NPC from moving and attacking.
+     * Last time that the attack was created.
+     */
+    private long lastTimeHit;
+
+    /**
+     * When the event listener has already been initialised.
+     */
+    private boolean initialised;
+
+    /**
+     * Constructor for the pause task which occurs when the enemy is recently hit or
+     * when a cutscene is open.
      */
     public PauseTask() {
+        lastTimeHit = ServiceLocator.getTimeSource().getTime();
+        initialised = false;
+    }
+
+    /**
+     * Sets the last time the enemy has been hit when the enemy is hit.
+     */
+    private void enemyHit() {
+        lastTimeHit = ServiceLocator.getTimeSource().getTime();
     }
 
     /**
@@ -25,8 +45,12 @@ public class PauseTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public int getPriority() {
+        if (!initialised) {
+            this.owner.getEntity().getEvents().addListener("enemyHit", this::enemyHit);
+            initialised = true;
+        }
         GameTime timeSource = ServiceLocator.getTimeSource();
-        if (timeSource.isEnemiesPaused()) {
+        if (timeSource.isEnemiesPaused() || timeSource.getTime() < lastTimeHit + 200) {
             return 25;
         } else {
             return -1;
