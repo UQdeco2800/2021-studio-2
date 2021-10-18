@@ -309,7 +309,7 @@ public class WeaponFactory {
 
         normalArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(BaseArrowConfig.HEALTH, 0))
+                .addComponent(new CombatStatsComponent(FastArrowConfig.HEALTH, 0))
                 //damage applied when shooting, arrow is decoration
                 .addComponent(aiComponent);
 
