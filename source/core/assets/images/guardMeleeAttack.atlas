@@ -46,7 +46,7 @@ frontAttack
   orig: 94, 110
   offset: 0, 0
   index: 3
-rightAttack
+leftAttack
   rotate: false
   xy: 578, 2
   size: 94, 110
@@ -55,11 +55,32 @@ rightAttack
   index: 1
 rightAttack
   rotate: false
+  xy: 578, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+leftAttack
+  rotate: false
   xy: 674, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
+rightAttack
+  rotate: false
+  xy: 674, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+leftAttack
+  rotate: false
+  xy: 770, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
 rightAttack
   rotate: false
   xy: 770, 2
