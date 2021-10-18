@@ -59,8 +59,9 @@ public class PlayerSave {
      * the file at location in SAVE_FILE
      */
     public static void load() {
+        File saveFile = new File(SAVE_FILE);
         try {
-            File saveFile = new File(SAVE_FILE);
+
             Scanner saveRead = new Scanner(saveFile);
 
             Save.setHasPlayed(Boolean.parseBoolean(saveRead.nextLine()));
@@ -77,11 +78,13 @@ public class PlayerSave {
             Save.setOdinWins(Integer.parseInt(saveRead.nextLine()));
 
             logger.debug("Player Save File correctly loaded into new game");
+            saveRead.close();
 
         } catch (FileNotFoundException | NumberFormatException e) {
             logger.warn("Player Save File has not correctly written save status");
             Save.resetSave();
         }
+
     }
 
     /**

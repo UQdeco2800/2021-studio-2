@@ -51,10 +51,10 @@ public class GameArea3 extends GameArea {
         for (HashMap<String, Float> boss : bossObjects) {
             int x = boss.get("x").intValue();
             int y = boss.get("y").intValue();
-
+            incBossNum();
             spawnEntityAt(
                     NPCFactory.createOdin(player),
-                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                    new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
                     false,
                     false);
         }

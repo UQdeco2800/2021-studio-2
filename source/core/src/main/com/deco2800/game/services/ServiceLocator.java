@@ -1,12 +1,10 @@
 package com.deco2800.game.services;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
-import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.screens.MainGameScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
