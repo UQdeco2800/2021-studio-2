@@ -64,10 +64,7 @@ public class PlayerSave {
      */
     public static void load() {
         File saveFile = new File(SAVE_FILE);
-        try {
-
-            Scanner saveRead = new Scanner(saveFile);
-
+        try (Scanner saveRead = new Scanner(saveFile)){
             Save.setHasPlayed(Boolean.parseBoolean(saveRead.nextLine()));
             Save.setElfEnc(Integer.parseInt(saveRead.nextLine()));
             Save.setLokiEnc(Integer.parseInt(saveRead.nextLine()));
