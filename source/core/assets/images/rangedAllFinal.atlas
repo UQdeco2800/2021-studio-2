@@ -381,166 +381,148 @@ rightDeath
   offset: 0, 0
   index: 5
 
-assassinElfBackDeath.png
-size: 512, 128
+assassinDeath.png
+size: 1024, 256
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 assassinBackDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 1
 assassinBackDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 2
 assassinBackDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 105, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 3
 assassinBackDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 105, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 4
 assassinBackDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 208, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
-
-assassinElfRightDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-assassinRightDeath
-  rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-assassinRightDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-assassinRightDeath
-  rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-assassinRightDeath
-  rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-assassinRightDeath
-  rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-
-assassinElfFrontDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
+  index: 5
 assassinFrontDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 208, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 5
 assassinFrontDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 826, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 1
 assassinFrontDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 925, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 2
 assassinFrontDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 826, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 3
 assassinFrontDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 925, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
-
-assassinElfLeftDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
+  index: 4
 assassinLeftDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 311, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 1
 assassinLeftDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 414, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 2
 assassinLeftDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 414, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 3
 assassinLeftDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 517, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 4
 assassinLeftDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 311, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 5
+assassinRightDeath
+  rotate: false
+  xy: 620, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+assassinRightDeath
+  rotate: false
+  xy: 620, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+assassinRightDeath
+  rotate: false
+  xy: 723, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+assassinRightDeath
+  rotate: false
+  xy: 723, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 4
+assassinRightDeath
+  rotate: false
+  xy: 517, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 5
