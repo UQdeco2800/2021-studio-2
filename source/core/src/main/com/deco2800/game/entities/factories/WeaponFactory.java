@@ -39,13 +39,21 @@ import com.deco2800.game.services.ServiceLocator;
  */
 public class WeaponFactory {
 
+    private WeaponFactory() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    private static final String ARROW_ATLAS = "images/newArrowBroken/atlas/arrow.atlas";
+    private static final String ARROW_TYPE = "arrow";
+    private static final String ARROW_BROKEN = "brokenArrow";
+
     /**
      * manages the sound to play when constructing the projectile
      *
      * @param projectileType type of projectile
      */
     private static void shootingSound(String projectileType) {
-        if (projectileType.toLowerCase().contains("arrow")) {
+        if (projectileType.toLowerCase().contains(ARROW_TYPE)) {
             Sound arrowEffect = ServiceLocator.getResourceService().getAsset(
                     "sounds/arrow_shoot.mp3", Sound.class);
             arrowEffect.play(0.3f);
@@ -64,7 +72,7 @@ public class WeaponFactory {
      */
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
-        normalArrow.setEntityType("arrow");
+        normalArrow.setEntityType(ARROW_TYPE);
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
@@ -76,13 +84,13 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/newArrowBroken/atlas/arrow.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.02f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.02f, Animation.PlayMode.LOOP);
+                                ARROW_ATLAS, TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.02f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.02f, Animation.PlayMode.LOOP);
 
         normalArrow.setScale(new Vector2(1f, 0.3f));
         normalArrow.setAngle(angle);
-        animator.startAnimation("arrow");
+        animator.startAnimation(ARROW_TYPE);
 
         normalArrow
                 //.addComponent(new TextureRenderComponent(sprite))
@@ -119,11 +127,11 @@ public class WeaponFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
                                 "Odin/OdinProjectile/beamBroken.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(ARROW_BROKEN, 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.1f, Animation.PlayMode.LOOP);
         beam.setScale(beam.getScale().x * 0.1f,
                 beam.getScale().y * 0.1f);
-        animator.startAnimation("arrow");
+        animator.startAnimation(ARROW_TYPE);
         beam.addComponent(animator);
         beam.addComponent(new ProjectileAnimationController());
         shootingSound("beam");
@@ -151,13 +159,13 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/newArrowBroken/atlas/arrow.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.02f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.02f, Animation.PlayMode.LOOP);
+                                ARROW_ATLAS, TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.02f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.02f, Animation.PlayMode.LOOP);
 
         trackingArrow.setScale(new Vector2(1f, 0.3f));
         trackingArrow.setAngle(angle);
-        animator.startAnimation("arrow");
+        animator.startAnimation(ARROW_TYPE);
 
         trackingArrow
                 //.addComponent(new TextureRenderComponent(sprite))
@@ -316,13 +324,13 @@ public class WeaponFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/newArrowBroken/atlas/arrow.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.02f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.02f, Animation.PlayMode.LOOP);
+                                ARROW_ATLAS, TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.02f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.02f, Animation.PlayMode.LOOP);
 
         normalArrow.setScale(new Vector2(1f, 0.3f));
         normalArrow.setAngle(angle);
-        animator.startAnimation("arrow");
+        animator.startAnimation(ARROW_TYPE);
 
         normalArrow.addComponent(animator);
         normalArrow.addComponent(new ProjectileAnimationController());

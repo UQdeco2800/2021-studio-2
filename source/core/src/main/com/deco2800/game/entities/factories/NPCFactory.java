@@ -119,6 +119,9 @@ public class NPCFactory {
      * Final String variable to define the up stun animations.
      */
     private static final String STUN_UP = "stunUp";
+    private static final String CREATE_FIREBALL = "createFireBall";
+    private static final String VIKING_TYPE = "viking";
+    private static final String LOKI_ATLAS = "images/lokiBoss.atlas";
 
     /**
      * throw error
@@ -336,7 +339,7 @@ public class NPCFactory {
         shootProjectileTask.setShootAnimationTimeMS(500);
         aiComponent.addTask(shootProjectileTask);
         //create fireballs if needed
-        elf.data.put("createFireBall", true);
+        elf.data.put(CREATE_FIREBALL, true);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -421,7 +424,7 @@ public class NPCFactory {
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
         //Dont create fireballs until ready and on the map
-        boss.data.put("createFireBall", false);
+        boss.data.put(CREATE_FIREBALL, false);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -520,7 +523,7 @@ public class NPCFactory {
         shootProjectileTask.setMultishotChance(0);
         shootProjectileTask.setShootAnimationTimeMS(1);
         aiComponent.addTask(shootProjectileTask);
-        odin.data.put("createFireBall", true);
+        odin.data.put(CREATE_FIREBALL, true);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -585,7 +588,7 @@ public class NPCFactory {
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
-        viking.setEntityType("viking");
+        viking.setEntityType(VIKING_TYPE);
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
     }
@@ -629,7 +632,7 @@ public class NPCFactory {
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
-        viking.setEntityType("viking");
+        viking.setEntityType(VIKING_TYPE);
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
     }
@@ -670,7 +673,7 @@ public class NPCFactory {
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
-        viking.setEntityType("viking");
+        viking.setEntityType(VIKING_TYPE);
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
     }
@@ -768,7 +771,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(LOKI_ATLAS, TextureAtlas.class));
 
         animator.addAnimation("transformedMoveLeft", 0.2f, Animation.PlayMode.LOOP);
         animator.addAnimation("transformedMoveRight", 0.1f, Animation.PlayMode.LOOP);
@@ -821,7 +824,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(LOKI_ATLAS, TextureAtlas.class));
         animator.setAnimationScale(2f);
 
         setHumanAnimations(animator);
@@ -852,7 +855,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/lokiBoss.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset(LOKI_ATLAS, TextureAtlas.class));
 
         setHumanAnimations(animator);
 
@@ -882,7 +885,7 @@ public class NPCFactory {
 
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
-        viking.setEntityType("viking");
+        viking.setEntityType(VIKING_TYPE);
         PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
         return viking;
     }

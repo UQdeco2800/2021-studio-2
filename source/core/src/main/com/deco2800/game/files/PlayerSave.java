@@ -17,6 +17,10 @@ public class PlayerSave {
     private static final String SAVE_FILE = "playersave.save";
     private static final Logger logger = LoggerFactory.getLogger(PlayerSave.class);
 
+    private PlayerSave() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * Function which takes in a PLayerSave.Save object
      * and writes it to the save file as is.
@@ -112,6 +116,10 @@ public class PlayerSave {
         private static int loki2Wins = 0;
         private static int thorWins = 0;
         private static int odinWins = 0;
+
+        private Save() {
+            throw new IllegalStateException("Utility class");
+        }
 
         public static void setHasPlayed(boolean played) {
             hasPlayed = played;
