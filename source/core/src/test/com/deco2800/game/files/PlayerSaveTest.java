@@ -1,5 +1,6 @@
 package com.deco2800.game.files;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -90,5 +91,10 @@ class PlayerSaveTest {
         assertEquals(8, PlayerSave.Save.getLoki2Wins());
         assertEquals(9, PlayerSave.Save.getThorWins());
         assertEquals(10, PlayerSave.Save.getOdinWins());
+    }
+
+    @AfterEach
+    void resetSaveFile() {
+        PlayerSave.resetFile();
     }
 }
