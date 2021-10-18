@@ -49,7 +49,7 @@ class AxeTest {
     }
 
     @Test
-    void shouldCreateWeaponHitbox() { // TODO
+    void shouldCreateWeaponHitbox() {
         short targetLayer = (1 << 3);
         Entity entity = createAttacker(targetLayer);
 

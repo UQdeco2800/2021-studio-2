@@ -52,8 +52,6 @@ public class Entity {
     public TreeMap<String, Object> data = new TreeMap<>();
     private boolean teleport = false;
     private Vector2 teleportLoc;
-    private PhysicsEngine physics;
-    private DebugRenderer debugRenderer;
 
     public Entity() {
         id = nextId;
@@ -305,7 +303,7 @@ public class Entity {
             component.triggerUpdate();
         }
         if (disposeYourself) {
-            //todo: add a death animation then dispose
+            //note:add a death animation then dispose
             //remove attack abilities and related components first
             dispose();
             return;
@@ -335,8 +333,8 @@ public class Entity {
      * @return true if no object, false otherwise
      */
     public boolean canSeeEntity(Entity target) {
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
+        PhysicsEngine physics = ServiceLocator.getPhysicsService().getPhysics();
+        DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
         RaycastHit hit = new RaycastHit();
         Vector2 from = getCenterPosition();
         Vector2 to = target.getCenterPosition();
