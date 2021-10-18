@@ -124,8 +124,7 @@ public class NPCFactory {
     /**
      * load attribute from config
      */
-    private static final NPCConfigs configs =
-            FileLoader.readClass(NPCConfigs.class, "configs/NPCs.json");
+    private static final NPCConfigs configs = new NPCConfigs();
 
     /**
      * throw error
@@ -778,7 +777,7 @@ public class NPCFactory {
     public static Entity createLoki(Entity target) {
 
         Entity boss = createBaseNPCNoAI();
-        ElfBossConfig config = configs.elfBoss;
+        LokiBossConfig config = configs.lokiBoss;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -833,7 +832,7 @@ public class NPCFactory {
      */
     public static Entity createRangedLokiDecoy(Entity target) {
         Entity boss = createBaseNPCNoAI();
-        ElfBossConfig config = configs.elfBoss;
+        LokiBossConfig config = configs.lokiBoss;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
