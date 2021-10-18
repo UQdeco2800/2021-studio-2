@@ -11,7 +11,6 @@ import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.ResourceService;

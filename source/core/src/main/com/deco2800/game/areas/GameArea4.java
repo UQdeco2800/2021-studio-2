@@ -1,14 +1,11 @@
 package com.deco2800.game.areas;
 
 import com.badlogic.gdx.math.Vector2;
-import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
-import com.deco2800.game.entities.factories.ObstacleFactory;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.DialogueSet;

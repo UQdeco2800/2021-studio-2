@@ -232,7 +232,7 @@ public abstract class GameArea implements Disposable {
                 GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(),
                         (map.getDimensions().get(tilesHeightJSON) - teleportPos.get("y").intValue()));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
-            } else  {
+            } else {
                 //gama area x
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();

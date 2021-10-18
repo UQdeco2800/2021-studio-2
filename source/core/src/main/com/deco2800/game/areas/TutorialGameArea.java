@@ -1,14 +1,12 @@
 package com.deco2800.game.areas;
 
 import com.badlogic.gdx.math.GridPoint2;
-import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.tasks.ShootProjectileTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.utils.math.RandomUtils;
 
 /**

@@ -236,8 +236,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         int maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
 
         if ((float) currentHealth / maxHealth < 0.5f && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
-                    && isTargetVisible()
-                    && getDistanceToTarget() < owner.getEntity().getAttackRange()) {
+                && isTargetVisible()
+                && getDistanceToTarget() < owner.getEntity().getAttackRange()) {
             return currentHealth < health;
         }
         return false;
