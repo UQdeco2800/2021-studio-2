@@ -261,7 +261,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         if (owner.getEntity().getEntityType() != null
                 && (this.owner.getEntity().getEntityType().equals("ranged")
                         || this.owner.getEntity().getEntityType().equals("assassin"))) {
-            String entityType = this.owner.getEntity().getEntityType();
             if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
                 owner.getEntity().getEvents().trigger("DownStart");
             } else if (targetDir > 90 && targetDir < 180) {
@@ -474,7 +473,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private void shootFireball() {
         if (checkFireBalls()) {
-            //TrackingArrowConfig config = new TrackingArrowConfig();
             Entity fireBall = getNextFireBall();
             if (fireBall != null) {
                 //Change behaviour
