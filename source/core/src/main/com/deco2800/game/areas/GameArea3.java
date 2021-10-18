@@ -401,8 +401,17 @@ public class GameArea3 extends GameArea {
     }
 
     private void spawnOdin() {
-        Entity odin = NPCFactory.createOdin(player);
-        spawnEntityAt(odin, new GridPoint2(105, map.getDimensions().get("n_tiles_height") - 101), true, true);
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        for (HashMap<String, Float> object : objects) {
+            int x = object.get("x").intValue();
+            int y = object.get("y").intValue();
+            Entity odin = NPCFactory.createOdin(player);
+            spawnEntityAt(
+                    odin,
+                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    false,
+                    false);
+        }
     }
 
     /**
