@@ -182,7 +182,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         true, true);
                 owner.getEntity().data.put(FIREBALLS_KEY, entities);
                 lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                return (true);
             } else if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
                 //Add new fireball
                 int index = 0;
@@ -196,10 +195,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                                 owner.getEntity().getCenterPosition(),
                                 true, true);
                         lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                        return (true);
+                        break;
                     }
                     index++;
                 }
+                return (true);
             } else {
                 //Check for fireball but don't make one
                 Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);

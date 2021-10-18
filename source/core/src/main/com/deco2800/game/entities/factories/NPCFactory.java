@@ -390,8 +390,7 @@ public class NPCFactory {
         shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.FIREBALL);
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
-        //Dont create fireballs until ready and on the map
-        boss.data.put(CREATE_FIREBALL, false);
+        boss.data.put(CREATE_FIREBALL, true);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(

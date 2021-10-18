@@ -107,7 +107,7 @@ class SpawnMinionsAndExplosionTaskTest {
         boss.getComponent(CombatStatsComponent.class).setHealth(40);
 
         // active
-        assertEquals(20, spawn.getPriority());
+        assertEquals(30, spawn.getPriority());
 
         spawn.update();
         // inactive after the task is update
@@ -115,7 +115,7 @@ class SpawnMinionsAndExplosionTaskTest {
 
         boss.getComponent(CombatStatsComponent.class).setHealth(24);
         // active again if health is reduce to 25%
-        assertEquals(20, spawn.getPriority());
+        assertEquals(30, spawn.getPriority());
 
         // boss can only spawn at most two wave of enemy - one at < 50%, and one at < 25%
 
@@ -143,7 +143,7 @@ class SpawnMinionsAndExplosionTaskTest {
         // special condiction of spawning minions - health < 50, no minions on the map
         // and the boss is outside of map bound
 
-        assertEquals(20, spawn.getPriority());
+        assertEquals(30, spawn.getPriority());
     }
 
     private Entity createBoss() {
