@@ -80,21 +80,23 @@ public class TextBoxDisplay extends UIComponent {
      */
     private final BooleanObject closing = new BooleanObject(false);
 
-    private final float textBoxHeight = 400f;
+    private static final float textBoxHeight = 400f;
 
-    private final float textBoxWidth = 800f;
+    private static final float textBoxWidth = 800f;
 
-    private final float displayYPos = 115f;
+    private static final float displayYPos = 115f;
 
-    private final float textYPos = 250f;
+    private static final float textYPos = 250f;
 
-    private final float characterImageYPos = 50f;
+    private static final float characterImageYPos = 50f;
 
-    private final float characterSize = 768f;
+    private static final float characterSize = 768f;
 
-    private final float mainCharacterDisplayX = 70f;
+    private static final float mainCharacterDisplayX = 70f;
 
-    private final float nameY = 325f;
+    private static final float nameY = 325f;
+
+    private static final float barHeight = 120f;
 
     private final float enemyDisplayX =
             ServiceLocator.getRenderService().getStage().getWidth() - textBoxWidth - mainCharacterDisplayX;
@@ -107,8 +109,6 @@ public class TextBoxDisplay extends UIComponent {
 
     private final float enemyNameX = ServiceLocator.getRenderService().getStage().getWidth() - 705;
 
-    private final float barHeight = 120f;
-
     @Override
     public void create() {
         super.create();
@@ -120,9 +120,9 @@ public class TextBoxDisplay extends UIComponent {
      * Adds the mainCharacterLabel actor to the screen which will be constantly updated to display changes.
      */
     private void addActors() {
-        float MAIN_CHARACTER_NAME_X = 550f;
-        float MAIN_CHARACTER_TEXT_X = 180f;
-        float MAIN_CHARACTER_X_POS = -100f;
+        float mainCharacterNameX = 550f;
+        float mainCharacterTextX = 180f;
+        float mainCharacterXPos = -100f;
 
         topBar = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
@@ -141,9 +141,9 @@ public class TextBoxDisplay extends UIComponent {
         //Text box for the main character set up
         mainCharacterName = new Label("WARRIOR", skin);
         mainCharacterName.setAlignment(Align.center);
-        mainCharacterName.setPosition(MAIN_CHARACTER_NAME_X, nameY);
+        mainCharacterName.setPosition(mainCharacterNameX, nameY);
         mainCharacterLabel = new Label("", skin);
-        mainCharacterLabel.setPosition(MAIN_CHARACTER_TEXT_X, textYPos);
+        mainCharacterLabel.setPosition(mainCharacterTextX, textYPos);
         mainCharacterBox = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/default_text_box.png", Texture.class));
         mainCharacterBox.setPosition(mainCharacterDisplayX, displayYPos);
@@ -151,7 +151,7 @@ public class TextBoxDisplay extends UIComponent {
         mainCharacterBox.setHeight(textBoxHeight);
         mainCharacterImage = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/main_character_image.png", Texture.class));
-        mainCharacterImage.setPosition(MAIN_CHARACTER_X_POS, characterImageYPos);
+        mainCharacterImage.setPosition(mainCharacterXPos, characterImageYPos);
         mainCharacterImage.setWidth(characterSize);
         mainCharacterImage.setHeight(characterSize);
 

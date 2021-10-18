@@ -61,6 +61,7 @@ public class PlayerWin extends UIComponent {
         return hasWin;
     }
 
+    @Override
     public float getZIndex() {
         return 10f;
     }
