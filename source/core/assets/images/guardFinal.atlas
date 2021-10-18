@@ -124,47 +124,6 @@ default
   offset: 0, 0
   index: 1
 
-guardElfBackDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-backDeath
-  rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 0
-backDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
-backDeath
-  rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 2
-backDeath
-  rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 3
-backDeath
-  rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 4
-
 guardDeath.png
 size: 1024, 256
 format: RGBA8888
@@ -311,3 +270,71 @@ rightDeath
   offset: 0, 0
   index: 5
 
+guardMeleeAttack.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+backAttack
+  rotate: false
+  xy: 2, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+backAttack
+  rotate: false
+  xy: 98, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+backAttack
+  rotate: false
+  xy: 194, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+frontAttack
+  rotate: false
+  xy: 290, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+frontAttack
+  rotate: false
+  xy: 386, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+frontAttack
+  rotate: false
+  xy: 482, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+rightAttack
+  rotate: false
+  xy: 578, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+rightAttack
+  rotate: false
+  xy: 674, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+rightAttack
+  rotate: false
+  xy: 770, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
