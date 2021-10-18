@@ -97,6 +97,8 @@ public enum Dialogue {
             new Message(false, "You'll need your hands stained with blood" +
                     "\nbefore you're deemed worthy to enter."),
             new Message(true, "I understand. Nothing will get in my way."),
+            new Message(false, "Last thing, if you want to leave \nbefore defeating all " +
+                    "the enemies \nor take a break between fights \npress P to see the pause menu."),
             new Message(false, "Good luck warrior, I hope to never" +
                     "\nsee you again."),
             new Message(true, "Thank you. Same to you."),
