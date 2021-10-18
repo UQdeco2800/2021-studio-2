@@ -545,25 +545,20 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             if ((float) health / max <= 0.5f) {
                 if (count == 0) {
                     logger.info("Berserk mode: Attack Speed x 4");
-                    logger.info("Berserk mode: Deal true damage 20% player health");
                     setCooldownMS(500);
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(
-                            target.getComponent(CombatStatsComponent.class).getMaxHealth() / 5);
                     rampageStart = System.currentTimeMillis();
                     count++;
-                }
-                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
-                        && (float) health / max <= 0.25) {
-                    logger.info("You can't kill a boss when his minions are alive");
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
                 }
                 if (count == 1 && System.currentTimeMillis() - rampageStart >= 30000) {
                     logger.info("Berserk off");
                     setCooldownMS(2000);
                     owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
                     count++;
                 }
+            } else if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
+                    && (float) health / max < 1f) {
+                logger.info("You can't kill a boss when his minions are alive");
+                owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
             }
         }
         checkFireBalls();
