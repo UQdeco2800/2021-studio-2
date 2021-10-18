@@ -190,6 +190,5 @@ public class BossOverlayComponent extends UIComponent {
         frameRight.remove();
         frameMiddle.remove();
         healthLabel.remove();
-        //Disposes of the dash image: dash.remove();
     }
 }

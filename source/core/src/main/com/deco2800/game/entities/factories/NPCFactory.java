@@ -275,8 +275,6 @@ public class NPCFactory {
                         .addTask(new AnchoredRetreatTask(anchor, anchorSize))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
-                        .addTask(new MeleeChaseTask(
-                                target, 10, 15f, 20f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         anchoredElf.addComponent(aiComponent);
@@ -493,8 +491,6 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new MeleeChaseTask(
-                                target, 10, 15f, 20f))
                         .addTask(new SpawnMinionsAndExplosionTask(target))
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(

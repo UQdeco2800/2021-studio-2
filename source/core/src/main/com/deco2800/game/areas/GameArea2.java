@@ -75,20 +75,4 @@ public class GameArea2 extends GameArea {
         PlayerSave.Save.setLoki2Wins(0);
         PlayerSave.write();
     }
-
-    private void spawnBoss() {
-        HashMap<String, Float>[] objects = map.getBossObjects();
-        for (HashMap<String, Float> object : objects) {
-            int x = object.get("x").intValue();
-            int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createLoki(player);
-            incNum();
-            spawnEntityAt(
-                    elf,
-                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
-                    false,
-                    false);
-        }
-        incBossNum();
-    }
 }

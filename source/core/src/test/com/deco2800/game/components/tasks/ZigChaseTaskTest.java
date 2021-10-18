@@ -17,8 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -63,7 +62,7 @@ class ZigChaseTaskTest {
                 count++;
             }
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - timeCompare) > 500) {
-                assertTrue(initialDistance - entity.getPosition().dst(target.getPosition()) != 0);
+                assertNotEquals(0, initialDistance - entity.getPosition().dst(target.getPosition()));
                 break;
             }
         }

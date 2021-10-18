@@ -348,7 +348,6 @@ public class WeaponFactory {
                 .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER,
                         PhysicsLayer.TELEPORT))
                 .addComponent(aiTaskComponent);
-        //vortex.setScale(scale);
         vortex.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 1);
@@ -378,7 +377,6 @@ public class WeaponFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(aiTaskComponent);
-        //vortex.setScale(scale);
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 2);
         return vortex;
@@ -508,13 +506,6 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(new HammerProjectile(targetLayer, owner));
-    }
-
-    /**
-     * throw error
-     */
-    public WeaponFactory() {
-        throw new IllegalStateException("Instantiating static util class");
     }
 }
 

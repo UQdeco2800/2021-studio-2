@@ -88,10 +88,10 @@ class TeleportComponentTest {
 
         Fixture entityFixture = entity.getComponent(HitboxComponent.class).getFixture();
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
-        Assertions.assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 10);
+        Assertions.assertEquals(10, entity.getComponent(CombatStatsComponent.class).getHealth());
         entity.getComponent(CombatStatsComponent.class).setHealth(5);
         entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
-        Assertions.assertEquals(entity.getComponent(CombatStatsComponent.class).getHealth(), 5);
+        Assertions.assertEquals(5, entity.getComponent(CombatStatsComponent.class).getHealth());
     }
 
     Entity createPlayer(short targetLayer) {

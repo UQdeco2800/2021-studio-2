@@ -75,23 +75,4 @@ public class GameArea1 extends GameArea {
         PlayerSave.Save.setLokiWins(0);
         PlayerSave.write();
     }
-
-    /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    private void spawnBoss() {
-        HashMap<String, Float>[] objects = map.getBossObjects();
-        for (HashMap<String, Float> object : objects) {
-            int x = object.get("x").intValue();
-            int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createLoki(player);
-            incNum();
-            spawnEntityAt(
-                    elf,
-                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
-                    false,
-                    false);
-        }
-        incBossNum();
-    }
 }

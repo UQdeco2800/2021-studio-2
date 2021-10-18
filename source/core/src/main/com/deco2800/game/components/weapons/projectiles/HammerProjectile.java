@@ -145,6 +145,7 @@ public class HammerProjectile extends ProjectileController {
      * @param me    fixture of this projectile
      * @param other fixture of colliding entity.
      */
+    @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {

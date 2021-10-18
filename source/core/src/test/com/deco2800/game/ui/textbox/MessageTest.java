@@ -35,11 +35,11 @@ class MessageTest {
 
     @Test
     void getMainCharacterMessageTest() {
-        assertEquals("This is the main character", messageMain.getMessage());
+        assertEquals("This is the main character", messageMain.getMessageContents());
     }
 
     @Test
     void getNPCMessageTest() {
-        assertEquals("This is not the main character", messageNPC.getMessage());
+        assertEquals("This is not the main character", messageNPC.getMessageContents());
     }
 }

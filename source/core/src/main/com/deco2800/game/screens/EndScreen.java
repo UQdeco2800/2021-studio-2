@@ -29,7 +29,6 @@ public class EndScreen extends ScreenAdapter {
     private static final String[] endScreenAtlas = {};
     private final GdxGame game;
     private final Renderer renderer;
-    private AnimationRenderComponent endAnimator;
 
     public EndScreen(GdxGame game) {
         this.game = game;
@@ -39,10 +38,8 @@ public class EndScreen extends ScreenAdapter {
         ServiceLocator.registerResourceService(new ResourceService());
         ServiceLocator.registerEntityService(new EntityService());
         ServiceLocator.registerRenderService(new RenderService());
-        //ServiceLocator.registerTimeSource(new GameTime()); //dunno about this one
 
         renderer = RenderFactory.createRenderer();
-        //renderer.getCamera().getEntity().setPosition(5f, 5f); //;do i really need this?
 
         loadAssets();
         createUI();

@@ -228,13 +228,6 @@ public class ObstacleFactory {
     public static Entity createAnchor() {
         Entity anchor = new Entity()
                 .addComponent(new PhysicsComponent())
-                //hitbox allows the anchor to be seen in debug mode but should be removed out of testing.
-                //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-                //collision can be used instead to test how the follower reacts to a moving anchor
-                //.addComponent(new ColliderComponent())
-                // or an obstacle based anchor (cant see through)
-                //.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                //Uncomment below to render in game
                 .addComponent(new TextureRenderComponent("images/crown.png"));
         //Stop from moving
         anchor.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

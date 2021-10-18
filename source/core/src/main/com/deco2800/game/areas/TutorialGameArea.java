@@ -50,7 +50,8 @@ public class TutorialGameArea extends GameArea {
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
-    private void spawnMeleeElf() {
+    @Override
+    protected void spawnMeleeElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -65,7 +66,8 @@ public class TutorialGameArea extends GameArea {
     /**
      * Spawn range elf on terrain, range elf can shoot target
      */
-    private void spawnRangedElf() {
+    @Override
+    protected void spawnRangedElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -82,7 +84,8 @@ public class TutorialGameArea extends GameArea {
     /**
      * Spawn Assassin on terrain, range can shoot from far away with high damage
      */
-    private void spawnAssassinElf() {
+    @Override
+    protected void spawnAssassinElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -99,13 +102,15 @@ public class TutorialGameArea extends GameArea {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    private void spawnBoss() {
+    @Override
+    protected void spawnBoss() {
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);
     }
 
-    private void spawnElfGuard() {
+    @Override
+    protected void spawnElfGuard() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -118,7 +123,8 @@ public class TutorialGameArea extends GameArea {
     /**
      * Spawn anchored elf, elf only move at the certain anchored
      */
-    private void spawnAnchoredElf() {
+    @Override
+    protected void spawnAnchoredElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 

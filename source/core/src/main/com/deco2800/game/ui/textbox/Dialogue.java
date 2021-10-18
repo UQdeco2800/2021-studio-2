@@ -556,7 +556,7 @@ public enum Dialogue {
      * @return String at the index
      */
     public String getMessage(int index) {
-        return messages[index].getMessage();
+        return messages[index].getMessageContents();
     }
 
     /**
@@ -593,11 +593,11 @@ class Message {
     /**
      * The message that will be displayed by the character.
      */
-    private final String message;
+    private final String messageContents;
 
-    public Message(boolean mainCharacter, String message) {
+    public Message(boolean mainCharacter, String messageContents) {
         this.mainCharacter = mainCharacter;
-        this.message = message;
+        this.messageContents = messageContents;
     }
 
     /**
@@ -614,8 +614,8 @@ class Message {
      *
      * @return String containing the message to be displayed
      */
-    public String getMessage() {
-        return message;
+    public String getMessageContents() {
+        return messageContents;
     }
 
 }

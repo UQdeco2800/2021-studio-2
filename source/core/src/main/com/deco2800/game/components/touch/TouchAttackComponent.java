@@ -116,38 +116,12 @@ public class TouchAttackComponent extends TouchComponent {
 
         applyContinuousDamage(me, other);
 
-//        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC) {
-//            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-//            if (this.getEntity().getComponent(
-//                    PhysicsMovementComponent.class).getTarget() == null) {
-//                return; // ignore if the physics component is null
-//            }
-//            Vector2 direction = this.getEntity().getComponent(
-//                    PhysicsMovementComponent.class).getDirection();
-//
-//            if (Math.abs(direction.x) > Math.abs(direction.y)) {
-//                if (direction.x < 0) {
-//                    this.getEntity().getEvents().trigger("stunLeft");
-//                } else {
-//                    this.getEntity().getEvents().trigger("stunRight");
-//                }
-//            } else {
-//                if (direction.y < 0) {
-//                    this.getEntity().getEvents().trigger("stunDown");
-//                } else {
-//                    this.getEntity().getEvents().trigger("stunUp");
-//                }
-//            }
-//        }
-
         //Dissolve arrow attacks after hits
         if (getEntity().getComponent(HitboxComponent.class).getLayer()
                 == PhysicsLayer.PROJECTILEWEAPON
                 || getEntity().getComponent(HitboxComponent.class).getLayer()
                 == PhysicsLayer.IDLEPROJECTILEWEAPON) {
 
-            //Remove later on to make arrows stick into walls and more
-            //getEntity().getComponent(AITaskComponent.class).dispose();
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
             knockbackForce = 0;

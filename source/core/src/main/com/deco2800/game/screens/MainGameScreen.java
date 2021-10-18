@@ -160,10 +160,9 @@ public class MainGameScreen extends ScreenAdapter {
      * Runs when the player dies, causes the camera to zoom in.
      */
     private void isPlayerDead() {
-        if (this.gameArea.getPlayer() != null) {
-            if (this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
-                zoomCamera();
-            }
+        if (this.gameArea.getPlayer() != null
+                && this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
+            zoomCamera();
         }
     }
 

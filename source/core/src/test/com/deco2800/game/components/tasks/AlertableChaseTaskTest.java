@@ -18,8 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -75,7 +74,7 @@ class AlertableChaseTaskTest {
         float newDistance1 = alertableEntity.getPosition().dst(target.getPosition());
 
         // target is too far from enemy
-        assertEquals(oldDistance - newDistance1, 0);
+        assertEquals(0, oldDistance - newDistance1);
 
         while (TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - time) < 3000) {
             entity.update();
@@ -84,7 +83,7 @@ class AlertableChaseTaskTest {
         }
 
         float newDistance2 = entity.getPosition().dst(target.getPosition());
-        assertTrue(newDistance2 - oldDistance != 0);
+        assertNotEquals(0, newDistance2 - oldDistance);
     }
 
     private Entity makePhysicsEntity() {
