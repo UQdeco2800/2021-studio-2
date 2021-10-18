@@ -54,46 +54,6 @@ public class TerrainFactory {
     }
 
     /**
-     * Create a terrain of the given type, using the orientation of the factory. This can be extended
-     * to add additional game terrains.
-     *
-     * @param terrainType Terrain to create
-     * @return Terrain component which renders the terrain
-     */
-    public TerrainComponent createTerrain(TerrainType terrainType) {
-        ResourceService resourceService = ServiceLocator.getResourceService();
-        switch (terrainType) {
-            case FOREST_DEMO:
-                TextureRegion orthoGrass =
-                        new TextureRegion(resourceService.getAsset("images/grass_1.png", Texture.class));
-                TextureRegion orthoTuft =
-                        new TextureRegion(resourceService.getAsset("images/grass_2.png", Texture.class));
-                TextureRegion orthoRocks =
-                        new TextureRegion(resourceService.getAsset("images/grass_3.png", Texture.class));
-                return createForestDemoTerrain(0.5f, orthoGrass, orthoTuft, orthoRocks);
-            case FOREST_DEMO_ISO:
-                TextureRegion isoGrass =
-                        new TextureRegion(resourceService.getAsset("images/iso_grass_1.png", Texture.class));
-                TextureRegion isoTuft =
-                        new TextureRegion(resourceService.getAsset("images/iso_grass_2.png", Texture.class));
-                TextureRegion isoRocks =
-                        new TextureRegion(resourceService.getAsset("images/iso_grass_3.png", Texture.class));
-                return createForestDemoTerrain(1f, isoGrass, isoTuft, isoRocks);
-            case FOREST_DEMO_HEX:
-                TextureRegion hexGrass =
-                        new TextureRegion(resourceService.getAsset("images/hex_grass_1.png", Texture.class));
-                TextureRegion hexTuft =
-                        new TextureRegion(resourceService.getAsset("images/hex_grass_2.png", Texture.class));
-                TextureRegion hexRocks =
-                        new TextureRegion(resourceService.getAsset("images/hex_grass_3.png", Texture.class));
-                return createForestDemoTerrain(1f, hexGrass, hexTuft, hexRocks);
-
-            default:
-                return null;
-        }
-    }
-
-    /**
      * A version of createTerrain that takes a map object as an input to render a specific map
      *
      * @param terrainType terrain type
