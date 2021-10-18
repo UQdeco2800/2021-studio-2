@@ -45,7 +45,7 @@ public abstract class ProjectileController extends Component {
      */
     @Override
     public void update() {
-        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > this.stats.PROJECTILE_LIFESPAN) {
+        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > BlastStats.PROJECTILE_LIFESPAN) {
             entity.prepareDispose();
         }
     }
@@ -72,15 +72,15 @@ public abstract class ProjectileController extends Component {
         Entity targetEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = targetEntity.getComponent(CombatStatsComponent.class);
         if (targetStats != null) {
-            targetStats.weaponHit(this.stats.ATTACK_POWER);
+            targetStats.weaponHit(BlastStats.ATTACK_POWER);
         }
 
         // Apply knockback
         PhysicsComponent physicsComponent = targetEntity.getComponent(PhysicsComponent.class);
-        if (physicsComponent != null && this.stats.KNOCKBACK > 0f) {
+        if (physicsComponent != null && BlastStats.KNOCKBACK > 0f) {
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = targetEntity.getCenterPosition().sub(entity.getCenterPosition());
-            Vector2 impulse = direction.setLength(this.stats.KNOCKBACK);
+            Vector2 impulse = direction.setLength(BlastStats.KNOCKBACK);
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         this.onHit();
