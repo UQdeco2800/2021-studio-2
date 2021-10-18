@@ -5,6 +5,5 @@ package com.deco2800.game.entities.configs;
  */
 public class ElfBossConfig {
     public int health = 1000;
-    public int attack = 20;
-    public int baseAttack = 30;
+    public int baseAttack = 0;
 }

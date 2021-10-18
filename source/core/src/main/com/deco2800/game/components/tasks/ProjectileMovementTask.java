@@ -46,11 +46,11 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     @Override
     public void update() {
         //Change this if statement if there is too much lag
-        if (updateAngle > 0) {//UserSettings.get().fps/10) {
+        if (updateAngle > 0) {
             if (targetEntity != null) {
                 RaycastHit hit = new RaycastHit();
                 if (!ServiceLocator.getPhysicsService().getPhysics().raycast(owner.getEntity().getPosition(), targetEntity.getPosition(), PhysicsLayer.OBSTACLE, hit)) {
-                    float turningAngle = 0.4f;//UserSettings.get().fps;
+                    float turningAngle = 0.4f;
                     Vector2 relativeLocationTarget = target.cpy().sub(owner.getEntity().getPosition());
                     Vector2 relativeLocationEntity = targetEntity.getPosition().cpy().sub(owner.getEntity().getPosition());
                     if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
@@ -116,7 +116,6 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
         } else {
             playArrow();
         }
-//        owner.getEntity().prepareDispose();
     }
 
     /**
