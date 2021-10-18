@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10};
+<script type="text/javascript">var data = {"i0":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -118,7 +118,7 @@ extends <a href="GameArea.html" title="class in com.deco2800.game.areas">GameAre
 <h3>Fields inherited from class&nbsp;com.deco2800.game.areas.<a href="GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></h3>
 <a id="fields.inherited.from.class.com.deco2800.game.areas.GameArea">
 <!--   -->
-</a><code><a href="GameArea.html#areaEntities">areaEntities</a>, <a href="GameArea.html#backgroundMusic">backgroundMusic</a>, <a href="GameArea.html#map">map</a>, <a href="GameArea.html#numBoss">numBoss</a>, <a href="GameArea.html#numEnemy">numEnemy</a>, <a href="GameArea.html#player">player</a>, <a href="GameArea.html#playerHealth">playerHealth</a>, <a href="GameArea.html#sounds">sounds</a>, <a href="GameArea.html#terrain">terrain</a>, <a href="GameArea.html#terrainFactory">terrainFactory</a>, <a href="GameArea.html#textureAtlases">textureAtlases</a>, <a href="GameArea.html#textures">textures</a>, <a href="GameArea.html#tileTextures">tileTextures</a>, <a href="GameArea.html#WALL_WIDTH">WALL_WIDTH</a></code></div>
+</a><code><a href="GameArea.html#areaEntities">areaEntities</a>, <a href="GameArea.html#backgroundMusic">backgroundMusic</a>, <a href="GameArea.html#levelInt">levelInt</a>, <a href="GameArea.html#map">map</a>, <a href="GameArea.html#numBoss">numBoss</a>, <a href="GameArea.html#numEnemy">numEnemy</a>, <a href="GameArea.html#player">player</a>, <a href="GameArea.html#playerHealth">playerHealth</a>, <a href="GameArea.html#sounds">sounds</a>, <a href="GameArea.html#terrain">terrain</a>, <a href="GameArea.html#terrainFactory">terrainFactory</a>, <a href="GameArea.html#textureAtlases">textureAtlases</a>, <a href="GameArea.html#textures">textures</a>, <a href="GameArea.html#tileTextures">tileTextures</a>, <a href="GameArea.html#WALL_WIDTH">WALL_WIDTH</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -176,13 +176,6 @@ int&nbsp;currentHealth)</code></th>
 <div class="block">Create the game area, including terrain, static entities (trees), dynamic entities (player)</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
-<td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLevel()">getLevel</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Use for teleport, track the current map player in</div>
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -191,7 +184,7 @@ int&nbsp;currentHealth)</code></th>
 <h3>Methods inherited from class&nbsp;com.deco2800.game.areas.<a href="GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.areas.GameArea">
 <!--   -->
-</a><code><a href="GameArea.html#decBossNum()">decBossNum</a>, <a href="GameArea.html#decNum()">decNum</a>, <a href="GameArea.html#displayUI(java.lang.String)">displayUI</a>, <a href="GameArea.html#dispose()">dispose</a>, <a href="GameArea.html#getNumEnemy()">getNumEnemy</a>, <a href="GameArea.html#getPlayer()">getPlayer</a>, <a href="GameArea.html#incBossNum()">incBossNum</a>, <a href="GameArea.html#incNum()">incNum</a>, <a href="GameArea.html#loadAssets()">loadAssets</a>, <a href="GameArea.html#playMusic()">playMusic</a>, <a href="GameArea.html#setMap(com.deco2800.game.areas.terrain.Map)">setMap</a>, <a href="GameArea.html#spawnAsgardWarriorObject()">spawnAsgardWarriorObject</a>, <a href="GameArea.html#spawnEntity(com.deco2800.game.entities.Entity)">spawnEntity</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2,boolean,boolean)">spawnEntityAt</a>, <a href="GameArea.html#spawnHealthCrateObject()">spawnHealthCrateObject</a>, <a href="GameArea.html#spawnHellWarriorObject()">spawnHellWarriorObject</a>, <a href="GameArea.html#spawnLavaTraps()">spawnLavaTraps</a>, <a href="GameArea.html#spawnLights()">spawnLights</a>, <a href="GameArea.html#spawnMovementCutscenes()">spawnMovementCutscenes</a>, <a href="GameArea.html#spawnObstacles()">spawnObstacles</a>, <a href="GameArea.html#spawnOutdoorArcherObject()">spawnOutdoorArcherObject</a>, <a href="GameArea.html#spawnOutdoorWarriorObject()">spawnOutdoorWarriorObject</a>, <a href="GameArea.html#spawnPlayer()">spawnPlayer</a>, <a href="GameArea.html#spawnPTraps()">spawnPTraps</a>, <a href="GameArea.html#spawnSpikeTraps()">spawnSpikeTraps</a>, <a href="GameArea.html#spawnTeleport()">spawnTeleport</a>, <a href="GameArea.html#spawnTerrain()">spawnTerrain</a>, <a href="GameArea.html#spawnTraps()">spawnTraps</a>, <a href="GameArea.html#unloadAssets()">unloadAssets</a></code></div>
+</a><code><a href="GameArea.html#decBossNum()">decBossNum</a>, <a href="GameArea.html#decNum()">decNum</a>, <a href="GameArea.html#displayUI(java.lang.String)">displayUI</a>, <a href="GameArea.html#dispose()">dispose</a>, <a href="GameArea.html#getLevel()">getLevel</a>, <a href="GameArea.html#getNumEnemy()">getNumEnemy</a>, <a href="GameArea.html#getPlayer()">getPlayer</a>, <a href="GameArea.html#incBossNum()">incBossNum</a>, <a href="GameArea.html#incNum()">incNum</a>, <a href="GameArea.html#loadAssets()">loadAssets</a>, <a href="GameArea.html#playMusic()">playMusic</a>, <a href="GameArea.html#setMap(com.deco2800.game.areas.terrain.Map)">setMap</a>, <a href="GameArea.html#spawnAsgardWarriorObject()">spawnAsgardWarriorObject</a>, <a href="GameArea.html#spawnEntity(com.deco2800.game.entities.Entity)">spawnEntity</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.GridPoint2,boolean,boolean)">spawnEntityAt</a>, <a href="GameArea.html#spawnEntityAt(com.deco2800.game.entities.Entity,com.badlogic.gdx.math.Vector2,boolean,boolean)">spawnEntityAt</a>, <a href="GameArea.html#spawnHealthCrateObject()">spawnHealthCrateObject</a>, <a href="GameArea.html#spawnHellWarriorObject()">spawnHellWarriorObject</a>, <a href="GameArea.html#spawnLavaTraps()">spawnLavaTraps</a>, <a href="GameArea.html#spawnLights()">spawnLights</a>, <a href="GameArea.html#spawnMovementCutscenes()">spawnMovementCutscenes</a>, <a href="GameArea.html#spawnObstacles()">spawnObstacles</a>, <a href="GameArea.html#spawnOutdoorArcherObject()">spawnOutdoorArcherObject</a>, <a href="GameArea.html#spawnOutdoorWarriorObject()">spawnOutdoorWarriorObject</a>, <a href="GameArea.html#spawnPlayer()">spawnPlayer</a>, <a href="GameArea.html#spawnPTraps()">spawnPTraps</a>, <a href="GameArea.html#spawnSpikeTraps()">spawnSpikeTraps</a>, <a href="GameArea.html#spawnTeleport()">spawnTeleport</a>, <a href="GameArea.html#spawnTerrain()">spawnTerrain</a>, <a href="GameArea.html#spawnTraps()">spawnTraps</a>, <a href="GameArea.html#unloadAssets()">unloadAssets</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <a id="methods.inherited.from.class.java.lang.Object">
@@ -241,17 +234,6 @@ int&nbsp;currentHealth)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="GameArea.html#create()">create</a></code>&nbsp;in class&nbsp;<code><a href="GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></code></dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="getLevel()">getLevel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">int</span>&nbsp;<span class="memberName">getLevel</span>()</div>
-<div class="block">Use for teleport, track the current map player in</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="GameArea.html#getLevel()">getLevel</a></code>&nbsp;in class&nbsp;<code><a href="GameArea.html" title="class in com.deco2800.game.areas">GameArea</a></code></dd>
 </dl>
 </section>
 </li>

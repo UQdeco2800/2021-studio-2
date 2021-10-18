@@ -6,7 +6,7 @@ com.deco2800.game.areas.terrain
 com.deco2800.game.components
 com.deco2800.game.components.crate
 com.deco2800.game.components.death
-com.deco2800.game.components.endGame
+com.deco2800.game.components.endgame
 com.deco2800.game.components.gamearea
 com.deco2800.game.components.maingame
 com.deco2800.game.components.mainmenu
