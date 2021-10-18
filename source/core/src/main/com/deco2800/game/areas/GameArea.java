@@ -176,7 +176,6 @@ public abstract class GameArea implements Disposable {
         spawnLavaTraps();
         spawnHealthCrateObject();
         spawnTraps();
-        spawnSpikeTraps();
         spawnPTraps();
 
         spawnPlayer();
