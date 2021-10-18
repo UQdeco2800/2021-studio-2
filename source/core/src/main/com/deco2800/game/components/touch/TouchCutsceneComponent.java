@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * <p>Damage is only applied if target entity has a CombatStatsComponent. Knockback is only applied
  * if target entity has a PhysicsComponent.
  */
-public class TouchCutsceneComponent extends com.deco2800.game.components.touch.TouchComponent {
+public class TouchCutsceneComponent extends TouchComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(TouchCutsceneComponent.class);
     private final RandomDialogueSet dialogueSet;
