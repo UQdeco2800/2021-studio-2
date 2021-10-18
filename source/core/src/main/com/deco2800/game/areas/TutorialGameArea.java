@@ -39,7 +39,6 @@ public class TutorialGameArea extends GameArea {
         spawnRangedElf();
         spawnAssassinElf();
         spawnAnchoredElf();
-        spawnBoss();
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
         return this;
@@ -95,16 +94,6 @@ public class TutorialGameArea extends GameArea {
             spawnEntityAt(elf, randomPos, true, true);
             incNum();
         }
-    }
-
-    /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    @Override
-    protected void spawnBoss() {
-        GridPoint2 bossPos = new GridPoint2(100, 100);
-        Entity boss = NPCFactory.createBossNPC(player);
-        spawnEntityAt(boss, bossPos, true, true);
     }
 
     @Override

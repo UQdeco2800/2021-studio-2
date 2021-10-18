@@ -172,8 +172,6 @@ public abstract class GameArea implements Disposable {
         spawnTerrain();
         spawnObstacles();
         spawnLights();
-        spawnTeleport();
-        spawnSpikeTraps();
         spawnLavaTraps();
         spawnHealthCrateObject();
         spawnTraps();
@@ -221,18 +219,12 @@ public abstract class GameArea implements Disposable {
      * decrease number of boss - spawn the teleport portal to another map
      */
     public void decBossNum() {
+        logger.info("Decreasing number of bosses in the map.");
         numBoss--;
         if (numBoss == 0) {
             logger.info("Number of Bosses is now at 0");
             logger.info("Spawning the teleport object");
-            if (getLevel() == 9) {
-                //tutorial level
-                Entity teleport = ObstacleFactory.createTeleport();
-                HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
-                GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(),
-                        (map.getDimensions().get(tilesHeightJSON) - teleportPos.get("y").intValue()));
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-            } else {
+            if (getLevel() != 9) {
                 //gama area x
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
@@ -544,12 +536,6 @@ public abstract class GameArea implements Disposable {
         spawnEntityAt(trap, fixedPos, true, true);
     }
 
-    protected void spawnTeleport() {
-        Entity teleport = ObstacleFactory.createTeleport();
-        GridPoint2 fixedPos = new GridPoint2(15, 10);
-        spawnEntityAt(teleport, fixedPos, true, true);
-    }
-
     protected void spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
@@ -687,26 +673,6 @@ public abstract class GameArea implements Disposable {
                 int y = object.get("y").intValue();
                 Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.FAST_ARROW, 0);
                 elf.getEvents().trigger("assassinLeft");
-                incNum();
-                spawnEntityAt(
-                        elf,
-                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
-                        false,
-                        false);
-            }
-        }
-    }
-
-    /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    protected void spawnBoss() {
-        HashMap<String, Float>[] objects = map.getBossObjects();
-        if (objects != null) {
-            for (HashMap<String, Float> object : objects) {
-                int x = object.get("x").intValue();
-                int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createBossNPC(player);
                 incNum();
                 spawnEntityAt(
                         elf,
