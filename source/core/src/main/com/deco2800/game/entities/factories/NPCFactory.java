@@ -509,7 +509,7 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 healthBar, healthBarFrame, healthBarDecrease);
 
-        thor.addComponent(new CombatStatsComponent(config.health, config.attack))
+        thor.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent)
@@ -543,7 +543,7 @@ public class NPCFactory {
         animator.startAnimation("default");
         setHumanAnimations(animator);
 
-        odin.addComponent(new CombatStatsComponent(config.health, config.attack))
+        odin.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent)
