@@ -493,13 +493,12 @@ public class NPCFactory {
         animator.startAnimation("default");
         setHumanAnimations(animator);
 
-        //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
-        odin.addComponent(new CombatStatsComponent(ElfBossConfig.HEALTH, ElfBossConfig.BASE_ATTACK))
+        odin.addComponent(new CombatStatsComponent(OdinBossConfig.HEALTH, OdinBossConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent)
                 .addComponent(new BossOverlayComponent());
-        odin.getComponent(BossOverlayComponent.class).nameBoss("Odin   ");
+        odin.getComponent(BossOverlayComponent.class).nameBoss("Odin");
         odin.setAttackRange(10);
 
         odin.getComponent(AnimationRenderComponent.class).scaleEntity();
@@ -756,7 +755,7 @@ public class NPCFactory {
                 .addComponent(new BossOverlayComponent());
         boss.setAttackRange(3);
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
-        boss.getComponent(BossOverlayComponent.class).nameBoss("Loki    ");
+        boss.getComponent(BossOverlayComponent.class).nameBoss("Loki");
 
         boss.addComponent(createHealthBarComponent());
         boss.setEntityType("loki");
