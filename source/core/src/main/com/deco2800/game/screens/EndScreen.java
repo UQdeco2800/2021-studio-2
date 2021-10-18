@@ -106,7 +106,7 @@ public class EndScreen extends ScreenAdapter {
 
         ServiceLocator.getEntityService().register(endUi);
 
-        endUi.setScale(20.5f,12.5f);
+        endUi.setScale(20.5f, 12.5f);
         endUi.setPosition(-5.5f, -1.5f);
 
         Timer.schedule(new Timer.Task() {
