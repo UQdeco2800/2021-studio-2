@@ -105,7 +105,8 @@ public class ForestGameArea extends GameArea {
             "thor/left_attck.png",
             "thor/right_attck.png",
             "thor/walk_left.png",
-            "thor/walk_right.png"
+            "thor/walk_right.png",
+            "rangedDeath.png"
     };
     public static final String[] healthRegenTextures = {
             "healthRegen/healthPotion_placeholder.png",
@@ -122,7 +123,7 @@ public class ForestGameArea extends GameArea {
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas", "thor/thor.atlas"
+            "images/lokiBoss.atlas", "thor/thor.atlas", "rangedDeath.atlas"
     };
     private static final String[] arrowSounds = {
             "sounds/arrow_disappear.mp3",
@@ -168,10 +169,10 @@ public class ForestGameArea extends GameArea {
         //spawnTrees();
         spawnPlayer();
         spawnCrate();
-        spawnThor();
+//        spawnThor();
 //        spawnMeleeElf();
 //        spawnElfGuard();
-//        spawnRangedElf();
+        spawnRangedElf();
 //        spawnAssassinElf();
 //        spawnAnchoredElf();
 //        spawnVikingMelee();
@@ -181,7 +182,7 @@ public class ForestGameArea extends GameArea {
 //        spawnAsgardWarriorMelee();
 //        spawnOutdoorArcher();
 //        spawnLoki();
-        playMusic();
+//        playMusic();
         setDialogue();
         spawnOdin();
 
