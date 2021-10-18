@@ -10,14 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileLoaderTest {
 
     @Test
-    void loadFromValidFile() {
-        TestStats test = FileLoader.readClass(TestStats.class, "test/files/valid.json");
-        assertNotNull(test);
-        assertEquals(3, test.stat1);
-        assertEquals(4, test.stat2);
-    }
-
-    @Test
     void loadFromEmptyFile() {
         TestStats test =
                 FileLoader.readClass(
