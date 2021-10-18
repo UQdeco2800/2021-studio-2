@@ -188,10 +188,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      * @return true if not inside the map, false otherwise
      */
     public boolean mapBound() {
-        return (owner.getEntity().getPosition().x < 0
-                && owner.getEntity().getPosition().y < 0)
-                || (owner.getEntity().getPosition().x > 30
-                && owner.getEntity().getPosition().y > 30);
+        return (owner.getEntity().getPosition().x < 86.315
+                && owner.getEntity().getPosition().y < 53.015)
+                || (owner.getEntity().getPosition().x > 98.185
+                && owner.getEntity().getPosition().y > 63.185);
     }
 
     /**
