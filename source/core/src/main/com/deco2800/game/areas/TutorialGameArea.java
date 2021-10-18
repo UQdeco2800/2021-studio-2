@@ -32,17 +32,9 @@ public class TutorialGameArea extends GameArea {
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
-    @Override
-    public void create() {
-        map = FileLoader.readClass(Map.class, "maps/MapObjects.json");
-        tileTextures = map.tileRefsArray();
-
-        super.create();
-        loadAssets();
-        displayUI("map Test");
-
-        spawnTerrain();
-        spawnPlayer();
+    public GameArea create() {
+        levelInt = 9;
+        super.create("maps/MapObjects.json", "map Test");
 
         spawnMeleeElf();
         spawnElfGuard();
@@ -51,25 +43,8 @@ public class TutorialGameArea extends GameArea {
         spawnAnchoredElf();
         spawnBoss();
 
-        spawnObstacles();
-
-        spawnSpikeTraps();
-        spawnLavaTraps();
-
-        spawnTraps();
-        spawnPTraps();
-
-        playMusic();
-        spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 9;
+        return this;
     }
 
     /**

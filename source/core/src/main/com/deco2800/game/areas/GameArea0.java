@@ -37,20 +37,9 @@ public class GameArea0 extends GameArea {
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
-    @Override
-    public void create() {
-        map = FileLoader.readClass(Map.class, "maps/lvl_1.json");
-        tileTextures = map.tileRefsArray();
+    public GameArea create() {
+        super.create("maps/lvl_1.json", "Level 1");
 
-        super.create();
-        loadAssets();
-        displayUI("Level 1");
-
-        spawnTerrain();
-        spawnPlayer();
-
-        spawnMeleeElf();
-        spawnMovementCutscenes();
         spawnMeleeElf();
         spawnElfGuard();
         spawnRangedElf();
@@ -58,52 +47,12 @@ public class GameArea0 extends GameArea {
         spawnAnchoredElf();
         spawnBoss();
 
-        spawnDialogueCutscenes();
+        spawnMovementCutscenes();
+        spawnDialogueCutscenes(RandomDialogueSet.ELF_ENCOUNTER);
         setInitialDialogue();
 
-        spawnObstacles();
-        spawnLights();
-
-        spawnSpikeTraps();
-        spawnLavaTraps();
-        spawnHealthCrateObject();
-
-        spawnHealthCrateObject();
-
-        spawnTraps();
-        spawnPTraps();
-
-        playMusic();
-        spawnTeleport();
-        decBossNum();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
-    }
-
-    private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.ELF_ENCOUNTER;
-        DialogueSet set;
-        if (PlayerSave.Save.getElfEnc() == 0) {
-            set = DialogueSet.FIRST_ENCOUNTER;
-        } else {
-            if (PlayerSave.Save.getElfWins() == 0) {
-                //If getWins() returns 0, that means the most recent game has resulted in a loss
-                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
-            } else {
-                // When it returns 1, then the player has beaten the boss before
-                set = DialogueSet.BOSS_DEFEATED_BEFORE;
-            }
-        }
-        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
-        for (HashMap<String, Float> dialogue : dialogues) {
-            int x = dialogue.get("x").intValue();
-            int y = dialogue.get("y").intValue();
-
-            spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
+        return this;
     }
 
     private void spawnMeleeElf() {
@@ -116,7 +65,7 @@ public class GameArea0 extends GameArea {
                 incNum();
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -138,7 +87,7 @@ public class GameArea0 extends GameArea {
                 elf.getEvents().trigger("rangerLeft");
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -159,7 +108,7 @@ public class GameArea0 extends GameArea {
                 incNum();
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -179,7 +128,7 @@ public class GameArea0 extends GameArea {
                 incNum();
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -196,7 +145,7 @@ public class GameArea0 extends GameArea {
                 incNum();
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -217,7 +166,7 @@ public class GameArea0 extends GameArea {
                 incNum();
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }

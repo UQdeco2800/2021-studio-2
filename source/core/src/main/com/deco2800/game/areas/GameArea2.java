@@ -35,67 +35,19 @@ public class GameArea2 extends GameArea {
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
-    @Override
-    public void create() {
-        map = FileLoader.readClass(Map.class, "maps/lvl_4.json");
-        tileTextures = map.tileRefsArray();
+    public GameArea create() {
         levelInt = 2;
+        super.create("maps/lvl_4.json", "Level 3");
 
-        super.create();
-        loadAssets();
-        displayUI("Level 3");
-
-        spawnTerrain();
-        spawnPlayer();
-
-        spawnBoss();
         spawnHellWarriorObject();
+        spawnBoss();
+
         spawnMovementCutscenes();
-        spawnDialogueCutscenes();
+        spawnDialogueCutscenes(RandomDialogueSet.LOKI2_ENCOUNTER);
         setInitialDialogue();
 
-        spawnObstacles();
-        spawnLights();
-
-        spawnSpikeTraps();
-        spawnLavaTraps();
-
-        spawnTraps();
-        spawnPTraps();
-
-        spawnHealthCrateObject();
-
-        playMusic();
-        spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
-    }
-
-    private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI2_ENCOUNTER;
-        DialogueSet set;
-        if (PlayerSave.Save.getElfEnc() == 0) {
-            set = DialogueSet.FIRST_ENCOUNTER;
-        } else {
-            if (PlayerSave.Save.getElfWins() == 0) {
-                //If getWins() returns 0, that means the most recent game has resulted in a loss
-                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
-            } else {
-                // When it returns 1, then the player has beaten the boss before
-                set = DialogueSet.BOSS_DEFEATED_BEFORE;
-            }
-        }
-
-        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
-        for (HashMap<String, Float> dialogue : dialogues) {
-            int x = dialogue.get("x").intValue();
-            int y = dialogue.get("y").intValue();
-
-            spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
+        return this;
     }
 
     /**
@@ -133,7 +85,7 @@ public class GameArea2 extends GameArea {
             incNum();
             spawnEntityAt(
                     elf,
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }

@@ -34,40 +34,21 @@ public class GameArea3 extends GameArea {
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
-    @Override
-    public void create() {
-        map = FileLoader.readClass(Map.class, "maps/lvl_2.json");
-        tileTextures = map.tileRefsArray();
+    public GameArea create() {
         levelInt = 3;
-
-        super.create();
-        loadAssets();
-        displayUI("Level 4");
-
-        spawnTerrain();
-        spawnPlayer();
+        super.create("maps/lvl_2.json", "Level 4");
 
         spawnOutdoorArcherObject();
         spawnOutdoorWarriorObject();
         spawnAsgardWarriorObject();
+        spawnOdin();
+
         spawnMovementCutscenes();
-        spawnDialogueCutscenes();
+        spawnDialogueCutscenes(RandomDialogueSet.ODIN_ENCOUNTER);
         setInitialDialogue();
 
-        spawnOdin();
-        spawnObstacles();
-        spawnLights();
-
-        spawnSpikeTraps();
-        spawnLavaTraps();
-
-        spawnTraps();
-        spawnPTraps();
-        spawnHealthCrateObject();
-        playMusic();
-        spawnTeleport();
-
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
+        return this;
     }
 
     private void spawnOdin() {
@@ -78,7 +59,7 @@ public class GameArea3 extends GameArea {
 
             spawnEntityAt(
                     NPCFactory.createOdin(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }
@@ -105,34 +86,6 @@ public class GameArea3 extends GameArea {
         PlayerSave.Save.setThorWins(1);
         PlayerSave.Save.setOdinWins(0);
         PlayerSave.write();
-    }
-
-    private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_ENCOUNTER;
-        DialogueSet set;
-        if (PlayerSave.Save.getElfEnc() == 0) {
-            set = DialogueSet.FIRST_ENCOUNTER;
-        } else {
-            if (PlayerSave.Save.getElfWins() == 0) {
-                //If getWins() returns 0, that means the most recent game has resulted in a loss
-                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
-            } else {
-                // When it returns 1, then the player has beaten the boss before
-                set = DialogueSet.BOSS_DEFEATED_BEFORE;
-            }
-        }
-
-        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
-        for (HashMap<String, Float> dialogue : dialogues) {
-            int x = dialogue.get("x").intValue();
-            int y = dialogue.get("y").intValue();
-
-            spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
     }
 
     /**
