@@ -16,6 +16,7 @@ import com.deco2800.game.components.Touch.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.*;
+import com.deco2800.game.components.tasks.LifespanComponent;
 import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.components.weapons.projectiles.BlastController;
 import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
@@ -406,6 +407,21 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(new BlastController());
+    }
+
+    public static Entity createLightning(short targetLayer) {
+
+        AnimationRenderComponent animator = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("images/lightning.atlas", TextureAtlas.class));
+        animator.addAnimation("strike", 0.10f, Animation.PlayMode.LOOP);
+
+        return new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new TouchAttackComponent(targetLayer))
+                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new LifespanComponent(500L));
     }
 
     /**
