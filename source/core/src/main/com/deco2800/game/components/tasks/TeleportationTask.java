@@ -84,7 +84,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             Vector2 posBefore = owner.getEntity().getPosition();
-            teleport(new Vector2(2f, 2f));
+            teleport(new Vector2(89.315f, 56.015f));
             if (owner.getEntity().getPosition().dst(posBefore) != 0) {
                 count++;
                 ServiceLocator.getGameAreaService().incBossNum();
@@ -145,9 +145,9 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
-                new Vector2(0, 0);
+                new Vector2(85, 55);
         //todo: get world size
-        Vector2 maxPos = new Vector2(10, 10);
+        Vector2 maxPos = new Vector2(90, 60);
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
