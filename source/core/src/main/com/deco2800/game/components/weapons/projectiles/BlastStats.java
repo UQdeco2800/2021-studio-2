@@ -1,8 +1,8 @@
 package com.deco2800.game.components.weapons.projectiles;
 
 public class BlastStats {
-    public long projectileLifespan = 1000L;
-    public int attackPower = 10;
-    public int knockback = 10;
+    public final long projectileLifespan = 1000L;
+    public final int attackPower = 10;
+    public final int knockback = 10;
 }
 

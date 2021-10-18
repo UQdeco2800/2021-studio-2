@@ -34,9 +34,9 @@ class TouchMoveComponentTest {
     @Mock
     PlayerActions actions;
 
-    Vector2 moveLeft = new Vector2(-1f, 0f);
+    final Vector2 moveLeft = new Vector2(-1f, 0f);
 
-    Vector2 noMovement = new Vector2(0f, 0f);
+    final Vector2 noMovement = new Vector2(0f, 0f);
 
     @BeforeEach
     void beforeEach() {

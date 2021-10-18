@@ -7,9 +7,9 @@ public class MeleeEnemyConfig {
     /**
      * health attribute
      */
-    public int health = 40;
+    public final int health = 40;
     /**
      * attack attribute
      */
-    public int baseAttack = 30;
+    public final int baseAttack = 30;
 }

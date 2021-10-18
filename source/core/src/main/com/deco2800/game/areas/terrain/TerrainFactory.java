@@ -126,7 +126,7 @@ public class TerrainFactory {
         GridPoint2 max = new GridPoint2(mapSize.x - 1, mapSize.y - 1);
 
         for (int y = min.y; y <= max.y; y++) {
-            for (int x = min.y; x <= max.x; x++) {
+            for (@SuppressWarnings("SuspiciousNameCombination") int x = min.y; x <= max.x; x++) {
                 Cell cell = new Cell();
 
                 cell.setTile(tiles.get(map[y][x] - 1));

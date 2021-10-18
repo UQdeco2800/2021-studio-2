@@ -7,9 +7,9 @@ public class MeleeHellWarriorConfig {
     /**
      * health attribute
      */
-    public int health = 50;
+    public final int health = 50;
     /**
      * attack attribute
      */
-    public int baseAttack = 30;
+    public final int baseAttack = 30;
 }

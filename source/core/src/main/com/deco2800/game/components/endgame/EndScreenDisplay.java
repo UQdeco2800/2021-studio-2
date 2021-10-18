@@ -71,5 +71,4 @@ public class EndScreenDisplay extends UIComponent {
     protected void draw(SpriteBatch batch) {
         //pass
     }
-
 }
