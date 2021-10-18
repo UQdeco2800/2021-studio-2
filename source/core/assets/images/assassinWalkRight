@@ -1,27 +1,26 @@
-
-guardWalkLeft.png
+assassinWalkRight.png
 size: 512, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-moveLeft
+rightWalk
   rotate: false
   xy: 2, 2
-  size: 94, 110
-  orig: 94, 110
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
   index: 1
-moveLeft
+rightWalk
   rotate: false
-  xy: 98, 2
-  size: 94, 110
-  orig: 94, 110
+  xy: 105, 2
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
   index: 2
-moveLeft
+rightWalk
   rotate: false
-  xy: 194, 2
-  size: 94, 110
-  orig: 94, 110
+  xy: 208, 2
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
   index: 3

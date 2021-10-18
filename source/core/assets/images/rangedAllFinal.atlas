@@ -596,6 +596,33 @@ leftAssassinWalk
   offset: 0, 0
   index: 3
 
+assassinWalkRight.png
+size: 512, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+rightAssassinWalk
+  rotate: false
+  xy: 2, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+rightAssassinWalk
+  rotate: false
+  xy: 105, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+rightAssassinWalk
+  rotate: false
+  xy: 208, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+
 rangedWalk.png
 size: 1024, 256
 format: RGBA8888
