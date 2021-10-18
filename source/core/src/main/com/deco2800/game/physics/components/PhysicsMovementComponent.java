@@ -123,7 +123,7 @@ public class PhysicsMovementComponent extends Component {
      *
      */
     public void directionAnimation() {
-        if (!this.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+        if (Boolean.FALSE.equals(this.getEntity().getComponent(CombatStatsComponent.class).isDead())) {
             if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
                 if (this.getDirection().x < 0) { //left
                     leftAnimation();

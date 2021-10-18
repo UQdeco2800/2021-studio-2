@@ -45,7 +45,7 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
         for (Entity entity : ServiceLocator.getEntityService().getEntities()) {
             //get event triggered
             if (entity.getEntityType() != null && entity.getEntityType().equals("AlertCaller")) {
-                //todo: don't re-add to same entity
+                //note:don't re-add to same entity
                 entity.getEvents().addListener("alert", this::alerted);
                 entity.getEvents().addListener("unAlert", this::unAlerted);
             }

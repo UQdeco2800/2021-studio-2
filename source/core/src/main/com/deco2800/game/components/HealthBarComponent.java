@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.rendering.RenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
+@SuppressWarnings("SuspiciousNameCombination")
 public class HealthBarComponent extends RenderComponent {
     private float ratioOfHealth = 1f;
     private float ratioOfHealthPrevious = 1f;

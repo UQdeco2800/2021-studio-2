@@ -17,6 +17,7 @@ import org.mockito.Mockito;
  */
 public class GameExtension implements AfterEachCallback, BeforeAllCallback {
     // 'Headless' back-end, so no rendering happens
+    @SuppressWarnings("unused")
     private final Application game = new HeadlessApplication(new ApplicationAdapter() {
     });
 

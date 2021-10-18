@@ -5,6 +5,7 @@ import java.util.HashMap;
 /**
  * A class that stores the information read in from a map JSON file
  */
+@SuppressWarnings("unused")
 public class Map {
     // Variables representing the types of data stored in the JSON file
     // Every element in the JSON must be represented with the same variable name and type

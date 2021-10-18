@@ -61,9 +61,4 @@ public class EndScreenDisplay extends UIComponent {
     @Override
     protected void draw(SpriteBatch batch) {
     }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

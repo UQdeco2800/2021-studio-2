@@ -453,7 +453,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
             //Check if hit
             if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
-                int damage = new WeaponConfigs().fastArrow.baseAttack;
+                int damage = new WeaponConfigs().FAST_ARROW.BASE_ATTACK;
                 target.getComponent(CombatStatsComponent.class).addHealth(-damage);
             } else {
                 arrow.data.put("dealDamage", false);

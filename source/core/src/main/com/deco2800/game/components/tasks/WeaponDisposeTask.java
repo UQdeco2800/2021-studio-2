@@ -69,7 +69,7 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
      */
     @Override
     public int getPriority() {
-        if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+        if (Boolean.TRUE.equals(owner.getEntity().getComponent(CombatStatsComponent.class).isDead())) {
             return 100;
         } else {
             return 0;

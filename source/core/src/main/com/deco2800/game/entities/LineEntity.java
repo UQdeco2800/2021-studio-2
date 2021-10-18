@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -55,5 +56,19 @@ public class LineEntity extends Entity {
         if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= ttl) {
             this.prepareDispose();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        LineEntity that = (LineEntity) o;
+        return timeCreated == that.timeCreated;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), timeCreated);
     }
 }
