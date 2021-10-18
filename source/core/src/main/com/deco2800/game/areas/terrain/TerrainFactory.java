@@ -132,13 +132,4 @@ public class TerrainFactory {
             }
         }
     }
-
-    /**
-     * This enum should contain the different terrains in your game, e.g. forest, cave, home, all with
-     * the same orientation. But for demonstration purposes, the base code has the same level in 3
-     * different orientations.
-     */
-    public enum TerrainType {
-        TEST
-    }
 }

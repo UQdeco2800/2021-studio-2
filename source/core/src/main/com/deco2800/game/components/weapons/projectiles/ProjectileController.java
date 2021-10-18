@@ -16,7 +16,6 @@ import com.deco2800.game.services.ServiceLocator;
  * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
  */
 public abstract class ProjectileController extends Component {
-    protected BlastStats stats;
     protected HitboxComponent hitbox;
     protected short targetLayer;
     protected CombatStatsComponent combatStats;

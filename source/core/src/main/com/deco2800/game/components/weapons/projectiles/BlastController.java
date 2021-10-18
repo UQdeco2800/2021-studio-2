@@ -10,7 +10,6 @@ public class BlastController extends ProjectileController {
     @Override
     public void create() {
         super.create();
-        this.stats = new BlastStats();
     }
 
     /**

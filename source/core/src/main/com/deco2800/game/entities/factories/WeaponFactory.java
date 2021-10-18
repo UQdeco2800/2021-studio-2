@@ -38,14 +38,6 @@ import com.deco2800.game.services.ServiceLocator;
  * Factory to create non-playable character weapon entities with predefined components.
  */
 public class WeaponFactory {
-    /**
-     * load attribute from weapon json
-     */
-    private static final WeaponConfigs configs = new WeaponConfigs();
-    /**
-     * player stat json file
-     */
-    private static final PlayerConfig stats = new PlayerConfig();
 
     /**
      * manages the sound to play when constructing the projectile
