@@ -42,6 +42,13 @@ public enum Dialogue {
                     "\nOnce you're ready, walk back over to me.")
     }),
 
+    TUTORIAL_OTHER(new Message[]{
+            new Message(false, "If you don't care what I'm saying, you" +
+                    "\ncan press ESCAPE to finish the cutscenes."),
+            new Message(false, "The pause button is also on ESCAPE if you" +
+                    "\nneed a break.")
+    }),
+
     TUTORIAL_DASH(new Message[]{
             new Message(false, "To get around quickly, press SHIFT" +
                     "\nto sprint around and CAPS_LOCK to dash." +
