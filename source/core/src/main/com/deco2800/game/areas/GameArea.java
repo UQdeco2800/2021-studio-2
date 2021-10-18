@@ -190,10 +190,6 @@ public abstract class GameArea implements Disposable {
         return levelInt;
     }
 
-    public void setMap(Map map) {
-        this.map = map;
-    }
-
     /**
      * increase number of enemy on the map (keep track) - when the enemy is create and spawn
      */

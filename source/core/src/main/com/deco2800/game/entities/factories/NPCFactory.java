@@ -321,74 +321,6 @@ public class NPCFactory {
     }
 
     /**
-     * Creates a anchored elf entity.
-     * Anchor elf only chase the target if the target approach the anchor point
-     *
-     * @param target      entity to chase
-     * @param anchor      base entity to anchor to
-     * @param anchorSizeX how big the base's area is in the X axis
-     * @param anchorSizeY how big the base's area is in the Y axis
-     * @return entity
-     */
-
-    public static Entity createAnchoredElf(Entity target, Entity anchor, float anchorSizeX, float anchorSizeY) {
-        Entity anchoredElf = createBaseNPCNoAI();
-        MeleeEnemyConfig config = configs.elfMelee;
-        AITaskComponent aiComponent =
-                new AITaskComponent()
-                        .addTask(new AnchoredWanderTask(
-                                anchor, anchorSizeX, anchorSizeY, 2f))
-                        .addTask(new PauseTask())
-                        .addTask(new AnchoredChaseTask(
-                                target, 3f,
-                                4f, anchor, anchorSizeX, anchorSizeY))
-                        .addTask(new AnchoredRetreatTask(anchor, anchorSizeX, anchorSizeY))
-                        .addTask(new DeathPauseTask(
-                                target, 0, 100, 100, 1.5f));
-
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
-
-        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(BACK_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-
-//        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
-//        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
-//
-//        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
-//        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
-
-        anchoredElf
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-                .addComponent(animator)
-                .addComponent(aiComponent)
-                .addComponent(new ElfAnimationController());
-
-        anchoredElf.addComponent(createHealthBarComponent());
-
-        anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
-
-        anchoredElf.setEntityType("melee");
-
-        anchoredElf.setScale(1f, 1.3f);
-        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
-        return anchoredElf;
-    }
-
-    /**
      * Creates a ranged elf entity.
      * elf that shoot arrow at target
      * It will retreat if the target is approach in certain range
@@ -995,20 +927,6 @@ public class NPCFactory {
         Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_border.png", Texture.class));
         return new HealthBarComponent(healthBar, healthBarFrame, healthBarDecrease);
-    }
-
-    /**
-     * Creates a generic NPC to be used as a base entity by more specific NPC creation methods.
-     *
-     * @return entity
-     */
-    private static Entity createBaseNPC(Entity target) {
-        AITaskComponent aiComponent =
-                new AITaskComponent()
-                        .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 3f, 4f));
-        return createBaseNPCNoAI()
-                .addComponent(aiComponent);
     }
 
     /**

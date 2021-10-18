@@ -28,7 +28,6 @@ public class ServiceLocator {
     private static InputService inputService;
     private static ResourceService resourceService;
     private static GameArea gameAreaService;
-    private static Renderer renderer;
     private static MainGameScreen gameScreen;
 
 
@@ -65,20 +64,8 @@ public class ServiceLocator {
         return resourceService;
     }
 
-    public static ResourceService copyResourceService() {
-        AssetManager cpy = new AssetManager();
-        for (String s : resourceService.getAssetManager().getAssetNames()) {
-            cpy.load(resourceService.getAssetManager().get(s));
-        }
-        return new ResourceService(cpy);
-    }
-
     public static GameArea getGameAreaService() {
         return gameAreaService;
-    }
-
-    public static Renderer getRenderer() {
-        return renderer;
     }
 
     public static MainGameScreen getGameScreen() {
@@ -136,10 +123,6 @@ public class ServiceLocator {
         timeSource = null;
         inputService = null;
         resourceService = null;
-    }
-
-    public static void registerRenderer(Renderer renderer) {
-        ServiceLocator.renderer = renderer;
     }
 
 }

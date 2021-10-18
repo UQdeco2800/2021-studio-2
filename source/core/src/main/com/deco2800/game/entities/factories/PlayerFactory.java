@@ -131,7 +131,6 @@ public class PlayerFactory {
                 .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new PlayerActions())
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new InventoryComponent(stats.gold))
                 .addComponent(inputComponent)
                 .addComponent(new PlayerStatsDisplay())
                 .addComponent(new PlayerLowHealthDisplay())

@@ -234,16 +234,6 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         }
     }
 
-    public void triggerCutsceneWalk() {
-        calculateDistance(speedMultiplier);
-        if (walkDirection.x == 0 && walkDirection.y == 0) {
-            entity.getEvents().trigger(walkStop);
-        } else {
-            calculateDistance(speedMultiplier);
-            entity.getEvents().trigger("walk", walkDirection);
-        }
-    }
-
     /**
      * Triggers the dash event for the player character. The method will
      * call a movement at a certain speed.

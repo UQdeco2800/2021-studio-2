@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +15,10 @@ import org.slf4j.LoggerFactory;
  */
 public class PhysicsMovementComponent extends Component implements MovementController {
     private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
-    public NPCFactory npcFactory;
     public PhysicsComponent physicsComponent;
     private Vector2 targetPosition;
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
-
-    public boolean animateAttack;
-    public boolean animateStun;
 
 
     @Override
@@ -167,13 +162,5 @@ public class PhysicsMovementComponent extends Component implements MovementContr
 
     public Vector2 getDirection() {
         return targetPosition.cpy().sub(entity.getPosition()).nor();
-    }
-
-    public void setAnimateAttack() {
-        animateAttack = true;
-    }
-
-    public void stopAnimateAttack() {
-        animateAttack = false;
     }
 }

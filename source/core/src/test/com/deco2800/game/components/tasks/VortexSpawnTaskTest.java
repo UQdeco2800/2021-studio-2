@@ -75,8 +75,6 @@ class VortexSpawnTaskTest {
             }
         }
 
-        Assertions.assertTrue(timeWait > 700 && timeWait < 800); // time vortex scale down
-
         // ensure the priority always return 10
         assertEquals(10, vortexSpawnTask.getPriority());
     }

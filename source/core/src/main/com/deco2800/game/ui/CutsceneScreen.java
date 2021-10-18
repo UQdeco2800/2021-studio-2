@@ -162,24 +162,6 @@ public class CutsceneScreen extends UIComponent {
     }
 
     /**
-     * Returns if the cutscene screen is currently opening.
-     *
-     * @return boolean, true if the cutscene screen is opening
-     */
-    public boolean isOpening() {
-        return this.opening;
-    }
-
-    /**
-     * Returns if the cutscene screen is currently closing.
-     *
-     * @return boolean, true if the cutscene screen is closing
-     */
-    public boolean isClosing() {
-        return this.closing;
-    }
-
-    /**
      * Gets the priority of the text display.
      *
      * @return the priority of the text to be displayed to the screen.
