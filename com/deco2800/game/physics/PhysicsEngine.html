@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -198,35 +198,6 @@ short&nbsp;layerMask,
 </td>
 </tr>
 <tr class="rowColor" id="i7">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#raycast(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.deco2800.game.physics.raycast.RaycastHit)">raycast</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to,
-<a href="raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a>&nbsp;hit)</code></th>
-<td class="colLast">
-<div class="block">Cast a ray in a straight line from one point to another, checking for a collision against any
- colliders.</div>
-</td>
-</tr>
-<tr class="altColor" id="i8">
-<td class="colFirst"><code><a href="raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a>[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#raycastAll(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">raycastAll</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to)</code></th>
-<td class="colLast">
-<div class="block">Cast a ray in a straight line from one point to another, checking for all collision against
- colliders in the specified layers.</div>
-</td>
-</tr>
-<tr class="rowColor" id="i9">
-<td class="colFirst"><code><a href="raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a>[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#raycastAll(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,short)">raycastAll</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to,
-short&nbsp;layerMask)</code></th>
-<td class="colLast">
-<div class="block">Cast a ray in a straight line from one point to another, checking for all collision against
- colliders in the specified layers.</div>
-</td>
-</tr>
-<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
@@ -314,24 +285,6 @@ short&nbsp;layerMask)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="raycast(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,com.deco2800.game.physics.raycast.RaycastHit)">raycast</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">raycast</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to,
-<a href="raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a>&nbsp;hit)</span></div>
-<div class="block">Cast a ray in a straight line from one point to another, checking for a collision against any
- colliders.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>from</code> - The starting point of the ray.</dd>
-<dd><code>to</code> - The end point of the ray.</dd>
-<dd><code>hit</code> - The raycast result will be stored in this class</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>true if a collider was hit, false otherwise.</dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
 <h3><a id="raycast(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,short,com.deco2800.game.physics.raycast.RaycastHit)">raycast</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">raycast</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to,
@@ -348,41 +301,6 @@ short&nbsp;layerMask,
                   will be ignored.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if a collider was hit, false otherwise.</dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="raycastAll(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2)">raycastAll</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a>[]</span>&nbsp;<span class="memberName">raycastAll</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to)</span></div>
-<div class="block">Cast a ray in a straight line from one point to another, checking for all collision against
- colliders in the specified layers.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>from</code> - The starting point of the ray.</dd>
-<dd><code>to</code> - The end point of the ray.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>All hits made by the ray, unordered. Empty if no hits were made.</dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="raycastAll(com.badlogic.gdx.math.Vector2,com.badlogic.gdx.math.Vector2,short)">raycastAll</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="raycast/RaycastHit.html" title="class in com.deco2800.game.physics.raycast">RaycastHit</a>[]</span>&nbsp;<span class="memberName">raycastAll</span>&#8203;(<span class="arguments"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;from,
-<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;to,
-short&nbsp;layerMask)</span></div>
-<div class="block">Cast a ray in a straight line from one point to another, checking for all collision against
- colliders in the specified layers.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>from</code> - The starting point of the ray.</dd>
-<dd><code>to</code> - The end point of the ray.</dd>
-<dd><code>layerMask</code> - The physics layer mask which specifies layers that can be hit. Other layers
-                  will be ignored.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>All hits made by the ray, unordered. Empty if no hits were made.</dd>
 </dl>
 </section>
 </li>

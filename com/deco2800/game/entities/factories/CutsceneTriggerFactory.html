@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
+<script type="text/javascript">var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -124,14 +124,6 @@ extends java.lang.Object</pre>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAttackTrigger(int,int)">createAttackTrigger</a></span>&#8203;(int&nbsp;repeats,
-int&nbsp;lastKeyPressed)</code></th>
-<td class="colLast">
-<div class="block">Creates an entity that can trigger a cutscene to start.</div>
-</td>
-</tr>
-<tr class="rowColor" id="i1">
-<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createDialogueTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,int)">createDialogueTrigger</a></span>&#8203;(<a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
 <a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type,
 int&nbsp;numRepeats)</code></th>
@@ -139,36 +131,28 @@ int&nbsp;numRepeats)</code></th>
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i1">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createDownMoveTrigger()">createDownMoveTrigger</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move down</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createLeftMoveTrigger()">createLeftMoveTrigger</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move left</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
-<td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createLokiTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet)">createLokiTrigger</a></span>&#8203;(<a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
-<a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type)</code></th>
-<td class="colLast">
-<div class="block">Creates an entity that can trigger a cutscene to start.</div>
-</td>
-</tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMovementEndTrigger()">createMovementEndTrigger</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates an entity trigger that will allow the player ot start inputting controls again.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createPrisonerCutscene(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet,int)">createPrisonerCutscene</a></span>&#8203;(<a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
 <a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type,
@@ -177,14 +161,14 @@ int&nbsp;numRepeats)</code></th>
 <div class="block">Creates an entity that can trigger a cutscene to start.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createRightMoveTrigger()">createRightMoveTrigger</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates an entity that can trigger the start of a movement cutscene that will force the player to move right</div>
 </td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>static <a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createUpMoveTrigger()">createUpMoveTrigger</a></span>()</code></th>
 <td class="colLast">
@@ -240,36 +224,6 @@ int&nbsp;numRepeats)</span></div>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>dialogueSet</code> - the dialogue set the entity will trigger</dd>
 <dd><code>type</code> - the type of selection of dialogue</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>entity that will create the trigger within the map</dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="createLokiTrigger(com.deco2800.game.ui.textbox.RandomDialogueSet,com.deco2800.game.ui.textbox.DialogueSet)">createLokiTrigger</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createLokiTrigger</span>&#8203;(<span class="arguments"><a href="../../ui/textbox/RandomDialogueSet.html" title="enum in com.deco2800.game.ui.textbox">RandomDialogueSet</a>&nbsp;dialogueSet,
-<a href="../../ui/textbox/DialogueSet.html" title="enum in com.deco2800.game.ui.textbox">DialogueSet</a>&nbsp;type)</span></div>
-<div class="block">Creates an entity that can trigger a cutscene to start.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>dialogueSet</code> - the dialogue set the entity will trigger</dd>
-<dd><code>type</code> - the type of selection of dialogue</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>entity that will create the trigger within the map</dd>
-</dl>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="createAttackTrigger(int,int)">createAttackTrigger</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../Entity.html" title="class in com.deco2800.game.entities">Entity</a></span>&nbsp;<span class="memberName">createAttackTrigger</span>&#8203;(<span class="arguments">int&nbsp;repeats,
-int&nbsp;lastKeyPressed)</span></div>
-<div class="block">Creates an entity that can trigger a cutscene to start.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>lastKeyPressed</code> - the last key direction the player will attack in</dd>
-<dd><code>repeats</code> - the amount to repeat</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>entity that will create the trigger within the map</dd>
 </dl>

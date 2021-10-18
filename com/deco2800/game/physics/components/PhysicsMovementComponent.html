@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -127,21 +127,6 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#animateAttack">animateAttack</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#animateStun">animateStun</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../entities/factories/NPCFactory.html" title="class in com.deco2800.game.entities.factories">NPCFactory</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#npcFactory">npcFactory</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><code><a href="PhysicsComponent.html" title="class in com.deco2800.game.physics.components">PhysicsComponent</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#physicsComponent">physicsComponent</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -254,41 +239,31 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAnimateAttack()">setAnimateAttack</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor" id="i10">
-<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMaxSpeed(com.badlogic.gdx.math.Vector2)">setMaxSpeed</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;maxSpeed)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i11">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setMoving(boolean)">setMoving</a></span>&#8203;(boolean&nbsp;movementEnabled)</code></th>
 <td class="colLast">
 <div class="block">Enable/disable movement for the controller.</div>
 </td>
 </tr>
-<tr class="altColor" id="i12">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTarget(com.badlogic.gdx.math.Vector2)">setTarget</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a>&nbsp;target)</code></th>
 <td class="colLast">
 <div class="block">Set a target to move towards.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i13">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#stopAnimateAttack()">stopAnimateAttack</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor" id="i14">
+<tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#upAnimation()">upAnimation</a></span>()</code></th>
 <td class="colLast">
 <div class="block">enemy move up</div>
 </td>
 </tr>
-<tr class="rowColor" id="i15">
+<tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
 <td class="colLast">
@@ -324,26 +299,8 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="npcFactory">npcFactory</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../entities/factories/NPCFactory.html" title="class in com.deco2800.game.entities.factories">NPCFactory</a></span>&nbsp;<span class="memberName">npcFactory</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
 <h3><a id="physicsComponent">physicsComponent</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="PhysicsComponent.html" title="class in com.deco2800.game.physics.components">PhysicsComponent</a></span>&nbsp;<span class="memberName">physicsComponent</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="animateAttack">animateAttack</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">animateAttack</span></div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="animateStun">animateStun</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">animateStun</span></div>
 </section>
 </li>
 </ul>
@@ -499,18 +456,6 @@ implements <a href="../../ai/movement/MovementController.html" title="interface 
 <section class="detail">
 <h3><a id="getDirection()">getDirection</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/math/Vector2.html?is-external=true" title="class or interface in com.badlogic.gdx.math" class="externalLink">Vector2</a></span>&nbsp;<span class="memberName">getDirection</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="setAnimateAttack()">setAnimateAttack</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setAnimateAttack</span>()</div>
-</section>
-</li>
-<li class="blockList">
-<section class="detail">
-<h3><a id="stopAnimateAttack()">stopAnimateAttack</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">stopAnimateAttack</span>()</div>
 </section>
 </li>
 </ul>
