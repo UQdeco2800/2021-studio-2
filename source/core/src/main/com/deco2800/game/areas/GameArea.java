@@ -485,13 +485,33 @@ public abstract class GameArea implements Disposable {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    protected void spawnBoss() {
+    protected void spawnLoki() {
         HashMap<String, Float>[] objects = map.getBossObjects();
         if (objects != null) {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
                 Entity elf = NPCFactory.createLoki(player);
+                incBossNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    protected void spawnBoss() {
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createBossNPC(player);
                 incBossNum();
                 spawnEntityAt(
                         elf,
