@@ -27,8 +27,7 @@ public class Scepter extends MeleeWeapon {
     /**
      * Time at the last range attack. Gets reset to 0 after it exceeds cool down.
      */
-    private long timeSinceRangeAttack;
-    private final long RANGE_COOLDOWN = 500L;
+    private long timeAtRangeAttack;
 
     private final GameArea gameArea;
 
@@ -39,15 +38,16 @@ public class Scepter extends MeleeWeapon {
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
         this.gameArea = ServiceLocator.getGameAreaService();
-        timeSinceRangeAttack = 0L;
+        timeAtRangeAttack = 0L;
     }
 
     @Override
     public void update() {
         super.update();
         long currentTime = ServiceLocator.getTimeSource().getTime();
-        if (timeSinceRangeAttack != 0L && currentTime - timeSinceRangeAttack > RANGE_COOLDOWN) {
-            timeSinceRangeAttack = 0L;
+        long rangedCoolDown = 500L;
+        if (timeAtRangeAttack != 0L && currentTime - timeAtRangeAttack > rangedCoolDown) {
+            timeAtRangeAttack = 0L;
         }
     }
 
@@ -86,9 +86,9 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     public void rangedAttack(int attackDirection) {
-        if (timeSinceRangeAttack != 0) return; // cooldown hasn't expired yet
+        if (timeAtRangeAttack != 0) return; // cooldown hasn't expired yet
         super.rangedAttack(attackDirection);
-        Vector2 target = entity.getCenterPosition();
+        Vector2 target = entity.getPosition();
         float range = 6f;
         float angle;
         switch (attackDirection) {
@@ -110,8 +110,8 @@ public class Scepter extends MeleeWeapon {
                 break;
         }
         Entity blast = WeaponFactory.createBlast(target, angle);
-        gameArea.spawnEntityAt(blast, entity.getCenterPosition(), true, true);
-        timeSinceRangeAttack = ServiceLocator.getTimeSource().getTime();
+        gameArea.spawnEntityAt(blast, entity.getPosition(), true, true);
+        timeAtRangeAttack = ServiceLocator.getTimeSource().getTime();
     }
 
     /**
