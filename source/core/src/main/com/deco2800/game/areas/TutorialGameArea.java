@@ -50,7 +50,7 @@ public class TutorialGameArea extends GameArea {
         return this;
     }
 
-    private void spawnCutsceneTrigger() {
+    /*private void spawnCutsceneTrigger() {
         Entity trigger = CutsceneTriggerFactory.createDialogueTrigger(RandomDialogueSet.TUTORIAL,
                 DialogueSet.ORDERED, 0);
         spawnEntityAt(trigger, new Vector2(11f, 181.3f), true, true);
@@ -71,7 +71,7 @@ public class TutorialGameArea extends GameArea {
 
         Entity moveTrigger6 = CutsceneTriggerFactory.createMoveTrigger(new Vector2(1f, 0f), 4, 0);
         spawnEntityAt(moveTrigger6, new Vector2(11.5f, 184.5f), true, true);
-    }
+    }*/
 
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2

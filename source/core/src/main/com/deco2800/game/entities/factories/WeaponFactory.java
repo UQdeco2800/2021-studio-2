@@ -481,7 +481,6 @@ public class WeaponFactory {
      */
     public static Entity createBlast(Vector2 target, float angle) {
         float speed = 8f;
-
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(

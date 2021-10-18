@@ -20,7 +20,6 @@ public abstract class ProjectileController extends Component {
     protected short targetLayer;
     protected CombatStatsComponent combatStats;
     protected long gameTime;
-    protected Vector2 target;
     protected boolean hit;
 
     /**

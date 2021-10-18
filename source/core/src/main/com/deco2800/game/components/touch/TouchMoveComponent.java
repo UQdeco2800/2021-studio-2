@@ -15,6 +15,8 @@ public class TouchMoveComponent extends com.deco2800.game.components.touch.Touch
 
     private static final Logger logger = LoggerFactory.getLogger(TouchMoveComponent.class);
 
+    private static final Logger logger = LoggerFactory.getLogger(TouchMoveComponent.class);
+
     /**
      * The direction the character will move in
      */

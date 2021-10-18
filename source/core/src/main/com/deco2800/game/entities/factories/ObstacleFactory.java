@@ -119,7 +119,6 @@ public class ObstacleFactory {
                 .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
                 .addComponent(new PhysicsComponent())
                 .addComponent(new CombatStatsComponent(1000000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TeleportComponent(PhysicsLayer.TRAP));
 
         teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

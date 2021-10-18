@@ -75,6 +75,11 @@ public class BossOverlayComponent extends UIComponent {
      */
     private String bossName = "Boss";
 
+    private final float HP_BAR_SIZE = 500f;
+
+    private final float OFF_SET = 100f;
+
+
     /**
      * Creates actors and positions them on the stage using a table.
      *
@@ -89,7 +94,8 @@ public class BossOverlayComponent extends UIComponent {
         healthText.top().right();
         healthText.setFillParent(true);
         healthText.setZIndex(10);
-        healthText.padRight((maxHealth * LENGTH_MULTIPLIER) / 2 + (8 * bossName.length())).padTop(40f);
+        //position the boss name correctly in the center of hp bar
+        healthText.padRight(((HP_BAR_SIZE / 2) + OFF_SET) - (float)(bossName.length()/2)).padTop(40f);
 
         healthLabel = new Label(bossName, skin, "health");
         healthText.add(healthLabel);
@@ -114,7 +120,7 @@ public class BossOverlayComponent extends UIComponent {
                 getAsset("images/boss_health_right.png", Texture.class));
         tableFrame.padRight(90f).padTop(26.5f);
         tableFrame.add(frameLeft).height(60f).width(30f);
-        tableFrame.add(frameMiddle).height(55f).width(maxHealth * LENGTH_MULTIPLIER);
+        tableFrame.add(frameMiddle).height(55f).width(HP_BAR_SIZE);
         tableFrame.add(frameRight).height(60f).width(30f);
 
         stage.addActor(tableFrame);
@@ -126,7 +132,7 @@ public class BossOverlayComponent extends UIComponent {
     private void createTable() {
         table.top().right();
         table.setFillParent(true);
-        table.padTop(36.5f).padRight(maxHealth);
+        table.padTop(36.5f).padRight(OFF_SET);
     }
 
     public void updateBossHealthUI(int health) {
@@ -135,7 +141,7 @@ public class BossOverlayComponent extends UIComponent {
         createTable();
         if (Boolean.FALSE.equals(entity.getComponent(CombatStatsComponent.class).isDead())) {
             table.add(healthBarLeft).height(40f).width(20f);
-            table.add(healthBarMiddle).height(40f).width(health * LENGTH_MULTIPLIER);
+            table.add(healthBarMiddle).height(40f).width(health/maxHealth * HP_BAR_SIZE);
             table.add(healthBarRight).height(40f).width(20f);
         }
     }
