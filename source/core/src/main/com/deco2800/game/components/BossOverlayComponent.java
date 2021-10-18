@@ -13,7 +13,7 @@ public class BossOverlayComponent extends UIComponent {
     /**
      * Health Bar length Multiplier
      */
-    private static final float lengthMultiplier = 5;
+    private static final float LENGTH_MULTIPLIER = 5;
 
     /**
      * has the boss spawned
@@ -89,7 +89,7 @@ public class BossOverlayComponent extends UIComponent {
         healthText.top().right();
         healthText.setFillParent(true);
         healthText.setZIndex(10);
-        healthText.padRight((maxHealth * lengthMultiplier) / 2 + (8 * bossName.length())).padTop(40f);
+        healthText.padRight((maxHealth * LENGTH_MULTIPLIER) / 2 + (8 * bossName.length())).padTop(40f);
 
         healthLabel = new Label(bossName, skin, "health");
         healthText.add(healthLabel);
@@ -114,7 +114,7 @@ public class BossOverlayComponent extends UIComponent {
                 getAsset("images/boss_health_right.png", Texture.class));
         tableFrame.padRight(90f).padTop(26.5f);
         tableFrame.add(frameLeft).height(60f).width(30f);
-        tableFrame.add(frameMiddle).height(55f).width(maxHealth * lengthMultiplier);
+        tableFrame.add(frameMiddle).height(55f).width(maxHealth * LENGTH_MULTIPLIER);
         tableFrame.add(frameRight).height(60f).width(30f);
 
         stage.addActor(tableFrame);
@@ -135,7 +135,7 @@ public class BossOverlayComponent extends UIComponent {
         createTable();
         if (!entity.getComponent(CombatStatsComponent.class).isDead()) {
             table.add(healthBarLeft).height(40f).width(20f);
-            table.add(healthBarMiddle).height(40f).width(health * lengthMultiplier);
+            table.add(healthBarMiddle).height(40f).width(health * LENGTH_MULTIPLIER);
             table.add(healthBarRight).height(40f).width(20f);
         }
     }

@@ -26,8 +26,7 @@ import com.deco2800.game.services.ServiceLocator;
  * the properties stores in 'PlayerConfig'.
  */
 public class PlayerFactory {
-    private static final PlayerConfig stats =
-            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+    private static final PlayerConfig stats = new PlayerConfig();
 
     private PlayerFactory() {
         throw new IllegalStateException("Instantiating static util class");

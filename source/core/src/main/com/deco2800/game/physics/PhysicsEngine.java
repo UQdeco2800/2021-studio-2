@@ -3,7 +3,6 @@ package com.deco2800.game.physics;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Disposable;
-import com.deco2800.game.physics.raycast.AllHitCallback;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.physics.raycast.SingleHitCallback;
 import com.deco2800.game.services.GameTime;

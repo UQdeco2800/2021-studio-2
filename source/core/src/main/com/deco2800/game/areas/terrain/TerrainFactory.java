@@ -30,8 +30,8 @@ public class TerrainFactory {
 
     private final OrthographicCamera camera;
     private final TerrainOrientation orientation;
-    protected static final String tilesHeightJSON = "n_tiles_height";
-    protected static final String tilesWidthJSON = "n_tiles_width";
+    protected static final String TILES_HEIGHT = "n_tiles_height";
+    protected static final String TILES_WIDTH = "n_tiles_width";
 
     /**
      * Create a terrain factory with Orthogonal orientation
@@ -56,31 +56,19 @@ public class TerrainFactory {
     /**
      * A version of createTerrain that takes a map object as an input to render a specific map
      *
-     * @param terrainType terrain type
-     * @param map         Map of tiles
+     * @param map Map of tiles
      * @return TerrainComponent
      */
-    public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
+    public TerrainComponent createTerrain(Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();
-        if (terrainType == TerrainType.TEST) {
-            String[] tileRefs = map.tileRefsArray();
-            ArrayList<TextureRegion> textures = new ArrayList<>();
+        String[] tileRefs = map.tileRefsArray();
+        ArrayList<TextureRegion> textures = new ArrayList<>();
 
-            for (String s : tileRefs) {
-                textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
-            }
-
-            return createWorldTerrain(textures, map.getMapTiles(), map.getDimensions());
+        for (String s : tileRefs) {
+            textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
         }
-        return null;
-    }
 
-    private TerrainComponent createForestDemoTerrain(
-            float tileWorldSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
-        GridPoint2 tilePixelSize = new GridPoint2(grass.getRegionWidth(), grass.getRegionHeight());
-        TiledMap tiledMap = createForestDemoTiles(tilePixelSize, grass, grassTuft, rocks);
-        TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
-        return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+        return createWorldTerrain(textures, map.getMapTiles(), map.getDimensions());
     }
 
 
@@ -95,24 +83,6 @@ public class TerrainFactory {
             default:
                 return null;
         }
-    }
-
-    private TiledMap createForestDemoTiles(
-            GridPoint2 tileSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
-        TiledMap tiledMap = new TiledMap();
-        TerrainTile grassTile = new TerrainTile(grass);
-        TerrainTile grassTuftTile = new TerrainTile(grassTuft);
-        TerrainTile rockTile = new TerrainTile(rocks);
-        TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
-        // Create base grass
-        fillTiles(layer, grassTile);
-
-        // Add some grass and rocks
-        fillTilesAtRandom(layer, grassTuftTile, TUFT_TILE_COUNT);
-        fillTilesAtRandom(layer, rockTile, ROCK_TILE_COUNT);
-
-        tiledMap.getLayers().add(layer);
-        return tiledMap;
     }
 
     private TerrainComponent createWorldTerrain(
@@ -131,8 +101,8 @@ public class TerrainFactory {
             GridPoint2 tileSize, ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
         TiledMap tiledMap = new TiledMap();
 
-        TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get(tilesWidthJSON),
-                dimensions.get(tilesHeightJSON), tileSize.x, tileSize.y);
+        TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get(TILES_WIDTH),
+                dimensions.get(TILES_HEIGHT), tileSize.x, tileSize.y);
 
         // Create Tiles
         ArrayList<TerrainTile> tiles = new ArrayList<>();
@@ -142,7 +112,7 @@ public class TerrainFactory {
         }
 
         // Create the map
-        GridPoint2 mapSize = new GridPoint2(dimensions.get(tilesWidthJSON), dimensions.get(tilesHeightJSON));
+        GridPoint2 mapSize = new GridPoint2(dimensions.get(TILES_WIDTH), dimensions.get(TILES_HEIGHT));
 
         placeTiles(layer, mapSize, tiles, map);
 
@@ -189,13 +159,10 @@ public class TerrainFactory {
 
     /**
      * This enum should contain the different terrains in your game, e.g. forest, cave, home, all with
-     * the same oerientation. But for demonstration purposes, the base code has the same level in 3
+     * the same orientation. But for demonstration purposes, the base code has the same level in 3
      * different orientations.
      */
     public enum TerrainType {
-        FOREST_DEMO,
-        FOREST_DEMO_ISO,
-        FOREST_DEMO_HEX,
         TEST
     }
 }

@@ -1,16 +1,11 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
-
-import java.util.HashMap;
 
 /**
  * Dungeon Level with an Elf Mage as the boss
@@ -47,26 +42,6 @@ public class GameArea0 extends GameArea {
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
         return this;
-    }
-
-    /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    private void spawnBoss() {
-        HashMap<String, Float>[] objects = map.getBossObjects();
-        if (objects != null) {
-            for (HashMap<String, Float> object : objects) {
-                int x = object.get("x").intValue();
-                int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createBossNPC(player);
-                incBossNum();
-                spawnEntityAt(
-                        elf,
-                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
-                        false,
-                        false);
-            }
-        }
     }
 
     /**

@@ -15,9 +15,6 @@ public class PhysicsLayer {
     public static final short TELEPORT = (1 << 8);
     public static final short EXPLOSION = (1 << 9);
 
-    public static final short ALL = ~0;
-
-
     private PhysicsLayer() {
         throw new IllegalStateException("Instantiating static util class");
     }

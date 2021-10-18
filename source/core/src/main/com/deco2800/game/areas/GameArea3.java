@@ -55,7 +55,7 @@ public class GameArea3 extends GameArea {
             incBossNum();
             spawnEntityAt(
                     NPCFactory.createOdin(player),
-                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                    new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
                     false,
                     false);
         }

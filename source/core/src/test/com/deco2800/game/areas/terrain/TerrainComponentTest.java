@@ -34,7 +34,7 @@ class TerrainComponentTest {
     @Test
     void shouldConvertPositionHexagonal() {
         try {
-            TerrainComponent component = makeComponent(TerrainOrientation.HEXAGONAL, 3f);
+            makeComponent(TerrainOrientation.HEXAGONAL, 3f);
         } catch (Exception e) {
             Assertions.fail();
         }
