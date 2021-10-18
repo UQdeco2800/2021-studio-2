@@ -140,7 +140,7 @@ public class NPCFactory {
         Entity elf = createBaseNPCNoAI();
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
 
         animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
@@ -207,7 +207,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/guardElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
 //                new AnimationRenderComponent(
 //                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
         animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
@@ -261,7 +261,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
         animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
@@ -317,7 +317,7 @@ public class NPCFactory {
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/rangedElf.atlas", TextureAtlas.class));
+                        ServiceLocator.getResourceService().getAsset("images/rangedAllFinal.atlas", TextureAtlas.class));
 
         if (type.equals(ShootProjectileTask.projectileTypes.FAST_ARROW)) {
             elf.setEntityType("assassin");
