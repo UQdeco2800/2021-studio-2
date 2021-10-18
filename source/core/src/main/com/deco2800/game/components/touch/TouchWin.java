@@ -3,8 +3,6 @@ package com.deco2800.game.components.touch;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TouchWin extends TouchComponent {
     /**

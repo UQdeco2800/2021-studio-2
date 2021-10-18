@@ -20,7 +20,8 @@ public class TestGameArea1 extends GameArea {
     @Override
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/testMap1.json");
-        tileTextures = map.TileRefsArray();
+        tileTextures = map.tileRefsArray();
+        levelInt = 2;
 
         super.create();
         loadAssets();
@@ -31,10 +32,5 @@ public class TestGameArea1 extends GameArea {
 
         spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(this.playerHealth);
-    }
-
-    @Override
-    public int getLevel() {
-        return 2;
     }
 }

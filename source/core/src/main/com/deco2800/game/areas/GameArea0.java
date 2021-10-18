@@ -40,7 +40,7 @@ public class GameArea0 extends GameArea {
     @Override
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/lvl_1.json");
-        tileTextures = map.TileRefsArray();
+        tileTextures = map.tileRefsArray();
 
         super.create();
         loadAssets();
@@ -104,14 +104,6 @@ public class GameArea0 extends GameArea {
                     false,
                     false);
         }
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 0;
     }
 
     private void spawnMeleeElf() {

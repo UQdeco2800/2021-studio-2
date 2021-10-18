@@ -36,7 +36,8 @@ public class GameArea4 extends GameArea {
     @Override
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/lvl_0.json");
-        tileTextures = map.TileRefsArray();
+        tileTextures = map.tileRefsArray();
+        levelInt = 9;
 
         super.create();
         loadAssets();
@@ -105,14 +106,6 @@ public class GameArea4 extends GameArea {
     private void spawnEnemy() {
         Entity enemy = NPCFactory.createMeleeElf(player);
         spawnEntityAt(enemy, new Vector2(50f, 37.5f), true, true);
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 9;
     }
 
     private void setInitialDialogue() {

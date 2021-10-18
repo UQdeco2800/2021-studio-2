@@ -34,8 +34,6 @@ public class TerrainFactory {
     private final OrthographicCamera camera;
     private final TerrainOrientation orientation;
 
-    static Logger logger = LoggerFactory.getLogger(FileLoader.class);
-
     /**
      * Create a terrain factory with Orthogonal orientation
      *
@@ -106,7 +104,7 @@ public class TerrainFactory {
     public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();
         if (terrainType == TerrainType.TEST) {
-            String[] tileRefs = map.TileRefsArray();
+            String[] tileRefs = map.tileRefsArray();
             ArrayList<TextureRegion> textures = new ArrayList<>();
 
             for (String s : tileRefs) {

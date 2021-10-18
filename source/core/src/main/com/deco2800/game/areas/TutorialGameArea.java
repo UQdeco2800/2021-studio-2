@@ -35,7 +35,7 @@ public class TutorialGameArea extends GameArea {
     @Override
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/MapObjects.json");
-        tileTextures = map.TileRefsArray();
+        tileTextures = map.tileRefsArray();
 
         super.create();
         loadAssets();
@@ -152,10 +152,10 @@ public class TutorialGameArea extends GameArea {
 
             GridPoint2 elfPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
             Entity anchor = ObstacleFactory.createAnchor();
-            Entity Anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
+            Entity anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
             incNum();
-            spawnEntityAt(Anchoredelf, elfPos, true, true);
+            spawnEntityAt(anchoredelf, elfPos, true, true);
         }
     }
 }

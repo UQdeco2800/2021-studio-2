@@ -422,11 +422,11 @@ public class WeaponFactory {
     /**
      * Creates a line entity
      *
-     * @param TTL time to live in MS
+     * @param ttl time to live in MS
      * @return return the entity - the line represent the arrow trajectory
      */
-    public static LineEntity aimingLine(long TTL) {
-        LineEntity line = new LineEntity(TTL);
+    public static LineEntity aimingLine(long ttl) {
+        LineEntity line = new LineEntity(ttl);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/aiming_line.png", Texture.class));
         sprite.flip(true, false);

@@ -72,7 +72,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     /**
      * Defines the String used to trigger the event to stop walking
      */
-    private final String WALK_STOP = "walkStop";
+    private static final String walkStop = "walkStop";
 
     /**
      * Stores the last system time since the dash ability was pressed.
@@ -188,7 +188,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         this.down = 0;
         this.up = 0;
         this.speedMultiplier = 1;
-        entity.getEvents().trigger(WALK_STOP);
+        entity.getEvents().trigger(walkStop);
     }
 
 
@@ -227,7 +227,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
         }
         calculateDistance(speedMultiplier);
         if (walkDirection.x == 0 && walkDirection.y == 0) {
-            entity.getEvents().trigger(WALK_STOP);
+            entity.getEvents().trigger(walkStop);
         } else {
             calculateDistance(speedMultiplier);
             entity.getEvents().trigger("walk", walkDirection);
@@ -237,7 +237,7 @@ public class KeyboardPlayerInputComponent extends InputComponent {
     public void triggerCutsceneWalk() {
         calculateDistance(speedMultiplier);
         if (walkDirection.x == 0 && walkDirection.y == 0) {
-            entity.getEvents().trigger(WALK_STOP);
+            entity.getEvents().trigger(walkStop);
         } else {
             calculateDistance(speedMultiplier);
             entity.getEvents().trigger("walk", walkDirection);

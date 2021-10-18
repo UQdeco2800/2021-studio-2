@@ -38,7 +38,8 @@ public class GameArea2 extends GameArea {
     @Override
     public void create() {
         map = FileLoader.readClass(Map.class, "maps/lvl_4.json");
-        tileTextures = map.TileRefsArray();
+        tileTextures = map.tileRefsArray();
+        levelInt = 2;
 
         super.create();
         loadAssets();
@@ -121,14 +122,6 @@ public class GameArea2 extends GameArea {
         PlayerSave.Save.setLokiWins(1);
         PlayerSave.Save.setLoki2Wins(0);
         PlayerSave.write();
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 2;
     }
 
     private void spawnBoss() {

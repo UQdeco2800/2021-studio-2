@@ -354,7 +354,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     private void powerupFastArrow() {
-        float AOE = 1f;
+        float aoe = 1f;
         if (!poweringUp) {
             poweringUp = true;
         }
@@ -380,7 +380,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 //            owner.getEntity().getEvents().trigger("LeftStart");
 //        }
 
-        updateTrajectory(AOE);
+        updateTrajectory(aoe);
         float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;
         Color newColor = new Color(Color.YELLOW);
         newColor.a = 0.5f;
@@ -388,10 +388,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         newColor = new Color(2.0f * fade, 2.0f * (1 - fade), 0f, 0.5f);
         aimingLine.getComponent(TextureRenderComponent.class).getSprite()
                 .setColor(newColor);
-        shootFastArrow(AOE);
+        shootFastArrow(aoe);
     }
 
-    private void updateTrajectory(float AOE) {
+    private void updateTrajectory(float aoe) {
         float turningAngle = 30f / UserSettings.get().fps;
         Vector2 relativeLocationTarget = tragectoryLocation.cpy()
                 .sub(owner.getEntity().getCenterPosition());
@@ -410,7 +410,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             }
             //If obstacle is blocking the way
             if (physics.raycast(owner.getEntity().getCenterPosition(), tragectoryLocation, PhysicsLayer.OBSTACLE, hit)) {
-                if (tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                if (tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
                     //add 0.1f to make sure it still collides
                     relativeLocationTarget.setLength(Math.min(owner.getEntity().getCenterPosition().dst(hit.point) + 0.1f, relativeLocationEntity.len()));
                 } else {
@@ -418,7 +418,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     relativeLocationTarget.setLength(Math.min(owner.getEntity().getCenterPosition().dst(hit.point) + 0.1f, owner.getEntity().getAttackRange()));
                 }
             } else {
-                if (tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                if (tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
                     relativeLocationTarget.setLength(Math.min(owner.getEntity().getAttackRange(), relativeLocationEntity.len()));
                 } else {
                     relativeLocationTarget.setLength(owner.getEntity().getAttackRange());
@@ -440,7 +440,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         showTrajectory();
     }
 
-    private void shootFastArrow(float AOE) {
+    private void shootFastArrow(float aoe) {
         if (!poweringUp) {
             Entity arrow = WeaponFactory.createFastArrow(
                     tragectoryLocation.cpy().sub(owner.getEntity().getCenterPosition())
@@ -448,7 +448,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     , getDirectionOfTarget());
             gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
             //Check if hit
-            if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+            if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
                 int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
                 target.getComponent(CombatStatsComponent.class).addHealth(-damage);
             } else {

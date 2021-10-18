@@ -143,6 +143,7 @@ public abstract class GameArea implements Disposable {
 
     protected TerrainFactory terrainFactory = null;
     protected int playerHealth = 300;
+    protected int levelInt = 0;
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -159,7 +160,7 @@ public abstract class GameArea implements Disposable {
      * Use for teleport, track the current map player in
      */
     public int getLevel() {
-        return 0;
+        return levelInt;
     }
 
     public void setMap(Map map) {
@@ -526,7 +527,7 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void spawnLights() {
-        int[][] lights = map.getLightTiles();
+        int[][] lights = map.getlightTiles();
         HashMap<String, String> tileRefs = map.getTileRefs();
         if (lights != null) {
             GridPoint2 min = new GridPoint2(0, 0);

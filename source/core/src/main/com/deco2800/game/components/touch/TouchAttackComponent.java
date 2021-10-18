@@ -9,8 +9,6 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -28,7 +26,7 @@ public class TouchAttackComponent extends TouchComponent {
     private long start = 0;
     private boolean disable = false;
 
-    private final String DEAL_DAMAGE = "dealDamage";
+    private static final String dealDamage = "dealDamage";
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -106,8 +104,8 @@ public class TouchAttackComponent extends TouchComponent {
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f || hitboxComponent.getFixture() != me)) {
             Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-            if (myEntity.data.containsKey(DEAL_DAMAGE)
-                    && !((boolean) myEntity.data.get(DEAL_DAMAGE))) {
+            if (myEntity.data.containsKey(dealDamage)
+                    && !((boolean) myEntity.data.get(dealDamage))) {
                 return;
             }
             Body targetBody = physicsComponent.getBody();
@@ -176,8 +174,8 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Try to attack target.
         if (targetStats != null) {
-            if (this.getEntity().data.containsKey(DEAL_DAMAGE)
-                    && !((boolean) this.getEntity().data.get(DEAL_DAMAGE))) {
+            if (this.getEntity().data.containsKey(dealDamage)
+                    && !((boolean) this.getEntity().data.get(dealDamage))) {
                 return;
             }
 

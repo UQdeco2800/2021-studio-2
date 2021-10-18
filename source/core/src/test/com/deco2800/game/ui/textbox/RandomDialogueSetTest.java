@@ -29,7 +29,7 @@ class RandomDialogueSetTest {
     @Test
     void getRandomBossDefeatedBeforeTest() {
         Dialogue random = RandomDialogueSet.TEST.getRandomBossDefeatedBefore();
-        assertSame(random, Dialogue.TEST_1);
+        assertSame(Dialogue.TEST_1, random);
     }
 
     @Test
