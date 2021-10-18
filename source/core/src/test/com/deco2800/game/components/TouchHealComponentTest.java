@@ -1,7 +1,7 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Touch.TouchHealComponent;
+import com.deco2800.game.components.touch.TouchHealComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
-public class TouchHealComponentTest {
+class TouchHealComponentTest {
     Entity entity;
     Entity health;
 

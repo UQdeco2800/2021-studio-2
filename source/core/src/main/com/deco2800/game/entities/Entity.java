@@ -49,11 +49,10 @@ public class Entity {
     private float attackRange;
     private String entityType = "";
     private float angle;
+    @SuppressWarnings("CanBeFinal")
     public TreeMap<String, Object> data = new TreeMap<>();
     private boolean teleport = false;
     private Vector2 teleportLoc;
-    private PhysicsEngine physics;
-    private DebugRenderer debugRenderer;
 
     public Entity() {
         id = nextId;
@@ -305,7 +304,7 @@ public class Entity {
             component.triggerUpdate();
         }
         if (disposeYourself) {
-            //todo: add a death animation then dispose
+            //note:add a death animation then dispose
             //remove attack abilities and related components first
             dispose();
             return;
@@ -331,11 +330,12 @@ public class Entity {
     /**
      * Check if there are any object between the entity and the target entity
      *
+     * @param target the player Entity that other NPC entities will attempt to track
      * @return true if no object, false otherwise
      */
     public boolean canSeeEntity(Entity target) {
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
+        PhysicsEngine physics = ServiceLocator.getPhysicsService().getPhysics();
+        DebugRenderer debugRenderer = ServiceLocator.getRenderService().getDebug();
         RaycastHit hit = new RaycastHit();
         Vector2 from = getCenterPosition();
         Vector2 to = target.getCenterPosition();
@@ -354,34 +354,6 @@ public class Entity {
         }
 
         debugRenderer.drawLine(from, to, Color.BLUE, 1);
-        return true;
-    }
-
-    /**
-     * Check if there are any object between the entity and the target location
-     *
-     * @return true if no object, false otherwise
-     */
-    public boolean canSeeTarget(Vector2 target) {
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
-        RaycastHit hit = new RaycastHit();
-        Vector2 from = getCenterPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from, target, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
-            return false;
-        }
-        Vector2 from2 = getPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from2, target, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
-            return false;
-        }
-
-        debugRenderer.drawLine(from, target, Color.BLUE, 1);
         return true;
     }
 

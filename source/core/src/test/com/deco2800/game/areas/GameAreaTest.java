@@ -1,6 +1,5 @@
 package com.deco2800.game.areas;
 
-import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -15,12 +14,10 @@ import static org.mockito.Mockito.verify;
 class GameAreaTest {
     @Test
     void shouldSpawnEntities() {
-        TerrainFactory factory = mock(TerrainFactory.class);
-
         GameArea gameArea =
                 new GameArea() {
                     @Override
-                    public void create() {
+                    public void create(String mapFile, String areaName) {
                     }
                 };
 

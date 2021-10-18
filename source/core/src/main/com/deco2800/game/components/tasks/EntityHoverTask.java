@@ -14,7 +14,7 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
 
     private final Vector2 givenOffset;
     private Vector2 calculatedOffset;
-    private float moveSpeedScl;
+    private final float moveSpeedScl;
 
     /**
      * @param waitTime      How long in seconds to wait between wandering.
@@ -24,19 +24,6 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     public EntityHoverTask(Entity anchor, float protectRadius,
                            float waitTime, Vector2 givenOffset, float moveSpeedScl) {
         super(anchor, protectRadius, waitTime);
-        this.givenOffset = givenOffset;
-        this.moveSpeedScl = moveSpeedScl;
-    }
-
-    /**
-     * @param waitTime How long in seconds to wait between wandering.
-     * @param anchor   - entity to retreat to
-     * @param protectX - bounds around the object to stay in on the x axis
-     * @param protectY - bounds around the object to stay in on the y axis
-     */
-    public EntityHoverTask(Entity anchor, float protectX, float protectY,
-                           float waitTime, Vector2 givenOffset, float moveSpeedScl) {
-        super(anchor, protectX, protectY, waitTime);
         this.givenOffset = givenOffset;
         this.moveSpeedScl = moveSpeedScl;
     }
@@ -72,16 +59,10 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     }
 
     /**
-     * update task to waiting
-     */
-    private void startWaiting() {
-        swapTask(waitTask);
-    }
-
-    /**
      * update task to move task
      */
-    private void startMoving() {
+    @Override
+    protected void startMoving() {
         calculatedOffset = getRandomOffsetInRange();
         movementTask.setTarget(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         swapTask(movementTask);
@@ -100,15 +81,12 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
             min = new Vector2(-protectX, -protectY);
             max = new Vector2(protectX, protectY);
         }
-        //Bug: is still possible for the coords to be too big and off the map
-        //Below is a temp but bad fix
         if (max.x > TerrainFactory.MAP_SIZE.x) {
             max = new Vector2(TerrainFactory.MAP_SIZE.x, max.y);
         }
         if (max.y > TerrainFactory.MAP_SIZE.y) {
             max = new Vector2(max.x, TerrainFactory.MAP_SIZE.y);
         }
-        //return new Vector2(0,0);
         return RandomUtils.random(min, max);
     }
 
@@ -124,7 +102,6 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
                 .sub(calculatedOffset.cpy().add(base.getCenterPosition()).add(givenOffset));
         distance.x = Math.abs(distance.x);
         distance.y = Math.abs(distance.y);
-        Vector2 moveSpeed = distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len())));
-        return (moveSpeed);
+        return (distance.scl((float) (moveSpeedScl * Math.pow(1f + 0.1, distance.len()))));
     }
 }

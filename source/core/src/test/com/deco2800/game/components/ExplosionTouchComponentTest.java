@@ -1,8 +1,8 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Touch.ExplosionTouchComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.ExplosionTouchComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsService;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
-public class ExplosionTouchComponentTest {
+class ExplosionTouchComponentTest {
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerPhysicsService(new PhysicsService());
@@ -44,13 +44,11 @@ public class ExplosionTouchComponentTest {
     }
 
     private Entity createBoss(short targetLayer) {
-        Entity entity =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new CombatStatsComponent(100, 10))
-                        .addComponent(new HitboxComponent())
-                        .addComponent(new TouchAttackComponent(targetLayer));
-        return entity;
+        return new Entity()
+                .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(100, 10))
+                .addComponent(new HitboxComponent())
+                .addComponent(new TouchAttackComponent(targetLayer));
     }
 
     private Entity createTarget(short layer) {

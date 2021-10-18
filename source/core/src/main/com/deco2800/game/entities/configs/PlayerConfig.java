@@ -1,9 +1,18 @@
 package com.deco2800.game.entities.configs;
 
 /**
- * Defines the properties stored in player config files to be loaded by the Player Factory.
+ * Defines a basic set of properties stored in entities config files to be loaded by Entity Factories.
  */
-public class PlayerConfig extends MeleeEnemyConfig {
-    public int gold = 1;
-    public String favouriteColour = "none";
+public class PlayerConfig {
+    private PlayerConfig() {
+        throw new IllegalStateException("Utility class");
+    }
+    /**
+     * health attribute
+     */
+    public static final int HEALTH = 300;
+    /**
+     * attack attribute
+     */
+    public static final int BASE_ATTACK = 10;
 }

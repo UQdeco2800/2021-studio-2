@@ -34,7 +34,6 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
         if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10) {
             this.owner.getEntity().getEvents().trigger("wanderStart");
         } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
-            //this.owner.getEntity().getEvents().trigger("fleeStart");
             this.owner.getEntity().getEvents().trigger("chaseStart");
         }
     }
@@ -61,9 +60,8 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
     @Override
     public int getPriority() {
         //Deadzone
-        if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10) {
-            return (super.getPriority());
-        } else if (super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
+        if (super.getDistanceToTarget() < owner.getEntity().getAttackRange() * 8 / 10
+                || super.getDistanceToTarget() > owner.getEntity().getAttackRange()) {
             return (super.getPriority());
         }
         return (-1);
@@ -86,7 +84,6 @@ public class RangedChaseTask extends ChaseTask implements PriorityTask {
             //invert v3 direction
             v3 = v2.cpy().sub(v1);
             v3.rotate90(1).rotate90(1); //heading relative to target
-            //v3.scl(v3.len() / range);
             if (range / (v3.len() + distanceFrom) < 1) {
                 v3.scl(range / (v3.len() + distanceFrom));
             }

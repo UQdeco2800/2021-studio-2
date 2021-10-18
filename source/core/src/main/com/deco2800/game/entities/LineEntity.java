@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.rendering.TextureRenderComponent;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -11,17 +12,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class LineEntity extends Entity {
 
-    private final long TTL;
+    private final long ttl;
     private final long timeCreated;
 
     /**
      * Creates a line entity
      *
-     * @param TTL time to live in MS
+     * @param ttl time to live in MS
      */
-    public LineEntity(long TTL) {
+    public LineEntity(long ttl) {
         super();
-        this.TTL = TTL;
+        this.ttl = ttl;
         timeCreated = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
     }
 
@@ -31,6 +32,7 @@ public class LineEntity extends Entity {
      *
      * @param target location of target
      * @param origin location of owner
+     * @return Vector2 representation of the different in positions between the target and origin vectors
      */
     public Vector2 setTarget(Vector2 target, Vector2 origin) {
         Vector2 v1 = origin.cpy();
@@ -51,8 +53,22 @@ public class LineEntity extends Entity {
     @Override
     public void update() {
         super.update();
-        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= TTL) {
+        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= ttl) {
             this.prepareDispose();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        LineEntity that = (LineEntity) o;
+        return timeCreated == that.timeCreated;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), timeCreated);
     }
 }

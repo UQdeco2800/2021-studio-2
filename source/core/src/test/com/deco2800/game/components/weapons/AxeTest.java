@@ -13,12 +13,14 @@ import com.deco2800.game.physics.components.WeaponHitboxComponent;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("StatementWithEmptyBody")
 @ExtendWith(GameExtension.class)
 class AxeTest {
     @BeforeEach
@@ -111,7 +113,11 @@ class AxeTest {
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
 
         // This should not cause an exception, but the attack should be ignored
-        entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        try {
+            entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     Entity createAttacker(short targetLayer) {

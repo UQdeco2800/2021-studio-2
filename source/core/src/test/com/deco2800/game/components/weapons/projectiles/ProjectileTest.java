@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ProjectileTest {
+@SuppressWarnings("StatementWithEmptyBody")
+class ProjectileTest {
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerPhysicsService(new PhysicsService());
@@ -23,7 +24,9 @@ public class ProjectileTest {
         ServiceLocator.registerResourceService(new ResourceService());
         ResourceService resourceService = ServiceLocator.getResourceService();
         // wait for assets to load
-        while (resourceService.loadForMillis(10)) ;
+        while (resourceService.loadForMillis(10)) {
+            // wait for assets to load
+        }
     }
 
     @Test

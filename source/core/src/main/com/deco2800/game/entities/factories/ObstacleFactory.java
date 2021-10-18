@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Touch.TeleportComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
-import com.deco2800.game.components.Touch.TouchHealComponent;
-import com.deco2800.game.components.Touch.TouchWin;
 import com.deco2800.game.components.crate.CrateAnimationController;
 import com.deco2800.game.components.crate.TransformBarrelComponent;
+import com.deco2800.game.components.touch.TeleportComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchHealComponent;
+import com.deco2800.game.components.touch.TouchWin;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -31,24 +31,6 @@ public class ObstacleFactory {
     private ObstacleFactory() {
         throw new IllegalStateException("Instantiating static util class");
     }
-
-    /**
-     * Creates a tree entity.
-     *
-     * @return entity
-     */
-    public static Entity createTree() {
-        Entity tree = new Entity()
-                .addComponent(new TextureRenderComponent("images/tree.png"))
-                .addComponent(new PhysicsComponent())
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE));
-        tree.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        tree.getComponent(TextureRenderComponent.class).scaleEntity();
-        tree.scaleHeight(2.5f);
-        PhysicsUtils.setScaledCollider(tree, 0.5f, 0.2f);
-        return tree;
-    }
-
 
     /**
      * Creates a non-physical entity with no collision
@@ -89,7 +71,7 @@ public class ObstacleFactory {
     public static Entity createRSNonePhysicalTrap(float width, float height) {
         Entity trap = new Entity()
                 .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
-                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new CombatStatsComponent(1000000, 70))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
         trap.setScale(width, height);
@@ -190,6 +172,7 @@ public class ObstacleFactory {
         crate.getComponent(TouchHealComponent.class).setEnabled(false);
         crate.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         crate.getComponent(AnimationRenderComponent.class).scaleEntity();
+        PhysicsUtils.setScaledCollider(crate, 0.6f, 0.3f);
         return crate;
     }
 
@@ -227,13 +210,6 @@ public class ObstacleFactory {
     public static Entity createAnchor() {
         Entity anchor = new Entity()
                 .addComponent(new PhysicsComponent())
-                //hitbox allows the anchor to be seen in debug mode but should be removed out of testing.
-                //.addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-                //collision can be used instead to test how the follower reacts to a moving anchor
-                //.addComponent(new ColliderComponent())
-                // or an obstacle based anchor (cant see through)
-                //.addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                //Uncomment below to render in game
                 .addComponent(new TextureRenderComponent("images/crown.png"));
         //Stop from moving
         anchor.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);

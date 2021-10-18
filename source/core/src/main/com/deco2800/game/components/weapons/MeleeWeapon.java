@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -64,7 +64,7 @@ public class MeleeWeapon extends Component {
     /**
      * Weapon attack width and range in terms of x and y, relative to entity size
      */
-    protected Vector2 weaponSize;
+    protected final Vector2 weaponSize;
     /**
      * Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
      * entity can re-use the same weapon hit box instance, provided they aren't setting/destroying

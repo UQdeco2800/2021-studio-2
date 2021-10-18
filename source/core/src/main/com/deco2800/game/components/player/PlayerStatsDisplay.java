@@ -115,9 +115,6 @@ public class PlayerStatsDisplay extends UIComponent {
         healthBarRight = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/health_right.png", Texture.class));
 
-        // Dash image
-        //Gets image dash = new Image(ServiceLocator.getResourceService().getAsset("images/dash_icon.png", Texture.class));
-
         // Health Bar Frame
         tableFrame = new Table();
         tableFrame.top().left();
@@ -173,8 +170,6 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(healthBarLeft).height(40f).width(20f);
         table.add(healthBarMiddle).height(40f).width(health - 20f);
         table.add(healthBarRight).height(40f).width(20f);
-        //This creates a new row to add actors: table.row();
-        //Adds the dash icon to the table: table.add(dash).size(64f).pad(5);
     }
 
     /**
@@ -220,6 +215,5 @@ public class PlayerStatsDisplay extends UIComponent {
         frameRight.remove();
         frameMiddle.remove();
         healthLabel.remove();
-        //Disposes of the dash image: dash.remove();
     }
 }

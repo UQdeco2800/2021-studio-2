@@ -65529,7 +65529,7 @@
             0
         ]
     ],
-    "LightTiles": [
+    "lightTiles": [
         [
             0,
             0,
@@ -98893,6 +98893,14 @@
             "width": 512
         }
     ],
+    "bossObjects": [
+        {
+            "x": 110,
+            "y": 50,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "wallObjects": [
         {
             "x": 102,
@@ -99387,6 +99395,212 @@
         },
         {
             "x": 36,
+            "y": 51,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "hellMeleeObjects": [
+        {
+            "x": 77,
+            "y": 116,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 75,
+            "y": 111,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 80,
+            "y": 107,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 75,
+            "y": 102,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 79,
+            "y": 98,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 42,
+            "y": 97,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 34,
+            "y": 92,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 38,
+            "y": 88,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 47,
+            "y": 87,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 51,
+            "y": 91,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 31,
+            "y": 60,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 36,
+            "y": 61,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 35,
+            "y": 52,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 41,
+            "y": 55,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 62,
+            "y": 73,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 66,
+            "y": 76,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 68,
+            "y": 70,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 76,
+            "y": 76,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 28,
+            "y": 105,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 26,
+            "y": 110,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 30,
+            "y": 112,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 28,
+            "y": 118,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 110,
+            "y": 82,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 116,
+            "y": 82,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 119,
+            "y": 87,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 117,
+            "y": 98,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 114,
+            "y": 91,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 109,
+            "y": 88,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveUpObjects": [
+        {
+            "x": 93,
+            "y": 71,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 101,
+            "y": 57,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "cutsceneObjects": [
+        {
+            "x": 107,
+            "y": 52,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveRightObjects": [
+        {
+            "x": 93,
+            "y": 56,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 100,
             "y": 51,
             "height": 0,
             "width": 0

@@ -1,0 +1,460 @@
+
+winScreen.png
+size: 8192, 8192
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+winScreen
+  rotate: false
+  xy: 2, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+
+winScreen2.png
+size: 8192, 8192
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+winScreen
+  rotate: false
+  xy: 2, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 6494
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 5412
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 2166
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 3846, 3248
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 5768, 4330
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 2, 2
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+winScreen
+  rotate: false
+  xy: 1924, 1084
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
