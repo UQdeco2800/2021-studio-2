@@ -301,13 +301,9 @@ public class NPCFactory {
         Entity elf = createBaseNPCNoAI();
         SecureRandom rand = new SecureRandom();
         double chance = rand.nextDouble();
-        System.out.println(multishotChance);
-        System.out.println(chance);
         if (chance <= multishotChance && type == ShootProjectileTask.projectileTypes.NORMAL_ARROW) {
             type = ShootProjectileTask.projectileTypes.TRACKING_ARROW;
             multishotChance = multishotChance / 2;
-            System.out.println("yes");
-            System.out.println(multishotChance);
         }
         AITaskComponent aiComponent =
                 new AITaskComponent()
