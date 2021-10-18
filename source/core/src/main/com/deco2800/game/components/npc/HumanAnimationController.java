@@ -16,6 +16,7 @@ public class HumanAnimationController extends Component {
     private boolean up = false;
     private boolean down = false;
     private boolean right = false;
+    private static final String TRANSFORMED = "transformed";
 
     /**
      * Create the animation
@@ -59,18 +60,14 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the left direction, if the player is dead, then it will animate the death.
      */
     public void animateLeft() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             if (!attack && !left) {
                 animator.startAnimation("transformedMoveLeft");
                 enableWalk();
                 left = true;
             }
         } else if (!death) {
-            if (!attack && !left) {
-                animator.startAnimation("moveLeft");
-                enableWalk();
-                left = true;
-            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
+            if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
         } else {
@@ -82,7 +79,7 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the right direction, if the player is dead, then it will animate the death.
      */
     public void animateRight() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             if (!attack && !right) {
                 animator.startAnimation("transformedMoveRight");
                 enableWalk();
@@ -105,7 +102,7 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the up direction, if the player is dead, then it will animate the death.
      */
     public void animateUp() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             if (!attack && !up) {
                 animator.startAnimation("transformedMoveUp");
                 enableWalk();
@@ -128,7 +125,7 @@ public class HumanAnimationController extends Component {
      * Animates the entity in the down direction, if the player is dead, then it will animate the death.
      */
     public void animateDown() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             if (!attack && !down) {
                 animator.startAnimation("transformedMoveDown");
                 enableWalk();
@@ -152,7 +149,7 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackDown() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             animateDown();
         }
         animator.startAnimation("EnemyAttackDown");
@@ -166,7 +163,7 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackUp() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             animateUp();
         }
         animator.startAnimation("EnemyAttackUp");
@@ -180,7 +177,7 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackLeft() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             animateLeft();
         }
         animator.startAnimation("EnemyAttackLeft");
@@ -194,7 +191,7 @@ public class HumanAnimationController extends Component {
      * for the duration of the attack animation.
      */
     public void animateAttackRight() {
-        if (entity.getEntityType().equals("transformed")) {
+        if (entity.getEntityType().equals(TRANSFORMED)) {
             animateRight();
         }
         animator.startAnimation("EnemyAttackRight");
@@ -208,7 +205,7 @@ public class HumanAnimationController extends Component {
      */
     public void stopLeft() {
         if (!death) {
-            if (entity.getEntityType().equals("transformed")) {
+            if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformedLeft");
             } else {
                 animator.startAnimation("defaultLeft");
@@ -223,7 +220,7 @@ public class HumanAnimationController extends Component {
      */
     public void stopRight() {
         if (!death) {
-            if (entity.getEntityType().equals("transformed")) {
+            if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformedRight");
             } else {
                 animator.startAnimation("defaultRight");
@@ -238,7 +235,7 @@ public class HumanAnimationController extends Component {
      */
     public void stopDown() {
         if (!death) {
-            if (entity.getEntityType().equals("transformed")) {
+            if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformed");
             } else {
                 animator.startAnimation("default");
@@ -253,7 +250,7 @@ public class HumanAnimationController extends Component {
      */
     public void stopUp() {
         if (!death) {
-            if (entity.getEntityType().equals("transformed")) {
+            if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformedUp");
             } else {
                 animator.startAnimation("defaultUp");

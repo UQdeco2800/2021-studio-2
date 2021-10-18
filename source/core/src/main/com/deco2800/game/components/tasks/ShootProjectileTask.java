@@ -116,6 +116,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         BEAM
     }
 
+    private static final String FIREBALLS_KEY = "fireBalls";
+
+    private static final String FIREBALL_MOVEMENT = "fireBallMovement";
+
 
     /**
      * @param target     The entity to chase.
@@ -165,7 +169,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         //Stops the fireballs from being created until ready.
         //Specifically so the boss doesnt create them before he teleports
         if (projectileType.equals(projectileTypes.FIREBALL) && owner.getEntity().data.get("createFireBall").equals(true)) {
-            if (!owner.getEntity().data.containsKey("fireBalls")) {
+            if (!owner.getEntity().data.containsKey(FIREBALLS_KEY)) {
                 //create fireball list
                 Entity[] entities = new Entity[]{
                         null,
@@ -174,13 +178,13 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 };
                 gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
                         true, true);
-                owner.getEntity().data.put("fireBalls", entities);
+                owner.getEntity().data.put(FIREBALLS_KEY, entities);
                 lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
                 return (true);
             } else if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
                 //Add new fireball
                 int index = 0;
-                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
                 for (Entity fireball : entities) {
                     if (!ServiceLocator.getEntityService().getEntities().contains(
                             fireball, true)) {
@@ -196,11 +200,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 }
             } else {
                 //Check for fireball but don't make one
-                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
                 for (Entity fireball : entities) {
                     if (ServiceLocator.getEntityService().getEntities().contains(
                             fireball, true)
-                            && fireball.data.get("fireBallMovement").equals(false)) {
+                            && fireball.data.get(FIREBALL_MOVEMENT).equals(false)) {
                         return (true);
 
                     }
@@ -216,10 +220,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * @return next fireball to cast
      */
     private Entity getNextFireBall() {
-        Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+        Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
         for (Entity fireball : entities) {
             if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)
-                    && fireball.data.get("fireBallMovement").equals(false)) {
+                    && fireball.data.get(FIREBALL_MOVEMENT).equals(false)) {
                 return (fireball);
             }
         }
@@ -473,7 +477,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 //Change behaviour
                 fireBall.setAngle(getDirectionOfTarget());
                 fireBall.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PROJECTILEWEAPON);
-                fireBall.data.put("fireBallMovement", true);
+                fireBall.data.put(FIREBALL_MOVEMENT, true);
                 fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
                         (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
                 //add flying animation.

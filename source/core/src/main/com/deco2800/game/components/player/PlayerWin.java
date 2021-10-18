@@ -54,7 +54,7 @@ public class PlayerWin extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-
+        //Don't draw
     }
 
     public boolean getHasWin() {

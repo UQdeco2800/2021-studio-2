@@ -10,6 +10,8 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class ElfAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
+    private static final String ASSASSIN_TYPE = "assassin";
+    private static final String RANGED_TYPE = "ranged";
 
     /**
      * Create the animation
@@ -52,11 +54,11 @@ public class ElfAnimationController extends Component {
     private void animate(String modifier) {
         if (!death) {
             switch (entity.getEntityType()) {
-                case "assassin":
-                    animator.startAnimation("assassin" + modifier);
+                case ASSASSIN_TYPE:
+                    animator.startAnimation(ASSASSIN_TYPE + modifier);
                     break;
-                case "ranged":
-                    animator.startAnimation("ranger" + modifier);
+                case RANGED_TYPE:
+                    animator.startAnimation(RANGED_TYPE + modifier);
                     break;
                 default:
                     animator.startAnimation("move" + modifier);
@@ -77,8 +79,8 @@ public class ElfAnimationController extends Component {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
                             animator.getEntity().getScale().y);
                 }
-                if (entity.getEntityType().equals("assassin")) {
-                    animator.startAnimation("assassin" + modifier + "Death");
+                if (entity.getEntityType().equals(ASSASSIN_TYPE)) {
+                    animator.startAnimation(ASSASSIN_TYPE + modifier + "Death");
                 } else {
                     animator.startAnimation(modifier.toLowerCase() + "Death");
                 }
@@ -139,10 +141,10 @@ public class ElfAnimationController extends Component {
 
     private void stun(String modifier) {
         switch (entity.getEntityType()) {
-            case "assassin":
+            case ASSASSIN_TYPE:
                 animator.startAnimation("assassinStun" + modifier);
                 break;
-            case "ranged":
+            case RANGED_TYPE:
                 animator.startAnimation("rangerStun" + modifier);
                 break;
             default:
