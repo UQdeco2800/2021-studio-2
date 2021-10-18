@@ -17,6 +17,7 @@ abstract class TouchComponent extends Component {
     protected short myLayer = 0;
     protected HitboxComponent hitboxComponent;
     protected boolean inCollision = false;
+    @SuppressWarnings("CanBeFinal")
     protected ArrayList<Fixture> collidingFixtures = new ArrayList<>();
 
     /**

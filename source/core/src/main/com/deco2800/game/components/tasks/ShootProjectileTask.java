@@ -10,6 +10,7 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
+import com.deco2800.game.entities.configs.FastArrowConfig;
 import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.files.UserSettings;
@@ -453,7 +454,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
             //Check if hit
             if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
-                int damage = new WeaponConfigs().FAST_ARROW.BASE_ATTACK;
+                int damage = FastArrowConfig.BASE_ATTACK;
                 target.getComponent(CombatStatsComponent.class).addHealth(-damage);
             } else {
                 arrow.data.put("dealDamage", false);

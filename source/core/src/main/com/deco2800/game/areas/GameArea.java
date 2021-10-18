@@ -35,7 +35,7 @@ import java.util.List;
  *
  * <p>Support for enabling/disabling game areas could be added by making this a Component instead.
  */
-@SuppressWarnings("SuspiciousNameCombination")
+@SuppressWarnings({"SuspiciousNameCombination", "CanBeFinal"})
 public abstract class GameArea implements Disposable {
     private static final Logger logger = LoggerFactory.getLogger(GameArea.class);
 

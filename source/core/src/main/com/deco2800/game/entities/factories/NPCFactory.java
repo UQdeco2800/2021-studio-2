@@ -121,11 +121,6 @@ public class NPCFactory {
     private static final String STUN_UP = "stunUp";
 
     /**
-     * load attribute from config
-     */
-    private static final NPCConfigs configs = new NPCConfigs();
-
-    /**
      * throw error
      */
     private NPCFactory() {

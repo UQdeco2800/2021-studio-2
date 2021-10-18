@@ -73,7 +73,6 @@ public class WeaponFactory {
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("arrow");
-        ArrowConfig config = WeaponConfigs.BASE_ARROW;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
@@ -108,19 +107,18 @@ public class WeaponFactory {
     public static Entity createOdinProjectile(Vector2 targetLoc, float angle) {
         Entity beam = createBaseArrow();
         beam.setEntityType("beam");
-        ArrowConfig config = configs.baseArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetLoc, new Vector2(config.speedX, config.speedY));
+                targetLoc, new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetLoc,
-                                new Vector2(config.speedX, config.speedY), 0.8f));
+                                new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y), 0.8f));
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "Odin/OdinProjectile/beam_normal.png", Texture.class));
         beam
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(new CombatStatsComponent(ArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent);
         Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
         beam.setScale(scale);
@@ -150,7 +148,6 @@ public class WeaponFactory {
     public static Entity createTrackingArrow(Entity targetEntity, float angle) {
         Entity trackingArrow = createBaseArrow();
         trackingArrow.setEntityType("trackingArrow");
-        TrackingArrowConfig config = WeaponConfigs.TRACKING_ARROW;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetEntity, new Vector2(TrackingArrowConfig.SPEED_X, TrackingArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
@@ -192,7 +189,6 @@ public class WeaponFactory {
     public static Entity createFireBall(Entity targetEntity, Entity owner, Vector2 offset) {
         Entity fireBall = new Entity();
         fireBall.setEntityType("fireBall");
-        TrackingArrowConfig config = WeaponConfigs.TRACKING_ARROW;
 
         //add fireball animation.
         AnimationRenderComponent animator =
@@ -311,7 +307,6 @@ public class WeaponFactory {
     public static Entity createFastArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("fastArrow");
-        FastArrowConfig config = WeaponConfigs.FAST_ARROW;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
                 targetLoc, new Vector2(FastArrowConfig.SPEED_X, FastArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =

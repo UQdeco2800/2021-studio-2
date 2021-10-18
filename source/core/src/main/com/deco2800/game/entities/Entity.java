@@ -49,6 +49,7 @@ public class Entity {
     private float attackRange;
     private String entityType = "";
     private float angle;
+    @SuppressWarnings("CanBeFinal")
     public TreeMap<String, Object> data = new TreeMap<>();
     private boolean teleport = false;
     private Vector2 teleportLoc;
