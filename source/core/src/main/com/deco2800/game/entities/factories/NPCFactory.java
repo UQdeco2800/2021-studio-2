@@ -481,7 +481,7 @@ public class NPCFactory {
 
     public static Entity createThor(Entity target) {
         Entity thor = createBaseNPCNoAI();
-        OdinBossConfig config = configs.odinBoss;
+        ElfBossConfig config = configs.elfBoss;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -509,7 +509,7 @@ public class NPCFactory {
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 healthBar, healthBarFrame, healthBarDecrease);
 
-        thor.addComponent(new CombatStatsComponent(config.health, config.attack))
+        thor.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent)
@@ -521,7 +521,7 @@ public class NPCFactory {
 
     public static Entity createOdin(Entity target) {
         Entity odin = createBaseNPCNoAI();
-        OdinBossConfig config = configs.odinBoss;
+        ElfBossConfig config = configs.elfBoss;
 
 //--------THE AI COMPONENT WHERE IT DOES THE ATTACK AND SUMMONING AND WHEN IT DIES SPAWN PORTAL-----
         AITaskComponent aiComponent =
@@ -542,7 +542,7 @@ public class NPCFactory {
         setHumanAnimations(animator);
 
         //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
-        odin.addComponent(new CombatStatsComponent(config.health, config.attack))
+        odin.addComponent(new CombatStatsComponent(config.health, config.baseAttack))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent);
