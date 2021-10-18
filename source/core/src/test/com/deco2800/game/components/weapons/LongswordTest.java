@@ -21,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("StatementWithEmptyBody")
 @ExtendWith(GameExtension.class)
 class LongswordTest {
     @BeforeEach

@@ -159,7 +159,7 @@ public class TerrainFactory {
     }
 
     private TerrainComponent createWorldTerrain(
-            ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions) {
+            ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
 
         GridPoint2 tilePixelSize = new GridPoint2(textures.get(1).getRegionWidth(), textures.get(1).getRegionHeight());
 

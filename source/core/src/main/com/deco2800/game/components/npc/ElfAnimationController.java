@@ -3,8 +3,6 @@ package com.deco2800.game.components.npc;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
-import java.util.Locale;
-
 /**
  * This class listens to events relevant to an entity's state and plays the animation when one
  * of the events is triggered.

@@ -1,6 +1,5 @@
 package com.deco2800.game.services;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.entities.EntityService;
