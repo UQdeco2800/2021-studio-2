@@ -50,6 +50,7 @@ public class TutorialGameArea extends GameArea {
             "images/player_axe.png",
             "images/player_hammer.png",
             "images/player_scepter.png",
+            "images/player_longsword.png",
             "images/blast.png",
             "images/hammer_projectile.png",
             "images/health_left.png",
@@ -93,7 +94,7 @@ public class TutorialGameArea extends GameArea {
             "images/player_axe.atlas", "images/arrow_broken/arrowBroken.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
-            "images/explosion/explosion.atlas", "images/outdoorArcher.atlas"
+            "images/explosion/explosion.atlas", "images/outdoorArcher.atlas", "images/player_longsword.atlas"
     };
 
     private static final String[] forestSounds = {

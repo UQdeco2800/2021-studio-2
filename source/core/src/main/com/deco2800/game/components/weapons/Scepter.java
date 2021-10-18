@@ -24,6 +24,9 @@ public class Scepter extends MeleeWeapon {
      */
     private final Sound impactSound;
 
+    private long timeSinceRangeAttack;
+    private final long RANGE_COOLDOWN = 500L;
+
     private GameArea gameArea;
     private final float range = 6f;
 
@@ -34,6 +37,16 @@ public class Scepter extends MeleeWeapon {
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
         this.gameArea = ServiceLocator.getGameAreaService();
+        timeSinceRangeAttack = 0L;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        long currentTime = ServiceLocator.getTimeSource().getTime();
+        if (timeSinceRangeAttack != 0L && currentTime - timeSinceRangeAttack > RANGE_COOLDOWN) {
+            timeSinceRangeAttack = 0L;
+        }
     }
 
     /**
@@ -69,9 +82,9 @@ public class Scepter extends MeleeWeapon {
      * Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
      * connect with any enemies immediately around the entity.
      */
-
     @Override
     public void rangedAttack(int attackDirection) {
+        if (timeSinceRangeAttack != 0) return; // cooldown hasn't expired yet
         super.rangedAttack(attackDirection);
         Vector2 target = entity.getCenterPosition();
         switch (attackDirection) {
@@ -90,6 +103,7 @@ public class Scepter extends MeleeWeapon {
         }
         Entity blast = WeaponFactory.createBlast(target);
         gameArea.spawnEntityAt(blast, entity.getCenterPosition(), true, true);
+        timeSinceRangeAttack = ServiceLocator.getTimeSource().getTime();
     }
 
     /**

@@ -31,8 +31,12 @@ public class Hammer extends MeleeWeapon {
      * Determines whether the axe has used its strong attack
      */
     private boolean hasStrongAttacked;
+    private long timeSinceStrongAttack;
+    private final long STRONG_COOLDOWN = 3000L;
 
     private boolean hasRangeAttacked;
+    private long timeSinceRangeAttack;
+    private final long RANGE_COOLDOWN = 2000L;
 
     private HammerProjectile projectile;
 
@@ -48,12 +52,26 @@ public class Hammer extends MeleeWeapon {
         strongAttackSize = new Vector2(2f, 2f); // default size
         hasStrongAttacked = false;
         hasRangeAttacked = false;
+        timeSinceStrongAttack = 0L;
+        timeSinceRangeAttack = 0L;
     }
 
     @Override
     public void create() {
         super.create();
         animator = entity.getComponent(AnimationRenderComponent.class);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        long currentTime = ServiceLocator.getTimeSource().getTime();
+        if (timeSinceRangeAttack != 0L && currentTime - timeSinceRangeAttack > RANGE_COOLDOWN) {
+            timeSinceRangeAttack = 0L;
+        }
+        if (timeSinceStrongAttack != 0L && currentTime - timeSinceStrongAttack > STRONG_COOLDOWN) {
+            timeSinceStrongAttack = 0L;
+        }
     }
 
     /**
@@ -90,7 +108,8 @@ public class Hammer extends MeleeWeapon {
      */
     @Override
     public void aoeAttack() {
-        if (isAttacking()) {
+        // if already attacking, or cooldown hasn't expired yet, do nothing.
+        if (isAttacking() || timeSinceStrongAttack != 0) {
             return;
         }
         hasStrongAttacked = true;
@@ -99,6 +118,7 @@ public class Hammer extends MeleeWeapon {
             return;
         }
         animator.startAnimation("hammer_aoe");
+        timeSinceStrongAttack = ServiceLocator.getTimeSource().getTime();
     }
 
     @Override
@@ -107,7 +127,8 @@ public class Hammer extends MeleeWeapon {
             projectile.recall();
             animator.startAnimation("hammer_recall");
             return;
-        } else if (isAttacking()) {
+        // if already attacking, or cool-down hasn't expired yet, do nothing.
+        } else if (isAttacking() || timeSinceRangeAttack != 0) {
             return;
         }
         Vector2 target = entity.getPosition();
@@ -137,6 +158,7 @@ public class Hammer extends MeleeWeapon {
                 rangedMjolnir, entity.getPosition(), true, true);
         attackSound.play();
         hasRangeAttacked = true;
+        timeSinceRangeAttack = ServiceLocator.getTimeSource().getTime();
     }
 
     public void destroyProjectile() {
