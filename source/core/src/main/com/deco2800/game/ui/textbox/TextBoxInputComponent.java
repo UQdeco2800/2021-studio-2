@@ -44,13 +44,11 @@ public class TextBoxInputComponent extends InputComponent {
      */
     @Override
     public boolean keyDown(int keycode) {
-        // handle open and close terminal
-        if (keycode == SKIP_KEY) {
+        if (keycode == SKIP_KEY && textBox.isOpen()) {
             textBox.setClosed();
             return true;
         }
-
-        return textBox.isOpen();
+        return false;
     }
 
     /**

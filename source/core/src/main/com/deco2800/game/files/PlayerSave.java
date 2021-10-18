@@ -78,10 +78,7 @@ public class PlayerSave {
             Save.setLoki2Wins(Integer.parseInt(saveRead.nextLine()));
             Save.setThorWins(Integer.parseInt(saveRead.nextLine()));
             Save.setOdinWins(Integer.parseInt(saveRead.nextLine()));
-
             logger.debug("Player Save File correctly loaded into new game");
-            saveRead.close();
-
         } catch (FileNotFoundException | NumberFormatException e) {
             logger.warn("Player Save File has not correctly written save status");
             Save.resetSave();

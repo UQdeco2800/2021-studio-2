@@ -42,6 +42,13 @@ public enum Dialogue {
                     "\nOnce you're ready, walk back over to me.")
     }),
 
+    TUTORIAL_OTHER(new Message[]{
+            new Message(false, "If you don't care what I'm saying, you" +
+                    "\ncan press ESCAPE to finish the cutscenes."),
+            new Message(false, "The pause button is also on ESCAPE if you" +
+                    "\nneed a break.")
+    }),
+
     TUTORIAL_DASH(new Message[]{
             new Message(false, "To get around quickly, press SHIFT" +
                     "\nto sprint around and CAPS_LOCK to dash." +
@@ -97,6 +104,8 @@ public enum Dialogue {
             new Message(false, "You'll need your hands stained with blood" +
                     "\nbefore you're deemed worthy to enter."),
             new Message(true, "I understand. Nothing will get in my way."),
+            new Message(false, "Last thing, if you want to leave \nbefore defeating all " +
+                    "the enemies \nor take a break between fights \npress P to see the pause menu."),
             new Message(false, "Good luck warrior, I hope to never" +
                     "\nsee you again."),
             new Message(true, "Thank you. Same to you."),

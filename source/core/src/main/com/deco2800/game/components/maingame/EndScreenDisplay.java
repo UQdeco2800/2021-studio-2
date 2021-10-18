@@ -26,14 +26,12 @@ public class EndScreenDisplay extends UIComponent {
         table = new Table();
         table.setFillParent(true);
         buttonSetup();
-
-
     }
 
     private void buttonSetup() {
         //create new skin file for buttons
         Skin endButton = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json")); //NEEDTO MAKE OWN SKIN FILE
-        TextButton exitBtn = new TextButton("GGEZ GGEZ GGEZ GO NEXT", endButton);
+        TextButton exitBtn = new TextButton("Continue...", endButton);
         exitBtn.addListener(
                 new ChangeListener() {
                     @Override

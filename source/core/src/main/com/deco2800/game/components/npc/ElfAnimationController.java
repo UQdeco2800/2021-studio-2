@@ -39,11 +39,6 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("stunUp", this::animateUpStun);
         entity.getEvents().addListener("stunDown", this::animateDownStun);
 
-        entity.getEvents().addListener("assassinLeftShoot", this::animateAssassinLeft);
-        entity.getEvents().addListener("assassinRightShoot", this::animateAssassinRight);
-        entity.getEvents().addListener("assassinUpShoot", this::animateAssassinUp);
-        entity.getEvents().addListener("assassinDownShoot", this::animateAssassinDown);
-
         animateDown();
     }
 
@@ -107,22 +102,6 @@ public class ElfAnimationController extends Component {
         animate("Down");
     }
 
-    public void animateAssassinLeft() {
-        animator.startAnimation("assassinLeft");
-    }
-
-    public void animateAssassinRight() {
-        animator.startAnimation("assassinRight");
-    }
-
-    public void animateAssassinUp() {
-        animator.startAnimation("assassinUp");
-    }
-
-    public void animateAssassinDown() {
-        animator.startAnimation("assassinDown");
-    }
-
     public void animateLeftAttack() {
         animator.startAnimation("attackLeft");
     }
@@ -145,7 +124,7 @@ public class ElfAnimationController extends Component {
                 animator.startAnimation("assassinStun" + modifier);
                 break;
             case RANGED_TYPE:
-                animator.startAnimation("rangerStun" + modifier);
+                animator.startAnimation("rangedStun" + modifier);
                 break;
             default:
                 animator.startAnimation("stun" + modifier);

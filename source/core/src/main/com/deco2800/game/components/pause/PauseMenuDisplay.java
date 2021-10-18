@@ -58,7 +58,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
                     public void changed(ChangeEvent changeEvent, Actor actor) {
                         logger.debug("Start button clicked");
                         //Needs to check which one it is in
-                        entity.getEvents().trigger("startForest");
+                        entity.getEvents().trigger("startTutorial");
                     }
                 });
         mainMenuBtn.addListener(

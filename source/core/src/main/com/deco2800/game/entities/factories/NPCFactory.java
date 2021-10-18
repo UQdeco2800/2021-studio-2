@@ -208,8 +208,6 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/guardElf.atlas", TextureAtlas.class));
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
         animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
@@ -334,10 +332,10 @@ public class NPCFactory {
 
         } else {
             elf.setEntityType("ranged");
-            animator.addAnimation("rangerLeft", 0.5f, Animation.PlayMode.LOOP);
-            animator.addAnimation("rangerRight", 0.5f, Animation.PlayMode.LOOP);
-            animator.addAnimation("rangerUp", 0.5f, Animation.PlayMode.LOOP);
-            animator.addAnimation("rangerDown", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedLeft", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedRight", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedUp", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedDown", 0.5f, Animation.PlayMode.LOOP);
 
             animator.addAnimation(LEFT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
             animator.addAnimation(RIGHT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
@@ -549,7 +547,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 
@@ -593,7 +591,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 
@@ -634,7 +632,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 
@@ -704,7 +702,8 @@ public class NPCFactory {
         archer.addComponent(createHealthBarComponent());
         archer.setEntityType("archer");
 
-        PhysicsUtils.setScaledCollider(archer, 0.6f, 0.2f);
+        PhysicsUtils.setScaledCollider(archer, 0.4f, 0.3f);
+
         return archer;
     }
 
@@ -846,7 +845,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 

@@ -58,7 +58,7 @@ class PauseMenuActionsTest {
     void togglePauseTest() {
         //ensure user inputs triggers toggle pause
         entity.getEvents().addListener("togglePause", actions::togglePauseGame);
-        input.keyDown(Input.Keys.P);
+        input.keyDown(Input.Keys.ESCAPE);
         verify(actions).togglePauseGame();
     }
 }
