@@ -67,7 +67,7 @@ public class MainGameScreen extends ScreenAdapter {
     private final Renderer renderer;
     private final PhysicsEngine physicsEngine;
     private GameArea gameArea;
-    private static boolean gameChange = false;
+    private boolean gameChange = false;
     private final TerrainFactory terrainFactory;
 
     public MainGameScreen(GdxGame game) {
@@ -103,9 +103,6 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "tutorial":
-                this.gameArea = new TutorialGameArea(terrainFactory);
-                break;
             case "game0":
                 this.gameArea = new GameArea0(terrainFactory);
                 break;
@@ -121,6 +118,9 @@ public class MainGameScreen extends ScreenAdapter {
             case "game4":
                 this.gameArea = new GameArea4(terrainFactory);
                 break;
+            default:
+                this.gameArea = new TutorialGameArea(terrainFactory);
+                break;
         }
         this.gameArea.create();
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -134,9 +134,6 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "tutorial":
-                this.gameArea = new TutorialGameArea(terrainFactory, currentHealth);
-                break;
             case "game0":
                 this.gameArea = new GameArea0(terrainFactory, currentHealth);
                 break;
@@ -151,6 +148,9 @@ public class MainGameScreen extends ScreenAdapter {
                 break;
             case "game4":
                 this.gameArea = new GameArea4(terrainFactory, currentHealth);
+                break;
+            default:
+                this.gameArea = new TutorialGameArea(terrainFactory, currentHealth);
                 break;
         }
         this.gameArea.create();
@@ -183,7 +183,7 @@ public class MainGameScreen extends ScreenAdapter {
     /**
      * Use for teleport, get the leve change
      */
-    public static void levelChange() {
+    public void levelChange() {
         gameChange = true;
     }
 
@@ -195,27 +195,22 @@ public class MainGameScreen extends ScreenAdapter {
         if (gameChange) {
             if (gameArea.getLevel() == 9) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA0, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 1) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA2, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 2) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 3) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                System.out.println("\n\n\n\nhealth: \n\n\n" + currentHealth);
                 game.setScreen(GdxGame.ScreenType.GAMEAREA4, currentHealth);
                 gameChange = false;
             }

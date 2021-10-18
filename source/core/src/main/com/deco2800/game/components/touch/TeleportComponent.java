@@ -41,7 +41,7 @@ public class TeleportComponent extends TouchComponent {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    MainGameScreen.levelChange();
+                    ServiceLocator.getGameScreen().levelChange();
                 }
             }, 1000);
         }

@@ -53,7 +53,7 @@ public class WeaponFactory {
      * @param projectileType type of projectile
      */
     private static void shootingSound(String projectileType) {
-        if (projectileType.contains("Arrow")) {
+        if (projectileType.toLowerCase().contains("arrow")) {
             Sound arrowEffect = ServiceLocator.getResourceService().getAsset(
                     "sounds/arrow_shoot.mp3", Sound.class);
             arrowEffect.play(0.3f);

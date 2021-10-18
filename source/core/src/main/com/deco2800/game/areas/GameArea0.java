@@ -140,7 +140,7 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.normalArrow, 0.1f);
+                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
                 incNum();
                 elf.setEntityType("ranged");
                 elf.getEvents().trigger("rangerLeft");
@@ -162,7 +162,7 @@ public class GameArea0 extends GameArea {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.fastArrow, 0);
+                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.FAST_ARROW, 0);
                 elf.getEvents().trigger("assassinLeft");
                 incNum();
                 spawnEntityAt(

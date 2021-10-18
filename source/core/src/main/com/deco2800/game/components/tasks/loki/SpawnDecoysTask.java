@@ -78,7 +78,7 @@ public class SpawnDecoysTask extends DefaultTask implements PriorityTask {
                 case 2:
                     spawnPosition.add(new Vector2(-1, -1));
                     break;
-                case 3:
+                default:
                     spawnPosition.add(new Vector2(1, -1));
                     break;
             }

@@ -56,14 +56,14 @@ public class Axe extends MeleeWeapon {
             case UP:
                 animator.startAnimation("up_attack");
                 break;
-            case DOWN:
-                animator.startAnimation("down_attack");
-                break;
             case LEFT:
                 animator.startAnimation("left_attack");
                 break;
             case RIGHT:
                 animator.startAnimation("right_attack");
+                break;
+            default:
+                animator.startAnimation("down_attack");
                 break;
         }
     }
