@@ -74,13 +74,13 @@ public class GameArea4 extends GameArea {
         Entity teleport = ObstacleFactory.createTeleport();
         HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
         GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(),
-                (map.getDimensions().get(TILES_HEIGHT) - teleportPos.get("y").intValue()) - 2);
+                (map.getDimensions().get(TILES_HEIGHT) - teleportPos.get("y").intValue()) - 1);
         this.spawnEntityAt(teleport, fixedPos, true, true);
     }
 
     private void spawnDialogueCutscenes() {
         Entity trigger = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED, 4  );
+                DialogueSet.ORDERED, 3);
         spawnEntityAt(trigger, new Vector2(25f, 40f), true, true);
 
         Entity trigger2 = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,

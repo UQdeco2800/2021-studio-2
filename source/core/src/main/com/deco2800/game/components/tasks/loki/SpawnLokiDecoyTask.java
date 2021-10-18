@@ -101,7 +101,7 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
      */
     private boolean canSpawn() {
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFiredTime >= cooldownMS
-                && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
+                && getDistanceToTarget() < owner.getEntity().getAttackRange());
     }
 
     /**
@@ -111,14 +111,5 @@ public class SpawnLokiDecoyTask extends DefaultTask implements PriorityTask {
      */
     private float getDistanceToTarget() {
         return owner.getEntity().getCenterPosition().dst(target.getPosition());
-    }
-
-    /**
-     * Check if there are any object between the entity and the target
-     *
-     * @return true if no object, false otherwise
-     */
-    private boolean isTargetVisible() {
-        return owner.getEntity().canSeeEntity(target);
     }
 }

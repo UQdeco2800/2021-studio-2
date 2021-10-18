@@ -228,14 +228,12 @@ public abstract class GameArea implements Disposable {
         if (numBoss == 0) {
             logger.info("Number of Bosses is now at 0");
             logger.info("Spawning the teleport object");
-            if (getLevel() != 9) {
-                //gama area x
-                Entity teleport = ObstacleFactory.createTeleport();
-                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
-                        (map.getDimensions().get(TILES_HEIGHT) - teleportPos[0].get("y").intValue() - 2));
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-            }
+            //gama area x
+            Entity teleport = ObstacleFactory.createTeleport();
+            HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
+            GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
+                    (map.getDimensions().get(TILES_HEIGHT) - teleportPos[0].get("y").intValue()) - 1);
+            this.spawnEntityAt(teleport, fixedPos, true, true);
         }
     }
 

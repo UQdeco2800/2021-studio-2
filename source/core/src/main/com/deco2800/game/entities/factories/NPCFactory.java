@@ -549,7 +549,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 
@@ -593,7 +593,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 
@@ -634,7 +634,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 
@@ -704,7 +704,8 @@ public class NPCFactory {
         archer.addComponent(createHealthBarComponent());
         archer.setEntityType("archer");
 
-        PhysicsUtils.setScaledCollider(archer, 0.6f, 0.2f);
+        PhysicsUtils.setScaledCollider(archer, 0.4f, 0.3f);
+
         return archer;
     }
 
@@ -846,7 +847,7 @@ public class NPCFactory {
         viking.getComponent(AnimationRenderComponent.class).scaleEntity();
         viking.getComponent(AnimationRenderComponent.class).setAnimationScale(2f);
         viking.setEntityType(VIKING_TYPE);
-        PhysicsUtils.setScaledCollider(viking, 0.9f, 0.6f);
+        PhysicsUtils.setScaledCollider(viking, 0.6f, 0.3f);
         return viking;
     }
 

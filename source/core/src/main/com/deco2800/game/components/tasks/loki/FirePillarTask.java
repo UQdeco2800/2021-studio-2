@@ -88,7 +88,7 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         logger.debug("Checking if the boss can attack");
 
         return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFiredTime >= cooldownMS
-                && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
+                && getDistanceToTarget() < owner.getEntity().getAttackRange());
     }
 
     /**
@@ -133,15 +133,6 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         Vector2 v2 = target.getCenterPosition().cpy();
         Vector2 v3 = v1.cpy().sub(v2);
         return (v3.angleDeg());
-    }
-
-    /**
-     * Check if there are any object between the entity and the target
-     *
-     * @return true if no object, false otherwise
-     */
-    private boolean isTargetVisible() {
-        return owner.getEntity().canSeeEntity(target);
     }
 
     /**
