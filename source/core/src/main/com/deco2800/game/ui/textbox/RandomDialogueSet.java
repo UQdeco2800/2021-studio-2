@@ -23,6 +23,7 @@ public enum RandomDialogueSet {
             },
             new Dialogue[]{
                     Dialogue.TUTORIAL_MOVE,
+                    Dialogue.TUTORIAL_OTHER,
                     Dialogue.TUTORIAL_DASH,
                     Dialogue.TUTORIAL_TRAPS,
                     Dialogue.TUTORIAL_CRATES,

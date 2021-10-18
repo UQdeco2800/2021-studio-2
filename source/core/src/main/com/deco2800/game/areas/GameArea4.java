@@ -80,7 +80,7 @@ public class GameArea4 extends GameArea {
 
     private void spawnDialogueCutscenes() {
         Entity trigger = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
-                DialogueSet.ORDERED, 3);
+                DialogueSet.ORDERED, 4  );
         spawnEntityAt(trigger, new Vector2(25f, 40f), true, true);
 
         Entity trigger2 = CutsceneTriggerFactory.createPrisonerCutscene(RandomDialogueSet.TUTORIAL,
