@@ -44,13 +44,11 @@ class ExplosionTouchComponentTest {
     }
 
     private Entity createBoss(short targetLayer) {
-        Entity entity =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new CombatStatsComponent(100, 10))
-                        .addComponent(new HitboxComponent())
-                        .addComponent(new TouchAttackComponent(targetLayer));
-        return entity;
+        return new Entity()
+                .addComponent(new PhysicsComponent())
+                .addComponent(new CombatStatsComponent(100, 10))
+                .addComponent(new HitboxComponent())
+                .addComponent(new TouchAttackComponent(targetLayer));
     }
 
     private Entity createTarget(short layer) {

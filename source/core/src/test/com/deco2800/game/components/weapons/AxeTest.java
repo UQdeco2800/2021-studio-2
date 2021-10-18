@@ -20,6 +20,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("StatementWithEmptyBody")
 @ExtendWith(GameExtension.class)
 class AxeTest {
     @BeforeEach
@@ -48,7 +49,7 @@ class AxeTest {
     }
 
     @Test
-    void shouldCreateWeaponHitbox() {
+    void shouldCreateWeaponHitbox() { // TODO
         short targetLayer = (1 << 3);
         Entity entity = createAttacker(targetLayer);
 

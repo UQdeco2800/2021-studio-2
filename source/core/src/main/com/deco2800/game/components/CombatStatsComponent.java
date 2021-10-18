@@ -16,14 +16,17 @@ public class CombatStatsComponent extends Component {
     private int health;
     private int maxHealth; // if we want to change his max health use the setMaxHeatlh()
     private int baseAttack;
+    private boolean damageLocked;
 
     public CombatStatsComponent(int health, int baseAttack) {
         this.health = health;
         setMaxHealth(health);
         setBaseAttack(baseAttack);
+        damageLocked = false;
         //if entities can heal trigger this even
     }
 
+    @Override
     public void create() {
         entity.getEvents().addListener("healEntity", this::addHealth);
     }
@@ -71,6 +74,10 @@ public class CombatStatsComponent extends Component {
      * @param health health
      */
     public void setHealth(int health) {
+        if (damageLocked) {
+            return;
+        }
+
         if (health > maxHealth) {
             this.health = maxHealth; //cannot get more health than his set max health
         } else if (health > 0) {
@@ -132,6 +139,9 @@ public class CombatStatsComponent extends Component {
      * @param attacker the CombatStatComponent of the attacker
      */
     public void hit(CombatStatsComponent attacker) {
+        if (damageLocked) {
+            return;
+        }
         if (this.enabled) {
             int newHealth = getHealth() - attacker.getBaseAttack();
             //check for hit animations
@@ -156,6 +166,7 @@ public class CombatStatsComponent extends Component {
             int newHealth = getHealth() - attacker.getBaseAttack() - weaponAttackPower;
             //check for hit animations
             checkHitAnimations();
+            this.entity.getEvents().trigger("enemyHit");
             //if entity has Transform Component and is about to die we don't want to update hp
             // here since it will dispose. Instead we want to disable this component and perform
             // our transformation.
@@ -209,5 +220,9 @@ public class CombatStatsComponent extends Component {
             return true;
         }
         return false;
+    }
+
+    public void setDamageLocked(boolean lock) {
+        this.damageLocked = lock;
     }
 }

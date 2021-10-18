@@ -45,21 +45,9 @@ public class DeathDisplay extends MainMenuDisplay {
 
         Skin menuButtons = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json"));
 
-        TextButton restartForestBtn = new TextButton("Restart Forest", menuButtons);
         TextButton restartTutorialBtn = new TextButton("Restart Tutorial", menuButtons);
         TextButton exitBtn = new TextButton("Exit MainMenu", menuButtons);
 
-
-        // Triggers an event when the button is pressed
-        restartForestBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Start button clicked");
-                        //Needs to check which one it is in
-                        entity.getEvents().trigger("startForest");
-                    }
-                });
         // Triggers an event when the button is pressed
         restartTutorialBtn.addListener(
                 new ChangeListener() {
@@ -83,8 +71,6 @@ public class DeathDisplay extends MainMenuDisplay {
 
         table.clear();
         table.add(title).padTop(-250f);
-        table.row();
-        table.add(restartForestBtn);
         table.row();
         table.add(restartTutorialBtn).padTop(30f);
         table.row();

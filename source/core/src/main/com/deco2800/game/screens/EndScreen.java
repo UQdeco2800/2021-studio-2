@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.deco2800.game.GdxGame;
 import com.deco2800.game.components.endGame.EndScreenActions;
-import com.deco2800.game.components.endGame.EndScreenDisplay;
+import com.deco2800.game.components.maingame.EndScreenDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
@@ -21,8 +21,6 @@ import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Time;
 
 /**
  * the End screen to be played after Odin dies
@@ -72,7 +70,6 @@ public class EndScreen extends ScreenAdapter {
 
         ServiceLocator.getRenderService().dispose();
         ServiceLocator.getEntityService().dispose();
-        //ServiceLocator.getResourceService().dispose();
         ServiceLocator.clear();
     }
 

@@ -4,22 +4,13 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.BodyUserData;
-import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.HitboxComponent;
-import com.deco2800.game.screens.MainGameScreen;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.CutsceneScreen;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TeleportComponent extends TouchComponent {
-
-    private static final Logger logger = LoggerFactory.getLogger(TeleportComponent.class);
-
-    private long start = 0;
 
     public TeleportComponent(short targetLayer) {
         super(targetLayer);
@@ -33,9 +24,6 @@ public class TeleportComponent extends TouchComponent {
      */
     @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
-
-        logger.debug("A TeleportComponent entity has been collided with");
-
         if (this.checkEntities(me, other)) {
             return;
         }
@@ -44,7 +32,7 @@ public class TeleportComponent extends TouchComponent {
         Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
 
         CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
-        if (targetStats != null && ((System.currentTimeMillis() - start) / 1000.) > 0.5) {
+        if (targetStats != null && ((System.currentTimeMillis()) / 1000.) > 0.5) {
             CutsceneScreen screen = ServiceLocator.getEntityService()
                     .getUIEntity().getComponent(CutsceneScreen.class);
             screen.setOpen();
@@ -52,9 +40,7 @@ public class TeleportComponent extends TouchComponent {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    logger.debug("Level is being changed after the collision");
-                    MainGameScreen.levelChange();
-                    timer.cancel();
+                    ServiceLocator.getGameScreen().levelChange();
                 }
             }, 1000);
         }

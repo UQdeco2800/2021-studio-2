@@ -7,6 +7,7 @@ import com.deco2800.game.input.InputService;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
+import com.deco2800.game.screens.MainGameScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,7 @@ public class ServiceLocator {
     private static InputService inputService;
     private static ResourceService resourceService;
     private static GameArea gameAreaService;
-    private static Renderer renderer;
+    private static MainGameScreen gameScreen;
 
 
     private ServiceLocator() {
@@ -63,20 +64,12 @@ public class ServiceLocator {
         return resourceService;
     }
 
-    public static ResourceService copyResourceService() {
-        AssetManager cpy = new AssetManager();
-        for (String s : resourceService.getAssetManager().getAssetNames()) {
-            cpy.load(resourceService.getAssetManager().get(s));
-        }
-        return new ResourceService(cpy);
-    }
-
     public static GameArea getGameAreaService() {
         return gameAreaService;
     }
 
-    public static Renderer getRenderer() {
-        return renderer;
+    public static MainGameScreen getGameScreen() {
+        return gameScreen;
     }
 
     public static void registerEntityService(EntityService service) {
@@ -109,6 +102,10 @@ public class ServiceLocator {
         resourceService = source;
     }
 
+    public static void registerGameScreen(MainGameScreen gameScreen) {
+        ServiceLocator.gameScreen = gameScreen;
+    }
+
     /**
      * Allows entities to access gameArea and spawn entities.
      *
@@ -126,10 +123,6 @@ public class ServiceLocator {
         timeSource = null;
         inputService = null;
         resourceService = null;
-    }
-
-    public static void registerRenderer(Renderer renderer) {
-        ServiceLocator.renderer = renderer;
     }
 
 }

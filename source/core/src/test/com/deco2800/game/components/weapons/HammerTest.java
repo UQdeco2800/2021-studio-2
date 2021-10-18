@@ -21,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("StatementWithEmptyBody")
 @ExtendWith(GameExtension.class)
 class HammerTest {
     @BeforeEach
@@ -34,7 +35,9 @@ class HammerTest {
         System.out.println("impact:" + resourceService.containsAsset("sounds/impact.ogg", Sound.class));
         System.out.println("swish:" + resourceService.containsAsset("sounds/swish.ogg", Sound.class));
         // wait for assets to load
-        while (resourceService.loadForMillis(10)) ;
+        while (resourceService.loadForMillis(10)) {
+            // wait for assets to load
+        }
     }
 
     @Test

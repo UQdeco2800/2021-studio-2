@@ -57,7 +57,7 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
      */
     public void spawn() {
         Entity elf = NPCFactory.createMeleeElf(target);
-        Entity elf2 = NPCFactory.createRangedElf(target, "normalArrow", 0.15f);
+        Entity elf2 = NPCFactory.createRangedElf(target, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.15f);
         Entity explosion = WeaponFactory.createExplosion(owner.getEntity());
 
         ServiceLocator.getGameAreaService().incNum();

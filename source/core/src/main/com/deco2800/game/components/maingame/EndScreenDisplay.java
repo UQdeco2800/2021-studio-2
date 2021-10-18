@@ -1,4 +1,4 @@
-package com.deco2800.game.components.endGame;
+package com.deco2800.game.components.maingame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,8 +30,6 @@ public class EndScreenDisplay extends UIComponent {
 
     private void buttonSetup() {
         //create new skin file for buttons
-        //Skin menuButtons = new Skin(Gdx.files.internal(".json"));
-        //TextButton exitBtn = new TextButton("Descend Valhalla", menuButtons);
         Skin endButton = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json")); //NEEDTO MAKE OWN SKIN FILE
         TextButton exitBtn = new TextButton("GGEZ GGEZ GGEZ GO NEXT", endButton);
         exitBtn.addListener(
@@ -53,7 +51,6 @@ public class EndScreenDisplay extends UIComponent {
         table.setVisible(true);
     }
 
-
     @Override
     public float getZIndex() {
         return Z_INDEX;
@@ -61,12 +58,10 @@ public class EndScreenDisplay extends UIComponent {
 
     @Override
     protected void draw(SpriteBatch batch) {
-
     }
 
     @Override
     public void dispose() {
         super.dispose();
     }
-
 }

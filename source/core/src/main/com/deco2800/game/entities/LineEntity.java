@@ -11,17 +11,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class LineEntity extends Entity {
 
-    private final long TTL;
+    private final long ttl;
     private final long timeCreated;
 
     /**
      * Creates a line entity
      *
-     * @param TTL time to live in MS
+     * @param ttl time to live in MS
      */
-    public LineEntity(long TTL) {
+    public LineEntity(long ttl) {
         super();
-        this.TTL = TTL;
+        this.ttl = ttl;
         timeCreated = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
     }
 
@@ -52,7 +52,7 @@ public class LineEntity extends Entity {
     @Override
     public void update() {
         super.update();
-        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= TTL) {
+        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - timeCreated >= ttl) {
             this.prepareDispose();
         }
     }

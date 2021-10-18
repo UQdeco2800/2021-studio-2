@@ -26,7 +26,6 @@ public class GameAreaDisplay extends UIComponent {
     private void addActors() {
         title = new Label(this.gameAreaName, skin, "large");
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-        //stage.addActor(title);
     }
 
     @Override

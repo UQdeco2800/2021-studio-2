@@ -41,7 +41,10 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     private boolean max = false;
 
-    private Entity ownerRunner;
+    /**
+     * owner of the entity that run this task
+     */
+    private final Entity ownerRunner;
 
 
     /**
@@ -70,7 +73,8 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(owner.getEntity().getPosition());
+        Vector2 bodyOffset = owner.getEntity().getCenterPosition().cpy().sub(
+                owner.getEntity().getPosition());
         Vector2 position = ownerRunner.getCenterPosition().sub(bodyOffset);
         owner.getEntity().setAngle(rotateAngle + rotateFactor);
         if (owner.getEntity().getScale().x > this.scale.x
@@ -87,25 +91,19 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
             max = true;
             //Let target teleport
             if (owner.getEntity().data.containsKey("teleportID")
-                    && (int) owner.getEntity().data.get("teleportID") == 1) {
-                if (!owner.getEntity().data.containsKey("teleportTarget")) {
-                    //Add body offset
-                    /*System.out.println(((Vector2) owner.getEntity().data.get("teleportLoc")));
-                    System.out.println(bodyOffset);
-                    owner.getEntity().data.put("teleportLoc",
-                            ((Vector2) owner.getEntity().data.get("teleportLoc")).add(bodyOffset));*/
-                    owner.getEntity().data.put("teleportTarget", true);
-                }
+                    && (int) owner.getEntity().data.get("teleportID") == 1
+                    && !owner.getEntity().data.containsKey("teleportTarget")) {
+                //Add body offset
+                owner.getEntity().data.put("teleportTarget", true);
             }
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
                 //Stop target teleporting
                 if (owner.getEntity().data.containsKey("teleportID")
-                        && (int) owner.getEntity().data.get("teleportID") == 1) {
-                    if ((boolean) owner.getEntity().data.get("teleportTarget")) {
-                        owner.getEntity().data.put("teleportTarget", false);
-                    }
+                        && (int) owner.getEntity().data.get("teleportID") == 1
+                        && (boolean) owner.getEntity().data.get("teleportTarget")) {
+                    owner.getEntity().data.put("teleportTarget", false);
                 }
                 owner.getEntity().setScale(owner.getEntity().getScale().sub(factor.scl(1.01f)));
                 owner.getEntity().setPosition(position);

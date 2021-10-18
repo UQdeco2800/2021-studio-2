@@ -6,9 +6,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,40 +16,42 @@ import java.util.concurrent.TimeUnit;
 
 public class FirePillarTask extends DefaultTask implements PriorityTask {
 
-    /** Required to spawn the entity which will damage the player. */
-    private GameArea gameArea;
+    /**
+     * Required to spawn the entity which will damage the player.
+     */
+    private final GameArea gameArea;
 
-    /** Physics Engine to handle collisions between enemy and attack.  */
-    private PhysicsEngine physics;
+    /**
+     * The target entity the enemy will attempt to attack.
+     */
+    private final Entity target;
 
-    /** Provides a view of the entities debug information. */
-    private DebugRenderer debugRenderer;
+    /**
+     * THe delay between each attacks for this task.
+     */
+    private final long cooldownMS;
 
-    /** The target entity the enemy will attempt to attack. */
-    private Entity target;
-
-    /** THe delay between each attacks for this task. */
-    private long cooldownMS;
-
-    /** Last time that the attack was created. */
+    /**
+     * Last time that the attack was created.
+     */
     private long lastFiredTime;
 
-    /** Time of the last shoot animation played. */
+    /**
+     * Time of the last shoot animation played.
+     */
     private long lastShootAnimation;
 
-    /** Duration of the shoot animation time in Milliseconds. */
-    private long shootAnimationTimeMS;
+    /**
+     * Duration of the shoot animation time in Milliseconds.
+     */
+    private final long shootAnimationTimeMS;
 
-    /** List of previous positions of the player. */
-    private LinkedList<Vector2> lastPositions;
+    /**
+     * List of previous positions of the player.
+     */
+    private final LinkedList<Vector2> lastPositions;
 
-    /** List of the previous Fire Pillar entities for disposal. */
-    private LinkedList<Entity> firePillars;
-
-    /** Count used to delay the ticks between pillars spawned. */
-    private int count;
-
-    private static final Logger logger = LoggerFactory.getLogger(FirePillarTask .class);
+    private static final Logger logger = LoggerFactory.getLogger(FirePillarTask.class);
 
     /**
      * Constructor for the AI task that will allow the enemy to create fire pillars.
@@ -64,14 +64,9 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         this.cooldownMS = cooldownMS;
         this.shootAnimationTimeMS = shootAnimationTimeMS;
         this.gameArea = ServiceLocator.getGameAreaService();
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
         lastPositions = new LinkedList<>();
-        firePillars = new LinkedList<>();
-
         lastShootAnimation = 0;
         lastFiredTime = 0;
-        count = 0;
     }
 
     @Override
@@ -111,7 +106,7 @@ public class FirePillarTask extends DefaultTask implements PriorityTask {
         logger.debug("Boss Spawning Fire Pillar");
 
         Entity pillar =
-            WeaponFactory.createFirePillarBase();
+                WeaponFactory.createFirePillarBase();
         Vector2 lastPosition = lastPositions.remove(0);
         Vector2 position = new Vector2(lastPosition.x + target.getPosition().x,
                 lastPosition.y + target.getPosition().y);

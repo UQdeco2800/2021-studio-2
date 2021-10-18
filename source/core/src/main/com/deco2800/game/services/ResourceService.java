@@ -97,16 +97,6 @@ public class ResourceService implements Disposable {
     }
 
     /**
-     * Clears all loaded assets and assets in the preloading queue.
-     *
-     * @see AssetManager#clear()
-     */
-    public void clearAllAssets() {
-        logger.debug("Clearing all assets");
-        assetManager.clear();
-    }
-
-    /**
      * Loads a single asset into the asset manager.
      *
      * @param assetName asset name

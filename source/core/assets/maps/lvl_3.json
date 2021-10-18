@@ -45609,7 +45609,7 @@
             0
         ]
     ],
-    "LightTiles": [
+    "lightTiles": [
         [
             0,
             0,
@@ -69375,30 +69375,30 @@
             "width": 32
         }
     ],
-  "bossObjects": [
-    {
-      "x": 100,
-      "y": 86,
-      "height": 0,
-      "width": 0
-    }
-  ],
-  "moveDownObjects": [
-    {
-      "x": 97,
-      "y": 67,
-      "height": 0,
-      "width": 0
-    }
-  ],
-  "cutsceneObjects": [
-    {
-      "x": 97,
-      "y": 80,
-      "height": 0,
-      "width": 0
-    }
-  ],
+    "bossObjects": [
+        {
+            "x": 100,
+            "y": 86,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "moveDownObjects": [
+        {
+            "x": 97,
+            "y": 67,
+            "height": 0,
+            "width": 0
+        }
+    ],
+    "cutsceneObjects": [
+        {
+            "x": 97,
+            "y": 80,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "spikeObjects": [],
     "lavaObjects": [
         {
@@ -69650,90 +69650,90 @@
             "width": 0
         }
     ],
-  "hellMeleeObjects": [
-    {
-      "x": 70,
-      "y": 47,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 74,
-      "y": 45,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 70,
-      "y": 53,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 77,
-      "y": 52,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 80,
-      "y": 60,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 88,
-      "y": 60,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 96,
-      "y": 59,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 53,
-      "y": 68,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 47,
-      "y": 66,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 60,
-      "y": 80,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 65,
-      "y": 81,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 65,
-      "y": 70,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 49,
-      "y": 61,
-      "height": 0,
-      "width": 0
-    },
-    {
-      "x": 59,
-      "y": 67,
-      "height": 0,
-      "width": 0
-    }
-  ]
+    "hellMeleeObjects": [
+        {
+            "x": 70,
+            "y": 47,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 74,
+            "y": 45,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 70,
+            "y": 53,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 77,
+            "y": 52,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 80,
+            "y": 60,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 88,
+            "y": 60,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 96,
+            "y": 59,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 53,
+            "y": 68,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 47,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 60,
+            "y": 80,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 65,
+            "y": 81,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 65,
+            "y": 70,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 49,
+            "y": 61,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 59,
+            "y": 67,
+            "height": 0,
+            "width": 0
+        }
+    ]
 }

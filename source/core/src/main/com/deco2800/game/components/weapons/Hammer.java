@@ -72,9 +72,6 @@ public class Hammer extends MeleeWeapon {
             case UP:
                 animator.startAnimation("up_hammer_attack");
                 break;
-            case DOWN:
-                animator.startAnimation("down_hammer_attack");
-                break;
             case LEFT:
                 animator.startAnimation("left_hammer_attack");
                 break;
@@ -82,6 +79,7 @@ public class Hammer extends MeleeWeapon {
                 animator.startAnimation("right_hammer_attack");
                 break;
             default:
+                animator.startAnimation("down_hammer_attack");
                 break;
         }
     }
@@ -119,10 +117,6 @@ public class Hammer extends MeleeWeapon {
                 target.y += range;
                 animator.startAnimation("up_throw");
                 break;
-            case DOWN:
-                target.y -= range;
-                animator.startAnimation("down_throw");
-                break;
             case LEFT:
                 target.x -= range;
                 animator.startAnimation("left_throw");
@@ -132,6 +126,8 @@ public class Hammer extends MeleeWeapon {
                 animator.startAnimation("right_throw");
                 break;
             default:
+                target.y -= range;
+                animator.startAnimation("down_throw");
                 break;
         }
         // Spawn projectile

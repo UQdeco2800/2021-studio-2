@@ -64,7 +64,7 @@ public class MeleeWeapon extends Component {
     /**
      * Weapon attack width and range in terms of x and y, relative to entity size
      */
-    protected Vector2 weaponSize;
+    protected final Vector2 weaponSize;
     /**
      * Hit box used by this melee weapon. NOTE: Multiple melee weapons equipped on the same
      * entity can re-use the same weapon hit box instance, provided they aren't setting/destroying

@@ -38,7 +38,7 @@ public class CutsceneTriggerFactory {
      * @param type        the type of selection of dialogue
      * @return entity that will create the trigger within the map
      */
-    public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type) {
+    public static Entity createDialogueTrigger(RandomDialogueSet dialogueSet, DialogueSet type, int numRepeats) {
         Entity trigger =
                 new Entity()
                         .addComponent(new PhysicsComponent())
@@ -46,7 +46,7 @@ public class CutsceneTriggerFactory {
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
                                 new Vector2(0f, 0f), false))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, 1));
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, numRepeats));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
@@ -62,50 +62,21 @@ public class CutsceneTriggerFactory {
      * @param type        the type of selection of dialogue
      * @return entity that will create the trigger within the map
      */
-    public static Entity createLokiTrigger(RandomDialogueSet dialogueSet, DialogueSet type) {
+    public static Entity createPrisonerCutscene(RandomDialogueSet dialogueSet, DialogueSet type, int numRepeats) {
+
         Entity trigger =
                 new Entity()
-                        .addComponent(new TextureRenderComponent("images/textBoxDisplay/loki_image.png"))
+                        .addComponent(new TextureRenderComponent("images/textBoxDisplay/prisoner_image.png"))
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                         .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER,
-                                new Vector2(0f, 0f), true))
-                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, Integer.MAX_VALUE));
+                                new Vector2(0f, 0f), numRepeats))
+                        .addComponent(new TouchCutsceneComponent(PhysicsLayer.PLAYER, dialogueSet, type, numRepeats));
 
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        trigger.getComponent(TextureRenderComponent.class).scaleEntity();
-        PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
-        trigger.scaleHeight(2f);
-        return trigger;
-    }
-
-    /**
-     * Creates an entity that can trigger a cutscene to start.
-     *
-     * @param lastKeyPressed the last key direction the player will attack in
-     * @param repeats        the amount to repeat
-     * @return entity that will create the trigger within the map
-     */
-    public static Entity createAttackTrigger(int repeats, int lastKeyPressed) {
-        Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar.png", Texture.class));
-        Sprite healthBarDecrease = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_bar_decrease.png", Texture.class));
-        Sprite healthBarFrame = new Sprite(ServiceLocator.getResourceService().getAsset("images/enemy_health_border.png", Texture.class));
-        HealthBarComponent healthBarComponent = new HealthBarComponent(healthBar, healthBarFrame, healthBarDecrease);
-
-        Entity trigger =
-                new Entity()
-                        .addComponent(new TextureRenderComponent("images/textBoxDisplay/loki_image.png"))
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                        .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
-                        .addComponent(new TouchAttackCutsceneComponent(PhysicsLayer.PLAYER, repeats, lastKeyPressed))
-                        .addComponent(new CombatStatsComponent(50, 0))
-                        .addComponent(healthBarComponent);
-
-        trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        trigger.getComponent(TextureRenderComponent.class).scaleEntity();
-        PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
+        PhysicsUtils.setScaledCollider(trigger, 0.6f, 0.3f);
+        trigger.getComponent(ColliderComponent.class).setSensor(true);
         trigger.scaleHeight(2f);
         return trigger;
     }
@@ -174,12 +145,10 @@ public class CutsceneTriggerFactory {
                         .addComponent(new PhysicsComponent())
                         .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                         .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC));
-
         trigger.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
         trigger.getComponent(ColliderComponent.class).setSensor(true);
         PhysicsUtils.setScaledCollider(trigger, 0f, 0f);
         trigger.scaleHeight(0.1f);
-
         return trigger;
     }
 }

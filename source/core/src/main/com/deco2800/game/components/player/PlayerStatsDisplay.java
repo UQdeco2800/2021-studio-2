@@ -170,7 +170,6 @@ public class PlayerStatsDisplay extends UIComponent {
         table.add(healthBarLeft).height(40f).width(20f);
         table.add(healthBarMiddle).height(40f).width(health - 20f);
         table.add(healthBarRight).height(40f).width(20f);
-        //This creates a new row to add actors: table.row();
     }
 
     /**

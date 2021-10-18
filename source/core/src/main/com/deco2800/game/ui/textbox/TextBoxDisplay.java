@@ -322,6 +322,8 @@ public class TextBoxDisplay extends UIComponent {
                 enemyBox = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/prison_text_box.png", Texture.class));
                 break;
+            case LOKI2_INTRODUCTION:
+            case LOKI2_ENCOUNTER:
             case LOKI_INTRODUCTION:
             case LOKI_ENCOUNTER:
                 enemyName = new Label("    LOKI", skin);

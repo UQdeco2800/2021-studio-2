@@ -167,15 +167,6 @@ public class AnimationRenderComponent extends RenderComponent {
         return currentAnimationName;
     }
 
-    /**
-     * Has the playing animation finished? This will always be false for looping animations.
-     *
-     * @return true if animation was playing and has now finished, false otherwise.
-     */
-    public boolean isFinished() {
-        return currentAnimation != null && currentAnimation.isAnimationFinished(animationPlayTime);
-    }
-
     @Override
     protected void draw(SpriteBatch batch) {
         if (currentAnimation == null) {

@@ -12,7 +12,7 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
     private final float maxChaseDistance;
     private long start = System.currentTimeMillis();
     private boolean zigLeft = false;
-    private float speedMultiplier;
+    private final float speedMultiplier;
 
     /**
      * Initialise zig zag chase task - advance movement task
@@ -75,14 +75,5 @@ public class ZigChaseTask extends ChaseTask implements PriorityTask {
         v3.rotateAroundDeg(new Vector2(0, 0), ((-direction) * angle));
         v3.add(v1);
         return (v3);
-    }
-
-    /**
-     * Return the distance of entity to target
-     *
-     * @return float distance from entity (owner) to target
-     */
-    protected float getDistanceToTarget() {
-        return owner.getEntity().getPosition().dst(target.getPosition());
     }
 } 

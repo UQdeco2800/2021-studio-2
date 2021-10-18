@@ -21,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("StatementWithEmptyBody")
 @ExtendWith(GameExtension.class)
 class LongswordTest {
     @BeforeEach
@@ -34,7 +35,9 @@ class LongswordTest {
         System.out.println("impact:" + resourceService.containsAsset("sounds/impact.ogg", Sound.class));
         System.out.println("swish:" + resourceService.containsAsset("sounds/swish.ogg", Sound.class));
         // wait for assets to load
-        while (resourceService.loadForMillis(10)) ;
+        while (resourceService.loadForMillis(10)) {
+            // wait for assets to load
+        }
     }
 
     @Test
@@ -119,7 +122,8 @@ class LongswordTest {
             entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
         } catch (Exception e) {
             Assertions.fail();
-        }    }
+        }
+    }
 
     Entity createAttacker(short targetLayer) {
 

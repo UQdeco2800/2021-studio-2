@@ -25,7 +25,7 @@ public class SettingsScreen extends ScreenAdapter {
 
     private final GdxGame game;
     private final Renderer renderer;
-    private String[] settingMenuTextures = {"images/BackgroundSettings.png"};
+    private final String[] settingMenuTextures = {"images/BackgroundSettings.png"};
 
 
     public SettingsScreen(GdxGame game) {

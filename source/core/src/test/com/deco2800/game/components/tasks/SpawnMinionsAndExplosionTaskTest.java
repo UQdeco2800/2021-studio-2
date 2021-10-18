@@ -11,21 +11,28 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(GameExtension.class)
 class SpawnMinionsAndExplosionTaskTest {
 
+    @Mock
+    GameTime gameTime;
+
     private static final String[] forestTextureAtlases = {
+            "images/rangedElf.atlas", "images/meleeElf.atlas",
             "images/meleeFinal.atlas", "images/rangedAllFinal.atlas", "images/explosion/explosion.atlas"
     };
 
@@ -58,7 +65,6 @@ class SpawnMinionsAndExplosionTaskTest {
         GameArea gameArea = mock(GameArea.class);
         ServiceLocator.registerGameArea(gameArea);
 
-
         ResourceService resourceService = new ResourceService();
         ServiceLocator.registerResourceService(resourceService);
         resourceService.loadTextureAtlases(forestTextureAtlases);
@@ -81,6 +87,10 @@ class SpawnMinionsAndExplosionTaskTest {
 
     @Test
     void activePriority() {
+        gameTime = mock(GameTime.class);
+        ServiceLocator.registerTimeSource(gameTime);
+        when(gameTime.getTime()).thenReturn(0L);
+
         Entity boss = createBoss();
         Entity target = new Entity();
         SpawnMinionsAndExplosionTask spawn =

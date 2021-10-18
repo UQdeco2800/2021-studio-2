@@ -26,7 +26,6 @@ public class PhysicsEngine implements Disposable {
     private final World world;
     private final GameTime timeSource;
     private final SingleHitCallback singleHitCallback = new SingleHitCallback();
-    private final AllHitCallback allHitCallback = new AllHitCallback();
     private float accumulator;
 
     public PhysicsEngine() {
@@ -80,19 +79,6 @@ public class PhysicsEngine implements Disposable {
     }
 
     /**
-     * Cast a ray in a straight line from one point to another, checking for a collision against any
-     * colliders.
-     *
-     * @param from The starting point of the ray.
-     * @param to   The end point of the ray.
-     * @param hit  The raycast result will be stored in this class
-     * @return true if a collider was hit, false otherwise.
-     */
-    public boolean raycast(Vector2 from, Vector2 to, RaycastHit hit) {
-        return raycast(from, to, PhysicsLayer.ALL, hit);
-    }
-
-    /**
      * Cast a ray in a straight line from one point to another, checking for a collision against
      * colliders in the specified layers.
      *
@@ -113,34 +99,6 @@ public class PhysicsEngine implements Disposable {
         singleHitCallback.hit = hit;
         world.rayCast(singleHitCallback, from, to);
         return singleHitCallback.didHit;
-    }
-
-    /**
-     * Cast a ray in a straight line from one point to another, checking for all collision against
-     * colliders in the specified layers.
-     *
-     * @param from The starting point of the ray.
-     * @param to   The end point of the ray.
-     * @return All hits made by the ray, unordered. Empty if no hits were made.
-     */
-    public RaycastHit[] raycastAll(Vector2 from, Vector2 to) {
-        return raycastAll(from, to, PhysicsLayer.ALL);
-    }
-
-    /**
-     * Cast a ray in a straight line from one point to another, checking for all collision against
-     * colliders in the specified layers.
-     *
-     * @param from      The starting point of the ray.
-     * @param to        The end point of the ray.
-     * @param layerMask The physics layer mask which specifies layers that can be hit. Other layers
-     *                  will be ignored.
-     * @return All hits made by the ray, unordered. Empty if no hits were made.
-     */
-    public RaycastHit[] raycastAll(Vector2 from, Vector2 to, short layerMask) {
-        allHitCallback.layerMask = layerMask;
-        world.rayCast(allHitCallback, from, to);
-        return allHitCallback.getHitsAndClear();
     }
 
     @Override

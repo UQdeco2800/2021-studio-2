@@ -13,7 +13,7 @@ public class BossOverlayComponent extends UIComponent {
     /**
      * Health Bar length Multiplier
      */
-    private float lengthMultiplier = 5;
+    private static final float lengthMultiplier = 5;
 
     /**
      * has the boss spawned
@@ -138,8 +138,6 @@ public class BossOverlayComponent extends UIComponent {
             table.add(healthBarMiddle).height(40f).width(health * lengthMultiplier);
             table.add(healthBarRight).height(40f).width(20f);
         }
-        //This creates a new row to add actors: table.row();
-        //Adds the dash icon to the table: table.add(dash).size(64f).pad(5);
     }
 
     public void nameBoss(String boss) {
@@ -192,6 +190,5 @@ public class BossOverlayComponent extends UIComponent {
         frameRight.remove();
         frameMiddle.remove();
         healthLabel.remove();
-        //Disposes of the dash image: dash.remove();
     }
 }
