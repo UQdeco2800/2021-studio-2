@@ -31,7 +31,7 @@ public class GameArea1 extends GameArea {
         super.create("maps/lvl_3.json", "Level 2");
 
         spawnHellWarriorObject();
-        spawnBoss();
+        spawnLoki();
 
         spawnMovementCutscenes();
         spawnDialogueCutscenes(RandomDialogueSet.LOKI_ENCOUNTER);

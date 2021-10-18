@@ -33,6 +33,13 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
         ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class).play(0.2f);
     }
 
+    private void playBeam() {
+        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/beam_disappear" +
+                        ".mp3",
+                Sound.class);
+        arrowEffect.play();
+    }
+
     /**
      * Update the arrow position on the screen
      */
@@ -104,7 +111,11 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     public void stop() {
         super.stop();
         //Arrows disappears when at destination to stop it from looping in the same place
-        playArrow();
+        if (owner.getEntity().getEntityType().contains("beam")) {
+            playBeam();
+        } else {
+            playArrow();
+        }
     }
 
     /**

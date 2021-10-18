@@ -14,6 +14,8 @@ import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
+import com.deco2800.game.ui.textbox.TextBox;
 
 import java.security.SecureRandom;
 
@@ -69,15 +71,16 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             if (owner.getEntity().getEntityType().equals("elfBoss")) {
                 playElfBossDeath();
             }
-            if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
-                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
-            } else if (owner.getEntity().getEntityType().equals("odin")) {
+            if (owner.getEntity().getEntityType().equals("odin")) {
+                showDialogue();
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
                         spawnWin();
                     }
-                }, 2f);
+                }, 4.5f);
+                owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
+            } else if (owner.getEntity().getComponent(HumanAnimationController.class) != null) {
                 owner.getEntity().getComponent(HumanAnimationController.class).setDeath();
             } else {
                 if (owner.getEntity().getComponent(ElfAnimationController.class) != null) {
@@ -105,6 +108,26 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                     status = Status.FINISHED;
                 }
                 dead = true;
+            }
+        }
+    }
+
+    private void showDialogue() {
+        TextBox textBox = ServiceLocator.getEntityService()
+                .getUIEntity().getComponent(TextBox.class);
+
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_KILLED;
+
+        PlayerSave.Save.setHasPlayed(true);
+        if (PlayerSave.Save.getOdinEnc() == 0) {
+            textBox.setRandomFirstEncounter(dialogueSet);
+        } else {
+            if (PlayerSave.Save.getOdinWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                textBox.setRandomDefeatDialogueSet(dialogueSet);
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
     }

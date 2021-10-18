@@ -140,7 +140,6 @@ public class NPCFactory {
      */
     public static Entity createMeleeElf(Entity target) {
         Entity elf = createBaseNPCNoAI();
-        MeleeEnemyConfig config = configs.ELF_MELEE;
         AnimationRenderComponent animator =
 //                new AnimationRenderComponent(
 //                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
@@ -179,7 +178,7 @@ public class NPCFactory {
                                 target, 0, 100, 100, 1.5f));
 
         elf
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(MeleeEnemyConfig.HEALTH, MeleeEnemyConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new ElfAnimationController());
@@ -203,7 +202,6 @@ public class NPCFactory {
 
     public static Entity createElfGuard(Entity target) {
         Entity elfGuard = createBaseNPCNoAI();
-        MeleeEnemyConfig config = configs.ELF_MELEE;
         AITaskComponent aiTaskComponent = new AITaskComponent()
                 .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                 .addTask(new AlertChaseTask(target, 15, 3f, 4f))
@@ -238,7 +236,7 @@ public class NPCFactory {
 //        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
 
         elfGuard
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(MeleeEnemyConfig.HEALTH, MeleeEnemyConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController());
 
@@ -263,7 +261,6 @@ public class NPCFactory {
      */
     public static Entity createAnchoredElf(Entity target, Entity anchor, float anchorSize) {
         Entity anchoredElf = createBaseNPCNoAI();
-        MeleeEnemyConfig config = configs.ELF_MELEE;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new AnchoredWanderTask(anchor, anchorSize, 2f))
@@ -304,7 +301,7 @@ public class NPCFactory {
 
 
         anchoredElf
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(MeleeEnemyConfig.HEALTH, MeleeEnemyConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController());
 
@@ -330,7 +327,6 @@ public class NPCFactory {
 
     public static Entity createRangedElf(Entity target, ShootProjectileTask.projectileTypes type, float multishotChance) {
         Entity elf = createBaseNPCNoAI();
-        RangedEnemyConfig config = configs.ELF_RANGED;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -393,7 +389,7 @@ public class NPCFactory {
         }
 
         elf
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(RangedEnemyConfig.HEALTH, RangedEnemyConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
                 .addComponent(aiComponent);
@@ -415,7 +411,6 @@ public class NPCFactory {
     public static Entity createBossNPC(Entity target) {
 
         Entity boss = createBaseNPCNoAI();
-        ElfBossConfig config = configs.ELF_BOSS;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -457,7 +452,7 @@ public class NPCFactory {
         animator.addAnimation("rightBossDeath", 0.1f, Animation.PlayMode.NORMAL);
 
         boss
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(ElfBossConfig.HEALTH, ElfBossConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new ElfAnimationController())
                 .addComponent(aiComponent)
@@ -480,7 +475,6 @@ public class NPCFactory {
 
     public static Entity createThor(Entity target) {
         Entity thor = createBaseNPCNoAI();
-        ElfBossConfig config = configs.ELF_BOSS;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -507,8 +501,7 @@ public class NPCFactory {
                 "images/enemy_health_border.png", Texture.class));
         HealthBarComponent healthBarComponent = new HealthBarComponent(
                 healthBar, healthBarFrame, healthBarDecrease);
-
-        thor.addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+        thor.addComponent(new CombatStatsComponent(ElfBossConfig.HEALTH, ElfBossConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent)
@@ -520,48 +513,42 @@ public class NPCFactory {
 
     public static Entity createOdin(Entity target) {
         Entity odin = createBaseNPCNoAI();
-        ElfBossConfig config = configs.ELF_BOSS;
 
-//--------THE AI COMPONENT WHERE IT DOES THE ATTACK AND SUMMONING AND WHEN IT DIES SPAWN PORTAL-----
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
-                        .addTask(new ChaseTask(target, 10, 5f, 20f))
+                        .addTask(new ChaseTask(target, 10, 20f, 40f))
                         .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
                         .addTask(new PauseTask());
+        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 3000);
+        shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.BEAM);
+        shootProjectileTask.setMultishotChance(0);
+        shootProjectileTask.setShootAnimationTimeMS(1);
+        aiComponent.addTask(shootProjectileTask);
+        odin.data.put("createFireBall", true);
 
-        // --------------------------------THE ANIMATION FOR THIS BOSS------------------------------------
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("Odin/odin.atlas",
                                 TextureAtlas.class));
-
-        animator.setAnimationScale(1f); //maybe?
         animator.startAnimation("default");
         setHumanAnimations(animator);
 
         //--- ---------------------ADD OTHER COMPONENTS OTHER THAN AI, ANIMATIONS---------------------
-        odin.addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+        odin.addComponent(new CombatStatsComponent(ElfBossConfig.HEALTH, ElfBossConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
-                .addComponent(aiComponent);
-//            .addComponent(new BossOverlayComponent());
-//        odin.getComponent(BossOverlayComponent.class).nameBoss("God King: ODIN");
+                .addComponent(aiComponent)
+                .addComponent(new BossOverlayComponent());
+        odin.getComponent(BossOverlayComponent.class).nameBoss("Odin   ");
+        odin.setAttackRange(10);
 
-        // ------------------------ITS ATTACK RANGE AND SCALLING?-----------------------------------------
-        odin.setAttackRange(5);
-        //odin.getComponent(AnimationRenderComponent.class).scaleEntity();
-        odin.scaleWidth(2);  //MORE SCALLING HERE AND AT THE BOTTOM???
-        odin.scaleHeight(2);
-//
-//
-//-------------------ITS MASSIVE HEALTH BAR ON TOP OF ITS HEAD-------------------------------------
+        odin.getComponent(AnimationRenderComponent.class).scaleEntity();
         odin.addComponent(createHealthBarComponent());
+        odin.setEntityType("odin");
+        odin.setScale(0.8f * 2, 1f * 2);
 
-// ----------------------------FINAL SETTINGS FOR IN-GAME LOOKS-------------------------------------
-        odin.setEntityType("odin"); //MAYBE NO USE? use for AI tasks
-        odin.setScale(0.8f * 2, 1f * 2); //Entity SCALING
-        PhysicsUtils.setScaledCollider(odin, 0.9f, 0.2f); //COLLIDER HIT BOX SCALER?
+        PhysicsUtils.setScaledCollider(odin, 0.6f, 0.3f);
         return odin;
     }
 
@@ -573,7 +560,6 @@ public class NPCFactory {
      */
     public static Entity createMeleeViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
-        MeleeVikingConfig config = configs.VIKING_MELEE;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -591,7 +577,7 @@ public class NPCFactory {
                                 target, 10, 3f, 4f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
-        viking.addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+        viking.addComponent(new CombatStatsComponent(MeleeVikingConfig.HEALTH, MeleeVikingConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
@@ -617,7 +603,6 @@ public class NPCFactory {
      */
     public static Entity createMeleeHellViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
-        MeleeHellWarriorConfig config = configs.HELL_WARRIOR_MELEE;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -636,7 +621,7 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
-        viking.addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+        viking.addComponent(new CombatStatsComponent(MeleeHellWarriorConfig.HEALTH, MeleeHellWarriorConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
@@ -662,7 +647,6 @@ public class NPCFactory {
      */
     public static Entity createMeleeAsgardViking(Entity target) {
         Entity viking = createBaseNPCNoAI();
-        MeleeAsgardWarriorConfig config = configs.ASGARD_WARRIOR_MELEE;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -679,7 +663,7 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
-        viking.addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+        viking.addComponent(new CombatStatsComponent(MeleeAsgardWarriorConfig.HEALTH, MeleeAsgardWarriorConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());
@@ -731,7 +715,6 @@ public class NPCFactory {
      */
     public static Entity createOutdoorArcher(Entity target) {
         Entity archer = createBaseNPCNoAI();
-        RangedEnemyConfig config = configs.ELF_RANGED;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -754,7 +737,7 @@ public class NPCFactory {
         setHumanAnimations(animator);
 
         archer
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(RangedEnemyConfig.HEALTH, RangedEnemyConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent);
@@ -776,7 +759,6 @@ public class NPCFactory {
     public static Entity createLoki(Entity target) {
 
         Entity boss = createBaseNPCNoAI();
-        LokiBossConfig config = configs.LOKI_BOSS;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -807,7 +789,7 @@ public class NPCFactory {
         setHumanAnimations(animator);
 
         boss
-                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(LokiBossConfig.HEALTH, LokiBossConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
 
@@ -831,7 +813,6 @@ public class NPCFactory {
      */
     public static Entity createRangedLokiDecoy(Entity target) {
         Entity boss = createBaseNPCNoAI();
-        LokiBossConfig config = configs.LOKI_BOSS;
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -851,7 +832,7 @@ public class NPCFactory {
         setHumanAnimations(animator);
 
         boss
-                .addComponent(new CombatStatsComponent(1, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(1, LokiBossConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(new HumanAnimationController())
                 .addComponent(aiComponent);
@@ -873,7 +854,6 @@ public class NPCFactory {
      */
     public static Entity createMeleeLokiDecoy(Entity target) {
         Entity viking = createBaseNPCNoAI();
-        MeleeHellWarriorConfig config = configs.HELL_WARRIOR_MELEE;
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -893,7 +873,7 @@ public class NPCFactory {
                                 target, 0, 100, 100, 1.5f));
 
         viking
-                .addComponent(new CombatStatsComponent(1, config.BASE_ATTACK))
+                .addComponent(new CombatStatsComponent(1, MeleeHellWarriorConfig.BASE_ATTACK))
                 .addComponent(animator)
                 .addComponent(aiComponent)
                 .addComponent(new HumanAnimationController());

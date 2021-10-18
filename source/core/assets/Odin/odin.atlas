@@ -1,6 +1,152 @@
 
-odin.png
-size: 4096, 2048
+odinAttack.png
+size: 4096, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+EnemyAttackDown
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 1928, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackDown
+  rotate: false
+  xy: 2570, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 1928, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackUp
+  rotate: false
+  xy: 2570, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 1928, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackLeft
+  rotate: false
+  xy: 2570, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 1928, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+EnemyAttackRight
+  rotate: false
+  xy: 2570, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+
+odinDeath.png
+size: 2048, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
@@ -46,6 +192,27 @@ frontDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
+frontDeath
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+frontDeath
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
 backDeath
   rotate: false
   xy: 2, 1286
@@ -88,6 +255,27 @@ backDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
+backDeath
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+backDeath
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
 leftDeath
   rotate: false
   xy: 2, 1286
@@ -130,6 +318,27 @@ leftDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
+leftDeath
+  rotate: false
+  xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+leftDeath
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
 rightDeath
   rotate: false
   xy: 2, 1286
@@ -172,65 +381,148 @@ rightDeath
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackDown
+rightDeath
   rotate: false
-  xy: 1928, 644
+  xy: 644, 2
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackLeft
+rightDeath
   rotate: false
-  xy: 2570, 1286
+  xy: 1286, 644
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackRight
+rightDeath
   rotate: false
-  xy: 1928, 2
+  xy: 1286, 2
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-EnemyAttackUp
+
+odinMovement.png
+size: 4096, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+default
   rotate: false
-  xy: 2570, 644
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveDown
-  rotate: false
-  xy: 3212, 1286
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveLeft
-  rotate: false
-  xy: 2570, 2
-  size: 640, 640
-  orig: 640, 640
-  offset: 0, 0
-  index: -1
-moveRight
-  rotate: false
-  xy: 3212, 644
+  xy: 644, 644
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
 moveUp
   rotate: false
-  xy: 3212, 2
+  xy: 2, 1286
   size: 640, 640
   orig: 640, 640
   offset: 0, 0
   index: -1
-default
+moveUp
+  rotate: false
+  xy: 2, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 644, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveUp
+  rotate: false
+  xy: 2, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 644, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 1286, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
   rotate: false
   xy: 644, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveDown
+  rotate: false
+  xy: 1286, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 1928, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 1286, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 1928, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveLeft
+  rotate: false
+  xy: 2570, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 1928, 2
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 2570, 644
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 3212, 1286
+  size: 640, 640
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+moveRight
+  rotate: false
+  xy: 2570, 2
   size: 640, 640
   orig: 640, 640
   offset: 0, 0

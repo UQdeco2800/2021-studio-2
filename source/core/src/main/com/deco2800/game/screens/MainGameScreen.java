@@ -171,8 +171,10 @@ public class MainGameScreen extends ScreenAdapter {
     private void zoomCamera() {
         if (((OrthographicCamera) renderer.getCamera().getCamera()).zoom > 0.4) {
             ((OrthographicCamera) renderer.getCamera().getCamera()).zoom -= 0.008;
-        } else {
+        } else if (this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
             game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+        } else if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
         }
     }
 
@@ -221,7 +223,7 @@ public class MainGameScreen extends ScreenAdapter {
 
     private void playerWin() {
         if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
-            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+            zoomCamera();
         }
     }
 

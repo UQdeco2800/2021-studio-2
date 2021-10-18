@@ -342,6 +342,7 @@ public class TextBoxDisplay extends UIComponent {
                 break;
             case ODIN_INTRODUCTION:
             case ODIN_ENCOUNTER:
+            case ODIN_KILLED:
                 enemyName = new Label("     ODIN", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/odin_image.png", Texture.class));

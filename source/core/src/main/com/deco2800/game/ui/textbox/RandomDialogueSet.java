@@ -200,6 +200,23 @@ public enum RandomDialogueSet {
             null
     ),
 
+    ODIN_KILLED(
+            new Dialogue[]{
+                    Dialogue.ODIN_KILLED_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_KILLED_VICTORY_1,
+                    Dialogue.ODIN_KILLED_VICTORY_2,
+                    Dialogue.ODIN_KILLED_VICTORY_3,
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_KILLED_DEFEAT_1,
+                    Dialogue.ODIN_KILLED_DEFEAT_2,
+                    Dialogue.ODIN_KILLED_DEFEAT_3,
+            },
+            null
+    ),
+
     TEST(
             new Dialogue[]{
                     Dialogue.TEST_1

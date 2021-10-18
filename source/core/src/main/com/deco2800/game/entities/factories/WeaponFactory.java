@@ -57,6 +57,9 @@ public class WeaponFactory {
             Sound arrowEffect = ServiceLocator.getResourceService().getAsset(
                     "sounds/arrow_shoot.mp3", Sound.class);
             arrowEffect.play(0.3f);
+        } else if (projectileType.contains("beam")) {
+            Sound beamEffect = ServiceLocator.getResourceService().getAsset("sounds/beam_shoot.mp3", Sound.class);
+            beamEffect.play(0.3f);
         }
     }
 
@@ -99,6 +102,42 @@ public class WeaponFactory {
 
         shootingSound("normalArrow");
         return normalArrow;
+    }
+
+    //just a copy of a normal arrow but using different sprites
+    public static Entity createOdinProjectile(Vector2 targetLoc, float angle) {
+        Entity beam = createBaseArrow();
+        beam.setEntityType("beam");
+        ArrowConfig config = configs.baseArrow;
+        ProjectileMovementTask movementTask = new ProjectileMovementTask(
+                targetLoc, new Vector2(config.speedX, config.speedY));
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(movementTask)
+                        .addTask(new WeaponDisposeTask(targetLoc,
+                                new Vector2(config.speedX, config.speedY), 0.8f));
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "Odin/OdinProjectile/beam_normal.png", Texture.class));
+        beam
+                //.addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(aiComponent);
+        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
+        beam.setScale(scale);
+        beam.setAngle(angle);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "Odin/OdinProjectile/beamBroken.atlas", TextureAtlas.class));
+        animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+        beam.setScale(beam.getScale().x * 0.1f,
+                beam.getScale().y * 0.1f);
+        animator.startAnimation("arrow");
+        beam.addComponent(animator);
+        beam.addComponent(new ProjectileAnimationController());
+        shootingSound("beam");
+        return beam;
     }
 
     /**

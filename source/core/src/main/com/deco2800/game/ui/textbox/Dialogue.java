@@ -428,6 +428,44 @@ public enum Dialogue {
                     "\n So be it.")
     }),
 
+    ODIN_KILLED_FIRST(new Message[]{
+            new Message(false, "You have defeated the best Asgard has to offer!" +
+                    "\n No mortal is worthier than you. Perhaps no god..." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_1(new Message[]{
+            new Message(false, "Revenge must taste sweet." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_2(new Message[]{
+            new Message(false, "They say revenge is best served cold." +
+                    "\n They won't say that anymore." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_3(new Message[]{
+            new Message(false, "Must be your lucky day." +
+                    "\n Walk through the gates before your luck changes.")
+    }),
+
+    ODIN_KILLED_VICTORY_1(new Message[]{
+            new Message(false, "Beaten by a mortal twice." +
+                    "\n Maybe, I should retire...")
+    }),
+
+    ODIN_KILLED_VICTORY_2(new Message[]{
+            new Message(true, "Is this the king of gods?" +
+                    "\n The gods must be weak!")
+    }),
+
+    ODIN_KILLED_VICTORY_3(new Message[]{
+            new Message(true, "King of gods?" +
+                    "\n I have seen peasants who fight better")
+    }),
+
+
     THOR_INTRODUCTION_FIRST(new Message[]{
             new Message(true, "I'm finally free from Loki, the heat from Hell" +
                     "\nand the chains within the prison." +

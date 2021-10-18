@@ -112,7 +112,8 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         NORMAL_ARROW,
         TRACKING_ARROW,
         FAST_ARROW,
-        FIREBALL
+        FIREBALL,
+        BEAM
     }
 
 
@@ -299,6 +300,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     shootFireball();
                     break;
                 }
+                case BEAM: {
+                    shootBeam();
+                    break;
+                }
             }
         }
     }
@@ -477,6 +482,19 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             }
             shootAnimation();
         }
+    }
+
+    /**
+     * Projectile shot by odin
+     */
+    public void shootBeam() {
+        Vector2 relativeLoc = target.getPosition().cpy().sub(owner.getEntity().getPosition());
+        relativeLoc.scl(30);
+        relativeLoc.add(owner.getEntity().getPosition());
+        Entity odinProjectile = WeaponFactory.createOdinProjectile(relativeLoc,
+                getDirectionOfTarget());
+        gameArea.spawnEntityAt(odinProjectile, owner.getEntity().getCenterPosition(), true, true);
+        shootAnimation();
     }
 
     /**

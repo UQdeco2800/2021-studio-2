@@ -102,7 +102,11 @@ public abstract class GameArea implements Disposable {
             "player_hammer.png",
             "player_axe.png",
             "portal.png",
-            "Odin/odin.png",
+            "Odin/odinAttack.png",
+            "Odin/odinDeath.png",
+            "Odin/odinMovement.png",
+            "Odin/OdinProjectile/beam_normal.png",
+            "Odin/OdinProjectile/beamBroken.png",
             "Assets/gametile-127.png",
             "images/boss_health_middle.png",
             "images/boss_health_left.png",
@@ -135,7 +139,8 @@ public abstract class GameArea implements Disposable {
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
-            "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas"
+            "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas", "Odin" +
+            "/OdinProjectile/beamBroken.atlas"
     };
     protected static final String[] sounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg",
@@ -143,7 +148,9 @@ public abstract class GameArea implements Disposable {
             "sounds/arrow_shoot.mp3",
             "sounds/death_2.mp3",
             "sounds/death_1.mp3",
-            "sounds/boss_death.mp3"
+            "sounds/boss_death.mp3",
+            "sounds/beam_shoot.mp3",
+            "sounds/beam_disappear.mp3"
     };
     protected static final String MUSIC = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
 
@@ -478,13 +485,33 @@ public abstract class GameArea implements Disposable {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    protected void spawnBoss() {
+    protected void spawnLoki() {
         HashMap<String, Float>[] objects = map.getBossObjects();
         if (objects != null) {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
                 Entity elf = NPCFactory.createLoki(player);
+                incBossNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    protected void spawnBoss() {
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createBossNPC(player);
                 incBossNum();
                 spawnEntityAt(
                         elf,

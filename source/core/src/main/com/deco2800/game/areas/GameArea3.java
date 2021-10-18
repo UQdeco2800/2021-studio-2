@@ -15,7 +15,6 @@ import java.util.HashMap;
  * Level based on the insides of a Palace with the boss being Odin
  */
 public class GameArea3 extends GameArea {
-
     public GameArea3(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
