@@ -73,7 +73,7 @@ public class TutorialGameArea extends GameArea {
             Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
             incNum();
             elf.setEntityType("ranged");
-            elf.getEvents().trigger("rangerLeft");
+            elf.getEvents().trigger("rangedLeft");
             spawnEntityAt(elf, randomPos, true, true);
         }
     }

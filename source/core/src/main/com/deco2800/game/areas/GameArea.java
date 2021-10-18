@@ -694,7 +694,7 @@ public abstract class GameArea implements Disposable {
                 Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
                 incNum();
                 elf.setEntityType("ranged");
-                elf.getEvents().trigger("rangerLeft");
+                elf.getEvents().trigger("rangedLeft");
                 spawnEntityAt(
                         elf,
                         new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
