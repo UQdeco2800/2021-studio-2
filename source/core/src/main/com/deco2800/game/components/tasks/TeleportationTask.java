@@ -77,19 +77,19 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (ServiceLocator.getGameAreaService().getNumEnemy() > 0 && mapBound()) {
-            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            return;
-        }
-        if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
-            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            Vector2 posBefore = owner.getEntity().getPosition();
-            teleport(new Vector2(2f, 2f));
-            if (owner.getEntity().getPosition().dst(posBefore) != 0) {
-                count++;
-                ServiceLocator.getGameAreaService().incBossNum();
-            }
-        }
+//        if (ServiceLocator.getGameAreaService().getNumEnemy() > 0 && mapBound()) {
+//            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+//            return;
+//        }
+//        if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
+//            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+//            Vector2 posBefore = owner.getEntity().getPosition();
+//            teleport(new Vector2(2f, 2f));
+//            if (owner.getEntity().getPosition().dst(posBefore) != 0) {
+//                count++;
+//                ServiceLocator.getGameAreaService().incBossNum();
+//            }
+//        }
         if (canTeleport()) {
             health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
@@ -169,10 +169,10 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public int getPriority() {
-        if ((ServiceLocator.getGameAreaService().getNumEnemy() == 0 && count == 0)
-                || (ServiceLocator.getGameAreaService().getNumEnemy() != 0 && mapBound())) {
-            return 100;
-        }
+//        if ((ServiceLocator.getGameAreaService().getNumEnemy() == 0 && count == 0)
+//                || (ServiceLocator.getGameAreaService().getNumEnemy() != 0 && mapBound())) {
+//            return 100;
+//        }
         if (canTeleport() || spawn) {
             if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 2000) {
                 spawn = false;

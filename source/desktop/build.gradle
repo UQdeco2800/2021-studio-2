@@ -13,8 +13,8 @@ task run(dependsOn: classes, type: JavaExec) {
     //noinspection GroovyAssignabilityCheck
     ignoreExitValue = true
 
-    jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]
-//    jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
+//    jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties"]
+    jvmArgs = ["-Djava.util.logging.config.file=../../logging.properties", "-XstartOnFirstThread"]
 
 }
 
