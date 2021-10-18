@@ -85,7 +85,7 @@ public class GameArea2 extends GameArea {
                 incBossNum();
                 spawnEntityAt(
                         elf,
-                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
                         false,
                         false);
             }

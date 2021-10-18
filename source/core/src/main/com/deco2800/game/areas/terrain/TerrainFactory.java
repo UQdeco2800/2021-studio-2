@@ -30,8 +30,8 @@ public class TerrainFactory {
 
     private final OrthographicCamera camera;
     private final TerrainOrientation orientation;
-    protected static final String tilesHeightJSON = "n_tiles_height";
-    protected static final String tilesWidthJSON = "n_tiles_width";
+    protected static final String TILES_HEIGHT = "n_tiles_height";
+    protected static final String TILES_WIDTH = "n_tiles_width";
 
     /**
      * Create a terrain factory with Orthogonal orientation
@@ -119,8 +119,8 @@ public class TerrainFactory {
             GridPoint2 tileSize, ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
         TiledMap tiledMap = new TiledMap();
 
-        TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get(tilesWidthJSON),
-                dimensions.get(tilesHeightJSON), tileSize.x, tileSize.y);
+        TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get(TILES_WIDTH),
+                dimensions.get(TILES_HEIGHT), tileSize.x, tileSize.y);
 
         // Create Tiles
         ArrayList<TerrainTile> tiles = new ArrayList<>();
@@ -130,7 +130,7 @@ public class TerrainFactory {
         }
 
         // Create the map
-        GridPoint2 mapSize = new GridPoint2(dimensions.get(tilesWidthJSON), dimensions.get(tilesHeightJSON));
+        GridPoint2 mapSize = new GridPoint2(dimensions.get(TILES_WIDTH), dimensions.get(TILES_HEIGHT));
 
         placeTiles(layer, mapSize, tiles, map);
 
