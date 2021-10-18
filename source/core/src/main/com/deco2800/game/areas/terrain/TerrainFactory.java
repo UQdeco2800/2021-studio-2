@@ -15,7 +15,6 @@ import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.utils.math.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
