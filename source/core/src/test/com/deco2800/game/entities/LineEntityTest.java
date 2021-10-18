@@ -58,8 +58,6 @@ class LineEntityTest {
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/aiming_line.png", Texture.class));
         LineEntity entity = new LineEntity(1000);
-
-        long timeCreate = System.nanoTime();
         entity.addComponent(new TextureRenderComponent(sprite));
 
         Vector2 v1 = new Vector2(0f, 0f);

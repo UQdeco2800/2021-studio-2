@@ -26,7 +26,10 @@ import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
 import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.*;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
@@ -99,19 +102,6 @@ public class WeaponFactory {
 
         shootingSound("normalArrow");
         return normalArrow;
-    }
-
-    /**
-     * create Thor weapon
-     *
-     * @return entiry - thor weapon
-     */
-    public static Entity createMjolnir() {
-        return new Entity()
-                .addComponent(new PhysicsComponent())
-                .addComponent(new PhysicsMovementComponent())
-                .addComponent(new WeaponHitboxComponent())
-                .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
     }
 
     /**

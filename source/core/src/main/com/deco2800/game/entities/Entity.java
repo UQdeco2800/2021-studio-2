@@ -359,35 +359,6 @@ public class Entity {
     }
 
     /**
-     * Check if there are any object between the entity and the target location
-     *
-     * @param target the player Entity that other NPC entities will attempt to track
-     * @return true if no object, false otherwise
-     */
-    public boolean canSeeTarget(Vector2 target) {
-        physics = ServiceLocator.getPhysicsService().getPhysics();
-        debugRenderer = ServiceLocator.getRenderService().getDebug();
-        RaycastHit hit = new RaycastHit();
-        Vector2 from = getCenterPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from, target, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from, hit.point, Color.RED, 1);
-            return false;
-        }
-        Vector2 from2 = getPosition();
-
-        // If there is an obstacle in the path to the player, not visible.
-        if (physics.raycast(from2, target, PhysicsLayer.OBSTACLE, hit)) {
-            debugRenderer.drawLine(from2, hit.point, Color.RED, 1);
-            return false;
-        }
-
-        debugRenderer.drawLine(from, target, Color.BLUE, 1);
-        return true;
-    }
-
-    /**
      * This entity's unique ID. Used for equality checks
      *
      * @return unique ID

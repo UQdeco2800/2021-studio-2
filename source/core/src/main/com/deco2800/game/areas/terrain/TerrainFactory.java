@@ -56,31 +56,19 @@ public class TerrainFactory {
     /**
      * A version of createTerrain that takes a map object as an input to render a specific map
      *
-     * @param terrainType terrain type
-     * @param map         Map of tiles
+     * @param map Map of tiles
      * @return TerrainComponent
      */
-    public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
+    public TerrainComponent createTerrain(Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();
-        if (terrainType == TerrainType.TEST) {
-            String[] tileRefs = map.tileRefsArray();
-            ArrayList<TextureRegion> textures = new ArrayList<>();
+        String[] tileRefs = map.tileRefsArray();
+        ArrayList<TextureRegion> textures = new ArrayList<>();
 
-            for (String s : tileRefs) {
-                textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
-            }
-
-            return createWorldTerrain(textures, map.getMapTiles(), map.getDimensions());
+        for (String s : tileRefs) {
+            textures.add(new TextureRegion(resourceService.getAsset(s, Texture.class)));
         }
-        return null;
-    }
 
-    private TerrainComponent createForestDemoTerrain(
-            float tileWorldSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
-        GridPoint2 tilePixelSize = new GridPoint2(grass.getRegionWidth(), grass.getRegionHeight());
-        TiledMap tiledMap = createForestDemoTiles(tilePixelSize, grass, grassTuft, rocks);
-        TiledMapRenderer renderer = createRenderer(tiledMap, tileWorldSize / tilePixelSize.x);
-        return new TerrainComponent(camera, tiledMap, renderer, orientation, tileWorldSize);
+        return createWorldTerrain(textures, map.getMapTiles(), map.getDimensions());
     }
 
 
@@ -189,13 +177,10 @@ public class TerrainFactory {
 
     /**
      * This enum should contain the different terrains in your game, e.g. forest, cave, home, all with
-     * the same oerientation. But for demonstration purposes, the base code has the same level in 3
+     * the same orientation. But for demonstration purposes, the base code has the same level in 3
      * different orientations.
      */
     public enum TerrainType {
-        FOREST_DEMO,
-        FOREST_DEMO_ISO,
-        FOREST_DEMO_HEX,
         TEST
     }
 }

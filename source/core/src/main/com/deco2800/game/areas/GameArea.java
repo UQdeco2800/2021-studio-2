@@ -484,7 +484,7 @@ public abstract class GameArea implements Disposable {
 
     protected void spawnTerrain() {
         // Background terrain
-        terrain = terrainFactory.createTerrain(TerrainFactory.TerrainType.TEST, map);
+        terrain = terrainFactory.createTerrain(map);
         spawnEntity(new Entity().addComponent(terrain));
 
         // Terrain walls

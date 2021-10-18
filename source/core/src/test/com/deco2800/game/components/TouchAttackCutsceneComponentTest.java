@@ -26,9 +26,6 @@ import static org.mockito.Mockito.*;
 class TouchAttackCutsceneComponentTest {
 
     @Mock
-    TextBox textBox;
-
-    @Mock
     KeyboardPlayerInputComponent inputComponent;
 
     @Mock
@@ -43,8 +40,6 @@ class TouchAttackCutsceneComponentTest {
 
         ServiceLocator.registerEntityService(new EntityService());
         ServiceLocator.getEntityService().registerUI(ui);
-
-        textBox = ServiceLocator.getEntityService().getUIEntity().getComponent(TextBox.class);
         inputComponent = mock(KeyboardPlayerInputComponent.class);
         actions = mock(PlayerActions.class);
     }

@@ -2,7 +2,6 @@ package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.utils.math.Vector2Utils;
@@ -13,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Movement controller for a physics-based entity.
  */
-public class PhysicsMovementComponent extends Component implements MovementController {
+public class PhysicsMovementComponent extends Component {
     private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
     public PhysicsComponent physicsComponent;
     private Vector2 targetPosition;
@@ -34,7 +33,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         }
     }
 
-    @Override
     public boolean getMoving() {
         return movementEnabled;
     }
@@ -44,7 +42,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      *
      * @param movementEnabled true to enable movement, false otherwise
      */
-    @Override
     public void setMoving(boolean movementEnabled) {
         this.movementEnabled = movementEnabled;
         if (!movementEnabled) {
@@ -56,7 +53,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     /**
      * @return Target position in the world
      */
-    @Override
     public Vector2 getTarget() {
         return targetPosition;
     }
@@ -67,7 +63,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      *
      * @param target target position
      */
-    @Override
     public void setTarget(Vector2 target) {
         logger.trace("Setting target to {}", target);
         this.targetPosition = target;
