@@ -25,8 +25,6 @@ import java.util.HashMap;
  */
 public class TerrainFactory {
     public static final GridPoint2 MAP_SIZE = new GridPoint2(30, 30);
-    private static final int TUFT_TILE_COUNT = 30;
-    private static final int ROCK_TILE_COUNT = 30;
 
     private final OrthographicCamera camera;
     private final TerrainOrientation orientation;
@@ -131,28 +129,6 @@ public class TerrainFactory {
 
                 cell.setTile(tiles.get(map[y][x] - 1));
                 layer.setCell(x, max.y - y, cell);
-            }
-        }
-    }
-
-    private static void fillTilesAtRandom(
-            TiledMapTileLayer layer, TerrainTile tile, int amount) {
-        GridPoint2 min = new GridPoint2(0, 0);
-        GridPoint2 max = new GridPoint2(TerrainFactory.MAP_SIZE.x - 1, TerrainFactory.MAP_SIZE.y - 1);
-
-        for (int i = 0; i < amount; i++) {
-            GridPoint2 tilePos = RandomUtils.random(min, max);
-            Cell cell = layer.getCell(tilePos.x, tilePos.y);
-            cell.setTile(tile);
-        }
-    }
-
-    private static void fillTiles(TiledMapTileLayer layer, TerrainTile tile) {
-        for (int x = 0; x < TerrainFactory.MAP_SIZE.x; x++) {
-            for (int y = 0; y < TerrainFactory.MAP_SIZE.y; y++) {
-                Cell cell = new Cell();
-                cell.setTile(tile);
-                layer.setCell(x, y, cell);
             }
         }
     }

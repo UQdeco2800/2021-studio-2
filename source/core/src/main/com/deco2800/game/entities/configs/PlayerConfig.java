@@ -7,9 +7,9 @@ public class PlayerConfig {
     /**
      * health attribute
      */
-    public final int health = 300;
+    public final static int HEALTH = 300;
     /**
      * attack attribute
      */
-    public final int baseAttack = 10;
+    public final static int BASE_ATTACK = 10;
 }

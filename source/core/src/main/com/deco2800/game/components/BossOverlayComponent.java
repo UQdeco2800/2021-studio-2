@@ -133,7 +133,7 @@ public class BossOverlayComponent extends UIComponent {
         healthLabel.setText(bossName);
         table.reset();
         createTable();
-        if (!entity.getComponent(CombatStatsComponent.class).isDead()) {
+        if (Boolean.FALSE.equals(entity.getComponent(CombatStatsComponent.class).isDead())) {
             table.add(healthBarLeft).height(40f).width(20f);
             table.add(healthBarMiddle).height(40f).width(health * LENGTH_MULTIPLIER);
             table.add(healthBarRight).height(40f).width(20f);

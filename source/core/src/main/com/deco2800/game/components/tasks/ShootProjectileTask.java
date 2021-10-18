@@ -12,7 +12,6 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.WeaponConfigs;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -449,7 +448,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
             //Check if hit
             if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
-                int damage = new WeaponConfigs().fastArrow.baseAttack;
+                int damage = new WeaponConfigs().FAST_ARROW.BASE_ATTACK;
                 target.getComponent(CombatStatsComponent.class).addHealth(-damage);
             } else {
                 arrow.data.put("dealDamage", false);

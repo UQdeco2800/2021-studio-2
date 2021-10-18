@@ -11,7 +11,6 @@ import com.deco2800.game.components.weapons.Longsword;
 import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -129,7 +128,7 @@ public class PlayerFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                 .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new PlayerActions())
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(stats.HEALTH, stats.BASE_ATTACK))
                 .addComponent(inputComponent)
                 .addComponent(new PlayerStatsDisplay())
                 .addComponent(new PlayerLowHealthDisplay())

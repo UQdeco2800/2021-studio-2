@@ -160,7 +160,7 @@ public class MainGameScreen extends ScreenAdapter {
      */
     private void isPlayerDead() {
         if (this.gameArea.getPlayer() != null
-                && this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
+                && Boolean.TRUE.equals(this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead())) {
             zoomCamera();
         }
     }

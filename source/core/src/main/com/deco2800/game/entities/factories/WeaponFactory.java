@@ -24,7 +24,6 @@ import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
@@ -71,14 +70,14 @@ public class WeaponFactory {
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("arrow");
-        ArrowConfig config = configs.baseArrow;
+        ArrowConfig config = configs.BASE_ARROW;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetLoc, new Vector2(config.speedX, config.speedY));
+                targetLoc, new Vector2(config.SPEED_X, config.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetLoc,
-                                new Vector2(config.speedX, config.speedY), 0.8f));
+                                new Vector2(config.SPEED_X, config.SPEED_Y), 0.8f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -93,7 +92,7 @@ public class WeaponFactory {
 
         normalArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController());
@@ -112,14 +111,14 @@ public class WeaponFactory {
     public static Entity createTrackingArrow(Entity targetEntity, float angle) {
         Entity trackingArrow = createBaseArrow();
         trackingArrow.setEntityType("trackingArrow");
-        TrackingArrowConfig config = configs.trackingArrow;
+        TrackingArrowConfig config = configs.TRACKING_ARROW;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetEntity, new Vector2(config.speedX, config.speedY));
+                targetEntity, new Vector2(config.SPEED_X, config.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetEntity.getPosition(),
-                                new Vector2(config.speedX, config.speedY), 0.8f));
+                                new Vector2(config.SPEED_X, config.SPEED_Y), 0.8f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -134,7 +133,7 @@ public class WeaponFactory {
 
         trackingArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController());
@@ -154,7 +153,7 @@ public class WeaponFactory {
     public static Entity createFireBall(Entity targetEntity, Entity owner, Vector2 offset) {
         Entity fireBall = new Entity();
         fireBall.setEntityType("fireBall");
-        TrackingArrowConfig config = configs.trackingArrow;
+        TrackingArrowConfig config = configs.TRACKING_ARROW;
 
         //add fireball animation.
         AnimationRenderComponent animator =
@@ -171,9 +170,9 @@ public class WeaponFactory {
                         .addTask(new EntityHoverTask(
                                 owner, 0.1f, 0, offset, 1.5f))
                         .addTask(new ProjectileMovementTask(
-                                targetEntity, new Vector2(config.speedX, config.speedY)))
+                                targetEntity, new Vector2(config.SPEED_X, config.SPEED_Y)))
                         .addTask(new WeaponDisposeTask(targetEntity.getPosition(),
-                                new Vector2(config.speedX, config.speedY), 0.8f));
+                                new Vector2(config.SPEED_X, config.SPEED_Y), 0.8f));
         fireBall.data.put("fireBallMovement", false);
 
         CircleShape circle = new CircleShape();
@@ -185,7 +184,7 @@ public class WeaponFactory {
         fireBall
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController())
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(new CombatStatsComponent(config.HEALTH, config.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new PhysicsMovementComponent())
@@ -220,7 +219,7 @@ public class WeaponFactory {
                 .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(stats.HEALTH, stats.BASE_ATTACK))
                 .addComponent(aiComponent);
         pillar.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
 
@@ -252,7 +251,7 @@ public class WeaponFactory {
                 .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(stats.HEALTH, stats.BASE_ATTACK))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER))
                 .addComponent(new PhysicsMovementComponent())
                 .addComponent(aiComponent);
@@ -273,18 +272,18 @@ public class WeaponFactory {
     public static Entity createFastArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("fastArrow");
-        FastArrowConfig config = configs.fastArrow;
+        FastArrowConfig config = configs.FAST_ARROW;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetLoc, new Vector2(config.speedX, config.speedY));
+                targetLoc, new Vector2(config.SPEED_X, config.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetLoc,
-                                new Vector2(config.speedX, config.speedY), 0.8f));
+                                new Vector2(config.SPEED_X, config.SPEED_Y), 0.8f));
 
         normalArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, 0))
+                .addComponent(new CombatStatsComponent(config.HEALTH, 0))
                 //damage applied when shooting, arrow is decoration
                 .addComponent(aiComponent);
 
@@ -460,7 +459,7 @@ public class WeaponFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(stats.HEALTH, stats.BASE_ATTACK))
                 .addComponent(new BlastController());
     }
 
@@ -492,7 +491,7 @@ public class WeaponFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(stats.HEALTH, stats.BASE_ATTACK))
                 .addComponent(new HammerProjectile(targetLayer, owner));
     }
 }

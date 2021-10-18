@@ -7,9 +7,9 @@ public class MeleeAsgardWarriorConfig {
     /**
      * health attribute
      */
-    public final int health = 100;
+    public final static int HEALTH = 100;
     /**
      * attack attribute
      */
-    public final int baseAttack = 15;
+    public final static int BASE_ATTACK = 15;
 }
