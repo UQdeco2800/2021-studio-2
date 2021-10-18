@@ -821,7 +821,6 @@ public class NPCFactory {
 
         boss.addComponent(createHealthBarComponent());
         boss.setEntityType("loki");
-        boss.getComponent(ColliderComponent.class).setDensity(1.5f);
         PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
         return boss;
     }
