@@ -114,4 +114,3 @@ public class ExplosionTouchComponent extends TouchComponent {
         }
     }
 }
-

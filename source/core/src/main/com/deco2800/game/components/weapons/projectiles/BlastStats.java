@@ -5,4 +5,3 @@ public class BlastStats {
     public final static int ATTACK_POWER = 10;
     public final static int KNOCKBACK = 10;
 }
-

@@ -534,4 +534,3 @@ public class WeaponFactory {
                 .addComponent(new HammerProjectile(targetLayer, owner));
     }
 }
-
