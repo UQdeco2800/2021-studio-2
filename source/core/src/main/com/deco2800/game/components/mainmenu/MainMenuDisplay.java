@@ -38,20 +38,9 @@ public class MainMenuDisplay extends UIComponent {
 
         Skin menuButtons = new Skin(Gdx.files.internal("mainMenuSkin/mainMenu.json"));
 
-        Button startForestBtn = new Button(menuButtons, "start");
         Button startTutorialBtn = new Button(menuButtons, "start");
         Button settingsBtn = new Button(menuButtons, "settings");
         Button exitBtn = new Button(menuButtons, "quit");
-
-        // Triggers an event when the button is pressed
-        startForestBtn.addListener(
-                new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent changeEvent, Actor actor) {
-                        logger.debug("Start button clicked");
-                        entity.getEvents().trigger("startForest");
-                    }
-                });
 
         startTutorialBtn.addListener(
                 new ChangeListener() {
@@ -79,7 +68,6 @@ public class MainMenuDisplay extends UIComponent {
                         entity.getEvents().trigger("exit");
                     }
                 });
-        table.add(startForestBtn).padTop(30f);
         table.row();
         table.add(startTutorialBtn).padTop(30f);
         table.row();

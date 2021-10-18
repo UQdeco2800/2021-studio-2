@@ -35,11 +35,6 @@ public class ColliderComponent extends Component {
         this.scale = scale;
     }
 
-    public void setScale(float scale) {
-        this.scale = scale;
-        create();
-    }
-
     @Override
     public void create() {
         if (fixtureDef.shape == null) {
@@ -58,7 +53,7 @@ public class ColliderComponent extends Component {
                 fixtureDef.shape = makeBoundingBox();
             }
             Body physBody = entity.getComponent(PhysicsComponent.class).getBody();
-            physBody.destroyFixture(fixture);
+            dispose();
             fixture = physBody.createFixture(fixtureDef);
         }
     }

@@ -17,9 +17,7 @@ public class SingleHitCallback implements RayCastCallback {
     public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
         if ((fixture.getFilterData().categoryBits & layerMask) != 0) {
             didHit = true;
-            hit.fixture = fixture;
             hit.point = point;
-            hit.normal = normal;
             return fraction; // Continue in case of closer object
         }
         return 1; // Ignore this collision, it wasn't in the layer mask.

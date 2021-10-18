@@ -1,9 +1,9 @@
 package com.deco2800.game.entities.configs;
 
-/**
- * Defines the properties stored in the odin config files to be loaded by the NPC Factory.
- */
-public class OdinBossConfig extends MeleeEnemyConfig {
-    public int health = 300; //good luck
-    public int attack = 100; //try and not facetank this dude
+public class OdinBossConfig {
+    private OdinBossConfig() {
+        throw new IllegalStateException("Utility class");
+    }
+    public static final int HEALTH = 666;
+    public static final int BASE_ATTACK = 33;
 }

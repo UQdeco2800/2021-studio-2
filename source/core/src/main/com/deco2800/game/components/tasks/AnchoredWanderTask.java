@@ -71,24 +71,10 @@ public class AnchoredWanderTask extends WanderTask implements PriorityTask {
     }
 
     /**
-     * update task to waiting
-     */
-    private void startWaiting() {
-        swapTask(waitTask);
-    }
-
-    /**
-     * update task to move task
-     */
-    private void startMoving() {
-        movementTask.setTarget(getRandomPosInRange());
-        swapTask(movementTask);
-    }
-
-    /**
      * @return random Vector2 that is in the anchored base
      */
-    private Vector2 getRandomPosInRange() {
+    @Override
+    protected Vector2 getRandomPosInRange() {
         Vector2 min;
         Vector2 max;
         if (protectRadius > 0) {

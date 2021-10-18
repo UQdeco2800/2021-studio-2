@@ -44,18 +44,18 @@ class PauseMenuDisplayTest {
     }
 
     @Test
-    public void createTest() {
+    void createTest() {
         verify(pauseMenu).create();
     }
 
     @Test
-    public void disposeTest() {
+    void disposeTest() {
         entity.dispose();
         verify(pauseMenu).dispose();
     }
 
     @Test
-    public void toggleMenuTest() {
+    void toggleMenuTest() {
         //ensure that toggling pause toggles pause menu
         entity.getEvents().addListener("toggleMenu", pauseMenu::toggleMenu);
         actions.togglePauseGame();

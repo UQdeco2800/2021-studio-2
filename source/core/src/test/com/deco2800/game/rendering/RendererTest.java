@@ -11,8 +11,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.deco2800.game.components.CameraComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
-import com.deco2800.game.physics.PhysicsEngine;
-import com.deco2800.game.physics.PhysicsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,12 +36,10 @@ class RendererTest {
     RenderService renderService;
     @Mock
     DebugRenderer debugRenderer;
-    PhysicsService physicsService;
 
     @BeforeEach
     void beforeEach() {
         Gdx.graphics = graphics;
-        physicsService = new PhysicsService(mock(PhysicsEngine.class));
     }
 
     @Test

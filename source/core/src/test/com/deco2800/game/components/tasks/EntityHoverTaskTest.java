@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
-public class EntityHoverTaskTest {
+class EntityHoverTaskTest {
     @Mock
     GameTime gameTime;
 

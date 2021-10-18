@@ -10,22 +10,26 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Touch.ExplosionTouchComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
-import com.deco2800.game.components.Touch.TouchTeleportComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.components.tasks.LifespanComponent;
+import com.deco2800.game.components.tasks.loki.FirePillarBaseTask;
+import com.deco2800.game.components.tasks.loki.FirePillarDamageTask;
+import com.deco2800.game.components.touch.ExplosionTouchComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchTeleportComponent;
 import com.deco2800.game.components.weapons.Hammer;
 import com.deco2800.game.components.weapons.projectiles.BlastController;
 import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
 import com.deco2800.game.entities.configs.*;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.physics.PhysicsLayer;
-import com.deco2800.game.physics.components.*;
+import com.deco2800.game.physics.components.ColliderComponent;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.TextureRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
@@ -35,13 +39,14 @@ import com.deco2800.game.services.ServiceLocator;
  * Factory to create non-playable character weapon entities with predefined components.
  */
 public class WeaponFactory {
-    /**
-     * load attribute from weapon json
-     */
-    private static final WeaponConfigs configs =
-            FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json");
-    private static final PlayerConfig stats =
-            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
+
+    private WeaponFactory() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    private static final String ARROW_ATLAS = "images/newArrowBroken/atlas/arrow.atlas";
+    private static final String ARROW_TYPE = "arrow";
+    private static final String ARROW_BROKEN = "brokenArrow";
 
     /**
      * manages the sound to play when constructing the projectile
@@ -49,10 +54,13 @@ public class WeaponFactory {
      * @param projectileType type of projectile
      */
     private static void shootingSound(String projectileType) {
-        if (projectileType.contains("Arrow")) {
+        if (projectileType.toLowerCase().contains(ARROW_TYPE)) {
             Sound arrowEffect = ServiceLocator.getResourceService().getAsset(
                     "sounds/arrow_shoot.mp3", Sound.class);
-            arrowEffect.play();
+            arrowEffect.play(0.3f);
+        } else if (projectileType.contains("beam")) {
+            Sound beamEffect = ServiceLocator.getResourceService().getAsset("sounds/beam_shoot.mp3", Sound.class);
+            beamEffect.play(0.3f);
         }
     }
 
@@ -65,51 +73,70 @@ public class WeaponFactory {
      */
     public static Entity createNormalArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
-        normalArrow.setEntityType("arrow");
-        BaseArrowConfig config = configs.baseArrow;
+        normalArrow.setEntityType(ARROW_TYPE);
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetLoc, new Vector2(config.speedX, config.speedY));
+                targetLoc, new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetLoc,
-                                new Vector2(config.speedX, config.speedY), 0.8f));
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/arrow_normal.png", Texture.class));
-        normalArrow
-                //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-                .addComponent(aiComponent);
-        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
-        normalArrow.setScale(scale);
-        normalArrow.setAngle(angle);
+                                new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y), 0.8f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+                                ARROW_ATLAS, TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.02f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.02f, Animation.PlayMode.LOOP);
 
-        normalArrow.setScale(normalArrow.getScale().x * 1.5f,
-                normalArrow.getScale().y * 5f);
-        animator.startAnimation("arrow");
+        normalArrow.setScale(new Vector2(1f, 0.3f));
+        normalArrow.setAngle(angle);
+        animator.startAnimation(ARROW_TYPE);
 
-        normalArrow.addComponent(animator);
-        normalArrow.addComponent(new ProjectileAnimationController());
+        normalArrow
+                //.addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(ArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
+                .addComponent(aiComponent)
+                .addComponent(animator)
+                .addComponent(new ProjectileAnimationController());
 
         shootingSound("normalArrow");
         return normalArrow;
     }
 
-    public static Entity createMjolnir() {
-        Entity mjolnir =
-                new Entity()
-                        .addComponent(new PhysicsComponent())
-                        .addComponent(new PhysicsMovementComponent())
-                        .addComponent(new WeaponHitboxComponent())
-                        .addComponent(new TouchAttackComponent(PhysicsLayer.NPC, 1f));
-        return mjolnir;
+    //just a copy of a normal arrow but using different sprites
+    public static Entity createOdinProjectile(Vector2 targetLoc, float angle) {
+        Entity beam = createBaseArrow();
+        beam.setEntityType("beam");
+        ProjectileMovementTask movementTask = new ProjectileMovementTask(
+                targetLoc, new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y));
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(movementTask)
+                        .addTask(new WeaponDisposeTask(targetLoc,
+                                new Vector2(ArrowConfig.SPEED_X, ArrowConfig.SPEED_Y), 0.8f));
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "Odin/OdinProjectile/beam_normal.png", Texture.class));
+        beam
+                //.addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(ArrowConfig.HEALTH, ArrowConfig.BASE_ATTACK))
+                .addComponent(aiComponent);
+        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
+        beam.setScale(scale);
+        beam.setAngle(angle);
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "Odin/OdinProjectile/beamBroken.atlas", TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.1f, Animation.PlayMode.LOOP);
+        beam.setScale(beam.getScale().x * 0.1f,
+                beam.getScale().y * 0.1f);
+        animator.startAnimation(ARROW_TYPE);
+        beam.addComponent(animator);
+        beam.addComponent(new ProjectileAnimationController());
+        shootingSound("beam");
+        return beam;
     }
 
     /**
@@ -122,38 +149,31 @@ public class WeaponFactory {
     public static Entity createTrackingArrow(Entity targetEntity, float angle) {
         Entity trackingArrow = createBaseArrow();
         trackingArrow.setEntityType("trackingArrow");
-        TrackingArrowConfig config = configs.trackingArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetEntity, new Vector2(config.speedX, config.speedY));
+                targetEntity, new Vector2(TrackingArrowConfig.SPEED_X, TrackingArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetEntity.getPosition(),
-                                new Vector2(config.speedX, config.speedY), 0.8f));
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/arrow_normal.png", Texture.class));
-        trackingArrow
-                //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
-                .addComponent(aiComponent);
-        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
-        trackingArrow.setScale(scale);
-        trackingArrow.setAngle(angle);
+                                new Vector2(TrackingArrowConfig.SPEED_X, TrackingArrowConfig.SPEED_Y), 0.8f));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+                                ARROW_ATLAS, TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.02f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.02f, Animation.PlayMode.LOOP);
 
-        trackingArrow.setScale(trackingArrow.getScale().x * 1.5f,
-                trackingArrow.getScale().y * 5f);
+        trackingArrow.setScale(new Vector2(1f, 0.3f));
+        trackingArrow.setAngle(angle);
+        animator.startAnimation(ARROW_TYPE);
 
-        animator.startAnimation("arrow");
-
-        trackingArrow.addComponent(animator);
-        trackingArrow.addComponent(new ProjectileAnimationController());
+        trackingArrow
+                //.addComponent(new TextureRenderComponent(sprite))
+                .addComponent(new CombatStatsComponent(TrackingArrowConfig.HEALTH, TrackingArrowConfig.BASE_ATTACK))
+                .addComponent(aiComponent)
+                .addComponent(animator)
+                .addComponent(new ProjectileAnimationController());
 
         shootingSound("trackingArrow");
         return trackingArrow;
@@ -164,12 +184,12 @@ public class WeaponFactory {
      *
      * @param targetEntity target (player)
      * @param owner        owner to hover at until needed
+     * @param offset       offset of fireball from center position
      * @return entity tracking arrow
      */
     public static Entity createFireBall(Entity targetEntity, Entity owner, Vector2 offset) {
         Entity fireBall = new Entity();
         fireBall.setEntityType("fireBall");
-        TrackingArrowConfig config = configs.trackingArrow;
 
         //add fireball animation.
         AnimationRenderComponent animator =
@@ -178,7 +198,7 @@ public class WeaponFactory {
                                 "images/fireball/fireballAnimation.atlas", TextureAtlas.class));
         animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("hit", 0.3f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("hit", 0.02f, Animation.PlayMode.NORMAL);
         animator.startAnimation("staticFireball");
 
         AITaskComponent aiComponent =
@@ -186,17 +206,21 @@ public class WeaponFactory {
                         .addTask(new EntityHoverTask(
                                 owner, 0.1f, 0, offset, 1.5f))
                         .addTask(new ProjectileMovementTask(
-                                targetEntity, new Vector2(config.speedX, config.speedY)))
+                                targetEntity, new Vector2(TrackingArrowConfig.SPEED_X, TrackingArrowConfig.SPEED_Y)))
                         .addTask(new WeaponDisposeTask(targetEntity.getPosition(),
-                                new Vector2(config.speedX, config.speedY), 0.8f));
+                                new Vector2(TrackingArrowConfig.SPEED_X, TrackingArrowConfig.SPEED_Y), 0.8f));
         fireBall.data.put("fireBallMovement", false);
 
-        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(0.25f);
+        circle.setPosition(circle.getPosition().add(new Vector2(1, 1).scl(0.5f)));
+        ColliderComponent hitbox = new HitboxComponent().setLayer(PhysicsLayer.IDLEPROJECTILEWEAPON)
+                .setShape(circle);
 
         fireBall
                 .addComponent(animator)
                 .addComponent(new ProjectileAnimationController())
-                .addComponent(new CombatStatsComponent(config.health, config.baseAttack))
+                .addComponent(new CombatStatsComponent(TrackingArrowConfig.HEALTH, TrackingArrowConfig.BASE_ATTACK))
                 .addComponent(aiComponent)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new PhysicsMovementComponent())
@@ -204,8 +228,73 @@ public class WeaponFactory {
                 .addComponent(new PlayerActions())
                 .addComponent(new TouchAttackComponent(PhysicsLayer.NONE, 1f));
         shootingSound("fireBall");
-        hitbox.setScale(0.8f);
         return fireBall;
+    }
+
+    /**
+     * Creates a fire pillar base that will not do damage to the Player but will indicate it is spawning
+     *
+     * @return The pillar entity that will damage on contact
+     */
+    public static Entity createFirePillarBase() {
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new FirePillarBaseTask());
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/firePillar.atlas", TextureAtlas.class));
+
+        animator.setAnimationScale(2f);
+
+        animator.addAnimation("firePillarSpawning", 0.05f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("firePillarSpawning");
+
+        Entity pillar = new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
+                .addComponent(aiComponent);
+        pillar.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
+
+        pillar.setScale(0.8f, 0.8f);
+
+        return pillar;
+    }
+
+    /**
+     * Creates a fire pillar that will do damage to the Player
+     *
+     * @return The pillar entity that will damage on contact
+     */
+    public static Entity createFirePillar() {
+        AITaskComponent aiComponent =
+                new AITaskComponent()
+                        .addTask(new FirePillarDamageTask());
+
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/firePillar.atlas", TextureAtlas.class));
+        animator.addAnimation("firePillar", 0.10f, Animation.PlayMode.LOOP);
+        animator.startAnimation("firePillar");
+
+        animator.setAnimationScale(2f);
+
+        Entity pillar = new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
+                .addComponent(new TouchAttackComponent(PhysicsLayer.PLAYER))
+                .addComponent(new PhysicsMovementComponent())
+                .addComponent(aiComponent);
+
+        pillar.setScale(0.8f, 0.8f);
+
+        return pillar;
     }
 
     /**
@@ -219,35 +308,30 @@ public class WeaponFactory {
     public static Entity createFastArrow(Vector2 targetLoc, float angle) {
         Entity normalArrow = createBaseArrow();
         normalArrow.setEntityType("fastArrow");
-        FastArrowConfig config = configs.fastArrow;
         ProjectileMovementTask movementTask = new ProjectileMovementTask(
-                targetLoc, new Vector2(config.speedX, config.speedY));
+                targetLoc, new Vector2(FastArrowConfig.SPEED_X, FastArrowConfig.SPEED_Y));
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(movementTask)
                         .addTask(new WeaponDisposeTask(targetLoc,
-                                new Vector2(config.speedX, config.speedY), 0.8f));
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/arrow_normal.png", Texture.class));
+                                new Vector2(FastArrowConfig.SPEED_X, FastArrowConfig.SPEED_Y), 0.8f));
+
         normalArrow
                 //.addComponent(new TextureRenderComponent(sprite))
-                .addComponent(new CombatStatsComponent(config.health, 0))
+                .addComponent(new CombatStatsComponent(FastArrowConfig.HEALTH, 0))
                 //damage applied when shooting, arrow is decoration
                 .addComponent(aiComponent);
-        Vector2 scale = new Vector2(sprite.getWidth() / 40f, sprite.getHeight() / 40f);
-        normalArrow.setScale(scale);
-        normalArrow.setAngle(angle);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
-                                "images/arrow_broken/arrowBroken.atlas", TextureAtlas.class));
-        animator.addAnimation("brokenArrow", 0.1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("arrow", 0.1f, Animation.PlayMode.LOOP);
+                                ARROW_ATLAS, TextureAtlas.class));
+        animator.addAnimation(ARROW_BROKEN, 0.02f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(ARROW_TYPE, 0.02f, Animation.PlayMode.LOOP);
 
-        normalArrow.setScale(normalArrow.getScale().x * 1.5f,
-                normalArrow.getScale().y * 5f);
-        animator.startAnimation("arrow");
+        normalArrow.setScale(new Vector2(1f, 0.3f));
+        normalArrow.setAngle(angle);
+        animator.startAnimation(ARROW_TYPE);
 
         normalArrow.addComponent(animator);
         normalArrow.addComponent(new ProjectileAnimationController());
@@ -259,6 +343,7 @@ public class WeaponFactory {
     /**
      * create the vortex for teleportation
      *
+     * @param ownerRunner  entity that call vortex enter
      * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex
@@ -282,9 +367,9 @@ public class WeaponFactory {
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.TELEPORT)
                         .setShape(circle).setRestitution(0))
-                .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER, PhysicsLayer.TELEPORT))
+                .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER,
+                        PhysicsLayer.TELEPORT))
                 .addComponent(aiTaskComponent);
-        //vortex.setScale(scale);
         vortex.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 1);
@@ -294,6 +379,7 @@ public class WeaponFactory {
     /**
      * create the vortex for teleportation
      *
+     * @param ownerRunner  entity that call vortex exit (spawn vortex)
      * @param angle        angle to spin the vortex for transition animate
      * @param reverseSpawn downscale the entity
      * @return entity vortex
@@ -313,7 +399,6 @@ public class WeaponFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(aiTaskComponent);
-        //vortex.setScale(scale);
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 2);
         return vortex;
@@ -322,6 +407,7 @@ public class WeaponFactory {
     /**
      * Create the explosion for Elf Boss
      *
+     * @param ownerRunner entity that call create Explosion (spawn it)
      * @return Explosion entity
      */
     public static Entity createExplosion(Entity ownerRunner) {
@@ -346,7 +432,8 @@ public class WeaponFactory {
                 .addComponent(new ColliderComponent().setLayer(PhysicsLayer.EXPLOSION)
                         .setShape(circle).setRestitution(0)
                         .setSensor(true))
-                .addComponent(new ExplosionTouchComponent(PhysicsLayer.PLAYER, PhysicsLayer.EXPLOSION, 2f))
+                .addComponent(new ExplosionTouchComponent(PhysicsLayer.PLAYER,
+                        PhysicsLayer.EXPLOSION, 2f))
                 .addComponent(aiTaskComponent);
         explosion.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
         return explosion;
@@ -355,10 +442,11 @@ public class WeaponFactory {
     /**
      * Creates a line entity
      *
-     * @param TTL time to live in MS
+     * @param ttl time to live in MS
+     * @return return the entity - the line represent the arrow trajectory
      */
-    public static LineEntity AimingLine(long TTL) {
-        LineEntity line = new LineEntity(TTL);
+    public static LineEntity aimingLine(long ttl) {
+        LineEntity line = new LineEntity(ttl);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/aiming_line.png", Texture.class));
         sprite.flip(true, false);
@@ -392,21 +480,31 @@ public class WeaponFactory {
      * @param target the location that the blast will try and reach
      * @return entity
      */
-    public static Entity createBlast(Vector2 target) {
+    public static Entity createBlast(Vector2 target, float angle) {
         float speed = 8f;
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/fireball/fireballAnimationBlue.atlas", TextureAtlas.class));
+        animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("hit", 0.2f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("flying");
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
+        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
+                "images/blast.png", Texture.class));
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
-        return new Entity()
-                .addComponent(new TextureRenderComponent(sprite))
+        Entity entity = new Entity()
+                .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
                 .addComponent(new BlastController());
+        entity.setAngle(angle);
+        return entity;
     }
 
     public static Entity createLightning(short targetLayer) {
@@ -419,8 +517,8 @@ public class WeaponFactory {
                 .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new TouchAttackComponent(targetLayer))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new TouchAttackComponent(targetLayer, 5f))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
                 .addComponent(new LifespanComponent(500L));
     }
 
@@ -442,7 +540,8 @@ public class WeaponFactory {
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
 
         AnimationRenderComponent animator = new AnimationRenderComponent(
-                ServiceLocator.getResourceService().getAsset("images/hammer_projectile.atlas", TextureAtlas.class));
+                ServiceLocator.getResourceService().getAsset(
+                        "images/hammer_projectile.atlas", TextureAtlas.class));
         animator.addAnimation("hammer", 0.10f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
 
@@ -451,12 +550,7 @@ public class WeaponFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
                 .addComponent(new HammerProjectile(targetLayer, owner));
     }
-
-    public WeaponFactory() {
-        throw new IllegalStateException("Instantiating static util class");
-    }
 }
-

@@ -57,7 +57,7 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
      */
     public void spawn() {
         Entity elf = NPCFactory.createMeleeElf(target);
-        Entity elf2 = NPCFactory.createRangedElf(target, "normalArrow", 0.15f);
+        Entity elf2 = NPCFactory.createRangedElf(target, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.15f);
         Entity explosion = WeaponFactory.createExplosion(owner.getEntity());
 
         ServiceLocator.getGameAreaService().incNum();
@@ -88,7 +88,7 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
      * @return true if not, false otherwise
      */
     public boolean mapBound() {
-        //todo: this isn't always true map can change sizes, wont always be 30x30
+        //note:this isn't always true map can change sizes, wont always be 30x30
         return owner.getEntity().getPosition().x < 0
                 && owner.getEntity().getPosition().y < 0
                 && owner.getEntity().getPosition().x > 30

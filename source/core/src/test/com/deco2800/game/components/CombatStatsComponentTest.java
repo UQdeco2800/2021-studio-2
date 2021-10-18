@@ -150,4 +150,26 @@ class CombatStatsComponentTest {
         combat.setBaseAttack(-50);
         assertEquals(150, combat.getBaseAttack());
     }
+
+    @Test
+    void shouldLockDamage() {
+        entity.addComponent(combat);
+        entity.getComponent(CombatStatsComponent.class).setDamageLocked(true);
+        combat.hit(new CombatStatsComponent(100, 10000));
+        assertEquals(100, combat.getHealth(), "hit() should do nothing when CombatStatComponents " +
+                "is disabled");
+    }
+
+    @Test
+    void shouldUnlockDamage() {
+        entity.addComponent(combat);
+        entity.getComponent(CombatStatsComponent.class).setDamageLocked(true);
+        combat.hit(new CombatStatsComponent(100, 20));
+        assertEquals(100, combat.getHealth(), "hit() should do nothing when CombatStatComponents " +
+                "is disabled");
+        entity.getComponent(CombatStatsComponent.class).setDamageLocked(false);
+        combat.hit(new CombatStatsComponent(100, 20));
+        assertEquals(80, combat.getHealth(), "hit() should do nothing when CombatStatComponents " +
+                "is disabled");
+    }
 }

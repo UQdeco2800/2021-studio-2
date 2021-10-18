@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ProjectileTest {
+@SuppressWarnings("StatementWithEmptyBody")
+class ProjectileTest {
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerPhysicsService(new PhysicsService());
@@ -23,22 +24,26 @@ public class ProjectileTest {
         ServiceLocator.registerResourceService(new ResourceService());
         ResourceService resourceService = ServiceLocator.getResourceService();
         // wait for assets to load
-        while (resourceService.loadForMillis(10)) ;
+        while (resourceService.loadForMillis(10)) {
+            // wait for assets to load
+        }
     }
 
     @Test
     void shouldTerminate() {
         Vector2 target = new Vector2(1f, 1f);
         Entity entity = createBlast(target);
-        entity.getComponent(BlastController.class).onHit();
+        entity.getComponent(BlastController.class).hit = true;
         boolean deleted = false;
         try {
+            entity.getComponent(BlastController.class).update();
+            entity.update();
             entity.getComponent(BlastController.class);
         } catch (Exception e) {
             deleted = true;
         }
         if (!deleted) {
-            assertTrue(true);
+            assertTrue(false);
         }
     }
 

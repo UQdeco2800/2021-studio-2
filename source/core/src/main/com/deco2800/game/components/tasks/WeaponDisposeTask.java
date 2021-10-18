@@ -5,8 +5,7 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
-import com.deco2800.game.services.GameTime;
-import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.rendering.AnimationRenderComponent;
 
 /**
  * Wait for the weapon break animation to run
@@ -24,10 +23,6 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
      * Start end
      */
     private boolean declareEnd;
-    /**
-     * Time
-     */
-    private final GameTime timeSource;
 
     /**
      * Pause the weapon in midair to wait for animation to run
@@ -39,7 +34,6 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
     public WeaponDisposeTask(Vector2 targetLoc, Vector2 speed, float duration) {
         super(targetLoc, speed);
         this.duration = duration;
-        this.timeSource = ServiceLocator.getTimeSource();
         this.declareEnd = true;
     }
 
@@ -61,9 +55,8 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
             this.declareEnd = false;
         } else {
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            if ((System.currentTimeMillis() - start) / 1000 >= duration) {
-                stop();
-                owner.getEntity().prepareDispose();
+            if ((System.currentTimeMillis() - start) / 500 >= duration) {
+                owner.getEntity().getComponent(AnimationRenderComponent.class).dispose();
                 status = Status.FINISHED;
             }
         }
@@ -76,7 +69,7 @@ public class WeaponDisposeTask extends ProjectileMovementTask implements Priorit
      */
     @Override
     public int getPriority() {
-        if (owner.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+        if (Boolean.TRUE.equals(owner.getEntity().getComponent(CombatStatsComponent.class).isDead())) {
             return 100;
         } else {
             return 0;

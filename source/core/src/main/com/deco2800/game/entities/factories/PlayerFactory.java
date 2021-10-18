@@ -11,7 +11,6 @@ import com.deco2800.game.components.weapons.Longsword;
 import com.deco2800.game.components.weapons.Scepter;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.PlayerConfig;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.input.InputComponent;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.PhysicsUtils;
@@ -26,8 +25,6 @@ import com.deco2800.game.services.ServiceLocator;
  * the properties stores in 'PlayerConfig'.
  */
 public class PlayerFactory {
-    private static final PlayerConfig stats =
-            FileLoader.readClass(PlayerConfig.class, "configs/player.json");
 
     private PlayerFactory() {
         throw new IllegalStateException("Instantiating static util class");
@@ -130,8 +127,7 @@ public class PlayerFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.PLAYER))
                 .addComponent(new WeaponHitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new PlayerActions())
-                .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
-                .addComponent(new InventoryComponent(stats.gold))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
                 .addComponent(inputComponent)
                 .addComponent(new PlayerStatsDisplay())
                 .addComponent(new PlayerLowHealthDisplay())
@@ -157,10 +153,9 @@ public class PlayerFactory {
                 break;
         }
 
-        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.7f, 0.4f), new Vector2(0.5f, 0.2f));
+        player.getComponent(TrapComponent.class).setAsBox(new Vector2(0.25f, 0.2f), new Vector2(0.5f, 0.1f));
         player.getComponent(ColliderComponent.class).setDensity(1.5f);
         player.getComponent(AnimationRenderComponent.class).scaleEntity();
-        //player.setScale(new Vector2().scl(2));
         PhysicsUtils.setScaledCollider(player, 0.6f, 0.3f);
         player.setEntityType("player");
         return player;
