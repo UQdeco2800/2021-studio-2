@@ -85,24 +85,6 @@ public class TerrainFactory {
         }
     }
 
-    private TiledMap createForestDemoTiles(
-            GridPoint2 tileSize, TextureRegion grass, TextureRegion grassTuft, TextureRegion rocks) {
-        TiledMap tiledMap = new TiledMap();
-        TerrainTile grassTile = new TerrainTile(grass);
-        TerrainTile grassTuftTile = new TerrainTile(grassTuft);
-        TerrainTile rockTile = new TerrainTile(rocks);
-        TiledMapTileLayer layer = new TiledMapTileLayer(MAP_SIZE.x, MAP_SIZE.y, tileSize.x, tileSize.y);
-        // Create base grass
-        fillTiles(layer, grassTile);
-
-        // Add some grass and rocks
-        fillTilesAtRandom(layer, grassTuftTile, TUFT_TILE_COUNT);
-        fillTilesAtRandom(layer, rockTile, ROCK_TILE_COUNT);
-
-        tiledMap.getLayers().add(layer);
-        return tiledMap;
-    }
-
     private TerrainComponent createWorldTerrain(
             ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
 

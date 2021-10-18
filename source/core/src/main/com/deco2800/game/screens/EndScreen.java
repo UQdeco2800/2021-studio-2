@@ -85,16 +85,7 @@ public class EndScreen extends ScreenAdapter {
 
     public void createUI() {
         logger.debug("Creating ui for end game screen");
-        Stage stage = ServiceLocator.getRenderService().getStage(); //if i use keyboard inputs
-//        this.endAnimator = new AnimationRenderComponent(ServiceLocator.getResourceService().getAsset(
-//                "end/endScreen.atlas", TextureAtlas.class));
-
-        //add Animation frame name "startFrame","frame{#}", "ending",
-
-        //start the first frame and loop until keyboard input -> do this feature last -> play it
-        // all until the last frame.
-        //link the last frame to the looping frame.
-        //use a Timer.Schedule
+        Stage stage = ServiceLocator.getRenderService().getStage();
 
         Entity endUi = new Entity()
                 .addComponent(new EndScreenAnimationController())
@@ -102,15 +93,7 @@ public class EndScreen extends ScreenAdapter {
                 .addComponent(new EndScreenDisplay())
                 .addComponent(new InputDecorator(stage, 10));
 
-
-        //make the Display put to the background -> only bring it out when on the last frame
-        //addComponents
-        //change frames based on player keyboard input
-
         ServiceLocator.getEntityService().register(endUi);
-
-        //position UI entity here
-        //Start first frame
     }
 
 }
