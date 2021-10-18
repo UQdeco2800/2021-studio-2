@@ -77,7 +77,7 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
     @Override
     public int getPriority() {
         if (canSpawn()) {
-            return 20;
+            return 30;
         }
         return -1;
     }
