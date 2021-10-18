@@ -208,8 +208,6 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/guardElf.atlas", TextureAtlas.class));
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
         animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
