@@ -2,9 +2,9 @@ package com.deco2800.game.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Touch.TouchMoveComponent;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
 import com.deco2800.game.components.player.PlayerActions;
+import com.deco2800.game.components.touch.TouchMoveComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.extensions.GameExtension;
@@ -34,9 +34,9 @@ class TouchMoveComponentTest {
     @Mock
     PlayerActions actions;
 
-    Vector2 moveLeft = new Vector2(-1f, 0f);
+    final Vector2 moveLeft = new Vector2(-1f, 0f);
 
-    Vector2 noMovement = new Vector2(0f, 0f);
+    final Vector2 noMovement = new Vector2(0f, 0f);
 
     @BeforeEach
     void beforeEach() {
@@ -238,7 +238,7 @@ class TouchMoveComponentTest {
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchMoveComponent(triggerLayer,
-                                direction, 5f, 0f, false));
+                                direction, false));
         entity.create();
         return entity;
     }
@@ -250,7 +250,7 @@ class TouchMoveComponentTest {
                         .addComponent(new HitboxComponent())
                         .addComponent(new ColliderComponent())
                         .addComponent(new TouchMoveComponent(triggerLayer,
-                                direction, 5f, 0f, true));
+                                direction, true));
         entity.create();
         return entity;
     }

@@ -2,9 +2,8 @@ package com.deco2800.game.physics;
 
 public class PhysicsLayer {
     public static final short NONE = 0;
-    public static final short DEFAULT = (1);
     public static final short PLAYER = (1 << 1);
-    // Terrain obstacle, e.g. trees
+    // Terrain obstacle
     public static final short OBSTACLE = (1 << 2);
     // NPC (Non-Playable Character) colliders
     public static final short NPC = (1 << 3);
@@ -15,9 +14,6 @@ public class PhysicsLayer {
     public static final short TRAP = (1 << 7);
     public static final short TELEPORT = (1 << 8);
     public static final short EXPLOSION = (1 << 9);
-
-    public static final short ALL = ~0;
-
 
     private PhysicsLayer() {
         throw new IllegalStateException("Instantiating static util class");

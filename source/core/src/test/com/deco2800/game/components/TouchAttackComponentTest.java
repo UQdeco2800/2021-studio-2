@@ -1,13 +1,14 @@
 package com.deco2800.game.components;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.services.ServiceLocator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,7 +64,11 @@ class TouchAttackComponentTest {
         Fixture targetFixture = target.getComponent(HitboxComponent.class).getFixture();
 
         // This should not cause an exception, but the attack should be ignored
-        entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        try {
+            entity.getEvents().trigger("collisionStart", entityFixture, targetFixture);
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     Entity createAttacker(short targetLayer) {

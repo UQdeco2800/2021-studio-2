@@ -42,6 +42,13 @@ public enum Dialogue {
                     "\nOnce you're ready, walk back over to me.")
     }),
 
+    TUTORIAL_OTHER(new Message[]{
+            new Message(false, "If you don't care what I'm saying, you" +
+                    "\ncan press ESCAPE to finish the cutscenes."),
+            new Message(false, "The pause button is also on ESCAPE if you" +
+                    "\nneed a break.")
+    }),
+
     TUTORIAL_DASH(new Message[]{
             new Message(false, "To get around quickly, press SHIFT" +
                     "\nto sprint around and CAPS_LOCK to dash." +
@@ -50,14 +57,37 @@ public enum Dialogue {
                     "\nto escape.")
     }),
 
+    TUTORIAL_TRAPS(new Message[]{
+            new Message(false, "The place is littered with traps," +
+                    "\nbe careful where you're stepping."),
+            new Message(false, "I'll meet you in the next room and show" +
+                    "\nyou what I'm talking about.")
+    }),
+
+    TUTORIAL_CRATES(new Message[]{
+            new Message(false, "You better get use to injuries." +
+                    "\nThere are crates spread across the worlds." +
+                    "\nBreak them for a health potion."),
+    }),
+
     TUTORIAL_ATTACK(new Message[]{
             new Message(false, "Use SPACE BAR to swing the axe at" +
                     "\nthe gate. Careful though, this is the" +
                     "\nonly thing that won't attack back."),
-            new Message(false, "User Q or Right Click to activate your" +
-                    "\nweapons power, each weapon has one" +
-                    "\nand they're all different. You should test" +
-                    "\nit out before heading off into battle.")
+            new Message(false, "There are some weapons you'll find along the way." +
+                    "\nUse them to your advantage and utilise the power" +
+                    "\nthey possess."),
+            new Message(false, "The Greatsword has a powerful AOE attack" +
+                    "\nwhen pressing Q."),
+            new Message(false, "The scepter is capable of firing a powerful" +
+                    "\nblast when pressing ALT"),
+            new Message(false, "Lastly, Thor's hammer allows can call" +
+                    "\nan AOE attack on Q and a deadly weapon" +
+                    "\nthrow on ALT."),
+            new Message(false, "You'll know what I'm talking about" +
+                    "\nwhen you wield them yourself." +
+                    "\nFor now, practice on some crates before taking" +
+                    "\nout the guard.")
     }),
 
     TUTORIAL_ENEMIES(new Message[]{
@@ -68,14 +98,17 @@ public enum Dialogue {
                     "\nyou from the shadows.")
     }),
 
-    TUTORIAL_TRAPS(new Message[]{
-            new Message(false, "The place is littered with traps," +
-                    "\nbe careful where you're stepping.")
-    }),
-
     TUTORIAL_EXIT(new Message[]{
+            new Message(false, "Between the worlds, you'll find a teleport pad." +
+                    "\nThese are how the Gods get around."),
+            new Message(false, "You'll need your hands stained with blood" +
+                    "\nbefore you're deemed worthy to enter."),
+            new Message(true, "I understand. Nothing will get in my way."),
+            new Message(false, "Last thing, if you want to leave \nbefore defeating all " +
+                    "the enemies \nor take a break between fights \npress P to see the pause menu."),
             new Message(false, "Good luck warrior, I hope to never" +
-                    "\nsee you again.")
+                    "\nsee you again."),
+            new Message(true, "Thank you. Same to you."),
     }),
 
     ELF_INTRODUCTION_FIRST(new Message[]{
@@ -206,12 +239,12 @@ public enum Dialogue {
 
     LOKI_INTRODUCTION_DEFEATED_5(new Message[]{
             new Message(false, "Good attempt, are you really going" +
-                    "\n to try again?"),
+                    "\nto try again?"),
     }),
 
     LOKI_ENCOUNTER_FIRST(new Message[]{
             new Message(false, "It's nice to see you in the flesh... " +
-                    "\nFor now"),
+                    "\nFor now."),
     }),
 
     LOKI_ENCOUNTER_VICTORY_1(new Message[]{
@@ -232,56 +265,256 @@ public enum Dialogue {
                     "\nNo matter, you'll make it no further than here."),
     }),
 
+    LOKI2_INTRODUCTION_FIRST(new Message[]{
+            new Message(true, "What? I thought the teleport pad would" +
+                    "\nget me out of here. It seems like I've only" +
+                    "\ngone further."),
+            new Message(true, "I have a higher chance of dying from" +
+                    "\nthe heat than anyone in my way."),
+            new Message(false, "Ignorant fool..."),
+            new Message(true, "What?! I saw you die at my hands."),
+            new Message(true, "Can't wait to kill you again.")
+    }),
+
+    LOKI2_INTRODUCTION_VICTORY_1(new Message[]{
+            new Message(true, "Killing Lokis may now be my new" +
+                    "\nfavourite hobby."),
+            new Message(true, "One down, another one to go."),
+    }),
+
+    LOKI2_INTRODUCTION_VICTORY_2(new Message[]{
+            new Message(false, "I'm surprised you made it through my" +
+                    "\ndecoy again."),
+            new Message(false, "It means that I get to have my " +
+                    "\nrevenge however."),
+    }),
+
+    LOKI2_INTRODUCTION_VICTORY_3(new Message[]{
+            new Message(false, "Come find me again. I know you can't" +
+                    "\nwait to kill me."),
+    }),
+
+    LOKI2_INTRODUCTION_DEFEATED_1(new Message[]{
+            new Message(false, "How did you get past my decoy again." +
+                    "\nI must not be like I use to be."),
+            new Message(false, "Still good enough to kill you however.")
+    }),
+
+    LOKI2_INTRODUCTION_DEFEATED_2(new Message[]{
+            new Message(true, "I'm prepared this time, the heat" +
+                    "\nwon't get to me."),
+            new Message(true, "Where are you Loki? Are you afraid" +
+                    "\nof a rematch?."),
+    }),
+
+    LOKI2_INTRODUCTION_DEFEATED_3(new Message[]{
+            new Message(true, "Spawn decoys, transform and fire." +
+                    "\nEasy."),
+            new Message(true, "Same as the clown I just killed."),
+    }),
+
+    LOKI2_ENCOUNTER_FIRST(new Message[]{
+            new Message(false, "I see you've reached me again" +
+                    "\nbut have you really? Am I just another clone?"),
+            new Message(true, "Are you afraid? I've seen what you" +
+                    "\ncan do and I'm far from impressed."),
+            new Message(false, "Fool! This is going to be fun isn't it." +
+                    "\nWatching you die didn't seem as fun."),
+            new Message(true, "So it is you. I'll make sure I savour" +
+                    "\nthe moment."),
+            new Message(false, "Is it? Who knows."),
+    }),
+
+    LOKI2_ENCOUNTER_VICTORY_1(new Message[]{
+            new Message(true, "Killing Loki. It never gets old."),
+            new Message(false, "I don't recall that happening." +
+                    "\nI must've been asleep while a decoy was watching over."),
+    }),
+
+    LOKI2_ENCOUNTER_VICTORY_2(new Message[]{
+            new Message(false, "Can't wait to get my revenge." +
+                    "\nI knew you wouldn't get past the others."),
+    }),
+
+    LOKI2_ENCOUNTER_DEFEATED_1(new Message[]{
+            new Message(true, "Hiding behind your decoys once again." +
+                    "\nYou can't hide forever."),
+    }),
+
+    LOKI2_ENCOUNTER_DEFEATED_2(new Message[]{
+            new Message(false, "Interesting. You seem to keep getting back" +
+                    "\nto me then dying."),
+            new Message(false, "Are you finding this fun?"),
+            new Message(true, "I will when I finally kill you."),
+    }),
+
+
     ODIN_INTRODUCTION_FIRST(new Message[]{
-            new Message(false, "Greetings Warrior, it is impressive that you" +
-                    "\nhave made it this far however now you face" +
-                    "\na god of pure power and so this is where" +
-                    "\nyou shall fail"),
-            new Message(false, "Perhaps after being put down quickly you" +
-                    "\nwill finally accept your fate and finally" +
-                    "\nand finally give up on your fools quest"),
-            new Message(false, "Come, let us fight and I will send you back" +
-                    "\n to where you belong")
+            new Message(true, "So this is where I belong, the golden statues" +
+                    "\nand pristine white walls." +
+                    "\nI could get use to this but I am not yet" +
+                    "\nworthy for a place here."),
+            new Message(true, "I cannot live here with those who belittled me" +
+                    "\nand locked me away." +
+                    "\nThis will be mine. And mine only."),
     }),
 
     ODIN_INTRODUCTION_DEFEAT_1(new Message[]{
+            new Message(true, "I couldn't see from the shine of the walls." +
+                    "\nHis eye patch must've helped him."),
+    }),
+
+    ODIN_INTRODUCTION_DEFEAT_2(new Message[]{
+            new Message(true, "Good skills for an old man. I'm impressed."),
+    }),
+
+    ODIN_INTRODUCTION_DEFEAT_3(new Message[]{
+            new Message(true, "I was taught the elderly should be" +
+                    "\nrespected. Not this time."),
+    }),
+
+    ODIN_INTRODUCTION_VICTORY_1(new Message[]{
+            new Message(true, "The old man didn't know what was coming for him." +
+                    "\nI can't wait to relive this joy."),
+    }),
+
+    ODIN_INTRODUCTION_VICTORY_2(new Message[]{
+            new Message(true, "More time in this golden palace." +
+                    "\nI could live here forever."),
+    }),
+
+    ODIN_INTRODUCTION_VICTORY_3(new Message[]{
+            new Message(true, "The curse on me may have been a blessing." +
+                    "\nBattles for the rest of my life."),
+    }),
+
+    ODIN_ENCOUNTER_FIRST(new Message[]{
+            new Message(false, "Greetings Warrior, it is impressive that you" +
+                    "\nhave made it this far however now you face" +
+                    "\na god of pure power and so this is where" +
+                    "\nyou shall fail."),
+            new Message(false, "Perhaps after being put down quickly you" +
+                    "\nwill finally accept your fate and finally" +
+                    "\ngive up on your fools quest."),
+            new Message(false, "Come, let us fight and I will send you back" +
+                    "\nto where you belong")
+    }),
+
+    ODIN_ENCOUNTER_DEFEAT_1(new Message[]{
             new Message(false, "Why have you come back for a second time?" +
                     "\nthe result will only be the same. You - sent" +
                     "\nback to the beginning.")
 
     }),
 
-    ODIN_INTRODUCTION_DEFEAT_2(new Message[]{
+    ODIN_ENCOUNTER_DEFEAT_2(new Message[]{
             new Message(false, "Your persistence is noteworthy. It is" +
                     "\nhowever folly as well. You shall not make it" +
                     "\nthrough"),
             new Message(false, "Give up now.")
     }),
 
-    ODIN_INTRODUCTION_DEFEAT_3(new Message[]{
+    ODIN_ENCOUNTER_DEFEAT_3(new Message[]{
             new Message(false, "Just how many times will you try? Failing" +
                     "\neach time. Your hubris led you here, and yet" +
                     "\nyou cling to it still")
     }),
 
-    ODIN_INTRODUCTION_VICTORY_1(new Message[]{
+    ODIN_ENCOUNTER_VICTORY_1(new Message[]{
             new Message(false, "Why are you back? Just because you" +
                     "\ncan?")
 
     }),
 
-    ODIN_INTRODUCTION_VICTORY_2(new Message[]{
+    ODIN_ENCOUNTER_VICTORY_2(new Message[]{
             new Message(false, "What are you doing here again?" +
                     "\n Valhalla awaits.")
     }),
 
-    ODIN_INTRODCTION_VICTORY_3(new Message[]{
+    ODIN_ENCOUNTER_VICTORY_3(new Message[]{
             new Message(false, "Are you really still that eager to battle?" +
                     "\n even with Valhalla now yours to roam?" +
                     "\n So be it.")
     }),
 
+    ODIN_KILLED_FIRST(new Message[]{
+            new Message(false, "You have defeated the best Asgard has to offer!" +
+                    "\n No mortal is worthier than you. Perhaps no god..." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_1(new Message[]{
+            new Message(false, "Revenge must taste sweet." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_2(new Message[]{
+            new Message(false, "They say revenge is best served cold." +
+                    "\n They won't say that anymore." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_3(new Message[]{
+            new Message(false, "Must be your lucky day." +
+                    "\n Walk through the gates before your luck changes.")
+    }),
+
+    ODIN_KILLED_VICTORY_1(new Message[]{
+            new Message(false, "Beaten by a mortal twice." +
+                    "\n Maybe, I should retire...")
+    }),
+
+    ODIN_KILLED_VICTORY_2(new Message[]{
+            new Message(true, "Is this the king of gods?" +
+                    "\n The gods must be weak!")
+    }),
+
+    ODIN_KILLED_VICTORY_3(new Message[]{
+            new Message(true, "King of gods?" +
+                    "\n I have seen peasants who fight better")
+    }),
+
+
     THOR_INTRODUCTION_FIRST(new Message[]{
+            new Message(true, "I'm finally free from Loki, the heat from Hell" +
+                    "\nand the chains within the prison." +
+                    "\nI'm nearly there. I can feel it"),
+            new Message(true, "It feels like home here, what I'm use to." +
+                    "\nThe soft, grassy fields and the chilling breeze"),
+            new Message(true, "I wonder who else stands before me on" +
+                    "\nmy journey. They aren't ready to face my wrath.")
+    }),
+
+    THOR_INTRODUCTION_DEFEAT_1(new Message[]{
+            new Message(true, "This place feels different," +
+                    "\nnot like home but I'm ready this time."),
+    }),
+
+    THOR_INTRODUCTION_DEFEAT_2(new Message[]{
+            new Message(true, "Thor may have bested me this time," +
+                    "\nbut he's incompetent, unwilling to learn."),
+    }),
+
+    THOR_INTRODUCTION_DEFEAT_3(new Message[]{
+            new Message(true, "I've seen his skills, he got lucky last time."),
+    }),
+
+    THOR_INTRODUCTION_VICTORY_1(new Message[]{
+            new Message(true, "It was a breeze last time," +
+                    "\nI don't see it being any different."),
+    }),
+
+    THOR_INTRODUCTION_VICTORY_2(new Message[]{
+            new Message(true, "Finally back in my element," +
+                    "\nThor is nothing compared to me."),
+    }),
+
+    THOR_INTRODUCTION_VICTORY_3(new Message[]{
+            new Message(true, "I have to go through this again..." +
+                    "\nWhat a waste of time."),
+    }),
+
+    THOR_ENCOUNTER_FIRST(new Message[]{
             new Message(false, "Ahh, I see that you've made it past my" +
                     "\nbrother. I can't say I'm too surprised though"),
             new Message(false, "He was never really one for real fights," +
@@ -292,47 +525,47 @@ public enum Dialogue {
                     "\nof a true god and see how you fare!")
     }),
 
-    THOR_INTRODUCTION_DEFEAT_1(new Message[]{
+    THOR_ENCOUNTER_DEFEAT_1(new Message[]{
             new Message(false, "What purpose does it serve to try again?" +
                     "\nI cannot be bested in combat. Learn to" +
                     "\naccept your limits"),
             new Message(false, "It is unbecoming of you to keep trying")
     }),
 
-    THOR_INTRODUCTION_DEFEAT_2(new Message[]{
+    THOR_ENCOUNTER_DEFEAT_2(new Message[]{
             new Message(false, "What? Back again? Allow me to send you back" +
                     "\nto whence you came.")
     }),
 
-    THOR_INTRODUCTION_DEFEAT_3(new Message[]{
+    THOR_ENCOUNTER_DEFEAT_3(new Message[]{
             new Message(false, "Your stubbornness is noteworthy, it is" +
                     "\nhowever also ugly. Learn to accept when you are" +
                     "\nbested.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_1(new Message[]{
+    THOR_ENCOUNTER_VICTORY_1(new Message[]{
             new Message(false, "I see that you've come back for a second" +
                     "\ntime. An error on your part."),
             new Message(false, "I shall make sure you don't defeat me again.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_2(new Message[]{
+    THOR_ENCOUNTER_VICTORY_2(new Message[]{
             new Message(false, "Ahhh you wish to fight me again?" +
                     "\nCome, you'll find me a willing opponent.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_3(new Message[]{
+    THOR_ENCOUNTER_VICTORY_3(new Message[]{
             new Message(false, "Still trying to make it to Valhalla?" +
                     "\nyou'll have to make it past me again.")
     }),
 
-    THOR_INTRODUCTION_VICTORY_4(new Message[]{
+    THOR_ENCOUNTER_VICTORY_4(new Message[]{
             new Message(false, "We really need to stop meeting like this," +
                     "\nmaybe instead we can meet in Valhalla before long."),
             new Message(false, "Until then however, we fight!")
     }),
 
-    THOR_INTRODUCTION_VICTORY_5(new Message[]{
+    THOR_ENCOUNTER_VICTORY_5(new Message[]{
             new Message(false, "Ah, hello once again warrior. Did you wish" +
                     "\nto clash with me once again?" +
                     "\nVery well, I am happy to oblige.")
@@ -370,7 +603,7 @@ public enum Dialogue {
      * @return String at the index
      */
     public String getMessage(int index) {
-        return messages[index].getMessage();
+        return messages[index].getMessageContents();
     }
 
     /**
@@ -407,11 +640,11 @@ class Message {
     /**
      * The message that will be displayed by the character.
      */
-    private final String message;
+    private final String messageContents;
 
-    public Message(boolean mainCharacter, String message) {
+    public Message(boolean mainCharacter, String messageContents) {
         this.mainCharacter = mainCharacter;
-        this.message = message;
+        this.messageContents = messageContents;
     }
 
     /**
@@ -428,8 +661,8 @@ class Message {
      *
      * @return String containing the message to be displayed
      */
-    public String getMessage() {
-        return message;
+    public String getMessageContents() {
+        return messageContents;
     }
 
 }

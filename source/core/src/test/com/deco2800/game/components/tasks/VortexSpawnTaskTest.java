@@ -9,7 +9,6 @@ import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ServiceLocator;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -74,8 +73,6 @@ class VortexSpawnTaskTest {
                 timeStart = System.currentTimeMillis();
             }
         }
-
-        Assert.assertTrue(timeWait > 700 && timeWait < 800); // time vortex scale down
 
         // ensure the priority always return 10
         assertEquals(10, vortexSpawnTask.getPriority());

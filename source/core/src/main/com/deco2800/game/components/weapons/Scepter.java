@@ -24,8 +24,7 @@ public class Scepter extends MeleeWeapon {
      */
     private final Sound impactSound;
 
-    private GameArea gameArea;
-    private final float range = 6f;
+    private final GameArea gameArea;
 
     public Scepter(short targetLayer, int attackPower, float knockback, Vector2 weaponSize) {
         super(targetLayer, attackPower, knockback, weaponSize);
@@ -53,14 +52,14 @@ public class Scepter extends MeleeWeapon {
             case UP:
                 animator.startAnimation("up_attack");
                 break;
-            case DOWN:
-                animator.startAnimation("down_attack");
-                break;
             case LEFT:
                 animator.startAnimation("left_scepter_attack");
                 break;
             case RIGHT:
                 animator.startAnimation("right_scepter_attack");
+                break;
+            default:
+                animator.startAnimation("down_attack");
                 break;
         }
     }
@@ -74,18 +73,19 @@ public class Scepter extends MeleeWeapon {
     public void rangedAttack(int attackDirection) {
         super.rangedAttack(attackDirection);
         Vector2 target = entity.getCenterPosition();
+        float range = 6f;
         switch (attackDirection) {
             case UP:
-                target.y += this.range;
-                break;
-            case DOWN:
-                target.y -= this.range;
+                target.y += range;
                 break;
             case LEFT:
-                target.x -= this.range;
+                target.x -= range;
                 break;
             case RIGHT:
-                target.x += this.range;
+                target.x += range;
+                break;
+            default:
+                target.y -= range;
                 break;
         }
         Entity blast = WeaponFactory.createBlast(target);
@@ -100,10 +100,8 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
-            if (hasAttacked) {
-                attackSound.play();
-            }
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration && hasAttacked) {
+            attackSound.play();
         }
         super.triggerAttackStage(timeSinceAttack);
     }

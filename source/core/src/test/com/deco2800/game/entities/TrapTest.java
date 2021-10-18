@@ -2,7 +2,7 @@ package com.deco2800.game.entities;
 
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.components.Touch.TouchAttackComponent;
+import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.extensions.GameExtension;
 import com.deco2800.game.physics.PhysicsService;
 import com.deco2800.game.physics.components.HitboxComponent;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(GameExtension.class)
-public class TrapTest {
+class TrapTest {
     @BeforeEach
     void beforeEach() {
         ServiceLocator.registerPhysicsService(new PhysicsService());

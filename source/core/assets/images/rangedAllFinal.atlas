@@ -115,112 +115,112 @@ assassinStunRight
   orig: 94, 110
   offset: 0, 0
   index: -1
-rangerDown
+rangedDown
   rotate: false
   xy: 386, 226
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerDown
+rangedDown
   rotate: false
   xy: 482, 338
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-rangerDown
+rangedDown
   rotate: false
   xy: 290, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-rangerLeft
+rangedLeft
   rotate: false
   xy: 386, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerLeft
+rangedLeft
   rotate: false
   xy: 482, 226
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-rangerLeft
+rangedLeft
   rotate: false
   xy: 578, 338
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-rangerRight
+rangedRight
   rotate: false
   xy: 386, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerRight
+rangedRight
   rotate: false
   xy: 482, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-rangerRight
+rangedRight
   rotate: false
   xy: 578, 226
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-rangerUp
+rangedUp
   rotate: false
   xy: 674, 338
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerUp
+rangedUp
   rotate: false
   xy: 482, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-rangerUp
+rangedUp
   rotate: false
   xy: 578, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-rangerStunUp
+rangedStunUp
   rotate: false
   xy: 674, 226
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerStunDown
+rangedStunDown
   rotate: false
   xy: 770, 338
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerStunLeft
+rangedStunLeft
   rotate: false
   xy: 578, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rangerStunRight
+rangedStunRight
   rotate: false
   xy: 674, 114
   size: 94, 110

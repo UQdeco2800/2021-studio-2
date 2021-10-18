@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 class AnimationRenderComponentTest {
     @Test
     void shouldAddRemoveAnimation() {
-        TextureAtlas atlas = createMockAtlas("test_name", 1);
+        TextureAtlas atlas = createMockAtlas();
         AnimationRenderComponent animator = new AnimationRenderComponent(atlas);
 
         assertTrue(animator.addAnimation("test_name", 0.1f));
@@ -35,7 +35,7 @@ class AnimationRenderComponentTest {
 
     @Test
     void shouldFailDuplicateAddAnimation() {
-        TextureAtlas atlas = createMockAtlas("test_name", 1);
+        TextureAtlas atlas = createMockAtlas();
         AnimationRenderComponent animator = new AnimationRenderComponent(atlas);
 
         assertTrue(animator.addAnimation("test_name", 0.1f));
@@ -44,7 +44,7 @@ class AnimationRenderComponentTest {
 
     @Test
     void shouldHaveAnimation() {
-        TextureAtlas atlas = createMockAtlas("test_name", 1);
+        TextureAtlas atlas = createMockAtlas();
         AnimationRenderComponent animator = new AnimationRenderComponent(atlas);
 
         animator.addAnimation("test_name", 0.1f);
@@ -53,69 +53,9 @@ class AnimationRenderComponentTest {
         assertFalse(animator.hasAnimation("test_name"));
     }
 
-    //todo reimplment
-    /*@Test
-    void shouldPlayAnimation() {
-        int numFrames = 5;
-        String animName = "test_name";
-        float frameTime = 1f;
-
-        // Mock texture atlas
-        TextureAtlas atlas = createMockAtlas(animName, numFrames);
-        Array<AtlasRegion> regions = atlas.findRegions(animName);
-        SpriteBatch batch = mock(SpriteBatch.class);
-
-        // Mock game time
-        GameTime gameTime = mock(GameTime.class);
-        ServiceLocator.registerTimeSource(gameTime);
-        when(gameTime.getDeltaTime()).thenReturn(frameTime);
-
-        // Start animation
-        AnimationRenderComponent animator = new AnimationRenderComponent(atlas);
-        Entity entity = new Entity();
-        animator.setEntity(entity);
-        animator.addAnimation(animName, frameTime);
-        animator.startAnimation(animName);
-
-        for (int i = 0; i < 5; i++) {
-            // Each draw advances 1 frame, check that it matches for each
-            animator.draw(batch);
-            verify(batch).draw(
-                    regions.get(i),
-                    entity.getPosition().x,
-                    entity.getPosition().y,
-                    entity.getScale().x,
-                    entity.getScale().y
-            );
-        }
-    }*/
-
-    //todo reimplment
-    /*@Test
-    void shouldFinish() {
-        TextureAtlas atlas = createMockAtlas("test_name", 1);
-        SpriteBatch batch = mock(SpriteBatch.class);
-
-        GameTime gameTime = mock(GameTime.class);
-        ServiceLocator.registerTimeSource(gameTime);
-        when(gameTime.getDeltaTime()).thenReturn(1f);
-
-        AnimationRenderComponent animator = new AnimationRenderComponent(atlas);
-        Entity entity = new Entity();
-        animator.setEntity(entity);
-        animator.addAnimation("test_name", 1f);
-        assertFalse(animator.isFinished());
-
-        animator.startAnimation("test_name");
-        assertFalse(animator.isFinished());
-
-        animator.draw(batch);
-        assertTrue(animator.isFinished());
-    }*/
-
     @Test
     void shouldStopAnimation() {
-        TextureAtlas atlas = createMockAtlas("test_name", 1);
+        TextureAtlas atlas = createMockAtlas();
         AnimationRenderComponent animator = new AnimationRenderComponent(atlas);
         animator.addAnimation("test_name", 1f);
         assertFalse(animator.stopAnimation());
@@ -125,13 +65,13 @@ class AnimationRenderComponentTest {
         assertNull(animator.getCurrentAnimation());
     }
 
-    static TextureAtlas createMockAtlas(String animationName, int numRegions) {
+    static TextureAtlas createMockAtlas() {
         TextureAtlas atlas = mock(TextureAtlas.class);
-        Array<AtlasRegion> regions = new Array<>(numRegions);
-        for (int i = 0; i < numRegions; i++) {
+        Array<AtlasRegion> regions = new Array<>(1);
+        for (int i = 0; i < 1; i++) {
             regions.add(mock(AtlasRegion.class));
         }
-        when(atlas.findRegions(animationName)).thenReturn(regions);
+        when(atlas.findRegions("test_name")).thenReturn(regions);
         return atlas;
     }
 } 

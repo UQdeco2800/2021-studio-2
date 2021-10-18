@@ -64,7 +64,7 @@ class AlertChaseTaskTest {
         float newDistance1 = alertableEntity.getPosition().dst(target.getPosition());
 
         // target is too far from enemy
-        assertEquals(oldDistance - newDistance1, 0);
+        assertEquals(0, oldDistance - newDistance1);
 
         for (int i = 0; i < 3; i++) {
             entity.update();
@@ -75,7 +75,7 @@ class AlertChaseTaskTest {
 
         float newDistance2 = alertableEntity.getPosition().dst(target.getPosition());
         // fail because the enemy is not alerted - alert task fail
-        assertEquals(newDistance2 - oldDistance, 0);
+        assertEquals(0, newDistance2 - oldDistance);
     }
 
     private Entity makePhysicsEntity() {

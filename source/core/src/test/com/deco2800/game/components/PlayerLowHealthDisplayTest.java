@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
-public class PlayerLowHealthDisplayTest {
+class PlayerLowHealthDisplayTest {
     @Mock
     PlayerLowHealthDisplay lowHealth;
     Entity entity;

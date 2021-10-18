@@ -30,22 +30,6 @@ public class AnchoredChaseTask extends ChaseTask implements PriorityTask {
     }
 
     /**
-     * @param target           The entity to chase.
-     * @param viewDistance     Maximum distance from the entity at which chasing can start.
-     * @param maxChaseDistance Maximum distance from the entity while chasing before giving up.
-     * @param anchor           - entity to retreat to
-     * @param protectX         - bounds around the object to stay in on the x axis
-     * @param protectY         - bounds around the object to stay in on the y axis
-     */
-    public AnchoredChaseTask(Entity target, float viewDistance, float maxChaseDistance, Entity anchor, float protectX, float protectY) {
-        super(target, 10, viewDistance, maxChaseDistance);
-        this.base = anchor;
-        this.protectRadius = 0;
-        this.protectX = protectX;
-        this.protectY = protectY;
-    }
-
-    /**
      * @return -1 to deactivate if the target is outside of the base
      * or it passes the call to its super to calculate if the target is in range and visible
      */

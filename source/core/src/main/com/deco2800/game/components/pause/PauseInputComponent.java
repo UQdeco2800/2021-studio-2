@@ -21,7 +21,7 @@ public class PauseInputComponent extends InputComponent {
     @Override
     public boolean keyDown(int keycode) {
 
-        if (keycode == Input.Keys.P) {
+        if (keycode == Input.Keys.ESCAPE) {
             if (timeSource != null) {
                 entity.getEvents().trigger("togglePause");
             }

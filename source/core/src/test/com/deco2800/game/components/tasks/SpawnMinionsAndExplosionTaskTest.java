@@ -11,21 +11,31 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
+import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(GameExtension.class)
 class SpawnMinionsAndExplosionTaskTest {
 
+    @Mock
+    GameTime gameTime;
+
+    @Mock
+    GameArea gameArea;
+
     private static final String[] forestTextureAtlases = {
+            "images/rangedElf.atlas", "images/meleeElf.atlas",
             "images/meleeFinal.atlas", "images/rangedAllFinal.atlas", "images/explosion/explosion.atlas"
     };
 
@@ -55,9 +65,6 @@ class SpawnMinionsAndExplosionTaskTest {
         ServiceLocator.registerRenderService(renderService);
         ServiceLocator.registerPhysicsService(new PhysicsService());
         ServiceLocator.registerEntityService(new EntityService());
-        GameArea gameArea = mock(GameArea.class);
-        ServiceLocator.registerGameArea(gameArea);
-
 
         ResourceService resourceService = new ResourceService();
         ServiceLocator.registerResourceService(resourceService);
@@ -81,6 +88,10 @@ class SpawnMinionsAndExplosionTaskTest {
 
     @Test
     void activePriority() {
+        gameTime = mock(GameTime.class);
+        ServiceLocator.registerTimeSource(gameTime);
+        when(gameTime.getTime()).thenReturn(0L);
+
         Entity boss = createBoss();
         Entity target = new Entity();
         SpawnMinionsAndExplosionTask spawn =
@@ -108,6 +119,31 @@ class SpawnMinionsAndExplosionTaskTest {
 
         // boss can only spawn at most two wave of enemy - one at < 50%, and one at < 25%
 
+        spawn.update();
+        assertEquals(-1, spawn.getPriority());
+    }
+
+    @Test
+    void checkBound() {
+        gameArea = mock(GameArea.class);
+        ServiceLocator.registerGameArea(gameArea);
+
+        Entity boss = createBoss();
+        Entity target = new Entity();
+        SpawnMinionsAndExplosionTask spawn =
+                new SpawnMinionsAndExplosionTask(target);
+        boss.setPosition(100f, 100f);
+        boss.getComponent(CombatStatsComponent.class).setHealth(40);
+        spawn.create(() -> boss);
+
+        boss.create();
+        // inactive when boss health not < 50%
+
+
+        // special condiction of spawning minions - health < 50, no minions on the map
+        // and the boss is outside of map bound
+
+        assertEquals(20, spawn.getPriority());
     }
 
     private Entity createBoss() {

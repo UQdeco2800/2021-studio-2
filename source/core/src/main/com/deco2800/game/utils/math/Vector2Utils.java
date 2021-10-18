@@ -14,7 +14,6 @@ public class Vector2Utils {
     public static final Vector2 CENTER = new Vector2(0f, 0f);
 
     public static final Vector2 ONE = new Vector2(1f, 1f);
-    public static final Vector2 ARROW = new Vector2(3f, 3f);
     public static final Vector2 MAX = new Vector2(Float.MAX_VALUE, Float.MAX_VALUE);
     public static final Vector2 MIN = new Vector2(Float.MIN_VALUE, Float.MIN_VALUE);
 
@@ -64,27 +63,6 @@ public class Vector2Utils {
         } else {
             return -1;
         }
-    }
-
-    /**
-     * Calculate the angle in degrees of a vector.
-     *
-     * @param vector The vector relative to the origin
-     * @return Angle in degrees from -180 to 180
-     */
-    public static double angleTo(Vector2 vector) {
-        return Math.toDegrees(Math.atan2(vector.y, vector.x));
-    }
-
-    /**
-     * Calculate the angle in degrees between two vectors
-     *
-     * @param from The vector from which angle is measured
-     * @param to   The vector to which angle is measured
-     * @return Angle in degrees from -180 to 180
-     */
-    public static double angleFromTo(Vector2 from, Vector2 to) {
-        return Math.toDegrees(Math.atan2(to.y - from.y, to.x - from.x));
     }
 
     /**

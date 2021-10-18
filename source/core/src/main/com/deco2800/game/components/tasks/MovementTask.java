@@ -22,9 +22,6 @@ public class MovementTask extends DefaultTask {
     private Vector2 moveSpeed = Vector2Utils.ONE;
     private long lastTimeMoved;
     private Vector2 lastPos;
-    //private float x=lastPos.x;
-
-    //public Vector2 lastPos;
     private PhysicsMovementComponent movementComponent;
 
     /**

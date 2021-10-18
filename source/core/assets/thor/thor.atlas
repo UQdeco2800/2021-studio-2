@@ -288,6 +288,7 @@ EnemyAttackAOE
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
+  index: 5
 EnemyAttackAOE
   rotate: false
   xy: 0, 384

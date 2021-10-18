@@ -9,7 +9,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(GameExtension.class)
-public class HealthBarComponentTest {
+class HealthBarComponentTest {
     @Test
     void checkComponentCreate() {
 

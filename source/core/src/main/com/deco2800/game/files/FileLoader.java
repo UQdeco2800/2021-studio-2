@@ -68,16 +68,6 @@ public class FileLoader {
      *
      * @param object   Java object to write.
      * @param filename File to write to.
-     */
-    public static void writeClass(Object object, String filename) {
-        writeClass(object, filename, Location.EXTERNAL);
-    }
-
-    /**
-     * Write generic Java classes to a JSON file.
-     *
-     * @param object   Java object to write.
-     * @param filename File to write to.
      * @param location File storage type. See
      *                 https://github.com/libgdx/libgdx/wiki/File-handling#file-storage-types
      */

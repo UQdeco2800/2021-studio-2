@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MessageTest {
+class MessageTest {
 
     /**
      * Message with main character speaking.
@@ -35,11 +35,11 @@ public class MessageTest {
 
     @Test
     void getMainCharacterMessageTest() {
-        assertEquals("This is the main character", messageMain.getMessage());
+        assertEquals("This is the main character", messageMain.getMessageContents());
     }
 
     @Test
     void getNPCMessageTest() {
-        assertEquals("This is not the main character", messageNPC.getMessage());
+        assertEquals("This is not the main character", messageNPC.getMessageContents());
     }
 }

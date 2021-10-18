@@ -81,7 +81,7 @@ public class WanderTask extends DefaultMultiTask implements PriorityTask {
     /**
      * start waiting task - swap the current task to wait task
      */
-    private void startWaiting() {
+    protected void startWaiting() {
         logger.debug("Starting waiting");
         swapTask(waitTask);
     }
@@ -90,7 +90,7 @@ public class WanderTask extends DefaultMultiTask implements PriorityTask {
      * start wandering task - swap the task to wandering task
      */
 
-    private void startMoving() {
+    protected void startMoving() {
         logger.debug("Starting moving");
         movementTask.setTarget(getRandomPosInRange());
         swapTask(movementTask);
@@ -101,7 +101,7 @@ public class WanderTask extends DefaultMultiTask implements PriorityTask {
      *
      * @return Vector2 position to move around
      */
-    private Vector2 getRandomPosInRange() {
+    protected Vector2 getRandomPosInRange() {
         Vector2 halfRange = wanderRange.cpy().scl(0.5f);
         Vector2 min = startPos.cpy().sub(halfRange);
         Vector2 max = startPos.cpy().add(halfRange);

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.TextBox;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,10 +16,6 @@ public class CutsceneScreen extends UIComponent {
      */
     private static final float Z_INDEX = 10f;
 
-    /**
-     * Instance of the Text Box that will be displayed to the screen.
-     */
-    private TextBox textBox;
 
     /**
      * Bars to indicate a cutscene is taking place.
@@ -42,10 +37,10 @@ public class CutsceneScreen extends UIComponent {
      */
     private boolean closing = false;
 
+
     @Override
     public void create() {
         super.create();
-        textBox = entity.getComponent(TextBox.class);
         addActors();
         openScreenInstant();
     }
@@ -164,24 +159,6 @@ public class CutsceneScreen extends UIComponent {
                 }
             }, 15);
         }
-    }
-
-    /**
-     * Returns if the cutscene screen is currently opening.
-     *
-     * @return boolean, true if the cutscene screen is opening
-     */
-    public boolean isOpening() {
-        return this.opening;
-    }
-
-    /**
-     * Returns if the cutscene screen is currently closing.
-     *
-     * @return boolean, true if the cutscene screen is closing
-     */
-    public boolean isClosing() {
-        return this.closing;
     }
 
     /**
