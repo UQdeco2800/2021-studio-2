@@ -140,7 +140,7 @@ public abstract class GameArea implements Disposable {
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas", "Odin" +
-            "/OdinProjectile/beamBroken.atlas"
+            "/OdinProjectile/beamBroken.atlas", "images/fireball/fireballAnimationBlue.atlas"
     };
     protected static final String[] sounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg",
@@ -162,6 +162,7 @@ public abstract class GameArea implements Disposable {
     protected static final String TILES_WIDTH = "n_tiles_width";
     protected static final String WALL_HEIGHT = "height";
     protected static final String WALL_WIDTH = "width";
+    protected String playerWeaponType = "Hammer";
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -581,7 +582,7 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
+        Entity newPlayer = PlayerFactory.createPlayer(playerWeaponType);
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
         int height = map.getDimensions().get(TILES_HEIGHT);
         spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),

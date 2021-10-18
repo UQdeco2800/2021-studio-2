@@ -11,7 +11,7 @@ import com.deco2800.game.physics.PhysicsLayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TouchMoveComponent extends TouchComponent {
+public class TouchMoveComponent extends com.deco2800.game.components.touch.TouchComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(TouchMoveComponent.class);
 

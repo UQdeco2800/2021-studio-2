@@ -37,6 +37,7 @@ class ProjectileTest {
         boolean deleted = false;
         try {
             entity.getComponent(BlastController.class).update();
+            entity.update();
             entity.getComponent(BlastController.class);
         } catch (Exception e) {
             deleted = true;
