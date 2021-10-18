@@ -334,10 +334,10 @@ public class NPCFactory {
 
         } else {
             elf.setEntityType("ranged");
-            animator.addAnimation("rangerLeft", 0.5f, Animation.PlayMode.LOOP);
-            animator.addAnimation("rangerRight", 0.5f, Animation.PlayMode.LOOP);
-            animator.addAnimation("rangerUp", 0.5f, Animation.PlayMode.LOOP);
-            animator.addAnimation("rangerDown", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedLeft", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedRight", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedUp", 0.5f, Animation.PlayMode.LOOP);
+            animator.addAnimation("rangedDown", 0.5f, Animation.PlayMode.LOOP);
 
             animator.addAnimation(LEFT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
             animator.addAnimation(RIGHT_DEATH, 0.2f, Animation.PlayMode.NORMAL);
