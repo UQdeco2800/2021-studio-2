@@ -27,6 +27,8 @@ import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.security.SecureRandom;
+
 
 /**
  * Factory to create non-playable character (NPC) entities with predefined components.
@@ -297,6 +299,16 @@ public class NPCFactory {
 
     public static Entity createRangedElf(Entity target, ShootProjectileTask.projectileTypes type, float multishotChance) {
         Entity elf = createBaseNPCNoAI();
+        SecureRandom rand = new SecureRandom();
+        double chance = rand.nextDouble();
+        System.out.println(multishotChance);
+        System.out.println(chance);
+        if (chance <= multishotChance && type == ShootProjectileTask.projectileTypes.NORMAL_ARROW) {
+            type = ShootProjectileTask.projectileTypes.TRACKING_ARROW;
+            multishotChance = multishotChance / 2;
+            System.out.println("yes");
+            System.out.println(multishotChance);
+        }
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))

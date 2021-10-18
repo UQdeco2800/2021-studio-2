@@ -24,6 +24,7 @@ import com.deco2800.game.utils.math.GridPoint2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -691,7 +692,7 @@ public abstract class GameArea implements Disposable {
             for (HashMap<String, Float> object : objects) {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
-                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
+                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.15f * (levelInt + 1));
                 incNum();
                 elf.setEntityType("ranged");
                 elf.getEvents().trigger("rangedLeft");
