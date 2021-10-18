@@ -17,7 +17,7 @@ public class Map {
     private HashMap<String, Float>[] lavaObjects;
     private HashMap<String, Float>[] teleportObjects;
     private HashMap<String, Float>[] initTeleportObjects;
-    private int[][] LightTiles;
+    private int[][] lightTiles;
     private HashMap<String, Float>[] bossBounds;
     private HashMap<String, Float>[] healthCrateObjects;
     private HashMap<String, Float>[] meleeObjects;
@@ -127,8 +127,8 @@ public class Map {
         return initTeleportObjects;
     }
 
-    public int[][] getLightTiles() {
-        return LightTiles;
+    public int[][] getlightTiles() {
+        return lightTiles;
     }
 
     public HashMap<String, Float>[] getBossBounds() {
@@ -142,7 +142,7 @@ public class Map {
     /**
      * Returns an array of the tile textures locations for easier loading
      */
-    public String[] TileRefsArray() {
+    public String[] tileRefsArray() {
         String[] s = new String[tileRefs.size()];
 
         for (int i = 1; i <= tileRefs.size(); i++) {

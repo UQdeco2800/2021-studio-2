@@ -78,7 +78,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     /**
      * the type of arrow
      */
-    private projectileTypes projectileType = projectileTypes.normalArrow;
+    private projectileTypes projectileType = projectileTypes.NORMAL_ARROW;
     /**
      * if the power up is trigger
      */
@@ -110,10 +110,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private long rampageStart = 0;
 
     public enum projectileTypes {
-        normalArrow,
-        trackingArrow,
-        fastArrow,
-        fireBall
+        NORMAL_ARROW,
+        TRACKING_ARROW,
+        FAST_ARROW,
+        FIREBALL
     }
 
 
@@ -164,48 +164,45 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private boolean checkFireBalls() {
         //Stops the fireballs from being created until ready.
         //Specifically so the boss doesnt create them before he teleports
-        if (projectileType.equals(projectileTypes.fireBall)) {
-            if (owner.getEntity().data.get("createFireBall").equals(true)) {
-                if (!owner.getEntity().data.containsKey("fireBalls")) {
-                    //create fireball list
-                    Entity[] entities = new Entity[]{
-                            null,
-                            WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
-                            null
-                    };
-                    gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
-                            true, true);
-                    owner.getEntity().data.put("fireBalls", entities);
-                    lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                    return (true);
-                } else if (projectileType.equals(projectileTypes.fireBall) && TimeUnit.NANOSECONDS.toMillis(
-                        System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
-                    //Add new fireball
-                    int index = 0;
-                    Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
-                    for (Entity fireball : entities) {
-                        if (!ServiceLocator.getEntityService().getEntities().contains(
-                                fireball, true)) {
-                            entities[index] = WeaponFactory.createFireBall(target,
-                                    owner.getEntity(), new Vector2(index - 1f, 1f));
-                            gameArea.spawnEntityAt(entities[index],
-                                    owner.getEntity().getCenterPosition(),
-                                    true, true);
-                            lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                            return (true);
-                        }
-                        index++;
+        if (projectileType.equals(projectileTypes.FIREBALL) && owner.getEntity().data.get("createFireBall").equals(true)) {
+            if (!owner.getEntity().data.containsKey("fireBalls")) {
+                //create fireball list
+                Entity[] entities = new Entity[]{
+                        null,
+                        WeaponFactory.createFireBall(target, owner.getEntity(), new Vector2(0, 1)),
+                        null
+                };
+                gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
+                        true, true);
+                owner.getEntity().data.put("fireBalls", entities);
+                lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+                return (true);
+            } else if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
+                //Add new fireball
+                int index = 0;
+                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                for (Entity fireball : entities) {
+                    if (!ServiceLocator.getEntityService().getEntities().contains(
+                            fireball, true)) {
+                        entities[index] = WeaponFactory.createFireBall(target,
+                                owner.getEntity(), new Vector2(index - 1f, 1f));
+                        gameArea.spawnEntityAt(entities[index],
+                                owner.getEntity().getCenterPosition(),
+                                true, true);
+                        lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+                        return (true);
                     }
-                } else if (projectileType.equals(projectileTypes.fireBall)) {
-                    //Check for fireball but don't make one
-                    Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
-                    for (Entity fireball : entities) {
-                        if (ServiceLocator.getEntityService().getEntities().contains(
-                                fireball, true)) {
-                            if (fireball.data.get("fireBallMovement").equals(false)) {
-                                return (true);
-                            }
-                        }
+                    index++;
+                }
+            } else {
+                //Check for fireball but don't make one
+                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                for (Entity fireball : entities) {
+                    if (ServiceLocator.getEntityService().getEntities().contains(
+                            fireball, true)
+                            && fireball.data.get("fireBallMovement").equals(false)) {
+                        return (true);
+
                     }
                 }
             }
@@ -221,10 +218,9 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     private Entity getNextFireBall() {
         Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
         for (Entity fireball : entities) {
-            if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)) {
-                if (fireball.data.get("fireBallMovement").equals(false)) {
-                    return (fireball);
-                }
+            if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)
+                    && fireball.data.get("fireBallMovement").equals(false)) {
+                return (fireball);
             }
         }
         return (null);
@@ -288,19 +284,19 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
             }
             switch (projectileType) {
-                case normalArrow: {
+                case NORMAL_ARROW: {
                     shootNormalArrow();
                     break;
                 }
-                case trackingArrow: {
+                case TRACKING_ARROW: {
                     shootTrackingArrow();
                     break;
                 }
-                case fastArrow: {
+                case FAST_ARROW: {
                     powerupFastArrow();
                     break;
                 }
-                case fireBall: {
+                case FIREBALL: {
                     shootFireball();
                     break;
                 }
@@ -358,7 +354,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
     }
 
     private void powerupFastArrow() {
-        float AOE = 1f;
+        float aoe = 1f;
         if (!poweringUp) {
             poweringUp = true;
         }
@@ -384,7 +380,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 //            owner.getEntity().getEvents().trigger("LeftStart");
 //        }
 
-        updateTrajectory(AOE);
+        updateTrajectory(aoe);
         float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;
         Color newColor = new Color(Color.YELLOW);
         newColor.a = 0.5f;
@@ -392,10 +388,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         newColor = new Color(2.0f * fade, 2.0f * (1 - fade), 0f, 0.5f);
         aimingLine.getComponent(TextureRenderComponent.class).getSprite()
                 .setColor(newColor);
-        shootFastArrow(AOE);
+        shootFastArrow(aoe);
     }
 
-    private void updateTrajectory(float AOE) {
+    private void updateTrajectory(float aoe) {
         float turningAngle = 30f / UserSettings.get().fps;
         Vector2 relativeLocationTarget = tragectoryLocation.cpy()
                 .sub(owner.getEntity().getCenterPosition());
@@ -414,7 +410,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             }
             //If obstacle is blocking the way
             if (physics.raycast(owner.getEntity().getCenterPosition(), tragectoryLocation, PhysicsLayer.OBSTACLE, hit)) {
-                if (tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                if (tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
                     //add 0.1f to make sure it still collides
                     relativeLocationTarget.setLength(Math.min(owner.getEntity().getCenterPosition().dst(hit.point) + 0.1f, relativeLocationEntity.len()));
                 } else {
@@ -422,7 +418,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     relativeLocationTarget.setLength(Math.min(owner.getEntity().getCenterPosition().dst(hit.point) + 0.1f, owner.getEntity().getAttackRange()));
                 }
             } else {
-                if (tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+                if (tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
                     relativeLocationTarget.setLength(Math.min(owner.getEntity().getAttackRange(), relativeLocationEntity.len()));
                 } else {
                     relativeLocationTarget.setLength(owner.getEntity().getAttackRange());
@@ -444,7 +440,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         showTrajectory();
     }
 
-    private void shootFastArrow(float AOE) {
+    private void shootFastArrow(float aoe) {
         if (!poweringUp) {
             Entity arrow = WeaponFactory.createFastArrow(
                     tragectoryLocation.cpy().sub(owner.getEntity().getCenterPosition())
@@ -452,7 +448,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     , getDirectionOfTarget());
             gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
             //Check if hit
-            if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < AOE) {
+            if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
                 int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
                 target.getComponent(CombatStatsComponent.class).addHealth(-damage);
             } else {
@@ -534,20 +530,17 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     rampageStart = System.currentTimeMillis();
                     count++;
                 }
-                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0) {
-                    if ((float) health / max <= 0.25) {
-                        logger.info("You can't kill a boss when his minions are alive");
-                        owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                    }
+                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
+                        && (float) health / max <= 0.25) {
+                    logger.info("You can't kill a boss when his minions are alive");
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
                 }
-                if (count == 1) {
-                    if (System.currentTimeMillis() - rampageStart >= 30000) {
-                        logger.info("Berserk off");
-                        setCooldownMS(2000);
-                        owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                        owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
-                        count++;
-                    }
+                if (count == 1 && System.currentTimeMillis() - rampageStart >= 30000) {
+                    logger.info("Berserk off");
+                    setCooldownMS(2000);
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
+                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+                    count++;
                 }
             }
         }
@@ -622,10 +615,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * @return true if can shoot, false otherwise
      */
     private boolean canShoot() {
-        if (projectileType.equals(projectileTypes.fireBall) && checkFireBalls()) {
+        if (projectileType.equals(projectileTypes.FIREBALL) && checkFireBalls()) {
             return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
                     && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
-        } else if (!projectileType.equals(projectileTypes.fireBall)) {
+        } else if (!projectileType.equals(projectileTypes.FIREBALL)) {
             return (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldownMS
                     && isTargetVisible() && getDistanceToTarget() < owner.getEntity().getAttackRange());
         } else {

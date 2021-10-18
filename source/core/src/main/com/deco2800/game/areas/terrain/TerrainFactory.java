@@ -13,12 +13,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.TerrainComponent.TerrainOrientation;
 import com.deco2800.game.components.CameraComponent;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.utils.math.RandomUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,8 +30,8 @@ public class TerrainFactory {
 
     private final OrthographicCamera camera;
     private final TerrainOrientation orientation;
-
-    static Logger logger = LoggerFactory.getLogger(FileLoader.class);
+    protected static final String tilesHeightJSON = "n_tiles_height";
+    protected static final String tilesWidthJSON = "n_tiles_width";
 
     /**
      * Create a terrain factory with Orthogonal orientation
@@ -106,7 +103,7 @@ public class TerrainFactory {
     public TerrainComponent createTerrain(TerrainType terrainType, Map map) {
         ResourceService resourceService = ServiceLocator.getResourceService();
         if (terrainType == TerrainType.TEST) {
-            String[] tileRefs = map.TileRefsArray();
+            String[] tileRefs = map.tileRefsArray();
             ArrayList<TextureRegion> textures = new ArrayList<>();
 
             for (String s : tileRefs) {
@@ -159,7 +156,7 @@ public class TerrainFactory {
     }
 
     private TerrainComponent createWorldTerrain(
-            ArrayList<TextureRegion> textures, int[][] map, HashMap dimensions) {
+            ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
 
         GridPoint2 tilePixelSize = new GridPoint2(textures.get(1).getRegionWidth(), textures.get(1).getRegionHeight());
 
@@ -174,8 +171,8 @@ public class TerrainFactory {
             GridPoint2 tileSize, ArrayList<TextureRegion> textures, int[][] map, HashMap<String, Integer> dimensions) {
         TiledMap tiledMap = new TiledMap();
 
-        TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get("n_tiles_width"),
-                dimensions.get("n_tiles_height"), tileSize.x, tileSize.y);
+        TiledMapTileLayer layer = new TiledMapTileLayer(dimensions.get(tilesWidthJSON),
+                dimensions.get(tilesHeightJSON), tileSize.x, tileSize.y);
 
         // Create Tiles
         ArrayList<TerrainTile> tiles = new ArrayList<>();
@@ -185,8 +182,7 @@ public class TerrainFactory {
         }
 
         // Create the map
-        GridPoint2 mapSize = new GridPoint2(dimensions.get("n_tiles_width"), dimensions.get("n_tiles_height"));
-        //fillTiles(layer, mapSize, tiles.get(0));
+        GridPoint2 mapSize = new GridPoint2(dimensions.get(tilesWidthJSON), dimensions.get(tilesHeightJSON));
 
         placeTiles(layer, mapSize, tiles, map);
 

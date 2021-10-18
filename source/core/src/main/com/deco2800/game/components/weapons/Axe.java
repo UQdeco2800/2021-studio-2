@@ -56,14 +56,14 @@ public class Axe extends MeleeWeapon {
             case UP:
                 animator.startAnimation("up_attack");
                 break;
-            case DOWN:
-                animator.startAnimation("down_attack");
-                break;
             case LEFT:
                 animator.startAnimation("left_attack");
                 break;
             case RIGHT:
                 animator.startAnimation("right_attack");
+                break;
+            default:
+                animator.startAnimation("down_attack");
                 break;
         }
     }
@@ -76,10 +76,8 @@ public class Axe extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
-            if (hasAttacked) {
-                attackSound.play();
-            }
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration && hasAttacked) {
+            attackSound.play();
         }
         super.triggerAttackStage(timeSinceAttack);
     }

@@ -48,15 +48,6 @@ public class MainMenuActions extends Component {
         }
     }
 
-
-    /**
-     * Intended for loading a saved game state.
-     * Load functionality is not actually implemented.
-     */
-    private void onLoad() {
-        logger.info("Load game");
-    }
-
     /**
      * Exits the game.
      */

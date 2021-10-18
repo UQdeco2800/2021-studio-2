@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.screens.*;
+import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,24 +81,30 @@ public class GdxGame extends Game {
         switch (screenType) {
             case MAIN_MENU:
                 return new MainMenuScreen(this);
-            case MAIN_GAME_TUTORIAL:
-                return new MainGameScreen(this, "tutorial");
             case SETTINGS:
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
             case END_SCREEN:
                 return new EndScreen(this);
+            case MAIN_GAME_TUTORIAL:
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "tutorial"));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA0:
-                return new MainGameScreen(this, "game0");
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game0"));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA1:
-                return new MainGameScreen(this, "game1");
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game1"));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA2:
-                return new MainGameScreen(this, "game2");
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game2"));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA3:
-                return new MainGameScreen(this, "game3");
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game3"));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA4:
-                return new MainGameScreen(this, "game4");
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game4"));
+                return ServiceLocator.getGameScreen();
             default:
                 return null;
         }
@@ -110,24 +117,31 @@ public class GdxGame extends Game {
         switch (screenType) {
             case MAIN_MENU:
                 return new MainMenuScreen(this);
-            case MAIN_GAME_TUTORIAL:
-                return new MainGameScreen(this, "tutorial", currentHealth);
             case SETTINGS:
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
             case TEST1:
-                return new MainGameScreen(this, "test1", currentHealth);
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "test1", currentHealth));
+                return ServiceLocator.getGameScreen();
+            case MAIN_GAME_TUTORIAL:
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "tutorial", currentHealth));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA0:
-                return new MainGameScreen(this, "game0", currentHealth);
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game0", currentHealth));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA1:
-                return new MainGameScreen(this, "game1", currentHealth);
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game1", currentHealth));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA2:
-                return new MainGameScreen(this, "game2", currentHealth);
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game2", currentHealth));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA3:
-                return new MainGameScreen(this, "game3", currentHealth);
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game3", currentHealth));
+                return ServiceLocator.getGameScreen();
             case GAMEAREA4:
-                return new MainGameScreen(this, "game4", currentHealth);
+                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game4", currentHealth));
+                return ServiceLocator.getGameScreen();
             default:
                 return null;
         }

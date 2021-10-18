@@ -13,7 +13,7 @@ public class HealthBarComponent extends RenderComponent {
     private final Sprite healthBar;
     private final Sprite healthDecrease;
     private final float heightOfHealth;
-    private final float xSize = 0.8f;
+    private static final float xSize = 0.8f;
     private final float size;
     private float previousHealth;
     private boolean healthDecreaseCheck;

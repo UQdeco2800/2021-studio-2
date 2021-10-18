@@ -43,8 +43,7 @@ class TeleportationTaskTest {
         ServiceLocator.registerTimeSource(gameTime);
         ServiceLocator.registerGameArea(new GameArea() {
             @Override
-            public void create() {
-                super.create();
+            public void create(String mapFile, String areaName) {
             }
         });
         ServiceLocator.registerPhysicsService(new PhysicsService());

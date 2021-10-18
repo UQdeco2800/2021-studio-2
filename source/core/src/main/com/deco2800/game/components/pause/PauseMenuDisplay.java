@@ -28,6 +28,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
         entity.getEvents().addListener("toggleMenu", this::toggleMenu);
     }
 
+    @Override
     protected void addActors() {
         stack = new Stack();
         Image menuBackground = new Image(ServiceLocator.getResourceService().getAsset("images/pauseMenu.png",
@@ -38,9 +39,7 @@ public class PauseMenuDisplay extends MainMenuDisplay {
 
         TextButton contBtn = new TextButton("Resume", menuButtons);
         TextButton restartForestBtn = new TextButton("Restart", menuButtons);
-        //TextButton restartTutorialBtn = new TextButton("Restart Tutorial", menuButtons);
         TextButton mainMenuBtn = new TextButton("Exit", menuButtons);
-        //TextButton exitBtn = new TextButton("Exit to Desktop", menuButtons);
 
 
         // Triggers an event when the button is pressed

@@ -52,9 +52,6 @@ public class Scepter extends MeleeWeapon {
             case UP:
                 animator.startAnimation("up_attack");
                 break;
-            case DOWN:
-                animator.startAnimation("down_attack");
-                break;
             case LEFT:
                 animator.startAnimation("left_scepter_attack");
                 break;
@@ -62,6 +59,7 @@ public class Scepter extends MeleeWeapon {
                 animator.startAnimation("right_scepter_attack");
                 break;
             default:
+                animator.startAnimation("down_attack");
                 break;
         }
     }
@@ -80,9 +78,6 @@ public class Scepter extends MeleeWeapon {
             case UP:
                 target.y += range;
                 break;
-            case DOWN:
-                target.y -= range;
-                break;
             case LEFT:
                 target.x -= range;
                 break;
@@ -90,6 +85,7 @@ public class Scepter extends MeleeWeapon {
                 target.x += range;
                 break;
             default:
+                target.y -= range;
                 break;
         }
         Entity blast = WeaponFactory.createBlast(target);
@@ -104,10 +100,8 @@ public class Scepter extends MeleeWeapon {
      */
     @Override
     protected void triggerAttackStage(long timeSinceAttack) {
-        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration) {
-            if (hasAttacked) {
-                attackSound.play();
-            }
+        if (timeSinceAttack > attackFrameDuration && timeSinceAttack < 3 * attackFrameDuration && hasAttacked) {
+            attackSound.play();
         }
         super.triggerAttackStage(timeSinceAttack);
     }

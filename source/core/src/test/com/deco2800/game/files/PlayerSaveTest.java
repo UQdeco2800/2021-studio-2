@@ -10,17 +10,17 @@ public class PlayerSaveTest {
     void testDefaultSave() {
         assertFalse(PlayerSave.Save.getHasPlayed());
 
-        assertEquals(PlayerSave.Save.getElfEnc(), 0);
-        assertEquals(PlayerSave.Save.getLokiEnc(), 0);
-        assertEquals(PlayerSave.Save.getLoki2Enc(), 0);
-        assertEquals(PlayerSave.Save.getThorEnc(), 0);
-        assertEquals(PlayerSave.Save.getOdinEnc(), 0);
+        assertEquals(0, PlayerSave.Save.getElfEnc());
+        assertEquals(0, PlayerSave.Save.getLokiEnc());
+        assertEquals(0, PlayerSave.Save.getLoki2Enc());
+        assertEquals(0, PlayerSave.Save.getThorEnc());
+        assertEquals(0, PlayerSave.Save.getOdinEnc());
 
-        assertEquals(PlayerSave.Save.getElfWins(), 0);
-        assertEquals(PlayerSave.Save.getLokiWins(), 0);
-        assertEquals(PlayerSave.Save.getLoki2Wins(), 0);
-        assertEquals(PlayerSave.Save.getThorWins(), 0);
-        assertEquals(PlayerSave.Save.getOdinWins(), 0);
+        assertEquals(0, PlayerSave.Save.getElfWins());
+        assertEquals(0, PlayerSave.Save.getLokiWins());
+        assertEquals(0, PlayerSave.Save.getLoki2Wins());
+        assertEquals(0, PlayerSave.Save.getThorWins());
+        assertEquals(0, PlayerSave.Save.getOdinWins());
     }
 
     @Test
@@ -43,17 +43,17 @@ public class PlayerSaveTest {
         PlayerSave.Save.resetSave();
 
         assertFalse(PlayerSave.Save.getHasPlayed());
-        assertEquals(PlayerSave.Save.getElfEnc(), 0);
-        assertEquals(PlayerSave.Save.getLokiEnc(), 0);
-        assertEquals(PlayerSave.Save.getLoki2Enc(), 0);
-        assertEquals(PlayerSave.Save.getThorEnc(), 0);
-        assertEquals(PlayerSave.Save.getOdinEnc(), 0);
+        assertEquals(0, PlayerSave.Save.getElfEnc());
+        assertEquals(0, PlayerSave.Save.getLokiEnc());
+        assertEquals(0, PlayerSave.Save.getLoki2Enc());
+        assertEquals(0, PlayerSave.Save.getThorEnc());
+        assertEquals(0, PlayerSave.Save.getOdinEnc());
 
-        assertEquals(PlayerSave.Save.getElfWins(), 0);
-        assertEquals(PlayerSave.Save.getLokiWins(), 0);
-        assertEquals(PlayerSave.Save.getLoki2Wins(), 0);
-        assertEquals(PlayerSave.Save.getThorWins(), 0);
-        assertEquals(PlayerSave.Save.getOdinWins(), 0);
+        assertEquals(0, PlayerSave.Save.getElfWins());
+        assertEquals(0, PlayerSave.Save.getLokiWins());
+        assertEquals(0, PlayerSave.Save.getLoki2Wins());
+        assertEquals(0, PlayerSave.Save.getThorWins());
+        assertEquals(0, PlayerSave.Save.getOdinWins());
     }
 
     @Test
@@ -79,16 +79,16 @@ public class PlayerSaveTest {
 
         assertTrue(PlayerSave.Save.getHasPlayed());
 
-        assertEquals(PlayerSave.Save.getElfEnc(), 1);
-        assertEquals(PlayerSave.Save.getLokiEnc(), 2);
-        assertEquals(PlayerSave.Save.getLoki2Enc(), 3);
-        assertEquals(PlayerSave.Save.getThorEnc(), 4);
-        assertEquals(PlayerSave.Save.getOdinEnc(), 5);
+        assertEquals(1, PlayerSave.Save.getElfEnc());
+        assertEquals(2, PlayerSave.Save.getLokiEnc());
+        assertEquals(3, PlayerSave.Save.getLoki2Enc());
+        assertEquals(4, PlayerSave.Save.getThorEnc());
+        assertEquals(5, PlayerSave.Save.getOdinEnc());
 
-        assertEquals(PlayerSave.Save.getElfWins(), 6);
-        assertEquals(PlayerSave.Save.getLokiWins(), 7);
-        assertEquals(PlayerSave.Save.getLoki2Wins(), 8);
-        assertEquals(PlayerSave.Save.getThorWins(), 9);
-        assertEquals(PlayerSave.Save.getOdinWins(), 10);
+        assertEquals(6, PlayerSave.Save.getElfWins());
+        assertEquals(7, PlayerSave.Save.getLokiWins());
+        assertEquals(8, PlayerSave.Save.getLoki2Wins());
+        assertEquals(9, PlayerSave.Save.getThorWins());
+        assertEquals(10, PlayerSave.Save.getOdinWins());
     }
 }

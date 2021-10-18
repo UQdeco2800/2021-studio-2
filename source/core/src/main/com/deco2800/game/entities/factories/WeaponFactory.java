@@ -53,7 +53,7 @@ public class WeaponFactory {
      * @param projectileType type of projectile
      */
     private static void shootingSound(String projectileType) {
-        if (projectileType.contains("Arrow")) {
+        if (projectileType.toLowerCase().contains("arrow")) {
             Sound arrowEffect = ServiceLocator.getResourceService().getAsset(
                     "sounds/arrow_shoot.mp3", Sound.class);
             arrowEffect.play(0.3f);
@@ -348,7 +348,6 @@ public class WeaponFactory {
                 .addComponent(new TouchTeleportComponent(PhysicsLayer.PLAYER,
                         PhysicsLayer.TELEPORT))
                 .addComponent(aiTaskComponent);
-        //vortex.setScale(scale);
         vortex.getComponent(PhysicsComponent.class).setBodyType(BodyDef.BodyType.StaticBody);
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 1);
@@ -378,7 +377,6 @@ public class WeaponFactory {
                 .addComponent(new PhysicsComponent())
                 .addComponent(new TextureRenderComponent(sprite))
                 .addComponent(aiTaskComponent);
-        //vortex.setScale(scale);
         vortex.setAngle(angle);
         vortex.data.put("teleportID", 2);
         return vortex;
@@ -422,11 +420,11 @@ public class WeaponFactory {
     /**
      * Creates a line entity
      *
-     * @param TTL time to live in MS
+     * @param ttl time to live in MS
      * @return return the entity - the line represent the arrow trajectory
      */
-    public static LineEntity aimingLine(long TTL) {
-        LineEntity line = new LineEntity(TTL);
+    public static LineEntity aimingLine(long ttl) {
+        LineEntity line = new LineEntity(ttl);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/aiming_line.png", Texture.class));
         sprite.flip(true, false);
@@ -508,13 +506,6 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(stats.health, stats.baseAttack))
                 .addComponent(new HammerProjectile(targetLayer, owner));
-    }
-
-    /**
-     * throw error
-     */
-    public WeaponFactory() {
-        throw new IllegalStateException("Instantiating static util class");
     }
 }
 

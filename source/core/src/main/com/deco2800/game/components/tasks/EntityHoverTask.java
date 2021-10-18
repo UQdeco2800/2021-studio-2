@@ -94,15 +94,12 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
             min = new Vector2(-protectX, -protectY);
             max = new Vector2(protectX, protectY);
         }
-        //Bug: is still possible for the coords to be too big and off the map
-        //Below is a temp but bad fix
         if (max.x > TerrainFactory.MAP_SIZE.x) {
             max = new Vector2(TerrainFactory.MAP_SIZE.x, max.y);
         }
         if (max.y > TerrainFactory.MAP_SIZE.y) {
             max = new Vector2(max.x, TerrainFactory.MAP_SIZE.y);
         }
-        //return new Vector2(0,0);
         return RandomUtils.random(min, max);
     }
 

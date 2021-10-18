@@ -275,8 +275,6 @@ public class NPCFactory {
                         .addTask(new AnchoredRetreatTask(anchor, anchorSize))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 3f, 4f))
-                        .addTask(new MeleeChaseTask(
-                                target, 10, 15f, 20f))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         anchoredElf.addComponent(aiComponent);
@@ -426,7 +424,7 @@ public class NPCFactory {
 //                        ServiceLocator.getResourceService().getAsset("images/rangedAllFinal.atlas", TextureAtlas.class));
 
 
-        if (type.equals(ShootProjectileTask.projectileTypes.fastArrow)) {
+        if (type.equals(ShootProjectileTask.projectileTypes.FAST_ARROW)) {
             elf.setEntityType("assassin");
             animator.addAnimation("assassinLeft", 0.5f, Animation.PlayMode.LOOP);
             animator.addAnimation("assassinRight", 0.5f, Animation.PlayMode.LOOP);
@@ -493,15 +491,13 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new AlertableChaseTask(
                                 target, 10, 7f, 10f))
-                        .addTask(new MeleeChaseTask(
-                                target, 10, 15f, 20f))
                         .addTask(new SpawnMinionsAndExplosionTask(target))
                         .addTask(new TeleportationTask(target, 2000))
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
 
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.fireBall);
+        shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.FIREBALL);
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
         //Dont create fireballs until ready and on the map
@@ -564,10 +560,10 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("thor/thor.atlas",
                                 TextureAtlas.class));
-        animator.addAnimation("moveLeft", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveRight", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveUp", 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("moveDown", 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
+        animator.addAnimation(MOVE_DOWN, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
@@ -815,7 +811,7 @@ public class NPCFactory {
                         .addTask(new DeathPauseTask(
                                 target, 0, 100, 100, 1.5f));
         ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.fastArrow);
+        shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.FAST_ARROW);
         shootProjectileTask.setShootAnimationTimeMS(200);
         aiComponent.addTask(shootProjectileTask);
 

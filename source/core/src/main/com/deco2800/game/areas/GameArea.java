@@ -8,13 +8,18 @@ import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainComponent;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.gamearea.GameAreaDisplay;
+import com.deco2800.game.components.tasks.ShootProjectileTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
 import com.deco2800.game.entities.factories.PlayerFactory;
+import com.deco2800.game.files.FileLoader;
+import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
+import com.deco2800.game.ui.textbox.DialogueSet;
+import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.utils.math.GridPoint2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,10 +144,16 @@ public abstract class GameArea implements Disposable {
             "sounds/death_1.mp3",
             "sounds/boss_death.mp3"
     };
-    protected static final String backgroundMusic = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
+    protected static final String music = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
 
     protected TerrainFactory terrainFactory = null;
     protected int playerHealth = 300;
+    protected int levelInt = 0;
+
+    protected static final String tilesHeightJSON = "n_tiles_height";
+    protected static final String tilesWidthJSON = "n_tiles_width";
+    protected static final String wallHeightJSON = "height";
+    protected static final String wallWidthJSON = "width";
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -151,15 +162,34 @@ public abstract class GameArea implements Disposable {
     /**
      * Create the game area in the world.
      */
-    public void create() {
+    public void create(String mapFile, String areaName) {
         ServiceLocator.registerGameArea(this);
+        map = FileLoader.readClass(Map.class, mapFile);
+        tileTextures = map.tileRefsArray();
+        loadAssets();
+        displayUI(areaName);
+
+        spawnTerrain();
+        spawnObstacles();
+        spawnLights();
+        spawnTeleport();
+        spawnSpikeTraps();
+        spawnLavaTraps();
+        spawnHealthCrateObject();
+        spawnTraps();
+        spawnPTraps();
+
+        spawnPlayer();
+
+        playMusic();
+
     }
 
     /**
      * Use for teleport, track the current map player in
      */
     public int getLevel() {
-        return 0;
+        return levelInt;
     }
 
     public void setMap(Map map) {
@@ -192,7 +222,6 @@ public abstract class GameArea implements Disposable {
      */
     public void decBossNum() {
         numBoss--;
-        System.out.println(numBoss);
         if (numBoss == 0) {
             logger.info("Number of Bosses is now at 0");
             logger.info("Spawning the teleport object");
@@ -201,50 +230,16 @@ public abstract class GameArea implements Disposable {
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float> teleportPos = map.getTeleportObjects()[0];
                 GridPoint2 fixedPos = new GridPoint2(teleportPos.get("x").intValue(),
-                        (map.getDimensions().get("n_tiles_heihgt") - teleportPos.get("y").intValue()));
+                        (map.getDimensions().get(tilesHeightJSON) - teleportPos.get("y").intValue()));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
-            } else if (getLevel() == 0) {
-                //gama area 0
+            } else {
+                //gama area x
                 Entity teleport = ObstacleFactory.createTeleport();
                 HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
                 GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
-                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
+                        (map.getDimensions().get(tilesHeightJSON) - teleportPos[0].get("y").intValue() - 2));
                 this.spawnEntityAt(teleport, fixedPos, true, true);
-
-            } else if (getLevel() == 1) {
-                //gama area 1
-                Entity teleport = ObstacleFactory.createTeleport();
-                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
-                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-
-            } else if (getLevel() == 2) {
-                //gama area 2
-                Entity teleport = ObstacleFactory.createTeleport();
-                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
-                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-
-            } else if (getLevel() == 3) {
-                //gama area 3
-                Entity teleport = ObstacleFactory.createTeleport();
-                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
-                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-
-            } else if (getLevel() == 4) {
-                //gama area 4
-                Entity teleport = ObstacleFactory.createTeleport();
-                HashMap<String, Float>[] teleportPos = map.getTeleportObjects();
-                GridPoint2 fixedPos = new GridPoint2(teleportPos[0].get("x").intValue(),
-                        (map.getDimensions().get("n_tiles_height") - teleportPos[0].get("y").intValue() - 2));
-                this.spawnEntityAt(teleport, fixedPos, true, true);
-
             }
-
         }
     }
 
@@ -252,6 +247,32 @@ public abstract class GameArea implements Disposable {
         Entity ui = new Entity();
         ui.addComponent(new GameAreaDisplay(areaName));
         spawnEntity(ui);
+    }
+
+    protected void spawnDialogueCutscenes(RandomDialogueSet dialogueSet) {
+        DialogueSet set;
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            set = DialogueSet.FIRST_ENCOUNTER;
+        } else {
+            if (PlayerSave.Save.getElfWins() == 0) {
+                //If getWins() returns 0, that means the most recent game has resulted in a loss
+                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
+            } else {
+                // When it returns 1, then the player has beaten the boss before
+                set = DialogueSet.BOSS_DEFEATED_BEFORE;
+            }
+        }
+        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
+        for (HashMap<String, Float> dialogue : dialogues) {
+            int x = dialogue.get("x").intValue();
+            int y = dialogue.get("y").intValue();
+
+            spawnEntityAt(
+                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                    false,
+                    false);
+        }
     }
 
     /**
@@ -322,7 +343,7 @@ public abstract class GameArea implements Disposable {
 
             spawnEntityAt(
                     ObstacleFactory.createHealthCrate(),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }
@@ -359,7 +380,7 @@ public abstract class GameArea implements Disposable {
 
             spawnEntityAt(
                     NPCFactory.createMeleeHellViking(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }
@@ -373,7 +394,7 @@ public abstract class GameArea implements Disposable {
 
             spawnEntityAt(
                     NPCFactory.createMeleeAsgardViking(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }
@@ -387,7 +408,7 @@ public abstract class GameArea implements Disposable {
 
             spawnEntityAt(
                     NPCFactory.createMeleeViking(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }
@@ -401,7 +422,7 @@ public abstract class GameArea implements Disposable {
 
             spawnEntityAt(
                     NPCFactory.createOutdoorArcher(player),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                     false,
                     false);
         }
@@ -416,7 +437,7 @@ public abstract class GameArea implements Disposable {
 
                 spawnEntityAt(
                         CutsceneTriggerFactory.createLeftMoveTrigger(),
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -430,7 +451,7 @@ public abstract class GameArea implements Disposable {
 
                 spawnEntityAt(
                         CutsceneTriggerFactory.createRightMoveTrigger(),
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -444,7 +465,7 @@ public abstract class GameArea implements Disposable {
 
                 spawnEntityAt(
                         CutsceneTriggerFactory.createDownMoveTrigger(),
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -458,7 +479,7 @@ public abstract class GameArea implements Disposable {
 
                 spawnEntityAt(
                         CutsceneTriggerFactory.createUpMoveTrigger(),
-                        new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
                         false,
                         false);
             }
@@ -499,13 +520,13 @@ public abstract class GameArea implements Disposable {
         for (HashMap<String, Float> wall : walls) {
             int x = wall.get("x").intValue();
             int y = wall.get("y").intValue();
-            float width = wall.get("width");
-            float height = wall.get("height");
+            float width = wall.get(wallWidthJSON);
+            float height = wall.get(wallHeightJSON);
 
-            int unitHeight = (int) ((height / 32f));
+            int unitHeight = (int) (height / 32f);
             spawnEntityAt(
                     ObstacleFactory.createWall((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - (y + unitHeight)),
                     false,
                     false);
         }
@@ -527,13 +548,12 @@ public abstract class GameArea implements Disposable {
         Entity teleport = ObstacleFactory.createTeleport();
         GridPoint2 fixedPos = new GridPoint2(15, 10);
         spawnEntityAt(teleport, fixedPos, true, true);
-        //boss= 1;
     }
 
     protected void spawnPlayer() {
         Entity newPlayer = PlayerFactory.createPlayer("Hammer");
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
-        int height = map.getDimensions().get("n_tiles_height");
+        int height = map.getDimensions().get(tilesHeightJSON);
         spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
                 true, true);
         player = newPlayer;
@@ -544,8 +564,8 @@ public abstract class GameArea implements Disposable {
         HashMap<String, String> tileRefs = map.getTileRefs();
         if (obstacles != null) {
             GridPoint2 min = new GridPoint2(0, 0);
-            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
-                    map.getDimensions().get("n_tiles_height") - 1);
+            GridPoint2 max = new GridPoint2(map.getDimensions().get(tilesWidthJSON) - 1,
+                    map.getDimensions().get(tilesHeightJSON) - 1);
 
             for (int y = min.y; y <= max.y; y++) {
                 for (int x = min.y; x <= max.x; x++) {
@@ -562,12 +582,12 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void spawnLights() {
-        int[][] lights = map.getLightTiles();
+        int[][] lights = map.getlightTiles();
         HashMap<String, String> tileRefs = map.getTileRefs();
         if (lights != null) {
             GridPoint2 min = new GridPoint2(0, 0);
-            GridPoint2 max = new GridPoint2(map.getDimensions().get("n_tiles_width") - 1,
-                    map.getDimensions().get("n_tiles_height") - 1);
+            GridPoint2 max = new GridPoint2(map.getDimensions().get(tilesWidthJSON) - 1,
+                    map.getDimensions().get(tilesHeightJSON) - 1);
 
             for (int y = min.y; y <= max.y; y++) {
                 for (int x = min.y; x <= max.x; x++) {
@@ -588,13 +608,13 @@ public abstract class GameArea implements Disposable {
         for (HashMap<String, Float> spikeTrap : spikeTraps) {
             int x = spikeTrap.get("x").intValue();
             int y = spikeTrap.get("y").intValue();
-            float width = spikeTrap.get("width");
-            float height = spikeTrap.get("height");
+            float width = spikeTrap.get(wallWidthJSON);
+            float height = spikeTrap.get(wallHeightJSON);
 
-            int unitHeight = (int) ((height / 32f));
+            int unitHeight = (int) (height / 32f);
             spawnEntityAt(
                     ObstacleFactory.createRSPhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - (y + unitHeight)),
                     false,
                     false);
         }
@@ -605,15 +625,133 @@ public abstract class GameArea implements Disposable {
         for (HashMap<String, Float> lavaTrap : lavaTraps) {
             int x = lavaTrap.get("x").intValue();
             int y = lavaTrap.get("y").intValue();
-            float width = lavaTrap.get("width");
-            float height = lavaTrap.get("height");
+            float width = lavaTrap.get(wallWidthJSON);
+            float height = lavaTrap.get(wallHeightJSON);
 
-            int unitHeight = (int) ((height / 32f));
+            int unitHeight = (int) (height / 32f);
             spawnEntityAt(
                     ObstacleFactory.createRSNonePhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - (y + unitHeight)),
+                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - (y + unitHeight)),
                     false,
                     false);
+        }
+    }
+
+    protected void spawnMeleeElf() {
+        HashMap<String, Float>[] objects = map.getMeleeObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createMeleeElf(player);
+                incNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * Spawn range elf on terrain, range elf can shoot target
+     */
+    protected void spawnRangedElf() {
+        HashMap<String, Float>[] objects = map.getRangeObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
+                incNum();
+                elf.setEntityType("ranged");
+                elf.getEvents().trigger("rangerLeft");
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * Spawn Assassin on terrain, range can shoot from far away with high damage
+     */
+    protected void spawnAssassinElf() {
+        HashMap<String, Float>[] objects = map.getAssassinObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.FAST_ARROW, 0);
+                elf.getEvents().trigger("assassinLeft");
+                incNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    protected void spawnBoss() {
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createBossNPC(player);
+                incNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    protected void spawnElfGuard() {
+        HashMap<String, Float>[] objects = map.getGuardObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity elf = NPCFactory.createElfGuard(player);
+                incNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * Spawn anchored elf, elf only move at the certain anchored
+     */
+    protected void spawnAnchoredElf() {
+        HashMap<String, Float>[] objects = map.getAnchoredObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity anchor = ObstacleFactory.createAnchor();
+                Entity elf = NPCFactory.createAnchoredElf(player, anchor, 3f);
+                incNum();
+                spawnEntityAt(
+                        elf,
+                        new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                        false,
+                        false);
+            }
         }
     }
 
@@ -628,7 +766,7 @@ public abstract class GameArea implements Disposable {
         resourceService.loadTextures(tileTextures);
         resourceService.loadTextureAtlases(textureAtlases);
         resourceService.loadSounds(sounds);
-        resourceService.loadMusic(new String[]{backgroundMusic});
+        resourceService.loadMusic(new String[]{music});
         while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
@@ -646,7 +784,7 @@ public abstract class GameArea implements Disposable {
             resourceService.unloadAssets(tileTextures);
             resourceService.unloadAssets(textureAtlases);
             resourceService.unloadAssets(sounds);
-            resourceService.unloadAssets(new String[]{backgroundMusic});
+            resourceService.unloadAssets(new String[]{music});
         }
     }
 
@@ -655,17 +793,17 @@ public abstract class GameArea implements Disposable {
             entity.dispose();
         }
         if (ServiceLocator.getResourceService() != null
-                && ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class) != null) {
-            ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class).stop();
+                && ServiceLocator.getResourceService().getAsset(music, Music.class) != null) {
+            ServiceLocator.getResourceService().getAsset(music, Music.class).stop();
         }
         this.unloadAssets();
     }
 
     protected void playMusic() {
-        Music music = ServiceLocator.getResourceService().getAsset(backgroundMusic, Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
+        Music gameMusic = ServiceLocator.getResourceService().getAsset(GameArea.music, Music.class);
+        gameMusic.setLooping(true);
+        gameMusic.setVolume(0.3f);
+        gameMusic.play();
 
     }
 }

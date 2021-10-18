@@ -1,7 +1,6 @@
-package com.deco2800.game.components.endGame;
+package com.deco2800.game.components.endgame;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,8 +16,6 @@ public class EndScreenDisplay extends UIComponent {
     private static final float Z_INDEX = 2f; //higher z index means placed to the front?
     private static final Logger logger = LoggerFactory.getLogger(EndScreenDisplay.class);
     private Image endBackground;
-    private Stack endLayout;
-    private Sound congrats;
     private Stack stack;
     private Table table;
 

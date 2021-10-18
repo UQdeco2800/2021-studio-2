@@ -47,8 +47,8 @@ public class HammerProjectile extends ProjectileController {
      * Current status of Mjolnir. See below for constants
      */
     private int status;
-    private final int THROWING = 0;
-    private final int RECALLING = 1;
+    private static final int throwing = 0;
+    private static final int recalling = 1;
 
     /**
      * The hammer component that controls the projectile
@@ -67,7 +67,7 @@ public class HammerProjectile extends ProjectileController {
         this.targetLayer = targetLayer;
         impactSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/impact.ogg", Sound.class);
-        this.status = THROWING;
+        this.status = throwing;
         this.attackPower = 5;
         this.knockback = 5;
         this.owner = owner;
@@ -100,7 +100,7 @@ public class HammerProjectile extends ProjectileController {
     public void triggerAttackStage() {
         Vector2 position = entity.getPosition();
 
-        if (this.status == THROWING) {
+        if (this.status == throwing) {
             float distance = 6f; // default distance
             // Check if projectile has reached target, or has timed out (2 seconds)
             if ((Math.abs(position.x - start.x) > distance || Math.abs(position.y - start.y) > distance) ||
@@ -113,7 +113,7 @@ public class HammerProjectile extends ProjectileController {
                 hitbox.setEnabled(false);
             }
             // Do nothing if static (changed by recall function)
-        } else if (this.status == RECALLING) {
+        } else if (this.status == recalling) {
             // Update target as being position of owner entity.
             movingComponent.setTarget(owner.getEntity().getPosition());
             // Distance is current distance between projectile and owner entity
@@ -134,7 +134,7 @@ public class HammerProjectile extends ProjectileController {
         movingComponent.setMoving(true);
         hitbox.setEnabled(true);
         this.gameTime = ServiceLocator.getTimeSource().getTime();
-        this.status = RECALLING;
+        this.status = recalling;
         animator.stopAnimation();
         animator.startAnimation("hammer");
     }
@@ -145,6 +145,7 @@ public class HammerProjectile extends ProjectileController {
      * @param me    fixture of this projectile
      * @param other fixture of colliding entity.
      */
+    @Override
     protected void onCollisionStart(Fixture me, Fixture other) {
 
         if (hitbox == null || hitbox.getFixture() != me) {

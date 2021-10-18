@@ -26,7 +26,7 @@ public abstract class ProjectileController extends Component {
     /**
      * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
      */
-    public ProjectileController() {
+    protected ProjectileController() {
         this.gameTime = ServiceLocator.getTimeSource().getTime();
     }
 
@@ -70,22 +70,17 @@ public abstract class ProjectileController extends Component {
         }
 
         // Try to attack target.
-        Entity target = ((BodyUserData) other.getBody().getUserData()).entity;
-        CombatStatsComponent targetStats = target.getComponent(CombatStatsComponent.class);
+        Entity targetEntity = ((BodyUserData) other.getBody().getUserData()).entity;
+        CombatStatsComponent targetStats = targetEntity.getComponent(CombatStatsComponent.class);
         if (targetStats != null) {
-            // add entity's base attack to attack, if they exist.
-//            if (hitbox == null) {
             targetStats.weaponHit(this.stats.attackPower);
-            /*} else {
-                targetStats.hit(combatStats, this.stats.attackPower);
-            } This set of code will always be redundant since hitbox can never be null */
         }
 
         // Apply knockback
-        PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
+        PhysicsComponent physicsComponent = targetEntity.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && this.stats.knockback > 0f) {
             Body targetBody = physicsComponent.getBody();
-            Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
+            Vector2 direction = targetEntity.getCenterPosition().sub(entity.getCenterPosition());
             Vector2 impulse = direction.setLength(this.stats.knockback);
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }

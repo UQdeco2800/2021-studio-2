@@ -1,20 +1,11 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.math.GridPoint2;
-import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.entities.Entity;
-import com.deco2800.game.entities.factories.CutsceneTriggerFactory;
-import com.deco2800.game.entities.factories.NPCFactory;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ServiceLocator;
-import com.deco2800.game.ui.textbox.DialogueSet;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
-
-import java.util.HashMap;
 
 /**
  * Level based on a harsher Helhiem (even more lava) with Thor as the boss
@@ -35,66 +26,19 @@ public class GameArea2 extends GameArea {
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
-    @Override
-    public void create() {
-        map = FileLoader.readClass(Map.class, "maps/lvl_4.json");
-        tileTextures = map.TileRefsArray();
+    public GameArea create() {
+        levelInt = 2;
+        super.create("maps/lvl_4.json", "Level 3");
 
-        super.create();
-        loadAssets();
-        displayUI("Level 3");
-
-        spawnTerrain();
-        spawnPlayer();
-
-        spawnBoss();
         spawnHellWarriorObject();
+        spawnBoss();
+
         spawnMovementCutscenes();
-        spawnDialogueCutscenes();
+        spawnDialogueCutscenes(RandomDialogueSet.LOKI2_ENCOUNTER);
         setInitialDialogue();
 
-        spawnObstacles();
-        spawnLights();
-
-        spawnSpikeTraps();
-        spawnLavaTraps();
-
-        spawnTraps();
-        spawnPTraps();
-
-        spawnHealthCrateObject();
-
-        playMusic();
-        spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
-    }
-
-    private void spawnDialogueCutscenes() {
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI2_ENCOUNTER;
-        DialogueSet set;
-        if (PlayerSave.Save.getElfEnc() == 0) {
-            set = DialogueSet.FIRST_ENCOUNTER;
-        } else {
-            if (PlayerSave.Save.getElfWins() == 0) {
-                //If getWins() returns 0, that means the most recent game has resulted in a loss
-                set = DialogueSet.PLAYER_DEFEATED_BEFORE;
-            } else {
-                // When it returns 1, then the player has beaten the boss before
-                set = DialogueSet.BOSS_DEFEATED_BEFORE;
-            }
-        }
-
-        HashMap<String, Float>[] dialogues = map.getCutsceneObjects();
-        for (HashMap<String, Float> dialogue : dialogues) {
-            int x = dialogue.get("x").intValue();
-            int y = dialogue.get("y").intValue();
-
-            spawnEntityAt(
-                    CutsceneTriggerFactory.createDialogueTrigger(dialogueSet, set, 1),
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
+        return this;
     }
 
     /**
@@ -121,29 +65,5 @@ public class GameArea2 extends GameArea {
         PlayerSave.Save.setLokiWins(1);
         PlayerSave.Save.setLoki2Wins(0);
         PlayerSave.write();
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 2;
-    }
-
-    private void spawnBoss() {
-        HashMap<String, Float>[] objects = map.getBossObjects();
-        for (HashMap<String, Float> object : objects) {
-            int x = object.get("x").intValue();
-            int y = object.get("y").intValue();
-            Entity elf = NPCFactory.createLoki(player);
-            incNum();
-            spawnEntityAt(
-                    elf,
-                    new GridPoint2(x, map.getDimensions().get("n_tiles_height") - y),
-                    false,
-                    false);
-        }
-        incBossNum();
     }
 }

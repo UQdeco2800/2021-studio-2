@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("StatementWithEmptyBody")
 public class ProjectileTest {
     @BeforeEach
     void beforeEach() {

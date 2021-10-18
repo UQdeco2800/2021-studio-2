@@ -26,6 +26,7 @@ public class CombatStatsComponent extends Component {
         //if entities can heal trigger this even
     }
 
+    @Override
     public void create() {
         entity.getEvents().addListener("healEntity", this::addHealth);
     }

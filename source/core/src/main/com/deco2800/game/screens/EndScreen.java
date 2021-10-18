@@ -3,15 +3,14 @@ package com.deco2800.game.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.deco2800.game.GdxGame;
-import com.deco2800.game.components.endGame.EndScreenActions;
-import com.deco2800.game.components.endGame.EndScreenAnimationController;
-import com.deco2800.game.components.endGame.EndScreenDisplay;
+import com.deco2800.game.components.endgame.EndScreenActions;
+import com.deco2800.game.components.endgame.EndScreenAnimationController;
+import com.deco2800.game.components.endgame.EndScreenDisplay;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.EntityService;
 import com.deco2800.game.entities.factories.RenderFactory;
 import com.deco2800.game.input.InputDecorator;
 import com.deco2800.game.input.InputService;
-import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.rendering.RenderService;
 import com.deco2800.game.rendering.Renderer;
 import com.deco2800.game.services.ResourceService;
@@ -29,7 +28,6 @@ public class EndScreen extends ScreenAdapter {
     private static final String[] endScreenAtlas = {};
     private final GdxGame game;
     private final Renderer renderer;
-    private AnimationRenderComponent endAnimator;
 
     public EndScreen(GdxGame game) {
         this.game = game;
@@ -39,10 +37,8 @@ public class EndScreen extends ScreenAdapter {
         ServiceLocator.registerResourceService(new ResourceService());
         ServiceLocator.registerEntityService(new EntityService());
         ServiceLocator.registerRenderService(new RenderService());
-        //ServiceLocator.registerTimeSource(new GameTime()); //dunno about this one
 
         renderer = RenderFactory.createRenderer();
-        //renderer.getCamera().getEntity().setPosition(5f, 5f); //;do i really need this?
 
         loadAssets();
         createUI();

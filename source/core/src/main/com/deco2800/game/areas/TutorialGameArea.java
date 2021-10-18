@@ -1,14 +1,12 @@
 package com.deco2800.game.areas;
 
 import com.badlogic.gdx.math.GridPoint2;
-import com.deco2800.game.areas.terrain.Map;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.tasks.ShootProjectileTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.ObstacleFactory;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.utils.math.RandomUtils;
 
 /**
@@ -32,17 +30,9 @@ public class TutorialGameArea extends GameArea {
     /**
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
-    @Override
-    public void create() {
-        map = FileLoader.readClass(Map.class, "maps/MapObjects.json");
-        tileTextures = map.TileRefsArray();
-
-        super.create();
-        loadAssets();
-        displayUI("map Test");
-
-        spawnTerrain();
-        spawnPlayer();
+    public GameArea create() {
+        levelInt = 9;
+        super.create("maps/MapObjects.json", "map Test");
 
         spawnMeleeElf();
         spawnElfGuard();
@@ -51,31 +41,15 @@ public class TutorialGameArea extends GameArea {
         spawnAnchoredElf();
         spawnBoss();
 
-        spawnObstacles();
-
-        spawnSpikeTraps();
-        spawnLavaTraps();
-
-        spawnTraps();
-        spawnPTraps();
-
-        playMusic();
-        spawnTeleport();
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 9;
+        return this;
     }
 
     /**
      * Randomly spawn elf on a random position of the terrain, the number of elf limit to 2
      */
-    private void spawnMeleeElf() {
+    @Override
+    protected void spawnMeleeElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -90,13 +64,14 @@ public class TutorialGameArea extends GameArea {
     /**
      * Spawn range elf on terrain, range elf can shoot target
      */
-    private void spawnRangedElf() {
+    @Override
+    protected void spawnRangedElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.normalArrow, 0.1f);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
             incNum();
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangerLeft");
@@ -107,13 +82,14 @@ public class TutorialGameArea extends GameArea {
     /**
      * Spawn Assassin on terrain, range can shoot from far away with high damage
      */
-    private void spawnAssassinElf() {
+    @Override
+    protected void spawnAssassinElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.fastArrow, 0);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.FAST_ARROW, 0);
             elf.setEntityType("assassin");
             elf.getEvents().trigger("assassinLeft");
             spawnEntityAt(elf, randomPos, true, true);
@@ -124,13 +100,15 @@ public class TutorialGameArea extends GameArea {
     /**
      * spawn boss - only spawn on the map if other enemies are killed
      */
-    private void spawnBoss() {
+    @Override
+    protected void spawnBoss() {
         GridPoint2 bossPos = new GridPoint2(100, 100);
         Entity boss = NPCFactory.createBossNPC(player);
         spawnEntityAt(boss, bossPos, true, true);
     }
 
-    private void spawnElfGuard() {
+    @Override
+    protected void spawnElfGuard() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -143,7 +121,8 @@ public class TutorialGameArea extends GameArea {
     /**
      * Spawn anchored elf, elf only move at the certain anchored
      */
-    private void spawnAnchoredElf() {
+    @Override
+    protected void spawnAnchoredElf() {
         GridPoint2 minPos = new GridPoint2(0, 0);
         GridPoint2 maxPos = terrain.getMapBounds(0).sub(2, 2);
 
@@ -152,10 +131,10 @@ public class TutorialGameArea extends GameArea {
 
             GridPoint2 elfPos = RandomUtils.random(basePos.cpy().sub(3, 3), basePos.cpy().add(3, 3));
             Entity anchor = ObstacleFactory.createAnchor();
-            Entity Anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
+            Entity anchoredelf = NPCFactory.createAnchoredElf(player, anchor, 3f);
             spawnEntityAt(anchor, basePos, true, true);
             incNum();
-            spawnEntityAt(Anchoredelf, elfPos, true, true);
+            spawnEntityAt(anchoredelf, elfPos, true, true);
         }
     }
 }

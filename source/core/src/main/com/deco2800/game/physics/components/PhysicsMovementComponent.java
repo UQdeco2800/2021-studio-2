@@ -160,7 +160,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     private void setToVelocity(Body body, Vector2 desiredVelocity) {
-        // impulse force = (desired velocity - current velocity) * mass
         Vector2 velocity = body.getLinearVelocity();
         Vector2 impulse = desiredVelocity.cpy().sub(velocity).scl(body.getMass());
         body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
@@ -175,7 +174,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
     }
 
     public void stopAnimateAttack() {
-        //System.out.println("stopAnimateAttack, set to false");
         animateAttack = false;
     }
 }

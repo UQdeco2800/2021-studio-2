@@ -57,7 +57,6 @@ public class TextureRenderComponent extends RenderComponent {
     public void draw(SpriteBatch batch) {
         Vector2 position = entity.getPosition();
         Vector2 positionCenter = entity.getCenterPosition();
-        //Vector2 positionCenterRelative = positionCenter.cpy().sub(position);
         Vector2 scale = entity.getScale();
         float angle = entity.getAngle();
 

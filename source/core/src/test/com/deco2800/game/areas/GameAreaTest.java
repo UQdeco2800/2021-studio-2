@@ -17,7 +17,7 @@ class GameAreaTest {
         GameArea gameArea =
                 new GameArea() {
                     @Override
-                    public void create() {
+                    public void create(String mapFile, String areaName) {
                     }
                 };
 

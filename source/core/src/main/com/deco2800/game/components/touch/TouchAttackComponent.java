@@ -9,8 +9,6 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -23,15 +21,12 @@ import org.slf4j.LoggerFactory;
  */
 
 public class TouchAttackComponent extends TouchComponent {
-
-    private static final Logger logger = LoggerFactory.getLogger(TouchAttackComponent.class);
-
     private float knockbackForce = 0f;
     private CombatStatsComponent combatStats;
     private long start = 0;
     private boolean disable = false;
 
-    private final String DEAL_DAMAGE = "dealDamage";
+    private static final String dealDamage = "dealDamage";
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -109,10 +104,9 @@ public class TouchAttackComponent extends TouchComponent {
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f || hitboxComponent.getFixture() != me)) {
             Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-            if (myEntity.data.containsKey(DEAL_DAMAGE)) {
-                if (!((boolean) myEntity.data.get(DEAL_DAMAGE))) {
-                    return;
-                }
+            if (myEntity.data.containsKey(dealDamage)
+                    && !((boolean) myEntity.data.get(dealDamage))) {
+                return;
             }
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
@@ -122,38 +116,12 @@ public class TouchAttackComponent extends TouchComponent {
 
         applyContinuousDamage(me, other);
 
-//        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC) {
-//            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-//            if (this.getEntity().getComponent(
-//                    PhysicsMovementComponent.class).getTarget() == null) {
-//                return; // ignore if the physics component is null
-//            }
-//            Vector2 direction = this.getEntity().getComponent(
-//                    PhysicsMovementComponent.class).getDirection();
-//
-//            if (Math.abs(direction.x) > Math.abs(direction.y)) {
-//                if (direction.x < 0) {
-//                    this.getEntity().getEvents().trigger("stunLeft");
-//                } else {
-//                    this.getEntity().getEvents().trigger("stunRight");
-//                }
-//            } else {
-//                if (direction.y < 0) {
-//                    this.getEntity().getEvents().trigger("stunDown");
-//                } else {
-//                    this.getEntity().getEvents().trigger("stunUp");
-//                }
-//            }
-//        }
-
         //Dissolve arrow attacks after hits
         if (getEntity().getComponent(HitboxComponent.class).getLayer()
                 == PhysicsLayer.PROJECTILEWEAPON
                 || getEntity().getComponent(HitboxComponent.class).getLayer()
                 == PhysicsLayer.IDLEPROJECTILEWEAPON) {
 
-            //Remove later on to make arrows stick into walls and more
-            //getEntity().getComponent(AITaskComponent.class).dispose();
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
             knockbackForce = 0;
@@ -180,10 +148,9 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Try to attack target.
         if (targetStats != null) {
-            if (this.getEntity().data.containsKey(DEAL_DAMAGE)) {
-                if (!((boolean) this.getEntity().data.get(DEAL_DAMAGE))) {
-                    return;
-                }
+            if (this.getEntity().data.containsKey(dealDamage)
+                    && !((boolean) this.getEntity().data.get(dealDamage))) {
+                return;
             }
 
             if (((System.currentTimeMillis() - start) / 1000.0) > 0.5) {
