@@ -510,18 +510,20 @@ public class WeaponFactory {
     public static Entity createLightning(short targetLayer, int attackStatus) {
 
         AnimationRenderComponent animator = new AnimationRenderComponent(
-                ServiceLocator.getResourceService().getAsset("images/lightning.atlas", TextureAtlas.class));
+                ServiceLocator.getResourceService().getAsset("thor/lightning.atlas", TextureAtlas.class));
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("alt-lightening-attack", 0.1f);
         animator.addAnimation("lightening_attack", 0.1f);
 
-        return new Entity()
+        Entity lightning = new Entity()
                 .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
-                .addComponent(new TouchAttackComponent(targetLayer, 5f))
+                .addComponent(new TouchAttackComponent(targetLayer))
                 .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
                 .addComponent(new LightningProjectile(1000L, attackStatus));
+        lightning.setScale(new Vector2(2f, 2f));
+        return lightning;
     }
 
     /**
