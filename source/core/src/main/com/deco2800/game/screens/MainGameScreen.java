@@ -117,8 +117,10 @@ public class MainGameScreen extends ScreenAdapter {
             case "game4":
                 this.gameArea = new GameArea4(terrainFactory).create();
                 break;
+            case "game5":
+                this.gameArea = new GameArea5(terrainFactory).create();
+                break;
             default:
-                this.gameArea = new TutorialGameArea(terrainFactory).create();
                 break;
         }
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -212,6 +214,10 @@ public class MainGameScreen extends ScreenAdapter {
             } else if (gameArea.getLevel() == 3) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA4, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 4) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
                 gameChange = false;
             }
         } else {

@@ -69197,12 +69197,6 @@
             "width": 0
         },
         {
-            "x": 71,
-            "y": 31,
-            "height": 0,
-            "width": 0
-        },
-        {
             "x": 61,
             "y": 44,
             "height": 0,
@@ -69233,7 +69227,14 @@
             "width": 0
         }
     ],
-    "initTeleportObjects": [],
+    "initTeleportObjects": [
+        {
+            "x": 19,
+            "y": 23,
+            "height": 0,
+            "width": 0
+        }
+    ],
     "bossBounds": [
         {
             "x": 102,
@@ -69544,12 +69545,6 @@
             "width": 0
         },
         {
-            "x": 102,
-            "y": 28,
-            "height": 0,
-            "width": 0
-        },
-        {
             "x": 108,
             "y": 28,
             "height": 0,
@@ -69568,26 +69563,8 @@
             "width": 0
         },
         {
-            "x": 69,
-            "y": 40,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 59,
-            "y": 66,
-            "height": 0,
-            "width": 0
-        },
-        {
             "x": 64,
             "y": 69,
-            "height": 0,
-            "width": 0
-        },
-        {
-            "x": 46,
-            "y": 71,
             "height": 0,
             "width": 0
         },
@@ -69602,27 +69579,173 @@
             "y": 23,
             "height": 0,
             "width": 0
-        },
+        }
+    ],
+    "healthCrateObjects": [
         {
-            "x": 44,
-            "y": 33,
+            "x": 43,
+            "y": 26,
             "height": 0,
             "width": 0
         },
         {
-            "x": 111,
+            "x": 33,
+            "y": 28,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 33,
+            "y": 20,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 41,
+            "y": 18,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 42,
+            "y": 35,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 60,
+            "y": 34,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 66,
+            "y": 29,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 73,
+            "y": 29,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 76,
+            "y": 44,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 74,
             "y": 37,
             "height": 0,
             "width": 0
-        }
-    ],
-    "moveDownObjects": [
+        },
         {
-            "x": 111,
-            "y": 53,
+            "x": 68,
+            "y": 45,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 91,
+            "y": 27,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 100,
+            "y": 28,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 106,
+            "y": 27,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 109,
+            "y": 31,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 105,
+            "y": 56,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 105,
+            "y": 64,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 117,
+            "y": 66,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 121,
+            "y": 63,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 122,
+            "y": 57,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 116,
+            "y": 55,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 47,
+            "y": 71,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 53,
+            "y": 74,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 59,
+            "y": 70,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 56,
+            "y": 64,
+            "height": 0,
+            "width": 0
+        },
+        {
+            "x": 64,
+            "y": 62,
             "height": 0,
             "width": 0
         }
     ],
-    "cutsceneObjects": []
+    "moveDownObjects": [],
+    "cutsceneObjects": [
+        {
+            "x": 111,
+            "y": 54,
+            "height": 0,
+            "width": 0
+        }
+    ]
 }
