@@ -135,7 +135,7 @@ public class CombatStatsComponent extends Component {
         }
     }
 
-    private void stuntEnemy() {
+    private void stunEnemy() {
         if (getEntity().getComponent(HitboxComponent.class) == null) {
             return;
         }
@@ -187,7 +187,7 @@ public class CombatStatsComponent extends Component {
             // our transformation.
             if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
-                stuntEnemy();
+                stunEnemy();
             }
         }
     }
@@ -210,7 +210,7 @@ public class CombatStatsComponent extends Component {
             // our transformation.
             if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
-                stuntEnemy();
+                stunEnemy();
             }
         }
     }
@@ -230,7 +230,7 @@ public class CombatStatsComponent extends Component {
             // our transformation.
             if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
-                stuntEnemy();
+                stunEnemy();
             }
         }
     }
