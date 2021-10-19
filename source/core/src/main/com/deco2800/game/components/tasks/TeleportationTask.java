@@ -100,8 +100,8 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
-                new Vector2(85, 55);
-        Vector2 maxPos = new Vector2(90, 60);
+                new Vector2(90, 55);
+        Vector2 maxPos = new Vector2(95, 60);
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
