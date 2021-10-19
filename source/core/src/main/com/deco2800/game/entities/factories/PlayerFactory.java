@@ -54,6 +54,11 @@ public class PlayerFactory {
                 animator.addAnimation("up_attack", 0.08f);
                 animator.addAnimation("down_attack", 0.08f);
 
+                animator.addAnimation("down_range", 0.1f);
+                animator.addAnimation("left_range", 0.1f);
+                animator.addAnimation("right_range", 0.1f);
+                animator.addAnimation("up_range", 0.1f);
+
                 break;
             case "Hammer":
                 animator = new AnimationRenderComponent(
@@ -91,8 +96,9 @@ public class PlayerFactory {
                 animator.addAnimation("longsword_up", 0.1f);
                 animator.addAnimation("longsword_down", 0.1f);
 
-                // Axe (default)
+                animator.addAnimation("longsword_aoe", 0.1f);
                 break;
+            // Axe (default)
             default:
                 animator = new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));
@@ -109,13 +115,9 @@ public class PlayerFactory {
         animator.addAnimation("walk_up", 0.13f, Animation.PlayMode.LOOP);
         animator.addAnimation("walk_left", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("default_up", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("damaged_right", 0.3f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("damaged_up", 0.3f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("damaged_down", 0.3f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("damaged_left", 0.3f, Animation.PlayMode.NORMAL);
         animator.setAnimationScale(2f);
 
         Entity player = new Entity()
@@ -148,7 +150,7 @@ public class PlayerFactory {
                         new Vector2(1f, 0.75f)));
                 break;
             default:  // Axe is default
-                player.addComponent(new Axe(PhysicsLayer.NPC, 7, 25,
+                player.addComponent(new Axe(PhysicsLayer.NPC, 4, 25,
                         new Vector2(1f, 0.75f)));
                 break;
         }

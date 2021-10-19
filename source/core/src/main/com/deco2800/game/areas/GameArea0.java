@@ -36,6 +36,9 @@ public class GameArea0 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
+        playerWeaponType = "Axe";
+        music = "sounds/area1.mp3";
+
         super.create("maps/lvl_1.json", "Level 1");
 
         spawnMeleeElf();
@@ -75,6 +78,4 @@ public class GameArea0 extends GameArea {
         PlayerSave.Save.setElfWins(0);
         PlayerSave.write();
     }
-
-
 }

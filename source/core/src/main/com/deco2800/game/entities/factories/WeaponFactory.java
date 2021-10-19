@@ -15,6 +15,7 @@ import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.components.tasks.loki.FirePillarBaseTask;
 import com.deco2800.game.components.tasks.loki.FirePillarDamageTask;
+import com.deco2800.game.components.tasks.thor.LightningProjectile;
 import com.deco2800.game.components.touch.ExplosionTouchComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.touch.TouchTeleportComponent;
@@ -478,22 +479,50 @@ public class WeaponFactory {
      * @param target the location that the blast will try and reach
      * @return entity
      */
-    public static Entity createBlast(Vector2 target) {
+    public static Entity createBlast(Vector2 target, float angle) {
         float speed = 8f;
-
+        AnimationRenderComponent animator =
+                new AnimationRenderComponent(
+                        ServiceLocator.getResourceService().getAsset(
+                                "images/fireball/fireballAnimationBlue.atlas", TextureAtlas.class));
+        animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation("hit", 0.2f, Animation.PlayMode.NORMAL);
+        animator.startAnimation("flying");
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
         Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/blast.png", Texture.class));
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
-        return new Entity()
-                .addComponent(new TextureRenderComponent(sprite))
+        Entity entity = new Entity()
+                .addComponent(animator)
                 .addComponent(new PhysicsComponent())
                 .addComponent(movingComponent)
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
                 .addComponent(new BlastController());
+        entity.setAngle(angle);
+        return entity;
+    }
+
+    public static Entity createLightning(short targetLayer, int attackStatus) {
+
+        AnimationRenderComponent animator = new AnimationRenderComponent(
+                ServiceLocator.getResourceService().getAsset("thor/lightning.atlas", TextureAtlas.class));
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("alt-lightening-attack", 0.1f);
+        animator.addAnimation("lightening_attack", 0.1f);
+
+        Entity lightning = new Entity()
+                .addComponent(animator)
+                .addComponent(new PhysicsComponent())
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
+                .addComponent(new TouchAttackComponent(targetLayer))
+                .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
+                .addComponent(new LightningProjectile(1000L, attackStatus));
+        lightning.setScale(new Vector2(2f, 2f));
+        return lightning;
     }
 
     /**

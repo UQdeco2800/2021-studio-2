@@ -20,6 +20,7 @@ public abstract class ProjectileController extends Component {
     protected short targetLayer;
     protected CombatStatsComponent combatStats;
     protected long gameTime;
+    protected boolean hit;
 
     /**
      * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
@@ -37,6 +38,7 @@ public abstract class ProjectileController extends Component {
         this.hitbox = entity.getComponent(HitboxComponent.class);
         this.targetLayer = PhysicsLayer.NPC;
         this.combatStats = entity.getComponent(CombatStatsComponent.class);
+        this.hit = false;
     }
 
     /**
@@ -44,8 +46,11 @@ public abstract class ProjectileController extends Component {
      */
     @Override
     public void update() {
-        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > BlastStats.PROJECTILE_LIFESPAN) {
+        if (hit) {
             entity.prepareDispose();
+        }
+        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > BlastStats.PROJECTILE_LIFESPAN) {
+            this.onHit();
         }
     }
 

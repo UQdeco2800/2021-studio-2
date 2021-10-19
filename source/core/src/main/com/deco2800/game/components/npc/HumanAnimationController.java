@@ -46,9 +46,7 @@ public class HumanAnimationController extends Component {
         entity.getEvents().addListener("stopDown", this::stopDown);
         entity.getEvents().addListener("stopLeft", this::stopLeft);
         entity.getEvents().addListener("stopRight", this::stopRight);
-
         entity.getEvents().addListener("enableWalk", this::enableWalk);
-
         animator.startAnimation("default");
     }
 
@@ -71,10 +69,12 @@ public class HumanAnimationController extends Component {
             }
         } else if (!death) {
             if (!attack && !left) {
-                animator.startAnimation("moveLeft");
+                animator.startAnimation("transformedMoveLeft");
                 enableWalk();
                 left = true;
-            } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
+            }
+        } else if (!death) {
+            if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
         } else if (!dead){

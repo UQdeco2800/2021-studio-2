@@ -154,7 +154,6 @@ public class MeleeWeapon extends Component {
         // Set hit box during attack frame
         if (hasAttacked && timeSinceAttack > attackFrameIndex * attackFrameDuration &&
                 timeSinceAttack < (attackFrameIndex + 1) * attackFrameDuration) {
-
             weaponHitbox.set(weaponSize.cpy(), attackDirection);
             hasAttacked = false; // use flag to ensure weapon is only set once.
             // Destroy hit box as soon as attack frame ends.

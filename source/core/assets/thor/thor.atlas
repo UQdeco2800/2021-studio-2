@@ -1,300 +1,321 @@
-walk_left.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-moveUp
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-moveUp
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-moveUp
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-moveUp
-  rotate: false
-  xy: 128, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
 
-walk_right.png
-size: 256, 256
+thor.png
+size: 2048, 512
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest, Nearest
 repeat: none
-moveDown
+default
   rotate: false
-  xy: 0, 0
+  xy: 262, 2
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
-moveDown
+  index: -1
+default_backward
   rotate: false
-  xy: 128, 0
+  xy: 1042, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-moveDown
+  index: -1
+default_left
   rotate: false
-  xy: 0, 128
+  xy: 912, 262
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-moveDown
+  index: -1
+default_right
   rotate: false
-  xy: 128, 128
+  xy: 1302, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
-
-walk_left.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-moveLeft
+  index: -1
+down_thor_walk
   rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-moveLeft
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-moveLeft
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-moveLeft
-  rotate: false
-  xy: 128, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-
-walk_right.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-moveRight
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-moveRight
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-moveRight
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-moveRight
-  rotate: false
-  xy: 128, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-
-up_attck.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-EnemyAttackUp
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-EnemyAttackUp
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackUp
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-
-down_attck.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-EnemyAttackDown
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-EnemyAttackDown
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackDown
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-  
-left_attck.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-EnemyAttackLeft
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-EnemyAttackLeft
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackLeft
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-  
-right_attck.png
-size: 256, 256
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-EnemyAttackRight
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-EnemyAttackRight
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackRight
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-
-aoe_attck.png
-size: 256, 512
-format: RGBA8888
-filter: Linear,Linear
-repeat: none
-EnemyAttackAOE
-  rotate: false
-  xy: 0, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-EnemyAttackAOE
-  rotate: false
-  xy: 128, 0
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-EnemyAttackAOE
-  rotate: false
-  xy: 0, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-EnemyAttackAOE
-  rotate: false
-  xy: 128, 128
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-EnemyAttackAOE
-  rotate: false
-  xy: 0, 256
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-EnemyAttackAOE
-  rotate: false
-  xy: 128, 256
+  xy: 2, 262
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 5
-EnemyAttackAOE
+down_thor_walk
   rotate: false
-  xy: 0, 384
+  xy: 262, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+down_thor_walk
+  rotate: false
+  xy: 782, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+down_thor_walk
+  rotate: false
+  xy: 1042, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+down_thor_walk
+  rotate: false
+  xy: 1432, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+down_thor_walk
+  rotate: false
+  xy: 1692, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+hammer_aoe
+  rotate: false
+  xy: 1172, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+hammer_aoe
+  rotate: false
+  xy: 1432, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+hammer_aoe_finish
+  rotate: false
+  xy: 1432, 262
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 6
-
-  
+hammer_aoe_finish
+  rotate: false
+  xy: 522, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+hammer_aoe
+  rotate: false
+  xy: 522, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+hammer_aoe_finish_4 
+  rotate: false
+  xy: 782, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+hammer_aoe
+  rotate: false
+  xy: 782, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_down_attack
+  rotate: false
+  xy: 2, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_down_attack
+  rotate: false
+  xy: 522, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_down_attack
+  rotate: false
+  xy: 1172, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+thor_left_attack
+  rotate: false
+  xy: 132, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_left_attack
+  rotate: false
+  xy: 652, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_left_attack
+  rotate: false
+  xy: 1302, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+thor_left_walking
+  rotate: false
+  xy: 2, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_left_walking
+  rotate: false
+  xy: 392, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+thor_left_walking
+  rotate: false
+  xy: 392, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_left_walking
+  rotate: false
+  xy: 652, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+thor_left_walking
+  rotate: false
+  xy: 1042, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+thor_right_attack
+  rotate: false
+  xy: 262, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+thor_right_attack
+  rotate: false
+  xy: 912, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_right_attack
+  rotate: false
+  xy: 1432, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_right_walking
+  rotate: false
+  xy: 132, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+thor_right_walking
+  rotate: false
+  xy: 392, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+thor_right_walking
+  rotate: false
+  xy: 782, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_right_walking
+  rotate: false
+  xy: 782, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+thor_right_walking
+  rotate: false
+  xy: 1172, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_up_attack
+  rotate: false
+  xy: 132, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+thor_up_attack
+  rotate: false
+  xy: 652, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+thor_up_attack
+  rotate: false
+  xy: 1562, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+up_thor_walk
+  rotate: false
+  xy: 392, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+up_thor_walk
+  rotate: false
+  xy: 522, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+up_thor_walk
+  rotate: false
+  xy: 912, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+up_thor_walk
+  rotate: false
+  xy: 1302, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+up_thor_walk
+  rotate: false
+  xy: 1562, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+up_thor_walk
+  rotate: false
+  xy: 1562, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
