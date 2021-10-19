@@ -15,6 +15,7 @@ import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.components.tasks.loki.FirePillarTask;
 import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
 import com.deco2800.game.components.tasks.loki.SpawnLokiDecoyTask;
+import com.deco2800.game.components.tasks.thor.LightningTask;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
@@ -436,7 +437,8 @@ public class NPCFactory {
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 5f, 20f))
-                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f));
+                        .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
+                        .addTask(new LightningTask(target, 800, 150));
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("thor/thor.atlas",
