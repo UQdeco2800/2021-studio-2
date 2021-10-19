@@ -457,7 +457,6 @@ public class NPCFactory {
         boss.scaleHeight(2);
         boss.getComponent(BossOverlayComponent.class).nameBoss("Elf King");
 
-        boss.addComponent(createHealthBarComponent());
         boss.setEntityType("elfBoss");
         boss.setScale(0.8f * 2, 1f * 2);
         PhysicsUtils.setScaledCollider(boss, 0.9f, 0.2f);
@@ -537,7 +536,6 @@ public class NPCFactory {
         odin.setAttackRange(10);
 
         odin.getComponent(AnimationRenderComponent.class).scaleEntity();
-        odin.addComponent(createHealthBarComponent());
         odin.setEntityType("odin");
         odin.setScale(0.8f * 2, 1f * 2);
 
@@ -793,7 +791,6 @@ public class NPCFactory {
         boss.getComponent(AnimationRenderComponent.class).scaleEntity();
         boss.getComponent(BossOverlayComponent.class).nameBoss("Loki");
 
-        boss.addComponent(createHealthBarComponent());
         boss.setEntityType("loki");
         PhysicsUtils.setScaledCollider(boss, 0.6f, 0.3f);
         return boss;
