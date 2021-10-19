@@ -1,0 +1,26 @@
+assassinWalkRight.png
+size: 512, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+rightWalk
+  rotate: false
+  xy: 2, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+rightWalk
+  rotate: false
+  xy: 105, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+rightWalk
+  rotate: false
+  xy: 208, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3

@@ -90,7 +90,11 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             PlayerSave.Save.setOdinWins(1);
             PlayerSave.write();
             this.declareEnd = false;
-            owner.getEntity().getComponent(HealthBarComponent.class).dispose();
+            try {
+                owner.getEntity().getComponent(HealthBarComponent.class).dispose();
+            } catch (Exception e) {
+                //ignore
+            }
             owner.getEntity().getComponent(ColliderComponent.class).dispose();
             owner.getEntity().getComponent(HitboxComponent.class).dispose();
             owner.getEntity().getComponent(TouchAttackComponent.class).dispose();

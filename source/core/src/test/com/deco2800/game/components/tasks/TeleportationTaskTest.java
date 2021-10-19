@@ -30,7 +30,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
 class TeleportationTaskTest {
     @Mock
     GameArea gameArea;
@@ -61,6 +61,38 @@ class TeleportationTaskTest {
 
         gameTime = mock(GameTime.class);
         ServiceLocator.registerTimeSource(gameTime);
+    }
+
+    @Test
+    void insideOfAreaBound() {
+        Entity taskRunner = makePhysicsEntity();
+
+        TeleportationTask teleportationTask = new TeleportationTask(taskRunner, 1000);
+
+        teleportationTask.create(() -> taskRunner);
+
+        taskRunner.setPosition(2f, 2f);
+
+        // ensure that the priority is 100 (initial priority is 100
+        assertEquals(-1, teleportationTask.getPriority());
+
+    }
+
+    @Test
+    void outsideGameBound() {
+        Entity taskRunner = makePhysicsEntity();
+
+        TeleportationTask teleportationTask = new TeleportationTask(taskRunner, 1000);
+        AITaskComponent ai = new AITaskComponent();
+        ai.addTask(teleportationTask);
+        taskRunner.addComponent(ai);
+        taskRunner.setPosition(100f, 100f);
+        ServiceLocator.getGameAreaService().incNum();
+
+        taskRunner.create();
+        teleportationTask.start();
+        assertEquals(-1, teleportationTask.getPriority());
+
     }
 
     @Test

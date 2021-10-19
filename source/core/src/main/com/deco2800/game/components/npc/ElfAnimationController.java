@@ -67,13 +67,6 @@ public class ElfAnimationController extends Component {
                 modifier = "Back";
             }
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
-                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
-                            animator.getEntity().getScale().y);
-                } else {
-                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
-                            animator.getEntity().getScale().y);
-                }
                 if (entity.getEntityType().equals(ASSASSIN_TYPE)) {
                     animator.startAnimation(ASSASSIN_TYPE + modifier + "Death");
                 } else {
