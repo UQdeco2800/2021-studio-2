@@ -1027,7 +1027,7 @@
   <object id="593" x="3301.98" y="3457.2"/>
   <object id="594" x="3489.5" y="4065.7" width="606.5" height="63.2741"/>
  </objectgroup>
- <objectgroup id="7" name="lavaObjects" visible="0">
+ <objectgroup id="7" name="lavaObjects">
   <object id="198" x="1760" y="3232" width="32" height="96"/>
   <object id="199" x="1632" y="3264" width="128" height="64"/>
   <object id="200" x="1600" y="3296" width="32" height="32"/>
