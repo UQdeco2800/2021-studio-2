@@ -67,15 +67,11 @@ public class HumanAnimationController extends Component {
                 enableWalk();
                 left = true;
             }
-        } else if (!death) {
+        } else if (!death && !dead) {
             if (!attack && !left) {
                 animator.startAnimation("transformedMoveLeft");
                 enableWalk();
                 left = true;
-            }
-        } else if (!death) {
-            if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
-                attack = false;
             }
         } else if (!dead){
             dead = true;
@@ -93,7 +89,7 @@ public class HumanAnimationController extends Component {
                 enableWalk();
                 right = true;
             }
-        } else if (!death) {
+        } else if (!death && !dead) {
             if (!attack && !right) {
                 animator.startAnimation("moveRight");
                 enableWalk();
@@ -117,7 +113,7 @@ public class HumanAnimationController extends Component {
                 enableWalk();
                 up = true;
             }
-        } else if (!death) {
+        } else if (!death && !dead) {
             if (!attack && !up) {
                 animator.startAnimation("moveUp");
                 enableWalk();
@@ -141,7 +137,7 @@ public class HumanAnimationController extends Component {
                 enableWalk();
                 down = true;
             }
-        } else if (!death) {
+        } else if (!death && !dead) {
             if (!attack && !down) {
                 animator.startAnimation("moveDown");
                 enableWalk();
