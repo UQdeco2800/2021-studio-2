@@ -140,8 +140,4 @@ public class Renderer implements Disposable {
         stage.dispose();
         batch.dispose();
     }
-
-    public Stage getStage() {
-        return stage;
-    }
 }

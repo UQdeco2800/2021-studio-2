@@ -45,8 +45,8 @@ public class DeathDisplay extends MainMenuDisplay {
 
         Skin menuButtons = new Skin(Gdx.files.internal("deathScreenSkin/deathScreen.json"));
 
-        TextButton restartTutorialBtn = new TextButton("Restart Tutorial", menuButtons);
-        TextButton exitBtn = new TextButton("Exit MainMenu", menuButtons);
+        TextButton restartTutorialBtn = new TextButton("Restart Game", menuButtons);
+        TextButton exitBtn = new TextButton("Exit to Menu", menuButtons);
 
         // Triggers an event when the button is pressed
         restartTutorialBtn.addListener(

@@ -43,16 +43,11 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     /**
      * set initial health = 100
      */
-    private int health = 100;
+    private int health = 1000;
     /**
      * random spawning position
      */
     private Vector2 pos2;
-    /**
-     * check if the enemy still outside the map area
-     */
-    private int count = 0;
-
 
     /**
      * @param target   The entity to chase.
@@ -77,19 +72,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (ServiceLocator.getGameAreaService().getNumEnemy() > 0 && mapBound()) {
-            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            return;
-        }
-        if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && mapBound()) {
-            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            Vector2 posBefore = owner.getEntity().getPosition();
-            teleport(new Vector2(2f, 2f));
-            if (owner.getEntity().getPosition().dst(posBefore) != 0) {
-                count++;
-                ServiceLocator.getGameAreaService().incBossNum();
-            }
-        }
         if (canTeleport()) {
             health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
@@ -98,31 +80,6 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
 
         if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 800) {
             owner.getEntity().setPosition(pos2);
-        }
-
-    }
-
-    /**
-     * method overloading - teleport to a given position
-     *
-     * @param position position to teleport to
-     */
-    public void teleport(Vector2 position) {
-        if (lastFired == 0) {
-            lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-
-            Entity entity = new Entity();
-            entity.setPosition(position);
-            entity.setScale(owner.getEntity().getScale());
-            Entity vortex2 = WeaponFactory.createVortexExit(entity, getDirectionOfTarget(), false);
-
-
-            gameArea.spawnEntityAt(vortex2, position, true, true);
-        }
-
-        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 1000) {
-            owner.getEntity().setPosition(position);
-            owner.getEntity().data.put("createFireBall", true);
         }
     }
 
@@ -134,20 +91,17 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
             lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
         }
         spawn = true;
-
-
         Entity entity = new Entity();
         entity.setPosition(owner.getEntity().getPosition());
         entity.setScale(owner.getEntity().getScale());
 
-        //todo: This doesn't need random entity positions to work, just set a vector
+        //note:This doesn't need random entity positions to work, just set a vector
         Entity vortex = WeaponFactory.createVortexEnter(entity,
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
-                new Vector2(0, 0);
-        //todo: get world size
-        Vector2 maxPos = new Vector2(10, 10);
+                new Vector2(85, 55);
+        Vector2 maxPos = new Vector2(90, 60);
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
@@ -169,29 +123,13 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public int getPriority() {
-        if ((ServiceLocator.getGameAreaService().getNumEnemy() == 0 && count == 0)
-                || (ServiceLocator.getGameAreaService().getNumEnemy() != 0 && mapBound())) {
-            return 100;
-        }
         if (canTeleport() || spawn) {
             if (spawn && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= 2000) {
                 spawn = false;
             }
-            return 30;
+            return 25;
         }
         return -1;
-    }
-
-    /**
-     * check if not inside the boundary of the map
-     *
-     * @return true if not inside the map, false otherwise
-     */
-    public boolean mapBound() {
-        return (owner.getEntity().getPosition().x < 86.315
-                && owner.getEntity().getPosition().y < 53.015)
-                || (owner.getEntity().getPosition().x > 98.185
-                && owner.getEntity().getPosition().y > 63.185);
     }
 
     /**
@@ -235,7 +173,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         int currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
         int maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
 
-        if ((float) currentHealth / maxHealth < 0.5f && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
+        if ((float) currentHealth / maxHealth < 0.75f && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
                 && isTargetVisible()
                 && getDistanceToTarget() < owner.getEntity().getAttackRange()) {
             return currentHealth < health;

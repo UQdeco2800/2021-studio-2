@@ -2,10 +2,8 @@ package com.deco2800.game.physics.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.deco2800.game.ai.movement.MovementController;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.Component;
-import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.utils.math.Vector2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,16 +12,15 @@ import org.slf4j.LoggerFactory;
 /**
  * Movement controller for a physics-based entity.
  */
-public class PhysicsMovementComponent extends Component implements MovementController {
+public class PhysicsMovementComponent extends Component {
     private static final Logger logger = LoggerFactory.getLogger(PhysicsMovementComponent.class);
-    public NPCFactory npcFactory;
-    public PhysicsComponent physicsComponent;
+    private PhysicsComponent physicsComponent;
     private Vector2 targetPosition;
     private boolean movementEnabled = true;
     private Vector2 maxSpeed = Vector2Utils.ONE;
-
-    public boolean animateAttack;
-    public boolean animateStun;
+    private boolean stopped = false;
+    private String previousDirection = null;
+    private boolean death = false;
 
 
     @Override
@@ -39,7 +36,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
         }
     }
 
-    @Override
     public boolean getMoving() {
         return movementEnabled;
     }
@@ -49,19 +45,36 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      *
      * @param movementEnabled true to enable movement, false otherwise
      */
-    @Override
     public void setMoving(boolean movementEnabled) {
         this.movementEnabled = movementEnabled;
         if (!movementEnabled) {
             Body body = physicsComponent.getBody();
             setToVelocity(body, Vector2.Zero);
+            if (previousDirection != null && !stopped) {
+                switch (previousDirection) {
+                    case "left":
+                        this.getEntity().getEvents().trigger("stopLeft");
+                        break;
+                    case "up":
+                        this.getEntity().getEvents().trigger("stopUp");
+                        break;
+                    case "right":
+                        this.getEntity().getEvents().trigger("stopRight");
+                        break;
+                    default:
+                        this.getEntity().getEvents().trigger("stopDown");
+                        break;
+                }
+                stopped = true;
+            } else {
+                stopped = false;
+            }
         }
     }
 
     /**
      * @return Target position in the world
      */
-    @Override
     public Vector2 getTarget() {
         return targetPosition;
     }
@@ -72,7 +85,6 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      *
      * @param target target position
      */
-    @Override
     public void setTarget(Vector2 target) {
         logger.trace("Setting target to {}", target);
         this.targetPosition = target;
@@ -86,6 +98,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      * enemy move down
      */
     public void downAnimation() {
+        previousDirection = "down";
         this.getEntity().getEvents().trigger("DownStart");
     }
 
@@ -93,6 +106,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      * enemy move up
      */
     public void upAnimation() {
+        previousDirection = "up";
         this.getEntity().getEvents().trigger("UpStart");
     }
 
@@ -100,6 +114,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      * enemy move left
      */
     public void leftAnimation() {
+        previousDirection = "left";
         this.getEntity().getEvents().trigger("LeftStart");
     }
 
@@ -107,6 +122,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      * enemy move right
      */
     public void rightAnimation() {
+        previousDirection = "right";
         this.getEntity().getEvents().trigger("RightStart");
     }
 
@@ -114,17 +130,20 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      *
      */
     public void deathAnimation() {
-        if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
-            if (this.getDirection().x < 0) { //left
-                this.getEntity().getEvents().trigger("LeftStart");
-            } else if (this.getDirection().x > 0) { //right
-                this.getEntity().getEvents().trigger("RightStart");
-            }
-        } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) { //y axis movement
-            if (this.getDirection().y < 0) { //down
-                this.getEntity().getEvents().trigger("DownStart");
-            } else if (this.getDirection().y > 0) { //up
-                this.getEntity().getEvents().trigger("UpStart");
+        if (!death) {
+            death = true;
+            if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
+                if (this.getDirection().x < 0) { //left
+                    this.getEntity().getEvents().trigger("LeftStart");
+                } else if (this.getDirection().x > 0) { //right
+                    this.getEntity().getEvents().trigger("RightStart");
+                }
+            } else if (Math.abs(this.getDirection().x) < Math.abs(this.getDirection().y)) { //y axis movement
+                if (this.getDirection().y < 0) { //down
+                    this.getEntity().getEvents().trigger("DownStart");
+                } else if (this.getDirection().y > 0) { //up
+                    this.getEntity().getEvents().trigger("UpStart");
+                }
             }
         }
     }
@@ -133,7 +152,7 @@ public class PhysicsMovementComponent extends Component implements MovementContr
      *
      */
     public void directionAnimation() {
-        if (!this.getEntity().getComponent(CombatStatsComponent.class).isDead()) {
+        if (Boolean.FALSE.equals(this.getEntity().getComponent(CombatStatsComponent.class).isDead())) {
             if (Math.abs(this.getDirection().x) > Math.abs(this.getDirection().y)) { //x-axis movement
                 if (this.getDirection().x < 0) { //left
                     leftAnimation();
@@ -167,13 +186,5 @@ public class PhysicsMovementComponent extends Component implements MovementContr
 
     public Vector2 getDirection() {
         return targetPosition.cpy().sub(entity.getPosition()).nor();
-    }
-
-    public void setAnimateAttack() {
-        animateAttack = true;
-    }
-
-    public void stopAnimateAttack() {
-        animateAttack = false;
     }
 }

@@ -31,6 +31,9 @@ class SpawnMinionsAndExplosionTaskTest {
     @Mock
     GameTime gameTime;
 
+    @Mock
+    GameArea gameArea;
+
     private static final String[] forestTextureAtlases = {
             "images/rangedElf.atlas", "images/meleeElf.atlas",
             "images/meleeFinal.atlas", "images/rangedAllFinal.atlas", "images/explosion/explosion.atlas"
@@ -62,8 +65,6 @@ class SpawnMinionsAndExplosionTaskTest {
         ServiceLocator.registerRenderService(renderService);
         ServiceLocator.registerPhysicsService(new PhysicsService());
         ServiceLocator.registerEntityService(new EntityService());
-        GameArea gameArea = mock(GameArea.class);
-        ServiceLocator.registerGameArea(gameArea);
 
         ResourceService resourceService = new ResourceService();
         ServiceLocator.registerResourceService(resourceService);
@@ -106,7 +107,7 @@ class SpawnMinionsAndExplosionTaskTest {
         boss.getComponent(CombatStatsComponent.class).setHealth(40);
 
         // active
-        assertEquals(20, spawn.getPriority());
+        assertEquals(30, spawn.getPriority());
 
         spawn.update();
         // inactive after the task is update
@@ -114,10 +115,35 @@ class SpawnMinionsAndExplosionTaskTest {
 
         boss.getComponent(CombatStatsComponent.class).setHealth(24);
         // active again if health is reduce to 25%
-        assertEquals(20, spawn.getPriority());
+        assertEquals(30, spawn.getPriority());
 
         // boss can only spawn at most two wave of enemy - one at < 50%, and one at < 25%
 
+        spawn.update();
+        assertEquals(-1, spawn.getPriority());
+    }
+
+    @Test
+    void checkBound() {
+        gameArea = mock(GameArea.class);
+        ServiceLocator.registerGameArea(gameArea);
+
+        Entity boss = createBoss();
+        Entity target = new Entity();
+        SpawnMinionsAndExplosionTask spawn =
+                new SpawnMinionsAndExplosionTask(target);
+        boss.setPosition(100f, 100f);
+        boss.getComponent(CombatStatsComponent.class).setHealth(40);
+        spawn.create(() -> boss);
+
+        boss.create();
+        // inactive when boss health not < 50%
+
+
+        // special condiction of spawning minions - health < 50, no minions on the map
+        // and the boss is outside of map bound
+
+        assertEquals(30, spawn.getPriority());
     }
 
     private Entity createBoss() {

@@ -9,6 +9,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 
 
 /**
@@ -26,7 +27,7 @@ public class TouchAttackComponent extends TouchComponent {
     private long start = 0;
     private boolean disable = false;
 
-    private static final String dealDamage = "dealDamage";
+    private static final String DEAL_DAMAGE = "dealDamage";
 
     /**
      * Create a component which attacks entities on collision, without knockback.
@@ -104,9 +105,9 @@ public class TouchAttackComponent extends TouchComponent {
         PhysicsComponent physicsComponent = target.getComponent(PhysicsComponent.class);
         if (physicsComponent != null && (knockbackForce > 0f || hitboxComponent.getFixture() != me)) {
             Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
-            if (myEntity.data.containsKey(dealDamage)
-                    && !((boolean) myEntity.data.get(dealDamage))) {
-                return;
+            if (myEntity.data.containsKey(DEAL_DAMAGE)
+                    && !((boolean) myEntity.data.get(DEAL_DAMAGE))) {
+                knockbackForce = 0;
             }
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
@@ -124,6 +125,7 @@ public class TouchAttackComponent extends TouchComponent {
 
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             knockbackForce = 0;
             getEntity().getEvents().trigger("brokenArrow");
         }
@@ -148,8 +150,8 @@ public class TouchAttackComponent extends TouchComponent {
 
         // Try to attack target.
         if (targetStats != null) {
-            if (this.getEntity().data.containsKey(dealDamage)
-                    && !((boolean) this.getEntity().data.get(dealDamage))) {
+            if (this.getEntity().data.containsKey(DEAL_DAMAGE)
+                    && !((boolean) this.getEntity().data.get(DEAL_DAMAGE))) {
                 return;
             }
 

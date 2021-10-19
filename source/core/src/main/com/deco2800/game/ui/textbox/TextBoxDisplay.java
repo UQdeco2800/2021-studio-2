@@ -80,34 +80,34 @@ public class TextBoxDisplay extends UIComponent {
      */
     private final BooleanObject closing = new BooleanObject(false);
 
-    private final float TEXT_BOX_HEIGHT = 400f;
+    private static final float TEXT_BOX_HEIGHT = 400f;
 
-    private final float TEXT_BOX_WIDTH = 800f;
+    private static final float TEXT_BOX_WIDTH = 800f;
 
-    private final float DISPLAY_Y_POS = 115f;
+    private static final float DISPLAY_Y_POS = 115f;
 
-    private final float TEXT_Y_POS = 250f;
+    private static final float TEXT_Y_POS = 250f;
 
-    private final float CHARACTER_IMAGE_Y_POS = 50f;
+    private static final float CHARACTER_IMAGE_Y_POS = 50f;
 
-    private final float CHARACTER_SIZE = 768f;
+    private static final float CHARACTER_SIZE = 768f;
 
-    private final float MAIN_CHARACTER_DISPLAY_X = 70f;
+    private static final float MAIN_CHARACTER_DISPLAY_X = 70f;
 
-    private final float NAME_Y = 325f;
+    private static final float NAME_Y = 325f;
 
-    private final float ENEMY_DISPLAY_X =
+    private static final float BAR_HEIGHT = 120f;
+
+    private final float enemyDisplayX =
             ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH - MAIN_CHARACTER_DISPLAY_X;
 
-    private final float ENEMY_TEXT_X =
+    private final float enemyTextX =
             ServiceLocator.getRenderService().getStage().getWidth() - TEXT_BOX_WIDTH + 60f;
 
-    private final float ENEMY_CHARACTER_X =
+    private final float enemyCharacterX =
             ServiceLocator.getRenderService().getStage().getWidth() - CHARACTER_SIZE - MAIN_CHARACTER_DISPLAY_X + 100f;
 
-    private final float ENEMY_NAME_X = ServiceLocator.getRenderService().getStage().getWidth() - 705;
-
-    private final float BAR_HEIGHT = 120f;
+    private final float enemyNameX = ServiceLocator.getRenderService().getStage().getWidth() - 705;
 
     @Override
     public void create() {
@@ -120,9 +120,9 @@ public class TextBoxDisplay extends UIComponent {
      * Adds the mainCharacterLabel actor to the screen which will be constantly updated to display changes.
      */
     private void addActors() {
-        float MAIN_CHARACTER_NAME_X = 550f;
-        float MAIN_CHARACTER_TEXT_X = 180f;
-        float MAIN_CHARACTER_X_POS = -100f;
+        float mainCharacterNameX = 550f;
+        float mainCharacterTextX = 180f;
+        float mainCharacterXPos = -100f;
 
         topBar = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/black_bars.png", Texture.class));
@@ -141,9 +141,9 @@ public class TextBoxDisplay extends UIComponent {
         //Text box for the main character set up
         mainCharacterName = new Label("WARRIOR", skin);
         mainCharacterName.setAlignment(Align.center);
-        mainCharacterName.setPosition(MAIN_CHARACTER_NAME_X, NAME_Y);
+        mainCharacterName.setPosition(mainCharacterNameX, NAME_Y);
         mainCharacterLabel = new Label("", skin);
-        mainCharacterLabel.setPosition(MAIN_CHARACTER_TEXT_X, TEXT_Y_POS);
+        mainCharacterLabel.setPosition(mainCharacterTextX, TEXT_Y_POS);
         mainCharacterBox = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/default_text_box.png", Texture.class));
         mainCharacterBox.setPosition(MAIN_CHARACTER_DISPLAY_X, DISPLAY_Y_POS);
@@ -151,7 +151,7 @@ public class TextBoxDisplay extends UIComponent {
         mainCharacterBox.setHeight(TEXT_BOX_HEIGHT);
         mainCharacterImage = new Image(ServiceLocator.getResourceService()
                 .getAsset("images/textBoxDisplay/main_character_image.png", Texture.class));
-        mainCharacterImage.setPosition(MAIN_CHARACTER_X_POS, CHARACTER_IMAGE_Y_POS);
+        mainCharacterImage.setPosition(mainCharacterXPos, CHARACTER_IMAGE_Y_POS);
         mainCharacterImage.setWidth(CHARACTER_SIZE);
         mainCharacterImage.setHeight(CHARACTER_SIZE);
 
@@ -342,6 +342,7 @@ public class TextBoxDisplay extends UIComponent {
                 break;
             case ODIN_INTRODUCTION:
             case ODIN_ENCOUNTER:
+            case ODIN_KILLED:
                 enemyName = new Label("     ODIN", skin);
                 enemyImage = new Image(ServiceLocator.getResourceService()
                         .getAsset("images/textBoxDisplay/odin_image.png", Texture.class));
@@ -367,16 +368,16 @@ public class TextBoxDisplay extends UIComponent {
      */
     private void setNPCPosition() {
         enemyLabel = new Label("", skin);
-        enemyLabel.setPosition(ENEMY_TEXT_X, TEXT_Y_POS);
+        enemyLabel.setPosition(enemyTextX, TEXT_Y_POS);
 
         enemyName.setAlignment(Align.center);
-        enemyName.setPosition(ENEMY_NAME_X, NAME_Y);
+        enemyName.setPosition(enemyNameX, NAME_Y);
 
-        enemyImage.setPosition(ENEMY_CHARACTER_X, CHARACTER_IMAGE_Y_POS);
+        enemyImage.setPosition(enemyCharacterX, CHARACTER_IMAGE_Y_POS);
         enemyImage.setWidth(CHARACTER_SIZE);
         enemyImage.setHeight(CHARACTER_SIZE);
 
-        enemyBox.setPosition(ENEMY_DISPLAY_X, DISPLAY_Y_POS);
+        enemyBox.setPosition(enemyDisplayX, DISPLAY_Y_POS);
         enemyBox.setWidth(TEXT_BOX_WIDTH);
         enemyBox.setHeight(TEXT_BOX_HEIGHT);
 

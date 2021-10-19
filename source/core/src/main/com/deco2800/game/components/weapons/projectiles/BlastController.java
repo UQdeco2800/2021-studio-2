@@ -5,15 +5,6 @@ package com.deco2800.game.components.weapons.projectiles;
  */
 public class BlastController extends ProjectileController {
     /**
-     * the blast's unique stats are used
-     */
-    @Override
-    public void create() {
-        super.create();
-        this.stats = new BlastStats();
-    }
-
-    /**
      * The blast disappears on a hit
      */
     @Override

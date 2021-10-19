@@ -23,6 +23,7 @@ public enum RandomDialogueSet {
             },
             new Dialogue[]{
                     Dialogue.TUTORIAL_MOVE,
+                    Dialogue.TUTORIAL_OTHER,
                     Dialogue.TUTORIAL_DASH,
                     Dialogue.TUTORIAL_TRAPS,
                     Dialogue.TUTORIAL_CRATES,
@@ -196,6 +197,23 @@ public enum RandomDialogueSet {
                     Dialogue.ODIN_ENCOUNTER_DEFEAT_1,
                     Dialogue.ODIN_ENCOUNTER_DEFEAT_2,
                     Dialogue.ODIN_ENCOUNTER_DEFEAT_3,
+            },
+            null
+    ),
+
+    ODIN_KILLED(
+            new Dialogue[]{
+                    Dialogue.ODIN_KILLED_FIRST
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_KILLED_VICTORY_1,
+                    Dialogue.ODIN_KILLED_VICTORY_2,
+                    Dialogue.ODIN_KILLED_VICTORY_3,
+            },
+            new Dialogue[]{
+                    Dialogue.ODIN_KILLED_DEFEAT_1,
+                    Dialogue.ODIN_KILLED_DEFEAT_2,
+                    Dialogue.ODIN_KILLED_DEFEAT_3,
             },
             null
     ),

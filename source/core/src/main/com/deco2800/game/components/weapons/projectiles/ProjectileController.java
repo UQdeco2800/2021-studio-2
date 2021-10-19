@@ -16,12 +16,10 @@ import com.deco2800.game.services.ServiceLocator;
  * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
  */
 public abstract class ProjectileController extends Component {
-    protected BlastStats stats;
     protected HitboxComponent hitbox;
     protected short targetLayer;
     protected CombatStatsComponent combatStats;
     protected long gameTime;
-    protected Vector2 target;
 
     /**
      * Component that is the main controller of the projectile entity, "Blast", shot from Scepter
@@ -46,7 +44,7 @@ public abstract class ProjectileController extends Component {
      */
     @Override
     public void update() {
-        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > this.stats.projectileLifespan) {
+        if ((ServiceLocator.getTimeSource().getTime() - gameTime) > BlastStats.PROJECTILE_LIFESPAN) {
             entity.prepareDispose();
         }
     }
@@ -73,15 +71,15 @@ public abstract class ProjectileController extends Component {
         Entity targetEntity = ((BodyUserData) other.getBody().getUserData()).entity;
         CombatStatsComponent targetStats = targetEntity.getComponent(CombatStatsComponent.class);
         if (targetStats != null) {
-            targetStats.weaponHit(this.stats.attackPower);
+            targetStats.weaponHit(BlastStats.ATTACK_POWER);
         }
 
         // Apply knockback
         PhysicsComponent physicsComponent = targetEntity.getComponent(PhysicsComponent.class);
-        if (physicsComponent != null && this.stats.knockback > 0f) {
+        if (physicsComponent != null && BlastStats.KNOCKBACK > 0f) {
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = targetEntity.getCenterPosition().sub(entity.getCenterPosition());
-            Vector2 impulse = direction.setLength(this.stats.knockback);
+            Vector2 impulse = direction.setLength(BlastStats.KNOCKBACK);
             targetBody.applyLinearImpulse(impulse, targetBody.getWorldCenter(), true);
         }
         this.onHit();

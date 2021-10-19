@@ -29,19 +29,6 @@ public class EntityHoverTask extends AnchoredWanderTask implements PriorityTask 
     }
 
     /**
-     * @param waitTime How long in seconds to wait between wandering.
-     * @param anchor   - entity to retreat to
-     * @param protectX - bounds around the object to stay in on the x axis
-     * @param protectY - bounds around the object to stay in on the y axis
-     */
-    public EntityHoverTask(Entity anchor, float protectX, float protectY,
-                           float waitTime, Vector2 givenOffset, float moveSpeedScl) {
-        super(anchor, protectX, protectY, waitTime);
-        this.givenOffset = givenOffset;
-        this.moveSpeedScl = moveSpeedScl;
-    }
-
-    /**
      * Start wander task - the entity move toward the target but target need to be in range of anchor
      */
     @Override

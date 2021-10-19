@@ -12,11 +12,20 @@ import com.deco2800.game.ui.textbox.TextBox;
  */
 public class GameArea1 extends GameArea {
 
+    /**
+     * Gamer area 1
+     * @param terrainFactory terrain factory
+     */
     public GameArea1(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Gamer area 1 with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public GameArea1(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;
@@ -31,7 +40,7 @@ public class GameArea1 extends GameArea {
         super.create("maps/lvl_3.json", "Level 2");
 
         spawnHellWarriorObject();
-        spawnBoss();
+        spawnLoki();
 
         spawnMovementCutscenes();
         spawnDialogueCutscenes(RandomDialogueSet.LOKI_ENCOUNTER);

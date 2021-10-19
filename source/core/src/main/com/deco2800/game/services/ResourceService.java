@@ -39,10 +39,6 @@ public class ResourceService implements Disposable {
         return assetManager.get(filename, type);
     }
 
-    public AssetManager getAssetManager() {
-        return assetManager;
-    }
-
     /**
      * Check if an asset has been loaded already
      *
@@ -94,16 +90,6 @@ public class ResourceService implements Disposable {
             logger.error(e.getMessage());
         }
         return !assetManager.isFinished();
-    }
-
-    /**
-     * Clears all loaded assets and assets in the preloading queue.
-     *
-     * @see AssetManager#clear()
-     */
-    public void clearAllAssets() {
-        logger.debug("Clearing all assets");
-        assetManager.clear();
     }
 
     /**

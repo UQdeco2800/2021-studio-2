@@ -126,15 +126,17 @@ public class ObstacleFactory {
     public static Entity createTeleport() {
 
         Entity teleport = new Entity()
-                .addComponent(new TextureRenderComponent("Assets/gametile-127.png"))
                 .addComponent(new PhysicsComponent())
+                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new CombatStatsComponent(1000000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
+                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.NPC))
                 .addComponent(new TeleportComponent(PhysicsLayer.TRAP));
 
         teleport.getComponent(PhysicsComponent.class).setBodyType(BodyType.StaticBody);
-        teleport.getComponent(TextureRenderComponent.class).scaleEntity();
-        teleport.scaleHeight(0.3f);
+        teleport.getComponent(ColliderComponent.class).setSensor(true);
+        PhysicsUtils.setScaledCollider(teleport, 0f, 0f);
+        teleport.scaleHeight(0.6f);
+
         return teleport;
     }
 

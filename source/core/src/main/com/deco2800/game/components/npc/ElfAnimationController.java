@@ -10,6 +10,8 @@ import com.deco2800.game.rendering.AnimationRenderComponent;
 public class ElfAnimationController extends Component {
     AnimationRenderComponent animator;
     private boolean death;
+    private static final String ASSASSIN_TYPE = "assassin";
+    private static final String RANGED_TYPE = "ranged";
 
     /**
      * Create the animation
@@ -37,11 +39,6 @@ public class ElfAnimationController extends Component {
         entity.getEvents().addListener("stunUp", this::animateUpStun);
         entity.getEvents().addListener("stunDown", this::animateDownStun);
 
-        entity.getEvents().addListener("assassinLeftShoot", this::animateAssassinLeft);
-        entity.getEvents().addListener("assassinRightShoot", this::animateAssassinRight);
-        entity.getEvents().addListener("assassinUpShoot", this::animateAssassinUp);
-        entity.getEvents().addListener("assassinDownShoot", this::animateAssassinDown);
-
         animateDown();
     }
 
@@ -52,11 +49,11 @@ public class ElfAnimationController extends Component {
     private void animate(String modifier) {
         if (!death) {
             switch (entity.getEntityType()) {
-                case "assassin":
-                    animator.startAnimation("assassin" + modifier);
+                case ASSASSIN_TYPE:
+                    animator.startAnimation(ASSASSIN_TYPE + modifier);
                     break;
-                case "ranged":
-                    animator.startAnimation("ranger" + modifier);
+                case RANGED_TYPE:
+                    animator.startAnimation(RANGED_TYPE + modifier);
                     break;
                 default:
                     animator.startAnimation("move" + modifier);
@@ -77,8 +74,8 @@ public class ElfAnimationController extends Component {
                     animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
                             animator.getEntity().getScale().y);
                 }
-                if (entity.getEntityType().equals("assassin")) {
-                    animator.startAnimation("assassin" + modifier + "Death");
+                if (entity.getEntityType().equals(ASSASSIN_TYPE)) {
+                    animator.startAnimation(ASSASSIN_TYPE + modifier + "Death");
                 } else {
                     animator.startAnimation(modifier.toLowerCase() + "Death");
                 }
@@ -105,22 +102,6 @@ public class ElfAnimationController extends Component {
         animate("Down");
     }
 
-    public void animateAssassinLeft() {
-        animator.startAnimation("assassinLeft");
-    }
-
-    public void animateAssassinRight() {
-        animator.startAnimation("assassinRight");
-    }
-
-    public void animateAssassinUp() {
-        animator.startAnimation("assassinUp");
-    }
-
-    public void animateAssassinDown() {
-        animator.startAnimation("assassinDown");
-    }
-
     public void animateLeftAttack() {
         animator.startAnimation("attackLeft");
     }
@@ -139,11 +120,11 @@ public class ElfAnimationController extends Component {
 
     private void stun(String modifier) {
         switch (entity.getEntityType()) {
-            case "assassin":
+            case ASSASSIN_TYPE:
                 animator.startAnimation("assassinStun" + modifier);
                 break;
-            case "ranged":
-                animator.startAnimation("rangerStun" + modifier);
+            case RANGED_TYPE:
+                animator.startAnimation("rangedStun" + modifier);
                 break;
             default:
                 animator.startAnimation("stun" + modifier);
@@ -169,4 +150,3 @@ public class ElfAnimationController extends Component {
 
 
 }
-

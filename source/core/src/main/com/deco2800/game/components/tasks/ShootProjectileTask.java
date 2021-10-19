@@ -10,9 +10,8 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
-import com.deco2800.game.entities.configs.WeaponConfigs;
+import com.deco2800.game.entities.configs.FastArrowConfig;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.files.FileLoader;
 import com.deco2800.game.files.UserSettings;
 import com.deco2800.game.physics.PhysicsEngine;
 import com.deco2800.game.physics.PhysicsLayer;
@@ -113,8 +112,15 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         NORMAL_ARROW,
         TRACKING_ARROW,
         FAST_ARROW,
-        FIREBALL
+        FIREBALL,
+        BEAM
     }
+
+    private boolean playingAnimation = false;
+
+    private static final String FIREBALLS_KEY = "fireBalls";
+
+    private static final String FIREBALL_MOVEMENT = "fireBallMovement";
 
 
     /**
@@ -165,7 +171,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         //Stops the fireballs from being created until ready.
         //Specifically so the boss doesnt create them before he teleports
         if (projectileType.equals(projectileTypes.FIREBALL) && owner.getEntity().data.get("createFireBall").equals(true)) {
-            if (!owner.getEntity().data.containsKey("fireBalls")) {
+            if (!owner.getEntity().data.containsKey(FIREBALLS_KEY)) {
                 //create fireball list
                 Entity[] entities = new Entity[]{
                         null,
@@ -174,13 +180,12 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                 };
                 gameArea.spawnEntityAt(entities[1], owner.getEntity().getCenterPosition(),
                         true, true);
-                owner.getEntity().data.put("fireBalls", entities);
+                owner.getEntity().data.put(FIREBALLS_KEY, entities);
                 lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                return (true);
             } else if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
                 //Add new fireball
                 int index = 0;
-                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
                 for (Entity fireball : entities) {
                     if (!ServiceLocator.getEntityService().getEntities().contains(
                             fireball, true)) {
@@ -190,17 +195,18 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                                 owner.getEntity().getCenterPosition(),
                                 true, true);
                         lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                        return (true);
+                        break;
                     }
                     index++;
                 }
+                return (true);
             } else {
                 //Check for fireball but don't make one
-                Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+                Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
                 for (Entity fireball : entities) {
                     if (ServiceLocator.getEntityService().getEntities().contains(
                             fireball, true)
-                            && fireball.data.get("fireBallMovement").equals(false)) {
+                            && fireball.data.get(FIREBALL_MOVEMENT).equals(false)) {
                         return (true);
 
                     }
@@ -216,10 +222,10 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      * @return next fireball to cast
      */
     private Entity getNextFireBall() {
-        Entity[] entities = (Entity[]) owner.getEntity().data.get("fireBalls");
+        Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
         for (Entity fireball : entities) {
             if (ServiceLocator.getEntityService().getEntities().contains(fireball, true)
-                    && fireball.data.get("fireBallMovement").equals(false)) {
+                    && fireball.data.get(FIREBALL_MOVEMENT).equals(false)) {
                 return (fireball);
             }
         }
@@ -231,75 +237,79 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public void update() {
-        if (canShoot() || poweringUp) {
+        if (canShoot() || poweringUp || playingAnimation) {
+            if (!(poweringUp || playingAnimation)) {
+                shootAnimation();
+            }
             owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            //trigger shoot projectile animations here
-            shoot();
+            if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - shootAnimationStart >= shootAnimationTimeMS
+                    || projectileType == projectileTypes.FAST_ARROW) {
+                shoot();
+                playingAnimation = false;
+                shootAnimationStart = 0;
+            }
         }
         checkFireBalls();
     }
 
     private void shootAnimation() {
-        shootAnimationStart = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+        playingAnimation = true;
+        if (shootAnimationStart == 0) {
+            shootAnimationStart = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+        }
         float targetDir = (getDirectionOfTarget() + 360 - 45) % 360; //shift axis
-//        if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("assassin")) {
-//            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-//                owner.getEntity().getEvents().trigger("assassinDownShoot");
-//            } else if (targetDir > 90 && targetDir < 180) {
-//                owner.getEntity().getEvents().trigger("assassinRightShoot");
-//            } else if (targetDir > 180 && targetDir < 270) {
-//                owner.getEntity().getEvents().trigger("assassinUpShoot");
-//            } else if (targetDir > 270 && targetDir < 360) {
-//                owner.getEntity().getEvents().trigger("assassinLeftShoot");
-//            }
-//        } else if (owner.getEntity().getEntityType() != null && this.owner.getEntity().getEntityType().equals("ranged")) {
-//            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-//                owner.getEntity().getEvents().trigger("rangedDownShoot");
-//            } else if (targetDir > 90 && targetDir < 180) {
-//                owner.getEntity().getEvents().trigger("rangedRightShoot");
-//            } else if (targetDir > 180 && targetDir < 270) {
-//                owner.getEntity().getEvents().trigger("rangedUpShoot");
-//            } else if (targetDir > 270 && targetDir < 360) {
-//                owner.getEntity().getEvents().trigger("rangedLeftShoot");
-//            }
-//        } else {
-//            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-//                owner.getEntity().getEvents().trigger("attackDown");
-//            } else if (targetDir > 90 && targetDir < 180) {
-//                owner.getEntity().getEvents().trigger("attackRight");
-//            } else if (targetDir > 180 && targetDir < 270) {
-//                owner.getEntity().getEvents().trigger("attackUp");
-//            } else if (targetDir > 270 && targetDir < 360) {
-//                owner.getEntity().getEvents().trigger("attackLeft");
-//            }
-//        }
+        if (owner.getEntity().getEntityType() != null
+                && (this.owner.getEntity().getEntityType().equals("ranged")
+                        || this.owner.getEntity().getEntityType().equals("assassin"))) {
+            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("DownStart");
+            } else if (targetDir > 90 && targetDir < 180) {
+                owner.getEntity().getEvents().trigger("RightStart");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("UpStart");
+            } else if (targetDir > 270 && targetDir < 360) {
+                owner.getEntity().getEvents().trigger("LeftStart");
+            }
+        } else {
+            if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+                owner.getEntity().getEvents().trigger("attackDown");
+            } else if (targetDir > 90 && targetDir < 180) {
+                owner.getEntity().getEvents().trigger("attackRight");
+            } else if (targetDir > 180 && targetDir < 270) {
+                owner.getEntity().getEvents().trigger("attackUp");
+            } else if (targetDir > 270 && targetDir < 360) {
+                owner.getEntity().getEvents().trigger("attackLeft");
+            }
+        }
     }
 
     /**
      * Spawns in a projectile according to the class' variables
      */
     public void shoot() {
-        if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - shootAnimationStart >= shootAnimationTimeMS) {
-            if (!poweringUp) {
-                lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+        if (!poweringUp) {
+            lastFired = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
+        }
+        switch (projectileType) {
+            case NORMAL_ARROW: {
+                shootNormalArrow();
+                break;
             }
-            switch (projectileType) {
-                case NORMAL_ARROW: {
-                    shootNormalArrow();
-                    break;
-                }
-                case TRACKING_ARROW: {
-                    shootTrackingArrow();
-                    break;
-                }
-                case FAST_ARROW: {
-                    powerupFastArrow();
-                    break;
-                }
-                case FIREBALL: {
-                    shootFireball();
-                    break;
-                }
+            case TRACKING_ARROW: {
+                shootTrackingArrow();
+                break;
+            }
+            case FAST_ARROW: {
+                powerupFastArrow();
+                break;
+            }
+            case FIREBALL: {
+                shootFireball();
+                break;
+            }
+            case BEAM: {
+                shootBeam();
+                break;
             }
         }
     }
@@ -370,15 +380,15 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
         //Rotate archer
         float targetDir = (relativeLocationTarget.angleDeg() + 180 - 45) % 360; //shift axis
-//        if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
-//            owner.getEntity().getEvents().trigger("DownStart");
-//        } else if (targetDir > 90 && targetDir < 180) {
-//            owner.getEntity().getEvents().trigger("RightStart");
-//        } else if (targetDir > 180 && targetDir < 270) {
-//            owner.getEntity().getEvents().trigger("UpStart");
-//        } else if (targetDir > 270 && targetDir < 360) {
-//            owner.getEntity().getEvents().trigger("LeftStart");
-//        }
+        if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
+            owner.getEntity().getEvents().trigger("DownStart");
+        } else if (targetDir > 90 && targetDir < 180) {
+            owner.getEntity().getEvents().trigger("RightStart");
+        } else if (targetDir > 180 && targetDir < 270) {
+            owner.getEntity().getEvents().trigger("UpStart");
+        } else if (targetDir > 270 && targetDir < 360) {
+            owner.getEntity().getEvents().trigger("LeftStart");
+        }
 
         updateTrajectory(aoe);
         float fade = ((float) TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired) / cooldownMS;
@@ -449,7 +459,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             gameArea.spawnEntityAt(arrow, owner.getEntity().getCenterPosition(), true, true);
             //Check if hit
             if (isTargetVisible() && tragectoryLocation.dst(target.getCenterPosition()) < aoe) {
-                int damage = FileLoader.readClass(WeaponConfigs.class, "configs/Weapons.json").fastArrow.baseAttack;
+                int damage = FastArrowConfig.BASE_ATTACK;
                 target.getComponent(CombatStatsComponent.class).addHealth(-damage);
             } else {
                 arrow.data.put("dealDamage", false);
@@ -463,13 +473,12 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
 
     private void shootFireball() {
         if (checkFireBalls()) {
-            //TrackingArrowConfig config = new TrackingArrowConfig();
             Entity fireBall = getNextFireBall();
             if (fireBall != null) {
                 //Change behaviour
                 fireBall.setAngle(getDirectionOfTarget());
                 fireBall.getComponent(HitboxComponent.class).setLayer(PhysicsLayer.PROJECTILEWEAPON);
-                fireBall.data.put("fireBallMovement", true);
+                fireBall.data.put(FIREBALL_MOVEMENT, true);
                 fireBall.getComponent(TouchAttackComponent.class).setTargetLayer(
                         (short) (PhysicsLayer.OBSTACLE | PhysicsLayer.PLAYER));
                 //add flying animation.
@@ -478,6 +487,19 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             }
             shootAnimation();
         }
+    }
+
+    /**
+     * Projectile shot by odin
+     */
+    public void shootBeam() {
+        Vector2 relativeLoc = target.getPosition().cpy().sub(owner.getEntity().getPosition());
+        relativeLoc.scl(30);
+        relativeLoc.add(owner.getEntity().getPosition());
+        Entity odinProjectile = WeaponFactory.createOdinProjectile(relativeLoc,
+                getDirectionOfTarget());
+        gameArea.spawnEntityAt(odinProjectile, owner.getEntity().getCenterPosition(), true, true);
+        shootAnimation();
     }
 
     /**
@@ -523,29 +545,24 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             if ((float) health / max <= 0.5f) {
                 if (count == 0) {
                     logger.info("Berserk mode: Attack Speed x 4");
-                    logger.info("Berserk mode: Deal true damage 20% player health");
                     setCooldownMS(500);
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(
-                            target.getComponent(CombatStatsComponent.class).getMaxHealth() / 5);
                     rampageStart = System.currentTimeMillis();
                     count++;
-                }
-                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
-                        && (float) health / max <= 0.25) {
-                    logger.info("You can't kill a boss when his minions are alive");
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
                 }
                 if (count == 1 && System.currentTimeMillis() - rampageStart >= 30000) {
                     logger.info("Berserk off");
                     setCooldownMS(2000);
                     owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
                     count++;
                 }
+            } else if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
+                    && (float) health / max < 1f) {
+                logger.info("You can't kill a boss when his minions are alive");
+                owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
             }
         }
         checkFireBalls();
-        if (canShoot() || poweringUp || TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - shootAnimationStart < shootAnimationTimeMS) {
+        if (canShoot() || poweringUp || playingAnimation) {
             return 20;
         }
         return -1;

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.rendering.RenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
+@SuppressWarnings("SuspiciousNameCombination")
 public class HealthBarComponent extends RenderComponent {
     private float ratioOfHealth = 1f;
     private float ratioOfHealthPrevious = 1f;
@@ -13,7 +14,7 @@ public class HealthBarComponent extends RenderComponent {
     private final Sprite healthBar;
     private final Sprite healthDecrease;
     private final float heightOfHealth;
-    private static final float xSize = 0.8f;
+    private static final float SIZE_X = 0.8f;
     private final float size;
     private float previousHealth;
     private boolean healthDecreaseCheck;
@@ -47,20 +48,20 @@ public class HealthBarComponent extends RenderComponent {
     }
 
     public void scaleHealth(float xScale) {
-        float width = (xSize / health.getWidth()) * size;
+        float width = (SIZE_X / health.getWidth()) * size;
         float height = (entity.getScale().y / health.getHeight()) * (xScale / 2) * size;
         health.setScale(height, width);
     }
 
     public void scaleHealthBar() {
-        float width = (xSize / healthBar.getWidth()) * size;
+        float width = (SIZE_X / healthBar.getWidth()) * size;
         float height = (entity.getScale().y / healthBar.getHeight()) * 0.5f * size;
         healthBar.setScale(height, width);
     }
 
     public void scaleHealthDecrease(float xScale, float xScalePrevious, double ratioHealthDecrease) {
         float scale = xScale + (xScalePrevious - xScale) * (float) ratioHealthDecrease;
-        float width = (xSize / healthBar.getWidth());
+        float width = (SIZE_X / healthBar.getWidth());
         float height = (entity.getScale().y / health.getHeight()) * (scale / 2);
         healthDecrease.setScale(height, width);
     }

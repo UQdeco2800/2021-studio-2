@@ -42,6 +42,13 @@ public enum Dialogue {
                     "\nOnce you're ready, walk back over to me.")
     }),
 
+    TUTORIAL_OTHER(new Message[]{
+            new Message(false, "If you don't care what I'm saying, you" +
+                    "\ncan press ESCAPE to finish the cutscenes."),
+            new Message(false, "The pause button is also on ESCAPE if you" +
+                    "\nneed a break.")
+    }),
+
     TUTORIAL_DASH(new Message[]{
             new Message(false, "To get around quickly, press SHIFT" +
                     "\nto sprint around and CAPS_LOCK to dash." +
@@ -97,6 +104,8 @@ public enum Dialogue {
             new Message(false, "You'll need your hands stained with blood" +
                     "\nbefore you're deemed worthy to enter."),
             new Message(true, "I understand. Nothing will get in my way."),
+            new Message(false, "Last thing, if you want to leave \nbefore defeating all " +
+                    "the enemies \nor take a break between fights \npress P to see the pause menu."),
             new Message(false, "Good luck warrior, I hope to never" +
                     "\nsee you again."),
             new Message(true, "Thank you. Same to you."),
@@ -427,6 +436,44 @@ public enum Dialogue {
                     "\n even with Valhalla now yours to roam?" +
                     "\n So be it.")
     }),
+
+    ODIN_KILLED_FIRST(new Message[]{
+            new Message(false, "You have defeated the best Asgard has to offer!" +
+                    "\n No mortal is worthier than you. Perhaps no god..." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_1(new Message[]{
+            new Message(false, "Revenge must taste sweet." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_2(new Message[]{
+            new Message(false, "They say revenge is best served cold." +
+                    "\n They won't say that anymore." +
+                    "\n Valhalla awaits you.")
+    }),
+
+    ODIN_KILLED_DEFEAT_3(new Message[]{
+            new Message(false, "Must be your lucky day." +
+                    "\n Walk through the gates before your luck changes.")
+    }),
+
+    ODIN_KILLED_VICTORY_1(new Message[]{
+            new Message(false, "Beaten by a mortal twice." +
+                    "\n Maybe, I should retire...")
+    }),
+
+    ODIN_KILLED_VICTORY_2(new Message[]{
+            new Message(true, "Is this the king of gods?" +
+                    "\n The gods must be weak!")
+    }),
+
+    ODIN_KILLED_VICTORY_3(new Message[]{
+            new Message(true, "King of gods?" +
+                    "\n I have seen peasants who fight better")
+    }),
+
 
     THOR_INTRODUCTION_FIRST(new Message[]{
             new Message(true, "I'm finally free from Loki, the heat from Hell" +

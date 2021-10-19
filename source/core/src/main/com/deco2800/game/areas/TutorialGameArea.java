@@ -21,6 +21,11 @@ public class TutorialGameArea extends GameArea {
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Tutorial game area with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public TutorialGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;
@@ -39,7 +44,6 @@ public class TutorialGameArea extends GameArea {
         spawnRangedElf();
         spawnAssassinElf();
         spawnAnchoredElf();
-        spawnBoss();
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
         return this;
@@ -71,10 +75,10 @@ public class TutorialGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.15f);
             incNum();
             elf.setEntityType("ranged");
-            elf.getEvents().trigger("rangerLeft");
+            elf.getEvents().trigger("rangedLeft");
             spawnEntityAt(elf, randomPos, true, true);
         }
     }
@@ -95,16 +99,6 @@ public class TutorialGameArea extends GameArea {
             spawnEntityAt(elf, randomPos, true, true);
             incNum();
         }
-    }
-
-    /**
-     * spawn boss - only spawn on the map if other enemies are killed
-     */
-    @Override
-    protected void spawnBoss() {
-        GridPoint2 bossPos = new GridPoint2(100, 100);
-        Entity boss = NPCFactory.createBossNPC(player);
-        spawnEntityAt(boss, bossPos, true, true);
     }
 
     @Override

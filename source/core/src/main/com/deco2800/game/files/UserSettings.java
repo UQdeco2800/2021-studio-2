@@ -103,9 +103,9 @@ public class UserSettings {
      * Stores chosen display settings. Can be serialised/deserialised.
      */
     public static class DisplaySettings {
-        public int width;
-        public int height;
-        public int refreshRate;
+        private int width;
+        private int height;
+        private int refreshRate;
 
         public DisplaySettings() {
         }
@@ -114,6 +114,30 @@ public class UserSettings {
             this.width = displayMode.width;
             this.height = displayMode.height;
             this.refreshRate = displayMode.refreshRate;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public int getRefreshRate() {
+            return refreshRate;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public void setRefreshRate(int refreshRate) {
+            this.refreshRate = refreshRate;
         }
     }
 }

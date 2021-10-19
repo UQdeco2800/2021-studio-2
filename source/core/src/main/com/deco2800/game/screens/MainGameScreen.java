@@ -88,7 +88,6 @@ public class MainGameScreen extends ScreenAdapter {
         ServiceLocator.registerRenderService(new RenderService());
 
         renderer = RenderFactory.createRenderer();
-        ServiceLocator.registerRenderer(renderer);
 
         renderer.getCamera().getEntity().setPosition(CAMERA_POSITION);
         renderer.getDebug().renderPhysicsWorld(physicsEngine.getWorld());
@@ -161,7 +160,7 @@ public class MainGameScreen extends ScreenAdapter {
      */
     private void isPlayerDead() {
         if (this.gameArea.getPlayer() != null
-                && this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead()) {
+                && Boolean.TRUE.equals(this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead())) {
             zoomCamera();
         }
     }
@@ -172,8 +171,10 @@ public class MainGameScreen extends ScreenAdapter {
     private void zoomCamera() {
         if (((OrthographicCamera) renderer.getCamera().getCamera()).zoom > 0.4) {
             ((OrthographicCamera) renderer.getCamera().getCamera()).zoom -= 0.008;
-        } else {
+        } else if (Boolean.TRUE.equals(this.gameArea.getPlayer().getComponent(CombatStatsComponent.class).isDead())) {
             game.setScreen(GdxGame.ScreenType.DEATHSCREEN);
+        } else if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
+            game.setScreen(GdxGame.ScreenType.END_SCREEN);
         }
     }
 
@@ -227,7 +228,7 @@ public class MainGameScreen extends ScreenAdapter {
      */
     private void playerWin() {
         if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
-            game.setScreen(GdxGame.ScreenType.END_SCREEN);
+            zoomCamera();
         }
     }
 
@@ -315,7 +316,7 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
-                .addComponent(new MainGameExitDisplay())
+                //.addComponent(new MainGameExitDisplay())
                 .addComponent(new PauseMenuActions(game))
                 .addComponent(new PauseMenuDisplay())
                 .addComponent(new PauseInputComponent())

@@ -46,6 +46,9 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
      */
     private final Entity ownerRunner;
 
+    private static final String TELEPORT_ID = "teleportID";
+
+    private static final String TELEPORT_TARGET = "teleportTarget";
 
     /**
      * Spawn the vortex
@@ -90,20 +93,20 @@ public class VortexSpawnTask extends DefaultTask implements PriorityTask {
         } else {
             max = true;
             //Let target teleport
-            if (owner.getEntity().data.containsKey("teleportID")
-                    && (int) owner.getEntity().data.get("teleportID") == 1
-                    && !owner.getEntity().data.containsKey("teleportTarget")) {
+            if (owner.getEntity().data.containsKey(TELEPORT_ID)
+                    && (int) owner.getEntity().data.get(TELEPORT_ID) == 1
+                    && !owner.getEntity().data.containsKey(TELEPORT_TARGET)) {
                 //Add body offset
-                owner.getEntity().data.put("teleportTarget", true);
+                owner.getEntity().data.put(TELEPORT_TARGET, true);
             }
             if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - time >= 800
                     && owner.getEntity().getScale().x > 0.1f
                     && owner.getEntity().getScale().y > 0.1f) {
                 //Stop target teleporting
-                if (owner.getEntity().data.containsKey("teleportID")
-                        && (int) owner.getEntity().data.get("teleportID") == 1
-                        && (boolean) owner.getEntity().data.get("teleportTarget")) {
-                    owner.getEntity().data.put("teleportTarget", false);
+                if (owner.getEntity().data.containsKey(TELEPORT_ID)
+                        && (int) owner.getEntity().data.get(TELEPORT_ID) == 1
+                        && (boolean) owner.getEntity().data.get(TELEPORT_TARGET)) {
+                    owner.getEntity().data.put(TELEPORT_TARGET, false);
                 }
                 owner.getEntity().setScale(owner.getEntity().getScale().sub(factor.scl(1.01f)));
                 owner.getEntity().setPosition(position);

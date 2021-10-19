@@ -15,12 +15,20 @@ import java.util.HashMap;
  * Level based on the insides of a Palace with the boss being Odin
  */
 public class GameArea3 extends GameArea {
-
+    /**
+     * Gamer area 3
+     * @param terrainFactory terrain factory
+     */
     public GameArea3(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Gamer area 3 with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public GameArea3(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;
@@ -52,10 +60,10 @@ public class GameArea3 extends GameArea {
         for (HashMap<String, Float> boss : bossObjects) {
             int x = boss.get("x").intValue();
             int y = boss.get("y").intValue();
-
+            incBossNum();
             spawnEntityAt(
                     NPCFactory.createOdin(player),
-                    new GridPoint2(x, map.getDimensions().get(tilesHeightJSON) - y),
+                    new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
                     false,
                     false);
         }

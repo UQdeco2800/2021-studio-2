@@ -63,10 +63,6 @@ public class TerrainComponent extends RenderComponent {
         return new GridPoint2(terrainLayer.getWidth(), terrainLayer.getHeight());
     }
 
-    public TiledMap getMap() {
-        return tiledMap;
-    }
-
     @Override
     public void draw(SpriteBatch batch) {
         tiledMapRenderer.setView(camera);

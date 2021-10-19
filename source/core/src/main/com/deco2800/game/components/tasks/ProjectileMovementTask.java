@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -33,17 +34,24 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
         ServiceLocator.getResourceService().getAsset("sounds/arrow_disappear.mp3", Sound.class).play(0.2f);
     }
 
+    private void playBeam() {
+        Sound arrowEffect = ServiceLocator.getResourceService().getAsset("sounds/beam_disappear" +
+                        ".mp3",
+                Sound.class);
+        arrowEffect.play();
+    }
+
     /**
      * Update the arrow position on the screen
      */
     @Override
     public void update() {
         //Change this if statement if there is too much lag
-        if (updateAngle > 0) {//UserSettings.get().fps/10) {
+        if (updateAngle > 0) {
             if (targetEntity != null) {
                 RaycastHit hit = new RaycastHit();
                 if (!ServiceLocator.getPhysicsService().getPhysics().raycast(owner.getEntity().getPosition(), targetEntity.getPosition(), PhysicsLayer.OBSTACLE, hit)) {
-                    float turningAngle = 0.4f;//UserSettings.get().fps;
+                    float turningAngle = 0.4f;
                     Vector2 relativeLocationTarget = target.cpy().sub(owner.getEntity().getPosition());
                     Vector2 relativeLocationEntity = targetEntity.getPosition().cpy().sub(owner.getEntity().getPosition());
                     if (relativeLocationTarget.angleDeg(relativeLocationEntity) > turningAngle && relativeLocationEntity.angleDeg(relativeLocationTarget) > turningAngle) {
@@ -104,8 +112,11 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
     public void stop() {
         super.stop();
         //Arrows disappears when at destination to stop it from looping in the same place
-        playArrow();
-//        owner.getEntity().prepareDispose();
+        if (owner.getEntity().getEntityType().contains("beam")) {
+            playBeam();
+        } else {
+            playArrow();
+        }
     }
 
     /**
@@ -114,6 +125,6 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
      * @return true if stop move, false otherwise
      */
     public boolean stoppedMoving() {
-        return (isAtTarget() || checkIfStuck());
+        return (isAtTarget() || checkIfStuck() || !owner.getEntity().getComponent(PhysicsMovementComponent.class).getMoving());
     }
 }

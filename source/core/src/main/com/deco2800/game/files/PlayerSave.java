@@ -17,6 +17,10 @@ public class PlayerSave {
     private static final String SAVE_FILE = "playersave.save";
     private static final Logger logger = LoggerFactory.getLogger(PlayerSave.class);
 
+    private PlayerSave() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * Function which takes in a PLayerSave.Save object
      * and writes it to the save file as is.
@@ -59,10 +63,8 @@ public class PlayerSave {
      * the file at location in SAVE_FILE
      */
     public static void load() {
-        try {
-            File saveFile = new File(SAVE_FILE);
-            Scanner saveRead = new Scanner(saveFile);
-
+        File saveFile = new File(SAVE_FILE);
+        try (Scanner saveRead = new Scanner(saveFile)){
             Save.setHasPlayed(Boolean.parseBoolean(saveRead.nextLine()));
             Save.setElfEnc(Integer.parseInt(saveRead.nextLine()));
             Save.setLokiEnc(Integer.parseInt(saveRead.nextLine()));
@@ -75,13 +77,12 @@ public class PlayerSave {
             Save.setLoki2Wins(Integer.parseInt(saveRead.nextLine()));
             Save.setThorWins(Integer.parseInt(saveRead.nextLine()));
             Save.setOdinWins(Integer.parseInt(saveRead.nextLine()));
-
             logger.debug("Player Save File correctly loaded into new game");
-
         } catch (FileNotFoundException | NumberFormatException e) {
             logger.warn("Player Save File has not correctly written save status");
             Save.resetSave();
         }
+
     }
 
     /**
@@ -109,6 +110,10 @@ public class PlayerSave {
         private static int loki2Wins = 0;
         private static int thorWins = 0;
         private static int odinWins = 0;
+
+        private Save() {
+            throw new IllegalStateException("Utility class");
+        }
 
         public static void setHasPlayed(boolean played) {
             hasPlayed = played;
