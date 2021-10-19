@@ -182,7 +182,6 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                         true, true);
                 owner.getEntity().data.put(FIREBALLS_KEY, entities);
                 lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                return (true);
             } else if (TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastCreatedFireball >= cooldownMS * 2.5) {
                 //Add new fireball
                 int index = 0;
@@ -196,10 +195,11 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                                 owner.getEntity().getCenterPosition(),
                                 true, true);
                         lastCreatedFireball = TimeUnit.NANOSECONDS.toMillis(System.nanoTime());
-                        return (true);
+                        break;
                     }
                     index++;
                 }
+                return (true);
             } else {
                 //Check for fireball but don't make one
                 Entity[] entities = (Entity[]) owner.getEntity().data.get(FIREBALLS_KEY);
@@ -545,25 +545,20 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
             if ((float) health / max <= 0.5f) {
                 if (count == 0) {
                     logger.info("Berserk mode: Attack Speed x 4");
-                    logger.info("Berserk mode: Deal true damage 20% player health");
                     setCooldownMS(500);
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(
-                            target.getComponent(CombatStatsComponent.class).getMaxHealth() / 5);
                     rampageStart = System.currentTimeMillis();
                     count++;
-                }
-                if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
-                        && (float) health / max <= 0.25) {
-                    logger.info("You can't kill a boss when his minions are alive");
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
                 }
                 if (count == 1 && System.currentTimeMillis() - rampageStart >= 30000) {
                     logger.info("Berserk off");
                     setCooldownMS(2000);
                     owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
-                    owner.getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
                     count++;
                 }
+            } else if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
+                    && (float) health / max < 1f) {
+                logger.info("You can't kill a boss when his minions are alive");
+                owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
             }
         }
         checkFireBalls();

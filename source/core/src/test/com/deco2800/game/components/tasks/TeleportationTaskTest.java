@@ -64,43 +64,6 @@ class TeleportationTaskTest {
     }
 
     @Test
-    void insideOfAreaBound() {
-        Entity taskRunner = makePhysicsEntity();
-
-        TeleportationTask teleportationTask = new TeleportationTask(taskRunner, 1000);
-
-        teleportationTask.create(() -> taskRunner);
-
-        taskRunner.setPosition(2f, 2f);
-
-        // ensure that the priority is 100 (initial priority is 100
-        assertEquals(100, teleportationTask.getPriority());
-
-    }
-
-    @Test
-    void outsideGameBound() {
-        Entity taskRunner = makePhysicsEntity();
-
-        TeleportationTask teleportationTask = new TeleportationTask(taskRunner, 1000);
-        AITaskComponent ai = new AITaskComponent();
-        ai.addTask(teleportationTask);
-        taskRunner.addComponent(ai);
-        taskRunner.setPosition(100f, 100f);
-        ServiceLocator.getGameAreaService().incNum();
-
-        taskRunner.create();
-        teleportationTask.start();
-
-
-        // outside the map
-        assertTrue(teleportationTask.mapBound());
-
-        taskRunner.setPosition(2f, 2f);
-        assertFalse(teleportationTask.mapBound());
-    }
-
-    @Test
     void activeCanSpawn() {
         Entity taskRunner = makePhysicsEntity();
 
@@ -114,12 +77,11 @@ class TeleportationTaskTest {
         taskRunner.setPosition(2f, 2f);
         taskRunner.create();
         teleportationTask.start();
-        when(gameArea.getNumEnemy()).thenReturn(1);
         teleportationTask.update();
         taskRunner.update();
         taskRunner.getComponent(CombatStatsComponent.class).setHealth(40);
         taskRunner.update();
-        assertEquals(30, teleportationTask.getPriority());
+        assertEquals(25, teleportationTask.getPriority());
     }
 
     @Test
@@ -136,7 +98,6 @@ class TeleportationTaskTest {
         taskRunner.setPosition(2f, 2f);
         taskRunner.create();
         teleportationTask.start();
-        when(gameArea.getNumEnemy()).thenReturn(1);
         teleportationTask.update();
         taskRunner.update();
         assertEquals(-1, teleportationTask.getPriority()); // health greater than 50%
@@ -156,7 +117,6 @@ class TeleportationTaskTest {
         taskRunner.setPosition(2f, 2f);
         taskRunner.create();
         teleportationTask.start();
-        when(gameArea.getNumEnemy()).thenReturn(1);
         teleportationTask.update();
         taskRunner.update();
         teleportationTask.teleport();
@@ -165,8 +125,6 @@ class TeleportationTaskTest {
         assertNotEquals(position1.x, taskRunner.getPosition().x, 0.0);
         teleportationTask.teleport();
         taskRunner.update();
-
-
     }
 
     private Entity makePhysicsEntity() {
