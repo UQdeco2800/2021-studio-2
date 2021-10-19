@@ -10,10 +10,6 @@ import com.deco2800.game.ui.UIComponent;
 import com.deco2800.game.ui.textbox.TextBox;
 
 public class BossOverlayComponent extends UIComponent {
-    /**
-     * Health Bar length Multiplier
-     */
-    private static final float LENGTH_MULTIPLIER = 5;
 
     /**
      * has the boss spawned
@@ -75,9 +71,9 @@ public class BossOverlayComponent extends UIComponent {
      */
     private String bossName = "Boss";
 
-    private final float HP_BAR_SIZE = 500f;
+    private static final  float HP_BAR_SIZE = 500f;
 
-    private final float OFF_SET = 100f;
+    private static final float OFF_SET = 100f;
 
 
     /**
@@ -95,7 +91,7 @@ public class BossOverlayComponent extends UIComponent {
         healthText.setFillParent(true);
         healthText.setZIndex(10);
         //position the boss name correctly in the center of hp bar
-        healthText.padRight(((HP_BAR_SIZE / 2) + OFF_SET) - (float)(bossName.length()/2)).padTop(40f);
+        healthText.padRight(((HP_BAR_SIZE / 2f) + OFF_SET) - (bossName.length() / 2f)).padTop(40f);
 
         healthLabel = new Label(bossName, skin, "health");
         healthText.add(healthLabel);

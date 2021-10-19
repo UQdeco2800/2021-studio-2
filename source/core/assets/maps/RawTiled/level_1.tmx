@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="230" height="230" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="710">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="230" height="230" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="720">
  <editorsettings>
   <export target="lvl_1.json" format="json"/>
  </editorsettings>
@@ -711,17 +711,16 @@
  <objectgroup id="14" name="initTeleportObjects">
   <object id="560" x="1152" y="2976" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="15" name="bossBounds" visible="0">
+ <objectgroup id="15" name="bossBounds">
   <object id="561" x="5536" y="3360" width="736" height="608"/>
  </objectgroup>
  <objectgroup id="16" name="moveRightObjects">
   <object id="657" x="4832" y="3616"/>
-  <object id="660" x="5696" y="3712"/>
  </objectgroup>
- <objectgroup id="19" name="cutsceneObjects">
-  <object id="662" x="5856" y="3680"/>
+ <objectgroup id="19" name="cutsceneObjects" visible="0">
+  <object id="662" x="5696" y="3776"/>
  </objectgroup>
- <objectgroup id="17" name="bossObjects" visible="0">
+ <objectgroup id="17" name="bossObjects">
   <object id="663" x="6048" y="3712"/>
  </objectgroup>
  <objectgroup id="24" name="healthCrateObjects">
@@ -737,32 +736,33 @@
   <object id="674" x="3232" y="3872"/>
   <object id="675" x="2848" y="3904"/>
   <object id="676" x="2816" y="3200"/>
+  <object id="730" x="5952" y="3392"/>
+  <object id="731" x="6048" y="3392"/>
+  <object id="733" x="5888" y="3968"/>
+  <object id="734" x="6016" y="3968"/>
  </objectgroup>
- <objectgroup id="18" name="moveDownObjects">
+ <objectgroup id="18" name="moveDownObjects" visible="0">
   <object id="659" x="5696" y="3616"/>
+  <object id="717" x="5696" y="3712"/>
  </objectgroup>
- <objectgroup id="13" name="teleportObjects" visible="0">
+ <objectgroup id="13" name="teleportObjects">
   <object id="559" x="6176" y="3872" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="20" name="meleeObjects" visible="0">
+ <objectgroup id="20" name="meleeObjects">
   <object id="683" x="2784" y="4160"/>
   <object id="684" x="2784" y="4032"/>
   <object id="685" x="1504" y="3264"/>
   <object id="686" x="1440" y="3904"/>
   <object id="688" x="1600" y="3904"/>
   <object id="689" x="3328" y="4032"/>
-  <object id="690" x="4288" y="4288"/>
+  <object id="690" x="4256" y="4256"/>
   <object id="691" x="3904" y="4736"/>
   <object id="692" x="3904" y="4640"/>
  </objectgroup>
- <objectgroup id="21" name="rangeObjects" visible="0">
+ <objectgroup id="21" name="rangeObjects">
   <object id="693" x="3040" y="4288"/>
   <object id="694" x="3008" y="3872"/>
   <object id="695" x="4128" y="4608"/>
-  <object id="696" x="5568" y="3872"/>
-  <object id="697" x="6112" y="3968"/>
-  <object id="698" x="5600" y="3424"/>
-  <object id="699" x="6016" y="3488"/>
   <object id="700" x="4672" y="2880"/>
   <object id="701" x="2464" y="3136"/>
   <object id="702" x="1792" y="4096"/>
@@ -770,20 +770,22 @@
   <object id="704" x="2112" y="4736"/>
   <object id="705" x="2336" y="4736"/>
  </objectgroup>
- <objectgroup id="22" name="assassinObjects" visible="0">
+ <objectgroup id="22" name="assassinObjects">
   <object id="677" x="4128" y="3680"/>
   <object id="678" x="4448" y="3680"/>
   <object id="680" x="4128" y="3456"/>
   <object id="681" x="4448" y="3456"/>
-  <object id="706" x="2240" y="4768"/>
   <object id="707" x="4160" y="4736"/>
   <object id="708" x="5856" y="3904"/>
   <object id="709" x="5824" y="3424"/>
+  <object id="727" x="6112" y="3936"/>
+  <object id="728" x="6208" y="3488"/>
+  <object id="729" x="5536" y="3488"/>
  </objectgroup>
- <objectgroup id="23" name="guardObjects" visible="0">
+ <objectgroup id="23" name="guardObjects">
   <object id="682" x="2656" y="4064"/>
  </objectgroup>
- <objectgroup id="2" name="wallObjects">
+ <objectgroup id="2" name="wallObjects" visible="0">
   <object id="1" x="1120" y="2880" width="1088" height="64"/>
   <object id="2" x="2208" y="2752" width="352" height="64"/>
   <object id="3" x="2560" y="2880" width="256" height="64"/>
@@ -1007,18 +1009,17 @@
   <object id="688" x="5792" y="3808" width="32" height="32"/>
   <object id="689" x="6176" y="3968" width="32" height="32"/>
   <object id="690" x="5536" y="3936" width="32" height="32"/>
+  <object id="725" x="1856" y="3936" width="160" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="spikeObjects">
   <object id="205" x="1760" y="3104" width="32" height="128"/>
   <object id="580" x="1727.01" y="3165.36" width="31.7429" height="98.2045"/>
   <object id="581" x="1694.28" y="3234.8" width="33.7268" height="26.7831"/>
   <object id="583" x="1759.75" y="3071.12" width="31.7429" height="32.7348"/>
-  <object id="584" x="1920.03" y="3004.89" width="31.2131" height="35.4311"/>
-  <object id="585" x="2078.62" y="3007.42" width="33.7439" height="31.2131"/>
   <object id="586" x="2208.54" y="3104.44" width="31.2131" height="31.2131"/>
-  <object id="587" x="1246.99" y="3327.71" width="33.01" height="320.482"/>
-  <object id="588" x="1119.28" y="3296" width="126.506" height="30.5106"/>
-  <object id="589" x="2784" y="3264" width="96" height="33.8812"/>
+  <object id="587" x="1246.99" y="3327.71" width="65.01" height="320.482"/>
+  <object id="588" x="1119.28" y="3264" width="126.506" height="62.5106"/>
+  <object id="589" x="2784" y="3232" width="128" height="65.8812"/>
   <object id="590" x="2881.88" y="3298.82" width="30.12" height="508.235"/>
   <object id="591" x="2754.73" y="3774.75" width="123.029" height="65.9881"/>
   <object id="592" x="3040" y="3264" width="64.794" height="33.1713"/>
@@ -1029,12 +1030,13 @@
   <object id="198" x="1760" y="3232" width="32" height="96"/>
   <object id="199" x="1632" y="3264" width="128" height="64"/>
   <object id="200" x="1600" y="3296" width="32" height="32"/>
-  <object id="565" x="1440" y="3967.77" width="256" height="159.887"/>
-  <object id="567" x="1697.37" y="3969.05" width="62.63" height="60.1177"/>
-  <object id="571" x="1888" y="3968.76" width="96" height="31.24"/>
-  <object id="575" x="2048" y="4097.08" width="32.1524" height="30.6863"/>
+  <object id="567" x="1696" y="3968" width="64" height="96"/>
+  <object id="571" x="1856" y="3968.76" width="160" height="63.24"/>
   <object id="576" x="4257.57" y="4289.61" width="125.816" height="30.8605"/>
   <object id="577" x="4319.29" y="4258.75" width="66.4688" height="27.2997"/>
   <object id="578" x="4354.9" y="4225.52" width="29.6736" height="60.5341"/>
+  <object id="710" x="1408" y="3968" width="288" height="160"/>
+  <object id="716" x="2016" y="4096" width="64" height="32"/>
+  <object id="718" x="1760" y="3968" width="32" height="64"/>
  </objectgroup>
 </map>

@@ -27,6 +27,8 @@ import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
 
+import java.security.SecureRandom;
+
 
 /**
  * Factory to create non-playable character (NPC) entities with predefined components.
@@ -208,8 +210,6 @@ public class NPCFactory {
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
-//                new AnimationRenderComponent(
-//                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
         animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
@@ -299,6 +299,12 @@ public class NPCFactory {
 
     public static Entity createRangedElf(Entity target, ShootProjectileTask.projectileTypes type, float multishotChance) {
         Entity elf = createBaseNPCNoAI();
+        SecureRandom rand = new SecureRandom();
+        double chance = rand.nextDouble();
+        if (chance <= multishotChance && type == ShootProjectileTask.projectileTypes.NORMAL_ARROW) {
+            type = ShootProjectileTask.projectileTypes.TRACKING_ARROW;
+            multishotChance = multishotChance / 2;
+        }
         AITaskComponent aiComponent =
                 new AITaskComponent()
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
@@ -384,8 +390,7 @@ public class NPCFactory {
         shootProjectileTask.setProjectileType(ShootProjectileTask.projectileTypes.FIREBALL);
         shootProjectileTask.setMultishotChance(0);
         aiComponent.addTask(shootProjectileTask);
-        //Dont create fireballs until ready and on the map
-        boss.data.put(CREATE_FIREBALL, false);
+        boss.data.put(CREATE_FIREBALL, true);
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(

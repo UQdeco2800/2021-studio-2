@@ -21,6 +21,11 @@ public class TutorialGameArea extends GameArea {
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Tutorial game area with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public TutorialGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;
@@ -70,7 +75,7 @@ public class TutorialGameArea extends GameArea {
 
         for (int i = 0; i < NUM_MELEE_ELF; i++) {
             GridPoint2 randomPos = RandomUtils.random(minPos, maxPos);
-            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.1f);
+            Entity elf = NPCFactory.createRangedElf(player, ShootProjectileTask.projectileTypes.NORMAL_ARROW, 0.15f);
             incNum();
             elf.setEntityType("ranged");
             elf.getEvents().trigger("rangedLeft");
