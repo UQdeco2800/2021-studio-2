@@ -475,6 +475,7 @@ public class NPCFactory {
                 .addComponent(healthBarComponent);
         thor.scaleWidth(2);
         thor.scaleHeight(2);
+        thor.setAttackRange(10);
         return thor;
     }
 
