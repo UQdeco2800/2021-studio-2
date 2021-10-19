@@ -121,7 +121,7 @@ public class Longsword extends MeleeWeapon {
         if (animator == null) {
             return;
         }
-        animator.startAnimation("aoe");
+        animator.startAnimation("longsword_aoe");
         timeSinceStrongAttack = ServiceLocator.getTimeSource().getTime();
     }
 

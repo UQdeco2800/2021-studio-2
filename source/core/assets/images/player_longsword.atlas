@@ -4,55 +4,90 @@ size: 2048, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-damaged_backward
-  rotate: false
-  xy: 398, 8
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-damaged_forward
-  rotate: false
-  xy: 1178, 268
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-damaged_left
-  rotate: false
-  xy: 918, 268
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-damaged_right
+default
   rotate: false
   xy: 788, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-default
+longsword_aoe
   rotate: false
-  xy: 788, 138
+  xy: 788, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: -1
+  index: 1
+longsword_aoe
+  rotate: false
+  xy: 788, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
 longsword_down
   rotate: false
-  xy: 788, 138
+  xy: 788, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 0
 default_left
   rotate: false
-  xy: 2, 2
+  xy: 134, 134
   size: 130, 130
   orig: 130, 130
   offset: 0, 0
   index: -1
+walk_left
+  rotate: false
+  xy: 134, 134
+  size: 130, 130
+  orig: 130, 130
+  offset: 0, 0
+  index: 1
+longsword_aoe
+  rotate: false
+  xy: 788, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 16
+longsword_aoe
+  rotate: false
+  xy: 788, 138
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 15
+longsword_aoe
+  rotate: false
+  xy: 1048, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+longsword_aoe
+  rotate: false
+  xy: 1048, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 6
+longsword_down
+  rotate: false
+  xy: 1048, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+longsword_aoe
+  rotate: false
+  xy: 1568, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 10
 longsword_down
   rotate: false
   xy: 528, 138
@@ -62,18 +97,11 @@ longsword_down
   index: 3
 longsword_down
   rotate: false
-  xy: 1568, 268
+  xy: 1438, 138
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-longsword_down
-  rotate: false
-  xy: 918, 8
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
 longsword_left
   rotate: false
   xy: 2, 266
@@ -90,14 +118,14 @@ longsword_left
   index: 4
 longsword_left
   rotate: false
-  xy: 134, 134
+  xy: 2, 2
   size: 130, 130
   orig: 130, 130
   offset: 0, 0
   index: 1
 longsword_left
   rotate: false
-  xy: 134, 134
+  xy: 2, 2
   size: 130, 130
   orig: 130, 130
   offset: 0, 0
@@ -118,7 +146,7 @@ longsword_right
   index: 5
 longsword_right
   rotate: false
-  xy: 1048, 268
+  xy: 918, 138
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -132,21 +160,7 @@ longsword_right
   index: 4
 longsword_right
   rotate: false
-  xy: 1828, 138
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-default_right
-  rotate: false
-  xy: 1828, 138
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-longsword_right
-  rotate: false
-  xy: 1048, 8
+  xy: 788, 8
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -160,14 +174,14 @@ longsword_up
   index: 1
 longsword_up
   rotate: false
-  xy: 1308, 138
+  xy: 1308, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 0
 default_backward
   rotate: false
-  xy: 1308, 138
+  xy: 1308, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -195,35 +209,35 @@ walk_down
   index: 2
 walk_down
   rotate: false
-  xy: 918, 138
+  xy: 918, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
 walk_down
   rotate: false
-  xy: 1308, 268
+  xy: 1178, 138
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 walk_down
   rotate: false
-  xy: 1438, 268
+  xy: 1308, 138
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 6
 walk_down
   rotate: false
-  xy: 1698, 138
+  xy: 1828, 138
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
 walk_down
   rotate: false
-  xy: 788, 8
+  xy: 658, 8
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -265,7 +279,28 @@ walk_right
   index: 4
 walk_right
   rotate: false
-  xy: 528, 8
+  xy: 1438, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+default_right
+  rotate: false
+  xy: 1438, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+longsword_right
+  rotate: false
+  xy: 1438, 268
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+walk_right
+  rotate: false
+  xy: 398, 8
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -286,28 +321,28 @@ walk_up
   index: 3
 walk_up
   rotate: false
-  xy: 1178, 138
+  xy: 1178, 268
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 5
 walk_up
   rotate: false
-  xy: 1438, 138
+  xy: 1698, 138
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 walk_up
   rotate: false
-  xy: 658, 8
+  xy: 528, 8
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 4
 walk_up
   rotate: false
-  xy: 1178, 8
+  xy: 918, 8
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

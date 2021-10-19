@@ -30,6 +30,7 @@ public class GameArea3 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
+        playerWeaponType = "Hammer";
         levelInt = 3;
         super.create("maps/lvl_2.json", "Level 4");
 

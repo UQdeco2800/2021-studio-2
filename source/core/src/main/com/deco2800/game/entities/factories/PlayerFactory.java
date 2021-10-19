@@ -96,8 +96,9 @@ public class PlayerFactory {
                 animator.addAnimation("longsword_up", 0.1f);
                 animator.addAnimation("longsword_down", 0.1f);
 
-                // Axe (default)
+                animator.addAnimation("longsword_aoe", 0.1f);
                 break;
+            // Axe (default)
             default:
                 animator = new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("images/player_axe.atlas", TextureAtlas.class));

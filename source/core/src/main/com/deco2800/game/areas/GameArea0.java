@@ -27,6 +27,7 @@ public class GameArea0 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
+        playerWeaponType = "Axe";
         super.create("maps/lvl_1.json", "Level 1");
 
         spawnMeleeElf();

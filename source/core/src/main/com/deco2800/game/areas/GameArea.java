@@ -178,7 +178,6 @@ public abstract class GameArea implements Disposable {
         tileTextures = map.tileRefsArray();
         loadAssets();
         displayUI(areaName);
-        setWeapon(areaName);
 
         spawnTerrain();
         spawnObstacles();
@@ -192,26 +191,6 @@ public abstract class GameArea implements Disposable {
 
         playMusic();
 
-    }
-
-    /**
-     * Used to retrieve the weapon associated with a given level.
-     */
-    private void setWeapon(String areaName) {
-        switch (areaName) {
-            case "Level 3":
-                playerWeaponType = "Longsword";
-                break;
-            case "Level 4":
-                playerWeaponType = "Scepter";
-                break;
-            case "Level 5":
-                playerWeaponType = "Hammer";
-                break;
-            default:
-                playerWeaponType = "Axe";
-        }
-        playerWeaponType = "Scepter";
     }
 
     /**
