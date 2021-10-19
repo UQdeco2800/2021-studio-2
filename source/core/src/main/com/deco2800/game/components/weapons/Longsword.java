@@ -34,7 +34,7 @@ public class Longsword extends MeleeWeapon {
         attackSound = ServiceLocator.getResourceService()
                 .getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
-                .getAsset("sounds/impact.ogg", Sound.class);
+                .getAsset("sounds/clank.mp3", Sound.class);
         strongAttackSize = new Vector2(2f, 2f); // default size
         hasStrongAttacked = false;
         timeSinceStrongAttack = 0L;

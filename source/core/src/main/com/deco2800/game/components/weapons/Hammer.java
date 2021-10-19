@@ -15,13 +15,17 @@ import com.deco2800.game.services.ServiceLocator;
 public class Hammer extends MeleeWeapon {
 
     /**
-     * Sound that plays every axe swing
+     * Sound that plays every hammer swing
      */
     private final Sound attackSound;
     /**
-     * Sound that plays when axe hits enemy
+     * Sound that plays when hammer hits enemy
      */
     private final Sound impactSound;
+    /**
+     * Sound that plays when hammer hits enemy
+     */
+    private final Sound aoeSound;
 
     /**
      * AOE / Strong attack size
@@ -48,7 +52,9 @@ public class Hammer extends MeleeWeapon {
         attackSound = ServiceLocator.getResourceService().
                 getAsset("sounds/swish.ogg", Sound.class);
         impactSound = ServiceLocator.getResourceService()
-                .getAsset("sounds/impact.ogg", Sound.class);
+                .getAsset("sounds/clank.mp3", Sound.class);
+        aoeSound = ServiceLocator.getResourceService()
+                .getAsset("sounds/lightning.mp3", Sound.class);
         strongAttackSize = new Vector2(2f, 2f); // default size
         hasStrongAttacked = false;
         hasRangeAttacked = false;
@@ -114,6 +120,7 @@ public class Hammer extends MeleeWeapon {
         }
         hasStrongAttacked = true;
         super.attack(MeleeWeapon.CENTER);
+        aoeSound.play();
         if (animator == null) {
             return;
         }

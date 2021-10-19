@@ -145,6 +145,7 @@ public abstract class GameArea implements Disposable {
     };
     protected static final String[] sounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg",
+            "sounds/lightning.mp3", "sounds/clank.mp3",
             "sounds/arrow_disappear.mp3",
             "sounds/arrow_shoot.mp3",
             "sounds/death_2.mp3",

@@ -150,7 +150,7 @@ public class PlayerFactory {
                         new Vector2(1f, 0.75f)));
                 break;
             default:  // Axe is default
-                player.addComponent(new Axe(PhysicsLayer.NPC, 7, 25,
+                player.addComponent(new Axe(PhysicsLayer.NPC, 4, 25,
                         new Vector2(1f, 0.75f)));
                 break;
         }
