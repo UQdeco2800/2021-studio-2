@@ -9,6 +9,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 
 
 /**
@@ -124,6 +125,7 @@ public class TouchAttackComponent extends TouchComponent {
 
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             knockbackForce = 0;
             getEntity().getEvents().trigger("brokenArrow");
         }
