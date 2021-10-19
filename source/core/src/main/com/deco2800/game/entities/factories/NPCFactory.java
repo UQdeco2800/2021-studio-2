@@ -16,6 +16,7 @@ import com.deco2800.game.components.tasks.loki.FirePillarTask;
 import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
 import com.deco2800.game.components.tasks.loki.SpawnLokiDecoyTask;
 import com.deco2800.game.components.tasks.thor.ShootLightningTask;
+import com.deco2800.game.components.tasks.thor.ThorAnimationController;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
@@ -438,7 +439,7 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 5f, 20f))
                         .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
-                        .addTask(new ShootLightningTask(target, 800, 150));
+                        .addTask(new ShootLightningTask(target, 2000, 150));
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -470,7 +471,7 @@ public class NPCFactory {
                 healthBar, healthBarFrame, healthBarDecrease);
         thor.addComponent(new CombatStatsComponent(ElfBossConfig.HEALTH, ElfBossConfig.BASE_ATTACK))
                 .addComponent(animator)
-                .addComponent(new HumanAnimationController())
+                .addComponent(new ThorAnimationController())
                 .addComponent(aiComponent)
                 .addComponent(healthBarComponent);
         thor.scaleWidth(2);
