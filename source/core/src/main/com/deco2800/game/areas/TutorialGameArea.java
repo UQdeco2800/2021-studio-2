@@ -87,6 +87,11 @@ public class TutorialGameArea extends GameArea {
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Tutorial game area with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public TutorialGameArea(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;

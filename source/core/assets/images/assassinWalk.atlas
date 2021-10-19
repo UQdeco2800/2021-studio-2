@@ -1,0 +1,69 @@
+
+assassinWalk.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+backAssassinWalk
+  rotate: false
+  xy: 2, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+backAssassinWalk
+  rotate: false
+  xy: 105, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+backAssassinWalk
+  rotate: false
+  xy: 208, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+frontAssassinWalk
+  rotate: false
+  xy: 311, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+frontAssassinWalk
+  rotate: false
+  xy: 414, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+frontAssassinWalk
+  rotate: false
+  xy: 517, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+leftAssassinWalk
+  rotate: false
+  xy: 620, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+leftAssassinWalk
+  rotate: false
+  xy: 723, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+leftAssassinWalk
+  rotate: false
+  xy: 826, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3

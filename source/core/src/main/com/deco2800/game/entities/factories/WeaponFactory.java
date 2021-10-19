@@ -317,7 +317,6 @@ public class WeaponFactory {
                                 new Vector2(FastArrowConfig.SPEED_X, FastArrowConfig.SPEED_Y), 0.8f));
 
         normalArrow
-                //.addComponent(new TextureRenderComponent(sprite))
                 .addComponent(new CombatStatsComponent(FastArrowConfig.HEALTH, 0))
                 //damage applied when shooting, arrow is decoration
                 .addComponent(aiComponent);

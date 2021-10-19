@@ -4,98 +4,14 @@ size: 1024, 256
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-moveDown
-  rotate: false
-  xy: 2, 114
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
-moveDown
-  rotate: false
-  xy: 2, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 2
-moveDown
-  rotate: false
-  xy: 98, 114
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 3
-moveLeft
-  rotate: false
-  xy: 98, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
-moveLeft
-  rotate: false
-  xy: 194, 114
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 2
-moveLeft
-  rotate: false
-  xy: 194, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 3
-moveRight
-  rotate: false
-  xy: 290, 114
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
-moveRight
-  rotate: false
-  xy: 290, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 2
-moveRight
-  rotate: false
-  xy: 386, 114
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 3
-moveUp
-  rotate: false
-  xy: 386, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
-moveUp
-  rotate: false
-  xy: 482, 114
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 2
-moveUp
-  rotate: false
-  xy: 482, 2
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 3
-stunBack
+stunUp
   rotate: false
   xy: 578, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-stunFront
+stunDown
   rotate: false
   xy: 578, 2
   size: 94, 110
@@ -124,166 +40,334 @@ default
   offset: 0, 0
   index: 1
 
-guardElfBackDeath.png
-size: 512, 128
+guardDeath.png
+size: 1024, 256
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 backDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 0
-backDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 1
 backDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 2
 backDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 101, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 3
 backDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 101, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 4
-
-guardElfFrontDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-frontDeath
+backDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 200, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: 0
+  index: 5
 frontDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 200, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 1
 frontDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 299, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 2
 frontDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 299, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 3
 frontDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 398, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 4
-
-guardElfLeftDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
+frontDeath
+  rotate: false
+  xy: 398, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
 leftDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 497, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 1
 leftDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 497, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 2
 leftDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 596, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 3
 leftDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 596, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
+  index: 4
 leftDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 695, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: -1
-
-guardElfRightDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
+  index: 5
 rightDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: 0
-rightDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 695, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 1
 rightDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 794, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 2
 rightDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 794, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 3
 rightDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 105
-  orig: 94, 105
+  xy: 893, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 4
+rightDeath
+  rotate: false
+  xy: 893, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
+
+guardMeleeAttack.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+attackUp
+  rotate: false
+  xy: 2, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+attackUp
+  rotate: false
+  xy: 98, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+attackUp
+  rotate: false
+  xy: 194, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+attackDown
+  rotate: false
+  xy: 290, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+attackDown
+  rotate: false
+  xy: 386, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+attackDown
+  rotate: false
+  xy: 482, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+attackLeft
+  rotate: false
+  xy: 578, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+attackRight
+  rotate: false
+  xy: 578, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+attackLeft
+  rotate: false
+  xy: 674, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+attackRight
+  rotate: false
+  xy: 674, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+attackLeft
+  rotate: false
+  xy: 770, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+attackRight
+  rotate: false
+  xy: 770, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+
+guardWalk.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+moveUp
+  rotate: false
+  xy: 2, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+moveUp
+  rotate: false
+  xy: 98, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+moveUp
+  rotate: false
+  xy: 194, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+moveDown
+  rotate: false
+  xy: 290, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+moveDown
+  rotate: false
+  xy: 386, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+moveDown
+  rotate: false
+  xy: 482, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+moveRight
+  rotate: false
+  xy: 578, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+moveRight
+  rotate: false
+  xy: 674, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+moveRight
+  rotate: false
+  xy: 770, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+
+guardWalkLeft.png
+size: 512, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+moveLeft
+  rotate: false
+  xy: 2, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+moveLeft
+  rotate: false
+  xy: 98, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+moveLeft
+  rotate: false
+  xy: 194, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3

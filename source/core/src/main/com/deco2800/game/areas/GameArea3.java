@@ -15,11 +15,20 @@ import java.util.HashMap;
  * Level based on the insides of a Palace with the boss being Odin
  */
 public class GameArea3 extends GameArea {
+    /**
+     * Gamer area 3
+     * @param terrainFactory terrain factory
+     */
     public GameArea3(TerrainFactory terrainFactory) {
         super();
         this.terrainFactory = terrainFactory;
     }
 
+    /**
+     * Gamer area 3 with teleport save health
+     * @param terrainFactory terrain factory
+     * @param currentHealth player health from last map
+     */
     public GameArea3(TerrainFactory terrainFactory, int currentHealth) {
         super();
         this.terrainFactory = terrainFactory;

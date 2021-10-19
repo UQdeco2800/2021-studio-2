@@ -50,7 +50,7 @@ public class ObstacleFactory {
     /**
      * Creates a trap with collision resizable.
      *
-     * @return trap
+     * @return trap entity
      */
     public static Entity createRSPhysicalTrap(float width, float height) {
         Entity trap = new Entity()
@@ -65,24 +65,29 @@ public class ObstacleFactory {
 
     /**
      * Creates a trap with no collision resizable.
-     *
-     * @return trap
+     * Using the json x,y
+     * @return trap entity
      */
     public static Entity createRSNonePhysicalTrap(float width, float height) {
         Entity trap = new Entity()
                 .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
-                .addComponent(new CombatStatsComponent(1000000, 70))
+                .addComponent(new CombatStatsComponent(1000000, 50))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
         trap.setScale(width, height);
         return trap;
     }
 
+    /**
+     * Creates a trap with no collation.
+     * Using the json x,y
+     * @return trap entity
+     */
     public static Entity createNonePhysicalTrap() {
         Entity trap = new Entity()
                 .addComponent(new TextureRenderComponent("images/trap.png"))
                 .addComponent(new PhysicsComponent())
-                .addComponent(new CombatStatsComponent(1000000, 10))
+                .addComponent(new CombatStatsComponent(1000000, 50))
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
                 .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 0));
 
@@ -95,7 +100,7 @@ public class ObstacleFactory {
     /**
      * Creates a trap with collation.
      *
-     * @return trap
+     * @return trap entity
      */
     public static Entity createPhysicalTrap() {
         Entity trap = new Entity()
@@ -113,6 +118,11 @@ public class ObstacleFactory {
     }
 
 
+    /**
+     * Creates a trap with no collation.
+     * Using the json x,y
+     * @return teleport entity
+     */
     public static Entity createTeleport() {
 
         Entity teleport = new Entity()
