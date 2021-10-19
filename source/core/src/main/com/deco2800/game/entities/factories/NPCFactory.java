@@ -475,7 +475,8 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 5f, 20f))
                         .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
-                        .addTask(new ShootLightningTask(target, 2000, 150));
+                        .addTask(new ShootLightningTask(target, 2000, 150))
+                        .addTask(new PauseTask());
 
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
@@ -509,7 +510,10 @@ public class NPCFactory {
                 .addComponent(animator)
                 .addComponent(new ThorAnimationController())
                 .addComponent(aiComponent)
-                .addComponent(healthBarComponent);
+                .addComponent(healthBarComponent)
+                .addComponent(new BossOverlayComponent());
+        thor.getComponent(BossOverlayComponent.class).nameBoss("Thor");
+        thor.setEntityType("thor");
         thor.scaleWidth(2);
         thor.scaleHeight(2);
         thor.setAttackRange(10);

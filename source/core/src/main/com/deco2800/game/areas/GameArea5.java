@@ -44,8 +44,8 @@ public class GameArea5 extends GameArea {
 
         levelInt = 3;
         super.create("maps/lvl_5.json", "Level 5");
-        //spawnOutdoorArcherObject();
-        //spawnOutdoorWarriorObject();
+        spawnOutdoorArcherObject();
+        spawnOutdoorWarriorObject();
         spawnThor();
 
         spawnMovementCutscenes();

@@ -171,9 +171,6 @@ public class ShootLightningTask extends DefaultTask implements PriorityTask {
      */
     @Override
     public int getPriority() {
-        if (owner.getEntity().getEntityType().equals("transformed")) {
-            return -1;
-        }
         if (canAttack() || TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastShootAnimation < shootAnimationTimeMS) {
             return 20;
         }

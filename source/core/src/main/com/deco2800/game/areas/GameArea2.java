@@ -36,14 +36,14 @@ public class GameArea2 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
-        playerWeaponType = "Longsword";
+        playerWeaponType = "Scepter";
         music = "sounds/area3.mp3";
 
         levelInt = 2;
         super.create("maps/lvl_4.json", "Level 3");
 
         spawnHellWarriorObject();
-        spawnThor();
+        spawnLoki();
 
         spawnMovementCutscenes();
         spawnDialogueCutscenes(RandomDialogueSet.LOKI2_ENCOUNTER);
