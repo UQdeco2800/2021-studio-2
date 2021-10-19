@@ -169,37 +169,47 @@ int&nbsp;currentHealth)</code></th>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispose()">dispose</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">dispose the game screen that no longer need it</div>
+</td>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#levelChange()">levelChange</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Use for teleport, get the leve change</div>
+<div class="block">Use for teleport, get the leve change to ture</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pause()">pause</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">pause the game</div>
+</td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#render(float)">render</a></span>&#8203;(float&nbsp;delta)</code></th>
 <td class="colLast">
-<div class="block">render map or new map if teleport trigger</div>
+<div class="block">render the map or new map if teleport trigger
+ get the player health form the previous map and keep it to next map
+ change the gameChange tate back to false;</div>
 </td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resize(int,int)">resize</a></span>&#8203;(int&nbsp;width,
 int&nbsp;height)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">resize the object</div>
+</td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resume()">resume</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">resume the game</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -264,14 +274,16 @@ int&nbsp;currentHealth)</span></div>
 <section class="detail">
 <h3><a id="levelChange()">levelChange</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">levelChange</span>()</div>
-<div class="block">Use for teleport, get the leve change</div>
+<div class="block">Use for teleport, get the leve change to ture</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="render(float)">render</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">render</span>&#8203;(<span class="arguments">float&nbsp;delta)</span></div>
-<div class="block">render map or new map if teleport trigger</div>
+<div class="block">render the map or new map if teleport trigger
+ get the player health form the previous map and keep it to next map
+ change the gameChange tate back to false;</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true#render(float)" title="class or interface in com.badlogic.gdx" class="externalLink">render</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">Screen</a></code></dd>
@@ -285,11 +297,15 @@ int&nbsp;currentHealth)</span></div>
 <h3><a id="resize(int,int)">resize</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">resize</span>&#8203;(<span class="arguments">int&nbsp;width,
 int&nbsp;height)</span></div>
+<div class="block">resize the object</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true#resize(int,int)" title="class or interface in com.badlogic.gdx" class="externalLink">resize</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">Screen</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/ScreenAdapter.html?is-external=true#resize(int,int)" title="class or interface in com.badlogic.gdx" class="externalLink">resize</a></code>&nbsp;in class&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/ScreenAdapter.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">ScreenAdapter</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>width</code> - new width</dd>
+<dd><code>height</code> - new hegiht</dd>
 </dl>
 </section>
 </li>
@@ -297,6 +313,7 @@ int&nbsp;height)</span></div>
 <section class="detail">
 <h3><a id="pause()">pause</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">pause</span>()</div>
+<div class="block">pause the game</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true#pause()" title="class or interface in com.badlogic.gdx" class="externalLink">pause</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">Screen</a></code></dd>
@@ -309,6 +326,7 @@ int&nbsp;height)</span></div>
 <section class="detail">
 <h3><a id="resume()">resume</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">resume</span>()</div>
+<div class="block">resume the game</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true#resume()" title="class or interface in com.badlogic.gdx" class="externalLink">resume</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">Screen</a></code></dd>
@@ -321,6 +339,7 @@ int&nbsp;height)</span></div>
 <section class="detail">
 <h3><a id="dispose()">dispose</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">dispose</span>()</div>
+<div class="block">dispose the game screen that no longer need it</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true#dispose()" title="class or interface in com.badlogic.gdx" class="externalLink">dispose</a></code>&nbsp;in interface&nbsp;<code><a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/Screen.html?is-external=true" title="class or interface in com.badlogic.gdx" class="externalLink">Screen</a></code></dd>
