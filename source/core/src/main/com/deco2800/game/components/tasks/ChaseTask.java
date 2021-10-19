@@ -100,6 +100,19 @@ public class ChaseTask extends DefaultTask implements PriorityTask {
      * @return float distance toward target
      */
     protected float getDistanceToTarget() {
+        Vector2 direction = target.getCenterPosition().sub(owner.getEntity().getCenterPosition());
+        float targetDir = direction.angleDeg(); //shift axis
+        if (owner.getEntity().getPosition().dst(target.getPosition()) < 0.1f) {
+            if (direction.angleDeg() > 45 && direction.angleDeg() < 135) {
+                owner.getEntity().getEvents().trigger("attackUp");
+            } else if (direction.angleDeg() > 135 && direction.angleDeg() < 225) {
+                owner.getEntity().getEvents().trigger("attackLeft");
+            } else if (direction.angleDeg() > 225 && direction.angleDeg() < 315) {
+                owner.getEntity().getEvents().trigger("attackDown");
+            } else {
+                owner.getEntity().getEvents().trigger("attackRight");
+            }
+        }
         return owner.getEntity().getPosition().dst(target.getPosition());
     }
 
