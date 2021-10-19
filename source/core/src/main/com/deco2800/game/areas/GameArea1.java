@@ -8,12 +8,13 @@ import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 
 /**
- * Level based on Helhiem (lava level) with Loki as boss.
+ * Dungeon Level with an Elf Mage as the boss
  */
 public class GameArea1 extends GameArea {
 
     /**
-     * Gamer area 1
+     * Gamer area 0
+     *
      * @param terrainFactory terrain factory
      */
     public GameArea1(TerrainFactory terrainFactory) {
@@ -22,9 +23,10 @@ public class GameArea1 extends GameArea {
     }
 
     /**
-     * Gamer area 1 with teleport save health
+     * Gamer area 0 with teleport save health
+     *
      * @param terrainFactory terrain factory
-     * @param currentHealth player health from last map
+     * @param currentHealth  player health from last map
      */
     public GameArea1(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -36,17 +38,21 @@ public class GameArea1 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
-        playerWeaponType = "Longsword";
-        music = "sounds/area2.mp3";
+        playerWeaponType = "Axe";
+        music = "sounds/area1.mp3";
 
         levelInt = 1;
-        super.create("maps/lvl_3.json", "Level 2");
+        super.create("maps/lvl_1.json", "Level 1");
 
-        spawnHellWarriorObject();
-        spawnLoki();
+        spawnMeleeElf();
+        spawnElfGuard();
+        spawnRangedElf();
+        spawnAssassinElf();
+        spawnAnchoredElf();
+        spawnBoss();
 
         spawnMovementCutscenes();
-        spawnDialogueCutscenes(RandomDialogueSet.LOKI_ENCOUNTER);
+        spawnDialogueCutscenes(RandomDialogueSet.ELF_ENCOUNTER);
         setInitialDialogue();
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
@@ -60,22 +66,19 @@ public class GameArea1 extends GameArea {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
 
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_INTRODUCTION;
-
         PlayerSave.Save.setHasPlayed(true);
-        if (PlayerSave.Save.getLokiEnc() == 0) {
-            textBox.setRandomFirstEncounter(dialogueSet);
+        if (PlayerSave.Save.getElfEnc() == 0) {
+            textBox.setRandomFirstEncounter(RandomDialogueSet.ELF_INTRODUCTION);
         } else {
-            if (PlayerSave.Save.getLokiWins() == 0) {
+            if (PlayerSave.Save.getElfWins() == 0) {
                 //If getWins() returns 0, that means the most recent game has resulted in a loss
-                textBox.setRandomDefeatDialogueSet(dialogueSet);
+                textBox.setRandomDefeatDialogueSet(RandomDialogueSet.ELF_INTRODUCTION);
             } else {
                 // When it returns 1, then the player has beaten the boss before
-                textBox.setRandomBeatenDialogueSet(dialogueSet);
+                textBox.setRandomBeatenDialogueSet(RandomDialogueSet.ELF_INTRODUCTION);
             }
         }
-        PlayerSave.Save.setElfWins(1);
-        PlayerSave.Save.setLokiWins(0);
+        PlayerSave.Save.setElfWins(0);
         PlayerSave.write();
     }
 }

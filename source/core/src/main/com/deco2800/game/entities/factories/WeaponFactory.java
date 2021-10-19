@@ -24,7 +24,10 @@ import com.deco2800.game.components.weapons.projectiles.BlastController;
 import com.deco2800.game.components.weapons.projectiles.HammerProjectile;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.LineEntity;
-import com.deco2800.game.entities.configs.*;
+import com.deco2800.game.entities.configs.ArrowConfig;
+import com.deco2800.game.entities.configs.FastArrowConfig;
+import com.deco2800.game.entities.configs.PlayerConfig;
+import com.deco2800.game.entities.configs.TrackingArrowConfig;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.ColliderComponent;
 import com.deco2800.game.physics.components.HitboxComponent;
@@ -47,6 +50,7 @@ public class WeaponFactory {
     private static final String ARROW_ATLAS = "images/newArrowBroken/atlas/arrow.atlas";
     private static final String ARROW_TYPE = "arrow";
     private static final String ARROW_BROKEN = "brokenArrow";
+    private static final String FIREBALL_FLYING = "flying";
 
     /**
      * manages the sound to play when constructing the projectile
@@ -196,7 +200,7 @@ public class WeaponFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
                                 "images/fireball/fireballAnimation.atlas", TextureAtlas.class));
-        animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(FIREBALL_FLYING, 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("hit", 0.02f, Animation.PlayMode.NORMAL);
         animator.startAnimation("staticFireball");
@@ -485,15 +489,12 @@ public class WeaponFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset(
                                 "images/fireball/fireballAnimationBlue.atlas", TextureAtlas.class));
-        animator.addAnimation("flying", 0.1f, Animation.PlayMode.LOOP);
-        animator.addAnimation("staticFireball", 0.1f, Animation.PlayMode.LOOP);
+        animator.addAnimation(FIREBALL_FLYING, 0.1f, Animation.PlayMode.LOOP);
         animator.addAnimation("hit", 0.2f, Animation.PlayMode.NORMAL);
-        animator.startAnimation("flying");
+        animator.startAnimation(FIREBALL_FLYING);
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
         Entity entity = new Entity()
                 .addComponent(animator)

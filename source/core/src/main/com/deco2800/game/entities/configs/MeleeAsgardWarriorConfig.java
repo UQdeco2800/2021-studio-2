@@ -7,6 +7,7 @@ public class MeleeAsgardWarriorConfig {
     private MeleeAsgardWarriorConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     /**
      * health attribute
      */

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * <p>Allows global access to a few core game services. Warning: global access is a trap and should
  * be used extremely sparingly. Read the README for details.
  */
-@SuppressWarnings({"GDXJavaStaticResource", "GDXJavaUnsafeIterator"})
+@SuppressWarnings({"GDXJavaStaticResource"})
 public class ServiceLocator {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLocator.class);
     private static EntityService entityService;

@@ -1,10 +1,10 @@
 {
-    com.badlogic.gdx.graphics.g2d.BitmapFont: {
+    BitmapFont: {
         prstart: {
             file: prstart.fnt
         }
     }
-    com.badlogic.gdx.graphics.Color: {
+    Color: {
         RGBA_0_0_0_255: {
             r: 0
             g: 0
@@ -30,13 +30,13 @@
             a: 1
         }
     }
-    com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+    TextButtonStyle: {
         default: {
             font: prstart
             fontColor: RGBA_0_0_0_255
             downFontColor: RGBA_255_255_255_255
             overFontColor: RGBA_55_54_54_255
-            up: 242708800_395361705487237_3927263406891731984_n (1)
+            up: pauseAsset
         }
     }
 }

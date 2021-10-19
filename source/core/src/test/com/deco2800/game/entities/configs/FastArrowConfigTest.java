@@ -39,7 +39,7 @@ class FastArrowConfigTest {
             System.out.println("fail()2");
         } catch (InvocationTargetException e) {
             System.out.println("fail()3");
-        }  catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             fail();
         }
     }

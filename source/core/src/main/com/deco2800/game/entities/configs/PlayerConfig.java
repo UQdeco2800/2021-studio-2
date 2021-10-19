@@ -7,6 +7,7 @@ public class PlayerConfig {
     private PlayerConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     /**
      * health attribute
      */
@@ -14,5 +15,5 @@ public class PlayerConfig {
     /**
      * attack attribute
      */
-    public static final int BASE_ATTACK = 100;
+    public static final int BASE_ATTACK = 10;
 }

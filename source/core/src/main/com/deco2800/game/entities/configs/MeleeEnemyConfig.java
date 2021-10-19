@@ -7,6 +7,7 @@ public class MeleeEnemyConfig {
     private MeleeEnemyConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     /**
      * health attribute
      */

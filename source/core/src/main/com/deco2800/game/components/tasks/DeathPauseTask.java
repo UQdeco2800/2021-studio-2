@@ -2,7 +2,6 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
@@ -100,14 +99,6 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             owner.getEntity().getComponent(ColliderComponent.class).dispose();
             owner.getEntity().getComponent(HitboxComponent.class).dispose();
             owner.getEntity().getComponent(TouchAttackComponent.class).dispose();
-            TreeMap<String, Object> data = owner.getEntity().data;
-            if (data.containsKey("fireBalls")) {
-                for (Entity fireBall : (Entity[]) data.get("fireBalls")) {
-                    if (fireBall != null) {
-                        fireBall.prepareDispose();
-                    }
-                }
-            }
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {

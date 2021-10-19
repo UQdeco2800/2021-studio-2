@@ -118,6 +118,10 @@ public class NPCFactory {
      * Final String variable to define the down stun animations.
      */
     private static final String STUN_DOWN = "stunDown";
+    /**
+     * Default animation
+     */
+    private static final String DEFAULT_ANIMATION = "default";
 
     /**
      * Final String variable to define the up stun animations.
@@ -142,29 +146,7 @@ public class NPCFactory {
      */
     public static Entity createMeleeElf(Entity target) {
         Entity elf = createBaseNPCNoAI();
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
-
-        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
-
-        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
-
-        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
-
-        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
+        AnimationRenderComponent animator = meleeElfAnimation(0);
 
         AITaskComponent aiComponent =
                 new AITaskComponent()
@@ -209,28 +191,7 @@ public class NPCFactory {
                         target, 0, 100, 100, 1.5f));
         elfGuard.addComponent(aiTaskComponent);
 
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
-        animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_DOWN, 0.4f, Animation.PlayMode.LOOP);
-
-        animator.addAnimation(FRONT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(LEFT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(RIGHT_DEATH, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(BACK_DEATH, 0.2f, Animation.PlayMode.NORMAL);
-
-        animator.addAnimation(STUN_LEFT, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(STUN_RIGHT, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(STUN_UP, 0.5f, Animation.PlayMode.NORMAL);
-        animator.addAnimation(STUN_DOWN, 0.5f, Animation.PlayMode.NORMAL);
-
-        animator.addAnimation(ATTACK_DOWN, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
-        animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
+        AnimationRenderComponent animator = meleeElfAnimation(1);
 
         elfGuard
                 .addComponent(new CombatStatsComponent(MeleeEnemyConfig.HEALTH, MeleeEnemyConfig.BASE_ATTACK))
@@ -271,9 +232,32 @@ public class NPCFactory {
                                 target, 0, 100, 100, 1.5f));
         anchoredElf.addComponent(aiComponent);
 
-        AnimationRenderComponent animator =
-                new AnimationRenderComponent(
-                        ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
+        AnimationRenderComponent animator = meleeElfAnimation(0);
+
+        anchoredElf
+                .addComponent(new CombatStatsComponent(MeleeEnemyConfig.HEALTH, MeleeEnemyConfig.BASE_ATTACK))
+                .addComponent(animator)
+                .addComponent(new ElfAnimationController());
+
+        anchoredElf.addComponent(createHealthBarComponent());
+
+        anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
+        anchoredElf.setScale(1f, 1.3f);
+        anchoredElf.setEntityType("melee");
+        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
+        anchoredElf.setAttackRange(6);
+        return anchoredElf;
+    }
+
+    private static AnimationRenderComponent meleeElfAnimation(int type) {
+        AnimationRenderComponent animator;
+        if (type == 1) {
+            animator = new AnimationRenderComponent(
+                    ServiceLocator.getResourceService().getAsset("images/meleeFinal.atlas", TextureAtlas.class));
+        } else {
+            animator = new AnimationRenderComponent(
+                    ServiceLocator.getResourceService().getAsset("images/guardFinal.atlas", TextureAtlas.class));
+        }
         animator.addAnimation(MOVE_LEFT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_RIGHT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(MOVE_UP, 0.4f, Animation.PlayMode.LOOP);
@@ -293,20 +277,7 @@ public class NPCFactory {
         animator.addAnimation(ATTACK_LEFT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(ATTACK_RIGHT, 0.4f, Animation.PlayMode.LOOP);
         animator.addAnimation(ATTACK_UP, 0.4f, Animation.PlayMode.LOOP);
-
-        anchoredElf
-                .addComponent(new CombatStatsComponent(MeleeEnemyConfig.HEALTH, MeleeEnemyConfig.BASE_ATTACK))
-                .addComponent(animator)
-                .addComponent(new ElfAnimationController());
-
-        anchoredElf.addComponent(createHealthBarComponent());
-
-        anchoredElf.getComponent(AnimationRenderComponent.class).scaleEntity();
-        anchoredElf.setScale(1f, 1.3f);
-        anchoredElf.setEntityType("melee");
-        PhysicsUtils.setScaledCollider(anchoredElf, 0.9f, 0.2f);
-        anchoredElf.setAttackRange(6);
-        return anchoredElf;
+        return animator;
     }
 
     /**
@@ -494,6 +465,8 @@ public class NPCFactory {
         animator.addAnimation("thor_left_walking", 0.13f, Animation.PlayMode.LOOP);
         animator.addAnimation("thor_right_walking", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+
+        animator.addAnimation(DEFAULT_ANIMATION, 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
@@ -540,7 +513,7 @@ public class NPCFactory {
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("Odin/odin.atlas",
                                 TextureAtlas.class));
-        animator.startAnimation("default");
+        animator.startAnimation(DEFAULT_ANIMATION);
         setHumanAnimations(animator);
 
         odin.addComponent(new CombatStatsComponent(OdinBossConfig.HEALTH, OdinBossConfig.BASE_ATTACK))
@@ -694,7 +667,7 @@ public class NPCFactory {
      */
     private static void setHumanAnimations(AnimationRenderComponent animator) {
 
-        animator.addAnimation("default", 0.2f, Animation.PlayMode.NORMAL);
+        animator.addAnimation(DEFAULT_ANIMATION, 0.2f, Animation.PlayMode.NORMAL);
         animator.addAnimation("defaultLeft", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("defaultRight", 0.05f, Animation.PlayMode.NORMAL);
         animator.addAnimation("defaultUp", 0.05f, Animation.PlayMode.NORMAL);

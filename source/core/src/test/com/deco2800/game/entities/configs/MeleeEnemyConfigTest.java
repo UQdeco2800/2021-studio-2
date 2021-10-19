@@ -30,14 +30,14 @@ class MeleeEnemyConfigTest {
         assert constructor != null;
         constructor.setAccessible(true);
         try {
-            MeleeEnemyConfig meleeEnemyConfig = constructor.newInstance();
+            constructor.newInstance();
         } catch (InstantiationException e) {
             System.out.println("fail()");
         } catch (IllegalAccessException e) {
             System.out.println("fail()2");
         } catch (InvocationTargetException e) {
             System.out.println("fail()3");
-        }  catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             fail();
         }
     }

@@ -13,7 +13,7 @@ import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SuppressWarnings("StatementWithEmptyBody")
 class ProjectileTest {
@@ -43,7 +43,7 @@ class ProjectileTest {
             deleted = true;
         }
         if (!deleted) {
-            assertTrue(false);
+            fail();
         }
     }
 

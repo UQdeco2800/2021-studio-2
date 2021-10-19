@@ -28,9 +28,6 @@ public class TouchTeleportComponent extends TouchComponent {
         }
         if (this.getEntity().data.containsKey("teleportTarget") && (boolean) this.getEntity().data.get("teleportTarget")) {
             target.teleport((Vector2) this.getEntity().data.get("teleportLoc"));
-            //Set this to only let the target travel once
-            /*set "teleportTarget" to  false;
-            disable ColliderComponent */
         }
     }
 }

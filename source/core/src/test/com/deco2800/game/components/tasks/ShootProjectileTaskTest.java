@@ -19,7 +19,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -158,35 +157,11 @@ class ShootProjectileTaskTest {
         assertEquals(20, shootProjectileTask.getPriority());
     }
 
-    @Test
-    void shootArrow() {
-        // load all the sound and images
-        Entity entity = makePhysicsEntity();
-        entity.setPosition(2, 2);
-        Entity target = makeTargetEntity();
-        target.setPosition(0, 0);
-        gameArea = mock(GameArea.class);
-        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setMultishotChance(0.1);
-        AITaskComponent ai = new AITaskComponent().addTask(shootProjectileTask);
-        entity.addComponent(ai);
-        entity.setAttackRange(5);
-        entity.create();
-        entity.update();
-    }
-
     private Entity makePhysicsEntity() {
         return new Entity()
                 .addComponent(new PhysicsComponent())
                 .addComponent(new HitboxComponent())
                 .addComponent(new CombatStatsComponent(1000, 0))
-                .addComponent(new PhysicsMovementComponent());
-    }
-
-    private Entity makeTargetEntity() {
-        return new Entity()
-                .addComponent(new PhysicsComponent())
-                .addComponent(new CombatStatsComponent(1000, 10))
                 .addComponent(new PhysicsMovementComponent());
     }
 } 

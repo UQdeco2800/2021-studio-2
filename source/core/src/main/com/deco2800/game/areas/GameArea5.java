@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class GameArea5 extends GameArea {
     /**
      * Gamer area 3
+     *
      * @param terrainFactory terrain factory
      */
     public GameArea5(TerrainFactory terrainFactory) {
@@ -26,8 +27,9 @@ public class GameArea5 extends GameArea {
 
     /**
      * Gamer area 3 with teleport save health
+     *
      * @param terrainFactory terrain factory
-     * @param currentHealth player health from last map
+     * @param currentHealth  player health from last map
      */
     public GameArea5(TerrainFactory terrainFactory, int currentHealth) {
         super();
@@ -42,25 +44,41 @@ public class GameArea5 extends GameArea {
         playerWeaponType = "Hammer";
         music = "sounds/area4.mp3";
 
-        levelInt = 3;
-        super.create("maps/lvl_5.json", "Level 5");
+        levelInt = 5;
+        super.create("maps/lvl_2.json", "Level 5");
+
         spawnOutdoorArcherObject();
         spawnOutdoorWarriorObject();
-        spawnThor();
+        spawnAsgardWarriorObject();
+        spawnOdin();
 
         spawnMovementCutscenes();
-        spawnDialogueCutscenes(RandomDialogueSet.THOR_ENCOUNTER);
+        spawnDialogueCutscenes(RandomDialogueSet.ODIN_ENCOUNTER);
         setInitialDialogue();
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
         return this;
     }
 
+    private void spawnOdin() {
+        HashMap<String, Float>[] bossObjects = map.getBossObjects();
+        for (HashMap<String, Float> boss : bossObjects) {
+            int x = boss.get("x").intValue();
+            int y = boss.get("y").intValue();
+            incBossNum();
+            spawnEntityAt(
+                    NPCFactory.createOdin(player),
+                    new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
+                    false,
+                    false);
+        }
+    }
+
     private void setInitialDialogue() {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
 
-        RandomDialogueSet dialogueSet = RandomDialogueSet.THOR_INTRODUCTION;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_INTRODUCTION;
 
         PlayerSave.Save.setHasPlayed(true);
         if (PlayerSave.Save.getOdinEnc() == 0) {
@@ -74,8 +92,8 @@ public class GameArea5 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setLoki2Wins(1);
-        PlayerSave.Save.setThorWins(0);
+        PlayerSave.Save.setThorWins(1);
+        PlayerSave.Save.setOdinWins(0);
         PlayerSave.write();
     }
 

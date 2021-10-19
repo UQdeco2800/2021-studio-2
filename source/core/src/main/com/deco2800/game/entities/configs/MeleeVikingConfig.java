@@ -7,6 +7,7 @@ public class MeleeVikingConfig {
     private MeleeVikingConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     /**
      * health attribute
      */

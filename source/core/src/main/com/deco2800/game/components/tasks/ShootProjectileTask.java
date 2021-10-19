@@ -260,7 +260,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
         float targetDir = (getDirectionOfTarget() + 360 - 45) % 360; //shift axis
         if (owner.getEntity().getEntityType() != null
                 && (this.owner.getEntity().getEntityType().equals("ranged")
-                        || this.owner.getEntity().getEntityType().equals("assassin"))) {
+                || this.owner.getEntity().getEntityType().equals("assassin"))) {
             if (targetDir > 0 && targetDir < 90) { //if arrow of the angle is between 0 and 90 degrees use left shoot animation
                 owner.getEntity().getEvents().trigger("DownStart");
             } else if (targetDir > 90 && targetDir < 180) {

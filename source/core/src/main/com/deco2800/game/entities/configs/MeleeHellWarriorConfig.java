@@ -7,6 +7,7 @@ public class MeleeHellWarriorConfig {
     private MeleeHellWarriorConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     /**
      * health attribute
      */

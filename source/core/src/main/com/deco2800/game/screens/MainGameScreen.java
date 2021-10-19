@@ -10,7 +10,6 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
-import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.pause.PauseInputComponent;
 import com.deco2800.game.components.pause.PauseMenuActions;
 import com.deco2800.game.components.pause.PauseMenuDisplay;
@@ -102,8 +101,8 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "game0":
-                this.gameArea = new GameArea0(terrainFactory).create();
+            case "tutorial":
+                this.gameArea = new TutorialArea(terrainFactory).create();
                 break;
             case "game1":
                 this.gameArea = new GameArea1(terrainFactory).create();
@@ -134,8 +133,8 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "game0":
-                this.gameArea = new GameArea0(terrainFactory, currentHealth).create();
+            case "tutorial":
+                this.gameArea = new TutorialArea(terrainFactory, currentHealth).create();
                 break;
             case "game1":
                 this.gameArea = new GameArea1(terrainFactory, currentHealth).create();
@@ -153,7 +152,6 @@ public class MainGameScreen extends ScreenAdapter {
                 this.gameArea = new GameArea5(terrainFactory, currentHealth).create();
                 break;
             default:
-                this.gameArea = new TutorialGameArea(terrainFactory, currentHealth).create();
                 break;
         }
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -198,11 +196,7 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (gameChange) {
-            if (gameArea.getLevel() == 9) {
-                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA0, currentHealth);
-                gameChange = false;
-            } else if (gameArea.getLevel() == 0) {
+            if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);
                 gameChange = false;
@@ -212,13 +206,13 @@ public class MainGameScreen extends ScreenAdapter {
                 gameChange = false;
             } else if (gameArea.getLevel() == 2) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 3) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA4, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 4) {
+            } else if (gameArea.getLevel() == 4 || gameArea.getLevel() == 5) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
                 gameChange = false;
@@ -243,7 +237,8 @@ public class MainGameScreen extends ScreenAdapter {
 
     /**
      * resize the object
-     * @param width new width
+     *
+     * @param width  new width
      * @param height new hegiht
      */
     @Override
@@ -325,7 +320,6 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
-                //.addComponent(new MainGameExitDisplay())
                 .addComponent(new PauseMenuActions(game))
                 .addComponent(new PauseMenuDisplay())
                 .addComponent(new PauseInputComponent())

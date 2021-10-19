@@ -3,15 +3,12 @@ package com.deco2800.game.components.tasks.thor;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 
-
-import com.deco2800.game.components.Component;
-import com.deco2800.game.rendering.AnimationRenderComponent;
-
 /**
  * This class listens to events relevant to an entity's state and plays the animation when one
  * of the events is triggered.
  */
 public class ThorAnimationController extends Component {
+    private static final String DEFAULT_ANIMATION = "default";
     AnimationRenderComponent animator;
     private boolean death;
     private boolean dead = false;
@@ -51,14 +48,7 @@ public class ThorAnimationController extends Component {
         entity.getEvents().addListener("stopLeft", this::stopLeft);
         entity.getEvents().addListener("stopRight", this::stopRight);
         entity.getEvents().addListener("enableWalk", this::enableWalk);
-        animator.startAnimation("default");
-    }
-
-    /**
-     * Sets the death of the entity to be true.
-     */
-    public void setDeath() {
-        death = true;
+        animator.startAnimation(DEFAULT_ANIMATION);
     }
 
     /**
@@ -77,11 +67,7 @@ public class ThorAnimationController extends Component {
                 enableWalk();
                 left = true;
             }
-        } else if (!death) {
-            if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
-                attack = false;
-            }
-        } else if (!dead){
+        } else if (!dead) {
             dead = true;
             animator.startAnimation("leftDeath");
         }
@@ -105,7 +91,7 @@ public class ThorAnimationController extends Component {
             } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else if (!dead){
+        } else if (!dead) {
             dead = true;
             animator.startAnimation("rightDeath");
         }
@@ -129,7 +115,7 @@ public class ThorAnimationController extends Component {
             } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else if (!dead){
+        } else if (!dead) {
             dead = true;
             animator.startAnimation("frontDeath");
         }
@@ -153,7 +139,7 @@ public class ThorAnimationController extends Component {
             } else if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
                 attack = false;
             }
-        } else if (!dead){
+        } else if (!dead) {
             dead = true;
             animator.startAnimation("backDeath");
         }
@@ -223,7 +209,7 @@ public class ThorAnimationController extends Component {
             if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformedLeft");
             } else {
-                animator.startAnimation("default");
+                animator.startAnimation(DEFAULT_ANIMATION);
             }
         } else {
             animateLeft();
@@ -238,7 +224,7 @@ public class ThorAnimationController extends Component {
             if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformedRight");
             } else {
-                animator.startAnimation("default");
+                animator.startAnimation(DEFAULT_ANIMATION);
             }
         } else {
             animateRight();
@@ -253,7 +239,7 @@ public class ThorAnimationController extends Component {
             if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformed");
             } else {
-                animator.startAnimation("default");
+                animator.startAnimation(DEFAULT_ANIMATION);
             }
         } else {
             animateDown();
@@ -268,7 +254,7 @@ public class ThorAnimationController extends Component {
             if (entity.getEntityType().equals(TRANSFORMED)) {
                 animator.startAnimation("defaultTransformedUp");
             } else {
-                animator.startAnimation("default");
+                animator.startAnimation(DEFAULT_ANIMATION);
             }
         } else {
             animateUp();
