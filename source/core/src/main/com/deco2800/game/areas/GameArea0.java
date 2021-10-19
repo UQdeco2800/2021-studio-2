@@ -38,6 +38,7 @@ public class GameArea0 extends GameArea {
         spawnAssassinElf();
         spawnAnchoredElf();
         spawnBoss();
+        spawnThor();
 
         spawnMovementCutscenes();
         spawnDialogueCutscenes(RandomDialogueSet.ELF_ENCOUNTER);
