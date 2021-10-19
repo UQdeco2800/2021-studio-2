@@ -490,8 +490,8 @@ public class NPCFactory {
 
         animator.addAnimation("up_thor_walk", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("down_thor_walk", 0.13f, Animation.PlayMode.LOOP);
-        animator.addAnimation("right_thor_walk", 0.13f, Animation.PlayMode.LOOP);
-        animator.addAnimation("left_thor_walk", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("thor_left_walking", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("thor_right_walking", 0.18f, Animation.PlayMode.LOOP);
         animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
         animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
