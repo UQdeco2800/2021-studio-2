@@ -3421,15 +3421,15 @@
                  "y":3296
                 }, 
                 {
-                 "height":96,
+                 "height":29.1677,
                  "id":567,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":64,
-                 "x":1696,
-                 "y":3968
+                 "width":96,
+                 "x":1664,
+                 "y":4000
                 }, 
                 {
                  "height":63.2399999999998,
@@ -3515,7 +3515,7 @@
          "y":0
         }],
  "nextlayerid":25,
- "nextobjectid":720,
+ "nextobjectid":718,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
