@@ -75,29 +75,6 @@ class TeleportationTaskTest {
 
         // ensure that the priority is 100 (initial priority is 100
         assertEquals(-1, teleportationTask.getPriority());
-
-    }
-
-    @Test
-    void outsideGameBound() {
-        Entity taskRunner = makePhysicsEntity();
-
-        TeleportationTask teleportationTask = new TeleportationTask(taskRunner, 1000);
-        AITaskComponent ai = new AITaskComponent();
-        ai.addTask(teleportationTask);
-        taskRunner.addComponent(ai);
-        taskRunner.setPosition(100f, 100f);
-        ServiceLocator.getGameAreaService().incNum();
-
-        taskRunner.create();
-        teleportationTask.start();
-
-
-        // outside the map
-        assertTrue(teleportationTask.mapBound());
-
-        taskRunner.setPosition(2f, 2f);
-        assertFalse(teleportationTask.mapBound());
     }
 
     @Test
