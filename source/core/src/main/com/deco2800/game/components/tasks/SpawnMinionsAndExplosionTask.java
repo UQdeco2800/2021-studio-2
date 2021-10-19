@@ -9,7 +9,9 @@ import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.WeaponFactory;
 import com.deco2800.game.services.ServiceLocator;
-import java.util.concurrent.ThreadLocalRandom;
+
+import java.security.SecureRandom;
+import java.util.Random;
 
 
 /**
@@ -51,7 +53,8 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
     public SpawnMinionsAndExplosionTask(Entity target) {
         this.target = target;
         this.gameArea = ServiceLocator.getGameAreaService();
-        spawnComparator = ThreadLocalRandom.current().nextInt(2, 8);
+        Random rand = new SecureRandom();
+        spawnComparator = rand.nextInt(7) + 2;
     }
 
     /**
@@ -82,7 +85,8 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
         gameArea.spawnEntityAt(explosion, owner.getEntity().getCenterPosition(), true, true);
         triggered = false;
         spawn = 0;
-        spawnComparator = ThreadLocalRandom.current().nextInt(2, 9);
+        Random rand = new SecureRandom();
+        spawnComparator = rand.nextInt(7) + 2;
     }
 
     /**

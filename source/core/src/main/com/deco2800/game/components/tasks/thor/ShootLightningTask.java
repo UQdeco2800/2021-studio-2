@@ -6,7 +6,6 @@ import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.components.tasks.thor.LightningProjectile;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 
 
 public class ShootLightningTask extends DefaultTask implements PriorityTask {

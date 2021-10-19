@@ -23,6 +23,7 @@ public class GameArea4 extends GameArea {
 
     /**
      * Gamer area 4
+     *
      * @param terrainFactory terrain factory
      */
     public GameArea4(TerrainFactory terrainFactory) {
@@ -32,8 +33,9 @@ public class GameArea4 extends GameArea {
 
     /**
      * Gamer area 4 with teleport save health
+     *
      * @param terrainFactory terrain factory
-     * @param currentHealth player health from last map
+     * @param currentHealth  player health from last map
      */
     public GameArea4(TerrainFactory terrainFactory, int currentHealth) {
         super();

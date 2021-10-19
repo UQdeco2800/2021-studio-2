@@ -116,18 +116,6 @@ public class UserSettings {
             this.refreshRate = displayMode.refreshRate;
         }
 
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public int getRefreshRate() {
-            return refreshRate;
-        }
-
         public void setWidth(int width) {
             this.width = width;
         }

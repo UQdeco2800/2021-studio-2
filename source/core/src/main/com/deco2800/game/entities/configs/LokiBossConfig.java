@@ -7,6 +7,7 @@ public class LokiBossConfig {
     private LokiBossConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     public static final int HEALTH = 1000;
     public static final int BASE_ATTACK = 30;
 }

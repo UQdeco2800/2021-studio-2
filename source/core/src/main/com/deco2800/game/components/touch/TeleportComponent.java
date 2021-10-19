@@ -19,6 +19,7 @@ public class TeleportComponent extends TouchComponent {
     /**
      * action apply when the hitbox component collide
      * triger the levelchange function
+     *
      * @param me    the owner of the hitbox
      * @param other the target of the hitbox
      */

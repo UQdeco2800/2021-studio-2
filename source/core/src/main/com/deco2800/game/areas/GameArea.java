@@ -24,7 +24,6 @@ import com.deco2800.game.utils.math.GridPoint2Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,13 +146,13 @@ public abstract class GameArea implements Disposable {
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "thor/lightning.atlas", "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-             "images/newArrowBroken/atlas/arrow.atlas", "images/player_axe.atlas",
+            "images/newArrowBroken/atlas/arrow.atlas", "images/player_axe.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas", "Odin" +
             "/OdinProjectile/beamBroken.atlas", "images/fireball/fireballAnimationBlue.atlas",
-            "/OdinProjectile/beamBroken.atlas", "rangedDeath.atlas",  "guardDeath.atlas", "meleeDeath.atlas", "assassinDeath.atlas", "bossDeath.atlas", "assassinWalk.atlas",
+            "/OdinProjectile/beamBroken.atlas", "rangedDeath.atlas", "guardDeath.atlas", "meleeDeath.atlas", "assassinDeath.atlas", "bossDeath.atlas", "assassinWalk.atlas",
             "rangedWalk.atlas", "guardMeleeAttack.atlas"
     };
     protected static final String[] sounds = {
@@ -664,23 +663,6 @@ public abstract class GameArea implements Disposable {
                     }
                 }
             }
-        }
-    }
-
-    protected void spawnSpikeTraps() {
-        HashMap<String, Float>[] spikeTraps = map.getSpikeObjects();
-        for (HashMap<String, Float> spikeTrap : spikeTraps) {
-            int x = spikeTrap.get("x").intValue();
-            int y = spikeTrap.get("y").intValue();
-            float width = spikeTrap.get(WALL_WIDTH);
-            float height = spikeTrap.get(WALL_HEIGHT);
-
-            int unitHeight = (int) (height / 32f);
-            spawnEntityAt(
-                    ObstacleFactory.createRSPhysicalTrap((width / 32f) * 0.5f, (height / 32f) * 0.5f),
-                    new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - (y + unitHeight)),
-                    false,
-                    false);
         }
     }
 

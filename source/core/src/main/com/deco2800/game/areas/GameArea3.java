@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class GameArea3 extends GameArea {
     /**
      * Gamer area 3
+     *
      * @param terrainFactory terrain factory
      */
     public GameArea3(TerrainFactory terrainFactory) {
@@ -26,8 +27,9 @@ public class GameArea3 extends GameArea {
 
     /**
      * Gamer area 3 with teleport save health
+     *
      * @param terrainFactory terrain factory
-     * @param currentHealth player health from last map
+     * @param currentHealth  player health from last map
      */
     public GameArea3(TerrainFactory terrainFactory, int currentHealth) {
         super();

@@ -10,7 +10,6 @@ import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.gamearea.PerformanceDisplay;
 import com.deco2800.game.components.maingame.MainGameActions;
-import com.deco2800.game.components.maingame.MainGameExitDisplay;
 import com.deco2800.game.components.pause.PauseInputComponent;
 import com.deco2800.game.components.pause.PauseMenuActions;
 import com.deco2800.game.components.pause.PauseMenuDisplay;
@@ -153,7 +152,6 @@ public class MainGameScreen extends ScreenAdapter {
                 this.gameArea = new GameArea5(terrainFactory, currentHealth).create();
                 break;
             default:
-                this.gameArea = new TutorialGameArea(terrainFactory, currentHealth).create();
                 break;
         }
         renderer.getCamera().setPlayer(this.gameArea.getPlayer());
@@ -210,17 +208,13 @@ public class MainGameScreen extends ScreenAdapter {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA2, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 2) {
+            } else if (gameArea.getLevel() == 2 || gameArea.getLevel() == 4) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 3) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
-                gameChange = false;
-            } else if (gameArea.getLevel() == 4) {
-                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
                 gameChange = false;
             }
         } else {
@@ -243,7 +237,8 @@ public class MainGameScreen extends ScreenAdapter {
 
     /**
      * resize the object
-     * @param width new width
+     *
+     * @param width  new width
      * @param height new hegiht
      */
     @Override
@@ -325,7 +320,6 @@ public class MainGameScreen extends ScreenAdapter {
                 .addComponent(new CutsceneScreen())
                 .addComponent(new PerformanceDisplay())
                 .addComponent(new MainGameActions(this.game))
-                //.addComponent(new MainGameExitDisplay())
                 .addComponent(new PauseMenuActions(game))
                 .addComponent(new PauseMenuDisplay())
                 .addComponent(new PauseInputComponent())

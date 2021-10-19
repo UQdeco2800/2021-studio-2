@@ -1,15 +1,11 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
-
-import java.util.HashMap;
 
 /**
  * Level based on the insides of a Palace with the boss being Odin
@@ -17,6 +13,7 @@ import java.util.HashMap;
 public class GameArea5 extends GameArea {
     /**
      * Gamer area 3
+     *
      * @param terrainFactory terrain factory
      */
     public GameArea5(TerrainFactory terrainFactory) {
@@ -26,8 +23,9 @@ public class GameArea5 extends GameArea {
 
     /**
      * Gamer area 3 with teleport save health
+     *
      * @param terrainFactory terrain factory
-     * @param currentHealth player health from last map
+     * @param currentHealth  player health from last map
      */
     public GameArea5(TerrainFactory terrainFactory, int currentHealth) {
         super();

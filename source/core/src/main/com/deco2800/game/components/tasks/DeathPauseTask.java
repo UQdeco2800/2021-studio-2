@@ -2,7 +2,6 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Timer;
-import com.deco2800.game.ai.tasks.AITaskComponent;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;

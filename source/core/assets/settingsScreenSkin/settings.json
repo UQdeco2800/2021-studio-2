@@ -100,7 +100,8 @@
             font: prstart
             fontColor: RGBA_200_200_200_255
             background: FPSBox
-            cursor: toppng.com-text-cursor-icon-403x842 (2)
+            cursor: toppng.com-text-cursor-icon-403x842
+            (2)
         }
     }
     com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {

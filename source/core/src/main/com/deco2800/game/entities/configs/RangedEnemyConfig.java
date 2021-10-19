@@ -7,6 +7,7 @@ public class RangedEnemyConfig {
     private RangedEnemyConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     public static final int HEALTH = 40;
     public static final int BASE_ATTACK = 0;
 }

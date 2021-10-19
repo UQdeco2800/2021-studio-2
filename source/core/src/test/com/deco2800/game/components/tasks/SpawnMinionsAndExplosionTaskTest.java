@@ -22,17 +22,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(GameExtension.class)
 class SpawnMinionsAndExplosionTaskTest {
-
-    @Mock
-    GameTime gameTime;
-
-    @Mock
-    GameArea gameArea;
 
     private static final String[] forestTextureAtlases = {
             "images/rangedElf.atlas", "images/meleeElf.atlas",

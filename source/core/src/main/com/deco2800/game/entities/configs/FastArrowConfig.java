@@ -7,6 +7,7 @@ public class FastArrowConfig {
     private FastArrowConfig() {
         throw new IllegalStateException("Utility class");
     }
+
     public static final int HEALTH = BaseArrowConfig.HEALTH;
     public static final int BASE_ATTACK = 100;
     public static final float SPEED_X = 30f;

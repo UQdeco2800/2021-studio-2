@@ -71,7 +71,7 @@ public class BossOverlayComponent extends UIComponent {
      */
     private String bossName = "Boss";
 
-    private static final  float HP_BAR_SIZE = 500f;
+    private static final float HP_BAR_SIZE = 500f;
 
     private static final float OFF_SET = 100f;
 
@@ -137,7 +137,7 @@ public class BossOverlayComponent extends UIComponent {
         createTable();
         if (Boolean.FALSE.equals(entity.getComponent(CombatStatsComponent.class).isDead())) {
             table.add(healthBarLeft).height(40f).width(20f);
-            table.add(healthBarMiddle).height(40f).width(health/maxHealth * HP_BAR_SIZE);
+            table.add(healthBarMiddle).height(40f).width(health / maxHealth * HP_BAR_SIZE);
             table.add(healthBarRight).height(40f).width(20f);
         }
     }

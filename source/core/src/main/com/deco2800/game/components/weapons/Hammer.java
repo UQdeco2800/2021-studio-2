@@ -134,7 +134,7 @@ public class Hammer extends MeleeWeapon {
             projectile.recall();
             animator.startAnimation("hammer_recall");
             return;
-        // if already attacking, or cool-down hasn't expired yet, do nothing.
+            // if already attacking, or cool-down hasn't expired yet, do nothing.
         } else if (isAttacking() || timeSinceRangeAttack != 0) {
             return;
         }

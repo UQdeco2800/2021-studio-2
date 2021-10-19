@@ -16,7 +16,6 @@ import com.deco2800.game.physics.components.PhysicsComponent;
 import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.DebugRenderer;
 import com.deco2800.game.rendering.RenderService;
-import com.deco2800.game.services.GameTime;
 import com.deco2800.game.services.ResourceService;
 import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +26,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(GameExtension.class)
 @ExtendWith(MockitoExtension.class)
@@ -55,18 +53,12 @@ class DeathPauseTaskTest {
             "images/boss_health_right.png",
     };
 
-    @Mock
-    GameArea gameArea;
-
     @BeforeEach
     void beforeEach() {
         // Mock rendering, physics, game time
         RenderService renderService = new RenderService();
         renderService.setDebug(mock(DebugRenderer.class));
         ServiceLocator.registerRenderService(renderService);
-//        GameTime gameTime = mock(GameTime.class);
-//        when(gameTime.getDeltaTime()).thenReturn(20f / 1000);
-//        ServiceLocator.registerTimeSource(gameTime);
         ServiceLocator.registerPhysicsService(new PhysicsService());
         ResourceService resourceService = new ResourceService();
         ServiceLocator.registerResourceService(resourceService);
@@ -94,7 +86,6 @@ class DeathPauseTaskTest {
 
     @Test
     void deathEnemyTrigger() {
-        gameArea = mock(GameArea.class);
         ServiceLocator.getResourceService().loadSounds(sounds);
         ServiceLocator.getResourceService().loadTextures(forestTextures);
         ServiceLocator.getResourceService().loadAll();

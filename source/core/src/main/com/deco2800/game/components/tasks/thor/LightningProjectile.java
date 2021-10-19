@@ -16,8 +16,6 @@ public class LightningProjectile extends Component {
     public static final int AOE = 0;
     public static final int FOLLOW_PLAYER = 1;
 
-    private AnimationRenderComponent animator;
-
     public LightningProjectile(long lifeSpan, int attackStatus) {
         this.lifeSpan = lifeSpan;
         this.attackStatus = attackStatus;
@@ -26,7 +24,7 @@ public class LightningProjectile extends Component {
     @Override
     public void create() {
         this.timeAtCreation = ServiceLocator.getTimeSource().getTime();
-        this.animator = entity.getComponent(AnimationRenderComponent.class);
+        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         ServiceLocator.getResourceService()
                 .getAsset("sounds/lightning.mp3", Sound.class).play(0.2f, 0.4f, 0f);
         if (attackStatus == AOE) {

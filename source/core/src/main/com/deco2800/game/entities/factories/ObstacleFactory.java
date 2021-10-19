@@ -66,6 +66,7 @@ public class ObstacleFactory {
     /**
      * Creates a trap with no collision resizable.
      * Using the json x,y
+     *
      * @return trap entity
      */
     public static Entity createRSNonePhysicalTrap(float width, float height) {
@@ -81,6 +82,7 @@ public class ObstacleFactory {
     /**
      * Creates a trap with no collation.
      * Using the json x,y
+     *
      * @return trap entity
      */
     public static Entity createNonePhysicalTrap() {
@@ -121,6 +123,7 @@ public class ObstacleFactory {
     /**
      * Creates a trap with no collation.
      * Using the json x,y
+     *
      * @return teleport entity
      */
     public static Entity createTeleport() {
