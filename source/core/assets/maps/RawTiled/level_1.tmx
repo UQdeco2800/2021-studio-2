@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="230" height="230" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="720">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="230" height="230" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="734">
  <editorsettings>
   <export target="lvl_1.json" format="json"/>
  </editorsettings>
@@ -730,7 +730,6 @@
   <object id="667" x="3840" y="4832"/>
   <object id="669" x="4416" y="4512"/>
   <object id="670" x="4384" y="4608"/>
-  <object id="671" x="1024" y="4096"/>
   <object id="672" x="2784" y="4352"/>
   <object id="673" x="3232" y="4352"/>
   <object id="674" x="3232" y="3872"/>
@@ -740,6 +739,16 @@
   <object id="731" x="6048" y="3392"/>
   <object id="733" x="5888" y="3968"/>
   <object id="734" x="6016" y="3968"/>
+  <object id="722" x="2304" y="4768"/>
+  <object id="723" x="4320" y="4192"/>
+  <object id="724" x="4608" y="3008"/>
+  <object id="725" x="6208" y="3776"/>
+  <object id="726" x="6208" y="3616"/>
+  <object id="727" x="5536" y="3840"/>
+  <object id="729" x="5536" y="3392"/>
+  <object id="730" x="5760" y="3968"/>
+  <object id="731" x="5600" y="3968"/>
+  <object id="733" x="5664" y="3392"/>
  </objectgroup>
  <objectgroup id="18" name="moveDownObjects" visible="0">
   <object id="659" x="5696" y="3616"/>
@@ -758,20 +767,19 @@
   <object id="690" x="4256" y="4256"/>
   <object id="691" x="3904" y="4736"/>
   <object id="692" x="3904" y="4640"/>
+  <object id="720" x="2112" y="4640"/>
+  <object id="721" x="4640" y="2880"/>
  </objectgroup>
  <objectgroup id="21" name="rangeObjects">
   <object id="693" x="3040" y="4288"/>
   <object id="694" x="3008" y="3872"/>
   <object id="695" x="4128" y="4608"/>
-  <object id="700" x="4672" y="2880"/>
   <object id="701" x="2464" y="3136"/>
   <object id="702" x="1792" y="4096"/>
   <object id="703" x="1312" y="4096"/>
   <object id="704" x="2112" y="4736"/>
-  <object id="705" x="2336" y="4736"/>
  </objectgroup>
  <objectgroup id="22" name="assassinObjects">
-  <object id="677" x="4128" y="3680"/>
   <object id="678" x="4448" y="3680"/>
   <object id="680" x="4128" y="3456"/>
   <object id="681" x="4448" y="3456"/>
