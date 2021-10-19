@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 public class TouchCutsceneComponent extends TouchComponent {
 
     private static final Logger logger = LoggerFactory.getLogger(TouchCutsceneComponent.class);
-
     private final RandomDialogueSet dialogueSet;
     private final DialogueSet type;
     private final int maxRepeats;

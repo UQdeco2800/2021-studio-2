@@ -84,7 +84,6 @@ public class CutsceneTriggerFactory {
         return createMoveTriggerBase()
                 .addComponent(new TouchMoveComponent(PhysicsLayer.PLAYER, new Vector2(-1f, 0f), false));
     }
-
     /**
      * Creates an entity that can trigger the start of a movement cutscene that will force the player to move right
      *
@@ -134,4 +133,5 @@ public class CutsceneTriggerFactory {
         trigger.scaleHeight(0.1f);
         return trigger;
     }
+
 }

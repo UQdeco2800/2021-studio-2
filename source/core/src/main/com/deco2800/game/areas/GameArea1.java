@@ -36,6 +36,9 @@ public class GameArea1 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
+        playerWeaponType = "Longsword";
+        music = "sounds/area2.mp3";
+
         levelInt = 1;
         super.create("maps/lvl_3.json", "Level 2");
 

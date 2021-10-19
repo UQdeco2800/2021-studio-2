@@ -69,6 +69,7 @@ public abstract class GameArea implements Disposable {
             "images/player_hammer.png",
             "images/player_scepter.png",
             "images/player_longsword.png",
+            "thor/lightning.png",
             "images/blast.png",
             "images/hammer_projectile",
             "images/health_left.png",
@@ -145,17 +146,19 @@ public abstract class GameArea implements Disposable {
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
-            "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
+            "thor/lightning.atlas", "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
+             "images/newArrowBroken/atlas/arrow.atlas", "images/player_axe.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
             "images/lokiBoss.atlas", "thor/thor.atlas", "images/firePillar.atlas", "Odin" +
+            "/OdinProjectile/beamBroken.atlas", "images/fireball/fireballAnimationBlue.atlas",
             "/OdinProjectile/beamBroken.atlas", "rangedDeath.atlas",  "guardDeath.atlas", "meleeDeath.atlas", "assassinDeath.atlas", "bossDeath.atlas", "assassinWalk.atlas",
             "rangedWalk.atlas", "guardMeleeAttack.atlas"
     };
     protected static final String[] sounds = {
             "sounds/Impact4.ogg", "sounds/impact.ogg", "sounds/swish.ogg",
+            "sounds/lightning.mp3", "sounds/clank.mp3",
             "sounds/arrow_disappear.mp3",
             "sounds/arrow_shoot.mp3",
             "sounds/death_2.mp3",
@@ -164,7 +167,7 @@ public abstract class GameArea implements Disposable {
             "sounds/beam_shoot.mp3",
             "sounds/beam_disappear.mp3"
     };
-    protected static final String MUSIC = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
+    protected static String music = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
 
     protected TerrainFactory terrainFactory = null;
     protected int playerHealth = 300;
@@ -174,6 +177,7 @@ public abstract class GameArea implements Disposable {
     protected static final String TILES_WIDTH = "n_tiles_width";
     protected static final String WALL_HEIGHT = "height";
     protected static final String WALL_WIDTH = "width";
+    protected String playerWeaponType = "Axe";
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -522,9 +526,35 @@ public abstract class GameArea implements Disposable {
                 int x = object.get("x").intValue();
                 int y = object.get("y").intValue();
                 Entity elf = NPCFactory.createBossNPC(player);
+                Entity thor = NPCFactory.createThor(player);
                 incBossNum();
                 spawnEntityAt(
                         elf,
+                        new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
+                        false,
+                        false);
+                spawnEntityAt(
+                        thor,
+                        new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
+                        false,
+                        false);
+            }
+        }
+    }
+
+    /**
+     * spawn boss - only spawn on the map if other enemies are killed
+     */
+    protected void spawnThor() {
+        HashMap<String, Float>[] objects = map.getBossObjects();
+        if (objects != null) {
+            for (HashMap<String, Float> object : objects) {
+                int x = object.get("x").intValue();
+                int y = object.get("y").intValue();
+                Entity thor = NPCFactory.createThor(player);
+                incBossNum();
+                spawnEntityAt(
+                        thor,
                         new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
                         false,
                         false);
@@ -591,7 +621,7 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void spawnPlayer() {
-        Entity newPlayer = PlayerFactory.createPlayer("Hammer");
+        Entity newPlayer = PlayerFactory.createPlayer(playerWeaponType);
         HashMap<String, Float> spawn = map.getInitTeleportObjects()[0];
         int height = map.getDimensions().get(TILES_HEIGHT);
         spawnEntityAt(newPlayer, new GridPoint2(spawn.get("x").intValue(), height - spawn.get("y").intValue()),
@@ -786,7 +816,7 @@ public abstract class GameArea implements Disposable {
         resourceService.loadTextures(tileTextures);
         resourceService.loadTextureAtlases(textureAtlases);
         resourceService.loadSounds(sounds);
-        resourceService.loadMusic(new String[]{MUSIC});
+        resourceService.loadMusic(new String[]{music});
         while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
@@ -804,7 +834,7 @@ public abstract class GameArea implements Disposable {
             resourceService.unloadAssets(tileTextures);
             resourceService.unloadAssets(textureAtlases);
             resourceService.unloadAssets(sounds);
-            resourceService.unloadAssets(new String[]{MUSIC});
+            resourceService.unloadAssets(new String[]{music});
         }
     }
 
@@ -813,14 +843,14 @@ public abstract class GameArea implements Disposable {
             entity.dispose();
         }
         if (ServiceLocator.getResourceService() != null
-                && ServiceLocator.getResourceService().getAsset(MUSIC, Music.class) != null) {
-            ServiceLocator.getResourceService().getAsset(MUSIC, Music.class).stop();
+                && ServiceLocator.getResourceService().getAsset(music, Music.class) != null) {
+            ServiceLocator.getResourceService().getAsset(music, Music.class).stop();
         }
         this.unloadAssets();
     }
 
     protected void playMusic() {
-        Music gameMusic = ServiceLocator.getResourceService().getAsset(GameArea.MUSIC, Music.class);
+        Music gameMusic = ServiceLocator.getResourceService().getAsset(GameArea.music, Music.class);
         gameMusic.setLooping(true);
         gameMusic.setVolume(0.3f);
         gameMusic.play();
