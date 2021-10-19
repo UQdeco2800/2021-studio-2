@@ -95,13 +95,12 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         entity.setPosition(owner.getEntity().getPosition());
         entity.setScale(owner.getEntity().getScale());
 
-        //note:This doesn't need random entity positions to work, just set a vector
         Entity vortex = WeaponFactory.createVortexEnter(entity,
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
-                new Vector2(85, 55);
-        Vector2 maxPos = new Vector2(90, 60);
+                new Vector2(86, 56);
+        Vector2 maxPos = new Vector2(89, 59);
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
