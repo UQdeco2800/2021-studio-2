@@ -104,7 +104,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             if (data.containsKey("fireBalls")) {
                 for (Entity fireBall : (Entity[]) data.get("fireBalls")) {
                     if (fireBall != null) {
-                        fireBall.dispose();
+                        fireBall.prepareDispose();
                     }
                 }
             }
@@ -126,7 +126,7 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
                 if (data.containsKey("fireBalls")) {
                     for (Entity fireBall : (Entity[]) data.get("fireBalls")) {
                         if (fireBall != null) {
-                            fireBall.dispose();
+                            fireBall.prepareDispose();
                         }
                     }
                 }
