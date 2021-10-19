@@ -211,6 +211,7 @@ public abstract class GameArea implements Disposable {
             default:
                 playerWeaponType = "Axe";
         }
+        playerWeaponType = "Scepter";
     }
 
     /**

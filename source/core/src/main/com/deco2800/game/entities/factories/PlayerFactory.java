@@ -54,6 +54,11 @@ public class PlayerFactory {
                 animator.addAnimation("up_attack", 0.08f);
                 animator.addAnimation("down_attack", 0.08f);
 
+                animator.addAnimation("down_range", 0.1f);
+                animator.addAnimation("left_range", 0.1f);
+                animator.addAnimation("right_range", 0.1f);
+                animator.addAnimation("up_range", 0.1f);
+
                 break;
             case "Hammer":
                 animator = new AnimationRenderComponent(

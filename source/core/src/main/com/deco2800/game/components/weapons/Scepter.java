@@ -88,25 +88,30 @@ public class Scepter extends MeleeWeapon {
     public void rangedAttack(int attackDirection) {
         if (timeAtRangeAttack != 0) return; // cooldown hasn't expired yet
         super.rangedAttack(attackDirection);
-        Vector2 target = entity.getPosition();
+        Vector2 target = entity.getPosition(); // start at origin
+        AnimationRenderComponent animator = entity.getComponent(AnimationRenderComponent.class);
         float range = 6f;
         float angle;
         switch (attackDirection) {
             case UP:
                 target.y += range;
                 angle = 270f;
+                animator.startAnimation("up_range");
                 break;
             case LEFT:
                 target.x -= range;
                 angle = 0f;
+                animator.startAnimation("left_range");
                 break;
             case RIGHT:
                 target.x += range;
                 angle = 180f;
+                animator.startAnimation("right_range");
                 break;
             default:
                 target.y -= range;
                 angle = 90f;
+                animator.startAnimation("down_range");
                 break;
         }
         Entity blast = WeaponFactory.createBlast(target, angle);
