@@ -1,22 +1,19 @@
 package com.deco2800.game.areas;
 
-import com.badlogic.gdx.math.GridPoint2;
 import com.deco2800.game.areas.terrain.TerrainFactory;
 import com.deco2800.game.components.CombatStatsComponent;
-import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.files.PlayerSave;
 import com.deco2800.game.services.ServiceLocator;
 import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 
-import java.util.HashMap;
-
 /**
- * Level based on the insides of a Palace with the boss being Odin
+ * Level based on a harsher Helhiem (even more lava) with Thor as the boss
  */
 public class GameArea3 extends GameArea {
+
     /**
-     * Gamer area 3
+     * Gamer area 2
      *
      * @param terrainFactory terrain factory
      */
@@ -26,7 +23,7 @@ public class GameArea3 extends GameArea {
     }
 
     /**
-     * Gamer area 3 with teleport save health
+     * Gamer area 2 with teleport save health
      *
      * @param terrainFactory terrain factory
      * @param currentHealth  player health from last map
@@ -41,50 +38,37 @@ public class GameArea3 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
-        playerWeaponType = "Hammer";
-        music = "sounds/area4.mp3";
+        playerWeaponType = "Scepter";
+        music = "sounds/area3.mp3";
 
         levelInt = 3;
-        super.create("maps/lvl_2.json", "Level 5");
+        super.create("maps/lvl_4.json", "Level 3");
 
-        spawnOutdoorArcherObject();
-        spawnOutdoorWarriorObject();
-        spawnAsgardWarriorObject();
-        spawnOdin();
+        spawnHellWarriorObject();
+        spawnLoki();
 
         spawnMovementCutscenes();
-        spawnDialogueCutscenes(RandomDialogueSet.ODIN_ENCOUNTER);
+        spawnDialogueCutscenes(RandomDialogueSet.LOKI2_ENCOUNTER);
         setInitialDialogue();
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
         return this;
     }
 
-    private void spawnOdin() {
-        HashMap<String, Float>[] bossObjects = map.getBossObjects();
-        for (HashMap<String, Float> boss : bossObjects) {
-            int x = boss.get("x").intValue();
-            int y = boss.get("y").intValue();
-            incBossNum();
-            spawnEntityAt(
-                    NPCFactory.createOdin(player),
-                    new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
-                    false,
-                    false);
-        }
-    }
-
+    /**
+     * Sets the dialogue for when the game first loads.
+     */
     private void setInitialDialogue() {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
 
-        RandomDialogueSet dialogueSet = RandomDialogueSet.ODIN_INTRODUCTION;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI2_INTRODUCTION;
 
         PlayerSave.Save.setHasPlayed(true);
-        if (PlayerSave.Save.getOdinEnc() == 0) {
+        if (PlayerSave.Save.getLoki2Enc() == 0) {
             textBox.setRandomFirstEncounter(dialogueSet);
         } else {
-            if (PlayerSave.Save.getOdinWins() == 0) {
+            if (PlayerSave.Save.getLoki2Wins() == 0) {
                 //If getWins() returns 0, that means the most recent game has resulted in a loss
                 textBox.setRandomDefeatDialogueSet(dialogueSet);
             } else {
@@ -92,16 +76,8 @@ public class GameArea3 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setThorWins(1);
-        PlayerSave.Save.setOdinWins(0);
+        PlayerSave.Save.setLokiWins(1);
+        PlayerSave.Save.setLoki2Wins(0);
         PlayerSave.write();
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 3;
     }
 }

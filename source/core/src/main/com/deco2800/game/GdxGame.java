@@ -90,9 +90,6 @@ public class GdxGame extends Game {
             case MAIN_GAME_TUTORIAL:
                 ServiceLocator.registerGameScreen(new MainGameScreen(this, "tutorial"));
                 return ServiceLocator.getGameScreen();
-            case GAMEAREA0:
-                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game0"));
-                return ServiceLocator.getGameScreen();
             case GAMEAREA1:
                 ServiceLocator.registerGameScreen(new MainGameScreen(this, "game1"));
                 return ServiceLocator.getGameScreen();
@@ -124,14 +121,8 @@ public class GdxGame extends Game {
                 return new SettingsScreen(this);
             case DEATHSCREEN:
                 return new DeathScreen(this);
-            case TEST1:
-                ServiceLocator.registerGameScreen(new MainGameScreen(this, "test1", currentHealth));
-                return ServiceLocator.getGameScreen();
             case MAIN_GAME_TUTORIAL:
                 ServiceLocator.registerGameScreen(new MainGameScreen(this, "tutorial", currentHealth));
-                return ServiceLocator.getGameScreen();
-            case GAMEAREA0:
-                ServiceLocator.registerGameScreen(new MainGameScreen(this, "game0", currentHealth));
                 return ServiceLocator.getGameScreen();
             case GAMEAREA1:
                 ServiceLocator.registerGameScreen(new MainGameScreen(this, "game1", currentHealth));
@@ -154,8 +145,8 @@ public class GdxGame extends Game {
     }
 
     public enum ScreenType {
-        MAIN_MENU, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, TEST1, GAMEAREA0, GAMEAREA1,
-        GAMEAREA2, GAMEAREA3, GAMEAREA4, END_SCREEN, GAMEAREA5
+        MAIN_MENU, MAIN_GAME_TUTORIAL, SETTINGS, DEATHSCREEN, GAMEAREA1,
+        GAMEAREA2, GAMEAREA3, GAMEAREA4, GAMEAREA5, END_SCREEN
     }
 
     /**

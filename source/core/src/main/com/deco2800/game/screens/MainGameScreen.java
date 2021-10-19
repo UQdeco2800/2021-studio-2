@@ -101,8 +101,8 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "game0":
-                this.gameArea = new GameArea0(terrainFactory).create();
+            case "tutorial":
+                this.gameArea = new TutorialArea(terrainFactory).create();
                 break;
             case "game1":
                 this.gameArea = new GameArea1(terrainFactory).create();
@@ -133,8 +133,8 @@ public class MainGameScreen extends ScreenAdapter {
         logger.debug("Initialising main game screen entities");
 
         switch (world) {
-            case "game0":
-                this.gameArea = new GameArea0(terrainFactory, currentHealth).create();
+            case "tutorial":
+                this.gameArea = new TutorialArea(terrainFactory, currentHealth).create();
                 break;
             case "game1":
                 this.gameArea = new GameArea1(terrainFactory, currentHealth).create();
@@ -196,11 +196,7 @@ public class MainGameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (gameChange) {
-            if (gameArea.getLevel() == 9) {
-                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA0, currentHealth);
-                gameChange = false;
-            } else if (gameArea.getLevel() == 0) {
+            if (gameArea.getLevel() == 0) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA1, currentHealth);
                 gameChange = false;
@@ -208,13 +204,17 @@ public class MainGameScreen extends ScreenAdapter {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
                 game.setScreen(GdxGame.ScreenType.GAMEAREA2, currentHealth);
                 gameChange = false;
-            } else if (gameArea.getLevel() == 2 || gameArea.getLevel() == 4) {
+            } else if (gameArea.getLevel() == 2) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
                 gameChange = false;
             } else if (gameArea.getLevel() == 3) {
                 int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
-                game.setScreen(GdxGame.ScreenType.GAMEAREA3, currentHealth);
+                game.setScreen(GdxGame.ScreenType.GAMEAREA4, currentHealth);
+                gameChange = false;
+            } else if (gameArea.getLevel() == 4 || gameArea.getLevel() == 5) {
+                int currentHealth = gameArea.getPlayer().getComponent(CombatStatsComponent.class).getHealth();
+                game.setScreen(GdxGame.ScreenType.GAMEAREA5, currentHealth);
                 gameChange = false;
             }
         } else {

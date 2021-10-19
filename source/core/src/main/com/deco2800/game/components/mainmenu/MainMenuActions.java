@@ -33,9 +33,9 @@ public class MainMenuActions extends Component {
         logger.info("Start game");
         PlayerSave.load();
         if (PlayerSave.Save.getHasPlayed()) {
-            game.setScreen(GdxGame.ScreenType.GAMEAREA0);
+            game.setScreen(GdxGame.ScreenType.GAMEAREA1);
         } else {
-            game.setScreen(GdxGame.ScreenType.GAMEAREA4);
+            game.setScreen(GdxGame.ScreenType.MAIN_GAME_TUTORIAL);
         }
     }
 

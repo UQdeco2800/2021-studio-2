@@ -8,12 +8,12 @@ import com.deco2800.game.ui.textbox.RandomDialogueSet;
 import com.deco2800.game.ui.textbox.TextBox;
 
 /**
- * Level based on a harsher Helhiem (even more lava) with Thor as the boss
+ * Level based on Helhiem (lava level) with Loki as boss.
  */
 public class GameArea2 extends GameArea {
 
     /**
-     * Gamer area 2
+     * Gamer area 1
      *
      * @param terrainFactory terrain factory
      */
@@ -23,7 +23,7 @@ public class GameArea2 extends GameArea {
     }
 
     /**
-     * Gamer area 2 with teleport save health
+     * Gamer area 1 with teleport save health
      *
      * @param terrainFactory terrain factory
      * @param currentHealth  player health from last map
@@ -38,17 +38,17 @@ public class GameArea2 extends GameArea {
      * Create the game area, including terrain, static entities (trees), dynamic entities (player)
      */
     public GameArea create() {
-        playerWeaponType = "Scepter";
-        music = "sounds/area3.mp3";
+        playerWeaponType = "Longsword";
+        music = "sounds/area2.mp3";
 
         levelInt = 2;
-        super.create("maps/lvl_4.json", "Level 3");
+        super.create("maps/lvl_3.json", "Level 2");
 
         spawnHellWarriorObject();
         spawnLoki();
 
         spawnMovementCutscenes();
-        spawnDialogueCutscenes(RandomDialogueSet.LOKI2_ENCOUNTER);
+        spawnDialogueCutscenes(RandomDialogueSet.LOKI_ENCOUNTER);
         setInitialDialogue();
 
         player.getComponent(CombatStatsComponent.class).setHealth(playerHealth);
@@ -62,13 +62,13 @@ public class GameArea2 extends GameArea {
         TextBox textBox = ServiceLocator.getEntityService()
                 .getUIEntity().getComponent(TextBox.class);
 
-        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI2_INTRODUCTION;
+        RandomDialogueSet dialogueSet = RandomDialogueSet.LOKI_INTRODUCTION;
 
         PlayerSave.Save.setHasPlayed(true);
-        if (PlayerSave.Save.getLoki2Enc() == 0) {
+        if (PlayerSave.Save.getLokiEnc() == 0) {
             textBox.setRandomFirstEncounter(dialogueSet);
         } else {
-            if (PlayerSave.Save.getLoki2Wins() == 0) {
+            if (PlayerSave.Save.getLokiWins() == 0) {
                 //If getWins() returns 0, that means the most recent game has resulted in a loss
                 textBox.setRandomDefeatDialogueSet(dialogueSet);
             } else {
@@ -76,8 +76,8 @@ public class GameArea2 extends GameArea {
                 textBox.setRandomBeatenDialogueSet(dialogueSet);
             }
         }
-        PlayerSave.Save.setLokiWins(1);
-        PlayerSave.Save.setLoki2Wins(0);
+        PlayerSave.Save.setElfWins(1);
+        PlayerSave.Save.setLokiWins(0);
         PlayerSave.write();
     }
 }
