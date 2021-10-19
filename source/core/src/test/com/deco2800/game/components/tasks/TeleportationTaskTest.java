@@ -74,7 +74,7 @@ class TeleportationTaskTest {
         taskRunner.setPosition(2f, 2f);
 
         // ensure that the priority is 100 (initial priority is 100
-        assertEquals(-1, teleportationTask.getPriority());
+        assertEquals(100, teleportationTask.getPriority());
 
     }
 
