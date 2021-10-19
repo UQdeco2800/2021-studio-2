@@ -107,7 +107,7 @@ public class TouchAttackComponent extends TouchComponent {
             Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
             if (myEntity.data.containsKey(DEAL_DAMAGE)
                     && !((boolean) myEntity.data.get(DEAL_DAMAGE))) {
-                return;
+                knockbackForce = 0;
             }
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
