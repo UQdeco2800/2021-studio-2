@@ -138,7 +138,7 @@ public class Longsword extends MeleeWeapon {
     protected boolean onCollisionStart(Fixture me, Fixture other) {
         // if weapon collides with enemy, play impact sound
         if (super.onCollisionStart(me, other)) {
-            impactSound.play();
+            impactSound.play(0.2f, 0.4f, 0f);
             return true;
         }
         return false;
