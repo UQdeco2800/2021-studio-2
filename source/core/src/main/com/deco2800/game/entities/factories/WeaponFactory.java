@@ -13,9 +13,9 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.npc.ProjectileAnimationController;
 import com.deco2800.game.components.player.PlayerActions;
 import com.deco2800.game.components.tasks.*;
-import com.deco2800.game.components.tasks.LifespanComponent;
 import com.deco2800.game.components.tasks.loki.FirePillarBaseTask;
 import com.deco2800.game.components.tasks.loki.FirePillarDamageTask;
+import com.deco2800.game.components.tasks.thor.LightningProjectile;
 import com.deco2800.game.components.touch.ExplosionTouchComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.components.touch.TouchTeleportComponent;
@@ -507,11 +507,13 @@ public class WeaponFactory {
         return entity;
     }
 
-    public static Entity createLightning(short targetLayer) {
+    public static Entity createLightning(short targetLayer, int attackStatus) {
 
         AnimationRenderComponent animator = new AnimationRenderComponent(
                 ServiceLocator.getResourceService().getAsset("images/lightning.atlas", TextureAtlas.class));
-        animator.addAnimation("strike", 0.10f, Animation.PlayMode.LOOP);
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("alt-lightening-attack", 0.1f);
+        animator.addAnimation("lightening_attack", 0.1f);
 
         return new Entity()
                 .addComponent(animator)
@@ -519,7 +521,7 @@ public class WeaponFactory {
                 .addComponent(new HitboxComponent().setLayer(PhysicsLayer.MELEEWEAPON))
                 .addComponent(new TouchAttackComponent(targetLayer, 5f))
                 .addComponent(new CombatStatsComponent(PlayerConfig.HEALTH, PlayerConfig.BASE_ATTACK))
-                .addComponent(new LifespanComponent(500L));
+                .addComponent(new LightningProjectile(1000L, attackStatus));
     }
 
     /**

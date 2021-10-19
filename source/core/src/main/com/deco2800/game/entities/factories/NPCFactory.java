@@ -15,7 +15,7 @@ import com.deco2800.game.components.tasks.*;
 import com.deco2800.game.components.tasks.loki.FirePillarTask;
 import com.deco2800.game.components.tasks.loki.SpawnDecoysTask;
 import com.deco2800.game.components.tasks.loki.SpawnLokiDecoyTask;
-import com.deco2800.game.components.tasks.thor.LightningTask;
+import com.deco2800.game.components.tasks.thor.ShootLightningTask;
 import com.deco2800.game.components.touch.TouchAttackComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.configs.*;
@@ -438,19 +438,27 @@ public class NPCFactory {
                         .addTask(new WanderTask(new Vector2(2f, 2f), 2f))
                         .addTask(new ChaseTask(target, 10, 5f, 20f))
                         .addTask(new DeathPauseTask(target, 0, 100, 100, 1.5f))
-                        .addTask(new LightningTask(target, 800, 150));
+                        .addTask(new ShootLightningTask(target, 800, 150));
+
         AnimationRenderComponent animator =
                 new AnimationRenderComponent(
                         ServiceLocator.getResourceService().getAsset("thor/thor.atlas",
                                 TextureAtlas.class));
-        animator.addAnimation(MOVE_LEFT, 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_RIGHT, 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_UP, 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation(MOVE_DOWN, 0.5f, Animation.PlayMode.LOOP);
-        animator.addAnimation("EnemyAttackDown", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackUp", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackLeft", 0.05f, Animation.PlayMode.NORMAL);
-        animator.addAnimation("EnemyAttackRight", 0.05f, Animation.PlayMode.NORMAL);
+
+        animator.addAnimation("hammer_aoe", 0.1f);
+        animator.addAnimation("thor_left_attack", 0.1f);
+        animator.addAnimation("thor_right_attack", 0.1f);
+        animator.addAnimation("thor_up_attack", 0.1f);
+        animator.addAnimation("thor_down_attack", 0.1f);
+
+        animator.addAnimation("up_thor_walk", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("down_thor_walk", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("right_thor_walk", 0.13f, Animation.PlayMode.LOOP);
+        animator.addAnimation("left_thor_walk", 0.18f, Animation.PlayMode.LOOP);
+        animator.addAnimation("default", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_backward", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_right", 1f, Animation.PlayMode.NORMAL);
+        animator.addAnimation("default_left", 1f, Animation.PlayMode.NORMAL);
 
         Sprite healthBar = new Sprite(ServiceLocator.getResourceService().getAsset(
                 "images/enemy_health_bar.png", Texture.class));
