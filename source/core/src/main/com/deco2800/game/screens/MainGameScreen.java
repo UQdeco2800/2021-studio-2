@@ -179,14 +179,16 @@ public class MainGameScreen extends ScreenAdapter {
     }
 
     /**
-     * Use for teleport, get the leve change
+     * Use for teleport, get the leve change to ture
      */
     public void levelChange() {
         gameChange = true;
     }
 
     /**
-     * render map or new map if teleport trigger
+     * render the map or new map if teleport trigger
+     * get the player health form the previous map and keep it to next map
+     * change the gameChange tate back to false;
      */
     @Override
     public void render(float delta) {
@@ -221,29 +223,45 @@ public class MainGameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * check the player win state and give the END_SCREEN if player win
+     */
     private void playerWin() {
         if (this.gameArea.getPlayer().getComponent(PlayerWin.class).getHasWin()) {
             zoomCamera();
         }
     }
 
-
+    /**
+     * resize the object
+     * @param width new width
+     * @param height new hegiht
+     */
     @Override
     public void resize(int width, int height) {
         renderer.resize(width, height);
         logger.trace("Resized renderer: ({} x {})", width, height);
     }
 
+    /**
+     * pause the game
+     */
     @Override
     public void pause() {
         logger.info("Game paused");
     }
 
+    /**
+     * resume the game
+     */
     @Override
     public void resume() {
         logger.info("Game resumed");
     }
 
+    /**
+     * dispose the game screen that no longer need it
+     */
     @Override
     public void dispose() {
         logger.debug("Disposing main game screen");
@@ -258,6 +276,9 @@ public class MainGameScreen extends ScreenAdapter {
         ServiceLocator.clear();
     }
 
+    /**
+     * load the assets the current game screen need it
+     */
     private void loadAssets() {
         logger.debug("Loading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
@@ -266,6 +287,9 @@ public class MainGameScreen extends ScreenAdapter {
         ServiceLocator.getResourceService().loadAll();
     }
 
+    /**
+     * unload the assets the current game screen need it
+     */
     private void unloadAssets() {
         logger.debug("Unloading assets");
         ResourceService resourceService = ServiceLocator.getResourceService();
