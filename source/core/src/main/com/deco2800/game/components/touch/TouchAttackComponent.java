@@ -128,28 +128,6 @@ public class TouchAttackComponent extends TouchComponent {
             getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             knockbackForce = 0;
             getEntity().getEvents().trigger("brokenArrow");
-        } else if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC) {
-            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
-            if (this.getEntity().getComponent(
-                    PhysicsMovementComponent.class).getTarget() == null) {
-                return; // ignore if the physics component is null
-            }
-            Vector2 direction = this.getEntity().getComponent(
-                    PhysicsMovementComponent.class).getDirection();
-
-            if (Math.abs(direction.x) > Math.abs(direction.y)) {
-                if (direction.x < 0) {
-                    this.getEntity().getEvents().trigger("stunLeft");
-                } else {
-                    this.getEntity().getEvents().trigger("stunRight");
-                }
-            } else {
-                if (direction.y < 0) {
-                    this.getEntity().getEvents().trigger("stunDown");
-                } else {
-                    this.getEntity().getEvents().trigger("stunUp");
-                }
-            }
         }
     }
 

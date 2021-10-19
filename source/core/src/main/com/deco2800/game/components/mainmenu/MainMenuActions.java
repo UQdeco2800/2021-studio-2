@@ -44,7 +44,7 @@ public class MainMenuActions extends Component {
         if (PlayerSave.Save.getHasPlayed()) {
             game.setScreen(GdxGame.ScreenType.GAMEAREA0);
         } else {
-            game.setScreen(GdxGame.ScreenType.GAMEAREA4);
+            game.setScreen(GdxGame.ScreenType.GAMEAREA0);
         }
     }
 

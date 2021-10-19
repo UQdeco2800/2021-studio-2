@@ -4,14 +4,14 @@ size: 1024, 256
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-stunBack
+stunUp
   rotate: false
   xy: 578, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-stunFront
+stunDown
   rotate: false
   xy: 578, 2
   size: 94, 110
@@ -191,84 +191,84 @@ size: 1024, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-backAttack
+attackUp
   rotate: false
   xy: 2, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-backAttack
+attackUp
   rotate: false
   xy: 98, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-backAttack
+attackUp
   rotate: false
   xy: 194, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-frontAttack
+attackDown
   rotate: false
   xy: 290, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-frontAttack
+attackDown
   rotate: false
   xy: 386, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-frontAttack
+attackDown
   rotate: false
   xy: 482, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-leftAttack
+attackLeft
   rotate: false
   xy: 578, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-rightAttack
+attackRight
   rotate: false
   xy: 578, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-leftAttack
+attackLeft
   rotate: false
   xy: 674, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-rightAttack
+attackRight
   rotate: false
   xy: 674, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-leftAttack
+attackLeft
   rotate: false
   xy: 770, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-rightAttack
+attackRight
   rotate: false
   xy: 770, 2
   size: 94, 110
@@ -281,42 +281,42 @@ size: 1024, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-moveBack
+moveUp
   rotate: false
   xy: 2, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-moveBack
+moveUp
   rotate: false
   xy: 98, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-moveBack
+moveUp
   rotate: false
   xy: 194, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 3
-moveFront
+moveDown
   rotate: false
   xy: 290, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 1
-moveFront
+moveDown
   rotate: false
   xy: 386, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: 2
-moveFront
+moveDown
   rotate: false
   xy: 482, 2
   size: 94, 110
