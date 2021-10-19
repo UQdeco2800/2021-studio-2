@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -171,12 +171,26 @@ float&nbsp;knockback,
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#aoeAttack()">aoeAttack</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Attacks using an AOE (meleeWeapon.CENTER) direction.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
+<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#attack(int)">attack</a></span>&#8203;(int&nbsp;attackDirection)</code></th>
 <td class="colLast">
 <div class="block">Attacks, but also plays animation.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create()">create</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Called when the entity is created and registered.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onCollisionStart(com.badlogic.gdx.physics.box2d.Fixture,com.badlogic.gdx.physics.box2d.Fixture)">onCollisionStart</a></span>&#8203;(<a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a>&nbsp;me,
 <a href="https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Fixture.html?is-external=true" title="class or interface in com.badlogic.gdx.physics.box2d" class="externalLink">Fixture</a>&nbsp;other)</code></th>
@@ -184,12 +198,19 @@ float&nbsp;knockback,
 <div class="block">Plays impact sound if weapon successfully collides with enemy.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#triggerAttackStage(long)">triggerAttackStage</a></span>&#8203;(long&nbsp;timeSinceAttack)</code></th>
 <td class="colLast">
 <div class="block">Implements functionality for strong attacks, also plays attack sound
  during attack frame (for both light and strong).</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update()">update</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Update uses timer to synchronise attack with animation.</div>
 </td>
 </tr>
 </tbody>
@@ -200,7 +221,7 @@ float&nbsp;knockback,
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.weapons.<a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.weapons.MeleeWeapon">
 <!--   -->
-</a><code><a href="MeleeWeapon.html#aoeAttack()">aoeAttack</a>, <a href="MeleeWeapon.html#create()">create</a>, <a href="MeleeWeapon.html#getTotalAttackTime()">getTotalAttackTime</a>, <a href="MeleeWeapon.html#rangedAttack(int)">rangedAttack</a>, <a href="MeleeWeapon.html#setAttackFrameDuration(long)">setAttackFrameDuration</a>, <a href="MeleeWeapon.html#setAttackFrames(long,int,int)">setAttackFrames</a>, <a href="MeleeWeapon.html#update()">update</a></code></div>
+</a><code><a href="MeleeWeapon.html#getTotalAttackTime()">getTotalAttackTime</a>, <a href="MeleeWeapon.html#rangedAttack(int)">rangedAttack</a>, <a href="MeleeWeapon.html#setAttackFrameDuration(long)">setAttackFrameDuration</a>, <a href="MeleeWeapon.html#setAttackFrames(long,int,int)">setAttackFrames</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;com.deco2800.game.components.<a href="../Component.html" title="class in com.deco2800.game.components">Component</a></h3>
 <a id="methods.inherited.from.class.com.deco2800.game.components.Component">
@@ -245,6 +266,32 @@ float&nbsp;knockback,
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
+<h3><a id="create()">create</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">create</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../Component.html#create()">Component</a></code></span></div>
+<div class="block">Called when the entity is created and registered. Initial logic such as calls to GetComponent
+ should be made here, not in the constructor which is called before an entity is finished.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="MeleeWeapon.html#create()">create</a></code>&nbsp;in class&nbsp;<code><a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></code></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="update()">update</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="MeleeWeapon.html#update()">MeleeWeapon</a></code></span></div>
+<div class="block">Update uses timer to synchronise attack with animation.
+ Assumes that animation has only 3 frames.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="MeleeWeapon.html#update()">update</a></code>&nbsp;in class&nbsp;<code><a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></code></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="attack(int)">attack</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">attack</span>&#8203;(<span class="arguments">int&nbsp;attackDirection)</span></div>
 <div class="block">Attacks, but also plays animation.</div>
@@ -272,6 +319,18 @@ float&nbsp;knockback,
                         0 - if the entity is not attacking.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons"><code>MeleeWeapon</code></a></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="aoeAttack()">aoeAttack</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">aoeAttack</span>()</div>
+<div class="block">Attacks using an AOE (meleeWeapon.CENTER) direction. The attack will
+ connect with any enemies immediately around the entity.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="MeleeWeapon.html#aoeAttack()">aoeAttack</a></code>&nbsp;in class&nbsp;<code><a href="MeleeWeapon.html" title="class in com.deco2800.game.components.weapons">MeleeWeapon</a></code></dd>
 </dl>
 </section>
 </li>
