@@ -75,11 +75,11 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
         ServiceLocator.getGameAreaService().incNum();
         ServiceLocator.getGameAreaService().incNum();
 
+        gameArea.decNum();
+        gameArea.decNum();
         gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(elf2, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(explosion, owner.getEntity().getCenterPosition(), true, true);
-        gameArea.decNum();
-        gameArea.decNum();
         triggered = false;
         spawn = 0;
         spawnComparator = ThreadLocalRandom.current().nextInt(2, 9);

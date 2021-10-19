@@ -14,5 +14,5 @@ public class PlayerConfig {
     /**
      * attack attribute
      */
-    public static final int BASE_ATTACK = 10;
+    public static final int BASE_ATTACK = 100;
 }

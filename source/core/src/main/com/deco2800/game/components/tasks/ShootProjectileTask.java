@@ -555,7 +555,7 @@ public class ShootProjectileTask extends DefaultTask implements PriorityTask {
                     owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
                     count++;
                 }
-            } else if (ServiceLocator.getGameAreaService().getNumEnemy() != 0
+            } else if (ServiceLocator.getGameAreaService().getNumEnemy() > 0
                     && (float) health / max < 1f) {
                 logger.info("You can't kill a boss when his minions are alive");
                 owner.getEntity().getComponent(CombatStatsComponent.class).setHealth(max);
