@@ -30,10 +30,8 @@ class LongswordTest {
         ServiceLocator.registerTimeSource(new GameTime());
         ServiceLocator.registerResourceService(new ResourceService());
         ResourceService resourceService = ServiceLocator.getResourceService();
-        String[] sounds = {"sounds/impact.ogg", "sounds/swish.ogg"};
-        resourceService.loadSounds(sounds);
-        System.out.println("impact:" + resourceService.containsAsset("sounds/impact.ogg", Sound.class));
-        System.out.println("swish:" + resourceService.containsAsset("sounds/swish.ogg", Sound.class));
+        String[] sounds = {"sounds/impact.ogg", "sounds/swish.ogg", "sounds/clank.mp3"};
+        resourceService.loadSounds(sounds);;
         // wait for assets to load
         while (resourceService.loadForMillis(10)) {
             // wait for assets to load
