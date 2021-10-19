@@ -28,6 +28,8 @@ public class GameArea0 extends GameArea {
      */
     public GameArea create() {
         playerWeaponType = "Axe";
+        music = "sounds/area1.mp3";
+
         super.create("maps/lvl_1.json", "Level 1");
 
         spawnMeleeElf();

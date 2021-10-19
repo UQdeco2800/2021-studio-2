@@ -153,7 +153,7 @@ public abstract class GameArea implements Disposable {
             "sounds/beam_shoot.mp3",
             "sounds/beam_disappear.mp3"
     };
-    protected static final String MUSIC = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
+    protected static String music = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
 
     protected TerrainFactory terrainFactory = null;
     protected int playerHealth = 300;
@@ -776,7 +776,7 @@ public abstract class GameArea implements Disposable {
         resourceService.loadTextures(tileTextures);
         resourceService.loadTextureAtlases(textureAtlases);
         resourceService.loadSounds(sounds);
-        resourceService.loadMusic(new String[]{MUSIC});
+        resourceService.loadMusic(new String[]{music});
         while (resourceService.loadForMillis(10)) {
             // This could be upgraded to a loading screen
             logger.info("Loading... {}%", resourceService.getProgress());
@@ -794,7 +794,7 @@ public abstract class GameArea implements Disposable {
             resourceService.unloadAssets(tileTextures);
             resourceService.unloadAssets(textureAtlases);
             resourceService.unloadAssets(sounds);
-            resourceService.unloadAssets(new String[]{MUSIC});
+            resourceService.unloadAssets(new String[]{music});
         }
     }
 
@@ -803,14 +803,14 @@ public abstract class GameArea implements Disposable {
             entity.dispose();
         }
         if (ServiceLocator.getResourceService() != null
-                && ServiceLocator.getResourceService().getAsset(MUSIC, Music.class) != null) {
-            ServiceLocator.getResourceService().getAsset(MUSIC, Music.class).stop();
+                && ServiceLocator.getResourceService().getAsset(music, Music.class) != null) {
+            ServiceLocator.getResourceService().getAsset(music, Music.class).stop();
         }
         this.unloadAssets();
     }
 
     protected void playMusic() {
-        Music gameMusic = ServiceLocator.getResourceService().getAsset(GameArea.MUSIC, Music.class);
+        Music gameMusic = ServiceLocator.getResourceService().getAsset(GameArea.music, Music.class);
         gameMusic.setLooping(true);
         gameMusic.setVolume(0.3f);
         gameMusic.play();

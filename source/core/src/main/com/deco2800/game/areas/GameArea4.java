@@ -36,6 +36,8 @@ public class GameArea4 extends GameArea {
      */
     public GameArea create() {
         playerWeaponType = "Axe";
+        music = "sounds/area1.mp3";
+
         levelInt = 9;
         super.create("maps/lvl_0.json", "Level 5");
 
