@@ -1,5 +1,6 @@
 package com.deco2800.game.components.tasks.thor;
 
+import com.badlogic.gdx.audio.Sound;
 import com.deco2800.game.components.Component;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import com.deco2800.game.services.ServiceLocator;
@@ -26,7 +27,8 @@ public class LightningProjectile extends Component {
     public void create() {
         this.timeAtCreation = ServiceLocator.getTimeSource().getTime();
         this.animator = entity.getComponent(AnimationRenderComponent.class);
-
+        ServiceLocator.getResourceService()
+                .getAsset("sounds/lightning.mp3", Sound.class).play(0.2f, 0.4f, 0f);
         if (attackStatus == AOE) {
             animator.startAnimation("lightening_attack");
         } else {

@@ -546,8 +546,6 @@ public abstract class GameArea implements Disposable {
                         new GridPoint2(x, map.getDimensions().get(TILES_HEIGHT) - y),
                         false,
                         false);
-                // TODO: DELETE
-                spawnEntityAt(thor, player.getPosition(), false, false);
             }
         }
     }
