@@ -8,8 +8,8 @@ import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.entities.factories.NPCFactory;
 import com.deco2800.game.entities.factories.WeaponFactory;
-import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.services.ServiceLocator;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
@@ -26,9 +26,22 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
      */
     private final GameArea gameArea;
     /**
-     * number of time enemy is spawn
+     * spawn every second hit
      */
     private int spawn = 0;
+    /**
+     * spawn every second hit
+     */
+    private int spawnComparator;
+    /**
+     * spawn every second hit
+     */
+    private float lastHealth = 0;
+
+    /**
+     * trigger the spawn
+     */
+    private boolean triggered = false;
 
     /**
      * spawn the minion to help the boss attack the target
@@ -38,6 +51,7 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
     public SpawnMinionsAndExplosionTask(Entity target) {
         this.target = target;
         this.gameArea = ServiceLocator.getGameAreaService();
+        spawnComparator = ThreadLocalRandom.current().nextInt(2, 8);
     }
 
     /**
@@ -46,9 +60,7 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
     @Override
     public void update() {
         if (canSpawn()) {
-            owner.getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             spawn();
-            spawn++;
         }
     }
 
@@ -63,10 +75,14 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
         ServiceLocator.getGameAreaService().incNum();
         ServiceLocator.getGameAreaService().incNum();
 
+        gameArea.decNum();
+        gameArea.decNum();
         gameArea.spawnEntityAt(elf, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(elf2, owner.getEntity().getCenterPosition(), true, true);
         gameArea.spawnEntityAt(explosion, owner.getEntity().getCenterPosition(), true, true);
-
+        triggered = false;
+        spawn = 0;
+        spawnComparator = ThreadLocalRandom.current().nextInt(2, 9);
     }
 
     /**
@@ -83,19 +99,6 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
     }
 
     /**
-     * check if the boss is not inside the bound
-     *
-     * @return true if not, false otherwise
-     */
-    public boolean mapBound() {
-        //note:this isn't always true map can change sizes, wont always be 30x30
-        return owner.getEntity().getPosition().x < 0
-                && owner.getEntity().getPosition().y < 0
-                && owner.getEntity().getPosition().x > 30
-                && owner.getEntity().getPosition().y > 30;
-    }
-
-    /**
      * check if the minions can be spawned
      *
      * @return true if can spawn, false otherwise
@@ -104,14 +107,14 @@ public class SpawnMinionsAndExplosionTask extends DefaultTask implements Priorit
         float maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
         float health = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
         float ratio = health / maxHealth;
-
-        if (ServiceLocator.getGameAreaService().getNumEnemy() == 0 && ratio < 0.5 && mapBound()) {
-            return true;
+        if (!triggered && health != lastHealth) {
+            if (ratio < 0.7 && spawn >= spawnComparator) {
+                triggered = true;
+            } else {
+                spawn++;
+            }
+            lastHealth = health;
         }
-
-        if (ratio < 0.5 && spawn < 1) {
-            return true;
-        }
-        return ratio < 0.25 && spawn < 2;
+        return triggered;
     }
 }

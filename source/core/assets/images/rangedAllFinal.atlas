@@ -235,316 +235,480 @@ default
   offset: 0, 0
   index: 1
 
-rangeElfLeftDeath.png
-size: 256, 256
+rangedDeath.png
+size: 1024, 256
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
-leftDeath
+backDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-leftDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-leftDeath
-  rotate: false
-  xy: 0, 105
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-leftDeath
-  rotate: false
-  xy: 94, 105
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-
-rangeElfFrontDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-frontDeath
-  rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 0
-frontDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 1
-frontDeath
+backDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 2
-frontDeath
+backDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 101, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 3
-frontDeath
+backDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 101, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 4
-
-rangeElfRightDeath.png
-size: 256, 256
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-rightDeath
+backDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 200, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
-  index: 0
-rightDeath
+  index: 5
+frontDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 200, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 1
-rightDeath
+frontDeath
   rotate: false
-  xy: 0, 110
-  size: 94, 110
-  orig: 94, 110
+  xy: 299, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 2
-rightDeath
+frontDeath
   rotate: false
-  xy: 94, 110
-  size: 94, 110
-  orig: 94, 110
+  xy: 299, 2
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 3
-
-rangeElfBackDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-backDeath
+frontDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 0
-backDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 1
-backDeath
-  rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 2
-backDeath
-  rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: 3
-backDeath
-  rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 398, 114
+  size: 97, 110
+  orig: 97, 110
   offset: 0, 0
   index: 4
+frontDeath
+  rotate: false
+  xy: 398, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
+leftDeath
+  rotate: false
+  xy: 497, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+leftDeath
+  rotate: false
+  xy: 497, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+leftDeath
+  rotate: false
+  xy: 596, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+leftDeath
+  rotate: false
+  xy: 596, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+leftDeath
+  rotate: false
+  xy: 695, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
+rightDeath
+  rotate: false
+  xy: 695, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+rightDeath
+  rotate: false
+  xy: 794, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+rightDeath
+  rotate: false
+  xy: 794, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+rightDeath
+  rotate: false
+  xy: 893, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+rightDeath
+  rotate: false
+  xy: 893, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
 
-assassinElfBackDeath.png
-size: 512, 128
+assassinDeath.png
+size: 1024, 256
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 assassinBackDeath
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 1
 assassinBackDeath
   rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 2
 assassinBackDeath
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 105, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 3
 assassinBackDeath
   rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 105, 6
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 4
 assassinBackDeath
   rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 208, 116
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
+  index: 5
+assassinFrontDeath
+  rotate: false
+  xy: 208, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 5
+assassinFrontDeath
+  rotate: false
+  xy: 826, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+assassinFrontDeath
+  rotate: false
+  xy: 925, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+assassinFrontDeath
+  rotate: false
+  xy: 826, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+assassinFrontDeath
+  rotate: false
+  xy: 925, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+assassinLeftDeath
+  rotate: false
+  xy: 311, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+assassinLeftDeath
+  rotate: false
+  xy: 414, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+assassinLeftDeath
+  rotate: false
+  xy: 414, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+assassinLeftDeath
+  rotate: false
+  xy: 517, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 4
+assassinLeftDeath
+  rotate: false
+  xy: 311, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 5
+assassinRightDeath
+  rotate: false
+  xy: 620, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+assassinRightDeath
+  rotate: false
+  xy: 620, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+assassinRightDeath
+  rotate: false
+  xy: 723, 116
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+assassinRightDeath
+  rotate: false
+  xy: 723, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 4
+assassinRightDeath
+  rotate: false
+  xy: 517, 6
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 5
 
-assassinElfRightDeath.png
+assassinWalk.png
+size: 1024, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+backAssassinWalk
+  rotate: false
+  xy: 2, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+backAssassinWalk
+  rotate: false
+  xy: 105, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+backAssassinWalk
+  rotate: false
+  xy: 208, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+frontAssassinWalk
+  rotate: false
+  xy: 311, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+frontAssassinWalk
+  rotate: false
+  xy: 414, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+frontAssassinWalk
+  rotate: false
+  xy: 517, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+leftAssassinWalk
+  rotate: false
+  xy: 620, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 1
+leftAssassinWalk
+  rotate: false
+  xy: 723, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 2
+leftAssassinWalk
+  rotate: false
+  xy: 826, 2
+  size: 101, 108
+  orig: 101, 108
+  offset: 0, 0
+  index: 3
+
+assassinWalkRight.png
 size: 512, 128
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
-assassinRightDeath
+rightAssassinWalk
   rotate: false
-  xy: 0, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 2, 2
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
-assassinRightDeath
+  index: 1
+rightAssassinWalk
   rotate: false
-  xy: 94, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 105, 2
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
-assassinRightDeath
+  index: 2
+rightAssassinWalk
   rotate: false
-  xy: 188, 0
-  size: 94, 110
-  orig: 94, 110
+  xy: 208, 2
+  size: 101, 108
+  orig: 101, 108
   offset: 0, 0
-  index: -1
-assassinRightDeath
-  rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-assassinRightDeath
-  rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
+  index: 3
 
-assassinElfFrontDeath.png
-size: 512, 128
+rangedWalk.png
+size: 1024, 256
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
-assassinFrontDeath
+downRangedWalk
   rotate: false
-  xy: 0, 0
+  xy: 2, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+downRangedWalk_
+  rotate: false
+  xy: 2, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+downRangedWalk_
+  rotate: false
+  xy: 98, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+leftRangedWalk
+  rotate: false
+  xy: 98, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+leftRangedWalk
+  rotate: false
+  xy: 194, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+leftRangedWalk
+  rotate: false
+  xy: 194, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+rightRangedWalk
+  rotate: false
+  xy: 290, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+rightRangedWalk
+  rotate: false
+  xy: 290, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+rightRangedWalk
+  rotate: false
+  xy: 386, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+upRangedWalk
+  rotate: false
+  xy: 386, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
   index: -1
-assassinFrontDeath
+upRangedWalk
   rotate: false
-  xy: 94, 0
+  xy: 482, 114
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
-assassinFrontDeath
+  index: 2
+upRangedWalk
   rotate: false
-  xy: 188, 0
+  xy: 482, 2
   size: 94, 110
   orig: 94, 110
   offset: 0, 0
-  index: -1
-assassinFrontDeath
-  rotate: false
-  xy: 282, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-assassinFrontDeath
-  rotate: false
-  xy: 376, 0
-  size: 94, 110
-  orig: 94, 110
-  offset: 0, 0
-  index: -1
-
-assassinElfLeftDeath.png
-size: 512, 128
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-assassinLeftDeath
-  rotate: false
-  xy: 0, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-assassinLeftDeath
-  rotate: false
-  xy: 94, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-assassinLeftDeath
-  rotate: false
-  xy: 188, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-assassinLeftDeath
-  rotate: false
-  xy: 282, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
-assassinLeftDeath
-  rotate: false
-  xy: 376, 0
-  size: 94, 105
-  orig: 94, 105
-  offset: 0, 0
-  index: -1
+  index: 3

@@ -1,6 +1,10 @@
 package com.deco2800.game.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.components.player.KeyboardPlayerInputComponent;
+import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.HitboxComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.rendering.AnimationRenderComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,6 +135,38 @@ public class CombatStatsComponent extends Component {
         }
     }
 
+    private void stunEnemy() {
+        if (getEntity().getComponent(HitboxComponent.class) == null) {
+            return;
+        }
+        if (getEntity().getComponent(HitboxComponent.class).getLayer() == PhysicsLayer.NPC) {
+            if (this.getEntity().getComponent(PhysicsMovementComponent.class) == null) {
+                return; // ignore if the physics component is null
+            }
+            if (this.getEntity().getComponent(
+                    PhysicsMovementComponent.class).getTarget() == null) {
+                return; // ignore if the physics component is null
+            }
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
+            Vector2 direction = this.getEntity().getComponent(
+                    PhysicsMovementComponent.class).getDirection();
+
+            if (Math.abs(direction.x) > Math.abs(direction.y)) {
+                if (direction.x < 0) {
+                    this.getEntity().getEvents().trigger("stunLeft");
+                } else {
+                    this.getEntity().getEvents().trigger("stunRight");
+                }
+            } else {
+                if (direction.y < 0) {
+                    this.getEntity().getEvents().trigger("stunDown");
+                } else {
+                    this.getEntity().getEvents().trigger("stunUp");
+                }
+            }
+        }
+    }
+
     /**
      * called when an entity is attack
      * if this entity has a transform component or hit animations they will be called.
@@ -151,6 +187,7 @@ public class CombatStatsComponent extends Component {
             // our transformation.
             if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
+                stunEnemy();
             }
         }
     }
@@ -173,6 +210,7 @@ public class CombatStatsComponent extends Component {
             // our transformation.
             if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
+                stunEnemy();
             }
         }
     }
@@ -192,6 +230,7 @@ public class CombatStatsComponent extends Component {
             // our transformation.
             if (!checkTransformation(newHealth)) {
                 setHealth(newHealth);
+                stunEnemy();
             }
         }
     }

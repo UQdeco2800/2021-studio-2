@@ -9,6 +9,7 @@ import com.deco2800.game.physics.BodyUserData;
 import com.deco2800.game.physics.PhysicsLayer;
 import com.deco2800.game.physics.components.HitboxComponent;
 import com.deco2800.game.physics.components.PhysicsComponent;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 
 
 /**
@@ -106,7 +107,7 @@ public class TouchAttackComponent extends TouchComponent {
             Entity myEntity = ((BodyUserData) me.getBody().getUserData()).entity;
             if (myEntity.data.containsKey(DEAL_DAMAGE)
                     && !((boolean) myEntity.data.get(DEAL_DAMAGE))) {
-                return;
+                knockbackForce = 0;
             }
             Body targetBody = physicsComponent.getBody();
             Vector2 direction = target.getCenterPosition().sub(entity.getCenterPosition());
@@ -124,6 +125,7 @@ public class TouchAttackComponent extends TouchComponent {
 
             getEntity().getComponent(CombatStatsComponent.class).setHealth(0);
             getEntity().getComponent(CombatStatsComponent.class).setBaseAttack(0);
+            getEntity().getComponent(PhysicsMovementComponent.class).setMoving(false);
             knockbackForce = 0;
             getEntity().getEvents().trigger("brokenArrow");
         }

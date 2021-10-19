@@ -1,0 +1,146 @@
+
+MeleeDeath.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+backDeath
+  rotate: false
+  xy: 2, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+backDeath
+  rotate: false
+  xy: 2, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+backDeath
+  rotate: false
+  xy: 101, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+backDeath
+  rotate: false
+  xy: 101, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+backDeath
+  rotate: false
+  xy: 200, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
+frontDeath
+  rotate: false
+  xy: 200, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
+frontDeath
+  rotate: false
+  xy: 794, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+frontDeath
+  rotate: false
+  xy: 794, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+frontDeath
+  rotate: false
+  xy: 890, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3
+frontDeath
+  rotate: false
+  xy: 890, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 4
+leftDeath
+  rotate: false
+  xy: 299, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+leftDeath
+  rotate: false
+  xy: 299, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+leftDeath
+  rotate: false
+  xy: 398, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+leftDeath
+  rotate: false
+  xy: 398, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+leftDeath
+  rotate: false
+  xy: 497, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5
+rightDeath
+  rotate: false
+  xy: 497, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+rightDeath
+  rotate: false
+  xy: 596, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+rightDeath
+  rotate: false
+  xy: 596, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+rightDeath
+  rotate: false
+  xy: 695, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+rightDeath
+  rotate: false
+  xy: 695, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 5

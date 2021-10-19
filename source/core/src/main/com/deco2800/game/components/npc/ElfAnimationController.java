@@ -67,13 +67,6 @@ public class ElfAnimationController extends Component {
                 modifier = "Back";
             }
             if (!entity.getEntityType().equals("elfBoss")) {
-                if (entity.getEntityType().equals("melee") || entity.getEntityType().equals("alertCaller")) {
-                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2.5f,
-                            animator.getEntity().getScale().y);
-                } else {
-                    animator.getEntity().setScale(animator.getEntity().getScale().x * 2f,
-                            animator.getEntity().getScale().y);
-                }
                 if (entity.getEntityType().equals(ASSASSIN_TYPE)) {
                     animator.startAnimation(ASSASSIN_TYPE + modifier + "Death");
                 } else {
@@ -103,32 +96,42 @@ public class ElfAnimationController extends Component {
     }
 
     public void animateLeftAttack() {
-        animator.startAnimation("attackLeft");
+        if (!death) {
+            animator.startAnimation("attackLeft");
+        }
     }
 
     public void animateRightAttack() {
-        animator.startAnimation("attackRight");
+        if (!death) {
+            animator.startAnimation("attackRight");
+        }
     }
 
     public void animateUpAttack() {
-        animator.startAnimation("attackUp");
+        if (!death) {
+            animator.startAnimation("attackUp");
+        }
     }
 
     public void animateDownAttack() {
-        animator.startAnimation("attackDown");
+        if (!death) {
+            animator.startAnimation("attackDown");
+        }
     }
 
     private void stun(String modifier) {
-        switch (entity.getEntityType()) {
-            case ASSASSIN_TYPE:
-                animator.startAnimation("assassinStun" + modifier);
-                break;
-            case RANGED_TYPE:
-                animator.startAnimation("rangedStun" + modifier);
-                break;
-            default:
-                animator.startAnimation("stun" + modifier);
-                break;
+        if (!death) {
+            switch (entity.getEntityType()) {
+                case ASSASSIN_TYPE:
+                    animator.startAnimation("assassinStun" + modifier);
+                    break;
+                case RANGED_TYPE:
+                    animator.startAnimation("rangedStun" + modifier);
+                    break;
+                default:
+                    animator.startAnimation("stun" + modifier);
+                    break;
+            }
         }
     }
 

@@ -1,0 +1,27 @@
+
+guardWalkLeft.png
+size: 512, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+moveLeft
+  rotate: false
+  xy: 2, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 1
+moveLeft
+  rotate: false
+  xy: 98, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 2
+moveLeft
+  rotate: false
+  xy: 194, 2
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 3

@@ -43,12 +43,11 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
     /**
      * set initial health = 100
      */
-    private int health = 100;
+    private int health = 1000;
     /**
      * random spawning position
      */
     private Vector2 pos2;
-
 
     /**
      * @param target   The entity to chase.
@@ -96,14 +95,12 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         entity.setPosition(owner.getEntity().getPosition());
         entity.setScale(owner.getEntity().getScale());
 
-        //note:This doesn't need random entity positions to work, just set a vector
         Entity vortex = WeaponFactory.createVortexEnter(entity,
                 getDirectionOfTarget(), false);
 
         Vector2 minPos =
-                new Vector2(0, 0);
-        //note:get world size
-        Vector2 maxPos = new Vector2(10, 10);
+                new Vector2(90, 55);
+        Vector2 maxPos = new Vector2(95, 60);
         pos2 = RandomUtils.random(minPos, maxPos);
         Entity entity2 = new Entity();
         entity2.setPosition(pos2);
@@ -175,7 +172,7 @@ public class TeleportationTask extends DefaultTask implements PriorityTask {
         int currentHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getHealth();
         int maxHealth = owner.getEntity().getComponent(CombatStatsComponent.class).getMaxHealth();
 
-        if ((float) currentHealth / maxHealth < 0.5f && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
+        if ((float) currentHealth / maxHealth < 0.75f && TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) - lastFired >= cooldown
                 && isTargetVisible()
                 && getDistanceToTarget() < owner.getEntity().getAttackRange()) {
             return currentHealth < health;

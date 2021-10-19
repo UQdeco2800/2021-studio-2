@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.deco2800.game.ai.tasks.PriorityTask;
 import com.deco2800.game.entities.Entity;
 import com.deco2800.game.physics.PhysicsLayer;
+import com.deco2800.game.physics.components.PhysicsMovementComponent;
 import com.deco2800.game.physics.raycast.RaycastHit;
 import com.deco2800.game.services.ServiceLocator;
 
@@ -124,6 +125,6 @@ public class ProjectileMovementTask extends MovementTask implements PriorityTask
      * @return true if stop move, false otherwise
      */
     public boolean stoppedMoving() {
-        return (isAtTarget() || checkIfStuck());
+        return (isAtTarget() || checkIfStuck() || !owner.getEntity().getComponent(PhysicsMovementComponent.class).getMoving());
     }
 }

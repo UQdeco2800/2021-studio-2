@@ -1,0 +1,146 @@
+
+bossDeath.png
+size: 1024, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+backBossDeath
+  rotate: false
+  xy: 2, 114
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 1
+backBossDeath
+  rotate: false
+  xy: 2, 2
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 2
+backBossDeath
+  rotate: false
+  xy: 105, 114
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 3
+backBossDeath
+  rotate: false
+  xy: 715, 114
+  size: 94, 110
+  orig: 94, 110
+  offset: 0, 0
+  index: 4
+backBossDeath
+  rotate: false
+  xy: 105, 2
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 5
+frontBossDeath
+  rotate: false
+  xy: 208, 114
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 1
+frontBossDeath
+  rotate: false
+  xy: 208, 2
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 2
+frontBossDeath
+  rotate: false
+  xy: 311, 114
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 3
+frontBossDeath
+  rotate: false
+  xy: 311, 2
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 4
+frontBossDeath
+  rotate: false
+  xy: 414, 114
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 5
+leftBossDeath
+  rotate: false
+  xy: 414, 2
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 5
+rightBossDeath
+  rotate: false
+  xy: 414, 2
+  size: 101, 110
+  orig: 101, 110
+  offset: 0, 0
+  index: 5
+leftBossDeath
+  rotate: false
+  xy: 517, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+rightBossDeath
+  rotate: false
+  xy: 517, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 1
+leftBossDeath
+  rotate: false
+  xy: 517, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+rightBossDeath
+  rotate: false
+  xy: 517, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 2
+leftBossDeath
+  rotate: false
+  xy: 616, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+rightBossDeath
+  rotate: false
+  xy: 616, 114
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 3
+leftBossDeath
+  rotate: false
+  xy: 616, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
+rightBossDeath
+  rotate: false
+  xy: 616, 2
+  size: 97, 110
+  orig: 97, 110
+  offset: 0, 0
+  index: 4
