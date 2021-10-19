@@ -57,7 +57,7 @@ public class ShootLightningTask extends DefaultTask implements PriorityTask {
      */
     private final LinkedList<Vector2> lastPositions;
 
-    private static final Logger logger = LoggerFactory.getLogger(com.deco2800.game.components.tasks.loki.FirePillarTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShootLightningTask.class);
 
     private final Random randomBooleanGenerator;
 

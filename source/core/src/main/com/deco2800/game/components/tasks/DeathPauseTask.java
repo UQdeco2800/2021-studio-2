@@ -100,14 +100,6 @@ public class DeathPauseTask extends ChaseTask implements PriorityTask {
             owner.getEntity().getComponent(ColliderComponent.class).dispose();
             owner.getEntity().getComponent(HitboxComponent.class).dispose();
             owner.getEntity().getComponent(TouchAttackComponent.class).dispose();
-            TreeMap<String, Object> data = owner.getEntity().data;
-            if (data.containsKey("fireBalls")) {
-                for (Entity fireBall : (Entity[]) data.get("fireBalls")) {
-                    if (fireBall != null) {
-                        fireBall.prepareDispose();
-                    }
-                }
-            }
         } else {
             movementTask.stop();
             if ((System.currentTimeMillis() - start) / 1000 >= duration) {

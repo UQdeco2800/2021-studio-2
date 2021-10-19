@@ -77,10 +77,6 @@ public class ThorAnimationController extends Component {
                 enableWalk();
                 left = true;
             }
-        } else if (!death) {
-            if (((System.currentTimeMillis() - this.start) / 1000.0) > 0.15) {
-                attack = false;
-            }
         } else if (!dead){
             dead = true;
             animator.startAnimation("leftDeath");

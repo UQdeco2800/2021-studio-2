@@ -167,7 +167,7 @@ public abstract class GameArea implements Disposable {
             "sounds/beam_shoot.mp3",
             "sounds/beam_disappear.mp3"
     };
-    protected static String music = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
+    protected String music = "sounds/RAGNAROK_MAIN_SONG_76bpm.mp3";
 
     protected TerrainFactory terrainFactory = null;
     protected int playerHealth = 300;
@@ -844,7 +844,7 @@ public abstract class GameArea implements Disposable {
     }
 
     protected void playMusic() {
-        Music gameMusic = ServiceLocator.getResourceService().getAsset(GameArea.music, Music.class);
+        Music gameMusic = ServiceLocator.getResourceService().getAsset(music, Music.class);
         gameMusic.setLooping(true);
         gameMusic.setVolume(0.3f);
         gameMusic.play();

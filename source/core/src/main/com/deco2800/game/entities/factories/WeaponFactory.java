@@ -492,8 +492,6 @@ public class WeaponFactory {
         PhysicsMovementComponent movingComponent = new PhysicsMovementComponent();
         movingComponent.setMoving(true);
         movingComponent.setTarget(target);
-        Sprite sprite = new Sprite(ServiceLocator.getResourceService().getAsset(
-                "images/blast.png", Texture.class));
         movingComponent.setMaxSpeed(new Vector2(speed, speed));
         Entity entity = new Entity()
                 .addComponent(animator)

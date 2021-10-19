@@ -25,7 +25,7 @@ public class Longsword extends MeleeWeapon {
      */
     private boolean hasStrongAttacked;
     private long timeSinceStrongAttack;
-    private final long STRONG_COOLDOWN = 2000L;
+    private static final long STRONG_COOLDOWN = 2000L;
 
     private AnimationRenderComponent animator;
 

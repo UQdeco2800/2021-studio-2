@@ -36,11 +36,11 @@ public class Hammer extends MeleeWeapon {
      */
     private boolean hasStrongAttacked;
     private long timeSinceStrongAttack;
-    private final long STRONG_COOLDOWN = 3000L;
+    private static final long STRONG_COOLDOWN = 3000L;
 
     private boolean hasRangeAttacked;
     private long timeSinceRangeAttack;
-    private final long RANGE_COOLDOWN = 2000L;
+    private static final long RANGE_COOLDOWN = 2000L;
 
     private HammerProjectile projectile;
 

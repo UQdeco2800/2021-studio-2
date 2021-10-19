@@ -158,23 +158,6 @@ class ShootProjectileTaskTest {
         assertEquals(20, shootProjectileTask.getPriority());
     }
 
-    @Test
-    void shootArrow() {
-        // load all the sound and images
-        Entity entity = makePhysicsEntity();
-        entity.setPosition(2, 2);
-        Entity target = makeTargetEntity();
-        target.setPosition(0, 0);
-        gameArea = mock(GameArea.class);
-        ShootProjectileTask shootProjectileTask = new ShootProjectileTask(target, 2000);
-        shootProjectileTask.setMultishotChance(0.1);
-        AITaskComponent ai = new AITaskComponent().addTask(shootProjectileTask);
-        entity.addComponent(ai);
-        entity.setAttackRange(5);
-        entity.create();
-        entity.update();
-    }
-
     private Entity makePhysicsEntity() {
         return new Entity()
                 .addComponent(new PhysicsComponent())
