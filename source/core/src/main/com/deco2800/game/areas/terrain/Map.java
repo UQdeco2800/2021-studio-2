@@ -18,7 +18,7 @@ public class Map {
     private HashMap<String, Float>[] lavaObjects;
     private HashMap<String, Float>[] teleportObjects;
     private HashMap<String, Float>[] initTeleportObjects;
-    private int[][] LightTiles;
+    private int[][] lightTiles;
     private HashMap<String, Float>[] bossBounds;
     private HashMap<String, Float>[] healthCrateObjects;
     private HashMap<String, Float>[] meleeObjects;
@@ -129,7 +129,7 @@ public class Map {
     }
 
     public int[][] getlightTiles() {
-        return LightTiles;
+        return lightTiles;
     }
 
     public HashMap<String, Float>[] getBossBounds() {
