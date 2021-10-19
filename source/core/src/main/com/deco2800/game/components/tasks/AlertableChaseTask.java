@@ -40,6 +40,7 @@ public class AlertableChaseTask extends ChaseTask implements PriorityTask {
      *
      * @return 15 if alerted (always see the target), default otherwise
      */
+    @SuppressWarnings("GDXJavaUnsafeIterator")
     @Override
     public int getPriority() {
         for (Entity entity : ServiceLocator.getEntityService().getEntities()) {

@@ -2,7 +2,6 @@ package com.deco2800.game.components.tasks;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.deco2800.game.areas.GameArea;
 import com.deco2800.game.components.CombatStatsComponent;
 import com.deco2800.game.components.HealthBarComponent;
 import com.deco2800.game.components.touch.TouchAttackComponent;
@@ -21,7 +20,6 @@ import com.deco2800.game.services.ServiceLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -13,6 +13,7 @@ import com.deco2800.game.services.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -73,7 +74,7 @@ public class ShootLightningTask extends DefaultTask implements PriorityTask {
         lastPositions = new LinkedList<>();
         lastShootAnimation = 0;
         lastFiredTime = 0;
-        this.randomBooleanGenerator = new Random();
+        this.randomBooleanGenerator = new SecureRandom();
     }
 
     @Override

@@ -46,23 +46,6 @@ public class ObstacleFactory {
         return obstacle;
     }
 
-
-    /**
-     * Creates a trap with collision resizable.
-     *
-     * @return trap entity
-     */
-    public static Entity createRSPhysicalTrap(float width, float height) {
-        Entity trap = new Entity()
-                .addComponent(new PhysicsComponent().setBodyType(BodyType.StaticBody))
-                .addComponent(new ColliderComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new CombatStatsComponent(1000000, 10))
-                .addComponent(new HitboxComponent().setLayer(PhysicsLayer.OBSTACLE))
-                .addComponent(new TouchAttackComponent(PhysicsLayer.TRAP, 4));
-        trap.setScale(width, height);
-        return trap;
-    }
-
     /**
      * Creates a trap with no collision resizable.
      * Using the json x,y
