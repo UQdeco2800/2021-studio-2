@@ -135,7 +135,7 @@ public abstract class GameArea implements Disposable {
             "end/portal.atlas", "Odin/odin.atlas", "images/player_scepter.atlas", "images/player_hammer.atlas",
             "images/player_longsword.atlas", "images/hammer_projectile.atlas", "images/outdoorWarrior.atlas",
             "images/guardElf.atlas", "images/rangedElf.atlas", "images/fireball/fireballAnimation.atlas",
-            "images/player_scepter.atlas", "images/player_hammer.atlas", "images/newArrowBroken/atlas/arrow.atlas",
+             "images/newArrowBroken/atlas/arrow.atlas", "images/player_axe.atlas",
             "images/viking.atlas", "images/meleeAnimationsTextured.atlas",
             "images/meleeFinal.atlas", "images/assassinFinal.atlas", "images/guardFinal.atlas", "images/rangedAllFinal.atlas", "images/bossFinal.atlas",
             "images/explosion/explosion.atlas", "images/hellViking.atlas", "images/outdoorArcher.atlas", "images/asgardWarrior.atlas",
@@ -163,7 +163,7 @@ public abstract class GameArea implements Disposable {
     protected static final String TILES_WIDTH = "n_tiles_width";
     protected static final String WALL_HEIGHT = "height";
     protected static final String WALL_WIDTH = "width";
-    protected String playerWeaponType = "Hammer";
+    protected String playerWeaponType = "Axe";
 
     protected GameArea() {
         areaEntities = new ArrayList<>();
@@ -178,6 +178,7 @@ public abstract class GameArea implements Disposable {
         tileTextures = map.tileRefsArray();
         loadAssets();
         displayUI(areaName);
+        setWeapon(areaName);
 
         spawnTerrain();
         spawnObstacles();
@@ -191,6 +192,25 @@ public abstract class GameArea implements Disposable {
 
         playMusic();
 
+    }
+
+    /**
+     * Used to retrieve the weapon associated with a given level.
+     */
+    private void setWeapon(String areaName) {
+        switch (areaName) {
+            case "Level 3":
+                playerWeaponType = "Longsword";
+                break;
+            case "Level 4":
+                playerWeaponType = "Scepter";
+                break;
+            case "Level 5":
+                playerWeaponType = "Hammer";
+                break;
+            default:
+                playerWeaponType = "Axe";
+        }
     }
 
     /**

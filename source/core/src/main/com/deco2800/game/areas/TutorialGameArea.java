@@ -98,7 +98,7 @@ public class TutorialGameArea extends GameArea {
      */
     public GameArea create() {
         levelInt = 9;
-        playerWeaponType = "Scepter";
+        playerWeaponType = "Axe";
         super.create("maps/MapObjects.json", "Map Test");
 
         spawnMeleeElf();
