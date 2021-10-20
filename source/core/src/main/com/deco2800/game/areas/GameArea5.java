@@ -96,12 +96,4 @@ public class GameArea5 extends GameArea {
         PlayerSave.Save.setOdinWins(0);
         PlayerSave.write();
     }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 3;
-    }
 }

@@ -42,6 +42,7 @@ public class GameArea4 extends GameArea {
 
         levelInt = 4;
         super.create("maps/lvl_5.json", "Level 4");
+
         spawnOutdoorArcherObject();
         spawnOutdoorWarriorObject();
         spawnThor();
@@ -75,13 +76,5 @@ public class GameArea4 extends GameArea {
         PlayerSave.Save.setLoki2Wins(1);
         PlayerSave.Save.setThorWins(0);
         PlayerSave.write();
-    }
-
-    /**
-     * Use for teleport, track the current map player in
-     */
-    @Override
-    public int getLevel() {
-        return 3;
     }
 }
