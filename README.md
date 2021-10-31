@@ -4,7 +4,7 @@ Last To Valhalla is a rogue-like RPG based on Norse Mythology and was created by
 
 # Story
 
-Ragnarok is approaching and you're running out of time to enter Valhalla as the mighty warrior you are. You've fought many battles over the years, and the wins have inflated your ego. You've declared that you deserve a place amongst the Gods in Asgard. However, the Gods have noticed you, your arogance has enraged them and a curse has been cast on you to ensure that you'll never be able to enter Valhalla. A death in battle will no longer make you worthy of Valhalla, you must lift this curse.
+Ragnarok is approaching and you're running out of time to enter Valhalla as the mighty warrior you are. You've fought many battles over the years and the wins have inflated your ego. You've declared that you deserve a place amongst the Gods in Asgard. However, the Gods have noticed you, your arogance has enraged them and a curse has been cast on you to ensure that you'll never be able to enter Valhalla. A death in battle will no longer make you worthy of Valhalla, you must lift this curse.
 
 The only way you can enter Valhalla now is by defeating Odin who cursed you, death is no longer an option. You must fight your way through the Gods and show them they were wrong to banish you from Valhalla.
 
