@@ -4,13 +4,13 @@ Last To Valhalla is a rogue-like RPG based on Norse Mythology and was created by
 
 # Story
 
-Ragnarok is approaching and you're running out of time to enter Valhalla as the mighty warrior you are. You've fought many battles over the years, the wins have grown your ego and you've declared that you deserve a place amongst the Gods in Asgard. However, the Gods have noticed you, your arogance has enraged them and a curse has been cast on you to ensure that you'll never be able to enter Valhalla. Your mighty deaths in battle no longer make you worthy but you must prove it.
+Ragnarok is approaching and you're running out of time to enter Valhalla as the mighty warrior you are. You've fought many battles over the years, and the wins have inflated your ego. You've declared that you deserve a place amongst the Gods in Asgard. However, the Gods have noticed you, your arogance has enraged them and a curse has been cast on you to ensure that you'll never be able to enter Valhalla. A death in battle will no longer make you worthy of Valhalla, you must lift this curse.
 
-The only way you can enter Valhalla now is by getting there yourself and a brave death is no longer an option. You must fight your way through the Gods and show them who they're messing with.
+The only way you can enter Valhalla now is by defeating Odin who cursed you, death is no longer an option. You must fight your way through the Gods and show them they were wrong to banish you from Valhalla.
 
 ## Objectives
 
-The journey into Asgard is filled with monster and enemies who is suffering the same fate as you or are mighty warriors that guard Asgard. You need to make your way through them, by death or deceipt. Your journey will take you closer to Asgard by a single death will take you back to the beginning. 
+The journey to Asgard is filled with enemies who share your fate as well as the mighty warriors that guard Asgard. You will need to fight your way through every last one of them to lift your curse and enter Valhalla. Each victory brings you closer to lifting your curse but a single death will throw you back to the beginning.
 
 ## Controls
 
